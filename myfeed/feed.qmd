@@ -1,0 +1,108 @@
+---
+title: "Feed"
+format: html
+server: shiny
+---
+
+## News feed
+
+Reference: https://github.com/rszymanski/shinyfeed/blob/master/app.R
+
+Feeds: https://mikestone.me/my-favorite-rss-feeds/
+
+```{r}
+library(tidyRSS)
+
+test <- tidyfeed("http://journal.r-project.org/rss.atom")
+
+
+
+#library(XML)
+
+#doc<-xmlTreeParse("http://s3.spotcrime.com/cache/rss/newark.xml")
+#doc <- xmlTreeParse("http://www.hackaday.com/rss.xml")
+  
+
+# library(data.table)
+# library(magrittr)
+# library(future)
+# library(promises)
+# library(shiny)
+# library(shiny.fluent)
+# library(shiny.router)
+# plan(multisession)
+# 
+# CONFIG <- config::get()
+# 
+# shiny::addResourcePath("shiny.router", system.file("www", package = "shiny.router"))
+# shiny_router_js_src <- file.path("shiny.router", "shiny.router.js")
+# shiny_router_script_tag <- shiny::tags$script(type = "text/javascript", src = shiny_router_js_src)
+# 
+# router <- make_router(route("/",  feed_module_ui("feed")))
+# 
+# ui <- fluentPage(
+#   tags$head(
+#     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+#     shiny_router_script_tag
+#   ),
+#   div(
+#     class = "grid-container",
+#     header(),
+#     div(
+#       class = "commands",
+#       command_bar_module_ui("view_command_bar")
+#     ),
+#     div(
+#       class = "sidenav",
+#       sidenav_module_ui("sidenav")
+#     ),
+#     div(
+#       class = "main",
+#       router$ui
+#     )
+#   )
+# )
+# 
+# server <- function(input, output, session) {
+#   router$server(input, output, session)
+#   
+#   rss_feed_service <- reactiveVal(NULL)
+#   
+#   future({
+#      RssFeedService$new(CONFIG$rss_feeds)
+#   }) %...>%
+#     (function(outer_result) {
+#       rss_feed_service(outer_result)
+#     })
+#   
+#   settings <- command_bar_module_server("view_command_bar")
+#   feed_module_server("feed", settings, rss_feed_service)
+#   sidenav_module_server("sidenav", rss_feed_service)
+# }
+# 
+# shinyApp(ui, server)
+
+```
+
+## Shiny Documents
+
+This Quarto document is made interactive using Shiny. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about Shiny interactive documents at <https://quarto.org/docs/interactive/shiny/>.
+
+## Inputs and Outputs
+
+You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change. This demonstrates how a standard R plot can be made interactive:
+
+```{r}
+sliderInput("bins", "Number of bins:", 
+            min = 1, max = 50, value = 30)
+plotOutput("distPlot")
+```
+
+```{r}
+#| context: server
+output$distPlot <- renderPlot({
+   x <- faithful[, 2]  # Old Faithful Geyser data
+   bins <- seq(min(x), max(x), length.out = input$bins + 1)
+   hist(x, breaks = bins, col = 'darkgray', border = 'white')
+})
+```

@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "References:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "myfeed",
+    "section": "",
+    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nJul 25, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "feed.html",
+    "href": "feed.html",
+    "title": "Feed",
+    "section": "",
+    "text": "Reference: https://github.com/rszymanski/shinyfeed/blob/master/app.R\nFeeds: https://mikestone.me/my-favorite-rss-feeds/"
+  },
+  {
+    "objectID": "feed.html#shiny-documents",
+    "href": "feed.html#shiny-documents",
+    "title": "Feed",
+    "section": "Shiny Documents",
+    "text": "Shiny Documents\nThis Quarto document is made interactive using Shiny. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about Shiny interactive documents at https://quarto.org/docs/interactive/shiny/."
+  },
+  {
+    "objectID": "feed.html#inputs-and-outputs",
+    "href": "feed.html#inputs-and-outputs",
+    "title": "Feed",
+    "section": "Inputs and Outputs",
+    "text": "Inputs and Outputs\nYou can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change. This demonstrates how a standard R plot can be made interactive:\n\n\n\nNumber of bins:"
+  }
+]

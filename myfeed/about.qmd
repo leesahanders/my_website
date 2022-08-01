@@ -1,0 +1,40 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/leesahanders/rss_feed
+
+---
+
+Only the news I care about. Now in RSS (Really Simple Syndication). 
+
+References: 
+
+ - https://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app 
+ - https://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723
+ - https://quarto.org/docs/websites/website-blog.html
+ - https://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r 
+ - https://www.cdata.com/kb/tech/rss-jdbc-r.rst
+ - https://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/
+ - https://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/
+ - https://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL
+ - https://www.lifewire.com/what-is-an-rss-feed-4684568
+ - https://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e 
+ - https://www.feedforall.com/displaying-rss.htm 
+ - https://rhodygarden.org/sitehelp-show-rss-feed-in-ie/ 
+ - https://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71 
+ - https://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/ 
+ - https://www.w3schools.com/xml/xml_rss.asp 
+ - https://github.com/rstudio/distill/issues/33
+ - https://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/
+ - https://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/
+ - https://github.com/noahhl/r-does-rss
+ - https://datawookie.github.io/feedeR/index.html
+ - https://quarto.org/docs/websites/website-listings-custom.html 
+ 
+ 
+ 

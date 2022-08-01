@@ -1,0 +1,6 @@
+default:
+  rss_feeds:
+  - "https://appsilon.com/rss"
+  - "https://blog.rstudio.com/index.xml"
+  - "https://www.r-bloggers.com/feed/"
+  - "http://www.hackaday.com/rss.xml"
