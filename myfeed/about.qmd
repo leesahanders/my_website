@@ -35,6 +35,7 @@ References:
  - https://github.com/noahhl/r-does-rss
  - https://datawookie.github.io/feedeR/index.html
  - https://quarto.org/docs/websites/website-listings-custom.html 
+ - https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/ 
  
  
  
