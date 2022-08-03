@@ -1,5 +1,5 @@
 ---
-title: "Day 3"
+title: "Day 5"
 description: "365 days of hyperfixation"
 author: "Lisa"
 date: "2022-08-02"
@@ -11,10 +11,10 @@ editor: visual
 categories:
   - 365
   - science
-image: "img/fbs.jpg"
+image: "img/starryai-10-597923218-1-10-photo.jpg"
 ---
 
-Lyme is such a curious and interesting bacterial infection.
+Lyme is such a curious and interesting bacterial infection. 
 
 ## Observable JS
 
@@ -23,11 +23,6 @@ This Quarto document is made interactive using Observable JS. Interactive docume
 ## Data wrangling
 
 Load the data
-
-```{ojs}
-
-```
-
 
 ```{ojs}
 data = FileAttachment("data/lyme_data.csv").csv({ typed: true })
@@ -79,3 +74,4 @@ Inputs.table(data, { sort: "date", reverse: true })
 -   Additional data options: https://data.world/datasets/lyme-disease
 -   Some plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar
 -   Some various tutorials: https://observablehq.com/tutorials
+-   Image created with [starryai](https://www.starryai.com/). 

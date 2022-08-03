@@ -1,6 +1,17 @@
 ---
-title: "test"
-format: html
+title: "Day 3"
+description: "365 days of hyperfixation"
+author: "Lisa"
+date: "2022-08-02"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+categories:
+  - 365
+  - science
+image: "img/fbs.jpg"
 ---
 
 ## Observable JS

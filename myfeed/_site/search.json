@@ -86,9 +86,9 @@
   {
     "objectID": "posts/Day-4.html",
     "href": "posts/Day-4.html",
-    "title": "Day 3",
+    "title": "test",
     "section": "",
-    "text": "Lyme is such a curious and interesting bacterial infection."
+    "text": "This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at https://quarto.org/docs/interactive/ojs/."
   },
   {
     "objectID": "posts/Day-4.html#observable-js",
@@ -131,5 +131,12 @@
     "title": "Day 1",
     "section": "Running Code",
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "posts/Day-4.html#bubble-chart",
+    "href": "posts/Day-4.html#bubble-chart",
+    "title": "test",
+    "section": "Bubble Chart",
+    "text": "Bubble Chart\nThis example uses a D3 bubble chart imported from Observable HQ to analyze commits to GitHub repositories.\nSelect a repository to analyze the commits of:\n\nviewof repo = Inputs.radio(\n  [\n    \"pandas-dev/pandas\",\n    \"tidyverse/ggplot2\",\n  ], \n  { label: \"Repository:\", value: \"pandas-dev/pandas\"}\n)\n\n\n\n\n\n\nFetch the commits for the specified repo using the GitHub API:\n\nd3 = require('d3')\ncontributors = await d3.json(\n  \"https://api.github.com/repos/\" + repo + \"/stats/contributors\"\n)\ncommits = contributors.map(contributor => {\n  const author = contributor.author;\n  return {\n    name: author.login,\n    title: author.login,\n    group: author.type,\n    value: contributor.total\n  }\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote that the repo variable is bound dynamically from the radio input defined above. If you change the input the contributors query will be automatically re-executed.\nView the commits sorted by most to least:\n\nInputs.table(commits, { sort: \"value\", reverse: true })\n\n\n\n\n\n\nVisualize using a D3 bubble chart imported from Observable HQ:\n\nimport { chart } with { commits as data } \n  from \"@d3/d3-bubble-chart\"\nchart"
   }
 ]

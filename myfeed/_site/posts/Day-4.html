@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2022-08-02">
-<meta name="description" content="365 days of hyperfixation">
 
-<title>myfeed - Day 3</title>
+<title>myfeed - test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,35 +157,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Day 3</h1>
-                  <div>
-        <div class="description">
-          365 days of hyperfixation
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">365</div>
-                <div class="quarto-category">science</div>
-              </div>
-                  </div>
+      <h1 class="title">test</h1>
+                      </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Lisa </p>
-            </div>
-    </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">August 2, 2022</p>
-      </div>
-    </div>
       
     </div>
     
@@ -203,35 +179,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>Lyme is such a curious and interesting bacterial infection.</p>
 <section id="observable-js" class="level2">
 <h2 class="anchored" data-anchor-id="observable-js">Observable JS</h2>
 <p>This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at <a href="https://quarto.org/docs/interactive/ojs/" class="uri">https://quarto.org/docs/interactive/ojs/</a>.</p>
 </section>
-<section id="data-wrangling" class="level2">
-<h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
-<p>Load the data</p>
-<div class="cell">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1" data-startfrom="27" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 26;"><span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"data/lyme_data.csv"</span>)<span class="op">.</span><span class="fu">csv</span>({ <span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span> })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<section id="bubble-chart" class="level2">
+<h2 class="anchored" data-anchor-id="bubble-chart">Bubble Chart</h2>
+<p>This example uses a D3 bubble chart imported from Observable HQ to analyze commits to GitHub repositories.</p>
+<p>Select a repository to analyze the commits of:</p>
+<div class="cell panel-input card bg-light p-2">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="18" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 17;"><span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>viewof repo <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas-dev/pandas"</span><span class="op">,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tidyverse/ggplot2"</span><span class="op">,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span> </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">label</span><span class="op">:</span> <span class="st">"Repository:"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">"pandas-dev/pandas"</span>}</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
-<p>Filter options</p>
+<p>Fetch the commits for the specified <code>repo</code> using the GitHub API:</p>
 <div class="cell">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2" data-startfrom="34" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 33;"><span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>viewof state <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(data<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">Stname</span>)<span class="op">,</span> {<span class="dt">multiple</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">"Alaska"</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Choose a state: "</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">unique</span><span class="op">:</span> <span class="kw">true</span>})</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> data<span class="op">.</span><span class="fu">filter</span>(<span class="kw">function</span>(data) {</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> state<span class="op">.</span><span class="fu">includes</span>(data<span class="op">.</span><span class="at">Stname</span>)<span class="op">;</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb2" data-startfrom="31" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 30;"><span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">'d3'</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>contributors <span class="op">=</span> <span class="cf">await</span> d3<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://api.github.com/repos/"</span> <span class="op">+</span> repo <span class="op">+</span> <span class="st">"/stats/contributors"</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>commits <span class="op">=</span> contributors<span class="op">.</span><span class="fu">map</span>(contributor <span class="kw">=&gt;</span> {</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> author <span class="op">=</span> contributor<span class="op">.</span><span class="at">author</span><span class="op">;</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> author<span class="op">.</span><span class="at">login</span><span class="op">,</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span><span class="op">:</span> author<span class="op">.</span><span class="at">login</span><span class="op">,</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">group</span><span class="op">:</span> author<span class="op">.</span><span class="at">type</span><span class="op">,</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> contributor<span class="op">.</span><span class="at">total</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -246,62 +230,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
 </div>
-<div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Data</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Stacked bar chart of cases by state by year, remember to select an option above.</p>
+</div>
+</div>
+</div>
+<p>Note that the <code>repo</code> variable is bound dynamically from the radio input defined above. If you change the input the contributors query will be automatically re-executed.</p>
+<p>View the commits sorted by most to least:</p>
 <div class="cell">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3" data-startfrom="46" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 45;"><span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(filtered<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"total_cases"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#bab0ab"</span>})<span class="op">,</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;!--</span> plot<span class="op">.</span><span class="fu">text</span>(filtered<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"total_cases"</span><span class="op">,</span> <span class="dt">text</span><span class="op">:</span> <span class="st">"Stname"</span><span class="op">,</span> <span class="dt">textAnchor</span><span class="op">:</span> <span class="st">"end"</span><span class="op">,</span> <span class="dt">dx</span><span class="op">:</span> <span class="op">-</span><span class="dv">6</span>})<span class="op">,</span> <span class="op">--&gt;</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb3" data-startfrom="50" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 49;"><span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(commits<span class="op">,</span> { <span class="dt">sort</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span> })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Aggregated dataset for all states.</p>
+<p>Visualize using a D3 bubble chart imported from Observable HQ:</p>
 <div class="cell">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4" data-startfrom="63" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(data<span class="op">,</span> { <span class="dt">sort</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span> })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb4" data-startfrom="57" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 56;"><span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { chart } <span class="cf">with</span> { commits <span class="im">as</span> data } </span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>  <span class="im">from</span> <span class="st">"@d3/d3-bubble-chart"</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-4" data-nodetype="expression">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ul>
-<li>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122</li>
-<li>https://www.hopkinslymetracker.org/</li>
-<li>https://quarto.org/docs/interactive/ojs/</li>
-<li>Data from: https://www.cdc.gov/lyme/stats/survfaq.html<br>
-</li>
-<li>Additional data options: https://data.world/datasets/lyme-disease</li>
-<li>Some plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/<span class="citation" data-cites="observablehq/plot-bar">@observablehq/plot-bar</span></li>
-<li>Some various tutorials: https://observablehq.com/tutorials</li>
-</ul>
 
 
 </section>
@@ -309,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </main> <!-- /main -->
 
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"data = FileAttachment(\"data/lyme_data.csv\").csv({ typed: true })\r\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"viewof state = Inputs.select(data.map(d => d.Stname), {multiple: true, value: \"Alaska\", label: \"Choose a state: \", sort: true, unique: true})\r\n\r\nfiltered = data.filter(function(data) {\r\n  return state.includes(data.Stname);\r\n})\r\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"Plot.plot({\r\n  y: {\r\n    grid: true\r\n  },\r\n  marks: [\r\n    Plot.barY(filtered, {x: \"date\", y: \"total_cases\", fill: \"#bab0ab\"}),\r\n    <!-- plot.text(filtered, {x: \"date\", y: \"total_cases\", text: \"Stname\", textAnchor: \"end\", dx: -6}), -->\r\n    Plot.ruleY([0])\r\n  ]\r\n})\r\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"Inputs.table(data, { sort: \"date\", reverse: true })\r\n"},{"methodName":"interpretQuiet","source":"shinyInput('state')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"viewof repo = Inputs.radio(\r\n  [\r\n    \"pandas-dev/pandas\",\r\n    \"tidyverse/ggplot2\",\r\n  ], \r\n  { label: \"Repository:\", value: \"pandas-dev/pandas\"}\r\n)\r\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"d3 = require('d3')\r\ncontributors = await d3.json(\r\n  \"https://api.github.com/repos/\" + repo + \"/stats/contributors\"\r\n)\r\ncommits = contributors.map(contributor => {\r\n  const author = contributor.author;\r\n  return {\r\n    name: author.login,\r\n    title: author.login,\r\n    group: author.type,\r\n    value: contributor.total\r\n  }\r\n})\r\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"Inputs.table(commits, { sort: \"value\", reverse: true })\r\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"import { chart } with { commits as data } \r\n  from \"@d3/d3-bubble-chart\"\r\nchart\r\n"},{"methodName":"interpretQuiet","source":"shinyInput('repo')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "..\..\posts";
