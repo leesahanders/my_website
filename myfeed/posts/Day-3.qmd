@@ -1,0 +1,20 @@
+---
+title: "Day 3"
+description: "365 days of hyperfixation"
+author: "Lisa"
+format: html
+editor: visual
+categories:
+  - 365
+  - science
+---
+
+## Fascination of the day
+
+Retracted science papers. Particularly with the engaging way the story is told on [For Better Science](https://forbetterscience.com/). 
+
+## [![For Better Science](thumbnail.jpg)](https://forbetterscience.com/)
+
+-   Sylvain Lesné is a failed scientist: https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/
+
+-   Cassava fraud and Alzheimer's capitalism: https://forbetterscience.com/2021/12/15/cassava-fraud-and-alzheimers-capitalism/

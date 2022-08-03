@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "References:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html"
+    "text": "References:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r\nhttps://www.cdata.com/kb/tech/rss-jdbc-r.rst\nhttps://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/\nhttps://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/\nhttps://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL\nhttps://www.lifewire.com/what-is-an-rss-feed-4684568\nhttps://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e\nhttps://www.feedforall.com/displaying-rss.htm\nhttps://rhodygarden.org/sitehelp-show-rss-feed-in-ie/\nhttps://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71\nhttps://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/\nhttps://www.w3schools.com/xml/xml_rss.asp\nhttps://github.com/rstudio/distill/issues/33\nhttps://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/\nhttps://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/\nhttps://github.com/noahhl/r-does-rss\nhttps://datawookie.github.io/feedeR/index.html\nhttps://quarto.org/docs/websites/website-listings-custom.html\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/\nhttps://www.r-bloggers.com/2022/07/how-to-set-up-quarto-with-docker-part-1-static-content/"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -25,14 +25,14 @@
     "href": "index.html",
     "title": "myfeed",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nJul 25, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "365\n\n\nscience\n\n\n\n\n365 days of hyperfixation\n\n\n\n\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nLisa Anders\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nJul 25, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "feed.html",
     "href": "feed.html",
     "title": "Feed",
     "section": "",
-    "text": "Reference: https://github.com/rszymanski/shinyfeed/blob/master/app.R\nFeeds: https://mikestone.me/my-favorite-rss-feeds/"
+    "text": "Reference: https://github.com/rszymanski/shinyfeed/blob/master/app.R\nFeeds: https://mikestone.me/my-favorite-rss-feeds/\n\n\nWarning: package 'tidyRSS' was built under R version 4.1.3\n\n\nGET request successful. Parsing..."
   },
   {
     "objectID": "feed.html#shiny-documents",
@@ -47,5 +47,40 @@
     "title": "Feed",
     "section": "Inputs and Outputs",
     "text": "Inputs and Outputs\nYou can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change. This demonstrates how a standard R plot can be made interactive:\n\n\n\nNumber of bins:"
+  },
+  {
+    "objectID": "posts/Day-3.html",
+    "href": "posts/Day-3.html",
+    "title": "Day 3",
+    "section": "",
+    "text": "Retracted science papers. Particularly with the engaging way the story is told on For Better Science."
+  },
+  {
+    "objectID": "posts/Day-3.html#for-better-science",
+    "href": "posts/Day-3.html#for-better-science",
+    "title": "Day 3",
+    "section": "",
+    "text": "Sylvain Lesné is a failed scientist: https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/\nCassava fraud and Alzheimer’s capitalism: https://forbetterscience.com/2021/12/15/cassava-fraud-and-alzheimers-capitalism/"
+  },
+  {
+    "objectID": "posts/Day-1/index.html",
+    "href": "posts/Day-1/index.html",
+    "title": "Day-1",
+    "section": "",
+    "text": "RSS (Really Simple Syndication) readers.\nSo much code out there to refer to:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r\nhttps://www.cdata.com/kb/tech/rss-jdbc-r.rst\nhttps://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/\nhttps://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/\nhttps://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL\nhttps://www.lifewire.com/what-is-an-rss-feed-4684568\nhttps://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e\nhttps://www.feedforall.com/displaying-rss.htm\nhttps://rhodygarden.org/sitehelp-show-rss-feed-in-ie/\nhttps://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71\nhttps://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/\nhttps://www.w3schools.com/xml/xml_rss.asp\nhttps://github.com/rstudio/distill/issues/33\nhttps://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/\nhttps://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/\nhttps://github.com/noahhl/r-does-rss\nhttps://datawookie.github.io/feedeR/index.html\nhttps://quarto.org/docs/websites/website-listings-custom.html\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/\nhttps://www.r-bloggers.com/2022/07/how-to-set-up-quarto-with-docker-part-1-static-content/\n\nAlternatively a program like feedly could be used on a local device (not sure about integration with quarto)."
+  },
+  {
+    "objectID": "posts/Day-2.html",
+    "href": "posts/Day-2.html",
+    "title": "Day 2",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "posts/Day-2.html#running-code",
+    "href": "posts/Day-2.html#running-code",
+    "title": "Day 2",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
   }
 ]
