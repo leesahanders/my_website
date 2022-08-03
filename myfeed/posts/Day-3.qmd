@@ -2,18 +2,22 @@
 title: "Day 3"
 description: "365 days of hyperfixation"
 author: "Lisa"
+date: "2022-08-02"
 format: html
 editor: visual
 categories:
   - 365
   - science
+image: "img/fbs.jpg"
 ---
 
 ## Fascination of the day
 
-Retracted science papers. Particularly with the engaging way the story is told on [For Better Science](https://forbetterscience.com/). 
+Retracted science papers. Particularly with the engaging way the stories are told on [For Better Science](https://forbetterscience.com/).
 
-## [![For Better Science](thumbnail.jpg)](https://forbetterscience.com/)
+## [![For Better Science](img/fbs.jpg)](https://forbetterscience.com/)
+
+The rabbit hole started with:
 
 -   Sylvain Lesné is a failed scientist: https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/
 

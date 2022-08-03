@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "References:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r\nhttps://www.cdata.com/kb/tech/rss-jdbc-r.rst\nhttps://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/\nhttps://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/\nhttps://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL\nhttps://www.lifewire.com/what-is-an-rss-feed-4684568\nhttps://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e\nhttps://www.feedforall.com/displaying-rss.htm\nhttps://rhodygarden.org/sitehelp-show-rss-feed-in-ie/\nhttps://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71\nhttps://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/\nhttps://www.w3schools.com/xml/xml_rss.asp\nhttps://github.com/rstudio/distill/issues/33\nhttps://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/\nhttps://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/\nhttps://github.com/noahhl/r-does-rss\nhttps://datawookie.github.io/feedeR/index.html\nhttps://quarto.org/docs/websites/website-listings-custom.html\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/\nhttps://www.r-bloggers.com/2022/07/how-to-set-up-quarto-with-docker-part-1-static-content/"
+    "text": "Under development, please come back later :)"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -25,7 +25,7 @@
     "href": "index.html",
     "title": "myfeed",
     "section": "",
-    "text": "365\n\n\nscience\n\n\n\n\n365 days of hyperfixation\n\n\n\n\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nLisa Anders\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nJul 25, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "365\n\n\nscience\n\n\n\n\n365 days of hyperfixation\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\nscience\n\n\n\n\n365 days of hyperfixation\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\n365 days of hyperfixation\n\n\n\n\n\n\nJul 28, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nLisa\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "feed.html",
@@ -53,33 +53,82 @@
     "href": "posts/Day-3.html",
     "title": "Day 3",
     "section": "",
-    "text": "Retracted science papers. Particularly with the engaging way the story is told on For Better Science."
+    "text": "Retracted science papers. Particularly with the engaging way the stories are told on For Better Science."
   },
   {
     "objectID": "posts/Day-3.html#for-better-science",
     "href": "posts/Day-3.html#for-better-science",
     "title": "Day 3",
     "section": "",
-    "text": "Sylvain Lesné is a failed scientist: https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/\nCassava fraud and Alzheimer’s capitalism: https://forbetterscience.com/2021/12/15/cassava-fraud-and-alzheimers-capitalism/"
+    "text": "The rabbit hole started with:\n\nSylvain Lesné is a failed scientist: https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/\nCassava fraud and Alzheimer’s capitalism: https://forbetterscience.com/2021/12/15/cassava-fraud-and-alzheimers-capitalism/"
   },
   {
     "objectID": "posts/Day-1/index.html",
     "href": "posts/Day-1/index.html",
     "title": "Day-1",
     "section": "",
-    "text": "RSS (Really Simple Syndication) readers.\nSo much code out there to refer to:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r\nhttps://www.cdata.com/kb/tech/rss-jdbc-r.rst\nhttps://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/\nhttps://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/\nhttps://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL\nhttps://www.lifewire.com/what-is-an-rss-feed-4684568\nhttps://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e\nhttps://www.feedforall.com/displaying-rss.htm\nhttps://rhodygarden.org/sitehelp-show-rss-feed-in-ie/\nhttps://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71\nhttps://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/\nhttps://www.w3schools.com/xml/xml_rss.asp\nhttps://github.com/rstudio/distill/issues/33\nhttps://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/\nhttps://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/\nhttps://github.com/noahhl/r-does-rss\nhttps://datawookie.github.io/feedeR/index.html\nhttps://quarto.org/docs/websites/website-listings-custom.html\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/\nhttps://www.r-bloggers.com/2022/07/how-to-set-up-quarto-with-docker-part-1-static-content/\n\nAlternatively a program like feedly could be used on a local device (not sure about integration with quarto)."
+    "text": "RSS (Really Simple Syndication) readers.\ndefault: rss_feeds: - “https://appsilon.com/rss” - “https://blog.rstudio.com/index.xml” - “https://www.r-bloggers.com/feed/” - “http://www.hackaday.com/rss.xml”\nSo much code out there to refer to:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r\nhttps://www.cdata.com/kb/tech/rss-jdbc-r.rst\nhttps://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/\nhttps://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/\nhttps://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL\nhttps://www.lifewire.com/what-is-an-rss-feed-4684568\nhttps://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e\nhttps://www.feedforall.com/displaying-rss.htm\nhttps://rhodygarden.org/sitehelp-show-rss-feed-in-ie/\nhttps://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71\nhttps://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/\nhttps://www.w3schools.com/xml/xml_rss.asp\nhttps://github.com/rstudio/distill/issues/33\nhttps://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/\nhttps://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/\nhttps://github.com/noahhl/r-does-rss\nhttps://datawookie.github.io/feedeR/index.html\nhttps://quarto.org/docs/websites/website-listings-custom.html\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/\nhttps://www.r-bloggers.com/2022/07/how-to-set-up-quarto-with-docker-part-1-static-content/\n\nAlternatively a program like feedly could be used on a local device (not sure about integration with quarto)."
   },
   {
     "objectID": "posts/Day-2.html",
     "href": "posts/Day-2.html",
-    "title": "Day 2",
+    "title": "Day-2",
     "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+    "text": "RSS (Really Simple Syndication) readers.\ndefault: rss_feeds: - “https://appsilon.com/rss” - “https://blog.rstudio.com/index.xml” - “https://www.r-bloggers.com/feed/” - “http://www.hackaday.com/rss.xml”\nSo much code out there to refer to:\n\nhttps://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app\nhttps://community.rstudio.com/t/shinyfeed-shiny-contest-submission/104723\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://stackoverflow.com/questions/27772079/how-to-consume-streaming-xml-rss-feeds-with-r\nhttps://www.cdata.com/kb/tech/rss-jdbc-r.rst\nhttps://www.r-bloggers.com/2021/11/rss-feeds-of-package-updates-in-r-universe/\nhttps://www.r-bloggers.com/2016/08/feeder-reading-rss-and-atom-feeds-from-r/\nhttps://rss.app/blog/how-to-add-auto-updated-news-feeds-to-your-website-6KP2RL\nhttps://www.lifewire.com/what-is-an-rss-feed-4684568\nhttps://medium.com/samsung-internet-dev/add-rss-feeds-to-your-website-to-keep-your-core-readers-engaged-3179dca9c91e\nhttps://www.feedforall.com/displaying-rss.htm\nhttps://rhodygarden.org/sitehelp-show-rss-feed-in-ie/\nhttps://medium.com/@spians/how-to-get-rss-feed-of-popular-websites-c5cb2af83d71\nhttps://www.r-bloggers.com/2019/12/creating-an-rss-feed-to-add-your-jekyll-github-pages-blog-to-r-bloggers/\nhttps://www.w3schools.com/xml/xml_rss.asp\nhttps://github.com/rstudio/distill/issues/33\nhttps://blog.ouseful.info/2017/06/28/hexjson-htmlwidget-for-r-part-1/\nhttps://www.r-bloggers.com/2011/04/how-to-build-a-dataset-in-r-using-an-rss-feed-or-web-page/\nhttps://github.com/noahhl/r-does-rss\nhttps://datawookie.github.io/feedeR/index.html\nhttps://quarto.org/docs/websites/website-listings-custom.html\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/\nhttps://www.r-bloggers.com/2022/07/how-to-set-up-quarto-with-docker-part-1-static-content/\n\nAlternatively a program like feedly could be used on a local device (not sure about integration with quarto)."
   },
   {
     "objectID": "posts/Day-2.html#running-code",
     "href": "posts/Day-2.html#running-code",
     "title": "Day 2",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "posts/Day-4.html",
+    "href": "posts/Day-4.html",
+    "title": "Day 3",
+    "section": "",
+    "text": "Lyme is such a curious and interesting bacterial infection."
+  },
+  {
+    "objectID": "posts/Day-4.html#observable-js",
+    "href": "posts/Day-4.html#observable-js",
+    "title": "Day 3",
+    "section": "Observable JS",
+    "text": "Observable JS\nThis Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at https://quarto.org/docs/interactive/ojs/."
+  },
+  {
+    "objectID": "posts/Day-4.html#data-wrangling",
+    "href": "posts/Day-4.html#data-wrangling",
+    "title": "Day 3",
+    "section": "Data wrangling",
+    "text": "Data wrangling\nLoad the data\n\n\nShow the code\ndata = FileAttachment(\"data/lyme_data.csv\").csv({ typed: true })\n\n\n\n\n\n\n\nFilter options\n\n\nShow the code\nviewof state = Inputs.select(data.map(d => d.Stname), {multiple: true, value: \"Alaska\", label: \"Choose a state: \", sort: true, unique: true})\n\nfiltered = data.filter(function(data) {\n  return state.includes(data.Stname);\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlotData\n\n\nStacked bar chart of cases by state by year, remember to select an option above.\n\n\nShow the code\nPlot.plot({\n  y: {\n    grid: true\n  },\n  marks: [\n    Plot.barY(filtered, {x: \"date\", y: \"total_cases\", fill: \"#bab0ab\"}),\n    <!-- plot.text(filtered, {x: \"date\", y: \"total_cases\", text: \"Stname\", textAnchor: \"end\", dx: -6}), -->\n    Plot.ruleY([0])\n  ]\n})\n\n\n\n\n\n\n\n\n\nAggregated dataset for all states.\n\n\nShow the code\nInputs.table(data, { sort: \"date\", reverse: true })"
+  },
+  {
+    "objectID": "posts/Day-4.html#references",
+    "href": "posts/Day-4.html#references",
+    "title": "Day 3",
+    "section": "References",
+    "text": "References\n\nhttps://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122\nhttps://www.hopkinslymetracker.org/\nhttps://quarto.org/docs/interactive/ojs/\nData from: https://www.cdc.gov/lyme/stats/survfaq.html\n\nAdditional data options: https://data.world/datasets/lyme-disease\nSome plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar\nSome various tutorials: https://observablehq.com/tutorials"
+  },
+  {
+    "objectID": "posts/Day-1.html",
+    "href": "posts/Day-1.html",
+    "title": "Day 1",
+    "section": "",
+    "text": "It’s a whole new exciting world! And the default project has a lot of exciting files to explore.\nI’m using:\n\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html"
+  },
+  {
+    "objectID": "posts/Day-1.html#example",
+    "href": "posts/Day-1.html#example",
+    "title": "Day 1",
+    "section": "Example",
+    "text": "Example\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "posts/Day-1.html#running-code",
+    "href": "posts/Day-1.html#running-code",
+    "title": "Day 1",
     "section": "Running Code",
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
   }
