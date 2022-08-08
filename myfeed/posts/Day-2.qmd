@@ -1,7 +1,8 @@
 ---
-title: "Day-2"
+title: "Day 2"
+description: "RSS"
 author: "Lisa"
-date: "2022-07-28"
+date: "2022-07-30"
 categories: [365, code, analysis]
 categories:
   - 365
@@ -11,14 +12,15 @@ image: "img/rss.jpg"
 
 ## Fascination of the day
 
-RSS (Really Simple Syndication) readers. 
+I'm really interested in building a RSS reader in R/Quarto. 
 
-default:
-  rss_feeds:
-  - "https://appsilon.com/rss"
-  - "https://blog.rstudio.com/index.xml"
-  - "https://www.r-bloggers.com/feed/"
-  - "http://www.hackaday.com/rss.xml"
+What is RSS? It stands for "Really Simple Syndication" and is a web feed for content being added to websites in a standardized way. 
+
+rss_feeds examples:
+ - "https://appsilon.com/rss"
+ - "https://blog.rstudio.com/index.xml"
+ - "https://www.r-bloggers.com/feed/"
+ - "http://www.hackaday.com/rss.xml"
 
 So much code out there to refer to: 
 

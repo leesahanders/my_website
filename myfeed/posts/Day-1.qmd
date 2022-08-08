@@ -1,7 +1,7 @@
 ---
 title: "Day 1"
-description: "365 days of hyperfixation"
-author: "Lisa"
+description: "Quarto"
+author: ""
 date: "2022-07-28"
 format: html
 editor: visual

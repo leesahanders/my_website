@@ -2,16 +2,16 @@ project:
   type: website
 
 website:
-  title: "myfeed"
+  title: "questionable.quarto"
   navbar:
     right:
+      - index.qmd
       - about.qmd
-      - feed.qmd
       - icon: github
         href: https://github.com/leesahanders/rss_feed
 format:
   html:
-    theme: cosmo
+    theme: vapor
     css: styles.css
 
 

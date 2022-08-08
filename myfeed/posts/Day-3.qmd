@@ -1,6 +1,6 @@
 ---
 title: "Day 3"
-description: "365 days of hyperfixation"
+description: "For Better Science"
 author: "Lisa"
 date: "2022-08-02"
 format: html

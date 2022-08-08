@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2022-07-28">
+<meta name="dcterms.date" content="2022-07-30">
+<meta name="description" content="RSS">
 
-<title>myfeed - Day-2</title>
+<title>questionable.quarto - Day 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,10 +33,10 @@ ul.task-list{list-style: none;}
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,7 +68,7 @@ ul.task-list{list-style: none;}
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">myfeed</span>
+    <span class="navbar-title">questionable.quarto</span>
   </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
@@ -75,10 +76,11 @@ ul.task-list{list-style: none;}
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
+    <a class="nav-link" href="../index.html">Blog</a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../about.html">About</a>
   </li>  
-  <li class="dropdown-header">
- feed.qmd</li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/leesahanders/rss_feed"><i class="bi bi-github" role="img">
 </i> 
@@ -94,8 +96,13 @@ ul.task-list{list-style: none;}
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Day-2</h1>
-                                <div class="quarto-categories">
+      <h1 class="title">Day 2</h1>
+                  <div>
+        <div class="description">
+          RSS
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">365</div>
                 <div class="quarto-category">code</div>
               </div>
@@ -115,7 +122,7 @@ ul.task-list{list-style: none;}
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 28, 2022</p>
+        <p class="date">July 30, 2022</p>
       </div>
     </div>
       
@@ -134,8 +141,9 @@ ul.task-list{list-style: none;}
 
 <section id="fascination-of-the-day" class="level2">
 <h2 class="anchored" data-anchor-id="fascination-of-the-day">Fascination of the day</h2>
-<p>RSS (Really Simple Syndication) readers.</p>
-<p>default: rss_feeds: - “https://appsilon.com/rss” - “https://blog.rstudio.com/index.xml” - “https://www.r-bloggers.com/feed/” - “http://www.hackaday.com/rss.xml”</p>
+<p>I’m really interested in building a RSS reader in R/Quarto.</p>
+<p>What is RSS? It stands for “Really Simple Syndication” and is a web feed for content being added to websites in a standardized way.</p>
+<p>rss_feeds examples: - “https://appsilon.com/rss” - “https://blog.rstudio.com/index.xml” - “https://www.r-bloggers.com/feed/” - “http://www.hackaday.com/rss.xml”</p>
 <p>So much code out there to refer to:</p>
 <ul>
 <li>https://stackoverflow.com/questions/51762965/getting-rss-feed-in-r-shiny-web-app</li>
