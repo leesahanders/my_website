@@ -17,3 +17,5 @@ categories:
 ![Adafruit Macropad](img/macropad.jpg)
 
 https://www.adafruit.com/product/5128
+
+For a project example: https://learn.adafruit.com/adafruit-macropad-rp2040/circuitpython 
