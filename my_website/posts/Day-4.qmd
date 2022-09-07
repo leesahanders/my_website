@@ -1,0 +1,39 @@
+---
+title: "Day 4"
+description: "AI Art"
+author: "Lisa"
+date: "2022-08-03"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+categories:
+  - 365
+  - art
+---
+
+There are so many AI art generators out there to use.
+
+My first AI art generating app (5 free pieces of art per day): [https://www.starryai.com/](https://www.starryai.com/) 
+ 
+Images in : img/starryai/
+ 
+![solarpunk](img/starryai/s1.png)![solar panel satellite](img/starryai/s3.png)![pluto](img/starryai/s11.png)![spaceship flying down the sidewalk](img/starryai/s10.png)![Hydraulic dam fairytale](img/starryai/s7.png)![the storm rolled in](img/starryai/s2.png)![I believe in a thing called love](img/starryai/s8.png)
+ 
+ 
+Doesn't require log in (5 free pieces of art per day, however using incognito mode or edge counts as a separate user for 15 pieces of art per day): [https://creator.nightcafe.studio/](https://creator.nightcafe.studio/) 
+ 
+Images in : img/nightcafe
+
+![Robotic owl in space](img/nightcafe/robotic owl in space.JPG)![The monster from alien on a date](img/nightcafe/The monster from alien on a date.JPG)![selfie](img/nightcafe/selfie.JPG)
+![brain on fire](img/nightcafe/brain on fire.JPG)
+![cyborg bartender](img/nightcafe/cyborg bartender.JPG)
+![grandmother knitting](img/nightcafe/grandmother knitting.JPG)
+![woman using a computer](img/nightcafe/woman using a computer.JPG)
+![ammonite seashell on the beach being worshipped by monsters](img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG)
+
+There are a bunch more I'm looking forward to trying: [https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another%20one%20of%20the%20best,trained%20with%20millions%20of%20images](https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another%20one%20of%20the%20best,trained%20with%20millions%20of%20images)
+
+
+Tips on dealing with displaying images in a rendered document: [https://rpubs.com/RatherBit/90926](https://rpubs.com/RatherBit/90926) 

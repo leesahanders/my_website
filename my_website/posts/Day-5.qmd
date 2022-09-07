@@ -1,0 +1,21 @@
+---
+title: "Day 5"
+description: "Seedship"
+author: "Lisa"
+date: "2022-08-04"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+image: "img/seedship.png"
+categories:
+  - 365
+  - games
+---
+
+![Seedship](img/seedship.png)
+
+A fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard. 
+
+Link: [https://philome.la/johnayliff/seedship/play/index.html](https://philome.la/johnayliff/seedship/play/index.html)

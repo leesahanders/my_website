@@ -1,0 +1,32 @@
+project:
+  type: website
+
+website:
+  title: "questionable.quarto"
+  navbar:
+    left: 
+      - text: "Home"
+        href: index.qmd
+      - about.qmd
+      - text: "Projects"
+        icon: fa-database
+        menu:
+          - text: "Battlebots Brackets"
+            href: battlebots.qmd
+          - text: "Resin Dice"
+            href: resin.qmd
+          - text: "Recipes"
+            href: recipes.qmd
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/leesahanders/my_website
+format:
+  html:
+    theme: 
+      light: custom_theme.scss
+      dark: vapor
+    css: styles.css
+
+
+

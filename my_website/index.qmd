@@ -1,0 +1,13 @@
+---
+title: "Index"
+image: images/ai/self_portrait.png
+about:
+  template: trestles
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/leesahanders/my_website
+---
+
+Grab a cup of coffee, I hope you enjoy the pages you find here. 
+

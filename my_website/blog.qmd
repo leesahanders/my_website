@@ -1,0 +1,14 @@
+---
+title: "Recipes"
+listing:
+  contents: recipes
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
+
+Sometimes you gotta eat. Testing out Quarto's blogging capabilities using cataloging delicious recipes as content. 
