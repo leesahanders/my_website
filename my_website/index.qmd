@@ -1,13 +1,6 @@
 ---
-title: "Index"
+title: "Home"
 image: images/ai/self_portrait.png
-listing:
-  type: table
-  categories: true
-  sort:
-    - "date desc"
-    - "title desc"
-  fields: [image, date, title, author, reading-time]
 about:
   template: jolla
   links:
@@ -24,6 +17,8 @@ about:
       text: Goodreads
       href: https://www.goodreads.com/user/show/47707460-lisa
 ---
+
+Hello there! You must be pretty awesome if you are checking out my humble website. Welcome! 
 
 Grab a cup of coffee, I hope you enjoy the pages you find here. 
 

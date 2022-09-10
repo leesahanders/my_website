@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>questionable.quarto - Index</title>
+<title>questionable.quarto - Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,8 +25,6 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -56,42 +54,12 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -107,9 +75,6 @@ ul.task-list{list-style: none;}
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html">About</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
@@ -155,293 +120,23 @@ ul.task-list{list-style: none;}
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div><div class="category" data-category="365">365 <span class="quarto-category-count">(7)</span></div><div class="category" data-category="art">art <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dessert">dessert <span class="quarto-category-count">(1)</span></div><div class="category" data-category="games">games <span class="quarto-category-count">(2)</span></div><div class="category" data-category="gluten-free">gluten-free <span class="quarto-category-count">(1)</span></div><div class="category" data-category="music">music <span class="quarto-category-count">(1)</span></div><div class="category" data-category="potluck">potluck <span class="quarto-category-count">(1)</span></div><div class="category" data-category="science">science <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
 <div class="quarto-about-jolla">
   <img src="images/ai/self_portrait.png" class="about-image
   round " style="height: 15em; width: 15em;">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Index</h1>
+<h1 class="title">Home</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
 </header><main class="content" id="quarto-document-content">
+<p>Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!</p>
 <p>Grab a cup of coffee, I hope you enjoy the pages you find here.</p>
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-</th>
-<th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
-</th>
-<th>
-Reading Time
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1662831840394" data-listing-reading-time-sort="0.08" data-listing-title-sort="Recipes" data-listing-filename-sort="recipes.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-date">
-</td>
-<td class="listing-title">
-<a href="./recipes.html" class="title">Recipes</a>
-</td>
-<td class="listing-author">
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="1" data-listing-file-modified-sort="1662831881546" data-listing-reading-time-sort="0.04" data-listing-title-sort="Blog" data-listing-filename-sort="blog.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-date">
-</td>
-<td class="listing-title">
-<a href="./blog.html" class="title">Blog</a>
-</td>
-<td class="listing-author">
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="2" data-listing-file-modified-sort="1662829053633" data-listing-reading-time-sort="8.075" data-listing-title-sort="BATTLEBOTS" data-listing-filename-sort="battlebots.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-date">
-</td>
-<td class="listing-title">
-<a href="./battlebots.html" class="title">BATTLEBOTS</a>
-</td>
-<td class="listing-author">
-</td>
-<td class="listing-reading-time">
-8 min
-</td>
-</tr>
-<tr data-index="3" data-listing-file-modified-sort="1662830075863" data-listing-reading-time-sort="7.55" data-listing-title-sort="Adventures in Resin: Making your own dice" data-listing-filename-sort="resin.qmd">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-date">
-</td>
-<td class="listing-title">
-<a href="./resin.html" class="title">Adventures in Resin: Making your own dice</a>
-</td>
-<td class="listing-author">
-</td>
-<td class="listing-reading-time">
-7 min
-</td>
-</tr>
-<tr data-index="4" data-listing-file-modified-sort="1662513180355" data-listing-reading-time-sort="0.565" data-listing-title-sort="About" data-listing-filename-sort="about.qmd">
-<td class="listing-image">
-<img src="./images/Rocinante.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-</td>
-<td class="listing-title">
-<a href="./about.html" class="title">About</a>
-</td>
-<td class="listing-author">
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="5" data-categories="dessert,gluten-free,potluck" data-listing-date-sort="1662786000000" data-listing-file-modified-sort="1662832403943" data-listing-reading-time-sort="1.8" data-listing-title-sort="Strawberry Crumble" data-listing-filename-sort="strawberry_crumble.qmd">
-<td class="listing-image">
-<img src="./recipes/img/strawberry_crumble.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-Sep 10, 2022
-</td>
-<td class="listing-title">
-<a href="./recipes/strawberry_crumble.html" class="title">Strawberry Crumble</a>
-</td>
-<td class="listing-author">
-consciousplantkitchen
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-</tr>
-<tr data-index="6" data-categories="365,games" data-listing-date-sort="1659848400000" data-listing-file-modified-sort="1662506175974" data-listing-reading-time-sort="0.035" data-listing-title-sort="Day 7" data-listing-filename-sort="Day-7.qmd">
-<td class="listing-image">
-<img src="./posts/img/macropad.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-Aug 7, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-7.html" class="title">Day 7</a>
-</td>
-<td class="listing-author">
-Lisa
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="7" data-categories="365,music" data-listing-date-sort="1659675600000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.2" data-listing-title-sort="Day 6" data-listing-filename-sort="Day-6.qmd">
-<td class="listing-image">
-<img src="./posts/img/otomata.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-Aug 5, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-6.html" class="title">Day 6</a>
-</td>
-<td class="listing-author">
-Lisa
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="8" data-categories="365,games" data-listing-date-sort="1659589200000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.155" data-listing-title-sort="Day 5" data-listing-filename-sort="Day-5.qmd">
-<td class="listing-image">
-<img src="./posts/img/seedship.png" style="height: 40px;">
-</td>
-<td class="listing-date">
-Aug 4, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-5.html" class="title">Day 5</a>
-</td>
-<td class="listing-author">
-Lisa
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="9" data-categories="365,art" data-listing-date-sort="1659502800000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.76" data-listing-title-sort="Day 4" data-listing-filename-sort="Day-4.qmd">
-<td class="listing-image">
-<img src="./posts/img/starryai/s1.png" style="height: 40px;">
-</td>
-<td class="listing-date">
-Aug 3, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-4.html" class="title">Day 4</a>
-</td>
-<td class="listing-author">
-Lisa
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="10" data-categories="365,science" data-listing-date-sort="1659416400000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.2" data-listing-title-sort="Day 3" data-listing-filename-sort="Day-3.qmd">
-<td class="listing-image">
-<img src="./posts/img/fbs.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-Aug 2, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-3.html" class="title">Day 3</a>
-</td>
-<td class="listing-author">
-Lisa
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="11" data-categories="365,code" data-listing-date-sort="1659157200000" data-listing-file-modified-sort="1662506175972" data-listing-reading-time-sort="0.64" data-listing-title-sort="Day 2" data-listing-filename-sort="Day-2.qmd">
-<td class="listing-image">
-<img src="./posts/img/rss.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-Jul 30, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-2.html" class="title">Day 2</a>
-</td>
-<td class="listing-author">
-Lisa
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-<tr data-index="12" data-categories="365,code" data-listing-date-sort="1658984400000" data-listing-file-modified-sort="1662506175972" data-listing-reading-time-sort="0.5" data-listing-title-sort="Day 1" data-listing-filename-sort="Day-1.qmd">
-<td class="listing-image">
-<img src="./posts/img/welcome.jpg" style="height: 40px;">
-</td>
-<td class="listing-date">
-Jul 28, 2022
-</td>
-<td class="listing-title">
-<a href="./posts/Day-1.html" class="title">Day 1</a>
-</td>
-<td class="listing-author">
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> 
+</main> 
   <hr class="about-sep">
    <div class="about-links">
   <a href="https://github.com/leesahanders/my_website" class="about-link">

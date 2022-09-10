@@ -1,23 +1,5 @@
 [
   {
-    "listing": "/index.html",
-    "items": [
-      "/recipes.html",
-      "/blog.html",
-      "/battlebots.html",
-      "/resin.html",
-      "/about.html",
-      "/recipes/strawberry_crumble.html",
-      "/posts/Day-7.html",
-      "/posts/Day-6.html",
-      "/posts/Day-5.html",
-      "/posts/Day-4.html",
-      "/posts/Day-3.html",
-      "/posts/Day-2.html",
-      "/posts/Day-1.html"
-    ]
-  },
-  {
     "listing": "/blog.html",
     "items": [
       "/posts/Day-7.html",

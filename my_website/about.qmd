@@ -18,10 +18,10 @@ about:
       href: https://www.goodreads.com/user/show/47707460-lisa
 ---
 
-Hello there! You must be pretty awesome if you are checking out my humble website. Welcome! 
+Welcome!
 
 I'm a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science. 
 
 In my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.
 
-<a href="https://github.com/leesahanders/Anders_Resume/blob/main/Anders_2022.pdf" class="download" title="Download Resume as PDF">Resume</a>	
+<a href="https://github.com/leesahanders/Anders_Resume/blob/main/Anders_2022.pdf" class="download" title="Download Resume">Resume</a>	

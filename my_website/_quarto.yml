@@ -7,7 +7,6 @@ website:
     left: 
       - text: "Home"
         href: index.qmd
-      - about.qmd
       - text: "Projects"
         icon: fa-database
         menu:
