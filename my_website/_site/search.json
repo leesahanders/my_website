@@ -4,14 +4,14 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to me. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked. Luckily this is what I get to do for work now.\nIn my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.\nResume"
+    "text": "I’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.\nIn my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.\nResume"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Grab a cup of coffee, I hope you enjoy the pages you find here."
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n \n\n\n\n\n\nRecipes\n\n\n\n\n0 min\n\n\n\n\n\n \n\n\n\n\n\nBlog\n\n\n\n\n0 min\n\n\n\n\n\n \n\n\n\n\n\nBATTLEBOTS\n\n\n\n\n8 min\n\n\n\n\n\n \n\n\n\n\n\nAdventures in Resin: Making your own dice\n\n\n\n\n7 min\n\n\n\n\n\n\n\n\n\nAbout\n\n\n\n\n0 min\n\n\n\n\n\n\n\nSep 10, 2022\n\n\nStrawberry Crumble\n\n\nconsciousplantkitchen\n\n\n1 min\n\n\n\n\n\n\n\nAug 7, 2022\n\n\nDay 7\n\n\nLisa\n\n\n0 min\n\n\n\n\n\n\n\nAug 5, 2022\n\n\nDay 6\n\n\nLisa\n\n\n0 min\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nDay 5\n\n\nLisa\n\n\n0 min\n\n\n\n\n\n\n\nAug 3, 2022\n\n\nDay 4\n\n\nLisa\n\n\n0 min\n\n\n\n\n\n\n\nAug 2, 2022\n\n\nDay 3\n\n\nLisa\n\n\n0 min\n\n\n\n\n\n\n\nJul 30, 2022\n\n\nDay 2\n\n\nLisa\n\n\n0 min\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nDay 1\n\n\n\n\n0 min\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/Day-1.html",
@@ -86,9 +86,9 @@
   {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "Recipes",
+    "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Day 7\n\n\n\n\n\n\n\n365\n\n\ngames\n\n\n\n\nAdafruit macropad\n\n\n\n\n\n\nAug 7, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nDay 6\n\n\n\n\n\n\n\n365\n\n\nmusic\n\n\n\n\nOtomata\n\n\n\n\n\n\nAug 5, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nDay 5\n\n\n\n\n\n\n\n365\n\n\ngames\n\n\n\n\nSeedship\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nDay 4\n\n\n\n\n\n\n\n365\n\n\nart\n\n\n\n\nAI Art\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nDay 3\n\n\n\n\n\n\n\n365\n\n\nscience\n\n\n\n\nFor Better Science\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nDay 2\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nRSS\n\n\n\n\n\n\nJul 30, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nDay 1\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nQuarto\n\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "battlebots.html",
@@ -121,8 +121,71 @@
   {
     "objectID": "recipes.html",
     "href": "recipes.html",
-    "title": "Blog",
+    "title": "Recipes",
     "section": "",
-    "text": "365\n\n\ngames\n\n\n\n\nAdafruit macropad\n\n\n\n\n\n\nAug 7, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\nmusic\n\n\n\n\nOtomata\n\n\n\n\n\n\nAug 5, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ngames\n\n\n\n\nSeedship\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\nart\n\n\n\n\nAI Art\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\nscience\n\n\n\n\nFor Better Science\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nRSS\n\n\n\n\n\n\nJul 30, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nQuarto\n\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Strawberry Crumble\n\n\n\n\n\n\n\ndessert\n\n\ngluten-free\n\n\npotluck\n\n\n\n\nAn easy strawberry crumble recipe with juicy strawberries topped with crispy oat and nuts topping.\n\n\n\n\n\n\nSep 10, 2022\n\n\nconsciousplantkitchen\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "resin.html",
+    "href": "resin.html",
+    "title": "Adventures in Resin: Making your own dice",
+    "section": "",
+    "text": "The basics I’ve gathered for learning how to make molds are:\n\nSmooth-On OOMOO\nNitrile Gloves\nSmall hand torch (originally meant for creme brulee)\nA Safety Pin\nPlasticine Clay\nVarious small disposable cups, disposable plastic fork, measuring cup\nHandful of my least favorite dice\n\n\n\n\n\n\n\n\nGoing to the crafts store the whole time I was thinking “this is going to go GREAT. How hard could it be? The videos are so calming, surely the whole process is straight up zen.”\nWRONG.\nAfter learning how difficult it is to attach a pin into a D6 (I would describe it more as teetering perilously rather than actually mounted) we got to move onto lessons into practically what pot time is. While on thebox it may say pot time of 30 minutes in practice I had less than 20 minutes to get the silicone into the mold before it was hardening to the point of not flowing smoothly.\n\n\n\n\n\n\n\nAlso had complete failure of the attempt at a vacuum chamber using my hand vaccuum, a small bell jar, and the valve on one of those clothes bags that let you vacuum the air out for better storage. No bubbles were successfully pulled out using this method, whether due to lack of a seal between the bell jar and the valve or if just wasn’t a strong enough vacuum.\n\n\n\n\n\n\n\nThe three mold attempts are sitting out to cure overnight before I’ll begin the process of removing the die and trying out adding resin. I’m doubtful any of these turned out but what a wonderful way to spend a couple hours!\n\n\n\n\n\n\n\n10/4/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTry 2 of creating the silicone mold. I was able to use the lessons from last time and create a mold with the sprue large enough to get a good amount in there while still having it be small enough that hopefully polishing won’t be horrible.\n\n\n\n\n\n\n\nInteresting enough I think that the mixture is very sensitive to the quantities of each part. While I was very careful to match the volumes using my trusty 1/2 cup measuring spoon we can notice a distinct change in color. Despite this change in color it did successfully set and it doesn’t feel different and will do nicely as a mold.\n\n\n\n\n\n\n\nI’m a little concerned with my splits in the mold for removing the pieces. Hopefully it will seal up well enough that we won’t have the resin leaking out or really large obvious lines.\n\n\n\n\n\n\n\n10/5-6/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe ingredients for pouring the resin:\n\nDried flowers\nFood coloring\nMica powders\nEasyCast resin\nDixie cups, pipettes, nitrile glove, facemask (not pictured)\n\n\n\n\n\n\n\n\nThis batch I decided to focus on blues.\nRecipe:\n\n2 drops blue food coloring\nFor 2 of the dice added the green mica powder\n\nSince I layered it in with pure blue on bottom and the blue + mica powder on top it really developed a beautiful layering effect.\n\n\n\n\n\n\n\n10/6/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRecipe:\n\n1 drop ‘kiwi’ food coloring\nHalf of a handle full of green metallic mica powder\nBlue flower\n\nThoroughly mix equal parts of resin for 2 minutes, transfer to second container and add coloring. Mix for an additional minute and use pipettes (two pipette method where one can fill while you use the other one) to fill each mold. Gently insert a flower once 3/4 full. Swish the containers by rotating to encourage air bubbles to exit from difficult places in the mold.\n\n\n\n\n\n\n\nWow this just turned out BEAUTIFUL.\n\n\n\n\n\n\n\n10/7/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSame recipe as before, still looks beautiful and we now have a matching set of 6!\n\n\n\n\n\n\n\n10/8/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nI’ve gathered my polishing components: namely various grits of sandpaper and some car automotive buff.\n\n\n\n\n\n\n\nFirst step is trimming off the sprue. This was done using a pair of shears (I used wirecutters). The ends come off pretty explosively (think nail trimming but times a million) so definitely be careful which direction you are pointing the die and the sprue.\nAll three have some kind of bubble where resin wasn’t able to really fill the mold. Maybe doing a “swish” after filling will help next time for preventing this?\n\n\n\n\n\n\n\nHere we have the before polishing with all the imperfections and remainder of the sprue.\n\n\n\n\n\n\n\nAnd here is our after with all the edges buffed out. Looking better, right? I think we can do better though because I did notice that the sides that came out looking good and shiny after being buffedstarted looking cloudy.\nIdeas for next time are to spend more time polishing on the finest grit. Maybe that will help get it super shiny? And spend longer polishing. It’s about time for a netflix marathon anyway.\n\n\n\n\n\n\n\n10/8/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVery happy to report success with the “swish”. Only 1 out of the three dice has a bubble in the corner disrupting the pattern (and this one is the hardest mold, with the highest point being higher than where the sprue intersects).\n\n\n\n\n\n\n\n10/9/2020\n\n\n\n\n\n\n\n\n\nNow that our unique dice have been cured, painted, and polished it was time to put them to the test. Sure they look pretty (minus the occasional bubble and polish mark) but can they ROLL?\nHere, I am proud to present to you, are our candidates for the roll off!\n\nEach die was rolled 50 times to give some statistical significance to the results. Ideally we would have a hundred rolls or more per die (1,000 would be a really great number) but I decided to balance statistics with the chances of developing arthritis.\nIn addition to rolling each of our manufactured dice 50 times a professional metal die was rolled 50 times to give a reference for our measurements.\nThe conclusion:\nWell. Looks like my metal dice is weighted (both literally but also rolls 6 much more often). The resin dice performed better than I expected. I was expected to see the dice with remnants of a bubble or bumps to really have a very significant impact, but honestly they look comparable to the metal die.\nOur results:\n\n\nShow the code\nlibrary(\"readxl\")\nlibrary(dplyr)\nlibrary(tidyverse)\nlibrary(ggplot2)\nlibrary(plotly)\n#library(rjags)\n\nrolls = read_excel(\"./files/Dice_rolls.xlsx\")\n\nrolls_long <- rolls %>%\n pivot_longer(cols = 1:10, names_to = \"Dice\", values_to = \"RollValue\")\n\nrolls_summary <- rolls_long %>%\n  group_by(Dice, RollValue) %>%\n  summarize(Count = n())\n\np <- ggplot(rolls_summary, aes(x=RollValue, y=Count, fill = Dice )) + \n  geom_bar(stat = \"identity\", position = position_stack(reverse = TRUE)) +\n  facet_wrap(~ Dice) +\n theme(legend.position = \"top\")\n\np\n\n\n\n\n\nShow the code\np <- ggplot(rolls_summary) + \n  geom_bar(aes(x=Dice, y=Count, fill = RollValue ), stat = \"identity\", position = position_stack(reverse = TRUE)) +\n  coord_flip() + \n  theme(legend.position = \"top\")\n\np\n\n\n\n\n\n\n10/10/2020"
+  },
+  {
+    "objectID": "resin.html#resources",
+    "href": "resin.html#resources",
+    "title": "Adventures in Resin: Making your own dice",
+    "section": "Resources",
+    "text": "Resources\nHere are some of the resources that helped me on my journey down this exciting path (in no particular order):\n\nhttps://www.evewynn.com/moldmaking\nhttp://www.hanleybrady.com/making-dice-part-1-molds/\nhttps://www.instructables.com/Custom-Dice/\nhttps://www.thingiverse.com/thing:3795542\nhttps://www.youtube.com/watch?v=iRDte2j54F0\nhttps://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/\nhttps://www.youtube.com/watch?v=FQ1A7ZjTsx8\nhttps://rpubs.com/benjamin_chittick/59278\nhttps://rstudio-education.github.io/hopr/project-1-weighted-dice.html\nhttp://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html\nhttps://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html\nhttps://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html"
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html",
+    "href": "recipes/strawberry_crumble.html",
+    "title": "Strawberry Crumble",
+    "section": "",
+    "text": "4 cups Strawberries fresh or frozen\n1/2 tablespoon Corn Starch or arrowroot flour\n1 tablespoon Brown Sugar or coconut sugar\n1 teaspoon Lemon Juice optional"
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html#strawberry-crumble-toppings",
+    "href": "recipes/strawberry_crumble.html#strawberry-crumble-toppings",
+    "title": "Strawberry Crumble",
+    "section": "Strawberry Crumble toppings",
+    "text": "Strawberry Crumble toppings\n\n1/2 cup Old-Fashioned Rolled Oats\n1/2 cup Flour of Choice all-purpose flour, oat flour, almond flour, or gluten-free flour blend\n1/4 cup Brown Sugar packed or coconut sugar\n1 teaspoon Vanilla\n1/4 teaspoon Cinnamon\n1/3 cup Coconut Flakes or chopped walnuts/almonds\n5-6 tablespoons Coconut Oil or softened dairy-free butter"
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html#instructions",
+    "href": "recipes/strawberry_crumble.html#instructions",
+    "title": "Strawberry Crumble",
+    "section": "Instructions",
+    "text": "Instructions\n\nPreheat oven to 350°F (180°C). Slightly oil an 8-inch x 8-inch square pan. Set aside.\nCore the strawberry stems, and cut each strawberry into large bites or keep whole if preferred. Both options work great. Place the strawberries into a large mixing bowl with corn starch, sugar, lemon juice, and stir to coat.\nSpread evenly into the baking dish. It’s ok if it’s not in a single layer. Strawberries bake really fast, even if they overlap. Set aside.\nIn another mixing bowl, mix flour of choice, rolled oats, coconut flakes (or chopped nuts), sugar, vanilla, and cinnamon.\nRub in soft coconut oil or softened dairy-free butter with fingertips until it forms a breadcrumb-like texture. Start with 5 tablespoons of soft coconut oil and add the extra one if too dry.\nSprinkle over the strawberries in the pan.\nBake for 25-30 minutes or until the fruits are cooked, bubbly, and the top is cooked and crispy.\nServe with a dollop of dairy-free ice cream or whipped cream."
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html#storage",
+    "href": "recipes/strawberry_crumble.html#storage",
+    "title": "Strawberry Crumble",
+    "section": "Storage",
+    "text": "Storage\nStore leftovers for up to 3 days in the fridge in an airtight container."
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html#nutrition",
+    "href": "recipes/strawberry_crumble.html#nutrition",
+    "title": "Strawberry Crumble",
+    "section": "Nutrition",
+    "text": "Nutrition\nServing: 1serving | Calories: 273.1kcal | Carbohydrates: 32.7g | Protein: 3g | Fat: 15.5g | Saturated Fat: 12.9g | Polyunsaturated Fat: 0.6g | Monounsaturated Fat: 1g | Sodium: 6.6mg | Potassium: 224.3mg | Fiber: 3.7g | Sugar: 16.1g | Vitamin A: 11.8IU | Vitamin C: 56.5mg | Calcium: 31.9mg | Iron: 1.4mg | Magnesium: 29.5mg | Phosphorus: 72.3mg | Zinc: 0.6mg"
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html#lisas-notes",
+    "href": "recipes/strawberry_crumble.html#lisas-notes",
+    "title": "Strawberry Crumble",
+    "section": "Lisa’s notes",
+    "text": "Lisa’s notes\nI’ve made this using frozen fruit (strawberries, frozen berry blends) and also using fresh strawberry and rhubarb blends. Consistently delicious!"
+  },
+  {
+    "objectID": "recipes/strawberry_crumble.html#ingredients",
+    "href": "recipes/strawberry_crumble.html#ingredients",
+    "title": "Strawberry Crumble",
+    "section": "Ingredients",
+    "text": "Ingredients\n\n4 cups Strawberries fresh or frozen\n1/2 tablespoon Corn Starch or arrowroot flour\n1 tablespoon Brown Sugar or coconut sugar\n1 teaspoon Lemon Juice optional"
   }
 ]

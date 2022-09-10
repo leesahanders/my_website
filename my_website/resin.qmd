@@ -1,0 +1,373 @@
+---
+title: "Adventures in Resin: Making your own dice"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+---
+
+<style>
+table, th, td {
+}
+
+th, td {
+  padding: 10px;
+}
+</style>
+
+## Experiments 
+
+### Silicone Mold
+
+<table style="width: 100%">
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_031026679.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+The basics I've gathered for learning how to make molds are: 
+
+ - Smooth-On OOMOO
+ - Nitrile Gloves
+ - Small hand torch (originally meant for creme brulee)
+ - A Safety Pin
+ - Plasticine Clay
+ - Various small disposable cups, disposable plastic fork, measuring cup
+ - Handful of my least favorite dice
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_013447645.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Going to the crafts store the whole time I was thinking "this is going to go GREAT. How hard could it be? The videos are so calming, surely the whole process is straight up zen."
+
+WRONG.
+
+After learning how difficult it is to attach a pin into a D6 (I would describe it more as teetering perilously rather than actually mounted) we got to move onto lessons into practically what pot time is. While on thebox it may say pot time of 30 minutes in practice I had less than 20 minutes to get the silicone into the mold before it was hardening to the point of not flowing smoothly. 
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_015535872.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Also had complete failure of the attempt at a vacuum chamber using my hand vaccuum, a small bell jar, and the valve on one of those clothes bags that let you vacuum the air out for better storage. No bubbles were successfully pulled out using this method, whether due to lack of a seal between the bell jar and the valve or if just wasn't a strong enough vacuum. 
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_022732163.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+The three mold attempts are sitting out to cure overnight before I'll begin the process of removing the die and trying out adding resin. I'm doubtful any of these turned out but what a wonderful way to spend a couple hours!
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/4/2020</p></td>
+</tr>
+</table>
+
+---
+
+
+
+<table style="width: 100%;">
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_161849020.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Try 2 of creating the silicone mold. I was able to use the lessons from last time and create a mold with the sprue large enough to get a good amount in there while still having it be small enough that hopefully polishing won't be horrible. 
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_163835042.MP_2.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Interesting enough I think that the mixture is very sensitive to the quantities of each part. While I was very careful to match the volumes using my trusty 1/2 cup measuring spoon we can notice a distinct change in color. Despite this change in color it did successfully set and it doesn't feel different and will do nicely as a mold. 
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201005_160755962.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+I'm a little concerned with my splits in the mold for removing the pieces. Hopefully it will seal up well enough that we won't have the resin leaking out or really large obvious lines. 
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/5-6/2020</p></td>
+</tr>
+</table>
+
+---
+
+
+### Pouring the Resin
+
+<table style="width: 100%" cellpadding="5">
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201007_004924418.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+The ingredients for pouring the resin: 
+
+ - Dried flowers
+ - Food coloring
+ - Mica powders
+ - EasyCast resin
+ - Dixie cups, pipettes, nitrile glove, facemask (not pictured)
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201008_054415456.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+This batch I decided to focus on blues. 
+
+Recipe: 
+
+ - 2 drops blue food coloring 
+ - For 2 of the dice added the green mica powder
+
+Since I layered it in with pure blue on bottom and the blue + mica powder on top it really developed a beautiful layering effect. 
+</td>
+<tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/6/2020</p></td>
+</tr>
+</table>
+
+---
+
+<table style="width: 100%" cellpadding="5">
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201009_010445950.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Recipe: 
+
+ - 1 drop 'kiwi' food coloring 
+ - Half of a handle full of green metallic mica powder
+ - Blue flower
+
+Thoroughly mix equal parts of resin for 2 minutes, transfer to second container and add coloring. Mix for an additional minute and use pipettes (two pipette method where one can fill while you use the other one) to fill each mold. Gently insert a flower once 3/4 full. Swish the containers by rotating to encourage air bubbles to exit from difficult places in the mold.  
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201009_010433085.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Wow this just turned out BEAUTIFUL. 
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/7/2020</p></td>
+</tr>
+</table>
+
+---
+
+
+<table style="width: 100%">
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201010_030648486.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Same recipe as before, still looks beautiful and we now have a matching set of 6!
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/8/2020</p></td>
+</tr>
+</table>
+
+---
+
+
+### Polishing
+
+<table style="width: 100%" >
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201008_180158037.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+I've gathered my polishing components: namely various grits of sandpaper and some car automotive buff. 
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201008_053345606.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+First step is trimming off the sprue. This was done using a pair of shears (I used wirecutters). The ends come off pretty explosively (think nail trimming but times a million) so definitely be careful which direction you are pointing the die and the sprue. 
+
+All three have some kind of bubble where resin wasn't able to really fill the mold. Maybe doing a "swish" after filling will help next time for preventing this?
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201008_054320983.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Here we have the before polishing with all the imperfections and remainder of the sprue. 
+</td>
+</tr>
+<tr>
+<td>
+<img src="images/resin/PXL_20201008_180436917.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+And here is our after with all the edges buffed out. Looking better, right? I think we can do better though because I did notice that the sides that came out looking good and shiny after being buffedstarted looking cloudy. 
+
+Ideas for next time are to spend more time polishing on the finest grit. Maybe that will help get it super shiny? And spend longer polishing. It's about time for a netflix marathon anyway. 
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/8/2020</p></td>
+</tr>
+</table>
+
+
+---
+
+<table style="width: 100%" border-spacing = "5" border-padding = "5">
+    <colgroup>
+       <col span="1" style="width: 35%;">
+       <col span="1" style="width: 65%;">
+    </colgroup>
+<tr>
+<td>
+<img src="images/resin/PXL_20201009_010423494.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+</td>
+<td>
+Very happy to report success with the "swish". Only 1 out of the three dice has a bubble in the corner disrupting the pattern (and this one is the hardest mold, with the highest point being higher than where the sprue intersects). 
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p style="color:grey; font-style:italic;" align="right">10/9/2020</p></td>
+</tr>
+</table>
+
+---
+
+
+
+### Rolling the Dice
+
+Now that our unique dice have been cured, painted, and polished it was time to put them to the test. Sure they look pretty (minus the occasional bubble and polish mark) but can they ROLL? 
+
+Here, I am proud to present to you, are our candidates for the roll off!
+
+<img src="images/resin/PXL_20201010_033639772.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="center">
+
+Each die was rolled 50 times to give some statistical significance to the results. Ideally we would have a hundred rolls or more per die (1,000 would be a really great number) but I decided to balance statistics with the chances of developing arthritis. 
+
+In addition to rolling each of our manufactured dice 50 times a professional metal die was rolled 50 times to give a reference for our measurements. 
+
+The conclusion:  
+Well. Looks like my metal dice is weighted (both literally but also rolls 6 much more often). 
+The resin dice performed better than I expected. I was expected to see the dice with remnants of a bubble or bumps to really have a very significant impact, but honestly they look comparable to the metal die. 
+
+Our results: 
+
+```{r cars, message=FALSE, warning=FALSE}
+library("readxl")
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+#library(rjags)
+
+rolls = read_excel("./files/Dice_rolls.xlsx")
+
+rolls_long <- rolls %>%
+ pivot_longer(cols = 1:10, names_to = "Dice", values_to = "RollValue")
+
+rolls_summary <- rolls_long %>%
+  group_by(Dice, RollValue) %>%
+  summarize(Count = n())
+
+p <- ggplot(rolls_summary, aes(x=RollValue, y=Count, fill = Dice )) + 
+  geom_bar(stat = "identity", position = position_stack(reverse = TRUE)) +
+  facet_wrap(~ Dice) +
+ theme(legend.position = "top")
+
+p
+
+p <- ggplot(rolls_summary) + 
+  geom_bar(aes(x=Dice, y=Count, fill = RollValue ), stat = "identity", position = position_stack(reverse = TRUE)) +
+  coord_flip() + 
+  theme(legend.position = "top")
+
+p
+
+```
+
+<p style="color:grey; font-style:italic;" align="right">10/10/2020</p>
+
+## Resources
+
+Here are some of the resources that helped me on my journey down this exciting path (in no particular order): 
+
+ - https://www.evewynn.com/moldmaking 
+ - http://www.hanleybrady.com/making-dice-part-1-molds/
+ - https://www.instructables.com/Custom-Dice/
+ - https://www.thingiverse.com/thing:3795542
+ - https://www.youtube.com/watch?v=iRDte2j54F0
+ - https://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/
+ - https://www.youtube.com/watch?v=FQ1A7ZjTsx8
+ - https://rpubs.com/benjamin_chittick/59278
+ - https://rstudio-education.github.io/hopr/project-1-weighted-dice.html
+ - http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html
+ - https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html
+ - https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html
+
+

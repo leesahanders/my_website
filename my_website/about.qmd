@@ -20,7 +20,7 @@ about:
 
 Hello there! You must be pretty awesome if you are checking out my humble website. Welcome! 
 
-I'm a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to me. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science. 
+I'm a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science. 
 
 In my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.
 

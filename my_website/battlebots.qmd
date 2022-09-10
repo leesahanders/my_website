@@ -6,7 +6,7 @@ format:
     code-summary: "Show the code"
 ---
 
-## What is Battlebots? {.tabset}
+## What is Battlebots?
 
 BattleBots is a robotic combat TV show. It is an amazing community and clearly a hobby of love by the people that join the show. Robots weigh 250lbs, 500 lbs in special circumstances, and there are strict rules around what is and isn't allowed for weapons. The show spends time both on the 3 minute match and behind the scenes with interviews with the builders, footage of repairs, and last minute modifications as teams compete for the ultimate trophy. 
 

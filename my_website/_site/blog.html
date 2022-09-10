@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>questionable.quarto - Recipes</title>
+<title>questionable.quarto - Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,9 +67,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -116,16 +116,20 @@ ul.task-list{list-style: none;}
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="./battlebots.qmd">
+    <a class="dropdown-item" href="./battlebots.html">
  <span class="dropdown-text">Battlebots Brackets</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./resin.qmd">
+    <a class="dropdown-item" href="./resin.html">
  <span class="dropdown-text">Resin Dice</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./recipes.qmd">
+    <a class="dropdown-item" href="./recipes.html">
  <span class="dropdown-text">Recipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./blog.html">
+ <span class="dropdown-text">Blog</span></a>
   </li>  
     </ul>
   </li>
@@ -152,7 +156,7 @@ ul.task-list{list-style: none;}
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Recipes</h1>
+      <h1 class="title">Blog</h1>
                       </div>
   </div>
     
@@ -169,21 +173,283 @@ ul.task-list{list-style: none;}
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="365">365 <span class="quarto-category-count">(7)</span></div><div class="category" data-category="art">art <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(2)</span></div><div class="category" data-category="games">games <span class="quarto-category-count">(2)</span></div><div class="category" data-category="music">music <span class="quarto-category-count">(1)</span></div><div class="category" data-category="science">science <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
-<p>Sometimes you gotta eat. Testing out Quarto’s blogging capabilities using cataloging delicious recipes as content.</p>
+<p>Random pages testing out Quarto’s blog capability.</p>
 
 
 
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="365,games" data-listing-date-sort="1659848400000" data-listing-file-modified-sort="1662506175974" data-listing-reading-time-sort="0.035">
+<div class="thumbnail">
+<p><a href="./posts/Day-7.html"> <img src="./posts/img/macropad.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-7.html">
+<h3 class="no-anchor listing-title">
+Day 7
+</h3>
+<div class="listing-subtitle">
 
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('games'); return false;">
+games
+</div>
+</div>
+<a href="./posts/Day-7.html">
+<div class="listing-description">
+<p>Adafruit macropad</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-7.html">
+<div class="listing-date">
+Aug 7, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="365,music" data-listing-date-sort="1659675600000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.2">
+<div class="thumbnail">
+<p><a href="./posts/Day-6.html"> <img src="./posts/img/otomata.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-6.html">
+<h3 class="no-anchor listing-title">
+Day 6
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
+music
+</div>
+</div>
+<a href="./posts/Day-6.html">
+<div class="listing-description">
+<p>Otomata</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-6.html">
+<div class="listing-date">
+Aug 5, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="365,games" data-listing-date-sort="1659589200000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.155">
+<div class="thumbnail">
+<p><a href="./posts/Day-5.html"> <img src="./posts/img/seedship.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-5.html">
+<h3 class="no-anchor listing-title">
+Day 5
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('games'); return false;">
+games
+</div>
+</div>
+<a href="./posts/Day-5.html">
+<div class="listing-description">
+<p>Seedship</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-5.html">
+<div class="listing-date">
+Aug 4, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="365,art" data-listing-date-sort="1659502800000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.76">
+<div class="thumbnail">
+<p><a href="./posts/Day-4.html"> <img src="./posts/img/starryai/s1.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-4.html">
+<h3 class="no-anchor listing-title">
+Day 4
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('art'); return false;">
+art
+</div>
+</div>
+<a href="./posts/Day-4.html">
+<div class="listing-description">
+<p>AI Art</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-4.html">
+<div class="listing-date">
+Aug 3, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="365,science" data-listing-date-sort="1659416400000" data-listing-file-modified-sort="1662506175973" data-listing-reading-time-sort="0.2">
+<div class="thumbnail">
+<p><a href="./posts/Day-3.html"> <img src="./posts/img/fbs.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-3.html">
+<h3 class="no-anchor listing-title">
+Day 3
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('science'); return false;">
+science
+</div>
+</div>
+<a href="./posts/Day-3.html">
+<div class="listing-description">
+<p>For Better Science</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-3.html">
+<div class="listing-date">
+Aug 2, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="365,code" data-listing-date-sort="1659157200000" data-listing-file-modified-sort="1662506175972" data-listing-reading-time-sort="0.64">
+<div class="thumbnail">
+<p><a href="./posts/Day-2.html"> <img src="./posts/img/rss.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-2.html">
+<h3 class="no-anchor listing-title">
+Day 2
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
+code
+</div>
+</div>
+<a href="./posts/Day-2.html">
+<div class="listing-description">
+<p>RSS</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-2.html">
+<div class="listing-date">
+Jul 30, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="365,code" data-listing-date-sort="1658984400000" data-listing-file-modified-sort="1662506175972" data-listing-reading-time-sort="0.5">
+<div class="thumbnail">
+<p><a href="./posts/Day-1.html"> <img src="./posts/img/welcome.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/Day-1.html">
+<h3 class="no-anchor listing-title">
+Day 1
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
+code
+</div>
+</div>
+<a href="./posts/Day-1.html">
+<div class="listing-description">
+<p>Quarto</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/Day-1.html">
+<div class="listing-date">
+Jul 28, 2022
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items

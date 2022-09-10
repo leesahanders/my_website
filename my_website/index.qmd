@@ -1,12 +1,28 @@
 ---
 title: "Index"
 image: images/ai/self_portrait.png
+listing:
+  type: table
+  categories: true
+  sort:
+    - "date desc"
+    - "title desc"
+  fields: [image, date, title, author, reading-time]
 about:
-  template: trestles
+  template: jolla
   links:
     - icon: github
       text: Github
       href: https://github.com/leesahanders/my_website
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/lisa-anders-engineer/
+    - icon: facebook
+      text: Facebook
+      href: https://www.facebook.com/LisamaeAnders/
+    - icon: book
+      text: Goodreads
+      href: https://www.goodreads.com/user/show/47707460-lisa
 ---
 
 Grab a cup of coffee, I hope you enjoy the pages you find here. 
