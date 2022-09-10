@@ -2,6 +2,8 @@
 
 This is a work in progress, please come back later :) 
 
+The output/website can be accessed at: https://questionable.quarto.pub/blog/
+
 ## Inspiration 
 
 There are so many awesome resources out there making building your own website/blog a breeze. Here are some of my favorites that I've stumbled across in my journey that you might enjoy: 
@@ -44,12 +46,18 @@ I have two domains I can publish to:
  - questionable.quarto.com
  - lisa.quarto.com
  
+I run `quarto publish quarto-pub` after cd-ing in to my my_website directory. Answer "Y" to overwrite my previous site and to use the correct account. 
+
+I can access my account and see my deployments at https://questionable.quarto.pub/blog/. 
+
+TODO: Figure out how to overwrite only the changes instead of a completely new deployment (if possible). 
+
 ## Publishing 2.0 - now make it automated!
 
-
+TODO
  
 ## Troubleshooting
 
-Current hurdle: Why isn't ojs being recognized on my computer? 
+ojs errors - Completely uninstall quarto, uninstall the RStudio IDE, and then reinstall. 
  
  
