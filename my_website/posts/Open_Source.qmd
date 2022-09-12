@@ -1,0 +1,23 @@
+---
+title: "Open Source Doesn't Have To Be Scary"
+description: "Adafruit macropad"
+author: "Lisa"
+date: "2022-09-12"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+image: "img/macropad.jpg"
+categories:
+  - coding
+  - opinions
+---
+
+![Adafruit Macropad](img/macropad.jpg)
+
+https://www.itjungle.com/2017/10/30/it-horror-stories/
+
+https://engineering.rice.edu/news/hadley-wickham-identifies-good-design-data-science
+
+And on a complete side tangent - just take a look at all the [adorable open source computing mascots](https://en.wikipedia.org/wiki/List_of_computing_mascots). Of course for every cute mascot there are an equal number of [terrifying ones](https://www.wired.com/2007/05/gallery-mascots/). 
