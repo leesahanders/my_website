@@ -8,7 +8,7 @@ editor: visual
 categories:
   - dessert
   - gluten-free
-image: "img/snow cream.jpg"
+image: "img/snow cream.PNG"
 about:
   template: trestles
   links:

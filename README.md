@@ -1,4 +1,4 @@
-# My Website AKA experiments in Quarto
+# My Website AKA Questionable experiments in Quarto
 
 This is a work in progress, please come back later :) 
 
@@ -11,7 +11,7 @@ There are so many awesome resources out there making building your own website/b
  - [The ultimate guide to starting a Quarto blog](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html)
  - [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/)
  - [Notes from a data witch](https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/)
-
+ - This is rmarkdown, but [Yihui's home page](https://yihui.org/todo/) is beautiful
 
 
 ## Previewing 
@@ -52,12 +52,12 @@ I can access my account and see my deployments at https://questionable.quarto.pu
 
 TODO: Figure out how to overwrite only the changes instead of a completely new deployment (if possible). 
 
-## Publishing 2.0 - now make it automated!
+## Publishing 2.0 - now make it automated using github actions
 
 TODO
  
 ## Troubleshooting
 
-ojs errors - Completely uninstall quarto, uninstall the RStudio IDE, and then reinstall. 
+ojs errors: This was resolved by completely uninstalling quarto, uninstalling the RStudio IDE, and then re-installing. 
  
  

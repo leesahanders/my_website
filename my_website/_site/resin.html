@@ -140,24 +140,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li class="nav-item">
     <a class="nav-link" href="./index.html">Home</a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./recipes.html">Recipes</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./posts.html">Posts</a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="./battlebots.html">
- <span class="dropdown-text">Battlebots Brackets</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./resin.html">
  <span class="dropdown-text">Resin Dice</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./recipes.html">
- <span class="dropdown-text">Recipes</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./posts.html">
- <span class="dropdown-text">Posts</span></a>
   </li>  
     </ul>
   </li>
@@ -213,6 +207,59 @@ th, td {
   padding: 10px;
 }
 </style>
+<section id="glitterdice" class="level2">
+<h2 class="anchored" data-anchor-id="glitterdice">Glitterdice</h2>
+<p>I’ve been playing with making glitterdice lately. Glitterdice are where there is a sphere of liquid and glitter with a cap (UV curable resin) in the center of the dice (think snow globe). It’s hard to capture on camera but creates some really striking and fun to roll dice.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resin/glitterdice_3.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Fire glitter</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resin/glitterdice_2.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">UV Flourescent and glitter filled giant D20</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="recent-dice-highlights" class="level2">
+<h2 class="anchored" data-anchor-id="recent-dice-highlights">Recent dice highlights</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resin/PXL_20210214_233000132.MP.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Fire dice set</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resin/PXL_20211226_172938496.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Flourescent dice set (all glitter dice)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resin/PXL_20211224_033628654.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Royal gold and purple dice set</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="experiments" class="level2">
 <h2 class="anchored" data-anchor-id="experiments">Experiments</h2>
 <section id="silicone-mold" class="level3">
@@ -538,7 +585,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#library(rjags)</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>rolls <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">"./files/Dice_rolls.xlsx"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>rolls <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">"./images/resin/Dice_rolls.xlsx"</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>rolls_long <span class="ot">&lt;-</span> rolls <span class="sc">%&gt;%</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">names_to =</span> <span class="st">"Dice"</span>, <span class="at">values_to =</span> <span class="st">"RollValue"</span>)</span>
@@ -591,6 +638,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 <li>http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html</li>
 <li>https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html</li>
 <li>https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html</li>
+<li>https://quarto.org/docs/authoring/figures.html#figure-panels</li>
 </ul>
 
 

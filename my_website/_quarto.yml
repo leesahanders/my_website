@@ -7,17 +7,15 @@ website:
     left: 
       - text: "Home"
         href: index.qmd
-      - text: "Recipes"
-        href: recipes.qmd
       - text: "Posts"
         href: posts.qmd
       - text: "Projects"
         icon: fa-database
         menu:
-          - text: "Battlebots Brackets"
-            href: battlebots.qmd
           - text: "Resin Dice"
             href: resin.qmd
+          - text: "Recipes"
+            href: recipes.qmd
 
     right:
       - about.qmd
@@ -29,6 +27,4 @@ format:
       light: custom_theme.scss
       dark: vapor
     css: styles.css
-
-
 

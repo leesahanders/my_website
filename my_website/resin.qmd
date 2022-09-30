@@ -4,7 +4,6 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
-freeze: true
 ---
 
 <style>
@@ -20,11 +19,21 @@ th, td {
 
 I've been playing with making glitterdice lately. Glitterdice are where there is a sphere of liquid and glitter with a cap (UV curable resin) in the center of the dice (think snow globe). It's hard to capture on camera but creates some really striking and fun to roll dice. 
 
-![Fire glitter](images/resin/glitterdice_3.gif)![UV Flourescent and glitter filled giant D20](images/resin/glitterdice_2.gif)
+::: {layout-nrow=1}
+![Fire glitter](images/resin/glitterdice_3.gif)
+
+![UV Flourescent and glitter filled giant D20](images/resin/glitterdice_2.gif)
+:::
 
 ## Recent dice highlights 
 
-![Fire dice set](images/resin/PXL_20210214_233000132.MP.jpg)![Flourescent dice set (all glitter dice)](images/resin/PXL_20211226_172938496.jpg)![Royal gold and purple dice set](images/resin/PXL_20211224_033628654.jpg)
+![Fire dice set](images/resin/PXL_20210214_233000132.MP.jpg)
+
+::: {layout-nrow=1}
+![Flourescent dice set (all glitter dice)](images/resin/PXL_20211226_172938496.jpg)
+
+![Royal gold and purple dice set](images/resin/PXL_20211224_033628654.jpg)
+:::
 
 ## Experiments 
 
@@ -380,5 +389,6 @@ Here are some of the resources that helped me on my journey down this exciting p
  - http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html
  - https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html
  - https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html
+ - https://quarto.org/docs/authoring/figures.html#figure-panels
 
 

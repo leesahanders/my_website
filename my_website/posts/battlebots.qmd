@@ -1,10 +1,16 @@
 ---
 title: "BATTLEBOTS"
+description: "It's robot fighting time!"
+author: "Lisa"
+date: "2021-01-04"
 format:
   html:
     code-fold: true
     code-summary: "Show the code"
-freeze: true
+editor: visual
+categories:
+  - datascience
+image: "img/bb/BB.jpg"
 ---
 
 ## What is Battlebots?
