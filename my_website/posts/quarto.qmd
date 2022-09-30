@@ -1,6 +1,6 @@
 ---
-title: "Day 1"
-description: "Quarto"
+title: "What is Quarto?"
+description: "My new favorite thing"
 author: ""
 date: "2022-07-28"
 format: html
@@ -10,6 +10,8 @@ categories:
   - code
 image: "img/welcome.jpg"
 ---
+
+The obligatory starting template with a couple links. 
 
 ## Quarto
 

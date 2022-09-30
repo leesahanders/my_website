@@ -1,6 +1,6 @@
 ---
-title: "Day 5"
-description: "Lyme"
+title: "Observable JS for snappy datascience"
+description: "Using OJS to plot Lyme disease cases over time by state"
 author: "Lisa"
 date: "2022-08-04"
 format:
@@ -9,63 +9,62 @@ format:
     code-summary: "Show the code"
 editor: visual
 categories:
-  - 365
-  - science
+  - datascience
 image: "img/starryai-10-597923218-1-10-photo.jpg"
-draft: true
 freeze: true
 ---
 
-Lyme is such a curious and interesting bacterial infection. 
+![Adafruit Macropad](img/starryai-10-597923218-1-10-photo.jpg)
 
-<!-- ## Observable JS -->
+## Observable JS
 
-<!-- This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at <https://quarto.org/docs/interactive/ojs/>. -->
+This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at <https://quarto.org/docs/interactive/ojs/>.
 
-<!-- ## Data wrangling -->
+## Data wrangling
 
-<!-- Load the data -->
+Load the data, using [Lyme data from the CDC](https://www.cdc.gov/lyme/stats/survfaq.html). 
 
-<!-- ```{ojs} -->
-<!-- data = FileAttachment("data/lyme_data.csv").csv({ typed: true }) -->
-<!-- ``` -->
+```{ojs}
+data = FileAttachment("data/lyme_data.csv").csv({ typed: true })
+```
 
-<!-- Filter options -->
+Filter options
 
-<!-- ```{ojs} -->
-<!-- viewof state = Inputs.select(data.map(d => d.Stname), {multiple: true, value: "Alaska", label: "Choose a state: ", sort: true, unique: true}) -->
+```{ojs}
+viewof state = Inputs.select(data.map(d => d.Stname), {multiple: true, value: "Alaska", label: "Choose a state: ", sort: true, unique: true})
+filtered = data.filter(function(data) {
+  return state.includes(data.Stname);
+})
+```
 
-<!-- filtered = data.filter(function(data) { -->
-<!--   return state.includes(data.Stname); -->
-<!-- }) -->
-<!-- ``` -->
+::: panel-tabset
 
-<!-- ::: panel-tabset -->
-<!-- ## Plot -->
+## Plot
 
-<!-- Stacked bar chart of cases by state by year, remember to select an option above. -->
+Stacked bar chart of cases by state by year, remember to select an option above.
 
-<!-- ```{ojs} -->
-<!-- Plot.plot({ -->
-<!--   y: { -->
-<!--     grid: true -->
-<!--   }, -->
-<!--   marks: [ -->
-<!--     Plot.barY(filtered, {x: "date", y: "total_cases", fill: "#bab0ab"}), -->
-<!--     <!-- plot.text(filtered, {x: "date", y: "total_cases", text: "Stname", textAnchor: "end", dx: -6}), --> -->
-<!--     Plot.ruleY([0]) -->
-<!--   ] -->
-<!-- }) -->
-<!-- ``` -->
+```{ojs}
+Plot.plot({
+  y: {
+    grid: true
+  },
+  marks: [
+    Plot.barY(filtered, {x: "date", y: "total_cases", fill: "#bab0ab"}),
+    <!-- plot.text(filtered, {x: "date", y: "total_cases", text: "Stname", textAnchor: "end", dx: -6}),
+    Plot.ruleY([0])
+  ]
+})
+```
 
-<!-- ## Data -->
+## Data
 
-<!-- Aggregated dataset for all states. -->
+Aggregated dataset for all states.
 
-<!-- ```{ojs} -->
-<!-- Inputs.table(data, { sort: "date", reverse: true }) -->
-<!-- ``` -->
-<!-- ::: -->
+```{ojs}
+Inputs.table(data, { sort: "date", reverse: true })
+```
+
+:::
 
 ## References
 
@@ -76,4 +75,4 @@ Lyme is such a curious and interesting bacterial infection.
 -   Additional data options: https://data.world/datasets/lyme-disease
 -   Some plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar
 -   Some various tutorials: https://observablehq.com/tutorials
--   Image created with [starryai](https://www.starryai.com/). 
+-   Image created with [starryai](https://www.starryai.com/).

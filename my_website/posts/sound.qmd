@@ -1,0 +1,32 @@
+---
+title: "Sound"
+description: "Some things I like to listen to"
+author: "Lisa"
+date: "2022-08-05"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+image: "img/otomata.jpg"
+categories:
+  - 365
+  - music
+---
+
+
+## Otomata
+
+Make beautiful generative algorithm inspired music using cellular automation.
+
+-   Link to the app: <https://marwahaha.github.io/otomata/>
+
+Some historic links:
+
+-   Originally at (but now no longer works): <https://earslap.com/page/otomata.html>
+
+-   From the reddit post: <https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/>
+
+-   Github: <https://github.com/marwahaha/otomata>
+
+![reddit post](img/otomata.jpg)

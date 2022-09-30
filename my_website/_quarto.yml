@@ -16,8 +16,8 @@ website:
             href: resin.qmd
           - text: "Recipes"
             href: recipes.qmd
-          - text: "Blog"
-            href: blog.qmd
+          - text: "Posts"
+            href: posts.qmd
     right:
       - about.qmd
       - icon: github

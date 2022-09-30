@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/epa.html",
+      "/posts/Open_Source.html",
       "/posts/Day-7.html",
       "/posts/Day-6.html",
       "/posts/Day-5.html",
@@ -15,6 +17,17 @@
     "listing": "/recipes.html",
     "items": [
       "/recipes/strawberry_crumble.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/sound.html",
+      "/posts/ojs_lyme.html",
+      "/posts/phone_games.html",
+      "/posts/ai_art.html",
+      "/posts/data.html",
+      "/posts/quarto.html"
     ]
   }
 ]

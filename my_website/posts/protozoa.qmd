@@ -14,6 +14,8 @@ freeze: true
 categories:
   - 365
   - games
+draft: true
+freeze: true
 ---
 
 ![Adafruit Macropad](img/macropad.jpg)
