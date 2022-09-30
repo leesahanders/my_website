@@ -22,7 +22,7 @@ This Quarto document is made interactive using Observable JS. Interactive docume
 
 ## Data wrangling
 
-Load the data, using [Lyme data from the CDC](https://www.cdc.gov/lyme/stats/survfaq.html). 
+Load the data, using [Lyme data from the CDC](https://www.cdc.gov/lyme/stats/survfaq.html).
 
 ```{ojs}
 data = FileAttachment("data/lyme_data.csv").csv({ typed: true })
@@ -38,7 +38,6 @@ filtered = data.filter(function(data) {
 ```
 
 ::: panel-tabset
-
 ## Plot
 
 Stacked bar chart of cases by state by year, remember to select an option above.
@@ -63,7 +62,6 @@ Aggregated dataset for all states.
 ```{ojs}
 Inputs.table(data, { sort: "date", reverse: true })
 ```
-
 :::
 
 ## References

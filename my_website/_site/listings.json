@@ -1,25 +1,5 @@
 [
   {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/epa.html",
-      "/posts/Open_Source.html",
-      "/posts/Day-7.html",
-      "/posts/Day-6.html",
-      "/posts/Day-5.html",
-      "/posts/Day-4.html",
-      "/posts/Day-3.html",
-      "/posts/Day-2.html",
-      "/posts/Day-1.html"
-    ]
-  },
-  {
-    "listing": "/recipes.html",
-    "items": [
-      "/recipes/strawberry_crumble.html"
-    ]
-  },
-  {
     "listing": "/posts.html",
     "items": [
       "/posts/sound.html",
@@ -28,6 +8,15 @@
       "/posts/ai_art.html",
       "/posts/data.html",
       "/posts/quarto.html"
+    ]
+  },
+  {
+    "listing": "/recipes.html",
+    "items": [
+      "/recipes/Roasted carrots with sage butter.html",
+      "/recipes/Socca with swiss chard pistachios and apricots.html",
+      "/recipes/snow cream.html",
+      "/recipes/strawberry_crumble.html"
     ]
   }
 ]

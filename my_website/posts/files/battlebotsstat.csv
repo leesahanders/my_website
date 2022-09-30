@@ -1,0 +1,895 @@
+"","Stats","Career","2019","2018","2016","Robot","2015","Season","Round","Matchup","Results"
+"1","Total matches","16","6","5","5","Yeti",NA,NA,NA,NA,NA
+"2","Win percentage","69%","67%","60%","80%","Yeti",NA,NA,NA,NA,NA
+"3","Total wins","11","4","3","4","Yeti",NA,NA,NA,NA,NA
+"4","Losses","5","2","2","1","Yeti",NA,NA,NA,NA,NA
+"5","Knockouts","7","2","2","3","Yeti",NA,NA,NA,NA,NA
+"6","KO percentage","44%","33%","40%","60%","Yeti",NA,NA,NA,NA,NA
+"7","Average knockout time","109 s","111 s","99 s","117 s","Yeti",NA,NA,NA,NA,NA
+"8","Knockouts against","2","1","1","0","Yeti",NA,NA,NA,NA,NA
+"9","KO against percentage","13%","17%","20%","0%","Yeti",NA,NA,NA,NA,NA
+"10","Judges decision wins","4","2","1","1","Yeti",NA,NA,NA,NA,NA
+"11","Total matches","24","7","6","6","Tombstone","5",NA,NA,NA,NA
+"12","Win percentage","83%","71%","83%","100%","Tombstone","80%",NA,NA,NA,NA
+"13","Total wins","20","5","5","6","Tombstone","4",NA,NA,NA,NA
+"14","Losses","4","2","1","0","Tombstone","1",NA,NA,NA,NA
+"15","Knockouts","17","4","5","4","Tombstone","4",NA,NA,NA,NA
+"16","KO percentage","71%","57%","83%","67%","Tombstone","80%",NA,NA,NA,NA
+"17","Average knockout time","77 s","71 s","104 s","55 s","Tombstone","78 s",NA,NA,NA,NA
+"18","Knockouts against","3","2","1","0","Tombstone","0",NA,NA,NA,NA
+"19","KO against percentage","13%","29%","17%","0%","Tombstone","0%",NA,NA,NA,NA
+"20","Judges decision wins","3","1","0","2","Tombstone","0",NA,NA,NA,NA
+"21","Total matches","8","4","4",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"22","Win percentage","13%","0%","25%",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"23","Total wins","1","0","1",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"24","Losses","7","4","3",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"25","Knockouts","1","0","1",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"26","KO percentage","13%","0%","25%",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"27","Average knockout time","135 s","","135 s",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"28","Knockouts against","5","3","2",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"29","KO against percentage","63%","75%","50%",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"30","Judges decision wins","0","0","0",NA,"Axe Backwards",NA,NA,NA,NA,NA
+"31","Total matches","16","8","8","3","Bite Force","5",NA,NA,NA,NA
+"32","Win percentage","94%","100%","100%","67%","Bite Force","100%",NA,NA,NA,NA
+"33","Total wins","15","8","8","2","Bite Force","5",NA,NA,NA,NA
+"34","Losses","1","0","0","1","Bite Force","0",NA,NA,NA,NA
+"35","Knockouts","10","6","7","1","Bite Force","2",NA,NA,NA,NA
+"36","KO percentage","63%","75%","88%","33%","Bite Force","40%",NA,NA,NA,NA
+"37","Average knockout time","98 s","103 s","76 s","96 s","Bite Force","123 s",NA,NA,NA,NA
+"38","Knockouts against","0","0","0","0","Bite Force","0",NA,NA,NA,NA
+"39","KO against percentage","0%","0%","0%","0%","Bite Force","0%",NA,NA,NA,NA
+"40","Judges decision wins","5","2","1","1","Bite Force","3",NA,NA,NA,NA
+"41","Total matches","6","6",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"42","Win percentage","67%","67%",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"43","Total wins","4","4",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"44","Losses","2","2",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"45","Knockouts","3","3",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"46","KO percentage","50%","50%",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"47","Average knockout time","68 s","68 s",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"48","Knockouts against","0","0",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"49","KO against percentage","0%","0%",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"50","Judges decision wins","1","1",NA,NA,"Black Dragon",NA,NA,NA,NA,NA
+"51","Total matches","14","6","5","3","Blacksmith",NA,NA,NA,NA,NA
+"52","Win percentage","36%","50%","20%","33%","Blacksmith",NA,NA,NA,NA,NA
+"53","Total wins","5","3","1","1","Blacksmith",NA,NA,NA,NA,NA
+"54","Losses","9","3","4","2","Blacksmith",NA,NA,NA,NA,NA
+"55","Knockouts","2","1","1","0","Blacksmith",NA,NA,NA,NA,NA
+"56","KO percentage","14%","17%","20%","0%","Blacksmith",NA,NA,NA,NA,NA
+"57","Average knockout time","175 s","175 s","175 s","","Blacksmith",NA,NA,NA,NA,NA
+"58","Knockouts against","2","1","0","1","Blacksmith",NA,NA,NA,NA,NA
+"59","KO against percentage","14%","17%","0%","33%","Blacksmith",NA,NA,NA,NA,NA
+"60","Judges decision wins","2","1","0","1","Blacksmith",NA,NA,NA,NA,NA
+"61","Total matches","4","4",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"62","Win percentage","75%","75%",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"63","Total wins","3","3",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"64","Losses","1","1",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"65","Knockouts","2","2",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"66","KO percentage","50%","50%",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"67","Average knockout time","83 s","83 s",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"68","Knockouts against","1","1",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"69","KO against percentage","25%","25%",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"70","Judges decision wins","1","1",NA,NA,"Bloodsport",NA,NA,NA,NA,NA
+"71","Total matches","16","4","6","6","Bombshell",NA,NA,NA,NA,NA
+"72","Win percentage","31%","0%","17%","67%","Bombshell",NA,NA,NA,NA,NA
+"73","Total wins","5","0","1","4","Bombshell",NA,NA,NA,NA,NA
+"74","Losses","11","4","5","2","Bombshell",NA,NA,NA,NA,NA
+"75","Knockouts","4","0","1","3","Bombshell",NA,NA,NA,NA,NA
+"76","KO percentage","25%","0%","17%","50%","Bombshell",NA,NA,NA,NA,NA
+"77","Average knockout time","120 s","","117 s","123 s","Bombshell",NA,NA,NA,NA,NA
+"78","Knockouts against","9","4","4","1","Bombshell",NA,NA,NA,NA,NA
+"79","KO against percentage","56%","100%","67%","17%","Bombshell",NA,NA,NA,NA,NA
+"80","Judges decision wins","1","0","0","1","Bombshell",NA,NA,NA,NA,NA
+"81","Total matches","4","4",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"82","Win percentage","25%","25%",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"83","Total wins","1","1",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"84","Losses","3","3",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"85","Knockouts","0","0",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"86","KO percentage","0%","0%",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"87","Average knockout time","","",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"88","Knockouts against","3","3",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"89","KO against percentage","75%","75%",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"90","Judges decision wins","1","1",NA,NA,"Breaker Box",NA,NA,NA,NA,NA
+"91","Total matches","18","4","6","4","Bronco","4",NA,NA,NA,NA
+"92","Win percentage","61%","0%","83%","75%","Bronco","75%",NA,NA,NA,NA
+"93","Total wins","11","0","5","3","Bronco","3",NA,NA,NA,NA
+"94","Losses","7","4","1","1","Bronco","1",NA,NA,NA,NA
+"95","Knockouts","9","0","3","3","Bronco","3",NA,NA,NA,NA
+"96","KO percentage","50%","0%","50%","75%","Bronco","75%",NA,NA,NA,NA
+"97","Average knockout time","82 s","","106 s","92 s","Bronco","48 s",NA,NA,NA,NA
+"98","Knockouts against","5","2","1","1","Bronco","1",NA,NA,NA,NA
+"99","KO against percentage","28%","50%","17%","25%","Bronco","25%",NA,NA,NA,NA
+"100","Judges decision wins","2","0","2","0","Bronco","0",NA,NA,NA,NA
+"101","Total matches","11","4","4","2","Captain Shrederator","1",NA,NA,NA,NA
+"102","Win percentage","18%","0%","25%","50%","Captain Shrederator","0%",NA,NA,NA,NA
+"103","Total wins","2","0","1","1","Captain Shrederator","0",NA,NA,NA,NA
+"104","Losses","9","4","3","1","Captain Shrederator","1",NA,NA,NA,NA
+"105","Knockouts","2","0","1","1","Captain Shrederator","0",NA,NA,NA,NA
+"106","KO percentage","18%","0%","25%","50%","Captain Shrederator","0%",NA,NA,NA,NA
+"107","Average knockout time","111 s","","97 s","124 s","Captain Shrederator","",NA,NA,NA,NA
+"108","Knockouts against","9","4","3","1","Captain Shrederator","1",NA,NA,NA,NA
+"109","KO against percentage","82%","100%","75%","50%","Captain Shrederator","100%",NA,NA,NA,NA
+"110","Judges decision wins","0","0","0","0","Captain Shrederator","0",NA,NA,NA,NA
+"111","Total matches","2","2",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"112","Win percentage","0%","0%",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"113","Total wins","0","0",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"114","Losses","2","2",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"115","Knockouts","0","0",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"116","KO percentage","0%","0%",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"117","Average knockout time","","",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"118","Knockouts against","2","2",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"119","KO against percentage","100%","100%",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"120","Judges decision wins","0","0",NA,NA,"BattleSaw",NA,NA,NA,NA,NA
+"121","Total matches","3","3",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"122","Win percentage","33%","33%",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"123","Total wins","1","1",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"124","Losses","2","2",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"125","Knockouts","1","1",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"126","KO percentage","33%","33%",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"127","Average knockout time","64 s","64 s",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"128","Knockouts against","1","1",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"129","KO against percentage","33%","33%",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"130","Judges decision wins","0","0",NA,NA,"Chronos",NA,NA,NA,NA,NA
+"131","Total matches","7","5",NA,"2","Cobalt",NA,NA,NA,NA,NA
+"132","Win percentage","43%","40%",NA,"50%","Cobalt",NA,NA,NA,NA,NA
+"133","Total wins","3","2",NA,"1","Cobalt",NA,NA,NA,NA,NA
+"134","Losses","4","3",NA,"1","Cobalt",NA,NA,NA,NA,NA
+"135","Knockouts","3","2",NA,"1","Cobalt",NA,NA,NA,NA,NA
+"136","KO percentage","43%","40%",NA,"50%","Cobalt",NA,NA,NA,NA,NA
+"137","Average knockout time","76 s","66 s",NA,"86 s","Cobalt",NA,NA,NA,NA,NA
+"138","Knockouts against","3","2",NA,"1","Cobalt",NA,NA,NA,NA,NA
+"139","KO against percentage","43%","40%",NA,"50%","Cobalt",NA,NA,NA,NA,NA
+"140","Judges decision wins","0","0",NA,"","Cobalt",NA,NA,NA,NA,NA
+"141","Total matches","5","5",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"142","Win percentage","40%","40%",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"143","Total wins","2","2",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"144","Losses","3","3",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"145","Knockouts","1","1",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"146","KO percentage","20%","20%",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"147","Average knockout time","79 s","79 s",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"148","Knockouts against","3","3",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"149","KO against percentage","60%","60%",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"150","Judges decision wins","1","1",NA,NA,"Copperhead",NA,NA,NA,NA,NA
+"151","Total matches","1","1",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"152","Win percentage","0%","0%",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"153","Total wins","0","0",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"154","Losses","1","1",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"155","Knockouts","0","0",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"156","KO percentage","0%","0%",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"157","Average knockout time","","",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"158","Knockouts against","1","1",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"159","KO against percentage","100%","100%",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"160","Judges decision wins","0","0",NA,NA,"Daisy Cutter",NA,NA,NA,NA,NA
+"161","Total matches","8","7",NA,"1","DeathRoll",NA,NA,NA,NA,NA
+"162","Win percentage","75%","86%",NA,NA,"DeathRoll",NA,NA,NA,NA,NA
+"163","Total wins","6","6",NA,"0","DeathRoll",NA,NA,NA,NA,NA
+"164","Losses","2","1",NA,"1","DeathRoll",NA,NA,NA,NA,NA
+"165","Knockouts","5","5",NA,NA,"DeathRoll",NA,NA,NA,NA,NA
+"166","KO percentage","63%","71%",NA,NA,"DeathRoll",NA,NA,NA,NA,NA
+"167","Average knockout time","87 s","87 s",NA,NA,"DeathRoll",NA,NA,NA,NA,NA
+"168","Knockouts against","1","0",NA,"1","DeathRoll",NA,NA,NA,NA,NA
+"169","KO against percentage","13%","0%",NA,NA,"DeathRoll",NA,NA,NA,NA,NA
+"170","Judges decision wins","1","1",NA,NA,"DeathRoll",NA,NA,NA,NA,NA
+"171","Total matches","3","3",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"172","Win percentage","67%","67%",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"173","Total wins","2","2",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"174","Losses","1","1",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"175","Knockouts","1","1",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"176","KO percentage","33%","33%",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"177","Average knockout time","61 s","61 s",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"178","Knockouts against","1","1",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"179","KO against percentage","33%","33%",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"180","Judges decision wins","1","1",NA,NA,"Deep Six",NA,NA,NA,NA,NA
+"181","Total matches","3","1","2",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"182","Win percentage","0%","0%","0%",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"183","Total wins","0","0","0",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"184","Losses","3","1","2",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"185","Knockouts","0","0","0",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"186","KO percentage","0%","0%","0%",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"187","Average knockout time","","","",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"188","Knockouts against","1","0","1",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"189","KO against percentage","33%","0%","50%",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"190","Judges decision wins","0","0","0",NA,"Double Jeopardy",NA,NA,NA,NA,NA
+"191","Total matches","10","5","5",NA,"DUCK!",NA,NA,NA,NA,NA
+"192","Win percentage","50%","40%","60%",NA,"DUCK!",NA,NA,NA,NA,NA
+"193","Total wins","5","2","3",NA,"DUCK!",NA,NA,NA,NA,NA
+"194","Losses","5","3","2",NA,"DUCK!",NA,NA,NA,NA,NA
+"195","Knockouts","4","2","2",NA,"DUCK!",NA,NA,NA,NA,NA
+"196","KO percentage","40%","40%","40%",NA,"DUCK!",NA,NA,NA,NA,NA
+"197","Average knockout time","103 s","95 s","110 s",NA,"DUCK!",NA,NA,NA,NA,NA
+"198","Knockouts against","2","0","2",NA,"DUCK!",NA,NA,NA,NA,NA
+"199","KO against percentage","20%","0%","40%",NA,"DUCK!",NA,NA,NA,NA,NA
+"200","Judges decision wins","1","0","1",NA,"DUCK!",NA,NA,NA,NA,NA
+"201","Total matches","11","5","6",NA,"End Game",NA,NA,NA,NA,NA
+"202","Win percentage","36%","40%","33%",NA,"End Game",NA,NA,NA,NA,NA
+"203","Total wins","4","2","2",NA,"End Game",NA,NA,NA,NA,NA
+"204","Losses","7","3","4",NA,"End Game",NA,NA,NA,NA,NA
+"205","Knockouts","4","2","2",NA,"End Game",NA,NA,NA,NA,NA
+"206","KO percentage","36%","40%","33%",NA,"End Game",NA,NA,NA,NA,NA
+"207","Average knockout time","122 s","141 s","102 s",NA,"End Game",NA,NA,NA,NA,NA
+"208","Knockouts against","6","3","3",NA,"End Game",NA,NA,NA,NA,NA
+"209","KO against percentage","55%","60%","50%",NA,"End Game",NA,NA,NA,NA,NA
+"210","Judges decision wins","0","0","0",NA,"End Game",NA,NA,NA,NA,NA
+"211","Total matches","2","2",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"212","Win percentage","50%","50%",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"213","Total wins","1","1",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"214","Losses","1","1",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"215","Knockouts","1","1",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"216","KO percentage","50%","50%",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"217","Average knockout time","123 s","123 s",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"218","Knockouts against","0","0",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"219","KO against percentage","0%","0%",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"220","Judges decision wins","0","0",NA,NA,"Extinguisher",NA,NA,NA,NA,NA
+"221","Total matches","3","3",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"222","Win percentage","33%","33%",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"223","Total wins","1","1",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"224","Losses","2","2",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"225","Knockouts","0","0",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"226","KO percentage","0%","0%",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"227","Average knockout time","","",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"228","Knockouts against","1","1",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"229","KO against percentage","33%","33%",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"230","Judges decision wins","1","1",NA,NA,"Falcon",NA,NA,NA,NA,NA
+"231","Total matches","8","4","4",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"232","Win percentage","38%","50%","25%",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"233","Total wins","3","2","1",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"234","Losses","5","2","3",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"235","Knockouts","1","1","0",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"236","KO percentage","13%","25%","0%",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"237","Average knockout time","127 s","127 s","",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"238","Knockouts against","2","1","1",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"239","KO against percentage","25%","25%","25%",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"240","Judges decision wins","2","1","1",NA,"The Four Horsemen",NA,NA,NA,NA,NA
+"241","Total matches","2","2",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"242","Win percentage","0%","0%",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"243","Total wins","0","0",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"244","Losses","2","2",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"245","Knockouts","0","0",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"246","KO percentage","0%","0%",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"247","Average knockout time","","",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"248","Knockouts against","2","2",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"249","KO against percentage","100%","100%",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"250","Judges decision wins","0","0",NA,NA,"Foxtrot",NA,NA,NA,NA,NA
+"251","Total matches","8","4","4",NA,"Free Shipping",NA,NA,NA,NA,NA
+"252","Win percentage","38%","50%","25%",NA,"Free Shipping",NA,NA,NA,NA,NA
+"253","Total wins","3","2","1",NA,"Free Shipping",NA,NA,NA,NA,NA
+"254","Losses","5","2","3",NA,"Free Shipping",NA,NA,NA,NA,NA
+"255","Knockouts","2","1","1",NA,"Free Shipping",NA,NA,NA,NA,NA
+"256","KO percentage","25%","25%","25%",NA,"Free Shipping",NA,NA,NA,NA,NA
+"257","Average knockout time","73 s","0 s","146 s",NA,"Free Shipping",NA,NA,NA,NA,NA
+"258","Knockouts against","1","1","0",NA,"Free Shipping",NA,NA,NA,NA,NA
+"259","KO against percentage","13%","25%","0%",NA,"Free Shipping",NA,NA,NA,NA,NA
+"260","Judges decision wins","1","1","0",NA,"Free Shipping",NA,NA,NA,NA,NA
+"261","Total matches","8","3","4","1","Gemini",NA,NA,NA,NA,NA
+"262","Win percentage","38%","33%","50%","0%","Gemini",NA,NA,NA,NA,NA
+"263","Total wins","3","1","2","0","Gemini",NA,NA,NA,NA,NA
+"264","Losses","5","2","2","1","Gemini",NA,NA,NA,NA,NA
+"265","Knockouts","2","1","1","0","Gemini",NA,NA,NA,NA,NA
+"266","KO percentage","25%","33%","25%","0%","Gemini",NA,NA,NA,NA,NA
+"267","Average knockout time","132 s","101 s","163 s","","Gemini",NA,NA,NA,NA,NA
+"268","Knockouts against","0","0","0","0","Gemini",NA,NA,NA,NA,NA
+"269","KO against percentage","0%","0%","0%","0%","Gemini",NA,NA,NA,NA,NA
+"270","Judges decision wins","1","0","1","0","Gemini",NA,NA,NA,NA,NA
+"271","Total matches","9","4","5",NA,"Gigabyte",NA,NA,NA,NA,NA
+"272","Win percentage","44%","50%","40%",NA,"Gigabyte",NA,NA,NA,NA,NA
+"273","Total wins","4","2","2",NA,"Gigabyte",NA,NA,NA,NA,NA
+"274","Losses","5","2","3",NA,"Gigabyte",NA,NA,NA,NA,NA
+"275","Knockouts","3","1","2",NA,"Gigabyte",NA,NA,NA,NA,NA
+"276","KO percentage","33%","25%","40%",NA,"Gigabyte",NA,NA,NA,NA,NA
+"277","Average knockout time","107 s","84 s","129 s",NA,"Gigabyte",NA,NA,NA,NA,NA
+"278","Knockouts against","4","1","3",NA,"Gigabyte",NA,NA,NA,NA,NA
+"279","KO against percentage","44%","25%","60%",NA,"Gigabyte",NA,NA,NA,NA,NA
+"280","Judges decision wins","1","1","0",NA,"Gigabyte",NA,NA,NA,NA,NA
+"281","Total matches","4","4",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"282","Win percentage","25%","25%",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"283","Total wins","1","1",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"284","Losses","3","3",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"285","Knockouts","0","0",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"286","KO percentage","0%","0%",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"287","Average knockout time","","",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"288","Knockouts against","1","1",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"289","KO against percentage","25%","25%",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"290","Judges decision wins","1","1",NA,NA,"Gruff",NA,NA,NA,NA,NA
+"291","Total matches","11","6","5",NA,"HUGE",NA,NA,NA,NA,NA
+"292","Win percentage","64%","67%","60%",NA,"HUGE",NA,NA,NA,NA,NA
+"293","Total wins","7","4","3",NA,"HUGE",NA,NA,NA,NA,NA
+"294","Losses","4","2","2",NA,"HUGE",NA,NA,NA,NA,NA
+"295","Knockouts","2","2","0",NA,"HUGE",NA,NA,NA,NA,NA
+"296","KO percentage","18%","33%","0%",NA,"HUGE",NA,NA,NA,NA,NA
+"297","Average knockout time","131 s","131 s","",NA,"HUGE",NA,NA,NA,NA,NA
+"298","Knockouts against","3","1","2",NA,"HUGE",NA,NA,NA,NA,NA
+"299","KO against percentage","27%","17%","40%",NA,"HUGE",NA,NA,NA,NA,NA
+"300","Judges decision wins","5","2","3",NA,"HUGE",NA,NA,NA,NA,NA
+"301","Total matches","5","5",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"302","Win percentage","80%","80%",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"303","Total wins","4","4",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"304","Losses","1","1",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"305","Knockouts","4","4",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"306","KO percentage","80%","80%",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"307","Average knockout time","96 s","96 s",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"308","Knockouts against","1","1",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"309","KO against percentage","20%","20%",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"310","Judges decision wins","0","0",NA,NA,"Hydra",NA,NA,NA,NA,NA
+"311",NA,NA,NA,NA,NA,"HyperShock",NA,"2019","Episode 1","HyperShock vs Valkyrie","HyperShock by KO 2m14s"
+"312",NA,NA,NA,NA,NA,"HyperShock",NA,"2019","Episode 6","HyperShock vs Monsoon","HyperShock by KO 41s"
+"313",NA,NA,NA,NA,NA,"HyperShock",NA,"2019","Episode 10","Bite Force vs HyperShock","Bite Force by JD"
+"314",NA,NA,NA,NA,NA,"HyperShock",NA,"2019","Episode 13","Breaker Box vs HyperShock","HyperShock by KO 2m59s"
+"315",NA,NA,NA,NA,NA,"HyperShock",NA,"2019","Episode 14","HyperShock vs HUGE","HUGE by KO 2m57s"
+"316",NA,NA,NA,NA,NA,"HyperShock",NA,"2019","Not Aired","HyperShock vs Hydra","Hydra by KO 45s"
+"317",NA,NA,NA,NA,NA,"HyperShock",NA,"2018","Day 2 Session 1","HyperShock vs Bite Force","Bite Force by KO 36s"
+"318",NA,NA,NA,NA,NA,"HyperShock",NA,"2018","Day 4 Session 1","HyperShock vs Battle Royal with Cheese","HyperShock by KO 50s"
+"319",NA,NA,NA,NA,NA,"HyperShock",NA,"2018","Day 6 Session 1","HyperShock vs Free Shipping","Free Shipping by KO 2m26s"
+"320",NA,NA,NA,NA,NA,"HyperShock",NA,"2018","Day 8 Session 1","Skorpios vs HyperShock","Skorpios by JD"
+"321",NA,NA,NA,NA,NA,"HyperShock",NA,"2018","Day 10 Session 1","HyperShock vs Reality","Reality by KO 2m5s"
+"322",NA,NA,NA,NA,NA,"HyperShock",NA,"2016","Qualifiers Session 2","HyperShock vs UltraViolent","HyperShock by KO 1m30s"
+"323",NA,NA,NA,NA,NA,"HyperShock",NA,"2016","Round of 32","HyperShock vs Warrior Dragon","HyperShock by KO 2m12s"
+"324",NA,NA,NA,NA,NA,"HyperShock",NA,"2016","Sweet 16","Poison Arrow vs HyperShock","Poison Arrow by KO 2m32s"
+"325","Total matches","2","2",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"326","Win percentage","0%","0%",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"327","Total wins","0","0",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"328","Losses","2","2",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"329","Knockouts","0","0",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"330","KO percentage","0%","0%",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"331","Average knockout time","","",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"332","Knockouts against","2","2",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"333","KO against percentage","100%","100%",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"334","Judges decision wins","0","0",NA,NA,"Jasper",NA,NA,NA,NA,NA
+"335","Total matches","2","2",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"336","Win percentage","50%","50%",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"337","Total wins","1","1",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"338","Losses","1","1",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"339","Knockouts","1","1",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"340","KO percentage","50%","50%",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"341","Average knockout time","57 s","57 s",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"342","Knockouts against","1","1",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"343","KO against percentage","50%","50%",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"344","Judges decision wins","0","0",NA,NA,"Kingpin",NA,NA,NA,NA,NA
+"345","Total matches","8","3","5",NA,"Kraken",NA,NA,NA,NA,NA
+"346","Win percentage","25%","33%","20%",NA,"Kraken",NA,NA,NA,NA,NA
+"347","Total wins","2","1","1",NA,"Kraken",NA,NA,NA,NA,NA
+"348","Losses","6","2","4",NA,"Kraken",NA,NA,NA,NA,NA
+"349","Knockouts","0","0","0",NA,"Kraken",NA,NA,NA,NA,NA
+"350","KO percentage","0%","0%","0%",NA,"Kraken",NA,NA,NA,NA,NA
+"351","Average knockout time","","","",NA,"Kraken",NA,NA,NA,NA,NA
+"352","Knockouts against","5","1","4",NA,"Kraken",NA,NA,NA,NA,NA
+"353","KO against percentage","63%","33%","80%",NA,"Kraken",NA,NA,NA,NA,NA
+"354","Judges decision wins","2","1","1",NA,"Kraken",NA,NA,NA,NA,NA
+"355","Total matches","20","7","9","2","Lock Jaw","2",NA,NA,NA,NA
+"356","Win percentage","60%","71%","67%","50%","Lock Jaw","50%",NA,NA,NA,NA
+"357","Total wins","12","5","6","0","Lock Jaw","1",NA,NA,NA,NA
+"358","Losses","8","2","3","2","Lock Jaw","1",NA,NA,NA,NA
+"359","Knockouts","8","3","5","0","Lock Jaw","0",NA,NA,NA,NA
+"360","KO percentage","40%","43%","56%","0%","Lock Jaw","0%",NA,NA,NA,NA
+"361","Average knockout time","114 s","117 s","110 s","","Lock Jaw","",NA,NA,NA,NA
+"362","Knockouts against","5","2","2","0","Lock Jaw","1",NA,NA,NA,NA
+"363","KO against percentage","25%","29%","22%","0%","Lock Jaw","50%",NA,NA,NA,NA
+"364","Judges decision wins","4","2","1","0","Lock Jaw","1",NA,NA,NA,NA
+"365","Total matches","11","3","6","2","Lucky!",NA,NA,NA,NA,NA
+"366","Win percentage","27%","33%","33%","0%","Lucky!",NA,NA,NA,NA,NA
+"367","Total wins","3","1","2","0","Lucky!",NA,NA,NA,NA,NA
+"368","Losses","8","2","4","2","Lucky!",NA,NA,NA,NA,NA
+"369","Knockouts","1","0","1","0","Lucky!",NA,NA,NA,NA,NA
+"370","KO percentage","9%","0%","17%","0%","Lucky!",NA,NA,NA,NA,NA
+"371","Average knockout time","67 s","","67 s","","Lucky!",NA,NA,NA,NA,NA
+"372","Knockouts against","5","1","3","1","Lucky!",NA,NA,NA,NA,NA
+"373","KO against percentage","45%","33%","50%","50%","Lucky!",NA,NA,NA,NA,NA
+"374","Judges decision wins","2","1","1","0","Lucky!",NA,NA,NA,NA,NA
+"375","Total matches","4","4",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"376","Win percentage","50%","50%",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"377","Total wins","2","2",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"378","Losses","2","2",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"379","Knockouts","2","2",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"380","KO percentage","50%","50%",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"381","Average knockout time","75 s","75 s",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"382","Knockouts against","1","1",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"383","KO against percentage","25%","25%",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"384","Judges decision wins","0","0",NA,NA,"MadCatter",NA,NA,NA,NA,NA
+"385","Total matches","6","6",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"386","Win percentage","50%","50%",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"387","Total wins","3","3",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"388","Losses","3","3",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"389","Knockouts","3","3",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"390","KO percentage","50%","50%",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"391","Average knockout time","89 s","89 s",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"392","Knockouts against","2","2",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"393","KO against percentage","33%","33%",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"394","Judges decision wins","0","0",NA,NA,"Mammoth",NA,NA,NA,NA,NA
+"395","Total matches","4","4",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"396","Win percentage","25%","25%",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"397","Total wins","1","1",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"398","Losses","3","3",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"399","Knockouts","0","0",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"400","KO percentage","0%","0%",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"401","Average knockout time","","",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"402","Knockouts against","0","0",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"403","KO against percentage","0%","0%",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"404","Judges decision wins","1","1",NA,NA,"Marvin",NA,NA,NA,NA,NA
+"405","Total matches","22","9","8","5","Minotaur",NA,NA,NA,NA,NA
+"406","Win percentage","68%","56%","75%","80%","Minotaur",NA,NA,NA,NA,NA
+"407","Total wins","15","5","6","4","Minotaur",NA,NA,NA,NA,NA
+"408","Losses","7","4","2","1","Minotaur",NA,NA,NA,NA,NA
+"409","Knockouts","11","4","4","3","Minotaur",NA,NA,NA,NA,NA
+"410","KO percentage","50%","44%","50%","60%","Minotaur",NA,NA,NA,NA,NA
+"411","Average knockout time","114 s","118 s","109 s","115 s","Minotaur",NA,NA,NA,NA,NA
+"412","Knockouts against","4","1","2","1","Minotaur",NA,NA,NA,NA,NA
+"413","KO against percentage","18%","11%","25%","20%","Minotaur",NA,NA,NA,NA,NA
+"414","Judges decision wins","4","1","2","1","Minotaur",NA,NA,NA,NA,NA
+"415","Total matches","11","5","6",NA,"Monsoon",NA,NA,NA,NA,NA
+"416","Win percentage","55%","40%","67%",NA,"Monsoon",NA,NA,NA,NA,NA
+"417","Total wins","6","2","4",NA,"Monsoon",NA,NA,NA,NA,NA
+"418","Losses","5","3","2",NA,"Monsoon",NA,NA,NA,NA,NA
+"419","Knockouts","3","1","2",NA,"Monsoon",NA,NA,NA,NA,NA
+"420","KO percentage","27%","20%","33%",NA,"Monsoon",NA,NA,NA,NA,NA
+"421","Average knockout time","62 s","44 s","79 s",NA,"Monsoon",NA,NA,NA,NA,NA
+"422","Knockouts against","4","2","2",NA,"Monsoon",NA,NA,NA,NA,NA
+"423","KO against percentage","36%","40%","33%",NA,"Monsoon",NA,NA,NA,NA,NA
+"424","Judges decision wins","3","1","2",NA,"Monsoon",NA,NA,NA,NA,NA
+"425","Total matches","2","2",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"426","Win percentage","0%","0%",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"427","Total wins","0","0",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"428","Losses","2","2",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"429","Knockouts","0","0",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"430","KO percentage","0%","0%",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"431","Average knockout time","","",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"432","Knockouts against","1","1",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"433","KO against percentage","50%","50%",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"434","Judges decision wins","0","0",NA,NA,"Nelly the Ellybot",NA,NA,NA,NA,NA
+"435","Total matches","4","1",NA,"3","Nightmare",NA,NA,NA,NA,NA
+"436","Win percentage","25%","0%",NA,"33%","Nightmare",NA,NA,NA,NA,NA
+"437","Total wins","1","0",NA,"1","Nightmare",NA,NA,NA,NA,NA
+"438","Losses","3","1",NA,"2","Nightmare",NA,NA,NA,NA,NA
+"439","Knockouts","1","0",NA,"1","Nightmare",NA,NA,NA,NA,NA
+"440","KO percentage","25%","0%",NA,"33%","Nightmare",NA,NA,NA,NA,NA
+"441","Average knockout time","48 s","",NA,"48 s","Nightmare",NA,NA,NA,NA,NA
+"442","Knockouts against","2","1",NA,"1","Nightmare",NA,NA,NA,NA,NA
+"443","KO against percentage","50%","100%",NA,"67%","Nightmare",NA,NA,NA,NA,NA
+"444","Judges decision wins","0","0",NA,"0","Nightmare",NA,NA,NA,NA,NA
+"445","Total matches","2","2",NA,NA,"P1",NA,NA,NA,NA,NA
+"446","Win percentage","0%","0%",NA,NA,"P1",NA,NA,NA,NA,NA
+"447","Total wins","0","0",NA,NA,"P1",NA,NA,NA,NA,NA
+"448","Losses","2","2",NA,NA,"P1",NA,NA,NA,NA,NA
+"449","Knockouts","0","0",NA,NA,"P1",NA,NA,NA,NA,NA
+"450","KO percentage","0%","0%",NA,NA,"P1",NA,NA,NA,NA,NA
+"451","Average knockout time","","",NA,NA,"P1",NA,NA,NA,NA,NA
+"452","Knockouts against","2","2",NA,NA,"P1",NA,NA,NA,NA,NA
+"453","KO against percentage","100%","100%",NA,NA,"P1",NA,NA,NA,NA,NA
+"454","Judges decision wins","0","0",NA,NA,"P1",NA,NA,NA,NA,NA
+"455","Total matches","9","4","5",NA,"Petunia",NA,NA,NA,NA,NA
+"456","Win percentage","44%","25%","60%",NA,"Petunia",NA,NA,NA,NA,NA
+"457","Total wins","4","1","3",NA,"Petunia",NA,NA,NA,NA,NA
+"458","Losses","5","3","2",NA,"Petunia",NA,NA,NA,NA,NA
+"459","Knockouts","1","0","1",NA,"Petunia",NA,NA,NA,NA,NA
+"460","KO percentage","11%","0%","20%",NA,"Petunia",NA,NA,NA,NA,NA
+"461","Average knockout time","76 s","","76 s",NA,"Petunia",NA,NA,NA,NA,NA
+"462","Knockouts against","5","3","2",NA,"Petunia",NA,NA,NA,NA,NA
+"463","KO against percentage","56%","75%","40%",NA,"Petunia",NA,NA,NA,NA,NA
+"464","Judges decision wins","3","1","2",NA,"Petunia",NA,NA,NA,NA,NA
+"465","Total matches","6","6",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"466","Win percentage","50%","50%",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"467","Total wins","3","3",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"468","Losses","3","3",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"469","Knockouts","1","1",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"470","KO percentage","17%","17%",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"471","Average knockout time","104 s","104 s",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"472","Knockouts against","3","3",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"473","KO against percentage","50%","50%",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"474","Judges decision wins","2","2",NA,NA,"Quantum",NA,NA,NA,NA,NA
+"475","Total matches","5","5",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"476","Win percentage","20%","20%",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"477","Total wins","1","1",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"478","Losses","4","4",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"479","Knockouts","0","0",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"480","KO percentage","0%","0%",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"481","Average knockout time","","",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"482","Knockouts against","4","4",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"483","KO against percentage","80%","80%",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"484","Judges decision wins","1","1",NA,NA,"Ragnarök",NA,NA,NA,NA,NA
+"485","Total matches","4","4",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"486","Win percentage","75%","75%",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"487","Total wins","3","3",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"488","Losses","1","1",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"489","Knockouts","2","2",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"490","KO percentage","50%","50%",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"491","Average knockout time","60 s","60 s",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"492","Knockouts against","1","1",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"493","KO against percentage","25%","25%",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"494","Judges decision wins","1","1",NA,NA,"RailGun Max",NA,NA,NA,NA,NA
+"495","Total matches","3","3",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"496","Win percentage","67%","67%",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"497","Total wins","2","2",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"498","Losses","1","1",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"499","Knockouts","1","1",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"500","KO percentage","33%","33%",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"501","Average knockout time","65 s","65 s",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"502","Knockouts against","1","1",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"503","KO against percentage","33%","33%",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"504","Judges decision wins","1","1",NA,NA,"Rainbow",NA,NA,NA,NA,NA
+"505","Total matches","5","5",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"506","Win percentage","60%","60%",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"507","Total wins","3","3",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"508","Losses","2","2",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"509","Knockouts","3","3",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"510","KO percentage","60%","60%",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"511","Average knockout time","108 s","108 s",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"512","Knockouts against","0","0",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"513","KO against percentage","0%","0%",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"514","Judges decision wins","0","0",NA,NA,"Ribbot",NA,NA,NA,NA,NA
+"515","Total matches","12","5","6","1","ROTATOR",NA,NA,NA,NA,NA
+"516","Win percentage","50%","40%","67%","0%","ROTATOR",NA,NA,NA,NA,NA
+"517","Total wins","6","2","4","0","ROTATOR",NA,NA,NA,NA,NA
+"518","Losses","6","3","2","1","ROTATOR",NA,NA,NA,NA,NA
+"519","Knockouts","3","2","1","0","ROTATOR",NA,NA,NA,NA,NA
+"520","KO percentage","25%","40%","17%","0%","ROTATOR",NA,NA,NA,NA,NA
+"521","Average knockout time","93 s","118 s","67 s","","ROTATOR",NA,NA,NA,NA,NA
+"522","Knockouts against","2","0","1","1","ROTATOR",NA,NA,NA,NA,NA
+"523","KO against percentage","17%","0%","17%","100%","ROTATOR",NA,NA,NA,NA,NA
+"524","Judges decision wins","3","0","3","0","ROTATOR",NA,NA,NA,NA,NA
+"525","Total matches","13","6","6","1","SawBlaze",NA,NA,NA,NA,NA
+"526","Win percentage","62%","67%","67%","0%","SawBlaze",NA,NA,NA,NA,NA
+"527","Total wins","8","4","4","0","SawBlaze",NA,NA,NA,NA,NA
+"528","Losses","5","2","2","1","SawBlaze",NA,NA,NA,NA,NA
+"529","Knockouts","2","0","2","0","SawBlaze",NA,NA,NA,NA,NA
+"530","KO percentage","15%","0%","33%","0","SawBlaze",NA,NA,NA,NA,NA
+"531","Average knockout time","111 s","","111 s","","SawBlaze",NA,NA,NA,NA,NA
+"532","Knockouts against","2","2","0","0","SawBlaze",NA,NA,NA,NA,NA
+"533","KO against percentage","15%","33%","0%","0%","SawBlaze",NA,NA,NA,NA,NA
+"534","Judges decision wins","6","4","2","0","SawBlaze",NA,NA,NA,NA,NA
+"535","Total matches","4","1","3",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"536","Win percentage","50%","0%","67%",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"537","Total wins","2","0","2",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"538","Losses","2","1","1",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"539","Knockouts","1","0","1",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"540","KO percentage","25%","0%","33%",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"541","Average knockout time","142 s","","142 s",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"542","Knockouts against","1","1","0",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"543","KO against percentage","25%","100%","0%",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"544","Judges decision wins","1","0","1",NA,"Sharkoprion",NA,NA,NA,NA,NA
+"545","Total matches","4","4",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"546","Win percentage","50%","50%",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"547","Total wins","2","2",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"548","Losses","2","2",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"549","Knockouts","1","1",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"550","KO percentage","25%","25%",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"551","Average knockout time","56 s","56 s",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"552","Knockouts against","1","1",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"553","KO against percentage","25%","25%",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"554","Judges decision wins","1","1",NA,NA,"Shatter!",NA,NA,NA,NA,NA
+"555","Total matches","1","1",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"556","Win percentage","0%","0%",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"557","Total wins","0","0",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"558","Losses","1","1",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"559","Knockouts","0","0",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"560","KO percentage","0%","0%",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"561","Average knockout time","","",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"562","Knockouts against","1","1",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"563","KO against percentage","100%","100%",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"564","Judges decision wins","0","0",NA,NA,"Shellshock",NA,NA,NA,NA,NA
+"565","Total matches","2","2",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"566","Win percentage","50%","50%",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"567","Total wins","1","1",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"568","Losses","1","1",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"569","Knockouts","1","1",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"570","KO percentage","50%","50%",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"571","Average knockout time","48 s","48 s",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"572","Knockouts against","1","1",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"573","KO against percentage","50%","50%",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"574","Judges decision wins","0","0",NA,NA,"Sidewinder",NA,NA,NA,NA,NA
+"575","Total matches","10","5","4","1","Skorpios",NA,NA,NA,NA,NA
+"576","Win percentage","70%","60%","75%","100%","Skorpios",NA,NA,NA,NA,NA
+"577","Total wins","7","3","3","1","Skorpios",NA,NA,NA,NA,NA
+"578","Losses","3","2","1","0","Skorpios",NA,NA,NA,NA,NA
+"579","Knockouts","3","2","0","1","Skorpios",NA,NA,NA,NA,NA
+"580","KO percentage","30%","40%","0%","100%","Skorpios",NA,NA,NA,NA,NA
+"581","Average knockout time","173 s","165 s","","180 s","Skorpios",NA,NA,NA,NA,NA
+"582","Knockouts against","2","2","0","0","Skorpios",NA,NA,NA,NA,NA
+"583","KO against percentage","20%","40%","0%","0%","Skorpios",NA,NA,NA,NA,NA
+"584","Judges decision wins","4","1","3","0","Skorpios",NA,NA,NA,NA,NA
+"585","Total matches","13","5","5","3","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"586","Win percentage","62%","60%","60%","67%","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"587","Total wins","8","3","3","2","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"588","Losses","5","2","2","1","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"589","Knockouts","8","2","3","3","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"590","KO percentage","62%","40%","60%","67%","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"591","Average knockout time","100 s","165 s","64 s","71 s","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"592","Knockouts against","4","2","1","1","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"593","KO against percentage","31%","40%","20%","33%","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"594","Judges decision wins","1","1","0","0","Son of Whyachi (aka SOW)",NA,NA,NA,NA,NA
+"595","Total matches","8","3","4","1","SubZero",NA,NA,NA,NA,NA
+"596","Win percentage","25%","33%","25%","0%","SubZero",NA,NA,NA,NA,NA
+"597","Total wins","2","1","1","0","SubZero",NA,NA,NA,NA,NA
+"598","Losses","6","2","3","1","SubZero",NA,NA,NA,NA,NA
+"599","Knockouts","2","1","1","0","SubZero",NA,NA,NA,NA,NA
+"600","KO percentage","25%","33%","25%","0%","SubZero",NA,NA,NA,NA,NA
+"601","Average knockout time","119 s","126 s","112 s","","SubZero",NA,NA,NA,NA,NA
+"602","Knockouts against","3","2","1","0","SubZero",NA,NA,NA,NA,NA
+"603","KO against percentage","38%","67%","25%","0%","SubZero",NA,NA,NA,NA,NA
+"604","Judges decision wins","0","0","0","0","SubZero",NA,NA,NA,NA,NA
+"605","Total matches","7","4","3",NA,"Tantrum",NA,NA,NA,NA,NA
+"606","Win percentage","43%","50%","33%",NA,"Tantrum",NA,NA,NA,NA,NA
+"607","Total wins","3","2","1",NA,"Tantrum",NA,NA,NA,NA,NA
+"608","Losses","4","2","2",NA,"Tantrum",NA,NA,NA,NA,NA
+"609","Knockouts","1","1","0",NA,"Tantrum",NA,NA,NA,NA,NA
+"610","KO percentage","14%","25%","0%",NA,"Tantrum",NA,NA,NA,NA,NA
+"611","Average knockout time","154 s","154 s","",NA,"Tantrum",NA,NA,NA,NA,NA
+"612","Knockouts against","3","1","2",NA,"Tantrum",NA,NA,NA,NA,NA
+"613","KO against percentage","43%","25%","67%",NA,"Tantrum",NA,NA,NA,NA,NA
+"614","Judges decision wins","2","1","1",NA,"Tantrum",NA,NA,NA,NA,NA
+"615","Total matches","4","4",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"616","Win percentage","50%","50%",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"617","Total wins","2","2",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"618","Losses","2","2",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"619","Knockouts","1","1",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"620","KO percentage","25%","25%",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"621","Average knockout time","86 s","86 s",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"622","Knockouts against","2","2",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"623","KO against percentage","50%","50%",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"624","Judges decision wins","1","1",NA,NA,"Texas Twister",NA,NA,NA,NA,NA
+"625","Total matches","6","6",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"626","Win percentage","67%","67%",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"627","Total wins","4","4",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"628","Losses","2","2",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"629","Knockouts","4","4",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"630","KO percentage","67%","67%",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"631","Average knockout time","110 s","110 s",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"632","Knockouts against","2","2",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"633","KO against percentage","33%","33%",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"634","Judges decision wins","0","0",NA,NA,"Uppercut",NA,NA,NA,NA,NA
+"635","Total matches","11","5","6",NA,"Valkyrie",NA,NA,NA,NA,NA
+"636","Win percentage","64%","60%","67%",NA,"Valkyrie",NA,NA,NA,NA,NA
+"637","Total wins","7","3","4",NA,"Valkyrie",NA,NA,NA,NA,NA
+"638","Losses","4","2","2",NA,"Valkyrie",NA,NA,NA,NA,NA
+"639","Knockouts","3","2","1",NA,"Valkyrie",NA,NA,NA,NA,NA
+"640","KO percentage","27%","40%","17%",NA,"Valkyrie",NA,NA,NA,NA,NA
+"641","Average knockout time","83 s","52 s","114 s",NA,"Valkyrie",NA,NA,NA,NA,NA
+"642","Knockouts against","4","2","2",NA,"Valkyrie",NA,NA,NA,NA,NA
+"643","KO against percentage","36%","40%","33%",NA,"Valkyrie",NA,NA,NA,NA,NA
+"644","Judges decision wins","4","1","3",NA,"Valkyrie",NA,NA,NA,NA,NA
+"645","Total matches","4","4",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"646","Win percentage","50%","50%",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"647","Total wins","2","2",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"648","Losses","2","2",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"649","Knockouts","1","1",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"650","KO percentage","25%","25%",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"651","Average knockout time","109 s","109 s",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"652","Knockouts against","0","0",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"653","KO against percentage","0%","0%",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"654","Judges decision wins","1","1",NA,NA,"WanHoo",NA,NA,NA,NA,NA
+"655","Total matches","11","5","6",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"656","Win percentage","55%","40%","67%",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"657","Total wins","6","2","4",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"658","Losses","5","3","2",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"659","Knockouts","4","2","2",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"660","KO percentage","36%","40%","33%",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"661","Average knockout time","109 s","138 s","80 s",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"662","Knockouts against","5","3","2",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"663","KO against percentage","45%","60%","33%",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"664","Judges decision wins","2","0","2",NA,"WAR Hawk",NA,NA,NA,NA,NA
+"665","Total matches","13","6","7",NA,"Whiplash",NA,NA,NA,NA,NA
+"666","Win percentage","69%","67%","71%",NA,"Whiplash",NA,NA,NA,NA,NA
+"667","Total wins","9","4","5",NA,"Whiplash",NA,NA,NA,NA,NA
+"668","Losses","4","2","2",NA,"Whiplash",NA,NA,NA,NA,NA
+"669","Knockouts","6","2","4",NA,"Whiplash",NA,NA,NA,NA,NA
+"670","KO percentage","46%","33%","57%",NA,"Whiplash",NA,NA,NA,NA,NA
+"671","Average knockout time","107 s","103 s","110 s",NA,"Whiplash",NA,NA,NA,NA,NA
+"672","Knockouts against","3","1","2",NA,"Whiplash",NA,NA,NA,NA,NA
+"673","KO against percentage","23%","17%","29%",NA,"Whiplash",NA,NA,NA,NA,NA
+"674","Judges decision wins","3","2","1",NA,"Whiplash",NA,NA,NA,NA,NA
+"675","Total matches","18","8","5","2","Witch Doctor","3",NA,NA,NA,NA
+"676","Win percentage","67%","88%","60%","50%","Witch Doctor","33%",NA,NA,NA,NA
+"677","Total wins","12","7","3","1","Witch Doctor","1",NA,NA,NA,NA
+"678","Losses","6","1","2","1","Witch Doctor","2",NA,NA,NA,NA
+"679","Knockouts","8","4","2","1","Witch Doctor","1",NA,NA,NA,NA
+"680","KO percentage","44%","50%","40%","50%","Witch Doctor","33%",NA,NA,NA,NA
+"681","Average knockout time","79 s","124 s","67 s","42 s","Witch Doctor","84 s",NA,NA,NA,NA
+"682","Knockouts against","6","1","2","1","Witch Doctor","2",NA,NA,NA,NA
+"683","KO against percentage","33%","13%","40%","50%","Witch Doctor","67%",NA,NA,NA,NA
+"684","Judges decision wins","4","3","1","0","Witch Doctor","0",NA,NA,NA,NA
+"685","Total matches","3",NA,"3",NA,"Bale Spear",NA,NA,NA,NA,NA
+"686","Win percentage","0%",NA,"0%",NA,"Bale Spear",NA,NA,NA,NA,NA
+"687","Total wins","0",NA,"0",NA,"Bale Spear",NA,NA,NA,NA,NA
+"688","Losses","3",NA,"3",NA,"Bale Spear",NA,NA,NA,NA,NA
+"689","Knockouts","0",NA,"0",NA,"Bale Spear",NA,NA,NA,NA,NA
+"690","KO percentage","0%",NA,"0%",NA,"Bale Spear",NA,NA,NA,NA,NA
+"691","Average knockout time","",NA,"",NA,"Bale Spear",NA,NA,NA,NA,NA
+"692","Knockouts against","1",NA,"1",NA,"Bale Spear",NA,NA,NA,NA,NA
+"693","KO against percentage","33%",NA,"33%",NA,"Bale Spear",NA,NA,NA,NA,NA
+"694","Judges decision wins","0",NA,"0",NA,"Bale Spear",NA,NA,NA,NA,NA
+"695","Total matches","2",NA,"2",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"696","Win percentage","0%",NA,"0%",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"697","Total wins","0",NA,"0",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"698","Losses","2",NA,"2",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"699","Knockouts","0",NA,"0",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"700","KO percentage","0%",NA,"0%",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"701","Average knockout time","",NA,"",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"702","Knockouts against","1",NA,"1",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"703","KO against percentage","50%",NA,"50%",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"704","Judges decision wins","0",NA,"0",NA,"Battle Royale With Cheese",NA,NA,NA,NA,NA
+"705","Total matches","4",NA,"3","1","Basilisk",NA,NA,NA,NA,NA
+"706","Win percentage","50%",NA,"67%","0%","Basilisk",NA,NA,NA,NA,NA
+"707","Total wins","2",NA,"2","0","Basilisk",NA,NA,NA,NA,NA
+"708","Losses","2",NA,"1","1","Basilisk",NA,NA,NA,NA,NA
+"709","Knockouts","1",NA,"1","0","Basilisk",NA,NA,NA,NA,NA
+"710","KO percentage","25%",NA,"33%","0%","Basilisk",NA,NA,NA,NA,NA
+"711","Average knockout time","137 s",NA,"137 s","","Basilisk",NA,NA,NA,NA,NA
+"712","Knockouts against","0",NA,"0","","Basilisk",NA,NA,NA,NA,NA
+"713","KO against percentage","0%",NA,"0%","0%","Basilisk",NA,NA,NA,NA,NA
+"714","Judges decision wins","1",NA,"1","0","Basilisk",NA,NA,NA,NA,NA
+"715","Total matches","8",NA,"5","3","Brutus",NA,NA,NA,NA,NA
+"716","Win percentage","50%",NA,"40%","67%","Brutus",NA,NA,NA,NA,NA
+"717","Total wins","4",NA,"2","2","Brutus",NA,NA,NA,NA,NA
+"718","Losses","4",NA,"3","1","Brutus",NA,NA,NA,NA,NA
+"719","Knockouts","3",NA,"2","1","Brutus",NA,NA,NA,NA,NA
+"720","KO percentage","38%",NA,"40%","33%","Brutus",NA,NA,NA,NA,NA
+"721","Average knockout time","72 s",NA,"97 s","47 s","Brutus",NA,NA,NA,NA,NA
+"722","Knockouts against","4",NA,"3","1","Brutus",NA,NA,NA,NA,NA
+"723","KO against percentage","50%",NA,"60%","33%","Brutus",NA,NA,NA,NA,NA
+"724","Judges decision wins","1",NA,"0","1","Brutus",NA,NA,NA,NA,NA
+"725","Total matches","12",NA,"6","4","Chomp","2",NA,NA,NA,NA
+"726","Win percentage","33%",NA,"17%","75%","Chomp","0%",NA,NA,NA,NA
+"727","Total wins","4",NA,"1","3","Chomp","0",NA,NA,NA,NA
+"728","Losses","8",NA,"5","1","Chomp","2",NA,NA,NA,NA
+"729","Knockouts","2",NA,"1","1","Chomp","0",NA,NA,NA,NA
+"730","KO percentage","17%",NA,"17%","25%","Chomp","0%",NA,NA,NA,NA
+"731","Average knockout time","116 s",NA,"103 s","128 s","Chomp","",NA,NA,NA,NA
+"732","Knockouts against","4",NA,"1","1","Chomp","2",NA,NA,NA,NA
+"733","KO against percentage","33%",NA,"17%","25%","Chomp","100%",NA,NA,NA,NA
+"734","Judges decision wins","2",NA,"0","2","Chomp","0",NA,NA,NA,NA
+"735","Total matches","2",NA,"2",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"736","Win percentage","50%",NA,"50%",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"737","Total wins","1",NA,"1",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"738","Losses","1",NA,"1",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"739","Knockouts","0",NA,"0",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"740","KO percentage","0%",NA,"0%",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"741","Average knockout time","",NA,"",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"742","Knockouts against","1",NA,"1",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"743","KO against percentage","50%",NA,"50%",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"744","Judges decision wins","1",NA,"1",NA,"Deviled Egg",NA,NA,NA,NA,NA
+"745","Total matches","4",NA,"4",NA,"Double Dutch",NA,NA,NA,NA,NA
+"746","Win percentage","50%",NA,"50%",NA,"Double Dutch",NA,NA,NA,NA,NA
+"747","Total wins","2",NA,"2",NA,"Double Dutch",NA,NA,NA,NA,NA
+"748","Losses","2",NA,"2",NA,"Double Dutch",NA,NA,NA,NA,NA
+"749","Knockouts","1",NA,"1",NA,"Double Dutch",NA,NA,NA,NA,NA
+"750","KO percentage","25%",NA,"25%",NA,"Double Dutch",NA,NA,NA,NA,NA
+"751","Average knockout time","124 s",NA,"124 s",NA,"Double Dutch",NA,NA,NA,NA,NA
+"752","Knockouts against","1",NA,"1",NA,"Double Dutch",NA,NA,NA,NA,NA
+"753","KO against percentage","25%",NA,"25%",NA,"Double Dutch",NA,NA,NA,NA,NA
+"754","Judges decision wins","1",NA,"1",NA,"Double Dutch",NA,NA,NA,NA,NA
+"755","Total matches","2",NA,"2",NA,"Gamma 9",NA,NA,NA,NA,NA
+"756","Win percentage","0%",NA,"0%",NA,"Gamma 9",NA,NA,NA,NA,NA
+"757","Total wins","0",NA,"0",NA,"Gamma 9",NA,NA,NA,NA,NA
+"758","Losses","2",NA,"2",NA,"Gamma 9",NA,NA,NA,NA,NA
+"759","Knockouts","0",NA,"0",NA,"Gamma 9",NA,NA,NA,NA,NA
+"760","KO percentage","0%",NA,"0%",NA,"Gamma 9",NA,NA,NA,NA,NA
+"761","Average knockout time","",NA,"",NA,"Gamma 9",NA,NA,NA,NA,NA
+"762","Knockouts against","1",NA,"1",NA,"Gamma 9",NA,NA,NA,NA,NA
+"763","KO against percentage","50%",NA,"50%",NA,"Gamma 9",NA,NA,NA,NA,NA
+"764","Judges decision wins","0",NA,"0",NA,"Gamma 9",NA,NA,NA,NA,NA
+"765","Total matches","4",NA,"4",NA,"Hypothermia",NA,NA,NA,NA,NA
+"766","Win percentage","25%",NA,"25%",NA,"Hypothermia",NA,NA,NA,NA,NA
+"767","Total wins","1",NA,"1",NA,"Hypothermia",NA,NA,NA,NA,NA
+"768","Losses","3",NA,"3",NA,"Hypothermia",NA,NA,NA,NA,NA
+"769","Knockouts","0",NA,"0",NA,"Hypothermia",NA,NA,NA,NA,NA
+"770","KO percentage","0%",NA,"0%",NA,"Hypothermia",NA,NA,NA,NA,NA
+"771","Average knockout time","",NA,"",NA,"Hypothermia",NA,NA,NA,NA,NA
+"772","Knockouts against","1",NA,"1",NA,"Hypothermia",NA,NA,NA,NA,NA
+"773","KO against percentage","25%",NA,"25%",NA,"Hypothermia",NA,NA,NA,NA,NA
+"774","Judges decision wins","1",NA,"1",NA,"Hypothermia",NA,NA,NA,NA,NA
+"775","Total matches","10",NA,"5","2","Icewave","3",NA,NA,NA,NA
+"776","Win percentage","60%",NA,"60%","50%","Icewave","67%",NA,NA,NA,NA
+"777","Total wins","6",NA,"3","1","Icewave","2",NA,NA,NA,NA
+"778","Losses","4",NA,"2","1","Icewave","1",NA,NA,NA,NA
+"779","Knockouts","5",NA,"3","0","Icewave","2",NA,NA,NA,NA
+"780","KO percentage","50%",NA,"60%","0%","Icewave","67%",NA,NA,NA,NA
+"781","Average knockout time","65 s",NA,"48 s","","Icewave","81 s",NA,NA,NA,NA
+"782","Knockouts against","1",NA,"0","","Icewave","1",NA,NA,NA,NA
+"783","KO against percentage","10%",NA,"0%","50%","Icewave","33%",NA,NA,NA,NA
+"784","Judges decision wins","1",NA,"0","1","Icewave","0",NA,NA,NA,NA
+"785","Total matches","4",NA,"4",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"786","Win percentage","50%",NA,"50%",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"787","Total wins","2",NA,"2",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"788","Losses","2",NA,"2",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"789","Knockouts","2",NA,"2",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"790","KO percentage","50%",NA,"50%",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"791","Average knockout time","58 s",NA,"58 s",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"792","Knockouts against","1",NA,"1",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"793","KO against percentage","25%",NA,"25%",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"794","Judges decision wins","0",NA,"0",NA,"Mecha Rampage",NA,NA,NA,NA,NA
+"795","Total matches","6",NA,"3","2","Mohawk","1",NA,NA,NA,NA
+"796","Win percentage","17%",NA,"0%","50%","Mohawk","0%",NA,NA,NA,NA
+"797","Total wins","1",NA,"0","1","Mohawk","0",NA,NA,NA,NA
+"798","Losses","5",NA,"3","1","Mohawk","1",NA,NA,NA,NA
+"799","Knockouts","1",NA,"0","1","Mohawk","0",NA,NA,NA,NA
+"800","KO percentage","17%",NA,"0%","50%","Mohawk","0%",NA,NA,NA,NA
+"801","Average knockout time","172 s",NA,"","172 s","Mohawk","",NA,NA,NA,NA
+"802","Knockouts against","5",NA,"3","1","Mohawk","1",NA,NA,NA,NA
+"803","KO against percentage","83%",NA,"100%","50%","Mohawk","50%",NA,NA,NA,NA
+"804","Judges decision wins","0",NA,"0","0","Mohawk","0",NA,NA,NA,NA
+"805","Total matches","10",NA,"5","2","Overhaul","3",NA,NA,NA,NA
+"806","Win percentage","20%",NA,"20%","0%","Overhaul","33%",NA,NA,NA,NA
+"807","Total wins","2",NA,"1","0","Overhaul","1",NA,NA,NA,NA
+"808","Losses","8",NA,"4","2","Overhaul","2",NA,NA,NA,NA
+"809","Knockouts","1",NA,"0","0","Overhaul","1",NA,NA,NA,NA
+"810","KO percentage","10%",NA,"0%","0%","Overhaul","33%",NA,NA,NA,NA
+"811","Average knockout time","121 s",NA,"","","Overhaul","121 s",NA,NA,NA,NA
+"812","Knockouts against","3",NA,"2","1","Overhaul","0",NA,NA,NA,NA
+"813","KO against percentage","30%",NA,"40%","50%","Overhaul","0%",NA,NA,NA,NA
+"814","Judges decision wins","1",NA,"1","0","Overhaul","0",NA,NA,NA,NA
+"815","Total matches","2",NA,"2",NA,"Parallax",NA,NA,NA,NA,NA
+"816","Win percentage","0%",NA,"0%",NA,"Parallax",NA,NA,NA,NA,NA
+"817","Total wins","0",NA,"0",NA,"Parallax",NA,NA,NA,NA,NA
+"818","Losses","2",NA,"2",NA,"Parallax",NA,NA,NA,NA,NA
+"819","Knockouts","0",NA,"0",NA,"Parallax",NA,NA,NA,NA,NA
+"820","KO percentage","0%",NA,"0%",NA,"Parallax",NA,NA,NA,NA,NA
+"821","Average knockout time","",NA,"",NA,"Parallax",NA,NA,NA,NA,NA
+"822","Knockouts against","0",NA,"0",NA,"Parallax",NA,NA,NA,NA,NA
+"823","KO against percentage","0%",NA,"0%",NA,"Parallax",NA,NA,NA,NA,NA
+"824","Judges decision wins","0",NA,"0",NA,"Parallax",NA,NA,NA,NA,NA
+"825","Total matches","3",NA,"3",NA,"Predator",NA,NA,NA,NA,NA
+"826","Win percentage","33%",NA,"33%",NA,"Predator",NA,NA,NA,NA,NA
+"827","Total wins","1",NA,"1",NA,"Predator",NA,NA,NA,NA,NA
+"828","Losses","2",NA,"2",NA,"Predator",NA,NA,NA,NA,NA
+"829","Knockouts","0",NA,"0",NA,"Predator",NA,NA,NA,NA,NA
+"830","KO percentage","0%",NA,"0%",NA,"Predator",NA,NA,NA,NA,NA
+"831","Average knockout time","",NA,"",NA,"Predator",NA,NA,NA,NA,NA
+"832","Knockouts against","2",NA,"2",NA,"Predator",NA,NA,NA,NA,NA
+"833","KO against percentage","67%",NA,"67%",NA,"Predator",NA,NA,NA,NA,NA
+"834","Judges decision wins","1",NA,"1",NA,"Predator",NA,NA,NA,NA,NA
+"835","Total matches","4",NA,"4",NA,"Reality",NA,NA,NA,NA,NA
+"836","Win percentage","50%",NA,"50%",NA,"Reality",NA,NA,NA,NA,NA
+"837","Total wins","2",NA,"2",NA,"Reality",NA,NA,NA,NA,NA
+"838","Losses","2",NA,"2",NA,"Reality",NA,NA,NA,NA,NA
+"839","Knockouts","2",NA,"2",NA,"Reality",NA,NA,NA,NA,NA
+"840","KO percentage","50%",NA,"50%",NA,"Reality",NA,NA,NA,NA,NA
+"841","Average knockout time","142 s",NA,"142 s",NA,"Reality",NA,NA,NA,NA,NA
+"842","Knockouts against","1",NA,"1",NA,"Reality",NA,NA,NA,NA,NA
+"843","KO against percentage","25%",NA,"25%",NA,"Reality",NA,NA,NA,NA,NA
+"844","Judges decision wins","0",NA,"0",NA,"Reality",NA,NA,NA,NA,NA
+"845","Total matches","8",NA,"5","3","Red Devil",NA,NA,NA,NA,NA
+"846","Win percentage","50%",NA,"40%","67%","Red Devil",NA,NA,NA,NA,NA
+"847","Total wins","4",NA,"2","2","Red Devil",NA,NA,NA,NA,NA
+"848","Losses","4",NA,"3","1","Red Devil",NA,NA,NA,NA,NA
+"849","Knockouts","3",NA,"1","2","Red Devil",NA,NA,NA,NA,NA
+"850","KO percentage","38%",NA,"20%","67%","Red Devil",NA,NA,NA,NA,NA
+"851","Average knockout time","123 s",NA,"144 s","102 s","Red Devil",NA,NA,NA,NA,NA
+"852","Knockouts against","0",NA,"0","0","Red Devil",NA,NA,NA,NA,NA
+"853","KO against percentage","0%",NA,"0%","0%","Red Devil",NA,NA,NA,NA,NA
+"854","Judges decision wins","1",NA,"1","0","Red Devil",NA,NA,NA,NA,NA
+"855","Total matches","5",NA,"4","1","Ultimo Destructo",NA,NA,NA,NA,NA
+"856","Win percentage","40%",NA,"50%","0%","Ultimo Destructo",NA,NA,NA,NA,NA
+"857","Total wins","2",NA,"2","0","Ultimo Destructo",NA,NA,NA,NA,NA
+"858","Losses","3",NA,"2","1","Ultimo Destructo",NA,NA,NA,NA,NA
+"859","Knockouts","1",NA,"1","0","Ultimo Destructo",NA,NA,NA,NA,NA
+"860","KO percentage","20%",NA,"25%","0","Ultimo Destructo",NA,NA,NA,NA,NA
+"861","Average knockout time","124 s",NA,"124 s","","Ultimo Destructo",NA,NA,NA,NA,NA
+"862","Knockouts against","3",NA,"2","1","Ultimo Destructo",NA,NA,NA,NA,NA
+"863","KO against percentage","60%",NA,"50%","100%","Ultimo Destructo",NA,NA,NA,NA,NA
+"864","Judges decision wins","1",NA,"1","0","Ultimo Destructo",NA,NA,NA,NA,NA
+"865","Total matches","2",NA,"2",NA,"Vanquish",NA,NA,NA,NA,NA
+"866","Win percentage","0%",NA,"0%",NA,"Vanquish",NA,NA,NA,NA,NA
+"867","Total wins","0",NA,"0",NA,"Vanquish",NA,NA,NA,NA,NA
+"868","Losses","2",NA,"2",NA,"Vanquish",NA,NA,NA,NA,NA
+"869","Knockouts","0",NA,"0",NA,"Vanquish",NA,NA,NA,NA,NA
+"870","KO percentage","0%",NA,"0%",NA,"Vanquish",NA,NA,NA,NA,NA
+"871","Average knockout time","",NA,"",NA,"Vanquish",NA,NA,NA,NA,NA
+"872","Knockouts against","2",NA,"2",NA,"Vanquish",NA,NA,NA,NA,NA
+"873","KO against percentage","100%",NA,"100%",NA,"Vanquish",NA,NA,NA,NA,NA
+"874","Judges decision wins","0",NA,"0",NA,"Vanquish",NA,NA,NA,NA,NA
+"875","Total matches","10",NA,"5","3","Warhead","2",NA,NA,NA,NA
+"876","Win percentage","60%",NA,"80%","67%","Warhead","0%",NA,NA,NA,NA
+"877","Total wins","6",NA,"4","2","Warhead","0",NA,NA,NA,NA
+"878","Losses","4",NA,"1","1","Warhead","2",NA,NA,NA,NA
+"879","Knockouts","2",NA,"0","2","Warhead","0",NA,NA,NA,NA
+"880","KO percentage","20%",NA,"0%","67%","Warhead","0%",NA,NA,NA,NA
+"881","Average knockout time","133 s",NA,"","133 s","Warhead","",NA,NA,NA,NA
+"882","Knockouts against","2",NA,"1","1","Warhead","0",NA,NA,NA,NA
+"883","KO against percentage","20%",NA,"20%","33%","Warhead","0%",NA,NA,NA,NA
+"884","Judges decision wins","4",NA,"4","0","Warhead","0",NA,NA,NA,NA
+"885","Total matches","7",NA,"3","2","Warrior Dragon","2",NA,NA,NA,NA
+"886","Win percentage","43%",NA,"33%","50%","Warrior Dragon","50%",NA,NA,NA,NA
+"887","Total wins","3",NA,"1","1","Warrior Dragon","1",NA,NA,NA,NA
+"888","Losses","4",NA,"2","1","Warrior Dragon","1",NA,NA,NA,NA
+"889","Knockouts","1",NA,"0","0","Warrior Dragon","1",NA,NA,NA,NA
+"890","KO percentage","14%",NA,"0%","0%","Warrior Dragon","50%",NA,NA,NA,NA
+"891","Average knockout time","126 s",NA,"","","Warrior Dragon","126 s",NA,NA,NA,NA
+"892","Knockouts against","2",NA,"0","1","Warrior Dragon","1",NA,NA,NA,NA
+"893","KO against percentage","29%",NA,"0%","50%","Warrior Dragon","50%",NA,NA,NA,NA
+"894","Judges decision wins","2",NA,"1","1","Warrior Dragon","0",NA,NA,NA,NA

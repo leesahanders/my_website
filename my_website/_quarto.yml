@@ -7,6 +7,10 @@ website:
     left: 
       - text: "Home"
         href: index.qmd
+      - text: "Recipes"
+        href: recipes.qmd
+      - text: "Posts"
+        href: posts.qmd
       - text: "Projects"
         icon: fa-database
         menu:
@@ -14,10 +18,7 @@ website:
             href: battlebots.qmd
           - text: "Resin Dice"
             href: resin.qmd
-          - text: "Recipes"
-            href: recipes.qmd
-          - text: "Posts"
-            href: posts.qmd
+
     right:
       - about.qmd
       - icon: github

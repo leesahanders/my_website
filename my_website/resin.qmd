@@ -4,6 +4,7 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
+freeze: true
 ---
 
 <style>
@@ -14,6 +15,16 @@ th, td {
   padding: 10px;
 }
 </style>
+
+## Glitterdice 
+
+I've been playing with making glitterdice lately. Glitterdice are where there is a sphere of liquid and glitter with a cap (UV curable resin) in the center of the dice (think snow globe). It's hard to capture on camera but creates some really striking and fun to roll dice. 
+
+![Fire glitter](images/resin/glitterdice_3.gif)![UV Flourescent and glitter filled giant D20](images/resin/glitterdice_2.gif)
+
+## Recent dice highlights 
+
+![Fire dice set](images/resin/PXL_20210214_233000132.MP.jpg)![Flourescent dice set (all glitter dice)](images/resin/PXL_20211226_172938496.jpg)![Royal gold and purple dice set](images/resin/PXL_20211224_033628654.jpg)
 
 ## Experiments 
 
@@ -326,7 +337,7 @@ library(ggplot2)
 library(plotly)
 #library(rjags)
 
-rolls = read_excel("./files/Dice_rolls.xlsx")
+rolls = read_excel("./images/resin/Dice_rolls.xlsx")
 
 rolls_long <- rolls %>%
  pivot_longer(cols = 1:10, names_to = "Dice", values_to = "RollValue")

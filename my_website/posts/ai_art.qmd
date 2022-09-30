@@ -33,8 +33,7 @@ There are a bunch more I'm looking forward to trying: <https://www.unite.ai/10-b
 
 Images in : img/starryai/
 
-![solarpunk](img/starryai/s1.png)![solar panel satellite](img/starryai/s3.png)![pluto](img/starryai/s11.png)![spaceship flying down the sidewalk](img/starryai/s10.png)![Hydraulic dam fairytale](img/starryai/s7.png)![the storm rolled in](img/starryai/s2.png)![I believe in a thing called love](img/starryai/s8.png)![Placeholder](img/starryai/placeholder.png)![Spacecat](img/starryai/spacecat.png)![party around a bonfire](img/starryai/party around a bonfire.png)![fireflies](img/starryai/fireflies.png)![thunderstorm over galveston](img/starryai/thunderstorm over galveston.png)![woodland creatures having a tea party](img/starryai/woodland creatures having a tea party.png)![Pacific Rim](img/starryai/pacific rim.png)![Mind the Gap](img/starryai/mind_the_gap.png)
-
+![solarpunk](img/starryai/s1.png)![solar panel satellite](img/starryai/s3.png)![pluto](img/starryai/s11.png)![spaceship flying down the sidewalk](img/starryai/s10.png)![Hydraulic dam fairytale](img/starryai/s7.png)![the storm rolled in](img/starryai/s2.png)![I believe in a thing called love](img/starryai/s8.png)![Placeholder](img/starryai/placeholder.png)![Spacecat](img/starryai/spacecat.png)![party around a bonfire](img/starryai/party%20around%20a%20bonfire.png)![fireflies](img/starryai/fireflies.png)![thunderstorm over galveston](img/starryai/thunderstorm%20over%20galveston.png)![woodland creatures having a tea party](img/starryai/woodland%20creatures%20having%20a%20tea%20party.png)![Pacific Rim](img/starryai/pacific%20rim.png)![Mind the Gap](img/starryai/mind_the_gap.png)
 
 Images in : img/nightcafe
 

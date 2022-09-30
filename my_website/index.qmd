@@ -1,6 +1,6 @@
 ---
 title: "Home"
-image: images/ai/self_portrait.png
+image: images/Rocinante.jpg
 about:
   template: jolla
   links:
