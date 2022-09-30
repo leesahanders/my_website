@@ -1,0 +1,59 @@
+---
+title: "Socca with swiss chard pistachios and apricots"
+description: "Summery chickpea pancakes"
+author: "America's Test Kitchen / James' version"
+date: "2022-09-29"
+format: html
+editor: visual
+categories:
+  - light-meal
+  - gluten-free
+  - vegan
+image: "img/Socca with swiss chard pistachios and apricots.PNG"
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://www.americastestkitchen.com/recipes/12559-vegan-socca-with-swiss-chard-pistachios-and-apricots
+---
+
+## Ingredients
+
+### Socca
+
+1½ cups (64 ounces) chickpea flour ½ teaspoon salt
+½ teaspoon pepper
+½ teaspoon turmeric
+1½ cups water
+6 tablespoons plus 1 teaspoon extra-virgin olive oil
+
+### Chard topping
+
+1 tablespoon extra-virgin olive oil 1 onion, chopped fine
+2 garlic cloves, minced 34 teaspoon ground cumin
+Salt and pepper
+½ teaspoon allspice
+12 ounces Swiss chard, stemmed and chopped
+3 tablespoons finely chopped dried apricots
+2 tablespoons finely chopped toasted pistachios
+1 teaspoon white wine vinegar
+
+## Instructions
+
+Made with chickpea flour that is popular in southern France -the loose, pancake-like batter comes together in less than a minute: Simply whisk together chickpea flour, water, olive oil, turmeric, salt, and pepper. 
+
+Traditionally the batter is poured into a cast-iron skillet and baked in a wood-burning oven to make a large socca with a blistered top and a smoky flavor. But in a home oven, this technique pro duced socca that was dry and limp. So we ditched the oven for the higher heat of the stovetop, which gave us crispy, golden brown socca. But flipping the skillet-size socca wasn't as easy as we'd hoped. We solved this problem by making several smaller flatbreads instead. 
+
+As an added bonus, these elegant flatbreads had a higher ratio of crunchy crust to tender interior. To comple ment our savory flatbreads, we came up with a flavorful topping of Swiss chard, dried apricots, and toasted pistachios that was earthy, sweet, and delicious. We used the warm spices cumin and allspice to balance the bright notes of the chickpea flour.
+
+1. FOR THE BATTER Adjust oven rack to middle position and heat oven to 200 degrees. Set wire rack in rimmed baking sheet and place in oven. Whisk chickpea flour, salt, pepper, and turmeric together in bowl. Slowly whisk in water and 3 tablespoons oil until combined and smooth.
+
+2. Heat 2 teaspoons oil in 8-inch nonstick skillet over medium high heat until shimmering. Add ½ cup batter to skillet, tilting pan to coat bottom evenly. Reduce heat to medium and cook until crisp at edges and golden brown on bottom, 3 to 5 minutes. Flip socca and continue to cook until second side is browned, about 2 minutes. Transfer to wire rack in warm oven and repeat, working with 2 teaspoons oil and ½ cup batter at a time.
+
+3. FOR THE TOPPING Heat oil in 12-inch nonstick skillet over medium heat until shimmering. Add onion and cook until soft ened, about 5 minutes. Stir in garlic, cumin, 1/4 teaspoon salt, and allspice and cook until fragrant, about 30 seconds. Stir in Swiss chard and apricots and cook until chard is wilted, 4 to 6 minutes. Off heat, stir in pistachios and vinegar and season with salt and pepper to taste. Top each cooked socca with ½ cup chard mixture, slice, and serve.
+
+
+## Lisa's notes
+
+By accident smoked paprika was used and it gave a subtle heat that was 10/10. Would intentionally recommend doing again. 
