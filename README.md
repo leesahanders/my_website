@@ -37,6 +37,14 @@ We do that by referencing our custom `.scss` file in our yaml with:
 
 From the about pages we can learn about the [different templates](https://quarto.org/docs/websites/website-about.html) that come built in to quarto for making it really easy to lay things out. 
 
+## Let's talk about images 
+
+The pain point I have dealt with for so long is now pure magic. 
+
+Read about it: [https://quarto.org/docs/authoring/figures.html#figure-panels](https://quarto.org/docs/authoring/figures.html#figure-panels)
+
+Todo: Have the images "pop up" when clicked using this quarto extension: [https://github.com/quarto-ext/lightbox](https://github.com/quarto-ext/lightbox)
+
 ## Publishing 
 
 Done through: https://quarto.org/docs/publishing/quarto-pub.html 
