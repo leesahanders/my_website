@@ -9,11 +9,12 @@ format:
     code-summary: "Show the code"
 editor: visual
 image: "img/otomata.jpg"
+draft: true
+freeze: true
 categories:
   - 365
   - music
 ---
-
 
 ## Otomata
 

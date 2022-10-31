@@ -10,11 +10,9 @@ format:
 editor: visual
 categories:
   - datascience
-image: "img/starryai-10-597923218-1-10-photo.jpg"
+image: "img/ojs_bar_chart.JPG"
 freeze: true
 ---
-
-![Adafruit Macropad](img/starryai-10-597923218-1-10-photo.jpg)
 
 ## Observable JS
 
@@ -73,4 +71,3 @@ Inputs.table(data, { sort: "date", reverse: true })
 -   Additional data options: https://data.world/datasets/lyme-disease
 -   Some plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar
 -   Some various tutorials: https://observablehq.com/tutorials
--   Image created with [starryai](https://www.starryai.com/).

@@ -95,7 +95,7 @@
     "href": "posts/ojs_lyme.html",
     "title": "Observable JS for snappy datascience",
     "section": "",
-    "text": "Adafruit Macropad"
+    "text": "This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at https://quarto.org/docs/interactive/ojs/."
   },
   {
     "objectID": "posts/ojs_lyme.html#observable-js",
@@ -116,14 +116,7 @@
     "href": "posts/ojs_lyme.html#references",
     "title": "Observable JS for snappy datascience",
     "section": "References",
-    "text": "References\n\nhttps://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122\nhttps://www.hopkinslymetracker.org/\nhttps://quarto.org/docs/interactive/ojs/\nData from: https://www.cdc.gov/lyme/stats/survfaq.html\n\nAdditional data options: https://data.world/datasets/lyme-disease\nSome plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar\nSome various tutorials: https://observablehq.com/tutorials\nImage created with starryai."
-  },
-  {
-    "objectID": "posts/phone_games.html",
-    "href": "posts/phone_games.html",
-    "title": "Phone games",
-    "section": "",
-    "text": "Seedship\n\n\nA fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.\nLink: https://philome.la/johnayliff/seedship/play/index.html"
+    "text": "References\n\nhttps://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122\nhttps://www.hopkinslymetracker.org/\nhttps://quarto.org/docs/interactive/ojs/\nData from: https://www.cdc.gov/lyme/stats/survfaq.html\n\nAdditional data options: https://data.world/datasets/lyme-disease\nSome plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar\nSome various tutorials: https://observablehq.com/tutorials"
   },
   {
     "objectID": "posts/quarto.html",
@@ -154,18 +147,11 @@
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
   },
   {
-    "objectID": "posts/sound.html",
-    "href": "posts/sound.html",
-    "title": "Sound",
-    "section": "",
-    "text": "Make beautiful generative algorithm inspired music using cellular automation.\n\nLink to the app: https://marwahaha.github.io/otomata/\n\nSome historic links:\n\nOriginally at (but now no longer works): https://earslap.com/page/otomata.html\nFrom the reddit post: https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/\nGithub: https://github.com/marwahaha/otomata\n\n\n\n\nreddit post"
-  },
-  {
     "objectID": "posts.html",
     "href": "posts.html",
     "title": "Blog",
     "section": "",
-    "text": "Sound\n\n\n\n\n\n\n\n365\n\n\nmusic\n\n\n\n\nSome things I like to listen to\n\n\n\n\n\n\nAug 5, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nObservable JS for snappy datascience\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nUsing OJS to plot Lyme disease cases over time by state\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nPhone games\n\n\n\n\n\n\n\n365\n\n\ngames\n\n\n\n\nFun little games worth the time\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nAI generated art\n\n\n\n\n\n\n\nart\n\n\n\n\nSometimes beautiful, sometimes horrifying\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nA little data goes a long way\n\n\n\n\n\n\n\ndatascience\n\n\nopinions\n\n\n\n\nSome of my favorite examples\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nMy new favorite thing\n\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\n  \n\n\n\n\nBATTLEBOTS\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nIt’s robot fighting time!\n\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n\n\n\n\nNo matching items"
+    "text": "Observable JS for snappy datascience\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nUsing OJS to plot Lyme disease cases over time by state\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nAI generated art\n\n\n\n\n\n\n\nart\n\n\n\n\nSometimes beautiful, sometimes horrifying\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nA little data goes a long way\n\n\n\n\n\n\n\ndatascience\n\n\nopinions\n\n\n\n\nSome of my favorite examples\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nMy new favorite thing\n\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\n  \n\n\n\n\nBATTLEBOTS\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nIt’s robot fighting time!\n\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "recipes/Roasted carrots with sage butter.html",

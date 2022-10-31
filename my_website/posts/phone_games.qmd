@@ -9,6 +9,8 @@ format:
     code-summary: "Show the code"
 editor: visual
 image: "img/seedship.png"
+draft: true
+freeze: true
 categories:
   - 365
   - games
