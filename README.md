@@ -45,7 +45,7 @@ Read about it: [https://quarto.org/docs/authoring/figures.html#figure-panels](ht
 
 Todo: Have the images "pop up" when clicked using this quarto extension: [https://github.com/quarto-ext/lightbox](https://github.com/quarto-ext/lightbox)
 
-## Publishing 
+## Publishing 1.0 - it's alive!
 
 Done through: https://quarto.org/docs/publishing/quarto-pub.html 
 
@@ -54,11 +54,11 @@ I have two domains I can publish to:
  - questionable.quarto.com
  - lisa.quarto.com
  
-I run `quarto publish quarto-pub` after cd-ing in to my my_website directory. Answer "Y" to overwrite my previous site and to use the correct account. 
+I run `quarto publish quarto-pub` after cd-ing in to my my_website directory. Answer "Y" to overwrite my previous site and to use the correct account. Alternatively can bypass prompts and render with `quarto publish quarto-pub --no-prompt --no-render`. 
 
-I can access my account and see my deployments at https://questionable.quarto.pub/blog/. 
+I can now access my account and see my deployments at https://questionable.quarto.pub/blog/. 
 
-TODO: Figure out how to overwrite only the changes instead of a completely new deployment (if possible). 
+The "API error 401" can be resolved by removing and reconnecting the account using `quarto publish accounts` to remove the account. You will be prompted to add an account when `quarto publish quarto-pub` is next run. 
 
 ## Publishing 2.0 - now make it automated using github actions
 
