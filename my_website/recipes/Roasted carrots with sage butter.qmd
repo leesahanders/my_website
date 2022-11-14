@@ -1,6 +1,6 @@
 ---
 title: "Roasted carrots with sage butter"
-description: "An easy strawberry crumble recipe with juicy strawberries topped with crispy oat and nuts topping."
+description: "Roasted carrots in a sage butter sauce. Very aromatic!"
 author: "Eatingwell"
 date: "2022-09-29"
 format: html
