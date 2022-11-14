@@ -15,11 +15,9 @@ categories:
   - hardware
 ---
 
-This is a work in progress, come back later :) 
-
+This is a work in progress, come back later :)
 
 ![Adafruit Macropad](img/macropad.jpg)
-
 
 [The macropad](https://www.adafruit.com/product/5128)
 

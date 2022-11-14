@@ -22,8 +22,7 @@ This Quarto document is made interactive using Observable JS. Interactive docume
 
 ## Bubble Chart
 
-This example uses a D3 bubble chart imported from Observable HQ to analyze commits to GitHub repositories.
-Select a repository to analyze the commits of:
+This example uses a D3 bubble chart imported from Observable HQ to analyze commits to GitHub repositories. Select a repository to analyze the commits of:
 
 ```{ojs}
 //| echo: false
