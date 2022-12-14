@@ -1,0 +1,40 @@
+---
+title: "Site Map"
+listing: 
+  - id: listing1
+    type: table
+    sort:
+      - "date"
+      - "title desc"
+    fields: [image, date, title, reading-time]
+    categories: true
+    feed: true
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/leesahanders/my_website
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/lisa-anders-engineer/
+    - icon: facebook
+      text: Facebook
+      href: https://www.facebook.com/LisamaeAnders/
+    - icon: book
+      text: Goodreads
+      href: https://www.goodreads.com/user/show/47707460-lisa
+---
+
+Hello there! You must be pretty awesome if you are checking out my humble website. Welcome! 
+
+::: {.panel-tabset}
+
+## Site Map Listing
+
+:::{#listing1}
+:::
+
+Refer to: <https://quarto.org/docs/websites/website-listings.html> 
+
+:::

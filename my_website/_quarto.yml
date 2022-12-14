@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  site-url: "https://questionable.quarto.pub/blog/"
   title: "questionable.quarto"
   navbar:
     left: 
@@ -17,8 +18,11 @@ website:
           - text: "Recipes"
             href: recipes.qmd
 
+
     right:
       - about.qmd
+      - text: "Site Map"
+        href: site_map.qmd
       - icon: github
         href: https://github.com/leesahanders/my_website
 format:
