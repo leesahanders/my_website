@@ -43,7 +43,7 @@ The pain point I have dealt with for so long is now pure magic.
 
 Read about it: [https://quarto.org/docs/authoring/figures.html#figure-panels](https://quarto.org/docs/authoring/figures.html#figure-panels)
 
-Todo: Have the images "pop up" when clicked using this quarto extension: [https://github.com/quarto-ext/lightbox](https://github.com/quarto-ext/lightbox)
+One step further - Have the images "pop up" when clicked using this quarto extension: [https://github.com/quarto-ext/lightbox](https://github.com/quarto-ext/lightbox)
 
 ## Publishing 1.0 - it's alive!
 

@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://questionable.quarto.pub/blog/site_map.html</loc>
-    <lastmod>2022-12-14T23:09:17.414Z</lastmod>
+    <loc>https://quartopub.com/sites/questionable/blog/about.html</loc>
+    <lastmod>2022-12-14T23:10:30.842Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/index.html</loc>
+    <lastmod>2022-12-14T23:10:31.368Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/posts/ai_art.html</loc>
+    <lastmod>2022-12-14T23:10:31.944Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/posts/battlebots.html</loc>
+    <lastmod>2022-12-14T23:10:32.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/posts/data.html</loc>
+    <lastmod>2022-12-14T23:10:33.305Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/posts/ojs_lyme.html</loc>
+    <lastmod>2022-12-14T23:10:34.427Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/posts/quarto.html</loc>
+    <lastmod>2022-12-14T23:10:36.121Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/posts.html</loc>
+    <lastmod>2022-12-14T23:10:37.105Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/recipes/Roasted carrots with sage butter.html</loc>
+    <lastmod>2022-12-14T23:10:37.513Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/recipes/snow cream.html</loc>
+    <lastmod>2022-12-14T23:10:37.962Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/recipes/Socca with swiss chard pistachios and apricots.html</loc>
+    <lastmod>2022-12-14T23:10:38.398Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/recipes/strawberry_crumble.html</loc>
+    <lastmod>2022-12-14T23:10:38.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/recipes.html</loc>
+    <lastmod>2022-12-14T23:10:39.363Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/resin.html</loc>
+    <lastmod>2022-12-14T23:10:45.533Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/questionable/blog/site_map.html</loc>
+    <lastmod>2022-12-14T23:10:46.171Z</lastmod>
   </url>
 </urlset>

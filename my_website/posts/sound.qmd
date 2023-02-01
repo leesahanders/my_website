@@ -1,6 +1,6 @@
 ---
 title: "Sound"
-description: "Some things I like to listen to"
+description: "Making noise"
 author: "Lisa"
 date: "2022-08-05"
 format:
@@ -31,3 +31,9 @@ Some historic links:
 -   Github: <https://github.com/marwahaha/otomata>
 
 ![reddit post](img/otomata.jpg)
+
+## Sonic Pi 
+
+Make your own music using programming with Sonic Pi: <https://sonic-pi.net/> 
+
+

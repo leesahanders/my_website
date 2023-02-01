@@ -6,15 +6,15 @@
       version="2.0">
 <channel>
 <title>questionable.quarto</title>
-<link>https://questionable.quarto.pub/blog/site_map.html</link>
-<atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
+<link>https://quartopub.com/sites/questionable/blog/site_map.html</link>
+<atom:link href="https://quartopub.com/sites/questionable/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.0.36</generator>
 <lastBuildDate>Thu, 29 Sep 2022 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Socca with swiss chard pistachios and apricots</title>
   <dc:creator>America's Test Kitchen / James' version</dc:creator>
-  <link>https://questionable.quarto.pub/blog/recipes/Socca with swiss chard pistachios and apricots.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/recipes/Socca with swiss chard pistachios and apricots.html</link>
   <description><![CDATA[ 
 <section id="ingredients" class="level2">
 <h2 data-anchor-id="ingredients">Ingredients</h2>
@@ -48,14 +48,14 @@
   <category>light-meal</category>
   <category>gluten-free</category>
   <category>vegan</category>
-  <guid>https://questionable.quarto.pub/blog/recipes/Socca with swiss chard pistachios and apricots.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/recipes/Socca with swiss chard pistachios and apricots.html</guid>
   <pubDate>Thu, 29 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/recipes/img/Socca with swiss chard pistachios and apricots.PNG" medium="image"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/Socca with swiss chard pistachios and apricots.PNG" medium="image"/>
 </item>
 <item>
   <title>Roasted carrots with sage butter</title>
   <dc:creator>Eatingwell</dc:creator>
-  <link>https://questionable.quarto.pub/blog/recipes/Roasted carrots with sage butter.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/recipes/Roasted carrots with sage butter.html</link>
   <description><![CDATA[ 
 <section id="ingredients" class="level2">
 <h2 data-anchor-id="ingredients">Ingredients</h2>
@@ -86,14 +86,14 @@
   <category>side-dish</category>
   <category>gluten-free</category>
   <category>potluck</category>
-  <guid>https://questionable.quarto.pub/blog/recipes/Roasted carrots with sage butter.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/recipes/Roasted carrots with sage butter.html</guid>
   <pubDate>Thu, 29 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/recipes/img/Roasted carrots with sage butter.PNG" medium="image"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/Roasted carrots with sage butter.PNG" medium="image"/>
 </item>
 <item>
   <title>Strawberry Crumble</title>
   <dc:creator>consciousplantkitchen</dc:creator>
-  <link>https://questionable.quarto.pub/blog/recipes/strawberry_crumble.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/recipes/strawberry_crumble.html</link>
   <description><![CDATA[ 
 <section id="ingredients" class="level2">
 <h2 data-anchor-id="ingredients">Ingredients</h2>
@@ -147,14 +147,14 @@
   <category>dessert</category>
   <category>gluten-free</category>
   <category>potluck</category>
-  <guid>https://questionable.quarto.pub/blog/recipes/strawberry_crumble.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/recipes/strawberry_crumble.html</guid>
   <pubDate>Sat, 10 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/recipes/img/strawberry_crumble.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/strawberry_crumble.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Snow Cream</title>
   <dc:creator>NPR</dc:creator>
-  <link>https://questionable.quarto.pub/blog/recipes/snow cream.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/recipes/snow cream.html</link>
   <description><![CDATA[ 
 <section id="ingredients" class="level2">
 <h2 data-anchor-id="ingredients">Ingredients</h2>
@@ -173,14 +173,14 @@
  ]]></description>
   <category>dessert</category>
   <category>gluten-free</category>
-  <guid>https://questionable.quarto.pub/blog/recipes/snow cream.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/recipes/snow cream.html</guid>
   <pubDate>Sat, 10 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/recipes/img/snow cream.PNG" medium="image"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/snow cream.PNG" medium="image"/>
 </item>
 <item>
   <title>Observable JS for snappy datascience</title>
   <dc:creator>Lisa</dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/ojs_lyme.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/posts/ojs_lyme.html</link>
   <description><![CDATA[ 
 
 
@@ -289,14 +289,14 @@
 
  ]]></description>
   <category>datascience</category>
-  <guid>https://questionable.quarto.pub/blog/posts/ojs_lyme.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/posts/ojs_lyme.html</guid>
   <pubDate>Thu, 04 Aug 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/ojs_bar_chart.JPG" medium="image"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/ojs_bar_chart.JPG" medium="image"/>
 </item>
 <item>
   <title>AI generated art</title>
   <dc:creator>Lisa</dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/ai_art.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/posts/ai_art.html</link>
   <description><![CDATA[ 
 
 
@@ -321,19 +321,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s1.png" class="lightbox" title="solarpunk" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s1.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s1.png" class="lightbox" data-gallery="my-gallery" title="solarpunk"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s1.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">solarpunk</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s3.png" class="lightbox" title="solar panel satellite" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s3.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s3.png" class="lightbox" data-gallery="my-gallery" title="solar panel satellite"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s3.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">solar panel satellite</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s11.png" class="lightbox" title="pluto" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s11.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s11.png" class="lightbox" data-gallery="my-gallery" title="pluto"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s11.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">pluto</figcaption><p></p>
 </figure>
 </div>
@@ -341,19 +341,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s10.png" class="lightbox" title="spaceship flying down the sidewalk" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s10.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s10.png" class="lightbox" data-gallery="my-gallery" title="spaceship flying down the sidewalk"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s10.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">spaceship flying down the sidewalk</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s7.png" class="lightbox" title="Hydraulic dam fairytale" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s7.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s7.png" class="lightbox" data-gallery="my-gallery" title="Hydraulic dam fairytale"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s7.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Hydraulic dam fairytale</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s2.png" class="lightbox" title="the storm rolled in" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s2.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s2.png" class="lightbox" data-gallery="my-gallery" title="the storm rolled in"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s2.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">the storm rolled in</figcaption><p></p>
 </figure>
 </div>
@@ -361,19 +361,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/s8.png" class="lightbox" title="I believe in a thing called love" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s8.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/s8.png" class="lightbox" data-gallery="my-gallery" title="I believe in a thing called love"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/s8.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">I believe in a thing called love</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/placeholder.png" class="lightbox" title="Placeholder" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/placeholder.png" class="lightbox" data-gallery="my-gallery" title="Placeholder"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/placeholder.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Placeholder</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/spacecat.png" class="lightbox" title="Spacecat" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/spacecat.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/spacecat.png" class="lightbox" data-gallery="my-gallery" title="Spacecat"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/spacecat.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Spacecat</figcaption><p></p>
 </figure>
 </div>
@@ -381,19 +381,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/party%20around%20a%20bonfire.png" class="lightbox" title="party around a bonfire" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/party%20around%20a%20bonfire.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/party%20around%20a%20bonfire.png" class="lightbox" data-gallery="my-gallery" title="party around a bonfire"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/party%20around%20a%20bonfire.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">party around a bonfire</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/fireflies.png" class="lightbox" title="fireflies" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/fireflies.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/fireflies.png" class="lightbox" data-gallery="my-gallery" title="fireflies"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/fireflies.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">fireflies</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/thunderstorm%20over%20galveston.png" class="lightbox" title="thunderstorm over galveston" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/thunderstorm%20over%20galveston.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/thunderstorm%20over%20galveston.png" class="lightbox" data-gallery="my-gallery" title="thunderstorm over galveston"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/thunderstorm%20over%20galveston.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">thunderstorm over galveston</figcaption><p></p>
 </figure>
 </div>
@@ -401,19 +401,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/woodland%20creatures%20having%20a%20tea%20party.png" class="lightbox" title="woodland creatures having a tea party" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/woodland%20creatures%20having%20a%20tea%20party.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/woodland%20creatures%20having%20a%20tea%20party.png" class="lightbox" data-gallery="my-gallery" title="woodland creatures having a tea party"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/woodland%20creatures%20having%20a%20tea%20party.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">woodland creatures having a tea party</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/pacific%20rim.png" class="lightbox" title="Pacific Rim" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/pacific%20rim.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/pacific%20rim.png" class="lightbox" data-gallery="my-gallery" title="Pacific Rim"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/pacific%20rim.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Pacific Rim</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/mind_the_gap.png" class="lightbox" title="Mind the Gap" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/mind_the_gap.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/mind_the_gap.png" class="lightbox" data-gallery="my-gallery" title="Mind the Gap"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/mind_the_gap.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Mind the Gap</figcaption><p></p>
 </figure>
 </div>
@@ -424,19 +424,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/robotic%20owl%20in%20space.JPG" class="lightbox" title="Robotic owl in space" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/robotic%20owl%20in%20space.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/robotic%20owl%20in%20space.JPG" class="lightbox" data-gallery="my-gallery" title="Robotic owl in space"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/robotic%20owl%20in%20space.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Robotic owl in space</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG" class="lightbox" title="The monster from alien on a date" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG" class="lightbox" data-gallery="my-gallery" title="The monster from alien on a date"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">The monster from alien on a date</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/selfie.JPG" class="lightbox" title="selfie" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/selfie.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/selfie.JPG" class="lightbox" data-gallery="my-gallery" title="selfie"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/selfie.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">selfie</figcaption><p></p>
 </figure>
 </div>
@@ -444,19 +444,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/brain%20on%20fire.JPG" class="lightbox" title="brain on fire" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/brain%20on%20fire.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/brain%20on%20fire.JPG" class="lightbox" data-gallery="my-gallery" title="brain on fire"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/brain%20on%20fire.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">brain on fire</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/cyborg%20bartender.JPG" class="lightbox" title="cyborg bartender" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/cyborg%20bartender.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/cyborg%20bartender.JPG" class="lightbox" data-gallery="my-gallery" title="cyborg bartender"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/cyborg%20bartender.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">cyborg bartender</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG" class="lightbox" title="ammonite seashell on the beach being worshipped by monsters" data-gallery="my-gallery"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG" class="lightbox" data-gallery="my-gallery" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">ammonite seashell on the beach being worshipped by monsters</figcaption><p></p>
 </figure>
 </div>
@@ -469,14 +469,14 @@
 
  ]]></description>
   <category>art</category>
-  <guid>https://questionable.quarto.pub/blog/posts/ai_art.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/posts/ai_art.html</guid>
   <pubDate>Wed, 03 Aug 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" medium="image" type="image/png" height="144" width="144"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/starryai/placeholder.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
   <title>A little data goes a long way</title>
   <dc:creator>Lisa</dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/data.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/posts/data.html</link>
   <description><![CDATA[ 
 
 
@@ -492,7 +492,7 @@
 <h2 class="anchored" data-anchor-id="for-better-science">For Better Science</h2>
 </section>
 <section id="for-better-science-1" class="level2">
-<h2 class="anchored" data-anchor-id="for-better-science-1"><a href="https://forbetterscience.com/"><img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="img-fluid" alt="For Better Science"></a></h2>
+<h2 class="anchored" data-anchor-id="for-better-science-1"><a href="https://forbetterscience.com/"><img src="https://quartopub.com/sites/questionable/blog/posts/img/fbs.jpg" class="img-fluid" alt="For Better Science"></a></h2>
 <p>The rabbit hole of learning about how bad science is uncovered and recalled started with:</p>
 <ul>
 <li><p><a href="https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/">Sylvain Lesné is a failed scientist</a></p></li>
@@ -521,13 +521,13 @@
  ]]></description>
   <category>datascience</category>
   <category>opinions</category>
-  <guid>https://questionable.quarto.pub/blog/posts/data.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/posts/data.html</guid>
   <pubDate>Tue, 02 Aug 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/fbs.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>What is Quarto?</title>
-  <link>https://questionable.quarto.pub/blog/posts/quarto.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/posts/quarto.html</link>
   <description><![CDATA[ 
 
 
@@ -570,14 +570,14 @@
  ]]></description>
   <category>365</category>
   <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/posts/quarto.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/posts/quarto.html</guid>
   <pubDate>Thu, 28 Jul 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/welcome.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/welcome.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>BATTLEBOTS</title>
   <dc:creator>Lisa</dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/battlebots.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/posts/battlebots.html</link>
   <description><![CDATA[ 
 
 
@@ -870,7 +870,7 @@ font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
 <span id="cb4-42">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/posts/battlebots_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://quartopub.com/sites/questionable/blog/posts/battlebots_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Show the code</summary>
@@ -941,7 +941,7 @@ font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
 <span id="cb6-36">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/posts/battlebots_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://quartopub.com/sites/questionable/blog/posts/battlebots_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -970,13 +970,13 @@ font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
 
  ]]></description>
   <category>datascience</category>
-  <guid>https://questionable.quarto.pub/blog/posts/battlebots.html</guid>
+  <guid>https://quartopub.com/sites/questionable/blog/posts/battlebots.html</guid>
   <pubDate>Mon, 04 Jan 2021 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/bb/BB.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Recipes</title>
-  <link>https://questionable.quarto.pub/blog/recipes.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/recipes.html</link>
   <description><![CDATA[ 
 
 
@@ -991,7 +991,7 @@ font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
 <div class="list quarto-listing-default">
 <div class="quarto-post image-right" data-index="0" data-categories="side-dish,gluten-free,potluck" data-listing-date-sort="1664427600000" data-listing-file-modified-sort="1668464358035" data-listing-reading-time-sort="0.895">
 <div class="thumbnail">
-<p><a href="./recipes/Roasted carrots with sage butter.html"> <img src="https://questionable.quarto.pub/blog/recipes/img/Roasted carrots with sage butter.PNG" class="thumnail-image"> </a></p>
+<p><a href="./recipes/Roasted carrots with sage butter.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/Roasted carrots with sage butter.PNG" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./recipes/Roasted carrots with sage butter.html">
@@ -1032,7 +1032,7 @@ Eatingwell
 </div>
 <div class="quarto-post image-right" data-index="1" data-categories="light-meal,gluten-free,vegan" data-listing-date-sort="1664427600000" data-listing-file-modified-sort="1664509607561" data-listing-reading-time-sort="2.37">
 <div class="thumbnail">
-<p><a href="./recipes/Socca with swiss chard pistachios and apricots.html"> <img src="https://questionable.quarto.pub/blog/recipes/img/Socca with swiss chard pistachios and apricots.PNG" class="thumnail-image"> </a></p>
+<p><a href="./recipes/Socca with swiss chard pistachios and apricots.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/Socca with swiss chard pistachios and apricots.PNG" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./recipes/Socca with swiss chard pistachios and apricots.html">
@@ -1073,7 +1073,7 @@ America’s Test Kitchen / James’ version
 </div>
 <div class="quarto-post image-right" data-index="2" data-categories="dessert,gluten-free" data-listing-date-sort="1662786000000" data-listing-file-modified-sort="1664512782888" data-listing-reading-time-sort="0.165">
 <div class="thumbnail">
-<p><a href="./recipes/snow cream.html"> <img src="https://questionable.quarto.pub/blog/recipes/img/snow cream.PNG" class="thumnail-image"> </a></p>
+<p><a href="./recipes/snow cream.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/snow cream.PNG" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./recipes/snow cream.html">
@@ -1111,7 +1111,7 @@ NPR
 </div>
 <div class="quarto-post image-right" data-index="3" data-categories="dessert,gluten-free,potluck" data-listing-date-sort="1662786000000" data-listing-file-modified-sort="1664508539915" data-listing-reading-time-sort="1.895">
 <div class="thumbnail">
-<p><a href="./recipes/strawberry_crumble.html"> <img src="https://questionable.quarto.pub/blog/recipes/img/strawberry_crumble.jpg" class="thumnail-image"> </a></p>
+<p><a href="./recipes/strawberry_crumble.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/strawberry_crumble.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./recipes/strawberry_crumble.html">
@@ -1155,24 +1155,24 @@ consciousplantkitchen
 No matching items
 </div>
 </div> ]]></description>
-  <guid>https://questionable.quarto.pub/blog/recipes.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:09:17 GMT</pubDate>
+  <guid>https://quartopub.com/sites/questionable/blog/recipes.html</guid>
+  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
 </item>
 <item>
   <title>Home</title>
-  <link>https://questionable.quarto.pub/blog/index.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/index.html</link>
   <description><![CDATA[ 
 <p>Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!</p>
 
 
  ]]></description>
-  <guid>https://questionable.quarto.pub/blog/index.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:09:17 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
+  <guid>https://quartopub.com/sites/questionable/blog/index.html</guid>
+  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <media:content url="https://quartopub.com/sites/questionable/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Blog</title>
-  <link>https://questionable.quarto.pub/blog/posts.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/posts.html</link>
   <description><![CDATA[ 
 
 
@@ -1187,7 +1187,7 @@ No matching items
 <div class="list quarto-listing-default">
 <div class="quarto-post image-right" data-index="0" data-categories="datascience" data-listing-date-sort="1659589200000" data-listing-file-modified-sort="1667226462154" data-listing-reading-time-sort="0.885">
 <div class="thumbnail">
-<p><a href="./posts/ojs_lyme.html"> <img src="https://questionable.quarto.pub/blog/posts/img/ojs_bar_chart.JPG" class="thumnail-image"> </a></p>
+<p><a href="./posts/ojs_lyme.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/ojs_bar_chart.JPG" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/ojs_lyme.html">
@@ -1222,7 +1222,7 @@ Lisa
 </div>
 <div class="quarto-post image-right" data-index="1" data-categories="art" data-listing-date-sort="1659502800000" data-listing-file-modified-sort="1668464921877" data-listing-reading-time-sort="0.99">
 <div class="thumbnail">
-<p><a href="./posts/ai_art.html"> <img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/ai_art.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/placeholder.png" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/ai_art.html">
@@ -1257,7 +1257,7 @@ Lisa
 </div>
 <div class="quarto-post image-right" data-index="2" data-categories="datascience,opinions" data-listing-date-sort="1659416400000" data-listing-file-modified-sort="1664507649483" data-listing-reading-time-sort="0.735">
 <div class="thumbnail">
-<p><a href="./posts/data.html"> <img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="thumnail-image"> </a></p>
+<p><a href="./posts/data.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/fbs.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/data.html">
@@ -1295,7 +1295,7 @@ Lisa
 </div>
 <div class="quarto-post image-right" data-index="3" data-categories="365,code" data-listing-date-sort="1658984400000" data-listing-file-modified-sort="1664507071522" data-listing-reading-time-sort="0.54">
 <div class="thumbnail">
-<p><a href="./posts/quarto.html"> <img src="https://questionable.quarto.pub/blog/posts/img/welcome.jpg" class="thumnail-image"> </a></p>
+<p><a href="./posts/quarto.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/welcome.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/quarto.html">
@@ -1330,7 +1330,7 @@ Jul 28, 2022
 </div>
 <div class="quarto-post image-right" data-index="4" data-categories="datascience" data-listing-date-sort="1609740000000" data-listing-file-modified-sort="1664512712663" data-listing-reading-time-sort="8.075">
 <div class="thumbnail">
-<p><a href="./posts/battlebots.html"> <img src="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" class="thumnail-image"> </a></p>
+<p><a href="./posts/battlebots.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/bb/BB.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/battlebots.html">
@@ -1368,12 +1368,12 @@ Lisa
 No matching items
 </div>
 </div> ]]></description>
-  <guid>https://questionable.quarto.pub/blog/posts.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:09:17 GMT</pubDate>
+  <guid>https://quartopub.com/sites/questionable/blog/posts.html</guid>
+  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
 </item>
 <item>
   <title>Adventures in Resin: Making your own dice</title>
-  <link>https://questionable.quarto.pub/blog/resin.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/resin.html</link>
   <description><![CDATA[ 
 
 
@@ -1399,7 +1399,7 @@ th, td {
 <h2 class="anchored" data-anchor-id="recent-dice-highlights">Recent dice highlights</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://questionable.quarto.pub/blog/images/resin/PXL_20211226_172938496.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20211226_172938496.jpg" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Flourescent dice set (all glitter dice)</figcaption><p></p>
 </figure>
 </div>
@@ -1421,7 +1421,7 @@ th, td {
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_031026679.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_031026679.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>The basics I’ve gathered for learning how to make molds are:</p>
@@ -1438,7 +1438,7 @@ th, td {
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_013447645.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_013447645.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>Going to the crafts store the whole time I was thinking “this is going to go GREAT. How hard could it be? The videos are so calming, surely the whole process is straight up zen.”</p>
@@ -1448,7 +1448,7 @@ After learning how difficult it is to attach a pin into a D6 (I would describe i
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_015535872.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_015535872.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Also had complete failure of the attempt at a vacuum chamber using my hand vaccuum, a small bell jar, and the valve on one of those clothes bags that let you vacuum the air out for better storage. No bubbles were successfully pulled out using this method, whether due to lack of a seal between the bell jar and the valve or if just wasn’t a strong enough vacuum.
@@ -1456,7 +1456,7 @@ Also had complete failure of the attempt at a vacuum chamber using my hand vaccu
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_022732163.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_022732163.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 The three mold attempts are sitting out to cure overnight before I’ll begin the process of removing the die and trying out adding resin. I’m doubtful any of these turned out but what a wonderful way to spend a couple hours!
@@ -1482,7 +1482,7 @@ The three mold attempts are sitting out to cure overnight before I’ll begin th
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_161849020.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_161849020.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Try 2 of creating the silicone mold. I was able to use the lessons from last time and create a mold with the sprue large enough to get a good amount in there while still having it be small enough that hopefully polishing won’t be horrible.
@@ -1490,7 +1490,7 @@ Try 2 of creating the silicone mold. I was able to use the lessons from last tim
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_163835042.MP_2.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_163835042.MP_2.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Interesting enough I think that the mixture is very sensitive to the quantities of each part. While I was very careful to match the volumes using my trusty 1/2 cup measuring spoon we can notice a distinct change in color. Despite this change in color it did successfully set and it doesn’t feel different and will do nicely as a mold.
@@ -1498,7 +1498,7 @@ Interesting enough I think that the mixture is very sensitive to the quantities 
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201005_160755962.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201005_160755962.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 I’m a little concerned with my splits in the mold for removing the pieces. Hopefully it will seal up well enough that we won’t have the resin leaking out or really large obvious lines.
@@ -1527,7 +1527,7 @@ I’m a little concerned with my splits in the mold for removing the pieces. Hop
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201007_004924418.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201007_004924418.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>The ingredients for pouring the resin:</p>
@@ -1542,7 +1542,7 @@ I’m a little concerned with my splits in the mold for removing the pieces. Hop
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201008_054415456.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201008_054415456.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>This batch I decided to focus on blues.</p>
@@ -1574,7 +1574,7 @@ Since I layered it in with pure blue on bottom and the blue + mica powder on top
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201009_010445950.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201009_010445950.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>Recipe:</p>
@@ -1588,7 +1588,7 @@ Thoroughly mix equal parts of resin for 2 minutes, transfer to second container 
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201009_010433085.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201009_010433085.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Wow this just turned out BEAUTIFUL.
@@ -1614,7 +1614,7 @@ Wow this just turned out BEAUTIFUL.
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201010_030648486.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201010_030648486.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Same recipe as before, still looks beautiful and we now have a matching set of 6!
@@ -1643,7 +1643,7 @@ Same recipe as before, still looks beautiful and we now have a matching set of 6
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201008_180158037.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201008_180158037.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 I’ve gathered my polishing components: namely various grits of sandpaper and some car automotive buff.
@@ -1651,7 +1651,7 @@ I’ve gathered my polishing components: namely various grits of sandpaper and s
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201008_053345606.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201008_053345606.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>First step is trimming off the sprue. This was done using a pair of shears (I used wirecutters). The ends come off pretty explosively (think nail trimming but times a million) so definitely be careful which direction you are pointing the die and the sprue.</p>
@@ -1660,7 +1660,7 @@ All three have some kind of bubble where resin wasn’t able to really fill the 
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201008_054320983.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201008_054320983.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Here we have the before polishing with all the imperfections and remainder of the sprue.
@@ -1668,7 +1668,7 @@ Here we have the before polishing with all the imperfections and remainder of th
 </tr>
 <tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201008_180436917.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201008_180436917.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 <p>And here is our after with all the edges buffed out. Looking better, right? I think we can do better though because I did notice that the sides that came out looking good and shiny after being buffedstarted looking cloudy.</p>
@@ -1695,7 +1695,7 @@ Ideas for next time are to spend more time polishing on the finest grit. Maybe t
 </colgroup>
 <tbody><tr>
 <td>
-<img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201009_010423494.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
+<img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201009_010423494.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="left">
 </td>
 <td>
 Very happy to report success with the “swish”. Only 1 out of the three dice has a bubble in the corner disrupting the pattern (and this one is the hardest mold, with the highest point being higher than where the sprue intersects).
@@ -1718,7 +1718,7 @@ Very happy to report success with the “swish”. Only 1 out of the three dice 
 <h3 class="anchored" data-anchor-id="rolling-the-dice">Rolling the Dice</h3>
 <p>Now that our unique dice have been cured, painted, and polished it was time to put them to the test. Sure they look pretty (minus the occasional bubble and polish mark) but can they ROLL?</p>
 <p>Here, I am proud to present to you, are our candidates for the roll off!</p>
-<p><img src="https://questionable.quarto.pub/blog/images/resin/PXL_20201010_033639772.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="center"></p>
+<p><img src="https://quartopub.com/sites/questionable/blog/images/resin/PXL_20201010_033639772.MP.jpg" style="width:100%; border:10px solid; margin-right: 20px" align="center"></p>
 <p>Each die was rolled 50 times to give some statistical significance to the results. Ideally we would have a hundred rolls or more per die (1,000 would be a really great number) but I decided to balance statistics with the chances of developing arthritis.</p>
 <p>In addition to rolling each of our manufactured dice 50 times a professional metal die was rolled 50 times to give a reference for our measurements.</p>
 <p>The conclusion:<br>
@@ -1751,7 +1751,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 <span id="cb1-22">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/resin_files/figure-html/cars-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://quartopub.com/sites/questionable/blog/resin_files/figure-html/cars-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Show the code</summary>
@@ -1763,7 +1763,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 <span id="cb2-6">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/resin_files/figure-html/cars-2.png" class="img-fluid" width="672"></p>
+<p><img src="https://quartopub.com/sites/questionable/blog/resin_files/figure-html/cars-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p style="color:grey; font-style:italic;" align="right">
@@ -1794,13 +1794,13 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 </section>
 
  ]]></description>
-  <guid>https://questionable.quarto.pub/blog/resin.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:09:17 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/images/resin/glitterdice_3.gif" medium="image" type="image/gif"/>
+  <guid>https://quartopub.com/sites/questionable/blog/resin.html</guid>
+  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <media:content url="https://quartopub.com/sites/questionable/blog/images/resin/glitterdice_3.gif" medium="image" type="image/gif"/>
 </item>
 <item>
   <title>About</title>
-  <link>https://questionable.quarto.pub/blog/about.html</link>
+  <link>https://quartopub.com/sites/questionable/blog/about.html</link>
   <description><![CDATA[ 
 <p>Welcome!</p>
 <p>I’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.</p>
@@ -1809,9 +1809,9 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 
 
  ]]></description>
-  <guid>https://questionable.quarto.pub/blog/about.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:09:17 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
+  <guid>https://quartopub.com/sites/questionable/blog/about.html</guid>
+  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <media:content url="https://quartopub.com/sites/questionable/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
