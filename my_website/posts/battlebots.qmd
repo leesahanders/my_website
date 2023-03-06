@@ -256,7 +256,7 @@ if(file.exists("./files/battlebotslocation.csv")){
   
   #Set up the API key for google 
   #Go to: https://cloud.google.com/maps-platform/
-  #register_google(key = "AIzaSyDmZUFZ-RzL0mnpO9-CELahrnEWdJwYqDw", write = TRUE)
+  #register_google(key = "", write = TRUE)
   
   bbmap <- battlebotsinfo %>%
     select(Robot, Hometown) %>%
