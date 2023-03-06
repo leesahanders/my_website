@@ -255,6 +255,7 @@ if(file.exists("./files/battlebotslocation.csv")){
   message("Generating battlebots location files")
   
   #Set up the API key for google 
+  #This now costs money
   #Go to: https://cloud.google.com/maps-platform/
   #register_google(key = "", write = TRUE)
   
