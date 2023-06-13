@@ -379,18 +379,18 @@ p
 
 Here are some of the resources that helped me on my journey down this exciting path (in no particular order): 
 
- - https://www.evewynn.com/moldmaking 
- - http://www.hanleybrady.com/making-dice-part-1-molds/
- - https://www.instructables.com/Custom-Dice/
- - https://www.thingiverse.com/thing:3795542
- - https://www.youtube.com/watch?v=iRDte2j54F0
- - https://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/
- - https://www.youtube.com/watch?v=FQ1A7ZjTsx8
- - https://rpubs.com/benjamin_chittick/59278
- - https://rstudio-education.github.io/hopr/project-1-weighted-dice.html
- - http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html
- - https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html
- - https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html
- - https://quarto.org/docs/authoring/figures.html#figure-panels
+ - <https://www.evewynn.com/moldmaking>
+ - <http://www.hanleybrady.com/making-dice-part-1-molds/>
+ - <https://www.instructables.com/Custom-Dice/>
+ - <https://www.thingiverse.com/thing:3795542>
+ - <https://www.youtube.com/watch?v=iRDte2j54F0>
+ - <https://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/>
+ - <https://www.youtube.com/watch?v=FQ1A7ZjTsx8>
+ - <https://rpubs.com/benjamin_chittick/59278>
+ - <https://rstudio-education.github.io/hopr/project-1-weighted-dice.html>
+ - <http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html>
+ - <https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html>
+ - <https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html>
+ - <https://quarto.org/docs/authoring/figures.html#figure-panels>
 
 

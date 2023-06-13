@@ -860,7 +860,7 @@ font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
 
  ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/index.html</guid>
-  <pubDate>Tue, 13 Jun 2023 17:37:21 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:39:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -1100,7 +1100,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/posts.html</guid>
-  <pubDate>Tue, 13 Jun 2023 17:37:21 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:39:00 GMT</pubDate>
 </item>
 <item>
   <title>Adventures in Resin: Making your own dice</title>
@@ -1506,19 +1506,19 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <p>Here are some of the resources that helped me on my journey down this exciting path (in no particular order):</p>
 <ul>
-<li>https://www.evewynn.com/moldmaking</li>
-<li>http://www.hanleybrady.com/making-dice-part-1-molds/</li>
-<li>https://www.instructables.com/Custom-Dice/</li>
-<li>https://www.thingiverse.com/thing:3795542</li>
-<li>https://www.youtube.com/watch?v=iRDte2j54F0</li>
-<li>https://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/</li>
-<li>https://www.youtube.com/watch?v=FQ1A7ZjTsx8</li>
-<li>https://rpubs.com/benjamin_chittick/59278</li>
-<li>https://rstudio-education.github.io/hopr/project-1-weighted-dice.html</li>
-<li>http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html</li>
-<li>https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html</li>
-<li>https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html</li>
-<li>https://quarto.org/docs/authoring/figures.html#figure-panels</li>
+<li><a href="https://www.evewynn.com/moldmaking" class="uri">https://www.evewynn.com/moldmaking</a></li>
+<li><a href="http://www.hanleybrady.com/making-dice-part-1-molds/" class="uri">http://www.hanleybrady.com/making-dice-part-1-molds/</a></li>
+<li><a href="https://www.instructables.com/Custom-Dice/" class="uri">https://www.instructables.com/Custom-Dice/</a></li>
+<li><a href="https://www.thingiverse.com/thing:3795542" class="uri">https://www.thingiverse.com/thing:3795542</a></li>
+<li><a href="https://www.youtube.com/watch?v=iRDte2j54F0" class="uri">https://www.youtube.com/watch?v=iRDte2j54F0</a></li>
+<li><a href="https://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/" class="uri">https://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/</a></li>
+<li><a href="https://www.youtube.com/watch?v=FQ1A7ZjTsx8" class="uri">https://www.youtube.com/watch?v=FQ1A7ZjTsx8</a></li>
+<li><a href="https://rpubs.com/benjamin_chittick/59278" class="uri">https://rpubs.com/benjamin_chittick/59278</a></li>
+<li><a href="https://rstudio-education.github.io/hopr/project-1-weighted-dice.html" class="uri">https://rstudio-education.github.io/hopr/project-1-weighted-dice.html</a></li>
+<li><a href="http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html" class="uri">http://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html</a></li>
+<li><a href="https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html" class="uri">https://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html</a></li>
+<li><a href="https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html" class="uri">https://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html</a></li>
+<li><a href="https://quarto.org/docs/authoring/figures.html#figure-panels" class="uri">https://quarto.org/docs/authoring/figures.html#figure-panels</a></li>
 </ul>
 
 
@@ -1526,7 +1526,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 
  ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/resin.html</guid>
-  <pubDate>Tue, 13 Jun 2023 17:37:21 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:39:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/images/resin/glitterdice_3.gif" medium="image" type="image/gif"/>
 </item>
 <item>
@@ -1541,7 +1541,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 
  ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/about.html</guid>
-  <pubDate>Tue, 13 Jun 2023 17:37:21 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:39:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
