@@ -16,7 +16,7 @@ website:
           - text: "Resin Dice"
             href: resin.qmd
           - text: "Recipes"
-            href: recipes.qmd
+            href: https://questionable.quarto.pub/recipes/
 
 
     right:

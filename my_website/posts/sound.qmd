@@ -2,19 +2,21 @@
 title: "Sound"
 description: "Making noise"
 author: "Lisa"
-date: "2022-08-05"
+date: "2022-10-05"
 format:
   html:
     code-fold: true
     code-summary: "Show the code"
-editor: visual
+editor: source
 image: "img/otomata.jpg"
-draft: true
-freeze: true
+draft: false
+freeze: false
 categories:
   - 365
   - music
 ---
+
+Make beautiful music with technology!
 
 ## Otomata
 
