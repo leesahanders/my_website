@@ -7,7 +7,7 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
-editor: visual
+editor: source
 image: "img/seedship.png"
 draft: true
 freeze: true
@@ -18,8 +18,57 @@ categories:
 
 ## Random assortment of games that I particularly enjoy and would endorse
 
+### Seedship
+
 ![Seedship](img/seedship.png)
 
 A fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.
 
 Link: <https://philome.la/johnayliff/seedship/play/index.html>
+
+### Sky Children of Light
+
+### Home Quest
+
+### Hungry Shark
+
+### Mine Sweeper
+
+### Neko Atsune
+
+### Nora's Dream 
+
+### SpaceFlight Simulator
+
+### Wordle 
+
+### Semantle 
+
+<https://semantle.com/> 
+
+### Space Team
+
+### One Night Werewolf
+
+### Royal Game of Ur 
+
+### BoardGameArena 
+
+### Garticphone 
+
+### Jackbox Games 
+
+### Wiki race
+
+### Longwave (Wavelength)
+
+### Codenames 
+
+
+
+
+
+
+
+
+
