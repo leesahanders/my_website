@@ -2,20 +2,12 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/sound.html",
       "/posts/ojs_lyme.html",
       "/posts/ai_art.html",
       "/posts/data.html",
       "/posts/quarto.html",
       "/posts/battlebots.html"
-    ]
-  },
-  {
-    "listing": "/recipes.html",
-    "items": [
-      "/recipes/Roasted carrots with sage butter.html",
-      "/recipes/Socca with swiss chard pistachios and apricots.html",
-      "/recipes/snow cream.html",
-      "/recipes/strawberry_crumble.html"
     ]
   },
   {
@@ -26,11 +18,7 @@
       "/posts/data.html",
       "/posts/ai_art.html",
       "/posts/ojs_lyme.html",
-      "/recipes/strawberry_crumble.html",
-      "/recipes/snow cream.html",
-      "/recipes/Socca with swiss chard pistachios and apricots.html",
-      "/recipes/Roasted carrots with sage butter.html",
-      "/recipes.html",
+      "/posts/sound.html",
       "/index.html",
       "/posts.html",
       "/resin.html",

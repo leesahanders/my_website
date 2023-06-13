@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.\nIn my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.\nResume"
+    "text": "Welcome!\nI’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.\nIn my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.\nResume"
   },
   {
     "objectID": "index.html",
@@ -140,123 +140,32 @@
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
   },
   {
+    "objectID": "posts/sound.html",
+    "href": "posts/sound.html",
+    "title": "Sound",
+    "section": "",
+    "text": "Make beautiful music with technology!"
+  },
+  {
+    "objectID": "posts/sound.html#otomata",
+    "href": "posts/sound.html#otomata",
+    "title": "Sound",
+    "section": "Otomata",
+    "text": "Otomata\nMake beautiful generative algorithm inspired music using cellular automation.\n\nLink to the app: https://marwahaha.github.io/otomata/\n\nSome historic links:\n\nOriginally at (but now no longer works): https://earslap.com/page/otomata.html\nFrom the reddit post: https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/\nGithub: https://github.com/marwahaha/otomata\n\n\n\n\nreddit post"
+  },
+  {
+    "objectID": "posts/sound.html#sonic-pi",
+    "href": "posts/sound.html#sonic-pi",
+    "title": "Sound",
+    "section": "Sonic Pi",
+    "text": "Sonic Pi\nMake your own music using programming with Sonic Pi: https://sonic-pi.net/"
+  },
+  {
     "objectID": "posts.html",
     "href": "posts.html",
     "title": "Blog",
     "section": "",
-    "text": "Observable JS for snappy datascience\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nUsing OJS to plot Lyme disease cases over time by state\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nAI generated art\n\n\n\n\n\n\n\nart\n\n\n\n\nSometimes beautiful, sometimes horrifying\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nA little data goes a long way\n\n\n\n\n\n\n\ndatascience\n\n\nopinions\n\n\n\n\nSome of my favorite examples\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nMy new favorite thing\n\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\n  \n\n\n\n\nBATTLEBOTS\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nIt’s robot fighting time!\n\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "recipes/Roasted carrots with sage butter.html",
-    "href": "recipes/Roasted carrots with sage butter.html",
-    "title": "Roasted carrots with sage butter",
-    "section": "",
-    "text": "2 pounds small carrots, preferably multicolored\n2 teaspoons extra-virgin olive oil\n¾ teaspoon salt\n3 tablespoons butter\n2 tablespoons chopped fresh sage or 2 teaspoons dried, plus more for garnish"
-  },
-  {
-    "objectID": "recipes/Roasted carrots with sage butter.html#instructions",
-    "href": "recipes/Roasted carrots with sage butter.html#instructions",
-    "title": "Roasted carrots with sage butter",
-    "section": "Instructions",
-    "text": "Instructions\n\nPosition racks in upper and lower third of oven; preheat to 450°F.\nTrim carrots and cut in half lengthwise. Toss with oil and salt in a large bowl. Divide between 2 large rimmed baking sheets and spread in an even layer.\nRoast the carrots, stirring once and switching the pans top to bottom halfway through, until tender, about 15 minutes.\nMeanwhile, melt butter in a small skillet over medium-high heat. Cook until just starting to brown, 2 to 3 minutes. Remove from heat. When the butter stops bubbling, stir in sage. Transfer the carrots to a serving dish and drizzle the sage brown butter over them. Garnish with fresh sage, if desired."
-  },
-  {
-    "objectID": "recipes/Roasted carrots with sage butter.html#lisas-notes",
-    "href": "recipes/Roasted carrots with sage butter.html#lisas-notes",
-    "title": "Roasted carrots with sage butter",
-    "section": "Lisa’s notes",
-    "text": "Lisa’s notes\nThe deliciousness of sage always amazes me, and the leftover sage butter can be used with just about anything afterwards."
-  },
-  {
-    "objectID": "recipes/snow cream.html",
-    "href": "recipes/snow cream.html",
-    "title": "Snow Cream",
-    "section": "",
-    "text": "1/2 to 3/4 cup cream 4 tablespoons sugar 1 teaspoon vanilla 1 egg (optional) 1 bowl of light, clean snow (6-8 cups)"
-  },
-  {
-    "objectID": "recipes/snow cream.html#instructions",
-    "href": "recipes/snow cream.html#instructions",
-    "title": "Snow Cream",
-    "section": "Instructions",
-    "text": "Instructions\n“Stir until it’s soft,” Chloe Tuttle says."
-  },
-  {
-    "objectID": "recipes/snow cream.html#lisas-notes",
-    "href": "recipes/snow cream.html#lisas-notes",
-    "title": "Snow Cream",
-    "section": "Lisa’s notes",
-    "text": "Lisa’s notes\nIt’s just a fun time really."
-  },
-  {
-    "objectID": "recipes/Socca with swiss chard pistachios and apricots.html",
-    "href": "recipes/Socca with swiss chard pistachios and apricots.html",
-    "title": "Socca with swiss chard pistachios and apricots",
-    "section": "",
-    "text": "1½ cups (64 ounces) chickpea flour ½ teaspoon salt ½ teaspoon pepper ½ teaspoon turmeric 1½ cups water 6 tablespoons plus 1 teaspoon extra-virgin olive oil\n\n\n\n1 tablespoon extra-virgin olive oil 1 onion, chopped fine 2 garlic cloves, minced 34 teaspoon ground cumin Salt and pepper ½ teaspoon allspice 12 ounces Swiss chard, stemmed and chopped 3 tablespoons finely chopped dried apricots 2 tablespoons finely chopped toasted pistachios 1 teaspoon white wine vinegar"
-  },
-  {
-    "objectID": "recipes/Socca with swiss chard pistachios and apricots.html#instructions",
-    "href": "recipes/Socca with swiss chard pistachios and apricots.html#instructions",
-    "title": "Socca with swiss chard pistachios and apricots",
-    "section": "Instructions",
-    "text": "Instructions\nMade with chickpea flour that is popular in southern France -the loose, pancake-like batter comes together in less than a minute: Simply whisk together chickpea flour, water, olive oil, turmeric, salt, and pepper.\nTraditionally the batter is poured into a cast-iron skillet and baked in a wood-burning oven to make a large socca with a blistered top and a smoky flavor. But in a home oven, this technique pro duced socca that was dry and limp. So we ditched the oven for the higher heat of the stovetop, which gave us crispy, golden brown socca. But flipping the skillet-size socca wasn’t as easy as we’d hoped. We solved this problem by making several smaller flatbreads instead.\nAs an added bonus, these elegant flatbreads had a higher ratio of crunchy crust to tender interior. To comple ment our savory flatbreads, we came up with a flavorful topping of Swiss chard, dried apricots, and toasted pistachios that was earthy, sweet, and delicious. We used the warm spices cumin and allspice to balance the bright notes of the chickpea flour.\n\nFOR THE BATTER Adjust oven rack to middle position and heat oven to 200 degrees. Set wire rack in rimmed baking sheet and place in oven. Whisk chickpea flour, salt, pepper, and turmeric together in bowl. Slowly whisk in water and 3 tablespoons oil until combined and smooth.\nHeat 2 teaspoons oil in 8-inch nonstick skillet over medium high heat until shimmering. Add ½ cup batter to skillet, tilting pan to coat bottom evenly. Reduce heat to medium and cook until crisp at edges and golden brown on bottom, 3 to 5 minutes. Flip socca and continue to cook until second side is browned, about 2 minutes. Transfer to wire rack in warm oven and repeat, working with 2 teaspoons oil and ½ cup batter at a time.\nFOR THE TOPPING Heat oil in 12-inch nonstick skillet over medium heat until shimmering. Add onion and cook until soft ened, about 5 minutes. Stir in garlic, cumin, 1/4 teaspoon salt, and allspice and cook until fragrant, about 30 seconds. Stir in Swiss chard and apricots and cook until chard is wilted, 4 to 6 minutes. Off heat, stir in pistachios and vinegar and season with salt and pepper to taste. Top each cooked socca with ½ cup chard mixture, slice, and serve."
-  },
-  {
-    "objectID": "recipes/Socca with swiss chard pistachios and apricots.html#lisas-notes",
-    "href": "recipes/Socca with swiss chard pistachios and apricots.html#lisas-notes",
-    "title": "Socca with swiss chard pistachios and apricots",
-    "section": "Lisa’s notes",
-    "text": "Lisa’s notes\nBy accident smoked paprika was used and it gave a subtle heat that was 10/10. Would intentionally recommend doing again."
-  },
-  {
-    "objectID": "recipes/strawberry_crumble.html",
-    "href": "recipes/strawberry_crumble.html",
-    "title": "Strawberry Crumble",
-    "section": "",
-    "text": "4 cups Strawberries fresh or frozen\n1/2 tablespoon Corn Starch or arrowroot flour\n1 tablespoon Brown Sugar or coconut sugar\n1 teaspoon Lemon Juice optional"
-  },
-  {
-    "objectID": "recipes/strawberry_crumble.html#strawberry-crumble-toppings",
-    "href": "recipes/strawberry_crumble.html#strawberry-crumble-toppings",
-    "title": "Strawberry Crumble",
-    "section": "Strawberry Crumble toppings",
-    "text": "Strawberry Crumble toppings\n\n1/2 cup Old-Fashioned Rolled Oats\n1/2 cup Flour of Choice all-purpose flour, oat flour, almond flour, or gluten-free flour blend\n1/4 cup Brown Sugar packed or coconut sugar\n1 teaspoon Vanilla\n1/4 teaspoon Cinnamon\n1/3 cup Coconut Flakes or chopped walnuts/almonds\n5-6 tablespoons Coconut Oil or softened dairy-free butter"
-  },
-  {
-    "objectID": "recipes/strawberry_crumble.html#instructions",
-    "href": "recipes/strawberry_crumble.html#instructions",
-    "title": "Strawberry Crumble",
-    "section": "Instructions",
-    "text": "Instructions\n\nPreheat oven to 350°F (180°C). Slightly oil an 8-inch x 8-inch square pan. Set aside.\nCore the strawberry stems, and cut each strawberry into large bites or keep whole if preferred. Both options work great. Place the strawberries into a large mixing bowl with corn starch, sugar, lemon juice, and stir to coat.\nSpread evenly into the baking dish. It’s ok if it’s not in a single layer. Strawberries bake really fast, even if they overlap. Set aside.\nIn another mixing bowl, mix flour of choice, rolled oats, coconut flakes (or chopped nuts), sugar, vanilla, and cinnamon.\nRub in soft coconut oil or softened dairy-free butter with fingertips until it forms a breadcrumb-like texture. Start with 5 tablespoons of soft coconut oil and add the extra one if too dry.\nSprinkle over the strawberries in the pan.\nBake for 25-30 minutes or until the fruits are cooked, bubbly, and the top is cooked and crispy.\nServe with a dollop of dairy-free ice cream or whipped cream."
-  },
-  {
-    "objectID": "recipes/strawberry_crumble.html#storage",
-    "href": "recipes/strawberry_crumble.html#storage",
-    "title": "Strawberry Crumble",
-    "section": "Storage",
-    "text": "Storage\nStore leftovers for up to 3 days in the fridge in an airtight container."
-  },
-  {
-    "objectID": "recipes/strawberry_crumble.html#nutrition",
-    "href": "recipes/strawberry_crumble.html#nutrition",
-    "title": "Strawberry Crumble",
-    "section": "Nutrition",
-    "text": "Nutrition\nServing: 1serving | Calories: 273.1kcal | Carbohydrates: 32.7g | Protein: 3g | Fat: 15.5g | Saturated Fat: 12.9g | Polyunsaturated Fat: 0.6g | Monounsaturated Fat: 1g | Sodium: 6.6mg | Potassium: 224.3mg | Fiber: 3.7g | Sugar: 16.1g | Vitamin A: 11.8IU | Vitamin C: 56.5mg | Calcium: 31.9mg | Iron: 1.4mg | Magnesium: 29.5mg | Phosphorus: 72.3mg | Zinc: 0.6mg"
-  },
-  {
-    "objectID": "recipes/strawberry_crumble.html#lisas-notes",
-    "href": "recipes/strawberry_crumble.html#lisas-notes",
-    "title": "Strawberry Crumble",
-    "section": "Lisa’s notes",
-    "text": "Lisa’s notes\nI’ve made this using frozen fruit (strawberries, frozen berry blends) and also using fresh strawberry and rhubarb blends. Consistently delicious!"
-  },
-  {
-    "objectID": "recipes.html",
-    "href": "recipes.html",
-    "title": "Recipes",
-    "section": "",
-    "text": "Roasted carrots with sage butter\n\n\n\n\n\n\n\nside-dish\n\n\ngluten-free\n\n\npotluck\n\n\n\n\nRoasted carrots in a sage butter sauce. Very aromatic!\n\n\n\n\n\n\nSep 29, 2022\n\n\nEatingwell\n\n\n\n\n\n\n  \n\n\n\n\nSocca with swiss chard pistachios and apricots\n\n\n\n\n\n\n\nlight-meal\n\n\ngluten-free\n\n\nvegan\n\n\n\n\nSummery chickpea pancakes\n\n\n\n\n\n\nSep 29, 2022\n\n\nAmerica’s Test Kitchen / James’ version\n\n\n\n\n\n\n  \n\n\n\n\nSnow Cream\n\n\n\n\n\n\n\ndessert\n\n\ngluten-free\n\n\n\n\nWhen Life Gives You Snow, Make Snow Cream\n\n\n\n\n\n\nSep 10, 2022\n\n\nNPR\n\n\n\n\n\n\n  \n\n\n\n\nStrawberry Crumble\n\n\n\n\n\n\n\ndessert\n\n\ngluten-free\n\n\npotluck\n\n\n\n\nAn easy strawberry crumble recipe with juicy strawberries topped with crispy oat and nuts topping.\n\n\n\n\n\n\nSep 10, 2022\n\n\nconsciousplantkitchen\n\n\n\n\n\n\nNo matching items"
+    "text": "Random pages testing out Quarto’s blog capability.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSound\n\n\n\n\n\n\n\n365\n\n\nmusic\n\n\n\n\nMaking noise\n\n\n\n\n\n\nOct 5, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nObservable JS for snappy datascience\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nUsing OJS to plot Lyme disease cases over time by state\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nAI generated art\n\n\n\n\n\n\n\nart\n\n\n\n\nSometimes beautiful, sometimes horrifying\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nA little data goes a long way\n\n\n\n\n\n\n\ndatascience\n\n\nopinions\n\n\n\n\nSome of my favorite examples\n\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n  \n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\n\n365\n\n\ncode\n\n\n\n\nMy new favorite thing\n\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\n  \n\n\n\n\nBATTLEBOTS\n\n\n\n\n\n\n\ndatascience\n\n\n\n\nIt’s robot fighting time!\n\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "resin.html",
@@ -291,6 +200,6 @@
     "href": "site_map.html",
     "title": "Site Map",
     "section": "",
-    "text": "Site Map Listing\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nJan 4, 2021\n\n\nBATTLEBOTS\n\n\n8 min\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nWhat is Quarto?\n\n\n0 min\n\n\n\n\n\n\n\nAug 2, 2022\n\n\nA little data goes a long way\n\n\n0 min\n\n\n\n\n\n\n\nAug 3, 2022\n\n\nAI generated art\n\n\n0 min\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nObservable JS for snappy datascience\n\n\n0 min\n\n\n\n\n\n\n\nSep 10, 2022\n\n\nStrawberry Crumble\n\n\n1 min\n\n\n\n\n\n\n\nSep 10, 2022\n\n\nSnow Cream\n\n\n0 min\n\n\n\n\n\n\n\nSep 29, 2022\n\n\nSocca with swiss chard pistachios and apricots\n\n\n2 min\n\n\n\n\n\n\n\nSep 29, 2022\n\n\nRoasted carrots with sage butter\n\n\n0 min\n\n\n\n\n\n \n\n\n\n\n\nRecipes\n\n\n0 min\n\n\n\n\n\n\n\n\n\nHome\n\n\n0 min\n\n\n\n\n\n \n\n\n\n\n\nBlog\n\n\n0 min\n\n\n\n\n\n\n\n\n\nAdventures in Resin: Making your own dice\n\n\n8 min\n\n\n\n\n\n\n\n\n\nAbout\n\n\n0 min\n\n\n\n\n\nNo matching items\n\n\nRefer to: https://quarto.org/docs/websites/website-listings.html"
+    "text": "Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!\n\nSite Map Listing\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nJan 4, 2021\n\n\nBATTLEBOTS\n\n\n8 min\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nWhat is Quarto?\n\n\n0 min\n\n\n\n\n\n\n\nAug 2, 2022\n\n\nA little data goes a long way\n\n\n0 min\n\n\n\n\n\n\n\nAug 3, 2022\n\n\nAI generated art\n\n\n0 min\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nObservable JS for snappy datascience\n\n\n0 min\n\n\n\n\n\n\n\nOct 5, 2022\n\n\nSound\n\n\n0 min\n\n\n\n\n\n\n\n\n\nHome\n\n\n0 min\n\n\n\n\n\n \n\n\n\n\n\nBlog\n\n\n0 min\n\n\n\n\n\n\n\n\n\nAdventures in Resin: Making your own dice\n\n\n8 min\n\n\n\n\n\n\n\n\n\nAbout\n\n\n0 min\n\n\n\n\n\nNo matching items\n\n\nRefer to: https://quarto.org/docs/websites/website-listings.html"
   }
 ]

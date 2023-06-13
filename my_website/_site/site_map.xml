@@ -9,173 +9,50 @@
 <link>https://quartopub.com/sites/questionable/blog/site_map.html</link>
 <atom:link href="https://quartopub.com/sites/questionable/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.0.36</generator>
-<lastBuildDate>Thu, 29 Sep 2022 05:00:00 GMT</lastBuildDate>
+<generator>quarto-1.2.475</generator>
+<lastBuildDate>Wed, 05 Oct 2022 06:00:00 GMT</lastBuildDate>
 <item>
-  <title>Socca with swiss chard pistachios and apricots</title>
-  <dc:creator>America's Test Kitchen / James' version</dc:creator>
-  <link>https://quartopub.com/sites/questionable/blog/recipes/Socca with swiss chard pistachios and apricots.html</link>
+  <title>Sound</title>
+  <dc:creator>Lisa</dc:creator>
+  <link>https://quartopub.com/sites/questionable/blog/posts/sound.html</link>
   <description><![CDATA[ 
-<section id="ingredients" class="level2">
-<h2 data-anchor-id="ingredients">Ingredients</h2>
-<section id="socca" class="level3">
-<h3 data-anchor-id="socca">Socca</h3>
-<p>1½ cups (64 ounces) chickpea flour ½ teaspoon salt ½ teaspoon pepper ½ teaspoon turmeric 1½ cups water 6 tablespoons plus 1 teaspoon extra-virgin olive oil</p>
-</section>
-<section id="chard-topping" class="level3">
-<h3 data-anchor-id="chard-topping">Chard topping</h3>
-<p>1 tablespoon extra-virgin olive oil 1 onion, chopped fine 2 garlic cloves, minced 34 teaspoon ground cumin Salt and pepper ½ teaspoon allspice 12 ounces Swiss chard, stemmed and chopped 3 tablespoons finely chopped dried apricots 2 tablespoons finely chopped toasted pistachios 1 teaspoon white wine vinegar</p>
-</section>
-</section>
-<section id="instructions" class="level2">
-<h2 data-anchor-id="instructions">Instructions</h2>
-<p>Made with chickpea flour that is popular in southern France -the loose, pancake-like batter comes together in less than a minute: Simply whisk together chickpea flour, water, olive oil, turmeric, salt, and pepper.</p>
-<p>Traditionally the batter is poured into a cast-iron skillet and baked in a wood-burning oven to make a large socca with a blistered top and a smoky flavor. But in a home oven, this technique pro duced socca that was dry and limp. So we ditched the oven for the higher heat of the stovetop, which gave us crispy, golden brown socca. But flipping the skillet-size socca wasn’t as easy as we’d hoped. We solved this problem by making several smaller flatbreads instead.</p>
-<p>As an added bonus, these elegant flatbreads had a higher ratio of crunchy crust to tender interior. To comple ment our savory flatbreads, we came up with a flavorful topping of Swiss chard, dried apricots, and toasted pistachios that was earthy, sweet, and delicious. We used the warm spices cumin and allspice to balance the bright notes of the chickpea flour.</p>
-<ol type="1">
-<li><p>FOR THE BATTER Adjust oven rack to middle position and heat oven to 200 degrees. Set wire rack in rimmed baking sheet and place in oven. Whisk chickpea flour, salt, pepper, and turmeric together in bowl. Slowly whisk in water and 3 tablespoons oil until combined and smooth.</p></li>
-<li><p>Heat 2 teaspoons oil in 8-inch nonstick skillet over medium high heat until shimmering. Add ½ cup batter to skillet, tilting pan to coat bottom evenly. Reduce heat to medium and cook until crisp at edges and golden brown on bottom, 3 to 5 minutes. Flip socca and continue to cook until second side is browned, about 2 minutes. Transfer to wire rack in warm oven and repeat, working with 2 teaspoons oil and ½ cup batter at a time.</p></li>
-<li><p>FOR THE TOPPING Heat oil in 12-inch nonstick skillet over medium heat until shimmering. Add onion and cook until soft ened, about 5 minutes. Stir in garlic, cumin, 1/4 teaspoon salt, and allspice and cook until fragrant, about 30 seconds. Stir in Swiss chard and apricots and cook until chard is wilted, 4 to 6 minutes. Off heat, stir in pistachios and vinegar and season with salt and pepper to taste. Top each cooked socca with ½ cup chard mixture, slice, and serve.</p></li>
-</ol>
-</section>
-<section id="lisas-notes" class="level2">
-<h2 data-anchor-id="lisas-notes">Lisa’s notes</h2>
-<p>By accident smoked paprika was used and it gave a subtle heat that was 10/10. Would intentionally recommend doing again.</p>
 
 
-</section>
- ]]></description>
-  <category>light-meal</category>
-  <category>gluten-free</category>
-  <category>vegan</category>
-  <guid>https://quartopub.com/sites/questionable/blog/recipes/Socca with swiss chard pistachios and apricots.html</guid>
-  <pubDate>Thu, 29 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/Socca with swiss chard pistachios and apricots.PNG" medium="image"/>
-</item>
-<item>
-  <title>Roasted carrots with sage butter</title>
-  <dc:creator>Eatingwell</dc:creator>
-  <link>https://quartopub.com/sites/questionable/blog/recipes/Roasted carrots with sage butter.html</link>
-  <description><![CDATA[ 
-<section id="ingredients" class="level2">
-<h2 data-anchor-id="ingredients">Ingredients</h2>
+
+
+<p>Make beautiful music with technology!</p>
+<section id="otomata" class="level2">
+<h2 class="anchored" data-anchor-id="otomata">Otomata</h2>
+<p>Make beautiful generative algorithm inspired music using cellular automation.</p>
 <ul>
-<li>2 pounds small carrots, preferably multicolored</li>
-<li>2 teaspoons extra-virgin olive oil</li>
-<li>¾ teaspoon salt</li>
-<li>3 tablespoons butter</li>
-<li>2 tablespoons chopped fresh sage or 2 teaspoons dried, plus more for garnish</li>
+<li>Link to the app: <a href="https://marwahaha.github.io/otomata/" class="uri">https://marwahaha.github.io/otomata/</a></li>
 </ul>
-</section>
-<section id="instructions" class="level2">
-<h2 data-anchor-id="instructions">Instructions</h2>
-<ol type="1">
-<li>Position racks in upper and lower third of oven; preheat to 450°F.</li>
-<li>Trim carrots and cut in half lengthwise. Toss with oil and salt in a large bowl. Divide between 2 large rimmed baking sheets and spread in an even layer.</li>
-<li>Roast the carrots, stirring once and switching the pans top to bottom halfway through, until tender, about 15 minutes.</li>
-<li>Meanwhile, melt butter in a small skillet over medium-high heat. Cook until just starting to brown, 2 to 3 minutes. Remove from heat. When the butter stops bubbling, stir in sage. Transfer the carrots to a serving dish and drizzle the sage brown butter over them. Garnish with fresh sage, if desired.</li>
-</ol>
-</section>
-<section id="lisas-notes" class="level2">
-<h2 data-anchor-id="lisas-notes">Lisa’s notes</h2>
-<p>The deliciousness of sage always amazes me, and the leftover sage butter can be used with just about anything afterwards.</p>
-
-
-</section>
- ]]></description>
-  <category>side-dish</category>
-  <category>gluten-free</category>
-  <category>potluck</category>
-  <guid>https://quartopub.com/sites/questionable/blog/recipes/Roasted carrots with sage butter.html</guid>
-  <pubDate>Thu, 29 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/Roasted carrots with sage butter.PNG" medium="image"/>
-</item>
-<item>
-  <title>Strawberry Crumble</title>
-  <dc:creator>consciousplantkitchen</dc:creator>
-  <link>https://quartopub.com/sites/questionable/blog/recipes/strawberry_crumble.html</link>
-  <description><![CDATA[ 
-<section id="ingredients" class="level2">
-<h2 data-anchor-id="ingredients">Ingredients</h2>
+<p>Some historic links:</p>
 <ul>
-<li>4 cups Strawberries fresh or frozen</li>
-<li>1/2 tablespoon Corn Starch or arrowroot flour</li>
-<li>1 tablespoon Brown Sugar or coconut sugar</li>
-<li>1 teaspoon Lemon Juice optional</li>
+<li><p>Originally at (but now no longer works): <a href="https://earslap.com/page/otomata.html" class="uri">https://earslap.com/page/otomata.html</a></p></li>
+<li><p>From the reddit post: <a href="https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/" class="uri">https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/</a></p></li>
+<li><p>Github: <a href="https://github.com/marwahaha/otomata" class="uri">https://github.com/marwahaha/otomata</a></p></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://quartopub.com/sites/questionable/blog/posts/img/otomata.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">reddit post</figcaption><p></p>
+</figure>
+</div>
 </section>
-<section id="strawberry-crumble-toppings" class="level2">
-<h2 data-anchor-id="strawberry-crumble-toppings">Strawberry Crumble toppings</h2>
-<ul>
-<li>1/2 cup Old-Fashioned Rolled Oats</li>
-<li>1/2 cup Flour of Choice all-purpose flour, oat flour, almond flour, or gluten-free flour blend</li>
-<li>1/4 cup Brown Sugar packed or coconut sugar</li>
-<li>1 teaspoon Vanilla</li>
-<li>1/4 teaspoon Cinnamon</li>
-<li>1/3 cup Coconut Flakes or chopped walnuts/almonds</li>
-<li>5-6 tablespoons Coconut Oil or softened dairy-free butter</li>
-</ul>
-</section>
-<section id="instructions" class="level2">
-<h2 data-anchor-id="instructions">Instructions</h2>
-<ul>
-<li>Preheat oven to 350°F (180°C). Slightly oil an 8-inch x 8-inch square pan. Set aside.</li>
-<li>Core the strawberry stems, and cut each strawberry into large bites or keep whole if preferred. Both options work great. Place the strawberries into a large mixing bowl with corn starch, sugar, lemon juice, and stir to coat.</li>
-<li>Spread evenly into the baking dish. It’s ok if it’s not in a single layer. Strawberries bake really fast, even if they overlap. Set aside.</li>
-<li>In another mixing bowl, mix flour of choice, rolled oats, coconut flakes (or chopped nuts), sugar, vanilla, and cinnamon.</li>
-<li>Rub in soft coconut oil or softened dairy-free butter with fingertips until it forms a breadcrumb-like texture. Start with 5 tablespoons of soft coconut oil and add the extra one if too dry.</li>
-<li>Sprinkle over the strawberries in the pan.</li>
-<li>Bake for 25-30 minutes or until the fruits are cooked, bubbly, and the top is cooked and crispy.</li>
-<li>Serve with a dollop of dairy-free ice cream or whipped cream.</li>
-</ul>
-</section>
-<section id="storage" class="level2">
-<h2 data-anchor-id="storage">Storage</h2>
-<p>Store leftovers for up to 3 days in the fridge in an airtight container.</p>
-</section>
-<section id="nutrition" class="level2">
-<h2 data-anchor-id="nutrition">Nutrition</h2>
-<p>Serving: 1serving | Calories: 273.1kcal | Carbohydrates: 32.7g | Protein: 3g | Fat: 15.5g | Saturated Fat: 12.9g | Polyunsaturated Fat: 0.6g | Monounsaturated Fat: 1g | Sodium: 6.6mg | Potassium: 224.3mg | Fiber: 3.7g | Sugar: 16.1g | Vitamin A: 11.8IU | Vitamin C: 56.5mg | Calcium: 31.9mg | Iron: 1.4mg | Magnesium: 29.5mg | Phosphorus: 72.3mg | Zinc: 0.6mg</p>
-</section>
-<section id="lisas-notes" class="level2">
-<h2 data-anchor-id="lisas-notes">Lisa’s notes</h2>
-<p>I’ve made this using frozen fruit (strawberries, frozen berry blends) and also using fresh strawberry and rhubarb blends. Consistently delicious!</p>
+<section id="sonic-pi" class="level2">
+<h2 class="anchored" data-anchor-id="sonic-pi">Sonic Pi</h2>
+<p>Make your own music using programming with Sonic Pi: <a href="https://sonic-pi.net/" class="uri">https://sonic-pi.net/</a></p>
 
 
 </section>
+
  ]]></description>
-  <category>dessert</category>
-  <category>gluten-free</category>
-  <category>potluck</category>
-  <guid>https://quartopub.com/sites/questionable/blog/recipes/strawberry_crumble.html</guid>
-  <pubDate>Sat, 10 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/strawberry_crumble.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Snow Cream</title>
-  <dc:creator>NPR</dc:creator>
-  <link>https://quartopub.com/sites/questionable/blog/recipes/snow cream.html</link>
-  <description><![CDATA[ 
-<section id="ingredients" class="level2">
-<h2 data-anchor-id="ingredients">Ingredients</h2>
-<p>1/2 to 3/4 cup cream 4 tablespoons sugar 1 teaspoon vanilla 1 egg (optional) 1 bowl of light, clean snow (6-8 cups)</p>
-</section>
-<section id="instructions" class="level2">
-<h2 data-anchor-id="instructions">Instructions</h2>
-<p>“Stir until it’s soft,” Chloe Tuttle says.</p>
-</section>
-<section id="lisas-notes" class="level2">
-<h2 data-anchor-id="lisas-notes">Lisa’s notes</h2>
-<p>It’s just a fun time really.</p>
-
-
-</section>
- ]]></description>
-  <category>dessert</category>
-  <category>gluten-free</category>
-  <guid>https://quartopub.com/sites/questionable/blog/recipes/snow cream.html</guid>
-  <pubDate>Sat, 10 Sep 2022 05:00:00 GMT</pubDate>
-  <media:content url="https://quartopub.com/sites/questionable/blog/recipes/img/snow cream.PNG" medium="image"/>
+  <category>365</category>
+  <category>music</category>
+  <guid>https://quartopub.com/sites/questionable/blog/posts/sound.html</guid>
+  <pubDate>Wed, 05 Oct 2022 06:00:00 GMT</pubDate>
+  <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/otomata.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Observable JS for snappy datascience</title>
@@ -290,7 +167,7 @@
  ]]></description>
   <category>datascience</category>
   <guid>https://quartopub.com/sites/questionable/blog/posts/ojs_lyme.html</guid>
-  <pubDate>Thu, 04 Aug 2022 05:00:00 GMT</pubDate>
+  <pubDate>Thu, 04 Aug 2022 06:00:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/ojs_bar_chart.JPG" medium="image"/>
 </item>
 <item>
@@ -381,7 +258,7 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/party%20around%20a%20bonfire.png" class="lightbox" data-gallery="my-gallery" title="party around a bonfire"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/party%20around%20a%20bonfire.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/party around a bonfire.png" class="lightbox" data-gallery="my-gallery" title="party around a bonfire"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/party around a bonfire.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">party around a bonfire</figcaption><p></p>
 </figure>
 </div>
@@ -393,7 +270,7 @@
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/thunderstorm%20over%20galveston.png" class="lightbox" data-gallery="my-gallery" title="thunderstorm over galveston"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/thunderstorm%20over%20galveston.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/thunderstorm over galveston.png" class="lightbox" data-gallery="my-gallery" title="thunderstorm over galveston"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/thunderstorm over galveston.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">thunderstorm over galveston</figcaption><p></p>
 </figure>
 </div>
@@ -401,13 +278,13 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/woodland%20creatures%20having%20a%20tea%20party.png" class="lightbox" data-gallery="my-gallery" title="woodland creatures having a tea party"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/woodland%20creatures%20having%20a%20tea%20party.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/woodland creatures having a tea party.png" class="lightbox" data-gallery="my-gallery" title="woodland creatures having a tea party"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/woodland creatures having a tea party.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">woodland creatures having a tea party</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/starryai/pacific%20rim.png" class="lightbox" data-gallery="my-gallery" title="Pacific Rim"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/pacific%20rim.png" class="img-fluid figure-img"></a></p>
+<p><a href="img/starryai/pacific rim.png" class="lightbox" data-gallery="my-gallery" title="Pacific Rim"><img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/pacific rim.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Pacific Rim</figcaption><p></p>
 </figure>
 </div>
@@ -424,13 +301,13 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/robotic%20owl%20in%20space.JPG" class="lightbox" data-gallery="my-gallery" title="Robotic owl in space"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/robotic%20owl%20in%20space.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/robotic owl in space.JPG" class="lightbox" data-gallery="my-gallery" title="Robotic owl in space"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/robotic owl in space.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Robotic owl in space</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG" class="lightbox" data-gallery="my-gallery" title="The monster from alien on a date"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/The monster from alien on a date.JPG" class="lightbox" data-gallery="my-gallery" title="The monster from alien on a date"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/The monster from alien on a date.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">The monster from alien on a date</figcaption><p></p>
 </figure>
 </div>
@@ -444,19 +321,19 @@
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/brain%20on%20fire.JPG" class="lightbox" data-gallery="my-gallery" title="brain on fire"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/brain%20on%20fire.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/brain on fire.JPG" class="lightbox" data-gallery="my-gallery" title="brain on fire"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/brain on fire.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">brain on fire</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/cyborg%20bartender.JPG" class="lightbox" data-gallery="my-gallery" title="cyborg bartender"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/cyborg%20bartender.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/cyborg bartender.JPG" class="lightbox" data-gallery="my-gallery" title="cyborg bartender"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/cyborg bartender.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">cyborg bartender</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
 <figure class="figure">
-<p><a href="img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG" class="lightbox" data-gallery="my-gallery" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG" class="img-fluid figure-img"></a></p>
+<p><a href="img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="lightbox" data-gallery="my-gallery" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://quartopub.com/sites/questionable/blog/posts/img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">ammonite seashell on the beach being worshipped by monsters</figcaption><p></p>
 </figure>
 </div>
@@ -470,7 +347,7 @@
  ]]></description>
   <category>art</category>
   <guid>https://quartopub.com/sites/questionable/blog/posts/ai_art.html</guid>
-  <pubDate>Wed, 03 Aug 2022 05:00:00 GMT</pubDate>
+  <pubDate>Wed, 03 Aug 2022 06:00:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/starryai/placeholder.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
@@ -522,7 +399,7 @@
   <category>datascience</category>
   <category>opinions</category>
   <guid>https://quartopub.com/sites/questionable/blog/posts/data.html</guid>
-  <pubDate>Tue, 02 Aug 2022 05:00:00 GMT</pubDate>
+  <pubDate>Tue, 02 Aug 2022 06:00:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/fbs.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -571,7 +448,7 @@
   <category>365</category>
   <category>code</category>
   <guid>https://quartopub.com/sites/questionable/blog/posts/quarto.html</guid>
-  <pubDate>Thu, 28 Jul 2022 05:00:00 GMT</pubDate>
+  <pubDate>Thu, 28 Jul 2022 06:00:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/welcome.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -971,192 +848,8 @@ font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
  ]]></description>
   <category>datascience</category>
   <guid>https://quartopub.com/sites/questionable/blog/posts/battlebots.html</guid>
-  <pubDate>Mon, 04 Jan 2021 06:00:00 GMT</pubDate>
+  <pubDate>Mon, 04 Jan 2021 07:00:00 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/posts/img/bb/BB.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Recipes</title>
-  <link>https://quartopub.com/sites/questionable/blog/recipes.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Sometimes you gotta eat. Testing out Quarto’s blogging capabilities using cataloging delicious recipes as content.</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="side-dish,gluten-free,potluck" data-listing-date-sort="1664427600000" data-listing-file-modified-sort="1668464358035" data-listing-reading-time-sort="0.895">
-<div class="thumbnail">
-<p><a href="./recipes/Roasted carrots with sage butter.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/Roasted carrots with sage butter.PNG" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./recipes/Roasted carrots with sage butter.html">
-<h3 class="no-anchor listing-title">
-Roasted carrots with sage butter
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('side-dish'); return false;">
-side-dish
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('gluten-free'); return false;">
-gluten-free
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('potluck'); return false;">
-potluck
-</div>
-</div>
-<a href="./recipes/Roasted carrots with sage butter.html">
-<div class="listing-description">
-<p>Roasted carrots in a sage butter sauce. Very aromatic!</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./recipes/Roasted carrots with sage butter.html">
-<div class="listing-date">
-Sep 29, 2022
-</div>
-<div class="listing-author">
-Eatingwell
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="light-meal,gluten-free,vegan" data-listing-date-sort="1664427600000" data-listing-file-modified-sort="1664509607561" data-listing-reading-time-sort="2.37">
-<div class="thumbnail">
-<p><a href="./recipes/Socca with swiss chard pistachios and apricots.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/Socca with swiss chard pistachios and apricots.PNG" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./recipes/Socca with swiss chard pistachios and apricots.html">
-<h3 class="no-anchor listing-title">
-Socca with swiss chard pistachios and apricots
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('light-meal'); return false;">
-light-meal
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('gluten-free'); return false;">
-gluten-free
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('vegan'); return false;">
-vegan
-</div>
-</div>
-<a href="./recipes/Socca with swiss chard pistachios and apricots.html">
-<div class="listing-description">
-<p>Summery chickpea pancakes</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./recipes/Socca with swiss chard pistachios and apricots.html">
-<div class="listing-date">
-Sep 29, 2022
-</div>
-<div class="listing-author">
-America’s Test Kitchen / James’ version
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="dessert,gluten-free" data-listing-date-sort="1662786000000" data-listing-file-modified-sort="1664512782888" data-listing-reading-time-sort="0.165">
-<div class="thumbnail">
-<p><a href="./recipes/snow cream.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/snow cream.PNG" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./recipes/snow cream.html">
-<h3 class="no-anchor listing-title">
-Snow Cream
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('dessert'); return false;">
-dessert
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('gluten-free'); return false;">
-gluten-free
-</div>
-</div>
-<a href="./recipes/snow cream.html">
-<div class="listing-description">
-<p>When Life Gives You Snow, Make Snow Cream</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./recipes/snow cream.html">
-<div class="listing-date">
-Sep 10, 2022
-</div>
-<div class="listing-author">
-NPR
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="dessert,gluten-free,potluck" data-listing-date-sort="1662786000000" data-listing-file-modified-sort="1664508539915" data-listing-reading-time-sort="1.895">
-<div class="thumbnail">
-<p><a href="./recipes/strawberry_crumble.html"> <img src="https://quartopub.com/sites/questionable/blog/recipes/img/strawberry_crumble.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./recipes/strawberry_crumble.html">
-<h3 class="no-anchor listing-title">
-Strawberry Crumble
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('dessert'); return false;">
-dessert
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('gluten-free'); return false;">
-gluten-free
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('potluck'); return false;">
-potluck
-</div>
-</div>
-<a href="./recipes/strawberry_crumble.html">
-<div class="listing-description">
-<p>An easy strawberry crumble recipe with juicy strawberries topped with crispy oat and nuts topping.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./recipes/strawberry_crumble.html">
-<div class="listing-date">
-Sep 10, 2022
-</div>
-<div class="listing-author">
-consciousplantkitchen
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div> ]]></description>
-  <guid>https://quartopub.com/sites/questionable/blog/recipes.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
 </item>
 <item>
   <title>Home</title>
@@ -1167,7 +860,7 @@ No matching items
 
  ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/index.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:28:38 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -1185,7 +878,45 @@ No matching items
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="datascience" data-listing-date-sort="1659589200000" data-listing-file-modified-sort="1667226462154" data-listing-reading-time-sort="0.885">
+<div class="quarto-post image-right" data-index="0" data-categories="365,music" data-listing-date-sort="1664949600000" data-listing-file-modified-sort="1686677092716" data-listing-reading-time-sort="0.285">
+<div class="thumbnail">
+<p><a href="./posts/sound.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/otomata.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/sound.html">
+<h3 class="no-anchor listing-title">
+Sound
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('365'); return false;">
+365
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
+music
+</div>
+</div>
+<a href="./posts/sound.html">
+<div class="listing-description">
+<p>Making noise</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/sound.html">
+<div class="listing-date">
+Oct 5, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1686676955337" data-listing-reading-time-sort="0.885">
 <div class="thumbnail">
 <p><a href="./posts/ojs_lyme.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/ojs_bar_chart.JPG" class="thumnail-image"> </a></p>
 </div>
@@ -1220,7 +951,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="art" data-listing-date-sort="1659502800000" data-listing-file-modified-sort="1668464921877" data-listing-reading-time-sort="0.99">
+<div class="quarto-post image-right" data-index="2" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1686676955206" data-listing-reading-time-sort="0.99">
 <div class="thumbnail">
 <p><a href="./posts/ai_art.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/starryai/placeholder.png" class="thumnail-image"> </a></p>
 </div>
@@ -1255,7 +986,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="datascience,opinions" data-listing-date-sort="1659416400000" data-listing-file-modified-sort="1664507649483" data-listing-reading-time-sort="0.735">
+<div class="quarto-post image-right" data-index="3" data-categories="datascience,opinions" data-listing-date-sort="1659420000000" data-listing-file-modified-sort="1686676955208" data-listing-reading-time-sort="0.735">
 <div class="thumbnail">
 <p><a href="./posts/data.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/fbs.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -1293,7 +1024,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="365,code" data-listing-date-sort="1658984400000" data-listing-file-modified-sort="1664507071522" data-listing-reading-time-sort="0.54">
+<div class="quarto-post image-right" data-index="4" data-categories="365,code" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1686676955339" data-listing-reading-time-sort="0.54">
 <div class="thumbnail">
 <p><a href="./posts/quarto.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/welcome.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -1328,7 +1059,7 @@ Jul 28, 2022
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="datascience" data-listing-date-sort="1609740000000" data-listing-file-modified-sort="1664512712663" data-listing-reading-time-sort="8.075">
+<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1686676955206" data-listing-reading-time-sort="8.1">
 <div class="thumbnail">
 <p><a href="./posts/battlebots.html"> <img src="https://quartopub.com/sites/questionable/blog/posts/img/bb/BB.jpg" class="thumnail-image"> </a></p>
 </div>
@@ -1369,7 +1100,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/posts.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:28:38 GMT</pubDate>
 </item>
 <item>
   <title>Adventures in Resin: Making your own dice</title>
@@ -1795,7 +1526,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 
  ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/resin.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:28:38 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/images/resin/glitterdice_3.gif" medium="image" type="image/gif"/>
 </item>
 <item>
@@ -1810,7 +1541,7 @@ Well. Looks like my metal dice is weighted (both literally but also rolls 6 much
 
  ]]></description>
   <guid>https://quartopub.com/sites/questionable/blog/about.html</guid>
-  <pubDate>Wed, 14 Dec 2022 23:10:46 GMT</pubDate>
+  <pubDate>Tue, 13 Jun 2023 17:28:38 GMT</pubDate>
   <media:content url="https://quartopub.com/sites/questionable/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
