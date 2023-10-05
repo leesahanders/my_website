@@ -8,6 +8,7 @@ format:
     code-fold: true
     code-summary: "Show the code"
 editor: source
+freeze: true
 categories:
   - datascience
 image: "img/bb/BB.jpg"
@@ -245,6 +246,8 @@ job_frequency <- battlebotsinfo %>%
   group_by(Job) %>%
   summarize(freq = n()) %>%
   rename("word" = "Job")
+
+job_frequency$word <- iconv(job_frequency$word, to = "UTF-8")
 
 my_wordcloud2 <- wordcloud2(data=job_frequency, size = 0.25, color='random-dark')
 

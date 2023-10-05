@@ -1,0 +1,70 @@
+
+Check out some of the presentations I've made while working at Posit: 
+
+::::::{.column-screen-inset}
+
+::::: mycards-container
+
+:::: mycard
+
+::: angle-open
+\>
+:::
+
+::: mycard-title
+Reporting in R with Posit Team
+:::
+
+::: mycard-description
+Using the Posit Team set of products to create data science reports. 
+:::
+
+::: mycard-link
+[Check out the slides](https://questionable.quarto.pub/reporting-in-r-with-posit-team/){target="_blank"}
+:::
+
+::::
+
+:::: mycard
+
+::: angle-open
+\>
+:::
+
+::: mycard-title
+Improving app performance
+:::
+
+::: mycard-description
+Analyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2. 
+:::
+
+::: mycard-link
+[Check out the slides](https://questionable.quarto.pub/improving-app-performance-with-profvis/){target="_blank"}
+:::
+
+::::
+
+:::: mycard
+
+::: angle-open
+\>
+:::
+
+::: mycard-title
+Reproduceable Workflows
+:::
+
+::: mycard-description
+Creating reproduceable data science workflows. 
+:::
+
+::: mycard-link
+[Check out the slides](https://questionable.quarto.pub/reproduceable-workflows/){target="_blank"}
+:::
+
+::::
+
+:::::
+
+:::::

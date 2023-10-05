@@ -1,0 +1,235 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Source+Code+Pro:wght@300;400;700&display=swap');
+
+$dark-blue: #213D4F !default;
+$darkest-blue: #17212B !default;
+$light-blue: #A2B8CB !default; 
+$lightest-blue: #D1DBE5 !default;
+$light-orange: #E58066 !default;
+$bright-orange: #9A4665 !default;
+$green: #57733D !default;
+
+$font-family-sans-serif: Open-Sans !default;
+$font-family-monospace: Source-Code-Pro !default;
+
+$body-bg: $lightest-blue !default;
+$body-color: $darkest-blue !default;
+$link-color: $bright-orange !default;
+$navbar-bg: $lightest-blue !default;
+$navbar-fg: $darkest-blue !default;
+$navbar-hl: $bright-orange !default;
+
+/*-- scss:rules --*/
+
+.center-foot {
+  display: block;
+  margin-top: 5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-logo {
+  margin-right: 18px !important;
+}
+
+.navbar-title {
+  color: $darkest-blue !important;
+  font-size: .6em;
+}
+
+.hero-plug {
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: .8em;
+}
+
+a {
+  color: $bright-orange !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: $light-orange !important;
+}
+
+h1,h2,h3,h4,h5 {
+  color: $darkest-blue !important;
+  font-weight: 200;
+}
+
+img {
+  border-radius: 6px;
+}
+
+.concept-img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.concept-img img {
+  opacity: .8;
+}
+
+.navbar {
+  text-shadow: none !important;
+  border-width: 0px;
+  border-style: solid;
+}
+
+.nav-link {
+  color: $darkest-blue !important;
+  text-decoration: none !important;
+  font-size: .8em;
+  margin-bottom: 0;
+  padding-bottom: 2px;
+}
+
+.navbar {
+  background-color: $navbar-bg !important;
+}
+
+.navbar-brand {
+  font-weight: 100 !important;
+  line-height: 1em !important;
+}
+
+.figure-caption {
+  color: $darkest-blue;
+  font-size: .75em;
+  margin-top: 0;
+}
+
+.mycards-sales-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-content: space-evenly !important;
+}
+
+.mycards-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-content: space-evenly !important;
+}
+
+.mycard {
+  position: relative !important;
+  padding: .25em;
+  border: 1px solid $dark-blue !important;
+  border-radius: 6px;
+  min-width: 200px !important;
+  max-width: 300px !important;
+  margin: .5em !important;
+}
+
+.mycard-title {
+  display: block !important;
+  font-family: 'Source Code Pro', monospace !important;
+  font-weight: 700 !important;
+  font-size: 1em !important;
+  margin: 0 !important;
+}
+
+.mycard-description {
+  display: block !important;
+  font-size: .9em !important;
+  font-weight: 300 !important;
+  white-space: break-spaces;
+}
+
+.mycard-pics-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding-top: .5em;
+}
+
+.mycard-portrait,  {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mycard-portrait .quarto-figure {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cs-name {
+  color: $bright-orange;
+}
+
+.mycard-link {
+  color: $darkest-blue !important;
+  font-weight: 400 !important;
+  font-size: .9em !important;
+  display: block !important;
+  position: absolute !important;
+  bottom: -15px !important;
+  left: 5px !important;
+  margin-top: 1rem !important;
+}
+
+.mycard-link::before {
+  display: block;
+  content: "\a";
+  white-space: pre;
+}
+
+.mycard-link a {
+  color: $bright-orange !important;
+  font-weight: 400 !important;
+  font-size: .9em !important;
+}
+
+.mycard-link::after {
+  display: block;
+  content: "\a";
+  white-space: pre;
+}
+
+.mycard-link a:hover {
+  color: $light-orange !important;
+}
+
+.mycard-description::after {
+  display: block;
+  content: "\a";
+  white-space: pre;
+}
+
+.angle-open {
+  display: block !important;
+}
+
+.angle-close {
+  display: block !important;
+  position: absolute !important;
+  bottom: -15px !important;
+  right: 5px !important;
+}
+
+.angle-close::before {
+  content: "\A";
+  white-space: pre;
+}
+
+.paid {
+  color: $green !important;
+  font-weight: 700;
+  font-size: .8em;
+  position: absolute !important;
+  top: 5px !important;
+  right: 5px !important;
+}

@@ -16,3 +16,6 @@ Check out some of the Posit tools presentations I've done:
 
 [Reproduceable Workflows](https://questionable.quarto.pub/reproduceable-workflows/)
 
+
+{{< include presentations_posit.qmd >}}
+

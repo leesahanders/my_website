@@ -16,11 +16,11 @@ categories:
   - maverick-mods
 ---
 
+![Assembled cubby holder fits perfectly!](img/cubby-holder.jpg)
+
 # Get it for yourself!
 
 Get the layout here: <https://github.com/leesahanders/laser-cutter> 
-
-![Assembled cubby holder fits perfectly!](img/cubby-holder.jpg)
 
 ![Simple design easy to modify and print](img/cubby-holder 2.jpg)
 
@@ -52,7 +52,9 @@ This is where your design is laid out for the laser cutter to cut.
 - Object, Group, Transform
 - Edit, Resize Page to Selection 
 
-# All about tabs
+# Specifications
+
+## All about tabs
 
 3.4mm tab thicknesses work with 1/8 inch wood. 
 

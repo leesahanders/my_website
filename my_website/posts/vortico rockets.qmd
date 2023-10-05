@@ -15,8 +15,6 @@ categories:
   - rockets
 ---
 
-Get one for yourself here: <https://www.rocketarium.com/Rockets/Vortico> 
-
 Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects! 
 
 ![Painted and assembled vortico rockets](img/vortico.jpg)
@@ -26,3 +24,4 @@ Vorticos are a spinning rocket that helicopter down to a safe landing. By painti
 
 ![Up it goes!](img/vortico 3.jpg)
 
+Get one for yourself here: <https://www.rocketarium.com/Rockets/Vortico> 
