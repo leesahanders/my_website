@@ -11,6 +11,8 @@ editor: source
 freeze: true
 categories:
   - datascience
+  - dice
+  - games
 image: "img/resin/PXL_20201008_180539533.MP.jpg"
 ---
 

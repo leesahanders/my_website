@@ -19,6 +19,7 @@ categories:
   - laser-cutting
   - rockets
   - datascience
+  - dice
   - opinions
   - hardware
   - python

@@ -8,14 +8,5 @@ format:
     link-external-newwindow: true
 ---
 
-Check out some of the Posit tools presentations I've done: 
-
-[Reporting in R with Posit Team](https://questionable.quarto.pub/reporting-in-r-with-posit-team/)
-
-[Improving app performance with profvis](https://questionable.quarto.pub/improving-app-performance-with-profvis/)
-
-[Reproduceable Workflows](https://questionable.quarto.pub/reproduceable-workflows/)
-
-
 {{< include presentations_posit.qmd >}}
 

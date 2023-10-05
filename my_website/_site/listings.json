@@ -3,6 +3,7 @@
     "listing": "/site_map.html",
     "items": [
       "/posts/battlebots 2021.html",
+      "/posts/resin.html",
       "/posts/quarto.html",
       "/posts/data.html",
       "/posts/ai_art.html",
@@ -12,10 +13,10 @@
       "/posts/maverick soft topper.html",
       "/posts/vortico rockets.html",
       "/posts/maverick cubby holder.html",
+      "/presentations_posit.html",
       "/presentations.html",
       "/index.html",
       "/posts.html",
-      "/resin.html",
       "/about.html"
     ]
   },

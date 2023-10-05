@@ -103,10 +103,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Presentations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./resin.html" rel="" target="">
- <span class="dropdown-text">Resin Dice</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/" rel="" target="">
  <span class="dropdown-text">Recipes</span></a>
   </li>  
@@ -160,10 +156,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Check out some of the Posit tools presentations I’ve done:</p>
-<p><a href="https://questionable.quarto.pub/reporting-in-r-with-posit-team/">Reporting in R with Posit Team</a></p>
-<p><a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/">Improving app performance with profvis</a></p>
-<p><a href="https://questionable.quarto.pub/reproduceable-workflows/">Reproduceable Workflows</a></p>
+<p>Check out some of the presentations I’ve made while working at Posit:</p>
 <div class="column-screen-inset">
 <div class="mycards-container">
 <div class="mycard">
@@ -177,10 +170,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Using the Posit Team set of products to create data science reports.</p>
 </div>
 <div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/reporting-in-r-with-posit-team/" target="_blank">Reporting in R with Posit Team Slides</a></p>
-</div>
-<div class="angle-close">
-<p>&lt;</p>
+<p><a href="https://questionable.quarto.pub/reporting-in-r-with-posit-team/" target="_blank">Check out the slides</a></p>
 </div>
 </div>
 <div class="mycard">
@@ -188,16 +178,13 @@ ul.task-list li input[type="checkbox"] {
 <p>&gt;</p>
 </div>
 <div class="mycard-title">
-<p>Improving app performance with profvis</p>
+<p>Improving app performance</p>
 </div>
 <div class="mycard-description">
-<p>Analyzing your R scripts and shiny apps for performance improvements using profvis, shinyloadtest, and shinytest2.</p>
+<p>Analyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.</p>
 </div>
 <div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/" target="_blank">Improving app performance with profvis Slides</a></p>
-</div>
-<div class="angle-close">
-<p>&lt;</p>
+<p><a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/" target="_blank">Check out the slides</a></p>
 </div>
 </div>
 <div class="mycard">
@@ -211,10 +198,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Creating reproduceable data science workflows.</p>
 </div>
 <div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/reproduceable-workflows/" target="_blank">Reproduceable Workflows Slides</a></p>
-</div>
-<div class="angle-close">
-<p>&lt;</p>
+<p><a href="https://questionable.quarto.pub/reproduceable-workflows/" target="_blank">Check out the slides</a></p>
 </div>
 </div>
 </div>
@@ -570,7 +554,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog\/");
+      var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
