@@ -13,6 +13,8 @@ website:
       - text: "Projects"
         icon: fa-database
         menu:
+          - text: "Presentations"
+            href: presentations.qmd
           - text: "Resin Dice"
             href: resin.qmd
           - text: "Recipes"

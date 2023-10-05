@@ -1,5 +1,5 @@
 ---
-title: "Adventures in Resin: Making your own dice"
+title: "Presentations"
 format:
   html:
     code-fold: true
