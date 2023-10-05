@@ -10,7 +10,7 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
-editor: visual
+editor: source
 categories:
   - art
 image: "img/starryai/placeholder.png"
@@ -79,7 +79,7 @@ Images in : img/nightcafe
 
 ![brain on fire](img/nightcafe/brain%20on%20fire.JPG){group="my-gallery"}
 
-![cyborg bartender](img/nightcafe/cyborg%20bartender.JPG){group="my-gallery"} 
+![cyborg bartender](img/nightcafe/cyborg%20bartender.JPG){group="my-gallery"}
 
 ![ammonite seashell on the beach being worshipped by monsters](img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG){group="my-gallery"}
 :::

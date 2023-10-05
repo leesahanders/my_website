@@ -7,11 +7,11 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
-editor: visual
+editor: source
+image: "img/ojs_bar_chart.JPG"
+freeze: false
 categories:
   - datascience
-image: "img/ojs_bar_chart.JPG"
-freeze: true
 ---
 
 ## Observable JS

@@ -4,14 +4,13 @@ description: "My new favorite thing"
 author: ""
 date: "2022-07-28"
 format: html
-editor: visual
+editor: source
 categories:
-  - 365
-  - code
+  - datascience
 image: "img/welcome.jpg"
 ---
 
-The obligatory starting template with a couple links. 
+The obligatory starting template with a couple links.
 
 ## Quarto
 
@@ -19,9 +18,9 @@ It's a whole new exciting world! And the default project has a lot of exciting f
 
 I'm using:
 
--   https://quarto.org/docs/websites/website-blog.html
+-   <https://quarto.org/docs/websites/website-blog.html>
 
--   https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html
+-   <https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html>
 
 ## Example
 

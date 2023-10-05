@@ -7,12 +7,13 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
-editor: visual
+editor: source
 image: "img/macropad.jpg"
 draft: true
 freeze: true
 categories:
   - hardware
+  - python
 ---
 
 This is a work in progress, come back later :)

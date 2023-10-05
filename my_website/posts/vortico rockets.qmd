@@ -1,0 +1,28 @@
+---
+title: "Vortico rockets"
+description: "The best rockets don't need parachutes"
+author: "Lisa"
+date: "2023-08-06"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+image: "img/vortico.jpg"
+draft: false
+freeze: false
+categories:
+  - rockets
+---
+
+Get one for yourself here: <https://www.rocketarium.com/Rockets/Vortico> 
+
+Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects! 
+
+![Painted and assembled vortico rockets](img/vortico.jpg)
+
+![Launching the vorticos is best with a smaller rod to prevent wobble on takeoff](img/vortico 2.jpg)
+
+
+![Up it goes!](img/vortico 3.jpg)
+

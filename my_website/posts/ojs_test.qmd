@@ -7,7 +7,7 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
-editor: visual
+editor: source
 categories:
   - 365
   - science

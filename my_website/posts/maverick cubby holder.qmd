@@ -1,0 +1,59 @@
+---
+title: "Ford Maverick Truck Cubby Holder"
+description: "Adding a cubby to that strange little space in the dash"
+author: "Lisa"
+date: "2023-10-05"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+image: "img/cubby-holder.jpg"
+draft: false
+freeze: false
+categories:
+  - laser-cutting
+  - maverick-mods
+---
+
+# Get it for yourself!
+
+Get the layout here: <https://github.com/leesahanders/laser-cutter> 
+
+![Assembled cubby holder fits perfectly!](img/cubby-holder.jpg)
+
+![Simple design easy to modify and print](img/cubby-holder 2.jpg)
+
+
+Cut on the laser cutter at the Boulder, Colorado Solid State Depot Makerspace. 
+
+# Recommended software: 
+
+## Libre CAD <https://librecad.org/>
+
+This is where the bulk of your work will be done. Some of the key functions to be aware of: 
+
+- Line, 2 points
+- Measure, distance point to point
+- Modify, Move/Copy, Rotate, Trim 2, Attributes, Explode text into letters, Mirror
+
+Tips: 
+
+- You'll need to change the snap settings at the bottom to change what it connects with. 
+- When drawing a line use the @ symbol to signify from the current reference (instead of absolute). EG. @0,10
+- Your actual cut layer should be its own layer separate from a designs / motifs layer. 
+
+In order to move your files (`.dxf`) into your next software (where it will be layed out on a page for the actual laser cutter to interpret), it will need to be saved/exported (as an `.svg`). 
+
+## Inkscape <https://inkscape.org/>
+
+This is where your design is laid out for the laser cutter to cut. 
+
+- Object, Group, Transform
+- Edit, Resize Page to Selection 
+
+# All about tabs
+
+3.4mm tab thicknesses work with 1/8 inch wood. 
+
+
