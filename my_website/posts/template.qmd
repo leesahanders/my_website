@@ -27,8 +27,17 @@ categories:
   - games
   - art
   - maverick-mods
+  - software
 ---
+
+
 
 Link: <https://marwahaha.github.io/otomata/>
 
 ![reddit post](img/otomata.jpg)
+
+
+
+
+
+

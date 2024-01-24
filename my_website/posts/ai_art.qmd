@@ -16,6 +16,13 @@ categories:
 image: "img/starryai/placeholder.png"
 ---
 
+## But first, a disclaimer
+
+AI is controversial, and I'd recommend watching these two videos to understand some technical points on why that is: 
+
+- [Keynote talk "USENIX Security '18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?"](https://www.youtube.com/watch?v=ajGX7odA87k) 
+- [Here's What Ethical AI Really Means - YouTube philosophy tube](https://www.youtube.com/watch?v=AaU6tI2pb3M)
+
 ## AI Generated Art
 
 AI isn't a new concept. Using AI's to generate art isn't a new concept. Having that available as app that actually creates some pretty fun results is pretty new.
