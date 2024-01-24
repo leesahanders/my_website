@@ -23,8 +23,8 @@ categories:
 
 ## UK Post Office Scandal 
 
-- [Victim testimony](https://www.postofficetrial.com/2019/01/victims-testimony.html)
 - [Developers blamed for the post office scandal?](https://www.youtube.com/watch?v=h3UIdGRBGlY) 
+- [Victim testimony](https://www.postofficetrial.com/2019/01/victims-testimony.html)
 - [Remote access and mistakes blamed on post masters, a smoking gun](https://www.postofficetrial.com/2019/03/the-smoking-gun.html) 
 - [Example of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?](https://www.reddit.com/r/it/s/i5NE3qQgv0)
 - [One of the independent investigators from 2012 breaks silence](https://www.postofficetrial.com/2019/12/second-sights-ron-warmington-breaks-his.html?m=1)
@@ -35,6 +35,8 @@ categories:
 - [Project manager on the original project discusses his impressions - how not to commission a complex project](https://www.postofficescandal.uk/post/how-not-to-commission-a-complex-it-project/)
 [Inquiry Phase 2: Star Witness – Dave gives it both barrels](https://www.postofficescandal.uk/post/inquiry-phase-2-star-witness-dave-gives-it-both-barrels/)
 - [Known errors in the software, perjury, and lack of disclosure](https://www.postofficetrial.com/2019/03/horizon-trial-day-5-he-had-loaded-gun.html)
+- [Interview with IT - throwing coconuts](https://www.postofficetrial.com/2019/06/horizon-trial-day-16-that-surprises-me.html)
+- [Interview with the other IT](https://www.postofficetrial.com/2019/06/horizon-trial-day-18-dr-robert.html)
 - [Attempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?](https://www.postofficetrial.com/2019/04/bates-v-post-office-recusal-judgment_9.html)
 - [The cover up](https://www.postofficetrial.com/2020/07/the-post-office-cover-up-part-2-they.html)
 - [Why did the lawyer for the post office act this way?](https://www.postofficetrial.com/2019/03/why-did-post-office-accuse-aakash-patny.html)
@@ -43,6 +45,11 @@ categories:
 # Chinook Crash 
 
 - [New evidence of computer problems](https://www.computerweekly.com/blog/Public-Sector-IT/Chinook-Mk2-we-publish-new-evidence-of-computer-problems)
+
+>  Although only 17% of the code has been analysed [EDS, the code’s assessors, stopped work on the code because of the density of anomalies found] 21 category one and 153 category two anomalies have been revealed. One of these, the reliance on an undocumented and unproved feature of the processor [based on an Intel ASM96 chip] is considered to be positively dangerous. 
+
+> EDS was not satisfied with Hawker Siddeley’s assurances. In its report on the Fadec software, EDS said: “Correct operation (of the Fadec) depends on an undocumented feature of the Intel ASM 96 microcomputer. EDS-Scicon’s concern is that a change in the mask or process of the ASM chip at some point in the future may cause incorrect operation of the FADEC.]
+
 
 # Bugs with the Therac-25 computer-controlled radiation therapy machine
 
