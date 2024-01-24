@@ -66,3 +66,7 @@ categories:
 > The lawsuits were settled out of court. It seemed like the problems were solved until January 17th, 1987, when another patient was overdosed at Yakima, Washington. This problem was a new one: A counter overflow. If the operator sent a command at the exact moment the counter overflowed, the machine would skip setting up some of the beam accessories – including moving the stainless steel aiming mirror. The result was once again an unscanned beam, and an overdose. The patient died 3 months later.
 
 > It’s important to note that while the software was the lynch pin in the Therac-25, it wasn’t the root cause. The entire system design was the real problem. Safety-critical loads were placed upon a computer system that was not designed to control them. Timing analysis wasn’t performed. Unit testing never happened. Fault trees for both hardware and software were not created. These tasks are not only the responsibility of the software engineers, but the systems engineers on the project. Therac-25 is long gone, but its legacy will live on. This was the watershed event that showed how badly things can go wrong when software for life-critical systems is not properly designed and adequately tested.
+
+# Others
+
+[WHEN SMALL SOFTWARE BUGS CAUSE BIG PROBLEMS](https://blog.grio.com/2021/07/when-small-software-bugs-cause-big-problems.html)
