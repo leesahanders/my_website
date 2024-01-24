@@ -10,7 +10,90 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Thu, 05 Oct 2023 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 24 Jan 2024 07:00:00 GMT</lastBuildDate>
+<item>
+  <title>The importance of good programming</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/posts/good-programming.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="uk-post-office-scandal" class="level2">
+<h2 class="anchored" data-anchor-id="uk-post-office-scandal">UK Post Office Scandal</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=h3UIdGRBGlY">Developers blamed for the post office scandal?</a></li>
+<li><a href="https://www.postofficetrial.com/2019/01/victims-testimony.html">Victim testimony</a></li>
+<li><a href="https://www.postofficetrial.com/2019/03/the-smoking-gun.html">Remote access and mistakes blamed on post masters, a smoking gun</a></li>
+<li><a href="https://www.reddit.com/r/it/s/i5NE3qQgv0">Example of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?</a></li>
+<li><a href="https://www.postofficetrial.com/2019/12/second-sights-ron-warmington-breaks-his.html?m=1">One of the independent investigators from 2012 breaks silence</a></li>
+<li><a href="https://www.postofficetrial.com/2021/07/second-sight-were-told-about-remote.html?m=1">Evidence that back in 2012 the indepent investigators were told about remote access, implying pejury in all later cases</a></li>
+<li><a href="https://www.postofficetrial.com/2019/03/horizon-trial-day-4-day-of-two-halves.html?m=1">They Could, And They Did Change Branch Transaction Data</a></li>
+<li><a href="https://www.postofficetrial.com/2019/03/miscarriages-of-justice.html?m=1">Miscarriage of justice - the Rose report</a></li>
+<li><a href="https://www.postofficescandal.uk/post/current-post-office-horizon-it-issues/">List of current issues / bugs as of 2017? with the software. One can only imagine how much worse it used to be</a></li>
+<li><a href="https://www.postofficescandal.uk/post/how-not-to-commission-a-complex-it-project/">Project manager on the original project discusses his impressions - how not to commission a complex project</a> <a href="https://www.postofficescandal.uk/post/inquiry-phase-2-star-witness-dave-gives-it-both-barrels/">Inquiry Phase 2: Star Witness – Dave gives it both barrels</a></li>
+<li><a href="https://www.postofficetrial.com/2019/03/horizon-trial-day-5-he-had-loaded-gun.html">Known errors in the software, perjury, and lack of disclosure</a></li>
+<li><a href="https://www.postofficetrial.com/2019/06/horizon-trial-day-16-that-surprises-me.html">Interview with IT - throwing coconuts</a></li>
+<li><a href="https://www.postofficetrial.com/2019/06/horizon-trial-day-18-dr-robert.html">Interview with the other IT</a></li>
+<li><a href="https://www.postofficetrial.com/2019/04/bates-v-post-office-recusal-judgment_9.html">Attempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?</a></li>
+<li><a href="https://www.postofficetrial.com/2020/07/the-post-office-cover-up-part-2-they.html">The cover up</a></li>
+<li><a href="https://www.postofficetrial.com/2019/03/why-did-post-office-accuse-aakash-patny.html">Why did the lawyer for the post office act this way?</a></li>
+<li><a href="https://www.civillitigationbrief.com/2015/07/23/thinking-of-alleging-or-pleading-fraud-better-read-this-first/">Thinking of alleging or pleading fraud: better read this first</a></li>
+</ul>
+</section>
+<section id="chinook-crash" class="level1">
+<h1>Chinook Crash</h1>
+<ul>
+<li><a href="https://www.computerweekly.com/blog/Public-Sector-IT/Chinook-Mk2-we-publish-new-evidence-of-computer-problems">New evidence of computer problems</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>Although only 17% of the code has been analysed [EDS, the code’s assessors, stopped work on the code because of the density of anomalies found] 21 category one and 153 category two anomalies have been revealed. One of these, the reliance on an undocumented and unproved feature of the processor [based on an Intel ASM96 chip] is considered to be positively dangerous.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>EDS was not satisfied with Hawker Siddeley’s assurances. In its report on the Fadec software, EDS said: “Correct operation (of the Fadec) depends on an undocumented feature of the Intel ASM 96 microcomputer. EDS-Scicon’s concern is that a change in the mask or process of the ASM chip at some point in the future may cause incorrect operation of the FADEC.]</p>
+</blockquote>
+</section>
+<section id="bugs-with-the-therac-25-computer-controlled-radiation-therapy-machine" class="level1">
+<h1>Bugs with the Therac-25 computer-controlled radiation therapy machine</h1>
+<ul>
+<li><a href="https://hackaday.com/2015/10/26/killed-by-a-machine-the-therac-25/">Killed by a machine</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>If this story has a hero, it’s [Fritz Hager], the staff physicist at the East Texas Cancer Center in Tyler, Texas. After the second incident at his facility, he was determined to get to the bottom of the problem. In both cases, the Therac-25 displayed a “Malfunction 54” message. The message was not mentioned in the manuals. AECL explained that Malfunction 54 meant that the Therac-25’s computer could not determine if there a underdose OR overdose of radiation.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The same radiotherapy technician had been involved in both incidents, so [Fritz] brought her back into the control room to attempt to recreate the problem. The two “locked the doors” NASA style, working into the night and through the weekend trying to reproduce the problem. With the technician running the machine, the two were able to pinpoint the issue. The VT-100 console used to enter Therac-25 prescriptions allowed cursor movement via cursor up and down keys. If the user selected X-ray mode, the machine would begin setting up the machine for high-powered X-rays. This process took about 8 seconds. If the user switched to Electron mode within those 8 seconds, the turntable would not switch over to the correct position, leaving the turntable in an unknown state.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>As the investigations and lawsuits progressed, the software for the Therac-25 was placed under scrutiny. The Therac-25’s PDP-11 was programmed completely in assembly language. Not only the application, but the underlying executive, which took the place of an operating system. The computer was tasked with handling real-time control of the machine, both its normal operation and safety systems. Today this sort of job could be handled by a microcontroller or two, with a PC running a GUI front end.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>AECL never publicly released the source code, but several experts including [Nancy Leveson] did obtain access for the investigation. What they found was shocking. The software appeared to have been written by a programmer with little experience coding for real-time systems. There were few comments, and no proof that any timing analysis had been performed. According to AECL, a single programmer had written the software based upon the Therac-6 and 20 code. However, this programmer no longer worked for the company, and could not be found.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The lawsuits were settled out of court. It seemed like the problems were solved until January 17th, 1987, when another patient was overdosed at Yakima, Washington. This problem was a new one: A counter overflow. If the operator sent a command at the exact moment the counter overflowed, the machine would skip setting up some of the beam accessories – including moving the stainless steel aiming mirror. The result was once again an unscanned beam, and an overdose. The patient died 3 months later.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>It’s important to note that while the software was the lynch pin in the Therac-25, it wasn’t the root cause. The entire system design was the real problem. Safety-critical loads were placed upon a computer system that was not designed to control them. Timing analysis wasn’t performed. Unit testing never happened. Fault trees for both hardware and software were not created. These tasks are not only the responsibility of the software engineers, but the systems engineers on the project. Therac-25 is long gone, but its legacy will live on. This was the watershed event that showed how badly things can go wrong when software for life-critical systems is not properly designed and adequately tested.</p>
+</blockquote>
+</section>
+<section id="others" class="level1">
+<h1>Others</h1>
+<p><a href="https://blog.grio.com/2021/07/when-small-software-bugs-cause-big-problems.html">WHEN SMALL SOFTWARE BUGS CAUSE BIG PROBLEMS</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>datascience</category>
+  <category>opinions</category>
+  <category>hardware</category>
+  <category>software</category>
+  <guid>https://questionable.quarto.pub/blog/posts/good-programming.html</guid>
+  <pubDate>Wed, 24 Jan 2024 07:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/posts/img/" medium="image"/>
+</item>
 <item>
   <title>Ford Maverick Truck Cubby Holder</title>
   <dc:creator>Lisa </dc:creator>
@@ -889,6 +972,14 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 
 
 
+<section id="but-first-a-disclaimer" class="level2">
+<h2 class="anchored" data-anchor-id="but-first-a-disclaimer">But first, a disclaimer</h2>
+<p>AI is controversial, and I’d recommend watching these two videos to understand some technical points on why that is:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=ajGX7odA87k">Keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”</a></li>
+<li><a href="https://www.youtube.com/watch?v=AaU6tI2pb3M">Here’s What Ethical AI Really Means - YouTube philosophy tube</a></li>
+</ul>
+</section>
 <section id="ai-generated-art" class="level2">
 <h2 class="anchored" data-anchor-id="ai-generated-art">AI Generated Art</h2>
 <p>AI isn’t a new concept. Using AI’s to generate art isn’t a new concept. Having that available as app that actually creates some pretty fun results is pretty new.</p>
@@ -3373,7 +3464,7 @@ font-style: inherit;">"Type"</span>)</span>
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/presentations.html</guid>
-  <pubDate>Thu, 05 Oct 2023 19:49:27 GMT</pubDate>
+  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
 </item>
 <item>
   <title>Home</title>
@@ -3384,7 +3475,7 @@ font-style: inherit;">"Type"</span>)</span>
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/index.html</guid>
-  <pubDate>Thu, 05 Oct 2023 19:49:27 GMT</pubDate>
+  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -3402,7 +3493,51 @@ font-style: inherit;">"Type"</span>)</span>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="laser-cutting,maverick-mods" data-listing-date-sort="1696485600000" data-listing-file-modified-sort="1696530583355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-categories="datascience,opinions,hardware,software" data-listing-date-sort="1706079600000" data-listing-file-modified-sort="1706114542800" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="./posts/good-programming.html"> <img src="https://questionable.quarto.pub/blog/posts/img/" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/good-programming.html">
+<h3 class="no-anchor listing-title">
+The importance of good programming
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
+opinions
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('hardware'); return false;">
+hardware
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('software'); return false;">
+software
+</div>
+</div>
+<a href="./posts/good-programming.html">
+<div class="listing-description">
+<p>Case studies</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/good-programming.html">
+<div class="listing-date">
+Jan 24, 2024
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="laser-cutting,maverick-mods" data-listing-date-sort="1696485600000" data-listing-file-modified-sort="1696530583355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="./posts/maverick cubby holder.html"> <img src="https://questionable.quarto.pub/blog/posts/img/cubby-holder.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3440,7 +3575,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="rockets" data-listing-date-sort="1691301600000" data-listing-file-modified-sort="1696530616769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="2" data-categories="rockets" data-listing-date-sort="1691301600000" data-listing-file-modified-sort="1696530616769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="./posts/vortico rockets.html"> <img src="https://questionable.quarto.pub/blog/posts/img/vortico.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3475,7 +3610,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="maverick-mods" data-listing-date-sort="1683352800000" data-listing-file-modified-sort="1696523918208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="3" data-categories="maverick-mods" data-listing-date-sort="1683352800000" data-listing-file-modified-sort="1696523918208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="./posts/maverick soft topper.html"> <img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper 3.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3510,7 +3645,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="music" data-listing-date-sort="1664949600000" data-listing-file-modified-sort="1696524162522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="4" data-categories="music" data-listing-date-sort="1664949600000" data-listing-file-modified-sort="1696524162522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
 <p><a href="./posts/sound.html"> <img src="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3545,7 +3680,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="datascience" data-listing-date-sort="1663567200000" data-listing-file-modified-sort="1696525704498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1663567200000" data-listing-file-modified-sort="1696525704498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
 <p><a href="./posts/chatbot.html"> <img src="https://questionable.quarto.pub/blog/posts/img/Plantey_saturated.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3580,7 +3715,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1696524348513" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="6" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1696524348513" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="./posts/ojs_lyme.html"> <img src="https://questionable.quarto.pub/blog/posts/img/ojs_bar_chart.JPG" class="thumbnail-image"> </a></p>
 </div>
@@ -3615,7 +3750,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1696522532679" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="7" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1706111383335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="./posts/ai_art.html"> <img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="thumbnail-image"> </a></p>
 </div>
@@ -3650,7 +3785,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="datascience,opinions" data-listing-date-sort="1659420000000" data-listing-file-modified-sort="1696521268278" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="8" data-categories="datascience,opinions" data-listing-date-sort="1659420000000" data-listing-file-modified-sort="1696521268278" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="./posts/data.html"> <img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3688,7 +3823,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="datascience" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1696524205087" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="9" data-categories="datascience" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1696524205087" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="./posts/quarto.html"> <img src="https://questionable.quarto.pub/blog/posts/img/welcome.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3720,7 +3855,7 @@ Jul 28, 2022
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="datascience,dice,games" data-listing-date-sort="1617516000000" data-listing-file-modified-sort="1696535148724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
+<div class="quarto-post image-right" data-index="10" data-categories="datascience,dice,games" data-listing-date-sort="1617516000000" data-listing-file-modified-sort="1696535148724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
 <div class="thumbnail">
 <p><a href="./posts/resin.html"> <img src="https://questionable.quarto.pub/blog/posts/img/resin/PXL_20201008_180539533.MP.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3761,7 +3896,7 @@ Lisa
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1696530405442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="11" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1696530405442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
 <div class="thumbnail">
 <p><a href="./posts/battlebots 2021.html"> <img src="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -3802,7 +3937,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://questionable.quarto.pub/blog/posts.html</guid>
-  <pubDate>Thu, 05 Oct 2023 19:49:27 GMT</pubDate>
+  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
 </item>
 <item>
   <title>About</title>
@@ -3816,7 +3951,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/about.html</guid>
-  <pubDate>Thu, 05 Oct 2023 19:49:27 GMT</pubDate>
+  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>

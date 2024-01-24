@@ -13,6 +13,7 @@
       "/posts/maverick soft topper.html",
       "/posts/vortico rockets.html",
       "/posts/maverick cubby holder.html",
+      "/posts/good-programming.html",
       "/presentations_posit.html",
       "/presentations.html",
       "/index.html",
@@ -23,6 +24,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/good-programming.html",
       "/posts/maverick cubby holder.html",
       "/posts/vortico rockets.html",
       "/posts/maverick soft topper.html",

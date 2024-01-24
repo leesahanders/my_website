@@ -17,7 +17,8 @@ website:
             href: presentations.qmd
           - text: "Recipes"
             href: https://questionable.quarto.pub/recipes/
-
+      - text: "Recipes"
+        href: https://questionable.quarto.pub/recipes/
 
     right:
       - about.qmd
