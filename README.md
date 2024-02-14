@@ -23,6 +23,182 @@ I can now access my account and see my deployments at https://questionable.quart
 
 The "API error 401" can be resolved by removing and reconnecting the account using `quarto publish accounts` to remove the account. You will be prompted to add an account when `quarto publish quarto-pub` is next run. 
 
+## Implement a broken link checker 
+
+Resources: 
+
+- <https://nanx.me/blog/post/rmarkdown-quarto-link-checker/> 
+- <https://github.com/quarto-dev/quarto-cli/issues/1319> 
+- <https://github.com/lycheeverse/lychee> 
+
+If using netlify can use something like this (convenient because it can run inside git, and will run after every commit) using [netlify-plugin-quarto
+](https://github.com/quarto-dev/netlify-plugin-quarto) and [netlify-plugin-checklinks](https://github.com/Munter/netlify-plugin-checklinks) after installing with `npm install -D netlify-plugin-checklinks`: 
+
+```
+[[plugins]]
+package = "@quarto/netlify-plugin-quarto"
+
+    [plugins.inputs]
+    cmd = "render --site-url $DEPLOY_PREVIEW_URL"
+    
+[[plugins]]
+package = "netlify-plugin-checklinks"
+
+  [plugins.inputs]
+  # An array of glob patterns for pages on your site
+  # Recursive traversal will start from these
+  entryPoints = [
+    "*.html",
+  ]
+
+  # Recurse through all the links and asset references on your page, starting
+  # at the entrypoints
+  recursive = true
+
+  # Checklinks outputs TAP (https://testanything.org/tap-version-13-specification.html)
+  # by default. Enabling pretty mode makes the output easier on the eyes.
+  pretty = true
+
+  # You can mark some check as skipped, which will block checklinks
+  # from ever attempting to execute them.
+  # skipPatterns is an array of strings you can match against failing reports
+  skipPatterns = [
+    "https://www.oracle.com/",
+    "../../installation"
+  ]
+
+  # You can mark some check as todo, which will execute the check, but allow failures.
+  # todoPatterns is an array of strings you can match against failing reports
+  todoPatterns = []
+
+  # Report on all broken links to external pages.
+  # Enabling this will make your tests more brittle, since you can't control
+  # external pages.
+  checkExternal = false
+
+  # Enable to check references to source maps, source map sources etc.
+  # Many build tools don't emit working references, so this is disabled by default
+  followSourceMaps = false
+```
+
+Or using Lychee with something like: 
+
+.lycheeignore
+```
+https://twitter.com
+https://example.com
+```
+
+.github/workflows/links.yml
+```
+name: Check Links
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      
+      - name: Render site
+        uses: quarto-dev/quarto-actions/render@v2
+
+      - name: Restore lychee cache
+        uses: actions/cache@v3
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1.8.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          args: '--cache --max-cache-age 1d _site/**/*.html'
+
+      - name: Create Issue From File
+        if: env.lychee_exit_code != 0
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: Link Checker Report
+          content-filepath: ./lychee/out.md
+          labels: report, automated issue
+```
+
+This can be run locally to check for broken links with: 
+
+Create a virtual environment:
+
+```
+python3 -m venv utils/venv
+
+source utils/venv/bin/activate
+
+python3 -m pip install -r utils/requirements.txt
+
+source utils/venv/bin/activate
+```
+
+Create a justfile that will build the site and run the link checker: 
+
+justfile
+```
+# build the site locally and test links
+linkcheck-local: 
+    quarto render
+    linkchecker -t 20 -o html _site/index.html > linkchecker.html
+```
+
+Build the site and run the link checker:
+
+```shell
+just linkcheck-local
+```
+
+This will build the site into the `_site` directory and run `linkchecker` against it.
+
+A report will be written to `linkchecker.html`, which you can view in any browser.
+
+Other checks can be added, for example 
+
+main.yml
+```
+name: lint
+on: [pull_request]
+
+jobs:
+  vale:
+    name: runner / vale
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render site
+        uses: quarto-dev/quarto-actions/render@v2
+      
+      - name: Lint
+        uses: errata-ai/vale-action@reviewdog
+        with:
+          files: _site/
+        env:
+          # Required, set by GitHub actions automatically:
+          # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+```
+
 ## Publishing 2.0 - now make it automated using github actions
 
 TODO
