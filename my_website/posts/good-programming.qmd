@@ -21,6 +21,8 @@ categories:
   - software
 ---
 
+A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means. 
+
 ## UK Post Office Scandal 
 
 - [Developers blamed for the post office scandal?](https://www.youtube.com/watch?v=h3UIdGRBGlY) 
