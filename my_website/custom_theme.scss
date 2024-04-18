@@ -28,12 +28,26 @@ $green: #57733D !default;
 $font-family-sans-serif: Open-Sans !default;
 $font-family-monospace: Source-Code-Pro !default;
 
+/*
 $body-bg: $lightest-blue !default;
 $body-color: $darkest-blue !default;
 $link-color: $bright-orange !default;
 $navbar-bg: $lightest-blue !default;
 $navbar-fg: $darkest-blue !default;
 $navbar-hl: $bright-orange !default;
+*/
+
+$body-bg: $lightest-blue !default;
+$body-color: $lightest-blue !default;
+
+//  Customize the navbar
+$navbar-bg: #ffffff;
+$navbar-fg: #888888;
+$navbar-hl: #000000;
+$navbar-brand: $body-color;
+$navbar-brand-hl: $navbar-brand;
+$nav-tabs-link-active-color: $lightest-blue;
+$nav-tabs-link-active-bg: $lightest-blue;
 
 .mycards-container {
   display: flex !important;

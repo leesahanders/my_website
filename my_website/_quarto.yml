@@ -33,7 +33,7 @@ website:
 format:
   html:
     theme: 
-      light: custom_theme.scss
-      dark: vapor
+      light: [litera, custom_theme.scss]
+      dark: [vapor, custom_theme.scss]
     css: styles.css
 

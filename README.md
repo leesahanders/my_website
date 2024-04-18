@@ -2,6 +2,17 @@
 
 ** <https://questionable.quarto.pub/blog/> **
 
+## Inspiration 
+
+There are so many awesome resources out there making building your own website/blog a breeze. Here are some of my favorites that I've stumbled across in my journey that you might enjoy: 
+
+ - [The ultimate guide to starting a Quarto blog](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html)
+ - [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/)
+ - [Notes from a data witch](https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/)
+ - [jollydata switching to quarto](https://jollydata.blog/posts/2022-08-06-_switching-to-quarto/switching-to-quarto.html)
+ - This is rmarkdown, but [Yihui's home page](https://yihui.org/todo/) is beautiful
+ - [Quarto Awesome](https://github.com/mcanouil/awesome-quarto?tab=readme-ov-file#websites-formats) 
+
 # Notes for the developer
 
 ## Previewing 
@@ -39,6 +50,10 @@ I run `quarto publish quarto-pub` after cd-ing in to my my_website directory. An
 I can now access my account and see my deployments at https://questionable.quarto.pub/blog/. 
 
 The "API error 401" can be resolved by removing and reconnecting the account using `quarto publish accounts` to remove the account. You will be prompted to add an account when `quarto publish quarto-pub` is next run. 
+ 
+## Troubleshooting
+
+ojs errors: This was resolved by completely uninstalling quarto, uninstalling the RStudio IDE, and then re-installing. 
 
 ## Implement a broken link checker 
 
@@ -278,21 +293,6 @@ black .
 ## Publishing 2.0 - now make it automated using github actions
 
 TODO
- 
-## Troubleshooting
-
-ojs errors: This was resolved by completely uninstalling quarto, uninstalling the RStudio IDE, and then re-installing. 
- 
-
-## Inspiration 
-
-There are so many awesome resources out there making building your own website/blog a breeze. Here are some of my favorites that I've stumbled across in my journey that you might enjoy: 
-
- - [The ultimate guide to starting a Quarto blog](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html)
- - [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/)
- - [Notes from a data witch](https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/)
- - This is rmarkdown, but [Yihui's home page](https://yihui.org/todo/) is beautiful
- - [Quarto Awesome](https://github.com/mcanouil/awesome-quarto?tab=readme-ov-file#websites-formats) 
 
 ## Make it pretty 
 
@@ -312,6 +312,8 @@ We do that by referencing our custom `.scss` file in our yaml with:
     `  light: custom_theme.scss`
 
 From the about pages we can learn about the [different templates](https://quarto.org/docs/websites/website-about.html) that come built in to quarto for making it really easy to lay things out. 
+
+Useful github issue discussing changing the top bar on a website to different color: <https://github.com/quarto-dev/quarto-cli/discussions/6557> 
 
 ## Let's talk about images 
 
