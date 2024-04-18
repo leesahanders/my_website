@@ -1,8 +1,8 @@
 # My Website AKA Questionable experiments in Quarto
 
-This is a work in progress, please come back later :) 
+** <https://questionable.quarto.pub/blog/> **
 
-The output/website can be accessed at: <https://questionable.quarto.pub/blog/> 
+# Notes for the developer
 
 ## Previewing 
 

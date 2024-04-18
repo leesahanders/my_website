@@ -28,7 +28,7 @@ Lisa's best practices for pain-free data science
 ::: mycard-link
 <br>
 [Check out the slides](https://questionable.quarto.pub/its-dangerous-to-go-alone-take-this/){target="_blank"}
-[Check out the repo](https://github.com/leesahanders/git_demo){target="_blank"}
+[Check out the repo](https://github.com/leesahanders/painfree_data_science_demo_and_presentation){target="_blank"}
 :::
 
 ::::

@@ -8,15 +8,19 @@ website:
     left: 
       - text: "Home"
         href: index.qmd
-      - text: "Posts"
-        href: posts.qmd
       - text: "Projects"
         icon: fa-database
         menu:
+          - text: "Posts"
+            href: posts.qmd
           - text: "Presentations"
-            href: presentations.qmd
+            href: presentations.qmd            
           - text: "Recipes"
             href: https://questionable.quarto.pub/recipes/
+      - text: "Posts"
+        href: posts.qmd
+      - text: "Presentations"
+        href: presentations.qmd
       - text: "Recipes"
         href: https://questionable.quarto.pub/recipes/
 
