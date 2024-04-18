@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Projects and radom musings"
 listing:
   contents: posts
   sort: "date desc"
@@ -11,4 +11,4 @@ page-layout: full
 title-block-banner: true
 ---
 
-Random pages testing out Quarto's blog capability. 
+Random pages and projects, all using Quarto's blog capability. 

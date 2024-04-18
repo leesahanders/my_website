@@ -13,7 +13,7 @@ website:
       - text: "Stuff"
         icon: fa-database
         menu:
-          - text: "Posts"
+          - text: "Projects"
             href: posts.qmd
           - text: "Presentations"
             href: presentations.qmd            

@@ -5,11 +5,11 @@
       xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
-<title>questionable.quarto</title>
+<title>Lisa Anders - questionable.quarto</title>
 <link>https://questionable.quarto.pub/blog/site_map.html</link>
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
-<description></description>
-<generator>quarto-1.3.450</generator>
+<description>Making the most out of data</description>
+<generator>quarto-1.4.550</generator>
 <lastBuildDate>Wed, 24 Jan 2024 07:00:00 GMT</lastBuildDate>
 <item>
   <title>The importance of good programming</title>
@@ -20,6 +20,8 @@
 
 
 
+
+<p>A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means.</p>
 <section id="uk-post-office-scandal" class="level2">
 <h2 class="anchored" data-anchor-id="uk-post-office-scandal">UK Post Office Scandal</h2>
 <ul>
@@ -81,6 +83,10 @@
 <section id="others" class="level1">
 <h1>Others</h1>
 <p><a href="https://blog.grio.com/2021/07/when-small-software-bugs-cause-big-problems.html">WHEN SMALL SOFTWARE BUGS CAUSE BIG PROBLEMS</a></p>
+<p><a href="https://arstechnica.com/security/2024/03/backdoor-found-in-widely-used-linux-utility-breaks-encrypted-ssh-connections/">Backdoors into open source package</a></p>
+<p><a href="https://resend.com/blog/incident-report-for-february-21-2024">We immediately began the restoration process from a backup, which completed 6 hours later. Unfortunately, once it finished, we found that it failed to restore the data, so we had to start the restoration process a second time with a different backup</a></p>
+<p><a href="https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&amp;publication_id=27849&amp;post_id=137046759&amp;utm_medium=email&amp;utm_content=share&amp;utm_campaign=email-share&amp;triggerShare=true&amp;isFreemail=true&amp;r=yxnx">Counting explosions at Unity, a data analysts perspective</a></p>
+<p><a href="https://www.youtube.com/watch?v=ajGX7odA87k">That keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”</a></p>
 
 
 </section>
@@ -103,10 +109,11 @@
 
 
 
+
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/cubby-holder.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Assembled cubby holder fits perfectly!</figcaption>
+<figcaption>Assembled cubby holder fits perfectly!</figcaption>
 </figure>
 </div>
 <section id="get-it-for-yourself" class="level1">
@@ -115,7 +122,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/cubby-holder 2.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Simple design easy to modify and print</figcaption>
+<figcaption>Simple design easy to modify and print</figcaption>
 </figure>
 </div>
 <p>Cut on the laser cutter at the Boulder, Colorado Solid State Depot Makerspace.</p>
@@ -173,23 +180,24 @@
 
 
 
+
 <p>Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/vortico.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Painted and assembled vortico rockets</figcaption>
+<figcaption>Painted and assembled vortico rockets</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/vortico 2.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Launching the vorticos is best with a smaller rod to prevent wobble on takeoff</figcaption>
+<figcaption>Launching the vorticos is best with a smaller rod to prevent wobble on takeoff</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/vortico 3.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Up it goes!</figcaption>
+<figcaption>Up it goes!</figcaption>
 </figure>
 </div>
 <p>Get one for yourself here: <a href="https://www.rocketarium.com/Rockets/Vortico" class="uri">https://www.rocketarium.com/Rockets/Vortico</a></p>
@@ -211,23 +219,24 @@
 
 
 
+
 <p><a href="https://softopper.com/">Soft topper</a> is a fabric rear cover for truck beds.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Carefully placing the clamps</figcaption>
+<figcaption>Carefully placing the clamps</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper 2.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The aluminum frame assembled and pushed back</figcaption>
+<figcaption>The aluminum frame assembled and pushed back</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper 3.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">With the fabric cover snapped in place the rear storage is safe from the elements. Next up to work on the camper modifications!</figcaption>
+<figcaption>With the fabric cover snapped in place the rear storage is safe from the elements. Next up to work on the camper modifications!</figcaption>
 </figure>
 </div>
 
@@ -248,6 +257,7 @@
 
 
 
+
 <p>Make beautiful music with technology!</p>
 <section id="otomata" class="level2">
 <h2 class="anchored" data-anchor-id="otomata">Otomata</h2>
@@ -264,7 +274,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">reddit post</figcaption>
+<figcaption>reddit post</figcaption>
 </figure>
 </div>
 </section>
@@ -375,6 +385,7 @@ View this post on Instagram
   <dc:creator>Lisa </dc:creator>
   <link>https://questionable.quarto.pub/blog/posts/chatbot.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -638,6 +649,7 @@ font-style: inherit;">"Send"</span>,</span></code></pre></div>
 
 
 
+
 <section id="observable-js" class="level2">
 <h2 class="anchored" data-anchor-id="observable-js">Observable JS</h2>
 <p>This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at <a href="https://quarto.org/docs/interactive/ojs/" class="uri">https://quarto.org/docs/interactive/ojs/</a>.</p>
@@ -646,8 +658,8 @@ font-style: inherit;">"Send"</span>,</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
 <p>Load the data, using <a href="https://www.cdc.gov/lyme/stats/survfaq.html">Lyme data from the CDC</a>.</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1" data-startfrom="25" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 24;"><span id="cb1-25">data <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
@@ -674,8 +686,8 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 </div>
 <p>Filter options</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2" data-startfrom="32" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 31;"><span id="cb2-32">viewof state <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
@@ -778,8 +790,8 @@ font-style: inherit;">;</span></span>
 <div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
 <p>Stacked bar chart of cases by state by year, remember to select an option above.</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3" data-startfrom="43" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 42;"><span id="cb3-43">Plot<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
@@ -907,8 +919,8 @@ font-style: inherit;">0</span>])</span>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
 <p>Aggregated dataset for all states.</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4" data-startfrom="60" data-source-offset="0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 59;"><span id="cb4-60">Inputs<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
@@ -972,6 +984,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 
 
 
+
 <section id="but-first-a-disclaimer" class="level2">
 <h2 class="anchored" data-anchor-id="but-first-a-disclaimer">But first, a disclaimer</h2>
 <p>AI is controversial, and I’d recommend watching these two videos to understand some technical points on why that is:</p>
@@ -995,152 +1008,201 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <section id="highlights" class="level2">
 <h2 class="anchored" data-anchor-id="highlights">Highlights</h2>
 <p>Images in : img/starryai/</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/s1.png" class="lightbox" data-gallery="my-gallery" title="solarpunk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s1.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">solarpunk</figcaption>
-</figure>
+<div>
+
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s3.png" class="lightbox" data-gallery="my-gallery" title="solar panel satellite"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s3.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">solar panel satellite</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/s11.png" class="lightbox" data-gallery="my-gallery" title="pluto"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s11.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">pluto</figcaption>
+<p><a href="img/starryai/s1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="my-gallery" title="solarpunk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s1.png" class="img-fluid figure-img" alt="solarpunk"></a></p>
+<figcaption>solarpunk</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s10.png" class="lightbox" data-gallery="my-gallery" title="spaceship flying down the sidewalk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s10.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">spaceship flying down the sidewalk</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/s7.png" class="lightbox" data-gallery="my-gallery" title="Hydraulic dam fairytale"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s7.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Hydraulic dam fairytale</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/s2.png" class="lightbox" data-gallery="my-gallery" title="the storm rolled in"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s2.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">the storm rolled in</figcaption>
+<p><a href="img/starryai/s3.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="my-gallery" title="solar panel satellite"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s3.png" class="img-fluid figure-img" alt="solar panel satellite"></a></p>
+<figcaption>solar panel satellite</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s8.png" class="lightbox" data-gallery="my-gallery" title="I believe in a thing called love"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s8.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">I believe in a thing called love</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/placeholder.png" class="lightbox" data-gallery="my-gallery" title="Placeholder"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Placeholder</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/spacecat.png" class="lightbox" data-gallery="my-gallery" title="Spacecat"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/spacecat.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Spacecat</figcaption>
+<p><a href="img/starryai/s11.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="my-gallery" title="pluto"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s11.png" class="img-fluid figure-img" alt="pluto"></a></p>
+<figcaption>pluto</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/party around a bonfire.png" class="lightbox" data-gallery="my-gallery" title="party around a bonfire"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/party around a bonfire.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">party around a bonfire</figcaption>
-</figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/fireflies.png" class="lightbox" data-gallery="my-gallery" title="fireflies"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/fireflies.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">fireflies</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/starryai/thunderstorm over galveston.png" class="lightbox" data-gallery="my-gallery" title="thunderstorm over galveston"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/thunderstorm over galveston.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">thunderstorm over galveston</figcaption>
+<p><a href="img/starryai/s10.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="my-gallery" title="spaceship flying down the sidewalk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s10.png" class="img-fluid figure-img" alt="spaceship flying down the sidewalk"></a></p>
+<figcaption>spaceship flying down the sidewalk</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/woodland creatures having a tea party.png" class="lightbox" data-gallery="my-gallery" title="woodland creatures having a tea party"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/woodland creatures having a tea party.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">woodland creatures having a tea party</figcaption>
+<p><a href="img/starryai/s7.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="my-gallery" title="Hydraulic dam fairytale"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s7.png" class="img-fluid figure-img" alt="Hydraulic dam fairytale"></a></p>
+<figcaption>Hydraulic dam fairytale</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/pacific rim.png" class="lightbox" data-gallery="my-gallery" title="Pacific Rim"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/pacific rim.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Pacific Rim</figcaption>
+<p><a href="img/starryai/s2.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="my-gallery" title="the storm rolled in"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s2.png" class="img-fluid figure-img" alt="the storm rolled in"></a></p>
+<figcaption>the storm rolled in</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/mind_the_gap.png" class="lightbox" data-gallery="my-gallery" title="Mind the Gap"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/mind_the_gap.png" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Mind the Gap</figcaption>
+<p><a href="img/starryai/s8.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="my-gallery" title="I believe in a thing called love"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s8.png" class="img-fluid figure-img" alt="I believe in a thing called love"></a></p>
+<figcaption>I believe in a thing called love</figcaption>
 </figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/placeholder.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="my-gallery" title="Placeholder"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="img-fluid figure-img" alt="Placeholder"></a></p>
+<figcaption>Placeholder</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/spacecat.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="my-gallery" title="Spacecat"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/spacecat.png" class="img-fluid figure-img" alt="Spacecat"></a></p>
+<figcaption>Spacecat</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/party around a bonfire.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="my-gallery" title="party around a bonfire"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/party around a bonfire.png" class="img-fluid figure-img" alt="party around a bonfire"></a></p>
+<figcaption>party around a bonfire</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/fireflies.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="my-gallery" title="fireflies"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/fireflies.png" class="img-fluid figure-img" alt="fireflies"></a></p>
+<figcaption>fireflies</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/thunderstorm over galveston.png" class="lightbox" data-glightbox="description: .lightbox-desc-12" data-gallery="my-gallery" title="thunderstorm over galveston"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/thunderstorm over galveston.png" class="img-fluid figure-img" alt="thunderstorm over galveston"></a></p>
+<figcaption>thunderstorm over galveston</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/woodland creatures having a tea party.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="my-gallery" title="woodland creatures having a tea party"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/woodland creatures having a tea party.png" class="img-fluid figure-img" alt="woodland creatures having a tea party"></a></p>
+<figcaption>woodland creatures having a tea party</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/pacific rim.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="my-gallery" title="Pacific Rim"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/pacific rim.png" class="img-fluid figure-img" alt="Pacific Rim"></a></p>
+<figcaption>Pacific Rim</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/starryai/mind_the_gap.png" class="lightbox" data-glightbox="description: .lightbox-desc-15" data-gallery="my-gallery" title="Mind the Gap"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/mind_the_gap.png" class="img-fluid figure-img" alt="Mind the Gap"></a></p>
+<figcaption>Mind the Gap</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </div>
 <p>Images in : img/nightcafe</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/nightcafe/robotic owl in space.JPG" class="lightbox" data-gallery="my-gallery" title="Robotic owl in space"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/robotic owl in space.JPG" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Robotic owl in space</figcaption>
-</figure>
+<div>
+
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/The monster from alien on a date.JPG" class="lightbox" data-gallery="my-gallery" title="The monster from alien on a date"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/The monster from alien on a date.JPG" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">The monster from alien on a date</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
-<figure class="figure">
-<p><a href="img/nightcafe/selfie.JPG" class="lightbox" data-gallery="my-gallery" title="selfie"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/selfie.JPG" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">selfie</figcaption>
+<p><a href="img/nightcafe/robotic owl in space.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-16" data-gallery="my-gallery" title="Robotic owl in space"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/robotic owl in space.JPG" class="img-fluid figure-img" alt="Robotic owl in space"></a></p>
+<figcaption>Robotic owl in space</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/brain on fire.JPG" class="lightbox" data-gallery="my-gallery" title="brain on fire"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/brain on fire.JPG" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">brain on fire</figcaption>
+<p><a href="img/nightcafe/The monster from alien on a date.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-17" data-gallery="my-gallery" title="The monster from alien on a date"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/The monster from alien on a date.JPG" class="img-fluid figure-img" alt="The monster from alien on a date"></a></p>
+<figcaption>The monster from alien on a date</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/cyborg bartender.JPG" class="lightbox" data-gallery="my-gallery" title="cyborg bartender"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/cyborg bartender.JPG" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">cyborg bartender</figcaption>
+<p><a href="img/nightcafe/selfie.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-18" data-gallery="my-gallery" title="selfie"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/selfie.JPG" class="img-fluid figure-img" alt="selfie"></a></p>
+<figcaption>selfie</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center" style="flex-basis: 33.3%;justify-content: center;">
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="lightbox" data-gallery="my-gallery" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">ammonite seashell on the beach being worshipped by monsters</figcaption>
+<p><a href="img/nightcafe/brain on fire.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-19" data-gallery="my-gallery" title="brain on fire"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/brain on fire.JPG" class="img-fluid figure-img" alt="brain on fire"></a></p>
+<figcaption>brain on fire</figcaption>
 </figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/nightcafe/cyborg bartender.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-20" data-gallery="my-gallery" title="cyborg bartender"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/cyborg bartender.JPG" class="img-fluid figure-img" alt="cyborg bartender"></a></p>
+<figcaption>cyborg bartender</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-21" data-gallery="my-gallery" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="img-fluid figure-img" alt="ammonite seashell on the beach being worshipped by monsters"></a></p>
+<figcaption>ammonite seashell on the beach being worshipped by monsters</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </div>
 <p>Tips on dealing with displaying images in a rendered quarto document: <a href="https://quarto.org/docs/authoring/figures.html#figure-panels" class="uri">https://quarto.org/docs/authoring/figures.html#figure-panels</a></p>
+
 
 
 </section>
@@ -1156,6 +1218,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
   <dc:creator>Lisa </dc:creator>
   <link>https://questionable.quarto.pub/blog/posts/data.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1207,6 +1270,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
   <title>What is Quarto?</title>
   <link>https://questionable.quarto.pub/blog/posts/quarto.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1282,7 +1346,7 @@ th, td {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/resin/PXL_20211226_172938496.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Flourescent dice set (all glitter dice)</figcaption>
+<figcaption>Flourescent dice set (all glitter dice)</figcaption>
 </figure>
 </div>
 <blockquote class="instagram-media blockquote" data-instgrm-captioned="" data-instgrm-permalink="https://www.instagram.com/tv/CYPDqkhI0Xb/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
@@ -1374,7 +1438,7 @@ View this post on Instagram
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/resin/Dice_purple.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Royal purple dice set with beautiful crystals due to cold temperatures</figcaption>
+<figcaption>Royal purple dice set with beautiful crystals due to cold temperatures</figcaption>
 </figure>
 </div>
 </section>
@@ -1383,7 +1447,7 @@ View this post on Instagram
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/resin/Dice_red.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Fire red dice set, with some glitter dice!</figcaption>
+<figcaption>Fire red dice set, with some glitter dice!</figcaption>
 </figure>
 </div>
 <!-- ![Fire dice set](img/resin/PXL_20210214_233000132.MP.jpg) -->
@@ -1397,7 +1461,6 @@ View this post on Instagram
 <h2 class="anchored" data-anchor-id="experiments">Experiments</h2>
 <section id="silicone-mold" class="level3">
 <h3 class="anchored" data-anchor-id="silicone-mold">Silicone Mold</h3>
-
 <table style="width: 100%">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1455,10 +1518,8 @@ The three mold attempts are sitting out to cure overnight before I’ll begin th
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
-
 <table style="width: 100%;">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1497,13 +1558,11 @@ I’m a little concerned with my splits in the mold for removing the pieces. Hop
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
 </section>
 <section id="pouring-the-resin" class="level3">
 <h3 class="anchored" data-anchor-id="pouring-the-resin">Pouring the Resin</h3>
-
 <table style="width: 100%" cellpadding="5">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1547,10 +1606,8 @@ Since I layered it in with pure blue on bottom and the blue + mica powder on top
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
-
 <table style="width: 100%" cellpadding="5">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1587,10 +1644,8 @@ Wow this just turned out BEAUTIFUL.
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
-
 <table style="width: 100%">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1613,13 +1668,11 @@ Same recipe as before, still looks beautiful and we now have a matching set of 6
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
 </section>
 <section id="polishing" class="level3">
 <h3 class="anchored" data-anchor-id="polishing">Polishing</h3>
-
 <table style="width: 100%">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1668,10 +1721,8 @@ Ideas for next time are to spend more time polishing on the finest grit. Maybe t
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
-
 <table style="width: 100%" border-spacing="5" border-padding="5">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1694,14 +1745,12 @@ Very happy to report success with the “swish”. Only 1 out of the three dice 
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
 </section>
 <section id="glitter-dice" class="level3">
 <h3 class="anchored" data-anchor-id="glitter-dice">Glitter Dice</h3>
 <hr>
-
 <table style="width: 100%" border-spacing="5" border-padding="5">
 <colgroup>
 <col span="1" style="width: 35%;">
@@ -1724,7 +1773,6 @@ I’ve been playing with making glitterdice lately. Glitterdice are where there 
 </p>
 </td>
 </tr>
-
 </tbody></table>
 <hr>
 </section>
@@ -1739,8 +1787,8 @@ I’ve been playing with making glitterdice lately. Glitterdice are where there 
 Well. Looks like my metal dice is weighted (both literally but also rolls 6 much more often). The resin dice performed better than I expected. I was expected to see the dice with remnants of a bubble or bumps to really have a very significant impact, but honestly they look comparable to the metal die.</p>
 <p>Our results:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
@@ -1863,10 +1911,14 @@ font-style: inherit;">"top"</span>)</span>
 <span id="cb1-22">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/posts/resin_files/figure-html/cars-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://questionable.quarto.pub/blog/posts/resin_files/figure-html/cars-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<details>
-<summary>Code</summary>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">p <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
@@ -1915,7 +1967,11 @@ font-style: inherit;">"top"</span>)</span>
 <span id="cb2-6">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/posts/resin_files/figure-html/cars-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://questionable.quarto.pub/blog/posts/resin_files/figure-html/cars-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p style="color:grey; font-style:italic;" align="right">
@@ -1958,6 +2014,7 @@ font-style: inherit;">"top"</span>)</span>
   <dc:creator>Lisa </dc:creator>
   <link>https://questionable.quarto.pub/blog/posts/battlebots 2021.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2018,8 +2075,8 @@ font-style: inherit;">"top"</span>)</span>
 <section id="messy-web-scraping-to-get-data" class="level3">
 <h3 class="anchored" data-anchor-id="messy-web-scraping-to-get-data">Messy web scraping to get data</h3>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(rvest)</span>
@@ -2668,8 +2725,8 @@ font-style: inherit;">#  - [Tidy Web Scraping in R Tutorial and Resources](https
 </details>
 </div>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="do" style="color: #5E5E5E;
 background-color: null;
 font-style: italic;">### Frequency of Battlebots Weapon Types</span></span>
@@ -2722,8 +2779,8 @@ font-style: inherit;"># https://cran.r-project.org/web/packages/wordcloud2/vigne
 <section id="frequency-of-builder-day-jobs" class="level3">
 <h3 class="anchored" data-anchor-id="frequency-of-builder-day-jobs">Frequency of Builder Day Jobs</h3>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">job_frequency <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> battlebotsinfo <span class="sc" style="color: #5E5E5E;
@@ -2794,8 +2851,8 @@ font-style: inherit;">'random-dark'</span>)</span>
 <section id="map-of-builder-locations" class="level3">
 <h3 class="anchored" data-anchor-id="map-of-builder-locations">Map of Builder Locations</h3>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#Load location data</span></span>
@@ -3007,10 +3064,14 @@ font-style: inherit;">#pp</span></span>
 <span id="cb4-43">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/posts/battlebots-2021_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://questionable.quarto.pub/blog/posts/battlebots-2021_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<details>
-<summary>Code</summary>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#htmlwidgets::saveWidget( plotly::ggplotly(p, tooltip="text"), "tmp3.html")</span></span>
@@ -3070,8 +3131,8 @@ font-style: inherit;">#https://stackoverflow.com/questions/59144842/why-does-ggp
 <section id="win-frequency-by-robot-type" class="level3">
 <h3 class="anchored" data-anchor-id="win-frequency-by-robot-type">Win Frequency by Robot Type</h3>
 <div class="cell">
-<details>
-<summary>Code</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#TODO: Add plot showing frequency of type of robot </span></span>
@@ -3372,7 +3433,11 @@ font-style: inherit;">"Type"</span>)</span>
 <span id="cb6-36">p</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://questionable.quarto.pub/blog/posts/battlebots-2021_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://questionable.quarto.pub/blog/posts/battlebots-2021_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3406,13 +3471,476 @@ font-style: inherit;">"Type"</span>)</span>
   <media:content url="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
+  <title>Projects and radom musings</title>
+  <link>https://questionable.quarto.pub/blog/posts.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Random pages and projects, all using Quarto’s blog capability.</p>
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="datascience,opinions,hardware,software" data-listing-date-sort="1706079600000" data-listing-file-modified-sort="1711992727158" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1024">
+<div class="thumbnail">
+<p><a href="./posts/good-programming.html" class="no-external"></a></p><a href="./posts/good-programming.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/" class="thumbnail-image"></p>
+</a><p><a href="./posts/good-programming.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/good-programming.html" class="no-external">The importance of good programming</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/good-programming.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
+opinions
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('hardware'); return false;">
+hardware
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('software'); return false;">
+software
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/good-programming.html" class="no-external">Case studies</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/good-programming.html" class="no-external">
+<div class="listing-date">
+Jan 24, 2024
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="laser-cutting,maverick-mods" data-listing-date-sort="1696485600000" data-listing-file-modified-sort="1696530583355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="202">
+<div class="thumbnail">
+<p><a href="./posts/maverick cubby holder.html" class="no-external"></a></p><a href="./posts/maverick cubby holder.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/cubby-holder.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/maverick cubby holder.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/maverick cubby holder.html" class="no-external">Ford Maverick Truck Cubby Holder</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/maverick cubby holder.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('laser-cutting'); return false;">
+laser-cutting
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('maverick-mods'); return false;">
+maverick-mods
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/maverick cubby holder.html" class="no-external">Adding a cubby to that strange little space in the dash</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/maverick cubby holder.html" class="no-external">
+<div class="listing-date">
+Oct 5, 2023
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="rockets" data-listing-date-sort="1691301600000" data-listing-file-modified-sort="1696530616769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="54">
+<div class="thumbnail">
+<p><a href="./posts/vortico rockets.html" class="no-external"></a></p><a href="./posts/vortico rockets.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/vortico.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/vortico rockets.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/vortico rockets.html" class="no-external">Vortico rockets</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/vortico rockets.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('rockets'); return false;">
+rockets
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/vortico rockets.html" class="no-external">The best rockets don’t need parachutes</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/vortico rockets.html" class="no-external">
+<div class="listing-date">
+Aug 6, 2023
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="maverick-mods" data-listing-date-sort="1683352800000" data-listing-file-modified-sort="1696523918208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="44">
+<div class="thumbnail">
+<p><a href="./posts/maverick soft topper.html" class="no-external"></a></p><a href="./posts/maverick soft topper.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper 3.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/maverick soft topper.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/maverick soft topper.html" class="no-external">Ford Maverick Soft Topper installation</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/maverick soft topper.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('maverick-mods'); return false;">
+maverick-mods
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/maverick soft topper.html" class="no-external">Protection for rear storage</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/maverick soft topper.html" class="no-external">
+<div class="listing-date">
+May 6, 2023
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="music" data-listing-date-sort="1664949600000" data-listing-file-modified-sort="1696524162522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="671">
+<div class="thumbnail">
+<p><a href="./posts/sound.html" class="no-external"></a></p><a href="./posts/sound.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/sound.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/sound.html" class="no-external">Sound</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/sound.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
+music
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/sound.html" class="no-external">Making noise</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/sound.html" class="no-external">
+<div class="listing-date">
+Oct 5, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1663567200000" data-listing-file-modified-sort="1696525704498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="793">
+<div class="thumbnail">
+<p><a href="./posts/chatbot.html" class="no-external"></a></p><a href="./posts/chatbot.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/Plantey_saturated.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/chatbot.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/chatbot.html" class="no-external">Chatbot</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/chatbot.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/chatbot.html" class="no-external">Making a simple chatbot</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/chatbot.html" class="no-external">
+<div class="listing-date">
+Sep 19, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1696524348513" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
+<div class="thumbnail">
+<p><a href="./posts/ojs_lyme.html" class="no-external"></a></p><a href="./posts/ojs_lyme.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/ojs_bar_chart.JPG" class="thumbnail-image"></p>
+</a><p><a href="./posts/ojs_lyme.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ojs_lyme.html" class="no-external">Observable JS for snappy datascience</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ojs_lyme.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ojs_lyme.html" class="no-external">Using OJS to plot Lyme disease cases over time by state</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ojs_lyme.html" class="no-external">
+<div class="listing-date">
+Aug 4, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1706111383335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="246">
+<div class="thumbnail">
+<p><a href="./posts/ai_art.html" class="no-external"></a></p><a href="./posts/ai_art.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/ai_art.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ai_art.html" class="no-external">AI generated art</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ai_art.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('art'); return false;">
+art
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ai_art.html" class="no-external">Sometimes beautiful, sometimes horrifying</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ai_art.html" class="no-external">
+<div class="listing-date">
+Aug 3, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="datascience,opinions" data-listing-date-sort="1659420000000" data-listing-file-modified-sort="1696521268278" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="145">
+<div class="thumbnail">
+<p><a href="./posts/data.html" class="no-external"></a></p><a href="./posts/data.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/data.html" class="no-external">A little data goes a long way</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/data.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
+opinions
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/data.html" class="no-external">Some of my favorite examples</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/data.html" class="no-external">
+<div class="listing-date">
+Aug 2, 2022
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="datascience" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1696524205087" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="107">
+<div class="thumbnail">
+<p><a href="./posts/quarto.html" class="no-external"></a></p><a href="./posts/quarto.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/welcome.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/quarto.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/quarto.html" class="no-external">What is Quarto?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/quarto.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/quarto.html" class="no-external">My new favorite thing</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/quarto.html" class="no-external">
+<div class="listing-date">
+Jul 28, 2022
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="datascience,dice,games" data-listing-date-sort="1617516000000" data-listing-file-modified-sort="1696535148724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2208">
+<div class="thumbnail">
+<p><a href="./posts/resin.html" class="no-external"></a></p><a href="./posts/resin.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/resin/PXL_20201008_180539533.MP.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/resin.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/resin.html" class="no-external">Resin Dice</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/resin.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('dice'); return false;">
+dice
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('games'); return false;">
+games
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/resin.html" class="no-external">Adventures in Resin: Making your own dice</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/resin.html" class="no-external">
+<div class="listing-date">
+Apr 4, 2021
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1696530405442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1629">
+<div class="thumbnail">
+<p><a href="./posts/battlebots 2021.html" class="no-external"></a></p><a href="./posts/battlebots 2021.html" class="no-external">
+<p><img src="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/battlebots 2021.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/battlebots 2021.html" class="no-external">BATTLEBOTS 2021</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/battlebots 2021.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
+datascience
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/battlebots 2021.html" class="no-external">It’s robot fighting time!</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/battlebots 2021.html" class="no-external">
+<div class="listing-date">
+Jan 4, 2021
+</div>
+<div class="listing-author">
+Lisa
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
+  <guid>https://questionable.quarto.pub/blog/posts.html</guid>
+  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
+</item>
+<item>
   <title>Presentations</title>
   <link>https://questionable.quarto.pub/blog/presentations.html</link>
   <description><![CDATA[ 
 
 
 
+
 <p>Check out some of the presentations I’ve made while working at Posit:</p>
+<center>
+<p><strong>2024</strong></p>
+</center>
+<div class="column-screen-inset">
+<div class="mycards-container">
+<div class="mycard">
+<div class="angle-open">
+<p>&gt;</p>
+</div>
+<div class="mycard-title">
+<p>It’s dangerous to go alone - take this!</p>
+</div>
+<div class="mycard-description">
+<p>Lisa’s best practices for pain-free data science</p>
+</div>
+<div class="mycard-link">
+<p><br> <a href="https://questionable.quarto.pub/its-dangerous-to-go-alone-take-this/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/painfree_data_science_demo_and_presentation" target="_blank">Check out the repo</a></p>
+</div>
+</div>
+</div>
+</div>
+<center>
+<p><strong>2023 and 2022</strong></p>
+</center>
 <div class="column-screen-inset">
 <div class="mycards-container">
 <div class="mycard">
@@ -3464,480 +3992,19 @@ font-style: inherit;">"Type"</span>)</span>
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/presentations.html</guid>
-  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
+  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
 </item>
 <item>
   <title>Home</title>
-  <link>https://questionable.quarto.pub/blog/index.html</link>
+  <link>https://questionable.quarto.pub/blog/</link>
   <description><![CDATA[ 
 <p>Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!</p>
 
 
  ]]></description>
-  <guid>https://questionable.quarto.pub/blog/index.html</guid>
-  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
+  <guid>https://questionable.quarto.pub/blog/</guid>
+  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Blog</title>
-  <link>https://questionable.quarto.pub/blog/posts.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Random pages testing out Quarto’s blog capability.</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="datascience,opinions,hardware,software" data-listing-date-sort="1706079600000" data-listing-file-modified-sort="1706114542800" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<div class="thumbnail">
-<p><a href="./posts/good-programming.html"> <img src="https://questionable.quarto.pub/blog/posts/img/" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/good-programming.html">
-<h3 class="no-anchor listing-title">
-The importance of good programming
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
-opinions
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('hardware'); return false;">
-hardware
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('software'); return false;">
-software
-</div>
-</div>
-<a href="./posts/good-programming.html">
-<div class="listing-description">
-<p>Case studies</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/good-programming.html">
-<div class="listing-date">
-Jan 24, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="laser-cutting,maverick-mods" data-listing-date-sort="1696485600000" data-listing-file-modified-sort="1696530583355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/maverick cubby holder.html"> <img src="https://questionable.quarto.pub/blog/posts/img/cubby-holder.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/maverick cubby holder.html">
-<h3 class="no-anchor listing-title">
-Ford Maverick Truck Cubby Holder
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('laser-cutting'); return false;">
-laser-cutting
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('maverick-mods'); return false;">
-maverick-mods
-</div>
-</div>
-<a href="./posts/maverick cubby holder.html">
-<div class="listing-description">
-<p>Adding a cubby to that strange little space in the dash</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/maverick cubby holder.html">
-<div class="listing-date">
-Oct 5, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="rockets" data-listing-date-sort="1691301600000" data-listing-file-modified-sort="1696530616769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/vortico rockets.html"> <img src="https://questionable.quarto.pub/blog/posts/img/vortico.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/vortico rockets.html">
-<h3 class="no-anchor listing-title">
-Vortico rockets
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('rockets'); return false;">
-rockets
-</div>
-</div>
-<a href="./posts/vortico rockets.html">
-<div class="listing-description">
-<p>The best rockets don’t need parachutes</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/vortico rockets.html">
-<div class="listing-date">
-Aug 6, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="maverick-mods" data-listing-date-sort="1683352800000" data-listing-file-modified-sort="1696523918208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/maverick soft topper.html"> <img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper 3.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/maverick soft topper.html">
-<h3 class="no-anchor listing-title">
-Ford Maverick Soft Topper installation
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('maverick-mods'); return false;">
-maverick-mods
-</div>
-</div>
-<a href="./posts/maverick soft topper.html">
-<div class="listing-description">
-<p>Protection for rear storage</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/maverick soft topper.html">
-<div class="listing-date">
-May 6, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="music" data-listing-date-sort="1664949600000" data-listing-file-modified-sort="1696524162522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
-<div class="thumbnail">
-<p><a href="./posts/sound.html"> <img src="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/sound.html">
-<h3 class="no-anchor listing-title">
-Sound
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
-music
-</div>
-</div>
-<a href="./posts/sound.html">
-<div class="listing-description">
-<p>Making noise</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/sound.html">
-<div class="listing-date">
-Oct 5, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1663567200000" data-listing-file-modified-sort="1696525704498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
-<div class="thumbnail">
-<p><a href="./posts/chatbot.html"> <img src="https://questionable.quarto.pub/blog/posts/img/Plantey_saturated.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/chatbot.html">
-<h3 class="no-anchor listing-title">
-Chatbot
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<a href="./posts/chatbot.html">
-<div class="listing-description">
-<p>Making a simple chatbot</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/chatbot.html">
-<div class="listing-date">
-Sep 19, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1696524348513" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/ojs_lyme.html"> <img src="https://questionable.quarto.pub/blog/posts/img/ojs_bar_chart.JPG" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/ojs_lyme.html">
-<h3 class="no-anchor listing-title">
-Observable JS for snappy datascience
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<a href="./posts/ojs_lyme.html">
-<div class="listing-description">
-<p>Using OJS to plot Lyme disease cases over time by state</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/ojs_lyme.html">
-<div class="listing-date">
-Aug 4, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1706111383335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/ai_art.html"> <img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/ai_art.html">
-<h3 class="no-anchor listing-title">
-AI generated art
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('art'); return false;">
-art
-</div>
-</div>
-<a href="./posts/ai_art.html">
-<div class="listing-description">
-<p>Sometimes beautiful, sometimes horrifying</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/ai_art.html">
-<div class="listing-date">
-Aug 3, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="datascience,opinions" data-listing-date-sort="1659420000000" data-listing-file-modified-sort="1696521268278" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/data.html"> <img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/data.html">
-<h3 class="no-anchor listing-title">
-A little data goes a long way
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
-opinions
-</div>
-</div>
-<a href="./posts/data.html">
-<div class="listing-description">
-<p>Some of my favorite examples</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/data.html">
-<div class="listing-date">
-Aug 2, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="datascience" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1696524205087" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/quarto.html"> <img src="https://questionable.quarto.pub/blog/posts/img/welcome.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/quarto.html">
-<h3 class="no-anchor listing-title">
-What is Quarto?
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<a href="./posts/quarto.html">
-<div class="listing-description">
-<p>My new favorite thing</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/quarto.html">
-<div class="listing-date">
-Jul 28, 2022
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="datascience,dice,games" data-listing-date-sort="1617516000000" data-listing-file-modified-sort="1696535148724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
-<div class="thumbnail">
-<p><a href="./posts/resin.html"> <img src="https://questionable.quarto.pub/blog/posts/img/resin/PXL_20201008_180539533.MP.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/resin.html">
-<h3 class="no-anchor listing-title">
-Resin Dice
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('dice'); return false;">
-dice
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('games'); return false;">
-games
-</div>
-</div>
-<a href="./posts/resin.html">
-<div class="listing-description">
-<p>Adventures in Resin: Making your own dice</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/resin.html">
-<div class="listing-date">
-Apr 4, 2021
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1696530405442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
-<div class="thumbnail">
-<p><a href="./posts/battlebots 2021.html"> <img src="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/battlebots 2021.html">
-<h3 class="no-anchor listing-title">
-BATTLEBOTS 2021
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<a href="./posts/battlebots 2021.html">
-<div class="listing-description">
-<p>It’s robot fighting time!</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/battlebots 2021.html">
-<div class="listing-date">
-Jan 4, 2021
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div> ]]></description>
-  <guid>https://questionable.quarto.pub/blog/posts.html</guid>
-  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
 </item>
 <item>
   <title>About</title>
@@ -3951,7 +4018,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/about.html</guid>
-  <pubDate>Wed, 24 Jan 2024 16:55:40 GMT</pubDate>
+  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
