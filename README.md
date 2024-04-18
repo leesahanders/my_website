@@ -2,15 +2,32 @@
 
 This is a work in progress, please come back later :) 
 
-The output/website can be accessed at: https://questionable.quarto.pub/blog/
+The output/website can be accessed at: <https://questionable.quarto.pub/blog/> 
 
 ## Previewing 
 
-The website can be previewed by using the terminal to move into the main quarto website folder and then running `quarto preview`. 
+The website can be previewed by using the terminal to move into the main quarto website folder:
+
+```bash
+cd my_website
+```
+
+Preview it by running: 
+
+```bash
+quarto preview
+```
 
 ## Publishing 1.0 - it's alive!
 
-Done through: https://quarto.org/docs/publishing/quarto-pub.html 
+In order to deploy it needs to be a project: 
+```
+quarto create project 
+```
+
+Done through: <https://quarto.org/docs/publishing/quarto-pub.html> 
+
+Alternatively one can publish to github pages: <https://ucsb-meds.github.io/creating-quarto-websites/> 
 
 I have two domains I can publish to: 
 
@@ -246,6 +263,18 @@ jobs:
           labels: report, automated issue
 ```
 
+## Other automated git checkers 
+
+```
+ruff check .
+mypy --strict .
+black .
+```
+
+- ruff performs code linting
+- mypy performs static type checking
+- black formats the code
+
 ## Publishing 2.0 - now make it automated using github actions
 
 TODO
@@ -263,7 +292,7 @@ There are so many awesome resources out there making building your own website/b
  - [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/)
  - [Notes from a data witch](https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/)
  - This is rmarkdown, but [Yihui's home page](https://yihui.org/todo/) is beautiful
-
+ - [Quarto Awesome](https://github.com/mcanouil/awesome-quarto?tab=readme-ov-file#websites-formats) 
 
 ## Make it pretty 
 
