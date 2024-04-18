@@ -9,7 +9,7 @@ There are so many awesome resources out there making building your own website/b
  - [The ultimate guide to starting a Quarto blog](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html)
  - [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/)
  - [Notes from a data witch](https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/)
- - [jollydata switching to quarto](https://jollydata.blog/posts/2022-08-06-_switching-to-quarto/switching-to-quarto.html)
+ - [jollydata switching to quarto](https://jollydata.blog/posts/2022-08-06-_switching-to-quarto/switching-to-quarto.html) and [his code](https://github.com/nucleic-acid/quarto-blog/tree/main) 
  - This is rmarkdown, but [Yihui's home page](https://yihui.org/todo/) is beautiful
  - [Quarto Awesome](https://github.com/mcanouil/awesome-quarto?tab=readme-ov-file#websites-formats) 
 

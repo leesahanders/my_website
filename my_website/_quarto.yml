@@ -3,12 +3,14 @@ project:
 
 website:
   site-url: "https://questionable.quarto.pub/blog/"
-  title: "questionable.quarto"
+  title: "Lisa Anders - questionable.quarto"
+  description: "Making the most out of data"
   navbar:
+    title: "<span class='icon-upper'>LISA ANDERS</span><span class='icon-sep'></span><span class='icon-lower'>questionable.quarto</span>"
     left: 
       - text: "Home"
         href: index.qmd
-      - text: "Projects"
+      - text: "Stuff"
         icon: fa-database
         menu:
           - text: "Posts"
@@ -17,12 +19,6 @@ website:
             href: presentations.qmd            
           - text: "Recipes"
             href: https://questionable.quarto.pub/recipes/
-      - text: "Posts"
-        href: posts.qmd
-      - text: "Presentations"
-        href: presentations.qmd
-      - text: "Recipes"
-        href: https://questionable.quarto.pub/recipes/
 
     right:
       - about.qmd
