@@ -17,6 +17,8 @@ categories:
 
 Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects! 
 
+Very fun project spread out over a couple days to assemble, paint, and then finally shoot!
+
 ![Painted and assembled vortico rockets](img/vortico.jpg)
 
 ![Launching the vorticos is best with a smaller rod to prevent wobble on takeoff](img/vortico 2.jpg)

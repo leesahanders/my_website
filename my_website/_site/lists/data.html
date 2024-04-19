@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2022-08-02">
+<meta name="description" content="Some of my favorite examples">
 
-<title>Lisa Anders - questionable.quarto - Blog posts and random musings</title>
+<title>Lisa Anders - questionable.quarto - A little data goes a long way</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +26,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,77 +71,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
     </a>
   </div>
@@ -151,7 +94,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -162,16 +105,16 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
         <li>
-    <a class="dropdown-item" href="./posts.html">
- <span class="dropdown-text">Blog posts</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./lists.html">
+    <a class="dropdown-item" href="../lists.html">
  <span class="dropdown-text">Lists</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presentations.html">
+    <a class="dropdown-item" href="../presentations.html">
  <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../posts.html">
+ <span class="dropdown-text">Projects</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/">
@@ -182,11 +125,11 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./site_map.html"> 
+    <a class="nav-link" href="../site_map.html"> 
 <span class="menu-text">Site Map</span></a>
   </li>  
   <li class="nav-item compact">
@@ -203,350 +146,90 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">Blog posts and random musings</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A little data goes a long way</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">datascience</div>
+    <div class="quarto-category">opinions</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Some of my favorite examples
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lisa </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 2, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
-
-<p>Here’s some random thoughts, all brought to you by Quarto’s blogging capability.</p>
-
+</header>
 
 
+<p>A little data goes a long way… here are some examples that I think illustrte this in a particularly fascinating way (at least to me).</p>
+<section id="fighting-the-gender-pay-gap-one-twitter-bot-at-a-time" class="level2">
+<h2 class="anchored" data-anchor-id="fighting-the-gender-pay-gap-one-twitter-bot-at-a-time">Fighting the gender pay gap one twitter bot at a time</h2>
+<p><a href="https://www.washingtonpost.com/lifestyle/2022/03/08/twitter-pay-gap-bot-international-womens-day/">Companies tweeted for International Women’s Day. Then this account called out their pay gaps.</a></p>
+<p>Check out <a href="https://twitter.com/PayGapApp">the bot</a> for yourself.</p>
+</section>
+<section id="for-better-science" class="level2">
+<h2 class="anchored" data-anchor-id="for-better-science">For Better Science</h2>
+</section>
+<section id="for-better-science-1" class="level2">
+<h2 class="anchored" data-anchor-id="for-better-science-1"><a href="https://forbetterscience.com/"><img src="img/fbs.jpg" class="img-fluid" alt="For Better Science"></a></h2>
+<p>The rabbit hole of learning about how bad science is uncovered and recalled started with:</p>
+<ul>
+<li><p><a href="https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/">Sylvain Lesné is a failed scientist</a></p></li>
+<li><p><a href="https://forbetterscience.com/2021/12/15/cassava-fraud-and-alzheimers-capitalism/">Cassava fraud and Alzheimer’s capitalism</a></p></li>
+</ul>
+</section>
+<section id="researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town" class="level2">
+<h2 class="anchored" data-anchor-id="researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town">Researchers uncover the use of coal ash for playground materials in small town</h2>
+<p>A recent story about coal ash that was used in a playground and the work the local newspaper and the University (Duke) is doing to figure out the path forward:</p>
+<ul>
+<li><a href="https://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/" class="uri">https://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/</a></li>
+<li><a href="https://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/" class="uri">https://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/</a></li>
+<li><a href="https://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/" class="uri">https://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/</a></li>
+</ul>
+</section>
+<section id="unprecedented-access-to-food-safety-and-consumer-recalls" class="level2">
+<h2 class="anchored" data-anchor-id="unprecedented-access-to-food-safety-and-consumer-recalls">Unprecedented access to food safety and consumer recalls</h2>
+<ul>
+<li><a href="https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts">Food safety</a></li>
+<li><a href="https://www.cpsc.gov/Recalls">Consumer products</a></li>
+</ul>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="code" data-listing-date-sort="1704956400000" data-listing-file-modified-sort="1713569329016" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="705">
-<div class="thumbnail">
-<p><a href="./posts/delta-lake-and-azure.html" class="no-external"></a></p><a href="./posts/delta-lake-and-azure.html" class="no-external">
-<p><img src="./posts/img/" class="thumbnail-image"></p>
-</a><p><a href="./posts/delta-lake-and-azure.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/delta-lake-and-azure.html" class="no-external">Accessing data in Azure Data Lake (delta files)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/delta-lake-and-azure.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/delta-lake-and-azure.html" class="no-external">
-<div class="listing-date">
-Jan 11, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-4 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="laser-cutting,maverick-mods" data-listing-date-sort="1696485600000" data-listing-file-modified-sort="1696530583355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="202">
-<div class="thumbnail">
-<p><a href="./posts/maverick cubby holder.html" class="no-external"></a></p><a href="./posts/maverick cubby holder.html" class="no-external">
-<p><img src="./posts/img/cubby-holder.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/maverick cubby holder.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/maverick cubby holder.html" class="no-external">Ford Maverick Truck Cubby Holder</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/maverick cubby holder.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/maverick cubby holder.html" class="no-external">
-<div class="listing-date">
-Oct 5, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-2 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="code" data-listing-date-sort="1693288800000" data-listing-file-modified-sort="1713569333593" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="458">
-<div class="thumbnail">
-<p><a href="./posts/git-and-sagemaker.html" class="no-external"></a></p><a href="./posts/git-and-sagemaker.html" class="no-external">
-<p><img src="./posts/img/" class="thumbnail-image"></p>
-</a><p><a href="./posts/git-and-sagemaker.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/git-and-sagemaker.html" class="no-external">Problems with persistence when in the cloud</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/git-and-sagemaker.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/git-and-sagemaker.html" class="no-external">
-<div class="listing-date">
-Aug 29, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-3 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="rockets" data-listing-date-sort="1691301600000" data-listing-file-modified-sort="1713567053274" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="69">
-<div class="thumbnail">
-<p><a href="./posts/vortico rockets.html" class="no-external"></a></p><a href="./posts/vortico rockets.html" class="no-external">
-<p><img src="./posts/img/vortico.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/vortico rockets.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/vortico rockets.html" class="no-external">Vortico rockets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/vortico rockets.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/vortico rockets.html" class="no-external">
-<div class="listing-date">
-Aug 6, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-1 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="maverick-mods" data-listing-date-sort="1683352800000" data-listing-file-modified-sort="1713566902522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="78">
-<div class="thumbnail">
-<p><a href="./posts/maverick soft topper.html" class="no-external"></a></p><a href="./posts/maverick soft topper.html" class="no-external">
-<p><img src="./posts/img/maverick_softtopper 3.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/maverick soft topper.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/maverick soft topper.html" class="no-external">Ford Maverick Soft Topper installation</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/maverick soft topper.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/maverick soft topper.html" class="no-external">
-<div class="listing-date">
-May 6, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-1 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1663567200000" data-listing-file-modified-sort="1696525704498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="793">
-<div class="thumbnail">
-<p><a href="./posts/chatbot.html" class="no-external"></a></p><a href="./posts/chatbot.html" class="no-external">
-<p><img src="./posts/img/Plantey_saturated.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/chatbot.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/chatbot.html" class="no-external">Chatbot</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/chatbot.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/chatbot.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-4 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1713566949143" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
-<div class="thumbnail">
-<p><a href="./posts/ojs_lyme.html" class="no-external"></a></p><a href="./posts/ojs_lyme.html" class="no-external">
-<p><img src="./posts/img/ojs_bar_chart.JPG" class="thumbnail-image"></p>
-</a><p><a href="./posts/ojs_lyme.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ojs_lyme.html" class="no-external">Observable JS for snappy datascience</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/ojs_lyme.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/ojs_lyme.html" class="no-external">
-<div class="listing-date">
-Aug 4, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-1 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1713566777906" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="285">
-<div class="thumbnail">
-<p><a href="./posts/ai_art.html" class="no-external"></a></p><a href="./posts/ai_art.html" class="no-external">
-<p><img src="./posts/img/starryai/placeholder.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/ai_art.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ai_art.html" class="no-external">AI generated art</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/ai_art.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/ai_art.html" class="no-external">
-<div class="listing-date">
-Aug 3, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-2 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="datascience" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1713566609782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="108">
-<div class="thumbnail">
-<p><a href="./posts/quarto.html" class="no-external"></a></p><a href="./posts/quarto.html" class="no-external">
-<p><img src="./posts/img/welcome.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/quarto.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/quarto.html" class="no-external">What is Quarto?</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/quarto.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/quarto.html" class="no-external">
-<div class="listing-date">
-Jul 28, 2022
-</div>
-<div class="listing-reading-time">
-1 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="datascience,dice,games" data-listing-date-sort="1617516000000" data-listing-file-modified-sort="1696535148724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2208">
-<div class="thumbnail">
-<p><a href="./posts/resin.html" class="no-external"></a></p><a href="./posts/resin.html" class="no-external">
-<p><img src="./posts/img/resin/PXL_20201008_180539533.MP.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/resin.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/resin.html" class="no-external">Resin Dice</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/resin.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/resin.html" class="no-external">
-<div class="listing-date">
-Apr 4, 2021
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-12 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1696530405442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1629">
-<div class="thumbnail">
-<p><a href="./posts/battlebots 2021.html" class="no-external"></a></p><a href="./posts/battlebots 2021.html" class="no-external">
-<p><img src="./posts/img/bb/BB.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/battlebots 2021.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/battlebots 2021.html" class="no-external">BATTLEBOTS 2021</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/battlebots 2021.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/battlebots 2021.html" class="no-external">
-<div class="listing-date">
-Jan 4, 2021
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-9 min
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

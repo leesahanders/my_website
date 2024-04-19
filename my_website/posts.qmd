@@ -1,14 +1,16 @@
 ---
-title: "Projects and radom musings"
+title: "Blog posts and random musings"
 listing:
   contents: posts
   sort: "date desc"
   type: default
-  categories: true
+  categories: false
   sort-ui: false
   filter-ui: false
+  fields: [image, date, title, author, reading-time]
+  image-placeholder: "img/62903-pencil-icon-963181669.png"
 page-layout: full
 title-block-banner: true
 ---
 
-Random pages and projects, all using Quarto's blog capability. 
+Here's some random thoughts, all brought to you by Quarto's blogging capability. 

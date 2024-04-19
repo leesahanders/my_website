@@ -12,7 +12,7 @@ image: "img/welcome.jpg"
 
 The obligatory starting template with a couple links.
 
-## Quarto
+## Quarto blogs
 
 It's a whole new exciting world! And the default project has a lot of exciting files to explore.
 
@@ -21,6 +21,8 @@ I'm using:
 -   <https://quarto.org/docs/websites/website-blog.html>
 
 -   <https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html>
+
+## Quarto
 
 ## Example
 

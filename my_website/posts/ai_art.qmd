@@ -37,7 +37,7 @@ The three that I recommend are:
 
 -   No limit to number of pieces, landscapes only: <https://www.wombo.art/>
 
-There are a bunch more I'm looking forward to trying: <https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another%20one%20of%20the%20best,trained%20with%20millions%20of%20images>
+There are a bunch more I'm looking forward to trying: <https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another one of the best,trained with millions of images>
 
 ## Highlights
 
@@ -62,15 +62,15 @@ Images in : img/starryai/
 
 ![Spacecat](img/starryai/spacecat.png){group="my-gallery"}
 
-![party around a bonfire](img/starryai/party%20around%20a%20bonfire.png){group="my-gallery"}
+![party around a bonfire](img/starryai/party around a bonfire.png){group="my-gallery"}
 
 ![fireflies](img/starryai/fireflies.png){group="my-gallery"}
 
-![thunderstorm over galveston](img/starryai/thunderstorm%20over%20galveston.png){group="my-gallery"}
+![thunderstorm over galveston](img/starryai/thunderstorm over galveston.png){group="my-gallery"}
 
-![woodland creatures having a tea party](img/starryai/woodland%20creatures%20having%20a%20tea%20party.png){group="my-gallery"}
+![woodland creatures having a tea party](img/starryai/woodland creatures having a tea party.png){group="my-gallery"}
 
-![Pacific Rim](img/starryai/pacific%20rim.png){group="my-gallery"}
+![Pacific Rim](img/starryai/pacific rim.png){group="my-gallery"}
 
 ![Mind the Gap](img/starryai/mind_the_gap.png){group="my-gallery"}
 :::
@@ -78,17 +78,17 @@ Images in : img/starryai/
 Images in : img/nightcafe
 
 ::: {layout-ncol="3"}
-![Robotic owl in space](img/nightcafe/robotic%20owl%20in%20space.JPG){group="my-gallery"}
+![Robotic owl in space](img/nightcafe/robotic owl in space.JPG){group="my-gallery"}
 
-![The monster from alien on a date](img/nightcafe/The%20monster%20from%20alien%20on%20a%20date.JPG){group="my-gallery"}
+![The monster from alien on a date](img/nightcafe/The monster from alien on a date.JPG){group="my-gallery"}
 
 ![selfie](img/nightcafe/selfie.JPG){group="my-gallery"}
 
-![brain on fire](img/nightcafe/brain%20on%20fire.JPG){group="my-gallery"}
+![brain on fire](img/nightcafe/brain on fire.JPG){group="my-gallery"}
 
-![cyborg bartender](img/nightcafe/cyborg%20bartender.JPG){group="my-gallery"}
+![cyborg bartender](img/nightcafe/cyborg bartender.JPG){group="my-gallery"}
 
-![ammonite seashell on the beach being worshipped by monsters](img/nightcafe/ammonite%20seashell%20on%20the%20beach%20being%20worshipped%20by%20monsters.JPG){group="my-gallery"}
+![ammonite seashell on the beach being worshipped by monsters](img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG){group="my-gallery"}
 :::
 
 Tips on dealing with displaying images in a rendered quarto document: <https://quarto.org/docs/authoring/figures.html#figure-panels>

@@ -13,10 +13,12 @@ website:
       - text: "Stuff"
         icon: fa-database
         menu:
-          - text: "Projects"
+          - text: "Blog posts"
             href: posts.qmd
+          - text: "Lists"
+            href: lists.qmd         
           - text: "Presentations"
-            href: presentations.qmd            
+            href: presentations.qmd   
           - text: "Recipes"
             href: https://questionable.quarto.pub/recipes/
 

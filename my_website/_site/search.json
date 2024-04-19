@@ -18,7 +18,7 @@
     "href": "posts/vortico rockets.html",
     "title": "Vortico rockets",
     "section": "",
-    "text": "Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects!\n\n\n\nPainted and assembled vortico rockets\n\n\n\n\n\nLaunching the vorticos is best with a smaller rod to prevent wobble on takeoff\n\n\n\n\n\nUp it goes!\n\n\nGet one for yourself here: https://www.rocketarium.com/Rockets/Vortico"
+    "text": "Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects!\nVery fun project spread out over a couple days to assemble, paint, and then finally shoot!\n\n\n\nPainted and assembled vortico rockets\n\n\n\n\n\nLaunching the vorticos is best with a smaller rod to prevent wobble on takeoff\n\n\n\n\n\nUp it goes!\n\n\nGet one for yourself here: https://www.rocketarium.com/Rockets/Vortico"
   },
   {
     "objectID": "posts/sound.html",
@@ -81,7 +81,7 @@
     "href": "posts/maverick soft topper.html",
     "title": "Ford Maverick Soft Topper installation",
     "section": "",
-    "text": "Soft topper is a fabric rear cover for truck beds.\n\n\n\nCarefully placing the clamps\n\n\n\n\n\nThe aluminum frame assembled and pushed back\n\n\n\n\n\nWith the fabric cover snapped in place the rear storage is safe from the elements. Next up to work on the camper modifications!"
+    "text": "Soft topper is a fabric rear cover for truck beds.\nFinally taking the time to actually install it on my Ford Maverick. Went in like a breeze, though there is some loss in visibility once it is on. Here are some of the measurements.\n\n\n\nCarefully placing the clamps\n\n\n\n\n\nThe aluminum frame assembled and pushed back\n\n\n\n\n\nWith the fabric cover snapped in place the rear storage is safe from the elements. Next up to work on the camper modifications!"
   },
   {
     "objectID": "posts/data.html",
@@ -186,7 +186,7 @@
     "href": "posts/ai_art.html#ai-generated-art",
     "title": "AI generated art",
     "section": "AI Generated Art",
-    "text": "AI Generated Art\nAI isn’t a new concept. Using AI’s to generate art isn’t a new concept. Having that available as app that actually creates some pretty fun results is pretty new.\nAs someone whose artistic ambitions always are greater than my actual ability, this has been a surprisingly fun and rewarding technology to play around with.\nThe three that I recommend are:\n\nMy first AI art generating app (5 free pieces of art per day): https://www.starryai.com/\nDoesn’t require log in (5 free pieces of art per day, however using incognito mode or edge counts as a separate user for 15 pieces of art per day): https://creator.nightcafe.studio/\nNo limit to number of pieces, landscapes only: https://www.wombo.art/\n\nThere are a bunch more I’m looking forward to trying: https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another%20one%20of%20the%20best,trained%20with%20millions%20of%20images"
+    "text": "AI Generated Art\nAI isn’t a new concept. Using AI’s to generate art isn’t a new concept. Having that available as app that actually creates some pretty fun results is pretty new.\nAs someone whose artistic ambitions always are greater than my actual ability, this has been a surprisingly fun and rewarding technology to play around with.\nThe three that I recommend are:\n\nMy first AI art generating app (5 free pieces of art per day): https://www.starryai.com/\nDoesn’t require log in (5 free pieces of art per day, however using incognito mode or edge counts as a separate user for 15 pieces of art per day): https://creator.nightcafe.studio/\nNo limit to number of pieces, landscapes only: https://www.wombo.art/\n\nThere are a bunch more I’m looking forward to trying: &lt;https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another one of the best,trained with millions of images&gt;"
   },
   {
     "objectID": "posts/ai_art.html#highlights",
@@ -298,7 +298,7 @@
     "href": "posts/ojs_lyme.html#references",
     "title": "Observable JS for snappy datascience",
     "section": "References",
-    "text": "References\n\nhttps://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122\nhttps://www.hopkinslymetracker.org/\nhttps://quarto.org/docs/interactive/ojs/\nData from: https://www.cdc.gov/lyme/stats/survfaq.html\n\nAdditional data options: https://data.world/datasets/lyme-disease\nSome plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar\nSome various tutorials: https://observablehq.com/tutorials"
+    "text": "References\n\nhttps://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122\nhttps://www.hopkinslymetracker.org/\nhttps://quarto.org/docs/interactive/ojs/\nData from: https://www.cdc.gov/lyme/stats/survfaq.html\\\nAdditional data options: https://data.world/datasets/lyme-disease\nSome plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar\nSome various tutorials: https://observablehq.com/tutorials"
   },
   {
     "objectID": "posts/resin.html",
@@ -331,9 +331,9 @@
   {
     "objectID": "posts.html",
     "href": "posts.html",
-    "title": "Projects and radom musings",
+    "title": "Blog posts and random musings",
     "section": "",
-    "text": "Random pages and projects, all using Quarto’s blog capability.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe importance of good programming\n\n\n\n\n\n\ndatascience\n\n\nopinions\n\n\nhardware\n\n\nsoftware\n\n\n\nCase studies\n\n\n\n\n\nJan 24, 2024\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nFord Maverick Truck Cubby Holder\n\n\n\n\n\n\nlaser-cutting\n\n\nmaverick-mods\n\n\n\nAdding a cubby to that strange little space in the dash\n\n\n\n\n\nOct 5, 2023\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nVortico rockets\n\n\n\n\n\n\nrockets\n\n\n\nThe best rockets don’t need parachutes\n\n\n\n\n\nAug 6, 2023\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nFord Maverick Soft Topper installation\n\n\n\n\n\n\nmaverick-mods\n\n\n\nProtection for rear storage\n\n\n\n\n\nMay 6, 2023\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nSound\n\n\n\n\n\n\nmusic\n\n\n\nMaking noise\n\n\n\n\n\nOct 5, 2022\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nChatbot\n\n\n\n\n\n\ndatascience\n\n\n\nMaking a simple chatbot\n\n\n\n\n\nSep 19, 2022\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nObservable JS for snappy datascience\n\n\n\n\n\n\ndatascience\n\n\n\nUsing OJS to plot Lyme disease cases over time by state\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nAI generated art\n\n\n\n\n\n\nart\n\n\n\nSometimes beautiful, sometimes horrifying\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nA little data goes a long way\n\n\n\n\n\n\ndatascience\n\n\nopinions\n\n\n\nSome of my favorite examples\n\n\n\n\n\nAug 2, 2022\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\ndatascience\n\n\n\nMy new favorite thing\n\n\n\n\n\nJul 28, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nResin Dice\n\n\n\n\n\n\ndatascience\n\n\ndice\n\n\ngames\n\n\n\nAdventures in Resin: Making your own dice\n\n\n\n\n\nApr 4, 2021\n\n\nLisa\n\n\n\n\n\n\n\n\n\n\n\n\nBATTLEBOTS 2021\n\n\n\n\n\n\ndatascience\n\n\n\nIt’s robot fighting time!\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n\n\n\n\nNo matching items"
+    "text": "Here’s some random thoughts, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\nFord Maverick Truck Cubby Holder\n\n\n\n\n\n\n\n\nOct 5, 2023\n\n\nLisa\n\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\n\nProblems with persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nVortico rockets\n\n\n\n\n\n\n\n\nAug 6, 2023\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nFord Maverick Soft Topper installation\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nChatbot\n\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\nObservable JS for snappy datascience\n\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nAI generated art\n\n\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nResin Dice\n\n\n\n\n\n\n\n\nApr 4, 2021\n\n\nLisa\n\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\n\nBATTLEBOTS 2021\n\n\n\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n9 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations_posit.html",
@@ -341,5 +341,187 @@
     "title": "Lisa Anders - questionable.quarto",
     "section": "",
     "text": "Check out some of the presentations I’ve made while working at Posit:\n\n2024\n\n\n\n\n\n&gt;\n\n\nIt’s dangerous to go alone - take this!\n\n\nLisa’s best practices for pain-free data science\n\n\n Check out the slides Check out the repo\n\n\n\n\n\n2023 and 2022\n\n\n\n\n\n&gt;\n\n\nReporting in R with Posit Team\n\n\nUsing the Posit Team set of products to create data science reports.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nImproving app performance\n\n\nAnalyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nReproduceable Workflows\n\n\nCreating reproduceable data science workflows.\n\n\nCheck out the slides"
+  },
+  {
+    "objectID": "lists/sound.html",
+    "href": "lists/sound.html",
+    "title": "Sound",
+    "section": "",
+    "text": "Make beautiful music with technology!"
+  },
+  {
+    "objectID": "lists/sound.html#otomata",
+    "href": "lists/sound.html#otomata",
+    "title": "Sound",
+    "section": "Otomata",
+    "text": "Otomata\nMake beautiful generative algorithm inspired music using cellular automation.\n\nLink to the app: https://marwahaha.github.io/otomata/\n\nSome historic links:\n\nOriginally at (but now no longer works): https://earslap.com/page/otomata.html\nFrom the reddit post: https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/\nGithub: https://github.com/marwahaha/otomata\n\n\n\n\nreddit post"
+  },
+  {
+    "objectID": "lists/sound.html#sonic-pi",
+    "href": "lists/sound.html#sonic-pi",
+    "title": "Sound",
+    "section": "Sonic Pi",
+    "text": "Sonic Pi\nMake your own music using programming with Sonic Pi: https://sonic-pi.net/"
+  },
+  {
+    "objectID": "lists/sound.html#sky-cotl",
+    "href": "lists/sound.html#sky-cotl",
+    "title": "Sound",
+    "section": "Sky COTL",
+    "text": "Sky COTL\nSky Children of Light is a phone game that has a built in music player that I really love. Instead of having to turn pages in sheet music it has floating icons that change shape over the notes you need to play, making it really easy to pick up once you get the hang of it.\n\nSky music library: https://sky-music.github.io/\nSky music app library: https://sky-music.herokuapp.com/songLibrary.html\nSky music app: https://sky-music.herokuapp.com/\n\nHere’s an example of one that I created (an attempt to translate “Regret” by Gackt):\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nView this post on Instagram\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA post shared by @lisa.needs.to.make"
+  },
+  {
+    "objectID": "lists/good-programming.html",
+    "href": "lists/good-programming.html",
+    "title": "The importance of good programming",
+    "section": "",
+    "text": "A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means."
+  },
+  {
+    "objectID": "lists/good-programming.html#uk-post-office-scandal",
+    "href": "lists/good-programming.html#uk-post-office-scandal",
+    "title": "The importance of good programming",
+    "section": "UK Post Office Scandal",
+    "text": "UK Post Office Scandal\n\nDevelopers blamed for the post office scandal?\nVictim testimony\nRemote access and mistakes blamed on post masters, a smoking gun\nExample of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?\nOne of the independent investigators from 2012 breaks silence\nEvidence that back in 2012 the indepent investigators were told about remote access, implying pejury in all later cases\nThey Could, And They Did Change Branch Transaction Data\nMiscarriage of justice - the Rose report\nList of current issues / bugs as of 2017? with the software. One can only imagine how much worse it used to be\nProject manager on the original project discusses his impressions - how not to commission a complex project Inquiry Phase 2: Star Witness – Dave gives it both barrels\nKnown errors in the software, perjury, and lack of disclosure\nInterview with IT - throwing coconuts\nInterview with the other IT\nAttempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?\nThe cover up\nWhy did the lawyer for the post office act this way?\nThinking of alleging or pleading fraud: better read this first"
+  },
+  {
+    "objectID": "lists/data.html",
+    "href": "lists/data.html",
+    "title": "A little data goes a long way",
+    "section": "",
+    "text": "A little data goes a long way… here are some examples that I think illustrte this in a particularly fascinating way (at least to me)."
+  },
+  {
+    "objectID": "lists/data.html#fighting-the-gender-pay-gap-one-twitter-bot-at-a-time",
+    "href": "lists/data.html#fighting-the-gender-pay-gap-one-twitter-bot-at-a-time",
+    "title": "A little data goes a long way",
+    "section": "Fighting the gender pay gap one twitter bot at a time",
+    "text": "Fighting the gender pay gap one twitter bot at a time\nCompanies tweeted for International Women’s Day. Then this account called out their pay gaps.\nCheck out the bot for yourself."
+  },
+  {
+    "objectID": "lists/data.html#for-better-science",
+    "href": "lists/data.html#for-better-science",
+    "title": "A little data goes a long way",
+    "section": "For Better Science",
+    "text": "For Better Science"
+  },
+  {
+    "objectID": "lists/data.html#for-better-science-1",
+    "href": "lists/data.html#for-better-science-1",
+    "title": "A little data goes a long way",
+    "section": "",
+    "text": "The rabbit hole of learning about how bad science is uncovered and recalled started with:\n\nSylvain Lesné is a failed scientist\nCassava fraud and Alzheimer’s capitalism"
+  },
+  {
+    "objectID": "lists/data.html#researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town",
+    "href": "lists/data.html#researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town",
+    "title": "A little data goes a long way",
+    "section": "Researchers uncover the use of coal ash for playground materials in small town",
+    "text": "Researchers uncover the use of coal ash for playground materials in small town\nA recent story about coal ash that was used in a playground and the work the local newspaper and the University (Duke) is doing to figure out the path forward:\n\nhttps://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/\nhttps://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/\nhttps://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/"
+  },
+  {
+    "objectID": "lists/data.html#unprecedented-access-to-food-safety-and-consumer-recalls",
+    "href": "lists/data.html#unprecedented-access-to-food-safety-and-consumer-recalls",
+    "title": "A little data goes a long way",
+    "section": "Unprecedented access to food safety and consumer recalls",
+    "text": "Unprecedented access to food safety and consumer recalls\n\nFood safety\nConsumer products"
+  },
+  {
+    "objectID": "lists.html",
+    "href": "lists.html",
+    "title": "Lists",
+    "section": "",
+    "text": "Have you heard of awesome lists? Probably some of the best compilations out there on there on the internet.\nWith that said here are some random compilations of my own.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\nCoding write-ups and resources\n\n\n1 min\n\n\n\n\nWorkplace articles\n\n\n1 min\n\n\n\n\nThe importance of good programming\n\n\n6 min\n\n\n\n\nSound\n\n\n4 min\n\n\n\n\nA little data goes a long way\n\n\n1 min\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "lists/code.html",
+    "href": "lists/code.html",
+    "title": "Coding write-ups and resources",
+    "section": "",
+    "text": "Source for good articles\nThe true cost of the cloud\nThe case for professional services\nOpinionated article on Python installations\nThis page addresses poetry and conda\nObject oriented programming is the biggest mistake of all time\nGoogle drive is production\nParadox of choice\nWhy we’re leaving the cloud\nMoving beyond “algorithmic bias is a data problem”\nThat keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?” : 4:08 is where he talks about ml\nHere’s What Ethical AI Really Means - YouTube philosophy tube\nPodcast on Stackoverflow Architecture\nData Feminism\nInvisible Women\nQuality Jam 2017: Michael Bolton “A Ridiculously Rapid Introduction to Rapid Software Testing”\nHome not so sweet home gist\n\nIncludes links to pages like Everything that uses configuration files should report where they’re located\n\nHelp linux ate my RAM\nFree images for including in presentations\nDatadog sales people are annoying\nCounting explosions at Unity, a data analysts perspective\nDatabase rebuild incident\nHow do lava lamps help with Internet encryption?\nFree email for testing things: mailtrap\nIf you haven’t done a Pandas data analysis project in awhile, it’s probably not a bad idea to watch this guy’s vids\nPassword purgatory\nEverything I learned about concurrency and reliability I learned at the Waffle House\nPositive affirmations for site reliability engineers\nvaporwave RStudio theme"
+  },
+  {
+    "objectID": "lists/workplace.html",
+    "href": "lists/workplace.html",
+    "title": "Workplace articles",
+    "section": "",
+    "text": "Yolo manifesto\nComfy software\nOpen source as the “new normal”\nOvercoming matrix madness\nMatrix organizations\nOvercoming matrix madness\nCall center burnout\nProduct led vs sales led organizations\nLAYER\nBeing glue\nDiscussion of cognitive load and how big of a barrier it can be\nCognitive load\nHow organizations are like slime molds\nForbes - let the engineers lead (boeing)\nFailure to Learn: the BP refinery disaster"
+  },
+  {
+    "objectID": "posts/delta-lake-and-azure.html",
+    "href": "posts/delta-lake-and-azure.html",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "",
+    "text": "This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it’s easy to find in the future! ## Azure Data Lake"
+  },
+  {
+    "objectID": "posts/delta-lake-and-azure.html#authentication",
+    "href": "posts/delta-lake-and-azure.html#authentication",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Authentication",
+    "text": "Authentication\nAccess your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.\nFor authentication from an R script we’ll be using https://github.com/Azure/AzureStor\nYou’ll need to know:\n\nThe Blob endpoint for your Azure Data Lake storage\nAn Access Key (this can also be done with a Shared Access Signature)\n\nlibrary(AzureStor)\n\nblob_endpoint &lt;- \"https://REDACTED.blob.core.windows.net/\"\n\nbl_endp_key &lt;- storage_endpoint(blob_endpoint, key=\"REDACTED\")\n\n# List containers and files in containers\nlist_storage_containers(bl_endp_key)\ncont1 &lt;- storage_container(bl_endp_key, \"container1\")\nlist_storage_files(cont1)\n\n# Download a file\nstorage_download(cont1, \"/crm_call_center_logs.parquet\")\n\n# Upload a file \nstorage_upload(cont1, \"crm_call_center_logs.parquet\", \"newdir/crm_call_center_logs.parquet\")\nYou can also create and delete containers:\n# Create a container\nnewcont &lt;- create_storage_container(bl_endp_key, \"container3\")\n\n# Create a directory in the container\ncont3 &lt;- storage_container(bl_endp_key, \"container3\")\ncreate_storage_dir(cont3, \"newdir\")\n\n# Delete a container\ndelete_storage_container(newcont)"
+  },
+  {
+    "objectID": "posts/delta-lake-and-azure.html#reading-and-writing-delta-files",
+    "href": "posts/delta-lake-and-azure.html#reading-and-writing-delta-files",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Reading and Writing Delta Files",
+    "text": "Reading and Writing Delta Files\nDelta files can be read by using the sparklyr package: https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html Thanks for the help with the magic incantation below!\nIn order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:\nlibrary(sparklyr)\n\n#Install a local version of Spark\nspark_install(version=3.4)\n\n# Set Spark configuration to be able to read delta tables\nconf &lt;- spark_config()\nconf$`spark.sql.extensions` &lt;- \"io.delta.sql.DeltaSparkSessionExtension\"\nconf$`spark.sql.catalog.spark_catalog` &lt;- \"org.apache.spark.sql.delta.catalog.DeltaCatalog\"\n\n# For spark 3.4 \nconf$sparklyr.defaultPackages &lt;- \"io.delta:delta-core_2.12:2.4.0\"\n\n# Open a connection\nsc &lt;- spark_connect(\"local\", version = 3.4, packages = \"delta\", conf = conf)\n\n# For this example we will use a built-in dataframe to save example data files, including one for delta tables\ntbl_mtcars &lt;- copy_to(sc, mtcars, \"spark_mtcars\")\n\n# Write spark dataframe to disk\nspark_write_csv(tbl_mtcars,  path = \"test_file_csv\", mode = \"overwrite\")\nspark_write_parquet(tbl_mtcars,  path = \"test_file_parquet\", mode = \"overwrite\")\nspark_write_delta(tbl_mtcars,  path = \"test_file_delta\", mode = \"overwrite\")\n\n# Read dataframes into normal memory\nspark_tbl_handle &lt;- spark_read_csv(sc, path = \"test_file_csv\")\nregular_df_csv &lt;- collect(spark_tbl_handle)\nspark_tbl_handle &lt;- spark_read_parquet(sc, path = \"test_file_parquet\")\nregular_df_parquet &lt;- collect(spark_tbl_handle)\nspark_tbl_handle &lt;- spark_read_delta(sc, path = \"test_file_delta\")\nregular_df_delta &lt;- collect(spark_tbl_handle)\n\n# Disconnect\nspark_disconnect(sc)\nYou should now have normal dataframes in your regular R environment that can be used for further analytics:\n\n\n\nimage\n\n\nNote: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”"
+  },
+  {
+    "objectID": "posts/delta-lake-and-azure.html#troubleshooting",
+    "href": "posts/delta-lake-and-azure.html#troubleshooting",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nFrom R:\n# See spark details (troubleshooting)\nspark_config()\nspark_get_java()\nspark_available_versions()\nspark_installed_versions()\n\n# See session details\nutils::sessionInfo() \nFrom bash:\nnamei -l /usr/lib/spark\nRecommended troubleshooting: https://spark.rstudio.com/guides/troubleshooting.html"
+  },
+  {
+    "objectID": "posts/delta-lake-and-azure.html#about",
+    "href": "posts/delta-lake-and-azure.html#about",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "About",
+    "text": "About\n\nAzure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage\n\nAzure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.\n\n\nData Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.\n\n\nA superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.\n\nTLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).\n\n\nDelta Tables: https://docs.delta.io/latest/delta-intro.html\n\nDelta Lake is an open source project that enables building a Lakehouse architecture on top of data lakes. Delta Lake provides ACID transactions, scalable metadata handling, and unifies streaming and batch data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.\n\nYou can check Delta Lake releases here: https://docs.delta.io/latest/releases.html\nTLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).\n\n\n\nimage\nimage"
+  },
+  {
+    "objectID": "posts/git-and-sagemaker.html",
+    "href": "posts/git-and-sagemaker.html",
+    "title": "Problems with persistence when in the cloud",
+    "section": "",
+    "text": "This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!"
+  },
+  {
+    "objectID": "posts/git-and-sagemaker.html#problem-when-on-linux",
+    "href": "posts/git-and-sagemaker.html#problem-when-on-linux",
+    "title": "Problems with persistence when in the cloud",
+    "section": "Problem when on Linux:",
+    "text": "Problem when on Linux:\n\nIn general gitcreds doesn’t work well on linux (which has led to this git issue (Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds ). There is an excellent blog post that is very useful that goes deeper into what is going on: Notes from a data witch - Managing GitHub credentials from R, difficulty level linux"
+  },
+  {
+    "objectID": "posts/git-and-sagemaker.html#problem-when-on-sagemaker",
+    "href": "posts/git-and-sagemaker.html#problem-when-on-sagemaker",
+    "title": "Problems with persistence when in the cloud",
+    "section": "Problem when on Sagemaker:",
+    "text": "Problem when on Sagemaker:\n\nAdditionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist."
+  },
+  {
+    "objectID": "posts/git-and-sagemaker.html#tldr-solution",
+    "href": "posts/git-and-sagemaker.html#tldr-solution",
+    "title": "Problems with persistence when in the cloud",
+    "section": "TLDR Solution:",
+    "text": "TLDR Solution:\nConfigure the global git to cache instead of store the credentials to a local file (from bash/terminal):\ngit config --global credential.helper 'store --file ~/.my-credentials'"
+  },
+  {
+    "objectID": "posts/git-and-sagemaker.html#testing",
+    "href": "posts/git-and-sagemaker.html#testing",
+    "title": "Problems with persistence when in the cloud",
+    "section": "Testing",
+    "text": "Testing\nI’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.\nLoad libraries:\nlibrary(usethis) \nlibrary(gitcreds) \nlibrary(gh) \nlibrary(credentials)\nConfigure the global git to cache instead of store the credentials to a local file (from bash/terminal):\ngit config --global credential.helper 'store --file ~/.my-credentials'\nFrom the documentation:\n\nThe “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.\n\nGenerate the PAT:\nusethis::create_github_token()\nCopy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:\ngitcreds::gitcreds_set()\nCheck that it stored with:\ngitcreds_get()"
+  },
+  {
+    "objectID": "posts/git-and-sagemaker.html#alternatives",
+    "href": "posts/git-and-sagemaker.html#alternatives",
+    "title": "Problems with persistence when in the cloud",
+    "section": "Alternatives",
+    "text": "Alternatives\nThe old way “store a PAT as the GITHUB_PAT environment variable in .Renviron.” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the gh package for generating PATs like in Managing Personal Access Tokens\nAlternatively, there are some git config options from the terminal. See: Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR"
   }
 ]

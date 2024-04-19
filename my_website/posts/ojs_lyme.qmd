@@ -64,10 +64,10 @@ Inputs.table(data, { sort: "date", reverse: true })
 
 ## References
 
--   https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122
--   https://www.hopkinslymetracker.org/
--   https://quarto.org/docs/interactive/ojs/
--   Data from: https://www.cdc.gov/lyme/stats/survfaq.html\
--   Additional data options: https://data.world/datasets/lyme-disease
--   Some plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar
--   Some various tutorials: https://observablehq.com/tutorials
+-   <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122>
+-   <https://www.hopkinslymetracker.org/>
+-   <https://quarto.org/docs/interactive/ojs/>
+-   Data from: <https://www.cdc.gov/lyme/stats/survfaq.html\>
+-   Additional data options: <https://data.world/datasets/lyme-disease>
+-   Some plots options using observable: <https://github.com/observablehq/plot> and <https://observablehq.com/@observablehq/plot-bar>
+-   Some various tutorials: <https://observablehq.com/tutorials>

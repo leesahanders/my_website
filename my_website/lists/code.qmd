@@ -1,0 +1,82 @@
+---
+title: "Coding write-ups and resources"
+description: "Random assortment of resources I've found insightful"
+author: "Lisa"
+date: "2024-04-19"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - datascience
+  - opinions
+  - hardware
+  - software
+---
+
+[Source for good articles](https://news.ycombinator.com/news)
+
+[The true cost of the cloud](https://a16z.com/2021/05/27/cost-of-cloud-paradox-market-cap-cloud-lifecycle-scale-growth-repatriation-optimization/)
+
+[The case for professional services](https://medium.com/8vc-news/the-case-for-professional-services-62b9921c6cd6)
+
+[Opinionated article on Python installations](https://www.bitecode.dev/p/relieving-your-python-packaging-pain)
+
+[This page addresses poetry and conda](https://www.bitecode.dev/p/why-not-tell-people-to-simply-use)
+
+[Object oriented programming is the biggest mistake of all time](https://suzdalnitski.medium.com/oop-will-make-you-suffer-846d072b4dce)
+
+[Google drive is production](https://vicki.substack.com/p/google-drive-is-production)
+
+[Paradox of choice](https://cxl.com/blog/does-offering-more-choices-actually-tank-conversions/) 
+
+[Why we're leaving the cloud](https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0)
+
+[Moving beyond “algorithmic bias is a data problem”](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/)
+
+[That keynote talk "USENIX Security '18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?"](https://www.youtube.com/watch?v=ajGX7odA87k) : 4:08 is where he talks about ml
+
+[Here's What Ethical AI Really Means - YouTube philosophy tube](https://www.youtube.com/watch?v=AaU6tI2pb3M)
+
+[Podcast on Stackoverflow Architecture](https://hanselminutes.com/847/engineering-stack-overflow-with-roberta-arcoverde)
+
+[Data Feminism](https://www.goodreads.com/book/show/51777543-data-feminism?ref=nav_sb_ss_1_8)
+
+[Invisible Women](https://www.goodreads.com/book/show/41104077-invisible-women?ref=nav_sb_ss_1_15)
+
+[Quality Jam 2017: Michael Bolton "A Ridiculously Rapid Introduction to Rapid Software Testing"](https://www.youtube.com/watch?t=374&v=AS2kuD--z44&feature=youtu.be)
+
+[Home not so sweet home gist](https://gist.github.com/sharadhr/39b804236c1941e9c30d90af828ad41e) 
+
+- Includes links to pages like [Everything that uses configuration files should report where they're located](https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReportConfigFileLocations)
+
+[Help linux ate my RAM](https://www.linuxatemyram.com/)
+
+[Free images for including in presentations](https://unsplash.com/)
+
+[Datadog sales people are annoying](https://www.reddit.com/r/devops/comments/vzpqsw/getting_harrassed_by_datadog_rant_suggestions/)
+
+[Counting explosions at Unity, a data analysts perspective](https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&publication_id=27849&post_id=137046759&utm_medium=email&utm_content=share&utm_campaign=email-share&triggerShare=true&isFreemail=true&r=yxnx)
+
+[Database rebuild incident](https://resend.com/blog/incident-report-for-february-21-2024) 
+
+[How do lava lamps help with Internet encryption?](https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/)
+
+Free email for testing things: mailtrap
+
+[If you haven't done a Pandas data analysis project in awhile, it's probably not a bad idea to watch this guy's vids](https://www.youtube.com/@robmulla/search?query=pandas)
+
+[Password purgatory](https://www.troyhunt.com/sending-spammers-to-password-purgatory-with-microsoft-power-automate-and-cloudflare-workers-kv/)
+
+[Everything I learned about concurrency and reliability I learned at the Waffle House](https://www.youtube.com/watch?v=Xty-gzzIkBc)
+
+[Positive affirmations for site reliability engineers](https://youtu.be/ia8Q51ouA_s?si=2xOQGQO-LYvB3fKZ) 
+
+[vaporwave RStudio theme](https://github.com/cobriant/vaporwave.rstheme)

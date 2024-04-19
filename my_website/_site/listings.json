@@ -24,18 +24,27 @@
   {
     "listing": "/posts.html",
     "items": [
-      "/posts/good-programming.html",
+      "/posts/delta-lake-and-azure.html",
       "/posts/maverick cubby holder.html",
+      "/posts/git-and-sagemaker.html",
       "/posts/vortico rockets.html",
       "/posts/maverick soft topper.html",
-      "/posts/sound.html",
       "/posts/chatbot.html",
       "/posts/ojs_lyme.html",
       "/posts/ai_art.html",
-      "/posts/data.html",
       "/posts/quarto.html",
       "/posts/resin.html",
       "/posts/battlebots 2021.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/data.html"
     ]
   }
 ]

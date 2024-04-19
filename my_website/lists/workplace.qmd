@@ -1,0 +1,52 @@
+---
+title: "Workplace articles"
+description: "Various articles I've read that I've found useful for understanding my workplace and how to work more productively within it"
+author: "Lisa"
+date: "2024-04-19"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - datascience
+  - opinions
+  - hardware
+  - software
+---
+
+[Yolo manifesto](https://andersoncardoso.github.io/ydd/) 
+
+[Comfy software](https://catgirl.ai/log/comfy-software/)
+
+[Open source as the "new normal"](https://www.theverge.com/ad/21520136/open-source-community-is-building-better-businesses)
+
+[Overcoming matrix madness](https://www.gallup.com/workplace/354935/teams-bosses-overcoming-matrix-madness.aspx)
+
+[Matrix organizations](https://www.pmi.org/learning/library/matrix-organization-structure-reason-evolution-1837)
+
+[Overcoming matrix madness](https://www.gallup.com/workplace/354935/teams-bosses-overcoming-matrix-madness.aspx)
+
+[Call center burnout](https://www.convoso.com/blog/how-to-overcome-call-center-burnout/)
+
+[Product led vs sales led organizations](https://medium.com/@StartupBusinesstips/product-led-vs-sales-led-saas-growth-or-both-25bb5e078822)
+
+[LAYER](https://www.tsia.com/blog/laer-explained-a-new-customer-engagement-model-for-a-new-business-era)
+
+[Being glue](https://noidea.dog/glue)
+
+[Discussion of cognitive load and how big of a barrier it can be](https://queue.acm.org/detail.cfm?id=3595878)
+
+[Cognitive load](https://github.com/zakirullin/cognitive-load)
+
+[How organizations are like slime molds](https://komoroske.com/slime-mold/)
+
+[Forbes - let the engineers lead (boeing)](https://www.forbes.com/sites/gautammukunda/2024/02/22/let-the-engineers-lead-america-needs-boeing-to-be-great/?sh=4327814630e1)
+
+[Failure to Learn: the BP refinery disaster](https://www.goodreads.com/book/show/8586375-failure-to-learn)
