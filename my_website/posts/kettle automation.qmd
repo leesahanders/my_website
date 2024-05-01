@@ -1,0 +1,60 @@
+---
+title: "Hey Google - make me coffee!"
+description: ""
+author: "Lisa"
+date: "2024-05-01"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+image: "img/home-automation.png"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - hardware
+  - code
+---
+
+I bought a smart kettle ([goveelife-smart-electric-kettle-lite](https://us.govee.com/products/goveelife-smart-electric-kettle-lite)) with the dream of being able to press a button from bed in order to have hot water available for my coffee first thing in the morning. 
+
+While this was great, it relies on bluetooth for the app to work. Normally I keep bluetooth off on my phone ([it's safer that way, plus a longer battery!](https://www.armis.com/research/blueborne/))
+
+So I automated it! 
+
+### Steps
+
+These steps were followed with my Android 
+
+Step 1: Install and configure the Govee app to be connected to your water kettle 
+
+Step 2: Install and configure Google Home and integrate with the Govee App. Assign your kettle to the kitchen (or wherever, you do you boo). Optional: Install and configure Google Assistant, for the voice activation. 
+
+Step 3: Create a Google Home Routine
+
+- This is a personal routine, so we have more options (like being able to adjust phone settings if needed). 
+- Starters: You can have this trigger for different things, like having it be voice activated when you say "hey google, make coffee!", or when an alarm is dismissed, or at a specific time, etc. 
+- Actions: Adjust home device, turn on the smart kettle (somehow by activating this way, I didn't need to turn on bluetooth! Which is great, that's the whole step I wanted to skip)
+
+Step 4: Test that the routine works 
+
+Step 5: Add the routine as an icon to the phone screen (since voice activation isn't my jam). Long click on the routine you've created and then click on the icon with the arrow over the phone to create a widget and place wherever you want on your phone screen. 
+
+![Creating a widget](img/home-automation-widget.png)
+
+Step 6: Enjoy :-)
+
+### What would I do differently next time? 
+
+There are some cool button options that look they have integration, or even a vibration sensor: 
+
+- [Smart button](https://us.govee.com/products/goveelife-smart-mini-double-button-switch?variantId=43252505313465)
+- [Vibration sensor](https://us.govee.com/products/goveelife-wireless-mini-vibration-sensor) 
+
+Honestly though, this suits my ~~lazy~~ efficient self just fine. 
+
+
+

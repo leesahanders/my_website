@@ -5,36 +5,35 @@
       "/posts/battlebots 2021.html",
       "/posts/resin.html",
       "/posts/quarto.html",
-      "/posts/data.html",
+      "/lists/data.html",
       "/posts/ai_art.html",
+      "/lists/phone_games.html",
       "/posts/ojs_lyme.html",
       "/posts/chatbot.html",
-      "/posts/sound.html",
+      "/lists/sound.html",
       "/posts/maverick soft topper.html",
       "/posts/vortico rockets.html",
+      "/posts-no-pictures/git-and-sagemaker.html",
       "/posts/maverick cubby holder.html",
-      "/posts/good-programming.html",
+      "/posts-no-pictures/delta-lake-and-azure.html",
+      "/lists/good-programming.html",
+      "/lists/workplace.html",
+      "/lists/code.html",
+      "/posts/kettle automation.html",
       "/presentations_posit.html",
-      "/posts.html",
+      "/posts-no-pictures.html",
       "/presentations.html",
+      "/lists.html",
       "/index.html",
+      "/posts.html",
       "/about.html"
     ]
   },
   {
-    "listing": "/posts.html",
+    "listing": "/posts-no-pictures.html",
     "items": [
-      "/posts/delta-lake-and-azure.html",
-      "/posts/maverick cubby holder.html",
-      "/posts/git-and-sagemaker.html",
-      "/posts/vortico rockets.html",
-      "/posts/maverick soft topper.html",
-      "/posts/chatbot.html",
-      "/posts/ojs_lyme.html",
-      "/posts/ai_art.html",
-      "/posts/quarto.html",
-      "/posts/resin.html",
-      "/posts/battlebots 2021.html"
+      "/posts-no-pictures/delta-lake-and-azure.html",
+      "/posts-no-pictures/git-and-sagemaker.html"
     ]
   },
   {
@@ -44,7 +43,23 @@
       "/lists/workplace.html",
       "/lists/good-programming.html",
       "/lists/sound.html",
+      "/lists/phone_games.html",
       "/lists/data.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/kettle automation.html",
+      "/posts/maverick cubby holder.html",
+      "/posts/vortico rockets.html",
+      "/posts/maverick soft topper.html",
+      "/posts/chatbot.html",
+      "/posts/ojs_lyme.html",
+      "/posts/ai_art.html",
+      "/posts/quarto.html",
+      "/posts/resin.html",
+      "/posts/battlebots 2021.html"
     ]
   }
 ]

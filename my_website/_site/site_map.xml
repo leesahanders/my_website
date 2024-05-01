@@ -10,11 +10,156 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Wed, 24 Jan 2024 07:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 01 May 2024 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Hey Google - make me coffee!</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/posts/kettle automation.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I bought a smart kettle (<a href="https://us.govee.com/products/goveelife-smart-electric-kettle-lite">goveelife-smart-electric-kettle-lite</a>) with the dream of being able to press a button from bed in order to have hot water available for my coffee first thing in the morning.</p>
+<p>While this was great, it relies on bluetooth for the app to work. Normally I keep bluetooth off on my phone (<a href="https://www.armis.com/research/blueborne/">it’s safer that way, plus a longer battery!</a>)</p>
+<p>So I automated it!</p>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps</h3>
+<p>These steps were followed with my Android</p>
+<p>Step 1: Install and configure the Govee app to be connected to your water kettle</p>
+<p>Step 2: Install and configure Google Home and integrate with the Govee App. Assign your kettle to the kitchen (or wherever, you do you boo). Optional: Install and configure Google Assistant, for the voice activation.</p>
+<p>Step 3: Create a Google Home Routine</p>
+<ul>
+<li>This is a personal routine, so we have more options (like being able to adjust phone settings if needed).</li>
+<li>Starters: You can have this trigger for different things, like having it be voice activated when you say “hey google, make coffee!”, or when an alarm is dismissed, or at a specific time, etc.</li>
+<li>Actions: Adjust home device, turn on the smart kettle (somehow by activating this way, I didn’t need to turn on bluetooth! Which is great, that’s the whole step I wanted to skip)</li>
+</ul>
+<p>Step 4: Test that the routine works</p>
+<p>Step 5: Add the routine as an icon to the phone screen (since voice activation isn’t my jam). Long click on the routine you’ve created and then click on the icon with the arrow over the phone to create a widget and place wherever you want on your phone screen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/home-automation-widget.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Creating a widget"><img src="https://questionable.quarto.pub/blog/posts/img/home-automation-widget.png" class="img-fluid figure-img" alt="Creating a widget"></a></p>
+<figcaption>Creating a widget</figcaption>
+</figure>
+</div>
+<p>Step 6: Enjoy :-)</p>
+</section>
+<section id="what-would-i-do-differently-next-time" class="level3">
+<h3 class="anchored" data-anchor-id="what-would-i-do-differently-next-time">What would I do differently next time?</h3>
+<p>There are some cool button options that look they have integration, or even a vibration sensor:</p>
+<ul>
+<li><a href="https://us.govee.com/products/goveelife-smart-mini-double-button-switch?variantId=43252505313465">Smart button</a></li>
+<li><a href="https://us.govee.com/products/goveelife-wireless-mini-vibration-sensor">Vibration sensor</a></li>
+</ul>
+<p>Honestly though, this suits my <del>lazy</del> efficient self just fine.</p>
+
+
+
+</section>
+
+ ]]></description>
+  <category>hardware</category>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/posts/kettle automation.html</guid>
+  <pubDate>Wed, 01 May 2024 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/posts/img/home-automation.png" medium="image" type="image/png" height="233" width="144"/>
+</item>
+<item>
+  <title>Workplace articles</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/lists/workplace.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="https://andersoncardoso.github.io/ydd/">Yolo manifesto</a></p>
+<p><a href="https://catgirl.ai/log/comfy-software/">Comfy software</a></p>
+<p><a href="https://www.theverge.com/ad/21520136/open-source-community-is-building-better-businesses">Open source as the “new normal”</a></p>
+<p><a href="https://www.gallup.com/workplace/354935/teams-bosses-overcoming-matrix-madness.aspx">Overcoming matrix madness</a></p>
+<p><a href="https://www.pmi.org/learning/library/matrix-organization-structure-reason-evolution-1837">Matrix organizations</a></p>
+<p><a href="https://www.gallup.com/workplace/354935/teams-bosses-overcoming-matrix-madness.aspx">Overcoming matrix madness</a></p>
+<p><a href="https://www.convoso.com/blog/how-to-overcome-call-center-burnout/">Call center burnout</a></p>
+<p><a href="https://medium.com/@StartupBusinesstips/product-led-vs-sales-led-saas-growth-or-both-25bb5e078822">Product led vs sales led organizations</a></p>
+<p><a href="https://www.tsia.com/blog/laer-explained-a-new-customer-engagement-model-for-a-new-business-era">LAYER</a></p>
+<p><a href="https://noidea.dog/glue">Being glue</a></p>
+<p><a href="https://queue.acm.org/detail.cfm?id=3595878">Discussion of cognitive load and how big of a barrier it can be</a></p>
+<p><a href="https://github.com/zakirullin/cognitive-load">Cognitive load</a></p>
+<p><a href="https://komoroske.com/slime-mold/">How organizations are like slime molds</a></p>
+<p><a href="https://www.forbes.com/sites/gautammukunda/2024/02/22/let-the-engineers-lead-america-needs-boeing-to-be-great/?sh=4327814630e1">Forbes - let the engineers lead (boeing)</a></p>
+<p><a href="https://www.goodreads.com/book/show/8586375-failure-to-learn">Failure to Learn: the BP refinery disaster</a></p>
+
+
+
+ ]]></description>
+  <category>datascience</category>
+  <category>opinions</category>
+  <category>hardware</category>
+  <category>software</category>
+  <guid>https://questionable.quarto.pub/blog/lists/workplace.html</guid>
+  <pubDate>Fri, 19 Apr 2024 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
+</item>
+<item>
+  <title>Coding write-ups and resources</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/lists/code.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><a href="https://news.ycombinator.com/news">Source for good articles</a></p>
+<p><a href="https://a16z.com/2021/05/27/cost-of-cloud-paradox-market-cap-cloud-lifecycle-scale-growth-repatriation-optimization/">The true cost of the cloud</a></p>
+<p><a href="https://medium.com/8vc-news/the-case-for-professional-services-62b9921c6cd6">The case for professional services</a></p>
+<p><a href="https://www.bitecode.dev/p/relieving-your-python-packaging-pain">Opinionated article on Python installations</a></p>
+<p><a href="https://www.bitecode.dev/p/why-not-tell-people-to-simply-use">This page addresses poetry and conda</a></p>
+<p><a href="https://suzdalnitski.medium.com/oop-will-make-you-suffer-846d072b4dce">Object oriented programming is the biggest mistake of all time</a></p>
+<p><a href="https://vicki.substack.com/p/google-drive-is-production">Google drive is production</a></p>
+<p><a href="https://cxl.com/blog/does-offering-more-choices-actually-tank-conversions/">Paradox of choice</a></p>
+<p><a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">Why we’re leaving the cloud</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/">Moving beyond “algorithmic bias is a data problem”</a></p>
+<p><a href="https://www.youtube.com/watch?v=ajGX7odA87k">That keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”</a> : 4:08 is where he talks about ml</p>
+<p><a href="https://www.youtube.com/watch?v=AaU6tI2pb3M">Here’s What Ethical AI Really Means - YouTube philosophy tube</a></p>
+<p><a href="https://hanselminutes.com/847/engineering-stack-overflow-with-roberta-arcoverde">Podcast on Stackoverflow Architecture</a></p>
+<p><a href="https://www.goodreads.com/book/show/51777543-data-feminism?ref=nav_sb_ss_1_8">Data Feminism</a></p>
+<p><a href="https://www.goodreads.com/book/show/41104077-invisible-women?ref=nav_sb_ss_1_15">Invisible Women</a></p>
+<p><a href="https://www.youtube.com/watch?t=374&amp;v=AS2kuD--z44&amp;feature=youtu.be">Quality Jam 2017: Michael Bolton “A Ridiculously Rapid Introduction to Rapid Software Testing”</a></p>
+<p><a href="https://gist.github.com/sharadhr/39b804236c1941e9c30d90af828ad41e">Home not so sweet home gist</a></p>
+<ul>
+<li>Includes links to pages like <a href="https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReportConfigFileLocations">Everything that uses configuration files should report where they’re located</a></li>
+</ul>
+<p><a href="https://www.linuxatemyram.com/">Help linux ate my RAM</a></p>
+<p><a href="https://unsplash.com/">Free images for including in presentations</a></p>
+<p><a href="https://www.reddit.com/r/devops/comments/vzpqsw/getting_harrassed_by_datadog_rant_suggestions/">Datadog sales people are annoying</a></p>
+<p><a href="https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&amp;publication_id=27849&amp;post_id=137046759&amp;utm_medium=email&amp;utm_content=share&amp;utm_campaign=email-share&amp;triggerShare=true&amp;isFreemail=true&amp;r=yxnx">Counting explosions at Unity, a data analysts perspective</a></p>
+<p><a href="https://resend.com/blog/incident-report-for-february-21-2024">Database rebuild incident</a></p>
+<p><a href="https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/">How do lava lamps help with Internet encryption?</a></p>
+<p>Free email for testing things: mailtrap</p>
+<p><a href="https://www.youtube.com/@robmulla/search?query=pandas">If you haven’t done a Pandas data analysis project in awhile, it’s probably not a bad idea to watch this guy’s vids</a></p>
+<p><a href="https://www.troyhunt.com/sending-spammers-to-password-purgatory-with-microsoft-power-automate-and-cloudflare-workers-kv/">Password purgatory</a></p>
+<p><a href="https://www.youtube.com/watch?v=Xty-gzzIkBc">Everything I learned about concurrency and reliability I learned at the Waffle House</a></p>
+<p><a href="https://youtu.be/ia8Q51ouA_s?si=2xOQGQO-LYvB3fKZ">Positive affirmations for site reliability engineers</a></p>
+<p><a href="https://github.com/cobriant/vaporwave.rstheme">vaporwave RStudio theme</a></p>
+
+
+
+ ]]></description>
+  <category>datascience</category>
+  <category>opinions</category>
+  <category>hardware</category>
+  <category>software</category>
+  <guid>https://questionable.quarto.pub/blog/lists/code.html</guid>
+  <pubDate>Fri, 19 Apr 2024 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
+</item>
 <item>
   <title>The importance of good programming</title>
   <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/good-programming.html</link>
+  <link>https://questionable.quarto.pub/blog/lists/good-programming.html</link>
   <description><![CDATA[ 
 
 
@@ -96,9 +241,188 @@
   <category>opinions</category>
   <category>hardware</category>
   <category>software</category>
-  <guid>https://questionable.quarto.pub/blog/posts/good-programming.html</guid>
+  <guid>https://questionable.quarto.pub/blog/lists/good-programming.html</guid>
   <pubDate>Wed, 24 Jan 2024 07:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/" medium="image"/>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
+</item>
+<item>
+  <title>Accessing data in Azure Data Lake (delta files)</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/posts-no-pictures/delta-lake-and-azure.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it’s easy to find in the future!</p>
+<section id="azure-data-lake" class="level2">
+<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
+<section id="set-up" class="level3">
+<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
+<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
+<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
+<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
+<p>Steps:</p>
+<ol type="1">
+<li><p>Go to storage account</p></li>
+<li><p>Create and give it a name</p></li>
+<li><p>Select: LRS</p></li>
+<li><p>Switch to premium: block blobs</p></li>
+<li><p>Change to hierarchical blob</p></li>
+<li><p>Set tags:</p></li>
+</ol>
+<ul>
+<li><p>rs:owner</p></li>
+<li><p>rs:project = soleng</p></li>
+<li><p>rs:environment = dev</p></li>
+</ul>
+<ol start="7" type="1">
+<li>Once in just need access keys or shared access signature in order to gain access</li>
+</ol>
+</section>
+<section id="add-data" class="level3">
+<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
+<p>You can add data manually by creating a container and then using the upload icon.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="authentication" class="level2">
+<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
+<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
+<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
+<p>You’ll need to know:</p>
+<ul>
+<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
+<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
+</ul>
+<pre><code>library(AzureStor)
+
+blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
+
+bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
+
+# List containers and files in containers
+list_storage_containers(bl_endp_key)
+cont1 &lt;- storage_container(bl_endp_key, "container1")
+list_storage_files(cont1)
+
+# Download a file
+storage_download(cont1, "/crm_call_center_logs.parquet")
+
+# Upload a file 
+storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
+<p>You can also create and delete containers:</p>
+<pre><code># Create a container
+newcont &lt;- create_storage_container(bl_endp_key, "container3")
+
+# Create a directory in the container
+cont3 &lt;- storage_container(bl_endp_key, "container3")
+create_storage_dir(cont3, "newdir")
+
+# Delete a container
+delete_storage_container(newcont)</code></pre>
+</section>
+<section id="reading-and-writing-delta-files" class="level2">
+<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
+<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
+<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
+<pre><code>library(sparklyr)
+
+#Install a local version of Spark
+spark_install(version=3.4)
+
+# Set Spark configuration to be able to read delta tables
+conf &lt;- spark_config()
+conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
+conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+
+# For spark 3.4 
+conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
+
+# Open a connection
+sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
+
+# For this example we will use a built-in dataframe to save example data files, including one for delta tables
+tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
+
+# Write spark dataframe to disk
+spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
+spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
+spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
+
+# Read dataframes into normal memory
+spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
+regular_df_csv &lt;- collect(spark_tbl_handle)
+spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
+regular_df_parquet &lt;- collect(spark_tbl_handle)
+spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
+regular_df_delta &lt;- collect(spark_tbl_handle)
+
+# Disconnect
+spark_disconnect(sc)</code></pre>
+<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<p>From R:</p>
+<pre><code># See spark details (troubleshooting)
+spark_config()
+spark_get_java()
+spark_available_versions()
+spark_installed_versions()
+
+# See session details
+utils::sessionInfo() </code></pre>
+<p>From bash:</p>
+<pre><code>namei -l /usr/lib/spark</code></pre>
+<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
+</section>
+<section id="about" class="level2">
+<h2 class="anchored" data-anchor-id="about">About</h2>
+<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
+<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
+<blockquote class="blockquote">
+<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
+</blockquote>
+<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
+</section>
+<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
+<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
+<blockquote class="blockquote">
+<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
+</blockquote>
+<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
+<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
+
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/posts-no-pictures/delta-lake-and-azure.html</guid>
+  <pubDate>Thu, 11 Jan 2024 07:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/posts-no-pictures/img/" medium="image"/>
 </item>
 <item>
   <title>Ford Maverick Truck Cubby Holder</title>
@@ -172,6 +496,69 @@
   <media:content url="https://questionable.quarto.pub/blog/posts/img/cubby-holder.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
+  <title>Problems with persistence when in the cloud</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/posts-no-pictures/git-and-sagemaker.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!</p>
+<section id="problem-when-on-linux" class="level2">
+<h2 class="anchored" data-anchor-id="problem-when-on-linux">Problem when on Linux:</h2>
+<blockquote class="blockquote">
+<p>In general gitcreds doesn’t work well on linux (which has led to this git issue <a href="https://github.com/r-lib/gitcreds/issues/47">(Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds</a> ). There is an excellent blog post that is very useful that goes deeper into what is going on: <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">Notes from a data witch - Managing GitHub credentials from R, difficulty level linux</a></p>
+</blockquote>
+</section>
+<section id="problem-when-on-sagemaker" class="level2">
+<h2 class="anchored" data-anchor-id="problem-when-on-sagemaker">Problem when on Sagemaker:</h2>
+<blockquote class="blockquote">
+<p>Additionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist.</p>
+</blockquote>
+</section>
+<section id="tldr-solution" class="level2">
+<h2 class="anchored" data-anchor-id="tldr-solution">TLDR Solution:</h2>
+<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
+<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p>I’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.</p>
+<p>Load libraries:</p>
+<pre><code>library(usethis) 
+library(gitcreds) 
+library(gh) 
+library(credentials)</code></pre>
+<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
+<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
+<p>From the documentation:</p>
+<blockquote class="blockquote">
+<p>The “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.</p>
+</blockquote>
+<p>Generate the PAT:</p>
+<p><code>usethis::create_github_token()</code></p>
+<p>Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:</p>
+<p><code>gitcreds::gitcreds_set()</code></p>
+<p>Check that it stored with:</p>
+<p><code>gitcreds_get()</code></p>
+</section>
+<section id="alternatives" class="level2">
+<h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
+<p>The old way “store a PAT as the <code>GITHUB_PAT</code> environment variable in <code>.Renviron.</code>” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the <code>gh</code> package for generating PATs like in <a href="https://gh.r-lib.org/articles/managing-personal-access-tokens.html">Managing Personal Access Tokens</a></p>
+<p>Alternatively, there are some git config options from the terminal. See: <a href="https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux">Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/posts-no-pictures/git-and-sagemaker.html</guid>
+  <pubDate>Tue, 29 Aug 2023 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/posts-no-pictures/img/" medium="image"/>
+</item>
+<item>
   <title>Vortico rockets</title>
   <dc:creator>Lisa </dc:creator>
   <link>https://questionable.quarto.pub/blog/posts/vortico rockets.html</link>
@@ -182,6 +569,7 @@
 
 
 <p>Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects!</p>
+<p>Very fun project spread out over a couple days to assemble, paint, and then finally shoot!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/vortico.jpg" class="img-fluid figure-img"></p>
@@ -221,6 +609,7 @@
 
 
 <p><a href="https://softopper.com/">Soft topper</a> is a fabric rear cover for truck beds.</p>
+<p>Finally taking the time to actually install it on my Ford Maverick. Went in like a breeze, though there is some loss in visibility once it is on. Here are some of the measurements.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper.jpg" class="img-fluid figure-img"></p>
@@ -251,7 +640,7 @@
 <item>
   <title>Sound</title>
   <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/sound.html</link>
+  <link>https://questionable.quarto.pub/blog/lists/sound.html</link>
   <description><![CDATA[ 
 
 
@@ -273,7 +662,7 @@
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://questionable.quarto.pub/blog/lists/img/otomata.jpg" class="img-fluid figure-img"></p>
 <figcaption>reddit post</figcaption>
 </figure>
 </div>
@@ -376,9 +765,9 @@ View this post on Instagram
 
  ]]></description>
   <category>music</category>
-  <guid>https://questionable.quarto.pub/blog/posts/sound.html</guid>
+  <guid>https://questionable.quarto.pub/blog/lists/sound.html</guid>
   <pubDate>Wed, 05 Oct 2022 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/otomata.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chatbot</title>
@@ -639,6 +1028,123 @@ font-style: inherit;">"Send"</span>,</span></code></pre></div>
   <guid>https://questionable.quarto.pub/blog/posts/chatbot.html</guid>
   <pubDate>Mon, 19 Sep 2022 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/posts/img/Plantey_saturated.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Phone games</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/lists/phone_games.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse" class="level2">
+<h2 class="anchored" data-anchor-id="random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse">Random assortment of games that I particularly enjoy and would endorse</h2>
+<section id="seedship" class="level3">
+<h3 class="anchored" data-anchor-id="seedship">Seedship</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://questionable.quarto.pub/blog/lists/img/seedship.png" class="img-fluid figure-img"></p>
+<figcaption>Seedship</figcaption>
+</figure>
+</div>
+<p>A fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.</p>
+<p>Link: <a href="https://philome.la/johnayliff/seedship/play/index.html" class="uri">https://philome.la/johnayliff/seedship/play/index.html</a></p>
+</section>
+<section id="garticphone" class="level3">
+<h3 class="anchored" data-anchor-id="garticphone">Garticphone</h3>
+<p><a href="https://garticphone.com/" class="uri">https://garticphone.com/</a></p>
+</section>
+<section id="urban-dead" class="level3">
+<h3 class="anchored" data-anchor-id="urban-dead">Urban dead</h3>
+<p><a href="https://www.urbandead.com/" class="uri">https://www.urbandead.com/</a></p>
+</section>
+<section id="robot-odyssey" class="level3">
+<h3 class="anchored" data-anchor-id="robot-odyssey">Robot Odyssey</h3>
+<p><a href="https://robotodyssey.online/" class="uri">https://robotodyssey.online/</a></p>
+</section>
+<section id="skribl.io" class="level3">
+<h3 class="anchored" data-anchor-id="skribl.io">skribl.io</h3>
+<p><a href="https://skribbl.io/" class="uri">https://skribbl.io/</a></p>
+</section>
+<section id="trickser-cards" class="level3">
+<h3 class="anchored" data-anchor-id="trickser-cards">Trickser cards</h3>
+<p><a href="https://www.trickstercards.com/home/euchre/" class="uri">https://www.trickstercards.com/home/euchre/</a></p>
+</section>
+<section id="codenames" class="level3">
+<h3 class="anchored" data-anchor-id="codenames">Codenames</h3>
+<p><a href="https://codenames.game/" class="uri">https://codenames.game/</a></p>
+</section>
+<section id="mario-cart-tour" class="level3">
+<h3 class="anchored" data-anchor-id="mario-cart-tour">Mario Cart Tour</h3>
+<p>Track your coverage gaps with: <a href="https://www.mkttoolbox.com/login/?ret_url=%2F" class="uri">https://www.mkttoolbox.com/login/?ret_url=%2F</a></p>
+</section>
+<section id="semantle" class="level3">
+<h3 class="anchored" data-anchor-id="semantle">Semantle</h3>
+<p><a href="https://semantle.com/" class="uri">https://semantle.com/</a></p>
+</section>
+<section id="sky-children-of-light" class="level3">
+<h3 class="anchored" data-anchor-id="sky-children-of-light">Sky Children of Light</h3>
+</section>
+<section id="home-quest" class="level3">
+<h3 class="anchored" data-anchor-id="home-quest">Home Quest</h3>
+</section>
+<section id="hungry-shark" class="level3">
+<h3 class="anchored" data-anchor-id="hungry-shark">Hungry Shark</h3>
+</section>
+<section id="mine-sweeper" class="level3">
+<h3 class="anchored" data-anchor-id="mine-sweeper">Mine Sweeper</h3>
+</section>
+<section id="neko-atsune" class="level3">
+<h3 class="anchored" data-anchor-id="neko-atsune">Neko Atsune</h3>
+</section>
+<section id="noras-dream" class="level3">
+<h3 class="anchored" data-anchor-id="noras-dream">Nora’s Dream</h3>
+</section>
+<section id="spaceflight-simulator" class="level3">
+<h3 class="anchored" data-anchor-id="spaceflight-simulator">SpaceFlight Simulator</h3>
+</section>
+<section id="wordle" class="level3">
+<h3 class="anchored" data-anchor-id="wordle">Wordle</h3>
+</section>
+<section id="space-team" class="level3">
+<h3 class="anchored" data-anchor-id="space-team">Space Team</h3>
+</section>
+<section id="one-night-werewolf" class="level3">
+<h3 class="anchored" data-anchor-id="one-night-werewolf">One Night Werewolf</h3>
+</section>
+<section id="royal-game-of-ur" class="level3">
+<h3 class="anchored" data-anchor-id="royal-game-of-ur">Royal Game of Ur</h3>
+</section>
+<section id="boardgamearena" class="level3">
+<h3 class="anchored" data-anchor-id="boardgamearena">BoardGameArena</h3>
+</section>
+<section id="jackbox-games" class="level3">
+<h3 class="anchored" data-anchor-id="jackbox-games">Jackbox Games</h3>
+</section>
+<section id="wiki-race" class="level3">
+<h3 class="anchored" data-anchor-id="wiki-race">Wiki race</h3>
+</section>
+<section id="longwave-wavelength" class="level3">
+<h3 class="anchored" data-anchor-id="longwave-wavelength">Longwave (Wavelength)</h3>
+</section>
+<section id="neopets" class="level3">
+<h3 class="anchored" data-anchor-id="neopets">Neopets</h3>
+</section>
+<section id="kingdom-of-loathing" class="level3">
+<h3 class="anchored" data-anchor-id="kingdom-of-loathing">Kingdom of Loathing</h3>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>365</category>
+  <category>games</category>
+  <guid>https://questionable.quarto.pub/blog/lists/phone_games.html</guid>
+  <pubDate>Thu, 04 Aug 2022 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/seedship.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Observable JS for snappy datascience</title>
@@ -956,14 +1462,13 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122</li>
-<li>https://www.hopkinslymetracker.org/</li>
-<li>https://quarto.org/docs/interactive/ojs/</li>
-<li>Data from: https://www.cdc.gov/lyme/stats/survfaq.html<br>
-</li>
-<li>Additional data options: https://data.world/datasets/lyme-disease</li>
-<li>Some plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/<span class="citation" data-cites="observablehq/plot-bar">@observablehq/plot-bar</span></li>
-<li>Some various tutorials: https://observablehq.com/tutorials</li>
+<li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122" class="uri">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122</a></li>
+<li><a href="https://www.hopkinslymetracker.org/" class="uri">https://www.hopkinslymetracker.org/</a></li>
+<li><a href="https://quarto.org/docs/interactive/ojs/" class="uri">https://quarto.org/docs/interactive/ojs/</a></li>
+<li>Data from: <a href="https://www.cdc.gov/lyme/stats/survfaq.html\" class="uri">https://www.cdc.gov/lyme/stats/survfaq.html\</a></li>
+<li>Additional data options: <a href="https://data.world/datasets/lyme-disease" class="uri">https://data.world/datasets/lyme-disease</a></li>
+<li>Some plots options using observable: <a href="https://github.com/observablehq/plot" class="uri">https://github.com/observablehq/plot</a> and <a href="https://observablehq.com/@observablehq/plot-bar" class="uri">https://observablehq.com/@observablehq/plot-bar</a></li>
+<li>Some various tutorials: <a href="https://observablehq.com/tutorials" class="uri">https://observablehq.com/tutorials</a></li>
 </ul>
 
 
@@ -1003,7 +1508,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <li><p>Doesn’t require log in (5 free pieces of art per day, however using incognito mode or edge counts as a separate user for 15 pieces of art per day): <a href="https://creator.nightcafe.studio/" class="uri">https://creator.nightcafe.studio/</a></p></li>
 <li><p>No limit to number of pieces, landscapes only: <a href="https://www.wombo.art/" class="uri">https://www.wombo.art/</a></p></li>
 </ul>
-<p>There are a bunch more I’m looking forward to trying: <a href="https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another%20one%20of%20the%20best,trained%20with%20millions%20of%20images" class="uri">https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another%20one%20of%20the%20best,trained%20with%20millions%20of%20images</a></p>
+<p>There are a bunch more I’m looking forward to trying: &lt;https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another one of the best,trained with millions of images&gt;</p>
 </section>
 <section id="highlights" class="level2">
 <h2 class="anchored" data-anchor-id="highlights">Highlights</h2>
@@ -1016,7 +1521,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="my-gallery" title="solarpunk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s1.png" class="img-fluid figure-img" alt="solarpunk"></a></p>
+<p><a href="img/starryai/s1.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-1" title="solarpunk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s1.png" class="img-fluid figure-img" alt="solarpunk"></a></p>
 <figcaption>solarpunk</figcaption>
 </figure>
 </div>
@@ -1024,7 +1529,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s3.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="my-gallery" title="solar panel satellite"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s3.png" class="img-fluid figure-img" alt="solar panel satellite"></a></p>
+<p><a href="img/starryai/s3.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-2" title="solar panel satellite"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s3.png" class="img-fluid figure-img" alt="solar panel satellite"></a></p>
 <figcaption>solar panel satellite</figcaption>
 </figure>
 </div>
@@ -1032,7 +1537,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s11.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="my-gallery" title="pluto"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s11.png" class="img-fluid figure-img" alt="pluto"></a></p>
+<p><a href="img/starryai/s11.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-3" title="pluto"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s11.png" class="img-fluid figure-img" alt="pluto"></a></p>
 <figcaption>pluto</figcaption>
 </figure>
 </div>
@@ -1042,7 +1547,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s10.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="my-gallery" title="spaceship flying down the sidewalk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s10.png" class="img-fluid figure-img" alt="spaceship flying down the sidewalk"></a></p>
+<p><a href="img/starryai/s10.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-4" title="spaceship flying down the sidewalk"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s10.png" class="img-fluid figure-img" alt="spaceship flying down the sidewalk"></a></p>
 <figcaption>spaceship flying down the sidewalk</figcaption>
 </figure>
 </div>
@@ -1050,7 +1555,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s7.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="my-gallery" title="Hydraulic dam fairytale"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s7.png" class="img-fluid figure-img" alt="Hydraulic dam fairytale"></a></p>
+<p><a href="img/starryai/s7.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-5" title="Hydraulic dam fairytale"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s7.png" class="img-fluid figure-img" alt="Hydraulic dam fairytale"></a></p>
 <figcaption>Hydraulic dam fairytale</figcaption>
 </figure>
 </div>
@@ -1058,7 +1563,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s2.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="my-gallery" title="the storm rolled in"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s2.png" class="img-fluid figure-img" alt="the storm rolled in"></a></p>
+<p><a href="img/starryai/s2.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-6" title="the storm rolled in"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s2.png" class="img-fluid figure-img" alt="the storm rolled in"></a></p>
 <figcaption>the storm rolled in</figcaption>
 </figure>
 </div>
@@ -1068,7 +1573,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/s8.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="my-gallery" title="I believe in a thing called love"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s8.png" class="img-fluid figure-img" alt="I believe in a thing called love"></a></p>
+<p><a href="img/starryai/s8.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-7" title="I believe in a thing called love"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/s8.png" class="img-fluid figure-img" alt="I believe in a thing called love"></a></p>
 <figcaption>I believe in a thing called love</figcaption>
 </figure>
 </div>
@@ -1076,7 +1581,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/placeholder.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="my-gallery" title="Placeholder"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="img-fluid figure-img" alt="Placeholder"></a></p>
+<p><a href="img/starryai/placeholder.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-8" title="Placeholder"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="img-fluid figure-img" alt="Placeholder"></a></p>
 <figcaption>Placeholder</figcaption>
 </figure>
 </div>
@@ -1084,7 +1589,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/spacecat.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="my-gallery" title="Spacecat"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/spacecat.png" class="img-fluid figure-img" alt="Spacecat"></a></p>
+<p><a href="img/starryai/spacecat.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-9" title="Spacecat"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/spacecat.png" class="img-fluid figure-img" alt="Spacecat"></a></p>
 <figcaption>Spacecat</figcaption>
 </figure>
 </div>
@@ -1094,7 +1599,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/party around a bonfire.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="my-gallery" title="party around a bonfire"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/party around a bonfire.png" class="img-fluid figure-img" alt="party around a bonfire"></a></p>
+<p><a href="img/starryai/party around a bonfire.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-10" title="party around a bonfire"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/party around a bonfire.png" class="img-fluid figure-img" alt="party around a bonfire"></a></p>
 <figcaption>party around a bonfire</figcaption>
 </figure>
 </div>
@@ -1102,7 +1607,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/fireflies.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="my-gallery" title="fireflies"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/fireflies.png" class="img-fluid figure-img" alt="fireflies"></a></p>
+<p><a href="img/starryai/fireflies.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-11" title="fireflies"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/fireflies.png" class="img-fluid figure-img" alt="fireflies"></a></p>
 <figcaption>fireflies</figcaption>
 </figure>
 </div>
@@ -1110,7 +1615,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/thunderstorm over galveston.png" class="lightbox" data-glightbox="description: .lightbox-desc-12" data-gallery="my-gallery" title="thunderstorm over galveston"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/thunderstorm over galveston.png" class="img-fluid figure-img" alt="thunderstorm over galveston"></a></p>
+<p><a href="img/starryai/thunderstorm over galveston.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-12" title="thunderstorm over galveston"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/thunderstorm over galveston.png" class="img-fluid figure-img" alt="thunderstorm over galveston"></a></p>
 <figcaption>thunderstorm over galveston</figcaption>
 </figure>
 </div>
@@ -1120,7 +1625,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/woodland creatures having a tea party.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="my-gallery" title="woodland creatures having a tea party"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/woodland creatures having a tea party.png" class="img-fluid figure-img" alt="woodland creatures having a tea party"></a></p>
+<p><a href="img/starryai/woodland creatures having a tea party.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-13" title="woodland creatures having a tea party"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/woodland creatures having a tea party.png" class="img-fluid figure-img" alt="woodland creatures having a tea party"></a></p>
 <figcaption>woodland creatures having a tea party</figcaption>
 </figure>
 </div>
@@ -1128,7 +1633,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/pacific rim.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="my-gallery" title="Pacific Rim"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/pacific rim.png" class="img-fluid figure-img" alt="Pacific Rim"></a></p>
+<p><a href="img/starryai/pacific rim.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-14" title="Pacific Rim"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/pacific rim.png" class="img-fluid figure-img" alt="Pacific Rim"></a></p>
 <figcaption>Pacific Rim</figcaption>
 </figure>
 </div>
@@ -1136,7 +1641,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/starryai/mind_the_gap.png" class="lightbox" data-glightbox="description: .lightbox-desc-15" data-gallery="my-gallery" title="Mind the Gap"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/mind_the_gap.png" class="img-fluid figure-img" alt="Mind the Gap"></a></p>
+<p><a href="img/starryai/mind_the_gap.png" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-15" title="Mind the Gap"><img src="https://questionable.quarto.pub/blog/posts/img/starryai/mind_the_gap.png" class="img-fluid figure-img" alt="Mind the Gap"></a></p>
 <figcaption>Mind the Gap</figcaption>
 </figure>
 </div>
@@ -1152,7 +1657,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/robotic owl in space.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-16" data-gallery="my-gallery" title="Robotic owl in space"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/robotic owl in space.JPG" class="img-fluid figure-img" alt="Robotic owl in space"></a></p>
+<p><a href="img/nightcafe/robotic owl in space.JPG" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-16" title="Robotic owl in space"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/robotic owl in space.JPG" class="img-fluid figure-img" alt="Robotic owl in space"></a></p>
 <figcaption>Robotic owl in space</figcaption>
 </figure>
 </div>
@@ -1160,7 +1665,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/The monster from alien on a date.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-17" data-gallery="my-gallery" title="The monster from alien on a date"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/The monster from alien on a date.JPG" class="img-fluid figure-img" alt="The monster from alien on a date"></a></p>
+<p><a href="img/nightcafe/The monster from alien on a date.JPG" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-17" title="The monster from alien on a date"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/The monster from alien on a date.JPG" class="img-fluid figure-img" alt="The monster from alien on a date"></a></p>
 <figcaption>The monster from alien on a date</figcaption>
 </figure>
 </div>
@@ -1168,7 +1673,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/selfie.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-18" data-gallery="my-gallery" title="selfie"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/selfie.JPG" class="img-fluid figure-img" alt="selfie"></a></p>
+<p><a href="img/nightcafe/selfie.JPG" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-18" title="selfie"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/selfie.JPG" class="img-fluid figure-img" alt="selfie"></a></p>
 <figcaption>selfie</figcaption>
 </figure>
 </div>
@@ -1178,7 +1683,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/brain on fire.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-19" data-gallery="my-gallery" title="brain on fire"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/brain on fire.JPG" class="img-fluid figure-img" alt="brain on fire"></a></p>
+<p><a href="img/nightcafe/brain on fire.JPG" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-19" title="brain on fire"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/brain on fire.JPG" class="img-fluid figure-img" alt="brain on fire"></a></p>
 <figcaption>brain on fire</figcaption>
 </figure>
 </div>
@@ -1186,7 +1691,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/cyborg bartender.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-20" data-gallery="my-gallery" title="cyborg bartender"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/cyborg bartender.JPG" class="img-fluid figure-img" alt="cyborg bartender"></a></p>
+<p><a href="img/nightcafe/cyborg bartender.JPG" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-20" title="cyborg bartender"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/cyborg bartender.JPG" class="img-fluid figure-img" alt="cyborg bartender"></a></p>
 <figcaption>cyborg bartender</figcaption>
 </figure>
 </div>
@@ -1194,7 +1699,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="lightbox" data-glightbox="description: .lightbox-desc-21" data-gallery="my-gallery" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="img-fluid figure-img" alt="ammonite seashell on the beach being worshipped by monsters"></a></p>
+<p><a href="img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="lightbox" data-gallery="my-gallery" data-glightbox="description: .lightbox-desc-21" title="ammonite seashell on the beach being worshipped by monsters"><img src="https://questionable.quarto.pub/blog/posts/img/nightcafe/ammonite seashell on the beach being worshipped by monsters.JPG" class="img-fluid figure-img" alt="ammonite seashell on the beach being worshipped by monsters"></a></p>
 <figcaption>ammonite seashell on the beach being worshipped by monsters</figcaption>
 </figure>
 </div>
@@ -1216,7 +1721,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <item>
   <title>A little data goes a long way</title>
   <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/posts/data.html</link>
+  <link>https://questionable.quarto.pub/blog/lists/data.html</link>
   <description><![CDATA[ 
 
 
@@ -1233,7 +1738,7 @@ font-style: inherit;">true</span> })</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="for-better-science">For Better Science</h2>
 </section>
 <section id="for-better-science-1" class="level2">
-<h2 class="anchored" data-anchor-id="for-better-science-1"><a href="https://forbetterscience.com/"><img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="img-fluid" alt="For Better Science"></a></h2>
+<h2 class="anchored" data-anchor-id="for-better-science-1"><a href="https://forbetterscience.com/"><img src="https://questionable.quarto.pub/blog/lists/img/fbs.jpg" class="img-fluid" alt="For Better Science"></a></h2>
 <p>The rabbit hole of learning about how bad science is uncovered and recalled started with:</p>
 <ul>
 <li><p><a href="https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/">Sylvain Lesné is a failed scientist</a></p></li>
@@ -1262,9 +1767,9 @@ font-style: inherit;">true</span> })</span></code></pre></div>
  ]]></description>
   <category>datascience</category>
   <category>opinions</category>
-  <guid>https://questionable.quarto.pub/blog/posts/data.html</guid>
+  <guid>https://questionable.quarto.pub/blog/lists/data.html</guid>
   <pubDate>Tue, 02 Aug 2022 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/fbs.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>What is Quarto?</title>
@@ -3471,431 +3976,63 @@ font-style: inherit;">"Type"</span>)</span>
   <media:content url="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Projects and radom musings</title>
-  <link>https://questionable.quarto.pub/blog/posts.html</link>
+  <title>Technical writeups and musings</title>
+  <link>https://questionable.quarto.pub/blog/posts-no-pictures.html</link>
   <description><![CDATA[ 
 
 
 
 
 
-<p>Random pages and projects, all using Quarto’s blog capability.</p>
+<p>Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.</p>
 
 
 
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="datascience,opinions,hardware,software" data-listing-date-sort="1706079600000" data-listing-file-modified-sort="1711992727158" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1024">
-<div class="thumbnail">
-<p><a href="./posts/good-programming.html" class="no-external"></a></p><a href="./posts/good-programming.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/" class="thumbnail-image"></p>
-</a><p><a href="./posts/good-programming.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="0" data-categories="code" data-listing-date-sort="1704956400000" data-listing-file-modified-sort="1713570028204" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="705">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/good-programming.html" class="no-external">The importance of good programming</a>
+<a href="./posts-no-pictures/delta-lake-and-azure.html" class="no-external">Accessing data in Azure Data Lake (delta files)</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/good-programming.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
-opinions
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('hardware'); return false;">
-hardware
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('software'); return false;">
-software
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/good-programming.html" class="no-external">Case studies</a>
+<a href="./posts-no-pictures/delta-lake-and-azure.html" class="no-external"></a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/good-programming.html" class="no-external">
+<a href="./posts-no-pictures/delta-lake-and-azure.html" class="no-external">
 <div class="listing-date">
-Jan 24, 2024
+Jan 11, 2024
 </div>
 <div class="listing-author">
 Lisa
 </div>
+<div class="listing-reading-time">
+4 min
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="laser-cutting,maverick-mods" data-listing-date-sort="1696485600000" data-listing-file-modified-sort="1696530583355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="202">
-<div class="thumbnail">
-<p><a href="./posts/maverick cubby holder.html" class="no-external"></a></p><a href="./posts/maverick cubby holder.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/cubby-holder.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/maverick cubby holder.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="1" data-categories="code" data-listing-date-sort="1693288800000" data-listing-file-modified-sort="1713569333593" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="458">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/maverick cubby holder.html" class="no-external">Ford Maverick Truck Cubby Holder</a>
+<a href="./posts-no-pictures/git-and-sagemaker.html" class="no-external">Problems with persistence when in the cloud</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/maverick cubby holder.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('laser-cutting'); return false;">
-laser-cutting
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('maverick-mods'); return false;">
-maverick-mods
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/maverick cubby holder.html" class="no-external">Adding a cubby to that strange little space in the dash</a>
+<a href="./posts-no-pictures/git-and-sagemaker.html" class="no-external"></a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/maverick cubby holder.html" class="no-external">
+<a href="./posts-no-pictures/git-and-sagemaker.html" class="no-external">
 <div class="listing-date">
-Oct 5, 2023
+Aug 29, 2023
 </div>
 <div class="listing-author">
 Lisa
 </div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="rockets" data-listing-date-sort="1691301600000" data-listing-file-modified-sort="1696530616769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="54">
-<div class="thumbnail">
-<p><a href="./posts/vortico rockets.html" class="no-external"></a></p><a href="./posts/vortico rockets.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/vortico.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/vortico rockets.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/vortico rockets.html" class="no-external">Vortico rockets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/vortico rockets.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('rockets'); return false;">
-rockets
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/vortico rockets.html" class="no-external">The best rockets don’t need parachutes</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/vortico rockets.html" class="no-external">
-<div class="listing-date">
-Aug 6, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="maverick-mods" data-listing-date-sort="1683352800000" data-listing-file-modified-sort="1696523918208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="44">
-<div class="thumbnail">
-<p><a href="./posts/maverick soft topper.html" class="no-external"></a></p><a href="./posts/maverick soft topper.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/maverick_softtopper 3.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/maverick soft topper.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/maverick soft topper.html" class="no-external">Ford Maverick Soft Topper installation</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/maverick soft topper.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('maverick-mods'); return false;">
-maverick-mods
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/maverick soft topper.html" class="no-external">Protection for rear storage</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/maverick soft topper.html" class="no-external">
-<div class="listing-date">
-May 6, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="music" data-listing-date-sort="1664949600000" data-listing-file-modified-sort="1696524162522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="671">
-<div class="thumbnail">
-<p><a href="./posts/sound.html" class="no-external"></a></p><a href="./posts/sound.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/otomata.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/sound.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/sound.html" class="no-external">Sound</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/sound.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
-music
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/sound.html" class="no-external">Making noise</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/sound.html" class="no-external">
-<div class="listing-date">
-Oct 5, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="datascience" data-listing-date-sort="1663567200000" data-listing-file-modified-sort="1696525704498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="793">
-<div class="thumbnail">
-<p><a href="./posts/chatbot.html" class="no-external"></a></p><a href="./posts/chatbot.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/Plantey_saturated.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/chatbot.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/chatbot.html" class="no-external">Chatbot</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/chatbot.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/chatbot.html" class="no-external">Making a simple chatbot</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/chatbot.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="datascience" data-listing-date-sort="1659592800000" data-listing-file-modified-sort="1696524348513" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
-<div class="thumbnail">
-<p><a href="./posts/ojs_lyme.html" class="no-external"></a></p><a href="./posts/ojs_lyme.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/ojs_bar_chart.JPG" class="thumbnail-image"></p>
-</a><p><a href="./posts/ojs_lyme.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ojs_lyme.html" class="no-external">Observable JS for snappy datascience</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/ojs_lyme.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/ojs_lyme.html" class="no-external">Using OJS to plot Lyme disease cases over time by state</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/ojs_lyme.html" class="no-external">
-<div class="listing-date">
-Aug 4, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="art" data-listing-date-sort="1659506400000" data-listing-file-modified-sort="1706111383335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="246">
-<div class="thumbnail">
-<p><a href="./posts/ai_art.html" class="no-external"></a></p><a href="./posts/ai_art.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/starryai/placeholder.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/ai_art.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ai_art.html" class="no-external">AI generated art</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/ai_art.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('art'); return false;">
-art
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/ai_art.html" class="no-external">Sometimes beautiful, sometimes horrifying</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/ai_art.html" class="no-external">
-<div class="listing-date">
-Aug 3, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="datascience,opinions" data-listing-date-sort="1659420000000" data-listing-file-modified-sort="1696521268278" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="145">
-<div class="thumbnail">
-<p><a href="./posts/data.html" class="no-external"></a></p><a href="./posts/data.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/fbs.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/data.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/data.html" class="no-external">A little data goes a long way</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/data.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('opinions'); return false;">
-opinions
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/data.html" class="no-external">Some of my favorite examples</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/data.html" class="no-external">
-<div class="listing-date">
-Aug 2, 2022
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="datascience" data-listing-date-sort="1658988000000" data-listing-file-modified-sort="1696524205087" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="107">
-<div class="thumbnail">
-<p><a href="./posts/quarto.html" class="no-external"></a></p><a href="./posts/quarto.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/welcome.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/quarto.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/quarto.html" class="no-external">What is Quarto?</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/quarto.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/quarto.html" class="no-external">My new favorite thing</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/quarto.html" class="no-external">
-<div class="listing-date">
-Jul 28, 2022
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="datascience,dice,games" data-listing-date-sort="1617516000000" data-listing-file-modified-sort="1696535148724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2208">
-<div class="thumbnail">
-<p><a href="./posts/resin.html" class="no-external"></a></p><a href="./posts/resin.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/resin/PXL_20201008_180539533.MP.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/resin.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/resin.html" class="no-external">Resin Dice</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/resin.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('dice'); return false;">
-dice
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('games'); return false;">
-games
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/resin.html" class="no-external">Adventures in Resin: Making your own dice</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/resin.html" class="no-external">
-<div class="listing-date">
-Apr 4, 2021
-</div>
-<div class="listing-author">
-Lisa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="datascience" data-listing-date-sort="1609743600000" data-listing-file-modified-sort="1696530405442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1629">
-<div class="thumbnail">
-<p><a href="./posts/battlebots 2021.html" class="no-external"></a></p><a href="./posts/battlebots 2021.html" class="no-external">
-<p><img src="https://questionable.quarto.pub/blog/posts/img/bb/BB.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/battlebots 2021.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/battlebots 2021.html" class="no-external">BATTLEBOTS 2021</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/battlebots 2021.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datascience'); return false;">
-datascience
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/battlebots 2021.html" class="no-external">It’s robot fighting time!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/battlebots 2021.html" class="no-external">
-<div class="listing-date">
-Jan 4, 2021
-</div>
-<div class="listing-author">
-Lisa
+<div class="listing-reading-time">
+3 min
 </div>
 </a>
 </div>
@@ -3905,8 +4042,8 @@ Lisa
 No matching items
 </div>
 </div> ]]></description>
-  <guid>https://questionable.quarto.pub/blog/posts.html</guid>
-  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
+  <guid>https://questionable.quarto.pub/blog/posts-no-pictures.html</guid>
+  <pubDate>Wed, 01 May 2024 16:56:38 GMT</pubDate>
 </item>
 <item>
   <title>Presentations</title>
@@ -3992,34 +4129,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/presentations.html</guid>
-  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
-</item>
-<item>
-  <title>Home</title>
-  <link>https://questionable.quarto.pub/blog/</link>
-  <description><![CDATA[ 
-<p>Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!</p>
-
-
- ]]></description>
-  <guid>https://questionable.quarto.pub/blog/</guid>
-  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>About</title>
-  <link>https://questionable.quarto.pub/blog/about.html</link>
-  <description><![CDATA[ 
-<p>Welcome!</p>
-<p>I’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.</p>
-<p>In my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.</p>
-<p><a href="https://github.com/leesahanders/Anders_Resume/blob/main/Anders_2022.pdf" class="download" title="Download Resume">Resume</a></p>
-
-
- ]]></description>
-  <guid>https://questionable.quarto.pub/blog/about.html</guid>
-  <pubDate>Thu, 18 Apr 2024 17:51:55 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
+  <pubDate>Wed, 01 May 2024 16:56:38 GMT</pubDate>
 </item>
 </channel>
 </rss>

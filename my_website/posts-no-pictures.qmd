@@ -1,0 +1,16 @@
+---
+title: "Technical writeups and musings"
+listing:
+  contents: posts-no-pictures
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  fields: [date, title, author, reading-time]
+  image-placeholder: "img/62903-pencil-icon-963181669.png"
+page-layout: full
+title-block-banner: true
+---
+
+Some random technical writeups for things I've found useful, all brought to you by Quarto's blogging capability. 

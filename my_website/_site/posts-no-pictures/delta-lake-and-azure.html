@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2024-01-11">
 
-<title>Lisa Anders - questionable.quarto</title>
+<title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,17 +75,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
     </a>
   </div>
@@ -91,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -102,15 +107,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
         <li>
-    <a class="dropdown-item" href="./posts.html">
+    <a class="dropdown-item" href="../posts.html">
  <span class="dropdown-text">Blog posts</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./lists.html">
+    <a class="dropdown-item" href="../lists.html">
  <span class="dropdown-text">Lists</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presentations.html">
+    <a class="dropdown-item" href="../presentations.html">
  <span class="dropdown-text">Presentations</span></a>
   </li>  
         <li>
@@ -118,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Recipes</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./posts-no-pictures.html">
+    <a class="dropdown-item" href="../posts-no-pictures.html">
  <span class="dropdown-text">Technical writeups</span></a>
   </li>  
     </ul>
@@ -126,11 +131,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./site_map.html"> 
+    <a class="nav-link" href="../site_map.html"> 
 <span class="menu-text">Site Map</span></a>
   </li>  
   <li class="nav-item compact">
@@ -147,89 +152,213 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lisa </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 11, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<p>Check out some of the presentations I’ve made while working at Posit:</p>
-<center>
-<p><strong>2024</strong></p>
-</center>
-<div class="column-screen-inset">
-<div class="mycards-container">
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
+
+<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it’s easy to find in the future!</p>
+<section id="azure-data-lake" class="level2">
+<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
+<section id="set-up" class="level3">
+<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
+<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
+<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
+<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
+<p>Steps:</p>
+<ol type="1">
+<li><p>Go to storage account</p></li>
+<li><p>Create and give it a name</p></li>
+<li><p>Select: LRS</p></li>
+<li><p>Switch to premium: block blobs</p></li>
+<li><p>Change to hierarchical blob</p></li>
+<li><p>Set tags:</p></li>
+</ol>
+<ul>
+<li><p>rs:owner</p></li>
+<li><p>rs:project = soleng</p></li>
+<li><p>rs:environment = dev</p></li>
+</ul>
+<ol start="7" type="1">
+<li>Once in just need access keys or shared access signature in order to gain access</li>
+</ol>
+</section>
+<section id="add-data" class="level3">
+<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
+<p>You can add data manually by creating a container and then using the upload icon.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<figcaption>image</figcaption>
+</figure>
 </div>
-<div class="mycard-title">
-<p>It’s dangerous to go alone - take this!</p>
+</section>
+</section>
+<section id="authentication" class="level2">
+<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
+<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
+<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
+<p>You’ll need to know:</p>
+<ul>
+<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
+<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
+</ul>
+<pre><code>library(AzureStor)
+
+blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
+
+bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
+
+# List containers and files in containers
+list_storage_containers(bl_endp_key)
+cont1 &lt;- storage_container(bl_endp_key, "container1")
+list_storage_files(cont1)
+
+# Download a file
+storage_download(cont1, "/crm_call_center_logs.parquet")
+
+# Upload a file 
+storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
+<p>You can also create and delete containers:</p>
+<pre><code># Create a container
+newcont &lt;- create_storage_container(bl_endp_key, "container3")
+
+# Create a directory in the container
+cont3 &lt;- storage_container(bl_endp_key, "container3")
+create_storage_dir(cont3, "newdir")
+
+# Delete a container
+delete_storage_container(newcont)</code></pre>
+</section>
+<section id="reading-and-writing-delta-files" class="level2">
+<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
+<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
+<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
+<pre><code>library(sparklyr)
+
+#Install a local version of Spark
+spark_install(version=3.4)
+
+# Set Spark configuration to be able to read delta tables
+conf &lt;- spark_config()
+conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
+conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+
+# For spark 3.4 
+conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
+
+# Open a connection
+sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
+
+# For this example we will use a built-in dataframe to save example data files, including one for delta tables
+tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
+
+# Write spark dataframe to disk
+spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
+spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
+spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
+
+# Read dataframes into normal memory
+spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
+regular_df_csv &lt;- collect(spark_tbl_handle)
+spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
+regular_df_parquet &lt;- collect(spark_tbl_handle)
+spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
+regular_df_delta &lt;- collect(spark_tbl_handle)
+
+# Disconnect
+spark_disconnect(sc)</code></pre>
+<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<figcaption>image</figcaption>
+</figure>
 </div>
-<div class="mycard-description">
-<p>Lisa’s best practices for pain-free data science</p>
-</div>
-<div class="mycard-link">
-<p><br> <a href="https://questionable.quarto.pub/its-dangerous-to-go-alone-take-this/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/painfree_data_science_demo_and_presentation" target="_blank">Check out the repo</a></p>
-</div>
-</div>
-</div>
-</div>
-<center>
-<p><strong>2023 and 2022</strong></p>
-</center>
-<div class="column-screen-inset">
-<div class="mycards-container">
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Reporting in R with Posit Team</p>
-</div>
-<div class="mycard-description">
-<p>Using the Posit Team set of products to create data science reports.</p>
-</div>
-<div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/reporting-in-r-with-posit-team/" target="_blank">Check out the slides</a></p>
-</div>
-</div>
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Improving app performance</p>
-</div>
-<div class="mycard-description">
-<p>Analyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.</p>
-</div>
-<div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/" target="_blank">Check out the slides</a></p>
-</div>
-</div>
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Reproduceable Workflows</p>
-</div>
-<div class="mycard-description">
-<p>Creating reproduceable data science workflows.</p>
-</div>
-<div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/reproduceable-workflows/" target="_blank">Check out the slides</a></p>
-</div>
-</div>
-</div>
-</div>
+<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<p>From R:</p>
+<pre><code># See spark details (troubleshooting)
+spark_config()
+spark_get_java()
+spark_available_versions()
+spark_installed_versions()
+
+# See session details
+utils::sessionInfo() </code></pre>
+<p>From bash:</p>
+<pre><code>namei -l /usr/lib/spark</code></pre>
+<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
+</section>
+<section id="about" class="level2">
+<h2 class="anchored" data-anchor-id="about">About</h2>
+<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
+<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
+<blockquote class="blockquote">
+<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
+</blockquote>
+<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
+</section>
+<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
+<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
+<blockquote class="blockquote">
+<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
+</blockquote>
+<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
+<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">image</span>
+<span class="glightbox-desc lightbox-desc-2">image</span>
+</div>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -764,6 +893,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

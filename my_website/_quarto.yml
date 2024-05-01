@@ -21,6 +21,8 @@ website:
             href: presentations.qmd   
           - text: "Recipes"
             href: https://questionable.quarto.pub/recipes/
+          - text: "Technical writeups"
+            href: posts-no-pictures.qmd  
 
     right:
       - about.qmd
