@@ -49,6 +49,42 @@ $navbar-brand-hl: $navbar-brand;
 $nav-tabs-link-active-color: $lightest-blue;
 $nav-tabs-link-active-bg: $lightest-blue;
 
+/*-- Fixing vapor's tables --*/
+
+$white:    #fff !default;
+$black:    #000 !default;
+$bs-warning: #fff !default;
+$bs-warning-text-emphasis: #2c1a4d !default;
+
+$pink:     #ea39b8 !default;
+$teal:     #03aa95 !default;
+
+$table-color:                 $white !default;
+$table-accent-bg:             rgba($white, .05) !default;
+$table-hover-bg:              rgba($white, .075) !default;
+$table-border-color:          rgba($black, .6) !default;
+$table-dark-border-color:     $table-border-color !default;
+$table-dark-color:            $white !default;
+
+$table-bg-scale:              0% !default;
+
+.datatables {
+    font-size: .9rem !important;
+    font-color: $white !important;
+    color: $white !important;
+}
+
+.datatables .dt-buttons {
+    font-color: $white !important;
+    color: #03aa95 !important;
+}
+
+// Fixing font size in value boxes, value-box-value per https://stackoverflow.com/questions/77880573/change-size-of-value-valuebox-in-dashboard-quarto
+
+.quarto-dashboard .bslib-value-box .value-box-value {
+    font-size: clamp(.1em, 6cqw, 5em) !important;
+}
+
 .mycards-container {
   display: flex !important;
   flex-direction: row !important;
