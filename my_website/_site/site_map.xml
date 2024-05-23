@@ -39,7 +39,7 @@
 <p>Step 5: Add the routine as an icon to the phone screen (since voice activation isn’t my jam). Long click on the routine you’ve created and then click on the icon with the arrow over the phone to create a widget and place wherever you want on your phone screen.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/home-automation-widget.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Creating a widget"><img src="https://questionable.quarto.pub/blog/posts/img/home-automation-widget.png" class="img-fluid figure-img" alt="Creating a widget"></a></p>
+<p><a href="img/home-automation-widget.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Creating a widget"><img src="https://questionable.quarto.pub/blog/posts/img/home-automation-widget.png" class="img-fluid figure-img" alt="Creating a widget"></a></p>
 <figcaption>Creating a widget</figcaption>
 </figure>
 </div>
@@ -286,7 +286,7 @@
 <p>You can add data manually by creating a container and then using the upload icon.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -369,7 +369,7 @@ spark_disconnect(sc)</code></pre>
 <p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -1068,8 +1068,8 @@ font-style: inherit;">"Send"</span>,</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="skribl.io">skribl.io</h3>
 <p><a href="https://skribbl.io/" class="uri">https://skribbl.io/</a></p>
 </section>
-<section id="trickser-cards" class="level3">
-<h3 class="anchored" data-anchor-id="trickser-cards">Trickser cards</h3>
+<section id="trickster-cards" class="level3">
+<h3 class="anchored" data-anchor-id="trickster-cards">Trickster cards</h3>
 <p><a href="https://www.trickstercards.com/home/euchre/" class="uri">https://www.trickstercards.com/home/euchre/</a></p>
 </section>
 <section id="codenames" class="level3">
@@ -1083,6 +1083,10 @@ font-style: inherit;">"Send"</span>,</span></code></pre></div>
 <section id="semantle" class="level3">
 <h3 class="anchored" data-anchor-id="semantle">Semantle</h3>
 <p><a href="https://semantle.com/" class="uri">https://semantle.com/</a></p>
+</section>
+<section id="knucklebones" class="level3">
+<h3 class="anchored" data-anchor-id="knucklebones">Knucklebones</h3>
+<p><a href="https://knucklebones.io/en" class="uri">https://knucklebones.io/en</a></p>
 </section>
 <section id="sky-children-of-light" class="level3">
 <h3 class="anchored" data-anchor-id="sky-children-of-light">Sky Children of Light</h3>
@@ -4043,7 +4047,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://questionable.quarto.pub/blog/posts-no-pictures.html</guid>
-  <pubDate>Wed, 01 May 2024 16:56:38 GMT</pubDate>
+  <pubDate>Thu, 23 May 2024 00:27:14 GMT</pubDate>
 </item>
 <item>
   <title>Presentations</title>
@@ -4129,7 +4133,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/presentations.html</guid>
-  <pubDate>Wed, 01 May 2024 16:56:38 GMT</pubDate>
+  <pubDate>Thu, 23 May 2024 00:27:14 GMT</pubDate>
 </item>
 </channel>
 </rss>
