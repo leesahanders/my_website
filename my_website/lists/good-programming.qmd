@@ -69,6 +69,12 @@ A handful of articles that have stood out over the years as interesting case stu
 
 > It’s important to note that while the software was the lynch pin in the Therac-25, it wasn’t the root cause. The entire system design was the real problem. Safety-critical loads were placed upon a computer system that was not designed to control them. Timing analysis wasn’t performed. Unit testing never happened. Fault trees for both hardware and software were not created. These tasks are not only the responsibility of the software engineers, but the systems engineers on the project. Therac-25 is long gone, but its legacy will live on. This was the watershed event that showed how badly things can go wrong when software for life-critical systems is not properly designed and adequately tested.
 
+# AI Hype Train
+
+[That keynote talk "USENIX Security '18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?"](https://www.youtube.com/watch?v=ajGX7odA87k) 
+
+[I Will Fu*king Piledrive You If You Mention AI Again](https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/)
+
 # Others
 
 [WHEN SMALL SOFTWARE BUGS CAUSE BIG PROBLEMS](https://blog.grio.com/2021/07/when-small-software-bugs-cause-big-problems.html)
@@ -79,7 +85,4 @@ A handful of articles that have stood out over the years as interesting case stu
 
 [Counting explosions at Unity, a data analysts perspective](https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&publication_id=27849&post_id=137046759&utm_medium=email&utm_content=share&utm_campaign=email-share&triggerShare=true&isFreemail=true&r=yxnx)
 
-[That keynote talk "USENIX Security '18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?"](https://www.youtube.com/watch?v=ajGX7odA87k) 
-
-[I Will Fu*king Piledrive You If You Mention AI Again](https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/)
 
