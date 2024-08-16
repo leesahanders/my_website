@@ -1,39 +1,15 @@
 [
   {
-    "listing": "/site_map.html",
+    "listing": "/work.html",
     "items": [
-      "/posts/battlebots 2021.html",
-      "/posts/resin.html",
-      "/posts/quarto.html",
-      "/lists/data.html",
-      "/posts/ai_art.html",
-      "/lists/phone_games.html",
-      "/posts/ojs_lyme.html",
-      "/posts/chatbot.html",
-      "/lists/sound.html",
-      "/posts/maverick soft topper.html",
-      "/posts/vortico rockets.html",
-      "/posts-no-pictures/git-and-sagemaker.html",
-      "/posts/maverick cubby holder.html",
-      "/posts-no-pictures/delta-lake-and-azure.html",
-      "/lists/good-programming.html",
-      "/lists/workplace.html",
-      "/lists/code.html",
-      "/posts/kettle automation.html",
-      "/presentations_posit.html",
-      "/posts-no-pictures.html",
-      "/presentations.html",
-      "/lists.html",
-      "/index.html",
-      "/posts.html",
-      "/about.html"
-    ]
-  },
-  {
-    "listing": "/posts-no-pictures.html",
-    "items": [
-      "/posts-no-pictures/delta-lake-and-azure.html",
-      "/posts-no-pictures/git-and-sagemaker.html"
+      "/work/google-resources.html",
+      "/work/renv-environments.html",
+      "/work/delta-lake-and-azure.html",
+      "/work/parallelization.html",
+      "/work/git-and-sagemaker.html",
+      "/work/securing-credentials.html",
+      "/work/sharepoint-oh-no.html",
+      "/work/vetiver.html"
     ]
   },
   {
@@ -48,29 +24,28 @@
     ]
   },
   {
-    "listing": "/posts.html",
+    "listing": "/site_map.html",
     "items": [
-      "/posts/kettle automation.html",
-      "/posts/maverick cubby holder.html",
-      "/posts/vortico rockets.html",
-      "/posts/maverick soft topper.html",
-      "/posts/chatbot.html",
-      "/posts/ojs_lyme.html",
-      "/posts/ai_art.html",
-      "/posts/quarto.html",
-      "/posts/resin.html",
-      "/posts/battlebots 2021.html"
-    ]
-  },
-  {
-    "listing": "/work.html",
-    "items": [
-      "/work/google-resources.html",
-      "/work/renv-environments.html",
-      "/work/delta-lake-and-azure.html",
-      "/work/git-and-sagemaker.html",
+      "/lists/data.html",
+      "/lists/phone_games.html",
+      "/lists/sound.html",
+      "/work/vetiver.html",
+      "/work/sharepoint-oh-no.html",
       "/work/securing-credentials.html",
-      "/work/sharepoint-oh-no.html"
+      "/work/git-and-sagemaker.html",
+      "/work/parallelization.html",
+      "/work/delta-lake-and-azure.html",
+      "/lists/good-programming.html",
+      "/lists/workplace.html",
+      "/lists/code.html",
+      "/work/renv-environments.html",
+      "/work/google-resources.html",
+      "/presentations_posit.html",
+      "/work.html",
+      "/presentations.html",
+      "/lists.html",
+      "/index.html",
+      "/about.html"
     ]
   }
 ]

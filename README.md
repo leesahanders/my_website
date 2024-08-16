@@ -32,7 +32,8 @@ quarto preview
 ## Publishing 1.0 - it's alive!
 
 In order to deploy it needs to be a project: 
-```
+
+```bash
 quarto create project 
 ```
 

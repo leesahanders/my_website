@@ -1,500 +1,10 @@
 [
   {
-    "objectID": "site_map.html",
-    "href": "site_map.html",
-    "title": "Site Map",
-    "section": "",
-    "text": "Site Map Listing\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nJan 4, 2021\n\n\nBATTLEBOTS 2021\n\n\n9 min\n\n\n\n\n\n\n\nApr 4, 2021\n\n\nResin Dice\n\n\n12 min\n\n\n\n\n\n\n\nJul 28, 2022\n\n\nWhat is Quarto?\n\n\n1 min\n\n\n\n\n\n\n\nAug 2, 2022\n\n\nA little data goes a long way\n\n\n1 min\n\n\n\n\n\n\n\nAug 3, 2022\n\n\nAI generated art\n\n\n2 min\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nPhone games\n\n\n1 min\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nObservable JS for snappy datascience\n\n\n1 min\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nChatbot\n\n\n4 min\n\n\n\n\n\n\n\nOct 5, 2022\n\n\nSound\n\n\n4 min\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nFord Maverick Soft Topper installation\n\n\n1 min\n\n\n\n\n\n\n\nAug 6, 2023\n\n\nVortico rockets\n\n\n1 min\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nProblems with persistence when in the cloud\n\n\n3 min\n\n\n\n\n\n\n\nOct 5, 2023\n\n\nFord Maverick Truck Cubby Holder\n\n\n2 min\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n4 min\n\n\n\n\n\n\n\nJan 24, 2024\n\n\nThe importance of good programming\n\n\n6 min\n\n\n\n\n\n\n\nApr 19, 2024\n\n\nWorkplace articles\n\n\n1 min\n\n\n\n\n\n\n\nApr 19, 2024\n\n\nCoding write-ups and resources\n\n\n1 min\n\n\n\n\n\n\n\nMay 1, 2024\n\n\nHey Google - make me coffee!\n\n\n2 min\n\n\n\n\n\n\n\n \n\n\n \n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nTechnical writeups and musings\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nPresentations\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nLists\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nHome\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nBlog posts and random musings\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nAbout\n\n\n1 min\n\n\n\n\n\nNo matching items\n\n\nRefer to: https://quarto.org/docs/websites/website-listings.html"
-  },
-  {
-    "objectID": "presentations.html",
-    "href": "presentations.html",
-    "title": "Presentations",
-    "section": "",
-    "text": "Check out some of the presentations I’ve made while working at Posit:\n\n2024\n\n\n\n\n\n&gt;\n\n\nIt’s dangerous to go alone - take this!\n\n\nLisa’s best practices for pain-free data science\n\n\n Check out the slides Check out the repo\n\n\n\n\n\n2023 and 2022\n\n\n\n\n\n&gt;\n\n\nReporting in R with Posit Team\n\n\nUsing the Posit Team set of products to create data science reports.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nImproving app performance\n\n\nAnalyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nReproduceable Workflows\n\n\nCreating reproduceable data science workflows.\n\n\nCheck out the slides"
-  },
-  {
-    "objectID": "posts-no-pictures.html",
-    "href": "posts-no-pictures.html",
-    "title": "Technical writeups and musings",
-    "section": "",
-    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nProblems with persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts-no-pictures/delta-lake-and-azure.html",
-    "href": "posts-no-pictures/delta-lake-and-azure.html",
-    "title": "Accessing data in Azure Data Lake (delta files)",
-    "section": "",
-    "text": "This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it’s easy to find in the future!"
-  },
-  {
-    "objectID": "posts-no-pictures/delta-lake-and-azure.html#azure-data-lake",
-    "href": "posts-no-pictures/delta-lake-and-azure.html#azure-data-lake",
-    "title": "Accessing data in Azure Data Lake (delta files)",
-    "section": "Azure Data Lake",
-    "text": "Azure Data Lake\n\nSet up\nLanding page for Azure: &lt;https://portal.azure.com/ &gt;\nFollow this article: &lt;https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account &gt;\nThe trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.\nSteps:\n\nGo to storage account\nCreate and give it a name\nSelect: LRS\nSwitch to premium: block blobs\nChange to hierarchical blob\nSet tags:\n\n\nrs:owner\nrs:project = soleng\nrs:environment = dev\n\n\nOnce in just need access keys or shared access signature in order to gain access\n\n\n\nAdd data\nYou can add data manually by creating a container and then using the upload icon.\n\n\n\nimage"
-  },
-  {
-    "objectID": "posts-no-pictures/delta-lake-and-azure.html#authentication",
-    "href": "posts-no-pictures/delta-lake-and-azure.html#authentication",
-    "title": "Accessing data in Azure Data Lake (delta files)",
-    "section": "Authentication",
-    "text": "Authentication\nAccess your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.\nFor authentication from an R script we’ll be using https://github.com/Azure/AzureStor\nYou’ll need to know:\n\nThe Blob endpoint for your Azure Data Lake storage\nAn Access Key (this can also be done with a Shared Access Signature)\n\nlibrary(AzureStor)\n\nblob_endpoint &lt;- \"https://REDACTED.blob.core.windows.net/\"\n\nbl_endp_key &lt;- storage_endpoint(blob_endpoint, key=\"REDACTED\")\n\n# List containers and files in containers\nlist_storage_containers(bl_endp_key)\ncont1 &lt;- storage_container(bl_endp_key, \"container1\")\nlist_storage_files(cont1)\n\n# Download a file\nstorage_download(cont1, \"/crm_call_center_logs.parquet\")\n\n# Upload a file \nstorage_upload(cont1, \"crm_call_center_logs.parquet\", \"newdir/crm_call_center_logs.parquet\")\nYou can also create and delete containers:\n# Create a container\nnewcont &lt;- create_storage_container(bl_endp_key, \"container3\")\n\n# Create a directory in the container\ncont3 &lt;- storage_container(bl_endp_key, \"container3\")\ncreate_storage_dir(cont3, \"newdir\")\n\n# Delete a container\ndelete_storage_container(newcont)"
-  },
-  {
-    "objectID": "posts-no-pictures/delta-lake-and-azure.html#reading-and-writing-delta-files",
-    "href": "posts-no-pictures/delta-lake-and-azure.html#reading-and-writing-delta-files",
-    "title": "Accessing data in Azure Data Lake (delta files)",
-    "section": "Reading and Writing Delta Files",
-    "text": "Reading and Writing Delta Files\nDelta files can be read by using the sparklyr package: https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html Thanks for the help with the magic incantation below!\nIn order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:\nlibrary(sparklyr)\n\n#Install a local version of Spark\nspark_install(version=3.4)\n\n# Set Spark configuration to be able to read delta tables\nconf &lt;- spark_config()\nconf$`spark.sql.extensions` &lt;- \"io.delta.sql.DeltaSparkSessionExtension\"\nconf$`spark.sql.catalog.spark_catalog` &lt;- \"org.apache.spark.sql.delta.catalog.DeltaCatalog\"\n\n# For spark 3.4 \nconf$sparklyr.defaultPackages &lt;- \"io.delta:delta-core_2.12:2.4.0\"\n\n# Open a connection\nsc &lt;- spark_connect(\"local\", version = 3.4, packages = \"delta\", conf = conf)\n\n# For this example we will use a built-in dataframe to save example data files, including one for delta tables\ntbl_mtcars &lt;- copy_to(sc, mtcars, \"spark_mtcars\")\n\n# Write spark dataframe to disk\nspark_write_csv(tbl_mtcars,  path = \"test_file_csv\", mode = \"overwrite\")\nspark_write_parquet(tbl_mtcars,  path = \"test_file_parquet\", mode = \"overwrite\")\nspark_write_delta(tbl_mtcars,  path = \"test_file_delta\", mode = \"overwrite\")\n\n# Read dataframes into normal memory\nspark_tbl_handle &lt;- spark_read_csv(sc, path = \"test_file_csv\")\nregular_df_csv &lt;- collect(spark_tbl_handle)\nspark_tbl_handle &lt;- spark_read_parquet(sc, path = \"test_file_parquet\")\nregular_df_parquet &lt;- collect(spark_tbl_handle)\nspark_tbl_handle &lt;- spark_read_delta(sc, path = \"test_file_delta\")\nregular_df_delta &lt;- collect(spark_tbl_handle)\n\n# Disconnect\nspark_disconnect(sc)\nYou should now have normal dataframes in your regular R environment that can be used for further analytics:\n\n\n\nimage\n\n\nNote: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”"
-  },
-  {
-    "objectID": "posts-no-pictures/delta-lake-and-azure.html#troubleshooting",
-    "href": "posts-no-pictures/delta-lake-and-azure.html#troubleshooting",
-    "title": "Accessing data in Azure Data Lake (delta files)",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\nFrom R:\n# See spark details (troubleshooting)\nspark_config()\nspark_get_java()\nspark_available_versions()\nspark_installed_versions()\n\n# See session details\nutils::sessionInfo() \nFrom bash:\nnamei -l /usr/lib/spark\nRecommended troubleshooting: https://spark.rstudio.com/guides/troubleshooting.html"
-  },
-  {
-    "objectID": "posts-no-pictures/delta-lake-and-azure.html#about",
-    "href": "posts-no-pictures/delta-lake-and-azure.html#about",
-    "title": "Accessing data in Azure Data Lake (delta files)",
-    "section": "About",
-    "text": "About\n\nAzure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage\n\nAzure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.\n\n\nData Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.\n\n\nA superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.\n\nTLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).\n\n\nDelta Tables: https://docs.delta.io/latest/delta-intro.html\n\nDelta Lake is an open source project that enables building a Lakehouse architecture on top of data lakes. Delta Lake provides ACID transactions, scalable metadata handling, and unifies streaming and batch data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.\n\nYou can check Delta Lake releases here: https://docs.delta.io/latest/releases.html\nTLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).\n\n\n\nimage\nimage"
-  },
-  {
-    "objectID": "posts/quarto.html",
-    "href": "posts/quarto.html",
-    "title": "What is Quarto?",
-    "section": "",
-    "text": "The obligatory starting template with a couple links."
-  },
-  {
-    "objectID": "posts/quarto.html#quarto",
-    "href": "posts/quarto.html#quarto",
-    "title": "What is Quarto?",
-    "section": "Quarto",
-    "text": "Quarto\nIt’s a whole new exciting world! And the default project has a lot of exciting files to explore.\nI’m using:\n\nhttps://quarto.org/docs/websites/website-blog.html\nhttps://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html"
-  },
-  {
-    "objectID": "posts/quarto.html#example",
-    "href": "posts/quarto.html#example",
-    "title": "What is Quarto?",
-    "section": "Example",
-    "text": "Example\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
-  },
-  {
-    "objectID": "posts/quarto.html#running-code",
-    "href": "posts/quarto.html#running-code",
-    "title": "What is Quarto?",
-    "section": "Running Code",
-    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
-  },
-  {
-    "objectID": "posts/ojs_lyme.html",
-    "href": "posts/ojs_lyme.html",
-    "title": "Observable JS for snappy datascience",
-    "section": "",
-    "text": "This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at https://quarto.org/docs/interactive/ojs/."
-  },
-  {
-    "objectID": "posts/ojs_lyme.html#observable-js",
-    "href": "posts/ojs_lyme.html#observable-js",
-    "title": "Observable JS for snappy datascience",
-    "section": "",
-    "text": "This Quarto document is made interactive using Observable JS. Interactive documents allow readers to modify parameters and see the results immediately. Learn more about OJS interactive documents at https://quarto.org/docs/interactive/ojs/."
-  },
-  {
-    "objectID": "posts/ojs_lyme.html#data-wrangling",
-    "href": "posts/ojs_lyme.html#data-wrangling",
-    "title": "Observable JS for snappy datascience",
-    "section": "Data wrangling",
-    "text": "Data wrangling\nLoad the data, using Lyme data from the CDC.\n\n\nShow the code\ndata = FileAttachment(\"data/lyme_data.csv\").csv({ typed: true })\n\n\n\n\n\n\n\nFilter options\n\n\nShow the code\nviewof state = Inputs.select(data.map(d =&gt; d.Stname), {multiple: true, value: \"Alaska\", label: \"Choose a state: \", sort: true, unique: true})\nfiltered = data.filter(function(data) {\n  return state.includes(data.Stname);\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlotData\n\n\nStacked bar chart of cases by state by year, remember to select an option above.\n\n\nShow the code\nPlot.plot({\n  y: {\n    grid: true\n  },\n  marks: [\n    Plot.barY(filtered, {x: \"date\", y: \"total_cases\", fill: \"#bab0ab\"}),\n    &lt;!-- plot.text(filtered, {x: \"date\", y: \"total_cases\", text: \"Stname\", textAnchor: \"end\", dx: -6}),\n    Plot.ruleY([0])\n  ]\n})\n\n\n\n\n\n\n\n\n\nAggregated dataset for all states.\n\n\nShow the code\nInputs.table(data, { sort: \"date\", reverse: true })"
-  },
-  {
-    "objectID": "posts/ojs_lyme.html#references",
-    "href": "posts/ojs_lyme.html#references",
-    "title": "Observable JS for snappy datascience",
-    "section": "References",
-    "text": "References\n\nhttps://journals.plos.org/plosone/article?id=10.1371/journal.pone.0260122\nhttps://www.hopkinslymetracker.org/\nhttps://quarto.org/docs/interactive/ojs/\nData from: https://www.cdc.gov/lyme/stats/survfaq.html\\\nAdditional data options: https://data.world/datasets/lyme-disease\nSome plots options using observable: https://github.com/observablehq/plot and https://observablehq.com/@observablehq/plot-bar\nSome various tutorials: https://observablehq.com/tutorials"
-  },
-  {
-    "objectID": "posts/maverick cubby holder.html",
-    "href": "posts/maverick cubby holder.html",
-    "title": "Ford Maverick Truck Cubby Holder",
-    "section": "",
-    "text": "Assembled cubby holder fits perfectly!"
-  },
-  {
-    "objectID": "posts/maverick cubby holder.html#libre-cad-httpslibrecad.org",
-    "href": "posts/maverick cubby holder.html#libre-cad-httpslibrecad.org",
-    "title": "Ford Maverick Truck Cubby Holder",
-    "section": "Libre CAD https://librecad.org/",
-    "text": "Libre CAD https://librecad.org/\nThis is where the bulk of your work will be done. Some of the key functions to be aware of:\n\nLine, 2 points\nMeasure, distance point to point\nModify, Move/Copy, Rotate, Trim 2, Attributes, Explode text into letters, Mirror\n\nTips:\n\nYou’ll need to change the snap settings at the bottom to change what it connects with.\nWhen drawing a line use the @ symbol to signify from the current reference (instead of absolute). EG. @0,10\nYour actual cut layer should be its own layer separate from a designs / motifs layer.\n\nIn order to move your files (.dxf) into your next software (where it will be layed out on a page for the actual laser cutter to interpret), it will need to be saved/exported (as an .svg)."
-  },
-  {
-    "objectID": "posts/maverick cubby holder.html#inkscape-httpsinkscape.org",
-    "href": "posts/maverick cubby holder.html#inkscape-httpsinkscape.org",
-    "title": "Ford Maverick Truck Cubby Holder",
-    "section": "Inkscape https://inkscape.org/",
-    "text": "Inkscape https://inkscape.org/\nThis is where your design is laid out for the laser cutter to cut.\n\nObject, Group, Transform\nEdit, Resize Page to Selection"
-  },
-  {
-    "objectID": "posts/maverick cubby holder.html#all-about-tabs",
-    "href": "posts/maverick cubby holder.html#all-about-tabs",
-    "title": "Ford Maverick Truck Cubby Holder",
-    "section": "All about tabs",
-    "text": "All about tabs\n3.4mm tab thicknesses work with 1/8 inch wood."
-  },
-  {
-    "objectID": "posts/kettle automation.html",
-    "href": "posts/kettle automation.html",
-    "title": "Hey Google - make me coffee!",
-    "section": "",
-    "text": "I bought a smart kettle (goveelife-smart-electric-kettle-lite) with the dream of being able to press a button from bed in order to have hot water available for my coffee first thing in the morning.\nWhile this was great, it relies on bluetooth for the app to work. Normally I keep bluetooth off on my phone (it’s safer that way, plus a longer battery!)\nSo I automated it!\n\nSteps\nThese steps were followed with my Android\nStep 1: Install and configure the Govee app to be connected to your water kettle\nStep 2: Install and configure Google Home and integrate with the Govee App. Assign your kettle to the kitchen (or wherever, you do you boo). Optional: Install and configure Google Assistant, for the voice activation.\nStep 3: Create a Google Home Routine\n\nThis is a personal routine, so we have more options (like being able to adjust phone settings if needed).\nStarters: You can have this trigger for different things, like having it be voice activated when you say “hey google, make coffee!”, or when an alarm is dismissed, or at a specific time, etc.\nActions: Adjust home device, turn on the smart kettle (somehow by activating this way, I didn’t need to turn on bluetooth! Which is great, that’s the whole step I wanted to skip)\n\nStep 4: Test that the routine works\nStep 5: Add the routine as an icon to the phone screen (since voice activation isn’t my jam). Long click on the routine you’ve created and then click on the icon with the arrow over the phone to create a widget and place wherever you want on your phone screen.\n\n\n\nCreating a widget\n\n\nStep 6: Enjoy :-)\n\n\nWhat would I do differently next time?\nThere are some cool button options that look they have integration, or even a vibration sensor:\n\nSmart button\nVibration sensor\n\nHonestly though, this suits my lazy efficient self just fine.\n\n\n\nCreating a widget"
-  },
-  {
-    "objectID": "posts/battlebots 2021.html",
-    "href": "posts/battlebots 2021.html",
-    "title": "BATTLEBOTS 2021",
-    "section": "",
-    "text": "BattleBots is a robotic combat TV show. It is an amazing community and clearly a hobby of love by the people that join the show. Robots weigh 250lbs, 500 lbs in special circumstances, and there are strict rules around what is and isn’t allowed for weapons. The show spends time both on the 3 minute match and behind the scenes with interviews with the builders, footage of repairs, and last minute modifications as teams compete for the ultimate trophy.\n\n\n\nOfficial BattleBots page\nReddit Battlebots\nSeason 5 Rumor Mill at Reddit/r/Battlebots\nCombat Robot Resource Guide by Robert Cowan\n\n\n\n\nAll rights are owned by Battlebots on ABC\n\nMinotaur vs. BombshellYeti vs. Lock JawTombstone vs. BroncoHypershock + RakeDeath Roll vs. End GameHUGE vs. BroncoWitch Doctor Vs. actual household items"
-  },
-  {
-    "objectID": "posts/battlebots 2021.html#what-is-battlebots",
-    "href": "posts/battlebots 2021.html#what-is-battlebots",
-    "title": "BATTLEBOTS 2021",
-    "section": "",
-    "text": "BattleBots is a robotic combat TV show. It is an amazing community and clearly a hobby of love by the people that join the show. Robots weigh 250lbs, 500 lbs in special circumstances, and there are strict rules around what is and isn’t allowed for weapons. The show spends time both on the 3 minute match and behind the scenes with interviews with the builders, footage of repairs, and last minute modifications as teams compete for the ultimate trophy.\n\n\n\nOfficial BattleBots page\nReddit Battlebots\nSeason 5 Rumor Mill at Reddit/r/Battlebots\nCombat Robot Resource Guide by Robert Cowan\n\n\n\n\nAll rights are owned by Battlebots on ABC\n\nMinotaur vs. BombshellYeti vs. Lock JawTombstone vs. BroncoHypershock + RakeDeath Roll vs. End GameHUGE vs. BroncoWitch Doctor Vs. actual household items"
-  },
-  {
-    "objectID": "posts/battlebots 2021.html#battlebots-analysis",
-    "href": "posts/battlebots 2021.html#battlebots-analysis",
-    "title": "BATTLEBOTS 2021",
-    "section": "Battlebots Analysis",
-    "text": "Battlebots Analysis\nBelow is my attempt at diving deep into the world of Battlebots to understand what makes some bots more successful than others. All data is from the Battlebots official website, scraped from the web using the Rvest R package developed by Hadley Wickam.\n\nMessy web scraping to get data\n\n\nShow the code\nlibrary(rvest)\nlibrary(dplyr)\nlibrary(tidyverse)\nlibrary(ggplot2)\nlibrary(plotly)\nlibrary(data.table)\nlibrary(stringr)\n#devtools::install_github(\"lchiffon/wordcloud2\")\nlibrary(wordcloud2)\nlibrary(RColorBrewer)\nlibrary(ggmap)\nlibrary(maps)\nlibrary(ggrepel)\nlibrary(sf)\nlibrary(\"rnaturalearth\")\nlibrary(\"rnaturalearthdata\")\nlibrary(htmlwidgets)\nlibrary(webshot)\nlibrary(tidygeocoder)\nlibrary(rgeos)\n\n\n# Set URL list\n#urls = c(\"https://battlebots.com/robot/yeti-2019/\")\n#url &lt;- \"https://battlebots.com/robot/yeti-2019/\"\n\n# Check if data already exists, if not download it\nif(file.exists(\"./files/battlebotsinfo.csv\")){\n  message(\"Loading saved files\")\n  \n  battlebotsinfo = read.csv(\"./files/battlebotsinfo.csv\", stringsAsFactors=FALSE)\n  battlebotsmatch = read.csv(\"./files/battlebotsmatch.csv\", stringsAsFactors=FALSE)\n  battlebotsstat = read.csv(\"./files/battlebotsstat.csv\", stringsAsFactors=FALSE)\n  \n} else {\n  message(\"Generating battlebots data files\")\n  \n  urls = read.csv(\"./files/battlebotsurls.csv\", stringsAsFactors=FALSE)\n  \n  for( i in 1:nrow(urls) ){\n    url = urls[i,1]\n    \n    print(paste0(\"Reading \", i, \" of \", nrow(urls), \": \", url))\n    \n    # Read info and arrange into table \n    # (note that this isn't actually a table in the html source so we had to jump through some hoops to make that happen)\n    info &lt;- read_html(url) %&gt;%\n      html_nodes(\".info-grid\") %&gt;%\n      html_text()\n    \n    info_df_tmp &lt;- map(info, function(x) {\n      tibble(text = unlist(str_split(x, pattern = \"\\\\n\"))) %&gt;%\n        rowid_to_column(var = \"line\")\n    })\n    \n    info_df &lt;- bind_rows(info_df_tmp, .id = \"page\") \n    \n    # Trim off leading whitespace\n    info_trim &lt;- slice(info_df, which.max(text == \"Robot:\") : n()) %&gt;%\n      select(text)\n    \n    # Split into multiple rows , remediate any cases where Values are part of the Record\n    info_split &lt;- info_trim %&gt;%\n      mutate(text = str_trim(text)) %&gt;% \n      mutate(Record = ifelse(grepl(\":\", text, fixed = TRUE), text, NA)) %&gt;%\n      separate(Record, into = c(\"Record\", \"Value\"), sep = \":\", remove = FALSE) %&gt;%\n      fill(Record) %&gt;%\n      mutate(Value = ifelse(is.na(Value), \n               ifelse(grepl(\":\", text, fixed = TRUE), NA, text), Value )) %&gt;%\n      select(Record, Value) %&gt;%\n      filter(!is.na(Value)) %&gt;%\n      filter(!grepl(\"^\\\\s*$\", Value)) %&gt;%\n      unique() %&gt;%\n      group_by(Record) %&gt;%\n      summarize(Value = paste0(Value, collapse = \", \")) %&gt;%\n      ungroup() %&gt;%\n      pivot_wider(names_from = Record, values_from = Value) %&gt;%\n      mutate_all(as.character)\n    \n    # Robot name \n    robot = info_split$Robot\n    \n    # Read both history tables and wrangle into table form\n    history &lt;- read_html(url) %&gt;%\n      html_nodes(\".igsv-table\") \n    \n    if(length(history) &gt; 0){\n    stat_history &lt;- history[1] %&gt;% html_table(header = TRUE, fill = TRUE)\n    stat_history_df &lt;- stat_history[[1]] %&gt;%\n      mutate(Robot = robot) %&gt;%\n      mutate_all(as.character)\n    }\n    \n    if(length(history) &gt; 1){\n      match_history &lt;- history[2] %&gt;% html_table(header = TRUE, fill = TRUE)\n      match_history_df &lt;- match_history[[1]] %&gt;%\n        mutate(Robot = robot) %&gt;%\n        mutate_all(as.character)\n    }\n    \n    # Compile\n    if(i==1){\n      battlebotsinfo = info_split\n      battlebotsmatch = match_history_df\n      battlebotsstat = stat_history_df\n    } else {\n      battlebotsinfo = bind_rows(battlebotsinfo, info_split)\n      \n      if(length(history) &gt; 0){\n        battlebotsstat = bind_rows(battlebotsstat, stat_history_df)\n      }\n      \n      if(length(history) &gt; 1){\n        battlebotsmatch = bind_rows(battlebotsmatch, match_history_df)\n      }\n      \n    }\n    \n  } # End for loop \n  \n  # Save files to make it easier next time\n  write.csv(battlebotsinfo, \"./files/battlebotsinfo.csv\")\n  write.csv(battlebotsmatch, \"./files/battlebotsmatch.csv\")\n  write.csv(battlebotsstat, \"./files/battlebotsstat.csv\")\n\n}\n\n\n# References:\n# https://community.rstudio.com/t/convert-character-string-into-table/9158\n# https://stackoverflow.com/questions/42419765/convert-one-column-into-a-new-column-every-5-rows-a-numeric-interval\n#  - [Scraping in R rvest](https://www.dataquest.io/blog/web-scraping-in-r-rvest/)\n#  - [Tidy Web Scraping in R Tutorial and Resources](https://towardsdatascience.com/tidy-web-scraping-in-r-tutorial-and-resources-ac9f72b4fe47)\n\n\n\n\nShow the code\n### Frequency of Battlebots Weapon Types\n\n# type_frequency &lt;- battlebotsinfo %&gt;%\n#   group_by(Type) %&gt;%\n#   summarize(freq = n()) %&gt;%\n#   rename(\"word\" = \"Type\")\n#   \n# my_wordcloud1 &lt;- wordcloud2(data=type_frequency, size = 0.5, shape = 'pentagon', color='random-dark')\n# \n# my_wordcloud1\n\n#saveWidget(my_wordcloud, \"tmp.html\", selfcontained = F)\n#webshot(\"tmp.html\", \"./images/wc1.png\", delay = 5)\n\n#wordcloud2(demoFreq, color = \"random-light\", backgroundColor = \"grey\")\n\n# https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a\n# https://cran.r-project.org/web/packages/wordcloud2/vignettes/wordcloud.html#lettercloud-function\n\n\n\n\nFrequency of Builder Day Jobs\n\n\nShow the code\njob_frequency &lt;- battlebotsinfo %&gt;%\n  group_by(Job) %&gt;%\n  summarize(freq = n()) %&gt;%\n  rename(\"word\" = \"Job\")\n\njob_frequency$word &lt;- iconv(job_frequency$word, to = \"UTF-8\")\n\nmy_wordcloud2 &lt;- wordcloud2(data=job_frequency, size = 0.25, color='random-dark')\n\nmy_wordcloud2\n\n\n\n\n\n\n\n\nMap of Builder Locations\n\n\nShow the code\n#Load location data\nif(file.exists(\"./files/battlebotslocation.csv\")){\n  message(\"Loading saved files\")\n  \n  bbmap = read.csv(\"./files/battlebotslocation.csv\", stringsAsFactors=FALSE)\n} else {\n  message(\"Generating battlebots location files\")\n  \n  #Set up the API key for google \n  #This now costs money\n  #Go to: https://cloud.google.com/maps-platform/\n  #register_google(key = \"\", write = TRUE)\n  \n  bbmap &lt;- battlebotsinfo %&gt;%\n    select(Robot, Hometown) %&gt;%\n    mutate(Team = paste(\"Team\", Robot, \", from\", Hometown)) %&gt;%\n    mutate_geocode(Hometown)\n  \n  write.csv(bbmap, \"./files/battlebotslocation.csv\")\n}\n  \nworld &lt;- ne_countries(scale = \"medium\", returnclass = \"sf\")\n\np &lt;- ggplot(data = world) + \n  geom_sf(color = \"black\", fill = \"lightgray\") +\n  xlab(\"Longitude\") + ylab(\"Latitude\") +\n  geom_point( data=bbmap, aes(x=lon, y=lat, text=Team), color=\"red\", size=1) +\n  # ggrepel::geom_label_repel(data = bbmap,\n  #            aes(x = lon, y = lat, label = Robot),\n  #            size = 1.5, alpha = 0.8,\n  #            label.r = unit(0.5, \"lines\"), label.size = 0.25,\n  #            segment.color = \"red\", segment.size = 1,\n  #            seed = 1002) +\n  #geom_text_repel(data=bbmap,aes(x = lon, y = lat, label = Robot),box.padding = 0.4,point.padding = 0.25,size=4,show.legend=FALSE)+\n  ggtitle(\"Battlebots Hometowns World map\", subtitle = paste0(\"(\", length(unique(bbmap$Robot)), \" teams)\"))\n\n#pp &lt;- ggplotly(p, tooltip=\"text\")\n\n#assign(\"pp\", plotly::ggplotly(p, tooltip=\"text\"), envir=parent.frame())\n\n#pp\n\np\n\n\n\n\n\n\n\n\n\nShow the code\n#htmlwidgets::saveWidget( plotly::ggplotly(p, tooltip=\"text\"), \"tmp3.html\")\n\n#print( htmltools::tags$iframe(src=\"temp.html\", width=640, height=480) )\n\n# &lt;iframe src=\"temp.html\" width='1000px' height='800px'&gt;&lt;/iframe&gt; \n\n  \n#https://stackoverflow.com/questions/29037851/how-do-i-plot-us-cities-using-ggplot\n#https://stackoverflow.com/questions/22752009/plot-on-ggmap-by-using-city-and-state\n#https://towardsdatascience.com/plotting-spatial-data-in-r-a38a405a07f1\n#https://cran.r-project.org/web/packages/usmap/vignettes/advanced-mapping.html \n#https://www.r-graph-gallery.com/330-bubble-map-with-ggplot2.html\n#https://ggplot2-book.org/maps.html\n#http://yluo86.github.io/rmaps\n#https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html\n#https://www.statsandr.com/blog/world-map-of-visited-countries-in-r/\n#https://cran.r-project.org/web/packages/tidygeocoder/vignettes/tidygeocoder.html\n#https://towardsdatascience.com/reverse-geocoding-in-r-f7fe4b908355\n#https://stackoverflow.com/questions/13905098/how-to-get-the-longitude-and-latitude-coordinates-from-a-city-name-and-country-i\n#https://stackoverflow.com/questions/59144842/why-does-ggplotly-does-not-work-in-rmarkdown-the-same-way-ggplot-does\n\n\n\n\n\nWin Frequency by Robot Type\n\n\nShow the code\n#TODO: Add plot showing frequency of type of robot \n\n# type_frequency &lt;- battlebotsinfo %&gt;%\n#   group_by(Type) %&gt;%\n#   summarize(freq = n()) %&gt;%\n#   rename(\"word\" = \"Type\")\n\nwin_frequency_raw &lt;- merge(battlebotsinfo, battlebotsstat, by=\"Robot\") %&gt;%\n  select(Stats, Career, Robot, Type) %&gt;%\n  filter(Stats %in% c(\"Total matches\", \"Total wins\")) %&gt;%\n  #mutate(Career = as.numeric(Stats)) %&gt;%\n  pivot_wider(names_from = Stats, values_from = Career) %&gt;%\n  unnest(`Total wins`) %&gt;%\n  mutate(`Total wins` = as.numeric(`Total wins`),\n         `Total matches` = as.numeric(`Total matches`))\n\ntype_wins &lt;- win_frequency_raw %&gt;%\n  group_by(Type) %&gt;%\n  summarize(wins = sum(`Total wins`) / sum(`Total matches`))\n\nrobot_wins &lt;- win_frequency_raw %&gt;%\n  group_by(Type) %&gt;%\n  mutate(CountType = n()) %&gt;%\n  ungroup() %&gt;%\n  group_by(Robot, Type, CountType) %&gt;%\n  summarize(wins = sum(`Total wins`) / sum(`Total matches`)) %&gt;%\n  filter(CountType &gt; 1) %&gt;%\n  arrange(wins)\n\n\n\np &lt;- ggplot(robot_wins, aes(x=Type, y=wins)) + geom_boxplot() + theme(axis.text.x = element_text(angle = -90, hjust = 1))\n\n\np &lt;- ggplot(robot_wins, aes(x=reorder(Type, -wins, na.rm = TRUE), y=wins)) + geom_boxplot() + theme(axis.text.x = element_text(angle = -90, hjust = 1)) +  labs(y=\"Wins\", x=\"Type\")\np"
-  },
-  {
-    "objectID": "posts/battlebots 2021.html#resources",
-    "href": "posts/battlebots 2021.html#resources",
-    "title": "BATTLEBOTS 2021",
-    "section": "Resources",
-    "text": "Resources\nBattlebots:\n\nOfficial BattleBots page\nReddit Battlebots\nSeason 5 Rumor Mill at Reddit/r/Battlebots\nCombat Robot Resource Guide by Robert Cowan\n\nResources for building a similar RMarkdown page:\n\nCreating dynamic tabs in Rmarkdown\nHTML Special Features: KU CRMDA Markdown\nhttps://github.com/rstudio/rmarkdown/issues/1681\nR: 2 column layout in Rmarkdown with tabset\nScraping in R rvest\nTidy Web Scraping in R Tutorial and Resources"
-  },
-  {
-    "objectID": "lists.html",
-    "href": "lists.html",
-    "title": "Lists",
-    "section": "",
-    "text": "Have you heard of awesome lists? Probably some of the best compilations out there on there on the internet.\nWith that said here are some random compilations of my own.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\nCoding write-ups and resources\n\n\n1 min\n\n\n\n\nWorkplace articles\n\n\n1 min\n\n\n\n\nThe importance of good programming\n\n\n6 min\n\n\n\n\nSound\n\n\n4 min\n\n\n\n\nPhone games\n\n\n1 min\n\n\n\n\nA little data goes a long way\n\n\n1 min\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "lists/sound.html",
-    "href": "lists/sound.html",
-    "title": "Sound",
-    "section": "",
-    "text": "Make beautiful music with technology!"
-  },
-  {
-    "objectID": "lists/sound.html#otomata",
-    "href": "lists/sound.html#otomata",
-    "title": "Sound",
-    "section": "Otomata",
-    "text": "Otomata\nMake beautiful generative algorithm inspired music using cellular automation.\n\nLink to the app: https://marwahaha.github.io/otomata/\n\nSome historic links:\n\nOriginally at (but now no longer works): https://earslap.com/page/otomata.html\nFrom the reddit post: https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/\nGithub: https://github.com/marwahaha/otomata\n\n\n\n\nreddit post"
-  },
-  {
-    "objectID": "lists/sound.html#sonic-pi",
-    "href": "lists/sound.html#sonic-pi",
-    "title": "Sound",
-    "section": "Sonic Pi",
-    "text": "Sonic Pi\nMake your own music using programming with Sonic Pi: https://sonic-pi.net/"
-  },
-  {
-    "objectID": "lists/sound.html#sky-cotl",
-    "href": "lists/sound.html#sky-cotl",
-    "title": "Sound",
-    "section": "Sky COTL",
-    "text": "Sky COTL\nSky Children of Light is a phone game that has a built in music player that I really love. Instead of having to turn pages in sheet music it has floating icons that change shape over the notes you need to play, making it really easy to pick up once you get the hang of it.\n\nSky music library: https://sky-music.github.io/\nSky music app library: https://sky-music.herokuapp.com/songLibrary.html\nSky music app: https://sky-music.herokuapp.com/\n\nHere’s an example of one that I created (an attempt to translate “Regret” by Gackt):\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nView this post on Instagram\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA post shared by @lisa.needs.to.make"
-  },
-  {
-    "objectID": "lists/good-programming.html",
-    "href": "lists/good-programming.html",
-    "title": "The importance of good programming",
-    "section": "",
-    "text": "A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means."
-  },
-  {
-    "objectID": "lists/good-programming.html#uk-post-office-scandal",
-    "href": "lists/good-programming.html#uk-post-office-scandal",
-    "title": "The importance of good programming",
-    "section": "UK Post Office Scandal",
-    "text": "UK Post Office Scandal\n\nDevelopers blamed for the post office scandal?\nVictim testimony\nRemote access and mistakes blamed on post masters, a smoking gun\nExample of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?\nOne of the independent investigators from 2012 breaks silence\nEvidence that back in 2012 the indepent investigators were told about remote access, implying pejury in all later cases\nThey Could, And They Did Change Branch Transaction Data\nMiscarriage of justice - the Rose report\nList of current issues / bugs as of 2017? with the software. One can only imagine how much worse it used to be\nProject manager on the original project discusses his impressions - how not to commission a complex project Inquiry Phase 2: Star Witness – Dave gives it both barrels\nKnown errors in the software, perjury, and lack of disclosure\nInterview with IT - throwing coconuts\nInterview with the other IT\nAttempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?\nThe cover up\nWhy did the lawyer for the post office act this way?\nThinking of alleging or pleading fraud: better read this first"
-  },
-  {
-    "objectID": "lists/code.html",
-    "href": "lists/code.html",
-    "title": "Coding write-ups and resources",
-    "section": "",
-    "text": "Source for good articles\nThe true cost of the cloud\nThe case for professional services\nOpinionated article on Python installations\nThis page addresses poetry and conda\nObject oriented programming is the biggest mistake of all time\nGoogle drive is production\nParadox of choice\nWhy we’re leaving the cloud\nMoving beyond “algorithmic bias is a data problem”\nThat keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?” : 4:08 is where he talks about ml\nHere’s What Ethical AI Really Means - YouTube philosophy tube\nPodcast on Stackoverflow Architecture\nData Feminism\nInvisible Women\nQuality Jam 2017: Michael Bolton “A Ridiculously Rapid Introduction to Rapid Software Testing”\nHome not so sweet home gist\n\nIncludes links to pages like Everything that uses configuration files should report where they’re located\n\nHelp linux ate my RAM\nFree images for including in presentations\nDatadog sales people are annoying\nCounting explosions at Unity, a data analysts perspective\nDatabase rebuild incident\nHow do lava lamps help with Internet encryption?\nFree email for testing things: mailtrap\nIf you haven’t done a Pandas data analysis project in awhile, it’s probably not a bad idea to watch this guy’s vids\nPassword purgatory\nEverything I learned about concurrency and reliability I learned at the Waffle House\nPositive affirmations for site reliability engineers\nvaporwave RStudio theme"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Welcome!\nI’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.\nIn my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.\nResume"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
-    "section": "",
-    "text": "Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!"
-  },
-  {
-    "objectID": "lists/data.html",
-    "href": "lists/data.html",
-    "title": "A little data goes a long way",
-    "section": "",
-    "text": "A little data goes a long way… here are some examples that I think illustrte this in a particularly fascinating way (at least to me)."
-  },
-  {
-    "objectID": "lists/data.html#fighting-the-gender-pay-gap-one-twitter-bot-at-a-time",
-    "href": "lists/data.html#fighting-the-gender-pay-gap-one-twitter-bot-at-a-time",
-    "title": "A little data goes a long way",
-    "section": "Fighting the gender pay gap one twitter bot at a time",
-    "text": "Fighting the gender pay gap one twitter bot at a time\nCompanies tweeted for International Women’s Day. Then this account called out their pay gaps.\nCheck out the bot for yourself."
-  },
-  {
-    "objectID": "lists/data.html#for-better-science",
-    "href": "lists/data.html#for-better-science",
-    "title": "A little data goes a long way",
-    "section": "For Better Science",
-    "text": "For Better Science"
-  },
-  {
-    "objectID": "lists/data.html#for-better-science-1",
-    "href": "lists/data.html#for-better-science-1",
-    "title": "A little data goes a long way",
-    "section": "",
-    "text": "The rabbit hole of learning about how bad science is uncovered and recalled started with:\n\nSylvain Lesné is a failed scientist\nCassava fraud and Alzheimer’s capitalism"
-  },
-  {
-    "objectID": "lists/data.html#researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town",
-    "href": "lists/data.html#researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town",
-    "title": "A little data goes a long way",
-    "section": "Researchers uncover the use of coal ash for playground materials in small town",
-    "text": "Researchers uncover the use of coal ash for playground materials in small town\nA recent story about coal ash that was used in a playground and the work the local newspaper and the University (Duke) is doing to figure out the path forward:\n\nhttps://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/\nhttps://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/\nhttps://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/"
-  },
-  {
-    "objectID": "lists/data.html#unprecedented-access-to-food-safety-and-consumer-recalls",
-    "href": "lists/data.html#unprecedented-access-to-food-safety-and-consumer-recalls",
-    "title": "A little data goes a long way",
-    "section": "Unprecedented access to food safety and consumer recalls",
-    "text": "Unprecedented access to food safety and consumer recalls\n\nFood safety\nConsumer products"
-  },
-  {
-    "objectID": "lists/phone_games.html",
-    "href": "lists/phone_games.html",
-    "title": "Phone games",
-    "section": "",
-    "text": "Seedship\n\n\nA fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.\nLink: https://philome.la/johnayliff/seedship/play/index.html\n\n\n\nhttps://garticphone.com/\n\n\n\nhttps://www.urbandead.com/\n\n\n\nhttps://robotodyssey.online/\n\n\n\nhttps://skribbl.io/\n\n\n\nhttps://www.trickstercards.com/home/euchre/\n\n\n\nhttps://codenames.game/\n\n\n\nTrack your coverage gaps with: https://www.mkttoolbox.com/login/?ret_url=%2F\n\n\n\nhttps://semantle.com/\n\n\n\nhttps://knucklebones.io/en"
-  },
-  {
-    "objectID": "lists/phone_games.html#random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse",
-    "href": "lists/phone_games.html#random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse",
-    "title": "Phone games",
-    "section": "",
-    "text": "Seedship\n\n\nA fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.\nLink: https://philome.la/johnayliff/seedship/play/index.html\n\n\n\nhttps://garticphone.com/\n\n\n\nhttps://www.urbandead.com/\n\n\n\nhttps://robotodyssey.online/\n\n\n\nhttps://skribbl.io/\n\n\n\nhttps://www.trickstercards.com/home/euchre/\n\n\n\nhttps://codenames.game/\n\n\n\nTrack your coverage gaps with: https://www.mkttoolbox.com/login/?ret_url=%2F\n\n\n\nhttps://semantle.com/\n\n\n\nhttps://knucklebones.io/en"
-  },
-  {
-    "objectID": "lists/workplace.html",
-    "href": "lists/workplace.html",
-    "title": "Workplace articles",
-    "section": "",
-    "text": "Yolo manifesto\nComfy software\nOpen source as the “new normal”\nOvercoming matrix madness\nMatrix organizations\nOvercoming matrix madness\nCall center burnout\nProduct led vs sales led organizations\nLAYER\nBeing glue\nDiscussion of cognitive load and how big of a barrier it can be\nCognitive load\nHow organizations are like slime molds\nForbes - let the engineers lead (boeing)\nFailure to Learn: the BP refinery disaster"
-  },
-  {
-    "objectID": "posts/ai_art.html",
-    "href": "posts/ai_art.html",
-    "title": "AI generated art",
-    "section": "",
-    "text": "AI is controversial, and I’d recommend watching these two videos to understand some technical points on why that is:\n\nKeynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”\nHere’s What Ethical AI Really Means - YouTube philosophy tube"
-  },
-  {
-    "objectID": "posts/ai_art.html#but-first-a-disclaimer",
-    "href": "posts/ai_art.html#but-first-a-disclaimer",
-    "title": "AI generated art",
-    "section": "",
-    "text": "AI is controversial, and I’d recommend watching these two videos to understand some technical points on why that is:\n\nKeynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”\nHere’s What Ethical AI Really Means - YouTube philosophy tube"
-  },
-  {
-    "objectID": "posts/ai_art.html#ai-generated-art",
-    "href": "posts/ai_art.html#ai-generated-art",
-    "title": "AI generated art",
-    "section": "AI Generated Art",
-    "text": "AI Generated Art\nAI isn’t a new concept. Using AI’s to generate art isn’t a new concept. Having that available as app that actually creates some pretty fun results is pretty new.\nAs someone whose artistic ambitions always are greater than my actual ability, this has been a surprisingly fun and rewarding technology to play around with.\nThe three that I recommend are:\n\nMy first AI art generating app (5 free pieces of art per day): https://www.starryai.com/\nDoesn’t require log in (5 free pieces of art per day, however using incognito mode or edge counts as a separate user for 15 pieces of art per day): https://creator.nightcafe.studio/\nNo limit to number of pieces, landscapes only: https://www.wombo.art/\n\nThere are a bunch more I’m looking forward to trying: &lt;https://www.unite.ai/10-best-ai-art-generators/#:~:text=Another one of the best,trained with millions of images&gt;"
-  },
-  {
-    "objectID": "posts/ai_art.html#highlights",
-    "href": "posts/ai_art.html#highlights",
-    "title": "AI generated art",
-    "section": "Highlights",
-    "text": "Highlights\nImages in : img/starryai/\n\n\n\n\n\n\n\n\n\nsolarpunk\n\n\n\n\n\n\n\nsolar panel satellite\n\n\n\n\n\n\n\npluto\n\n\n\n\n\n\n\n\n\nspaceship flying down the sidewalk\n\n\n\n\n\n\n\nHydraulic dam fairytale\n\n\n\n\n\n\n\nthe storm rolled in\n\n\n\n\n\n\n\n\n\nI believe in a thing called love\n\n\n\n\n\n\n\nPlaceholder\n\n\n\n\n\n\n\nSpacecat\n\n\n\n\n\n\n\n\n\nparty around a bonfire\n\n\n\n\n\n\n\nfireflies\n\n\n\n\n\n\n\nthunderstorm over galveston\n\n\n\n\n\n\n\n\n\nwoodland creatures having a tea party\n\n\n\n\n\n\n\nPacific Rim\n\n\n\n\n\n\n\nMind the Gap\n\n\n\n\n\nImages in : img/nightcafe\n\n\n\n\n\n\n\n\n\nRobotic owl in space\n\n\n\n\n\n\n\nThe monster from alien on a date\n\n\n\n\n\n\n\nselfie\n\n\n\n\n\n\n\n\n\nbrain on fire\n\n\n\n\n\n\n\ncyborg bartender\n\n\n\n\n\n\n\nammonite seashell on the beach being worshipped by monsters\n\n\n\n\n\nTips on dealing with displaying images in a rendered quarto document: https://quarto.org/docs/authoring/figures.html#figure-panels\n\n\n\nsolarpunk\nsolar panel satellite\npluto\nspaceship flying down the sidewalk\nHydraulic dam fairytale\nthe storm rolled in\nI believe in a thing called love\nPlaceholder\nSpacecat\nparty around a bonfire\nfireflies\nthunderstorm over galveston\nwoodland creatures having a tea party\nPacific Rim\nMind the Gap\nRobotic owl in space\nThe monster from alien on a date\nselfie\nbrain on fire\ncyborg bartender\nammonite seashell on the beach being worshipped by monsters"
-  },
-  {
-    "objectID": "posts/chatbot.html",
-    "href": "posts/chatbot.html",
-    "title": "Chatbot",
-    "section": "",
-    "text": "Check out the code: https://github.com/leesahanders/Chatbot\nCheck out the hosted chatbot: https://leesahanders.shinyapps.io/Chatbot/\nThe goal of this project was to build a basic chatbot and explore a couple ways of hosting it. You can check it out in action in a Shiny app hosted at leesahanders.shinyapps.io/Chatbot/"
-  },
-  {
-    "objectID": "posts/chatbot.html#meet-the-bot",
-    "href": "posts/chatbot.html#meet-the-bot",
-    "title": "Chatbot",
-    "section": "Meet the bot",
-    "text": "Meet the bot\n\n\n\n\n\n\n\n\nChatbot\nName\nDescription\n\n\n\n\n\nLeafey\nLeafey is here to provide some plant therapy. Leafey is very simple with just key phrase look ups based on user inputs.\n\n\n\n\nIt’s just the one bot for now, but check back later and there might be more added."
-  },
-  {
-    "objectID": "posts/chatbot.html#chat-model",
-    "href": "posts/chatbot.html#chat-model",
-    "title": "Chatbot",
-    "section": "Chat model",
-    "text": "Chat model\nShout out to the incredible resource at https://www.r-bloggers.com/2021/01/eliza-chatbot-in-r-build-yourself-a-shrink/ where the core code parts for the chatbot are from.\nAt it’s most basic the important elements are: 1. List of answers based on key phrases 2. List of default answers if no key phrases are found 3. Pattern matching function\nEssentially it works by using an input from the user and searching for key phrases and based on what it finds for a match returning the best matched answer. For more details check out the writeout the folks at r-bloggers did (linked above).\nMore chatbots can be created by copying the chatbot_leafey file and changing the name and contents to reflect the personality of the new one."
-  },
-  {
-    "objectID": "posts/chatbot.html#hosting",
-    "href": "posts/chatbot.html#hosting",
-    "title": "Chatbot",
-    "section": "Hosting",
-    "text": "Hosting\nThe chat bot can now be kicked off inside whichever system wanted - whether that is in a shiny app, discord integration, or just in console using a while loop.\n\nConsole\nShout out to the incredible resource at https://www.r-bloggers.com/2021/01/eliza-chatbot-in-r-build-yourself-a-shrink/ where this code is from for kicking off your chatbot to interact with in the console until you hit exit:\ncat(\"Leafey: Hello, I am Leafey!\\n\")\nwhile (TRUE) {\n  input &lt;- readline(\"You: \")\n  if (input == \"quit\") break\n  cat(\"Leafey:\", Leafey(input))\n}\n\n\nShiny\nThe Shiny app is essentially just a wrapper for the chatbot functions. The trick was setting it up so that the user could select a chatbot and it would load the rest (so it would be reasonably scaleable), and capturing the chat with a log so that the user can see the full history of the conversation.\nIn order to use this feel free to clone the project and update the various sections as needed. Pay close attention to the section happening after the submit / chatbot selection action button is triggered. This is where the loading in of the appropriate chatbot is happening and various parameters are being set/reset.\n\nGithub link\nThe fancy ribbon is courtesy the gitlink.\nribbon_css(\"https://github.com/leesahanders/Chatbot\", text = \"Code on Github\", fade = FALSE),\nA less fancy way to include a link would be:\n      # Adding div tag to the sidebar with git link           \n      tags$div(class=\"header\", checked=NA,\n               #tags$p(\"Raw code located on Git\"),\n               tags$a(href=\"https://github.com/leesahanders/Chatbot\", \"Raw code located on Git, check it out by clicking here\")\n      ),\n\n\nUsing the enter key for triggering the action button\nHuge thanks to Rahul Mishra for finding an easy to use solution.\nIn the initialization of the app include the javascript function:\njscode &lt;- '\n$(function() {\n  var $els = $(\"[data-proxy-click]\");\n  $.each(\n    $els,\n    function(idx, el) {\n      var $el = $(el);\n      var $proxy = $(\"#\" + $el.data(\"proxyClick\"));\n      $el.keydown(function (e) {\n        if (e.keyCode == 13) {\n          $proxy.click();\n        }\n      });\n    }\n  );\n});\n'\nThen inside the UI include the call to the javascript where “Send” is changed to the label for your actionButton:\n  tags$head(tags$script(HTML(jscode))),\n  `data-proxy-click` = \"Send\","
-  },
-  {
-    "objectID": "posts/chatbot.html#references",
-    "href": "posts/chatbot.html#references",
-    "title": "Chatbot",
-    "section": "References",
-    "text": "References\nCredit where credit is due - jokes are from: - https://www.rd.com/article/plant-puns/\nFor the Shiny app development I used a bunch of resources for getting the details:\n\nhttps://stackoverflow.com/questions/65365805/how-to-align-button-next-to-text-input\nhttps://stackoverflow.com/questions/56608214/how-can-i-keep-input-track-log-in-shiny-then-print-it-and-save-it\nhttps://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html (probably my favorite page on the internet!)\nhttps://clarewest.github.io/blog/post/making-tables-shiny/\nhttps://bookdown.org/yihui/rmarkdown-cookbook/kable.html\nhttps://stackoverflow.com/questions/62139431/how-can-i-make-the-first-col-aligned-to-left-and-the-rest-aligned-to-center-with\n\nAnd some resources that are more aspirational, for future plans and features: - https://shiny.rstudio.com/articles/notifications.html - https://community.rstudio.com/t/shiny-contest-submission-table-editor-shiny-app/23600 - https://stackoverflow.com/questions/32335951/using-enter-key-with-action-button-in-r-shiny\nSomeday it would be cool to explore integrating a chatbot with discord, these resources look like they’d be useful: - https://github.com/jljsio/discordr - wrapper for Python package https://realpython.com/how-to-make-a-discord-bot-python/ - https://www.reddit.com/r/rprogramming/comments/epqfnl/making_a_discord_bot_in_r/"
-  },
-  {
-    "objectID": "posts/maverick soft topper.html",
-    "href": "posts/maverick soft topper.html",
-    "title": "Ford Maverick Soft Topper installation",
-    "section": "",
-    "text": "Soft topper is a fabric rear cover for truck beds.\nFinally taking the time to actually install it on my Ford Maverick. Went in like a breeze, though there is some loss in visibility once it is on. Here are some of the measurements.\n\n\n\nCarefully placing the clamps\n\n\n\n\n\nThe aluminum frame assembled and pushed back\n\n\n\n\n\nWith the fabric cover snapped in place the rear storage is safe from the elements. Next up to work on the camper modifications!"
-  },
-  {
-    "objectID": "posts/resin.html",
-    "href": "posts/resin.html",
-    "title": "Resin Dice",
-    "section": "",
-    "text": "Flourescent dice set (all glitter dice)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nView this post on Instagram\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA post shared by @lisa.needs.to.make\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRoyal purple dice set with beautiful crystals due to cold temperatures\n\n\n\n\n\n\n\n\nFire red dice set, with some glitter dice!"
-  },
-  {
-    "objectID": "posts/resin.html#recent-dice-highlights",
-    "href": "posts/resin.html#recent-dice-highlights",
-    "title": "Resin Dice",
-    "section": "",
-    "text": "Flourescent dice set (all glitter dice)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nView this post on Instagram\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA post shared by @lisa.needs.to.make\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRoyal purple dice set with beautiful crystals due to cold temperatures\n\n\n\n\n\n\n\n\nFire red dice set, with some glitter dice!"
-  },
-  {
-    "objectID": "posts/resin.html#experiments",
-    "href": "posts/resin.html#experiments",
-    "title": "Resin Dice",
-    "section": "Experiments",
-    "text": "Experiments\n\nSilicone Mold\n\n\n\n\n\n\n\n\n\n\nThe basics I’ve gathered for learning how to make molds are:\n\nSmooth-On OOMOO\nNitrile Gloves\nSmall hand torch (originally meant for creme brulee)\nA Safety Pin\nPlasticine Clay\nVarious small disposable cups, disposable plastic fork, measuring cup\nHandful of my least favorite dice\n\n\n\n\n\n\n\n\nGoing to the crafts store the whole time I was thinking “this is going to go GREAT. How hard could it be? The videos are so calming, surely the whole process is straight up zen.”\nWRONG.\nAfter learning how difficult it is to attach a pin into a D6 (I would describe it more as teetering perilously rather than actually mounted) we got to move onto lessons into practically what pot time is. While on thebox it may say pot time of 30 minutes in practice I had less than 20 minutes to get the silicone into the mold before it was hardening to the point of not flowing smoothly.\n\n\n\n\n\n\n\nAlso had complete failure of the attempt at a vacuum chamber using my hand vaccuum, a small bell jar, and the valve on one of those clothes bags that let you vacuum the air out for better storage. No bubbles were successfully pulled out using this method, whether due to lack of a seal between the bell jar and the valve or if just wasn’t a strong enough vacuum.\n\n\n\n\n\n\n\nThe three mold attempts are sitting out to cure overnight before I’ll begin the process of removing the die and trying out adding resin. I’m doubtful any of these turned out but what a wonderful way to spend a couple hours!\n\n\n\n\n\n\n\n10/4/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTry 2 of creating the silicone mold. I was able to use the lessons from last time and create a mold with the sprue large enough to get a good amount in there while still having it be small enough that hopefully polishing won’t be horrible.\n\n\n\n\n\n\n\nInteresting enough I think that the mixture is very sensitive to the quantities of each part. While I was very careful to match the volumes using my trusty 1/2 cup measuring spoon we can notice a distinct change in color. Despite this change in color it did successfully set and it doesn’t feel different and will do nicely as a mold.\n\n\n\n\n\n\n\nI’m a little concerned with my splits in the mold for removing the pieces. Hopefully it will seal up well enough that we won’t have the resin leaking out or really large obvious lines.\n\n\n\n\n\n\n\n10/5-6/2020\n\n\n\n\n\n\n\nPouring the Resin\n\n\n\n\n\n\n\n\n\n\nThe ingredients for pouring the resin:\n\nDried flowers\nFood coloring\nMica powders\nEasyCast resin\nDixie cups, pipettes, nitrile glove, facemask (not pictured)\n\n\n\n\n\n\n\n\nThis batch I decided to focus on blues.\nRecipe:\n\n2 drops blue food coloring\nFor 2 of the dice added the green mica powder\n\nSince I layered it in with pure blue on bottom and the blue + mica powder on top it really developed a beautiful layering effect.\n\n\n\n\n\n\n\n10/6/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRecipe:\n\n1 drop ‘kiwi’ food coloring\nHalf of a handle full of green metallic mica powder\nBlue flower\n\nThoroughly mix equal parts of resin for 2 minutes, transfer to second container and add coloring. Mix for an additional minute and use pipettes (two pipette method where one can fill while you use the other one) to fill each mold. Gently insert a flower once 3/4 full. Swish the containers by rotating to encourage air bubbles to exit from difficult places in the mold.\n\n\n\n\n\n\n\nWow this just turned out BEAUTIFUL.\n\n\n\n\n\n\n\n10/7/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSame recipe as before, still looks beautiful and we now have a matching set of 6!\n\n\n\n\n\n\n\n10/8/2020\n\n\n\n\n\n\n\nPolishing\n\n\n\n\n\n\n\n\n\n\nI’ve gathered my polishing components: namely various grits of sandpaper and some car automotive buff.\n\n\n\n\n\n\n\nFirst step is trimming off the sprue. This was done using a pair of shears (I used wirecutters). The ends come off pretty explosively (think nail trimming but times a million) so definitely be careful which direction you are pointing the die and the sprue.\nAll three have some kind of bubble where resin wasn’t able to really fill the mold. Maybe doing a “swish” after filling will help next time for preventing this?\n\n\n\n\n\n\n\nHere we have the before polishing with all the imperfections and remainder of the sprue.\n\n\n\n\n\n\n\nAnd here is our after with all the edges buffed out. Looking better, right? I think we can do better though because I did notice that the sides that came out looking good and shiny after being buffedstarted looking cloudy.\nIdeas for next time are to spend more time polishing on the finest grit. Maybe that will help get it super shiny? And spend longer polishing. It’s about time for a netflix marathon anyway.\n\n\n\n\n\n\n\n10/8/2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVery happy to report success with the “swish”. Only 1 out of the three dice has a bubble in the corner disrupting the pattern (and this one is the hardest mold, with the highest point being higher than where the sprue intersects).\n\n\n\n\n\n\n\n10/9/2020\n\n\n\n\n\n\n\nGlitter Dice\n\n\n\n\n\n\n\n\n\n\n\nI’ve been playing with making glitterdice lately. Glitterdice are where there is a sphere of liquid and glitter with a cap (UV curable resin) in the center of the dice (think snow globe). It’s hard to capture on camera but creates some really striking and fun to roll dice.\n\n\n\n\n\n\n\n4/3/2021\n\n\n\n\n\n\n\nRolling the Dice\nNow that our unique dice have been cured, painted, and polished it was time to put them to the test. Sure they look pretty (minus the occasional bubble and polish mark) but can they ROLL?\nHere, I am proud to present to you, are our candidates for the roll off!\n\nEach die was rolled 50 times to give some statistical significance to the results. Ideally we would have a hundred rolls or more per die (1,000 would be a really great number) but I decided to balance statistics with the chances of developing arthritis.\nIn addition to rolling each of our manufactured dice 50 times a professional metal die was rolled 50 times to give a reference for our measurements.\nThe conclusion:\nWell. Looks like my metal dice is weighted (both literally but also rolls 6 much more often). The resin dice performed better than I expected. I was expected to see the dice with remnants of a bubble or bumps to really have a very significant impact, but honestly they look comparable to the metal die.\nOur results:\n\n\nShow the code\nlibrary(\"readxl\")\nlibrary(dplyr)\nlibrary(tidyverse)\nlibrary(ggplot2)\nlibrary(plotly)\n#library(rjags)\n\nrolls = read_excel(\"./img/resin/Dice_rolls.xlsx\")\n\nrolls_long &lt;- rolls %&gt;%\n pivot_longer(cols = 1:10, names_to = \"Dice\", values_to = \"RollValue\")\n\nrolls_summary &lt;- rolls_long %&gt;%\n  group_by(Dice, RollValue) %&gt;%\n  summarize(Count = n())\n\np &lt;- ggplot(rolls_summary, aes(x=RollValue, y=Count, fill = Dice )) + \n  geom_bar(stat = \"identity\", position = position_stack(reverse = TRUE)) +\n  facet_wrap(~ Dice) +\n theme(legend.position = \"top\")\n\np\n\n\n\n\n\n\n\n\n\nShow the code\np &lt;- ggplot(rolls_summary) + \n  geom_bar(aes(x=Dice, y=Count, fill = RollValue ), stat = \"identity\", position = position_stack(reverse = TRUE)) +\n  coord_flip() + \n  theme(legend.position = \"top\")\n\np\n\n\n\n\n\n\n\n\n\n\n10/10/2020"
-  },
-  {
-    "objectID": "posts/resin.html#resources",
-    "href": "posts/resin.html#resources",
-    "title": "Resin Dice",
-    "section": "Resources",
-    "text": "Resources\nHere are some of the resources that helped me on my journey down this exciting path (in no particular order):\n\nhttps://www.evewynn.com/moldmaking\nhttp://www.hanleybrady.com/making-dice-part-1-molds/\nhttps://www.instructables.com/Custom-Dice/\nhttps://www.thingiverse.com/thing:3795542\nhttps://www.youtube.com/watch?v=iRDte2j54F0\nhttps://www.reddit.com/r/dice/comments/8zemqn/looking_to_resin_cast_my_own_dice/\nhttps://www.youtube.com/watch?v=FQ1A7ZjTsx8\nhttps://rpubs.com/benjamin_chittick/59278\nhttps://rstudio-education.github.io/hopr/project-1-weighted-dice.html\nhttp://ditraglia.com/Econ103Public/Rtutorials/Rtutorial4.html\nhttps://dk81.github.io/dkmathstats_site/rvisual-bargraphs.html\nhttps://cran.r-project.org/web/packages/tidydice/vignettes/tidydice.html\nhttps://quarto.org/docs/authoring/figures.html#figure-panels"
-  },
-  {
-    "objectID": "posts/vortico rockets.html",
-    "href": "posts/vortico rockets.html",
-    "title": "Vortico rockets",
-    "section": "",
-    "text": "Vorticos are a spinning rocket that helicopter down to a safe landing. By painting different patterns on the wings you can get some interesting optical effects!\nVery fun project spread out over a couple days to assemble, paint, and then finally shoot!\n\n\n\nPainted and assembled vortico rockets\n\n\n\n\n\nLaunching the vorticos is best with a smaller rod to prevent wobble on takeoff\n\n\n\n\n\nUp it goes!\n\n\nGet one for yourself here: https://www.rocketarium.com/Rockets/Vortico"
-  },
-  {
-    "objectID": "posts-no-pictures/git-and-sagemaker.html",
-    "href": "posts-no-pictures/git-and-sagemaker.html",
-    "title": "Problems with persistence when in the cloud",
-    "section": "",
-    "text": "This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!"
-  },
-  {
-    "objectID": "posts-no-pictures/git-and-sagemaker.html#problem-when-on-linux",
-    "href": "posts-no-pictures/git-and-sagemaker.html#problem-when-on-linux",
-    "title": "Problems with persistence when in the cloud",
-    "section": "Problem when on Linux:",
-    "text": "Problem when on Linux:\n\nIn general gitcreds doesn’t work well on linux (which has led to this git issue (Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds ). There is an excellent blog post that is very useful that goes deeper into what is going on: Notes from a data witch - Managing GitHub credentials from R, difficulty level linux"
-  },
-  {
-    "objectID": "posts-no-pictures/git-and-sagemaker.html#problem-when-on-sagemaker",
-    "href": "posts-no-pictures/git-and-sagemaker.html#problem-when-on-sagemaker",
-    "title": "Problems with persistence when in the cloud",
-    "section": "Problem when on Sagemaker:",
-    "text": "Problem when on Sagemaker:\n\nAdditionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist."
-  },
-  {
-    "objectID": "posts-no-pictures/git-and-sagemaker.html#tldr-solution",
-    "href": "posts-no-pictures/git-and-sagemaker.html#tldr-solution",
-    "title": "Problems with persistence when in the cloud",
-    "section": "TLDR Solution:",
-    "text": "TLDR Solution:\nConfigure the global git to cache instead of store the credentials to a local file (from bash/terminal):\ngit config --global credential.helper 'store --file ~/.my-credentials'"
-  },
-  {
-    "objectID": "posts-no-pictures/git-and-sagemaker.html#testing",
-    "href": "posts-no-pictures/git-and-sagemaker.html#testing",
-    "title": "Problems with persistence when in the cloud",
-    "section": "Testing",
-    "text": "Testing\nI’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.\nLoad libraries:\nlibrary(usethis) \nlibrary(gitcreds) \nlibrary(gh) \nlibrary(credentials)\nConfigure the global git to cache instead of store the credentials to a local file (from bash/terminal):\ngit config --global credential.helper 'store --file ~/.my-credentials'\nFrom the documentation:\n\nThe “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.\n\nGenerate the PAT:\nusethis::create_github_token()\nCopy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:\ngitcreds::gitcreds_set()\nCheck that it stored with:\ngitcreds_get()"
-  },
-  {
-    "objectID": "posts-no-pictures/git-and-sagemaker.html#alternatives",
-    "href": "posts-no-pictures/git-and-sagemaker.html#alternatives",
-    "title": "Problems with persistence when in the cloud",
-    "section": "Alternatives",
-    "text": "Alternatives\nThe old way “store a PAT as the GITHUB_PAT environment variable in .Renviron.” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the gh package for generating PATs like in Managing Personal Access Tokens\nAlternatively, there are some git config options from the terminal. See: Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR"
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Blog posts and random musings",
-    "section": "",
-    "text": "Here’s some random thoughts, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHey Google - make me coffee!\n\n\n\n\n\n\n\n\nMay 1, 2024\n\n\nLisa\n\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\n\nFord Maverick Truck Cubby Holder\n\n\n\n\n\n\n\n\nOct 5, 2023\n\n\nLisa\n\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\n\nVortico rockets\n\n\n\n\n\n\n\n\nAug 6, 2023\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nFord Maverick Soft Topper installation\n\n\n\n\n\n\n\n\nMay 6, 2023\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nChatbot\n\n\n\n\n\n\n\n\nSep 19, 2022\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\nObservable JS for snappy datascience\n\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nAI generated art\n\n\n\n\n\n\n\n\nAug 3, 2022\n\n\nLisa\n\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is Quarto?\n\n\n\n\n\n\n\n\nJul 28, 2022\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nResin Dice\n\n\n\n\n\n\n\n\nApr 4, 2021\n\n\nLisa\n\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\n\nBATTLEBOTS 2021\n\n\n\n\n\n\n\n\nJan 4, 2021\n\n\nLisa\n\n\n9 min\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "presentations_posit.html",
-    "href": "presentations_posit.html",
-    "title": "Lisa Anders - questionable.quarto",
-    "section": "",
-    "text": "Check out some of the presentations I’ve made while working at Posit:\n\n2024\n\n\n\n\n\n&gt;\n\n\nIt’s dangerous to go alone - take this!\n\n\nLisa’s best practices for pain-free data science\n\n\n Check out the slides Check out the repo\n\n\n\n\n\n2023 and 2022\n\n\n\n\n\n&gt;\n\n\nReporting in R with Posit Team\n\n\nUsing the Posit Team set of products to create data science reports.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nImproving app performance\n\n\nAnalyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nReproduceable Workflows\n\n\nCreating reproduceable data science workflows.\n\n\nCheck out the slides"
-  },
-  {
-    "objectID": "work/google-resources.html",
-    "href": "work/google-resources.html",
-    "title": "Access to resources in Google, an exploration",
-    "section": "",
-    "text": "Access to resources in google (bigquery, drive, etc) will depend on where the user is connecting from:\n\nLocal desktop: any method is fine\nWorkbench / server web app based: “OOB” workflows or non-interactive\nConnect / server web app non-interactive: Non-interactive only"
-  },
-  {
-    "objectID": "work/google-resources.html#service-account-token",
-    "href": "work/google-resources.html#service-account-token",
-    "title": "Access to resources in Google, an exploration",
-    "section": "Service account token",
-    "text": "Service account token\nFollow these steps:\n\nCreate a service account\nFrom the GCP Console, in the target GCP Project, go to IAM & Admin &gt; Service accounts\nAssign permissions: googledrive docs does not have any explicit roles, service account used to test bigrquery has roles BigQuery Admin and Storage Admin\nAfter creating the service account, click on the three dots and “actions”, manage keys, add key as json, download credentials as json file\nThis key is a secret! Consider how it should be protected\nProvide path of json file to authentication\nGrant the service account permissions to resources as needed (it doesn’t inherit permissions) (For example, I had to visit https://console.developers.google.com/apis/api/drive.googleapis.com/overview?project=redacted to enable access for google drive and gogle sheets, which it gave me the link to in an error message for my specific project)\n\nReference: https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-a-service-account-token-directly and https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token\n# use a service account token, like drive_auth(path = \"/path/to/your/service-account-token.json\")\n# drive_auth(path = Sys.getenv(\"google_drive_service_account\"), scopes = \"drive.readonly\")\n# drive_auth(path = Sys.getenv(\"google_drive_service_account\"), scopes = \"drive.readonly\")\ncredentials_service_account(\n  #scopes = \"https://www.googleapis.com/auth/userinfo.email\",\n  path = Sys.getenv(\"google_drive_service_account\")\n)\n# now use googledrive\ngoogledrive::drive_find(n_max = 5)"
-  },
-  {
     "objectID": "work.html",
     "href": "work.html",
     "title": "Technical writeups and musings",
     "section": "",
-    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nAccess to resources in Google, an exploration\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n48 min\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nProblems with persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nSecuring credentials\n\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nLisa\n\n\n5 min\n\n\n\n\n\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nLisa\n\n\n10 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nAccess to resources in Google, an exploration\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n48 min\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nParallelization in R\n\n\n\n\n\n\n\n\nDec 8, 2023\n\n\nLisa\n\n\n7 min\n\n\n\n\n\n\n\nProblems with persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nSecuring credentials\n\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nLisa\n\n\n5 min\n\n\n\n\n\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nLisa\n\n\n10 min\n\n\n\n\n\n\n\nPublish and version your models with Vetiver\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "work/sharepoint-oh-no.html",
@@ -714,18 +224,214 @@
     "text": "Package installation errors on Workbench\nHere’s an example error message that occurred during package installation inside Workbench (install.packages(askpass)):\n\n* installing binary package ‘askpass’ … cp: cannot open ‘./libs/askpass.so’ for reading: Operation not permitted /usr/bin/gtar: You may not specify more than one ‘-Acdtrux’, ‘–delete’ or ‘–test-label’ option Try ‘/usr/bin/gtar –help’ or ‘/usr/bin/gtar –usage’ for more information. /usr/bin/gtar: This does not look like a tar archive /usr/bin/gtar: Exiting with failure status due to previous errors\n\nA good first trouble shooting step is to SSH on the server and open an R session as root and attempt to install the same package. This helps to rule out where the issue is coming from, the global R configuration, the server, or a specific user issue or something with the Workbench configuration. Create a R session after SSH-ing into the server with /opt/R/${R_VERSION}/bin/R\n\nWhere to start\nGet the system information: Sys.info()\nGet session details: sessionInfo()\n\n\nProblems with pak\nGet details about pak (if used): pak::pak_sitrep()\nCheck if renv has been configured to use pak: Sys.getenv('renv.config.pak.enabled')\n\n\nProblems with renv : where to start\nCan they provide a renv diagnostic? It is generated by running this: renv::diagnostics().\n\n\nProblems with renv : cache location\nCheck the location of the renv cache:\nrenv::paths$library()\nSys.getenv('RENV_PATHS_CACHE')\noptions('renv.config.external.libraries')\noptions('renv.download.trace')\nrenv::paths$cache()\nSys.getenv('RENV_PATHS_PREFIX_AUTO')\nMake sure that it is located to a writeable location (if it is a mount, see the note about file mounts below, this could be a source of issues):\nsystem('namei -l /rsspdata/common/renv_cache/renv/v5/R-3.6/x86_64-pc-linux-gnu')\nCheck that the renv cache location matches the library locations: .libPaths()\nBy default packages are installed into the global cache at ~/.cache/R/renv/ and symlinked from the users cache within the project at ~/renv/library/.\nAre they using a shared renv cache, or an external library,\nDo they know if they’ve implemented settings in either of these, and could they share the contents?\n\nRprofile.site : The RProfile.site file is typically located at etc/Rprofile.site\nRenviron.site : The Renviron.site file is specific to the R installation (in this case I’m interested in if it exists for R 4.3 and R 3.6), typically located at file.path(R.home(\"etc\"), \"Renviron.site\").\nCheck if an external library is referenced in the environment: options('renv.config.external.libraries')\n\nIs the goal to use a shared renv cache location? There are a couple caveats with shared cache’s that can make them tricky. (1) cache permissions can be set with ACL’s, needing admin oversight to make sure are set correctly, (2) packages in the cache are owned by the requesting user, unless the RENV_CACHE_USER option is set. When set, renv will attempt to run chown -R &lt;package&gt; &lt;user&gt; to update cache ownership after the package has been copied into the cache.\nIf the desired behavior is to have a shared renv cache then these two settings will likely need to be added to the project .Renviron, user .Renviron, or site Renviron.site file:\n\nRENV_PATHS_CACHE : Path location for a cache shared across multiple users\nRENV_CACHE_USER : When using a shared cache, renv can re-assign ownership of the cache’d package to a separate user account\n\nI’d be curious, if it’s possible for them, to see if they are able to use R 4.4, or to set that parameter RENV_PATHS_PREFIX_AUTO to true (for example for just the session with Sys.setenv(\"RENV_PATHS_PREFIX_AUTO\" = TRUE)) using their current version of R, and repeat the steps of installing a package:\n\nStarting with R 4.4.0, renv automatically uses a platform prefix for library paths on linux (the equivalent to setting RENV_PATHS_PREFIX_AUTO = TRUE). This means that, for example, upgrading to a new version of an OS will automatically signal to renv that new library + cache directories will be required.\n\nOf course, they could also try this for installing the package, bypassing the cache, and see if it works (but I’m worried that there is a ghost setting somewhere that needs to be removed so that issues don’t keep popping up):\n# install a package, bypassing the cache\nrenv::install(\"&lt;package&gt;\", rebuild = TRUE)\n\n# restore packages from the lockfile, bypassing the cache\nrenv::restore(rebuild = TRUE)\n\n\nProblems with renv : other\nCheck:\n\nAre you running the latest renv? If not, upgrade\nAdd additional logging: options(renv.download.trace = TRUE)\nTake a diagnostic: renv::diagnostics()\n\nIf you are having particular issue with a package and it keeps being pulled in from the cache then doing a complete purge and reinstall can be useful:\nrenv::purge(\"stringr\")\nrenv::purge(\"stringi\")\ninstall.packages(\"stringr\")\nrenv::purge removes packages completely from the package cache (which may be shared across projects) rather than just removing the package from the project which is what renv::remove does. This can be useful if a package which had previously been installed in the cache has become corrupted or unusable, and needs to be re-installed.\nFollow these steps to “flush” and rebuild the renv environment, without losing the important parts of your renv.lock that are defining the R version and package versions:\nrenv::snapshot()\n# Make the appropriate changes (for example, changing OS) \n# Update the renv.lock file manually to reflect any needed changes (for example, changing the repository URL) \nrenv::deactivate()\nrenv::activate()\nrenv::restore(rebuild=TRUE) \nCheck that the packages either installed into the global cache at ~/.cache/R/renv/ or the users cache within the project at ~/renv/library/. The folder structure will give some clues for whether source, binaries were installed, and which OS and R version they were installed for if specified.\n\n\nProblems with packages not persisting\nIs this on a cloud vendor? IE sagemaker, google workstations, azureml? Check that the package repository location is being saved to the mounted drive. If it is saved to the general OS that is ephemeral it will be lost when the session is spun down. This also applies for things like git credentials.\n\n\nIncorrect / corrupted R installation\nCheck for an incorrect R installation for the OS, or a R installation that has gotten corrupted. An easy way to test this is to install a new R version, making sure to closely follow the instructions as well as verifying the OS version.\n\n\nIncorrect package repository source URL for the particular system OS\nWhen R installs a binary package, it doesn’t actually check if the package can be loaded after installation, which is different from source packages. So it is unfortunately possible to install a binary package only to find out later that it can’t actually be loaded.\nCheck the URL that the user is installing from: options('repos')\nTemporarily point the repository to global CRAN and check if the packages will successfully install. For example by running this: options(repos=c(CRAN=\"https://cran.r-project.org\")) and then installing any package with install.packages(\"ggplot2\")\nCheck in /etc/rstudio/rsession.conf if there is anything that would set the library location, for example r-libs-user=~/R/library.\nIt may also be useful to verify both the OS you are currently useing as well as checking that the repository you are pointing towards is using the correct OS if it is pulling in the binaries.\nFor debian/ubuntu distributions:\nlsb_release -a\nFor other distributions (more broadly cross-linux compatible command):\ncat /etc/os-release\n\n\nUsers lacking read/write permissions to their home directory\nCheck the home directory permissions on /home/username/. For example with namei -l /home/username/.\nIf useful, could try recursively chown-ing the directory with the user experiencing the issue and chmod 750 to make sure there is access.\nThis can commonly happen after a migration from one server to another, if the correct permissions weren’t correctly carried over. This is why we commonly recommend using rsync with the -a flag for transfer any files / directories. This syncs directories recursively and preserve symbolic links, groups, ownership, and permissions. Additionally, rsync needs to be used in root mode in order to completely move the various software and home directory components as it includes files with restrictive read and write permissions.\nFor example, the permissions should look something like: -rwx-r--r--\n\n\nUsers lacking permissions to ./libs\nCheck the permissions on ./libs/. For example with namei -l ./libs and ls -la ./libs\n\n\nIncorrect PAM configuration for users\nCheck the output of sudo getent passwd username\nFrom a workbench session the output of the environment, Sys.getenv() and compare between a Workbench session and logged into a R session as root on the server (after SSH-ing in)\nFrom an SSH session as root check the outputs of the user verification commands: sudo /usr/lib/rstudio-server/bin/pamtester --verbose &lt;session-profile&gt; &lt;user&gt; authenticate acct_mgmt setcred open_session\nFor example this command will likely look like: sudo /usr/lib/rstudio-server/bin/pamtester --verbose rstudio-session username authenticate acct_mgmt setcred open_session\nCheck for any umask or mask lines used during user provisioning, in the /etc/sssd/sssd.conf file\n\n\nServer hardening\nAnother thing to check is whether SELinux is enabled on the system. Check the mode with getenforce\nThis can result in user specific errors, in that case compare the SELinux context for a user that has successfully package installations to the one that is having errors.\nOften the following command will work to fix SELinux context issues: restorecon -Rv /home/users/username\nGreat article from our support team discussing how to use selinux\nDisable SELINUX (RHEL only): setenforce 0 && sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config\nCheck for FIPS being enabled: fips-mode-setup --check\nThis article from redhat on FIPS mode is also very useful.\n\n\nMounted share drive\nCheck if /home on the server, or is it a network mount (NFS or CIFS). In NFS, for example, there can be the use of access control lists which can impact permissions. Similarly, when working in a system that has a mounted share drive then would want to check that libraries are being written to that share so you get persistence. Typically this means writing to inside the home directory. Check mounted drives with: df -h\nCheck /etc/fstab to see if the home directories are mounted with noexec\nFor example, this shows that the home directories were mounted with noexec: /dev/mapper/rhel-home  /home  xfs    defaults,noexec,nosuid,nodev   0 0\nThis resulted in this error message:\nlibrary(stringi)Error: package or namespace load failed for 'stringi' in dyn.load(file, DLLpath = DLLpath, ...):\nunable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':\n  /home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object\n\n\nAzure cloud images\nThe default Azure RHEL images are unfortunately constricted in their ability to do some things.\n\n\nSlurm\nThe Slurm service account should have full privileges to the Slurm environment (like killing jobs).\nIn regards to not being able to run the diagnostics command, could you please provide the following:\n\nEnable debug logging by setting enable-debug-logging=1 in /etc/rstudio/launcher.slurm.conf\nTrigger the issue you are experiencing after restarting the launcher.\nResulting logs will be in: - /var/lib/rstudio-launcher/Slurm/rstudio-slurm-launcher.log\nThe Slurm version, which can be found by running sinfo –version\nThe installation location of Slurm on the host\nYour /etc/slurm.conf (or equivalent) configuration file\nThe output of running sinfo as the Slurm service user configured in /etc/rstudio/launcher.slurm.conf\nRun test job with srun date\nReplace  with a valid username of a user that is set up to run Posit - Workbench in your installation, in the commands below:\nsudo rstudio-server stop\nsudo rstudio-server verify-installation –verify-user=\nsudo rstudio-server start\nThe output of running sudo rstudio-launcher status"
   },
   {
-    "objectID": "work/securing-credentials.html",
-    "href": "work/securing-credentials.html",
-    "title": "Securing credentials",
+    "objectID": "work/google-resources.html",
+    "href": "work/google-resources.html",
+    "title": "Access to resources in Google, an exploration",
     "section": "",
-    "text": "When working with pulling data from secure databases or other sources a developer might find themselves in a situation of needing to provide very sensitive information, such as a password or a token, in order to access the data that is needed or to successfully deploy a project. Handling those secrets in way that doesn’t expose them in the code directly is critical and where using environmental variable’s for securing sensitive variables is strongly recommended.\nAdditionally there may be parameters that are often needed that can be accessed as a variable more easily rather than having to type in every time.\nFor both of these cases knowing how environment variables can be leveraged can be very rewarding and it is surprising how little effort it can to take to set up.\n\n\nWhen R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.\nHowever for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.\nWith increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files:\n\nUser\nProject\n\nOn startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf.\nJust to re-iterate the key takeaway: When in doubt note that the project level file is given preference over user level config files. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.\nThere is a really excellent overview of R’s startup process here but in short it can be thought of this way:\n\n\nusethis has a function for creating and editing the .Renviron file\nlibrary(usethis)\nusethis::edit_r_environ()\nAdd the variables to that file in the format variable_name = \"variable_value\" and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE\nSaved variables can be accessed with:\nvariable_name &lt;- Sys.getenv(\"variable_name\")\nWhen working in a more complex environment structure where separate project, site, and user environments are being support this support article has useful information with a deeper dive into R’s startup here.\n\n\n\nStoring secrets securely can be done using the edit_r_environ function from the usethis package. For more overview see this overview.\nExample:\nlibrary(usethis)\nusethis::edit_r_environ(scope = \"project\")\nAccessing those stored parameters later can be done using Sys.getenv(\"DB_NAME\").\nBe sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the edit_git_ignore(scope = c(\"user\", \"project\")) function. For more best practices see securing credentials.\n\nWhile typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: *.html.\n\nAfter updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).\n\n\n\nAnother approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}. In the R scripts they will be referenced as usual with something like Sys.getenv(\"DB_NAME\").\n\n\n\nStarting with version 1.6, RStudio Connect allows Environment Variables. The variables are encrypted on-disk, and in-memory.\nThis can be done at the project level with securing deployment through the Connect UI.\nUse Connect to manage environment variables through the UI: https://docs.posit.co/connect/user/content-settings/index.html#content-vars\nHave your admin use a supervisor script to add Environment Variables automatically: https://docs.posit.co/connect/admin/process-management/index.html#example-environment-variables\nSecuring credentials solutions article: https://solutions.posit.co/connections/db/best-practices/managing-credentials/"
+    "text": "Access to resources in google (bigquery, drive, etc) will depend on where the user is connecting from:\n\nLocal desktop: any method is fine\nWorkbench / server web app based: “OOB” workflows or non-interactive\nConnect / server web app non-interactive: Non-interactive only"
   },
   {
-    "objectID": "work/securing-credentials.html#working-with-the-.renviron-file",
-    "href": "work/securing-credentials.html#working-with-the-.renviron-file",
-    "title": "Securing credentials",
+    "objectID": "work/google-resources.html#service-account-token",
+    "href": "work/google-resources.html#service-account-token",
+    "title": "Access to resources in Google, an exploration",
+    "section": "Service account token",
+    "text": "Service account token\nFollow these steps:\n\nCreate a service account\nFrom the GCP Console, in the target GCP Project, go to IAM & Admin &gt; Service accounts\nAssign permissions: googledrive docs does not have any explicit roles, service account used to test bigrquery has roles BigQuery Admin and Storage Admin\nAfter creating the service account, click on the three dots and “actions”, manage keys, add key as json, download credentials as json file\nThis key is a secret! Consider how it should be protected\nProvide path of json file to authentication\nGrant the service account permissions to resources as needed (it doesn’t inherit permissions) (For example, I had to visit https://console.developers.google.com/apis/api/drive.googleapis.com/overview?project=redacted to enable access for google drive and gogle sheets, which it gave me the link to in an error message for my specific project)\n\nReference: https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-a-service-account-token-directly and https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token\n# use a service account token, like drive_auth(path = \"/path/to/your/service-account-token.json\")\n# drive_auth(path = Sys.getenv(\"google_drive_service_account\"), scopes = \"drive.readonly\")\n# drive_auth(path = Sys.getenv(\"google_drive_service_account\"), scopes = \"drive.readonly\")\ncredentials_service_account(\n  #scopes = \"https://www.googleapis.com/auth/userinfo.email\",\n  path = Sys.getenv(\"google_drive_service_account\")\n)\n# now use googledrive\ngoogledrive::drive_find(n_max = 5)"
+  },
+  {
+    "objectID": "work/delta-lake-and-azure.html",
+    "href": "work/delta-lake-and-azure.html",
+    "title": "Accessing data in Azure Data Lake (delta files)",
     "section": "",
-    "text": "When R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.\nHowever for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.\nWith increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files:\n\nUser\nProject\n\nOn startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf.\nJust to re-iterate the key takeaway: When in doubt note that the project level file is given preference over user level config files. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.\nThere is a really excellent overview of R’s startup process here but in short it can be thought of this way:\n\n\nusethis has a function for creating and editing the .Renviron file\nlibrary(usethis)\nusethis::edit_r_environ()\nAdd the variables to that file in the format variable_name = \"variable_value\" and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE\nSaved variables can be accessed with:\nvariable_name &lt;- Sys.getenv(\"variable_name\")\nWhen working in a more complex environment structure where separate project, site, and user environments are being support this support article has useful information with a deeper dive into R’s startup here.\n\n\n\nStoring secrets securely can be done using the edit_r_environ function from the usethis package. For more overview see this overview.\nExample:\nlibrary(usethis)\nusethis::edit_r_environ(scope = \"project\")\nAccessing those stored parameters later can be done using Sys.getenv(\"DB_NAME\").\nBe sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the edit_git_ignore(scope = c(\"user\", \"project\")) function. For more best practices see securing credentials.\n\nWhile typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: *.html.\n\nAfter updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).\n\n\n\nAnother approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}. In the R scripts they will be referenced as usual with something like Sys.getenv(\"DB_NAME\").\n\n\n\nStarting with version 1.6, RStudio Connect allows Environment Variables. The variables are encrypted on-disk, and in-memory.\nThis can be done at the project level with securing deployment through the Connect UI.\nUse Connect to manage environment variables through the UI: https://docs.posit.co/connect/user/content-settings/index.html#content-vars\nHave your admin use a supervisor script to add Environment Variables automatically: https://docs.posit.co/connect/admin/process-management/index.html#example-environment-variables\nSecuring credentials solutions article: https://solutions.posit.co/connections/db/best-practices/managing-credentials/"
+    "text": "This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it’s easy to find in the future!"
+  },
+  {
+    "objectID": "work/delta-lake-and-azure.html#azure-data-lake",
+    "href": "work/delta-lake-and-azure.html#azure-data-lake",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Azure Data Lake",
+    "text": "Azure Data Lake\n\nSet up\nLanding page for Azure: &lt;https://portal.azure.com/ &gt;\nFollow this article: &lt;https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account &gt;\nThe trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.\nSteps:\n\nGo to storage account\nCreate and give it a name\nSelect: LRS\nSwitch to premium: block blobs\nChange to hierarchical blob\nSet tags:\n\n\nrs:owner\nrs:project = soleng\nrs:environment = dev\n\n\nOnce in just need access keys or shared access signature in order to gain access\n\n\n\nAdd data\nYou can add data manually by creating a container and then using the upload icon.\n\n\n\nimage"
+  },
+  {
+    "objectID": "work/delta-lake-and-azure.html#authentication",
+    "href": "work/delta-lake-and-azure.html#authentication",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Authentication",
+    "text": "Authentication\nAccess your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.\nFor authentication from an R script we’ll be using https://github.com/Azure/AzureStor\nYou’ll need to know:\n\nThe Blob endpoint for your Azure Data Lake storage\nAn Access Key (this can also be done with a Shared Access Signature)\n\nlibrary(AzureStor)\n\nblob_endpoint &lt;- \"https://REDACTED.blob.core.windows.net/\"\n\nbl_endp_key &lt;- storage_endpoint(blob_endpoint, key=\"REDACTED\")\n\n# List containers and files in containers\nlist_storage_containers(bl_endp_key)\ncont1 &lt;- storage_container(bl_endp_key, \"container1\")\nlist_storage_files(cont1)\n\n# Download a file\nstorage_download(cont1, \"/crm_call_center_logs.parquet\")\n\n# Upload a file \nstorage_upload(cont1, \"crm_call_center_logs.parquet\", \"newdir/crm_call_center_logs.parquet\")\nYou can also create and delete containers:\n# Create a container\nnewcont &lt;- create_storage_container(bl_endp_key, \"container3\")\n\n# Create a directory in the container\ncont3 &lt;- storage_container(bl_endp_key, \"container3\")\ncreate_storage_dir(cont3, \"newdir\")\n\n# Delete a container\ndelete_storage_container(newcont)"
+  },
+  {
+    "objectID": "work/delta-lake-and-azure.html#reading-and-writing-delta-files",
+    "href": "work/delta-lake-and-azure.html#reading-and-writing-delta-files",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Reading and Writing Delta Files",
+    "text": "Reading and Writing Delta Files\nDelta files can be read by using the sparklyr package: https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html Thanks for the help with the magic incantation below!\nIn order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:\nlibrary(sparklyr)\n\n#Install a local version of Spark\nspark_install(version=3.4)\n\n# Set Spark configuration to be able to read delta tables\nconf &lt;- spark_config()\nconf$`spark.sql.extensions` &lt;- \"io.delta.sql.DeltaSparkSessionExtension\"\nconf$`spark.sql.catalog.spark_catalog` &lt;- \"org.apache.spark.sql.delta.catalog.DeltaCatalog\"\n\n# For spark 3.4 \nconf$sparklyr.defaultPackages &lt;- \"io.delta:delta-core_2.12:2.4.0\"\n\n# Open a connection\nsc &lt;- spark_connect(\"local\", version = 3.4, packages = \"delta\", conf = conf)\n\n# For this example we will use a built-in dataframe to save example data files, including one for delta tables\ntbl_mtcars &lt;- copy_to(sc, mtcars, \"spark_mtcars\")\n\n# Write spark dataframe to disk\nspark_write_csv(tbl_mtcars,  path = \"test_file_csv\", mode = \"overwrite\")\nspark_write_parquet(tbl_mtcars,  path = \"test_file_parquet\", mode = \"overwrite\")\nspark_write_delta(tbl_mtcars,  path = \"test_file_delta\", mode = \"overwrite\")\n\n# Read dataframes into normal memory\nspark_tbl_handle &lt;- spark_read_csv(sc, path = \"test_file_csv\")\nregular_df_csv &lt;- collect(spark_tbl_handle)\nspark_tbl_handle &lt;- spark_read_parquet(sc, path = \"test_file_parquet\")\nregular_df_parquet &lt;- collect(spark_tbl_handle)\nspark_tbl_handle &lt;- spark_read_delta(sc, path = \"test_file_delta\")\nregular_df_delta &lt;- collect(spark_tbl_handle)\n\n# Disconnect\nspark_disconnect(sc)\nYou should now have normal dataframes in your regular R environment that can be used for further analytics:\n\n\n\nimage\n\n\nNote: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”"
+  },
+  {
+    "objectID": "work/delta-lake-and-azure.html#troubleshooting",
+    "href": "work/delta-lake-and-azure.html#troubleshooting",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nFrom R:\n# See spark details (troubleshooting)\nspark_config()\nspark_get_java()\nspark_available_versions()\nspark_installed_versions()\n\n# See session details\nutils::sessionInfo() \nFrom bash:\nnamei -l /usr/lib/spark\nRecommended troubleshooting: https://spark.rstudio.com/guides/troubleshooting.html"
+  },
+  {
+    "objectID": "work/delta-lake-and-azure.html#about",
+    "href": "work/delta-lake-and-azure.html#about",
+    "title": "Accessing data in Azure Data Lake (delta files)",
+    "section": "About",
+    "text": "About\n\nAzure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage\n\nAzure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.\n\n\nData Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.\n\n\nA superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.\n\nTLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).\n\n\nDelta Tables: https://docs.delta.io/latest/delta-intro.html\n\nDelta Lake is an open source project that enables building a Lakehouse architecture on top of data lakes. Delta Lake provides ACID transactions, scalable metadata handling, and unifies streaming and batch data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.\n\nYou can check Delta Lake releases here: https://docs.delta.io/latest/releases.html\nTLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).\n\n\n\nimage\nimage"
+  },
+  {
+    "objectID": "presentations_posit.html",
+    "href": "presentations_posit.html",
+    "title": "Lisa Anders - questionable.quarto",
+    "section": "",
+    "text": "Check out some of the presentations I’ve made while working at Posit:\n\n2024\n\n\n\n\n\n&gt;\n\n\nIt’s dangerous to go alone - take this!\n\n\nLisa’s best practices for pain-free data science\n\n\n Check out the slides Check out the repo\n\n\n\n\n\n2023 and 2022\n\n\n\n\n\n&gt;\n\n\nReporting in R with Posit Team\n\n\nUsing the Posit Team set of products to create data science reports.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nImproving app performance\n\n\nAnalyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nReproduceable Workflows\n\n\nCreating reproduceable data science workflows.\n\n\nCheck out the slides"
+  },
+  {
+    "objectID": "lists.html",
+    "href": "lists.html",
+    "title": "Lists",
+    "section": "",
+    "text": "Have you heard of awesome lists? Probably some of the best compilations out there on there on the internet.\nWith that said here are some random compilations of my own.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\nCoding write-ups and resources\n\n\n1 min\n\n\n\n\nWorkplace articles\n\n\n1 min\n\n\n\n\nThe importance of good programming\n\n\n6 min\n\n\n\n\nSound\n\n\n4 min\n\n\n\n\nPhone games\n\n\n1 min\n\n\n\n\nA little data goes a long way\n\n\n1 min\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "lists/sound.html",
+    "href": "lists/sound.html",
+    "title": "Sound",
+    "section": "",
+    "text": "Make beautiful music with technology!"
+  },
+  {
+    "objectID": "lists/sound.html#otomata",
+    "href": "lists/sound.html#otomata",
+    "title": "Sound",
+    "section": "Otomata",
+    "text": "Otomata\nMake beautiful generative algorithm inspired music using cellular automation.\n\nLink to the app: https://marwahaha.github.io/otomata/\n\nSome historic links:\n\nOriginally at (but now no longer works): https://earslap.com/page/otomata.html\nFrom the reddit post: https://www.reddit.com/r/otomata/comments/lrd7n4/otomata_lives_again_web_version/\nGithub: https://github.com/marwahaha/otomata\n\n\n\n\nreddit post"
+  },
+  {
+    "objectID": "lists/sound.html#sonic-pi",
+    "href": "lists/sound.html#sonic-pi",
+    "title": "Sound",
+    "section": "Sonic Pi",
+    "text": "Sonic Pi\nMake your own music using programming with Sonic Pi: https://sonic-pi.net/"
+  },
+  {
+    "objectID": "lists/sound.html#sky-cotl",
+    "href": "lists/sound.html#sky-cotl",
+    "title": "Sound",
+    "section": "Sky COTL",
+    "text": "Sky COTL\nSky Children of Light is a phone game that has a built in music player that I really love. Instead of having to turn pages in sheet music it has floating icons that change shape over the notes you need to play, making it really easy to pick up once you get the hang of it.\n\nSky music library: https://sky-music.github.io/\nSky music app library: https://sky-music.herokuapp.com/songLibrary.html\nSky music app: https://sky-music.herokuapp.com/\n\nHere’s an example of one that I created (an attempt to translate “Regret” by Gackt):\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nView this post on Instagram\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA post shared by @lisa.needs.to.make"
+  },
+  {
+    "objectID": "lists/good-programming.html",
+    "href": "lists/good-programming.html",
+    "title": "The importance of good programming",
+    "section": "",
+    "text": "A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means."
+  },
+  {
+    "objectID": "lists/good-programming.html#uk-post-office-scandal",
+    "href": "lists/good-programming.html#uk-post-office-scandal",
+    "title": "The importance of good programming",
+    "section": "UK Post Office Scandal",
+    "text": "UK Post Office Scandal\n\nDevelopers blamed for the post office scandal?\nVictim testimony\nRemote access and mistakes blamed on post masters, a smoking gun\nExample of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?\nOne of the independent investigators from 2012 breaks silence\nEvidence that back in 2012 the indepent investigators were told about remote access, implying pejury in all later cases\nThey Could, And They Did Change Branch Transaction Data\nMiscarriage of justice - the Rose report\nList of current issues / bugs as of 2017? with the software. One can only imagine how much worse it used to be\nProject manager on the original project discusses his impressions - how not to commission a complex project Inquiry Phase 2: Star Witness – Dave gives it both barrels\nKnown errors in the software, perjury, and lack of disclosure\nInterview with IT - throwing coconuts\nInterview with the other IT\nAttempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?\nThe cover up\nWhy did the lawyer for the post office act this way?\nThinking of alleging or pleading fraud: better read this first"
+  },
+  {
+    "objectID": "lists/code.html",
+    "href": "lists/code.html",
+    "title": "Coding write-ups and resources",
+    "section": "",
+    "text": "Source for good articles\nThe true cost of the cloud\nThe case for professional services\nOpinionated article on Python installations\nThis page addresses poetry and conda\nObject oriented programming is the biggest mistake of all time\nGoogle drive is production\nParadox of choice\nWhy we’re leaving the cloud\nMoving beyond “algorithmic bias is a data problem”\nThat keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?” : 4:08 is where he talks about ml\nHere’s What Ethical AI Really Means - YouTube philosophy tube\nPodcast on Stackoverflow Architecture\nData Feminism\nInvisible Women\nQuality Jam 2017: Michael Bolton “A Ridiculously Rapid Introduction to Rapid Software Testing”\nHome not so sweet home gist\n\nIncludes links to pages like Everything that uses configuration files should report where they’re located\n\nHelp linux ate my RAM\nFree images for including in presentations\nDatadog sales people are annoying\nCounting explosions at Unity, a data analysts perspective\nDatabase rebuild incident\nHow do lava lamps help with Internet encryption?\nFree email for testing things: mailtrap\nIf you haven’t done a Pandas data analysis project in awhile, it’s probably not a bad idea to watch this guy’s vids\nPassword purgatory\nEverything I learned about concurrency and reliability I learned at the Waffle House\nPositive affirmations for site reliability engineers\nvaporwave RStudio theme"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Welcome!\nI’m a former product engineer with experience in biotech, semiconductor, and MEMS/BioMEMS manufacturing that stumbled into computational shenanigans in my journey of trying to make the most out of the data available to my team. I was fortunate enough to set up a RStudio / Posit Connect server at a previous company and from then on was hooked on helping folks set up infrastructure for doing good data science.\nIn my spare time I enjoy playing board games at the local game shop, building things, hot chocolate, and talking about anything SciFi.\nResume"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "Hello there! You must be pretty awesome if you are checking out my humble website. Welcome!"
+  },
+  {
+    "objectID": "lists/data.html",
+    "href": "lists/data.html",
+    "title": "A little data goes a long way",
+    "section": "",
+    "text": "A little data goes a long way… here are some examples that I think illustrte this in a particularly fascinating way (at least to me)."
+  },
+  {
+    "objectID": "lists/data.html#fighting-the-gender-pay-gap-one-twitter-bot-at-a-time",
+    "href": "lists/data.html#fighting-the-gender-pay-gap-one-twitter-bot-at-a-time",
+    "title": "A little data goes a long way",
+    "section": "Fighting the gender pay gap one twitter bot at a time",
+    "text": "Fighting the gender pay gap one twitter bot at a time\nCompanies tweeted for International Women’s Day. Then this account called out their pay gaps.\nCheck out the bot for yourself."
+  },
+  {
+    "objectID": "lists/data.html#for-better-science",
+    "href": "lists/data.html#for-better-science",
+    "title": "A little data goes a long way",
+    "section": "For Better Science",
+    "text": "For Better Science"
+  },
+  {
+    "objectID": "lists/data.html#for-better-science-1",
+    "href": "lists/data.html#for-better-science-1",
+    "title": "A little data goes a long way",
+    "section": "",
+    "text": "The rabbit hole of learning about how bad science is uncovered and recalled started with:\n\nSylvain Lesné is a failed scientist\nCassava fraud and Alzheimer’s capitalism"
+  },
+  {
+    "objectID": "lists/data.html#researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town",
+    "href": "lists/data.html#researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town",
+    "title": "A little data goes a long way",
+    "section": "Researchers uncover the use of coal ash for playground materials in small town",
+    "text": "Researchers uncover the use of coal ash for playground materials in small town\nA recent story about coal ash that was used in a playground and the work the local newspaper and the University (Duke) is doing to figure out the path forward:\n\nhttps://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/\nhttps://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/\nhttps://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/"
+  },
+  {
+    "objectID": "lists/data.html#unprecedented-access-to-food-safety-and-consumer-recalls",
+    "href": "lists/data.html#unprecedented-access-to-food-safety-and-consumer-recalls",
+    "title": "A little data goes a long way",
+    "section": "Unprecedented access to food safety and consumer recalls",
+    "text": "Unprecedented access to food safety and consumer recalls\n\nFood safety\nConsumer products"
+  },
+  {
+    "objectID": "lists/phone_games.html",
+    "href": "lists/phone_games.html",
+    "title": "Phone games",
+    "section": "",
+    "text": "Seedship\n\n\nA fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.\nLink: https://philome.la/johnayliff/seedship/play/index.html\n\n\n\nhttps://garticphone.com/\n\n\n\nhttps://www.urbandead.com/\n\n\n\nhttps://robotodyssey.online/\n\n\n\nhttps://skribbl.io/\n\n\n\nhttps://www.trickstercards.com/home/euchre/\n\n\n\nhttps://codenames.game/\n\n\n\nTrack your coverage gaps with: https://www.mkttoolbox.com/login/?ret_url=%2F\n\n\n\nhttps://semantle.com/\n\n\n\nhttps://knucklebones.io/en"
+  },
+  {
+    "objectID": "lists/phone_games.html#random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse",
+    "href": "lists/phone_games.html#random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse",
+    "title": "Phone games",
+    "section": "",
+    "text": "Seedship\n\n\nA fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.\nLink: https://philome.la/johnayliff/seedship/play/index.html\n\n\n\nhttps://garticphone.com/\n\n\n\nhttps://www.urbandead.com/\n\n\n\nhttps://robotodyssey.online/\n\n\n\nhttps://skribbl.io/\n\n\n\nhttps://www.trickstercards.com/home/euchre/\n\n\n\nhttps://codenames.game/\n\n\n\nTrack your coverage gaps with: https://www.mkttoolbox.com/login/?ret_url=%2F\n\n\n\nhttps://semantle.com/\n\n\n\nhttps://knucklebones.io/en"
+  },
+  {
+    "objectID": "lists/workplace.html",
+    "href": "lists/workplace.html",
+    "title": "Workplace articles",
+    "section": "",
+    "text": "Yolo manifesto\nComfy software\nOpen source as the “new normal”\nOvercoming matrix madness\nMatrix organizations\nOvercoming matrix madness\nCall center burnout\nProduct led vs sales led organizations\nLAYER\nBeing glue\nDiscussion of cognitive load and how big of a barrier it can be\nCognitive load\nHow organizations are like slime molds\nForbes - let the engineers lead (boeing)\nFailure to Learn: the BP refinery disaster"
+  },
+  {
+    "objectID": "presentations.html",
+    "href": "presentations.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "Check out some of the presentations I’ve made while working at Posit:\n\n2024\n\n\n\n\n\n&gt;\n\n\nIt’s dangerous to go alone - take this!\n\n\nLisa’s best practices for pain-free data science\n\n\n Check out the slides Check out the repo\n\n\n\n\n\n2023 and 2022\n\n\n\n\n\n&gt;\n\n\nReporting in R with Posit Team\n\n\nUsing the Posit Team set of products to create data science reports.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nImproving app performance\n\n\nAnalyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.\n\n\nCheck out the slides\n\n\n\n\n&gt;\n\n\nReproduceable Workflows\n\n\nCreating reproduceable data science workflows.\n\n\nCheck out the slides"
+  },
+  {
+    "objectID": "site_map.html",
+    "href": "site_map.html",
+    "title": "Site Map",
+    "section": "",
+    "text": "Site Map Listing\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nAug 2, 2022\n\n\nA little data goes a long way\n\n\n1 min\n\n\n\n\n\n\n\nAug 4, 2022\n\n\nPhone games\n\n\n1 min\n\n\n\n\n\n\n\nOct 5, 2022\n\n\nSound\n\n\n4 min\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nPublish and version your models with Vetiver\n\n\n3 min\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n10 min\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nSecuring credentials\n\n\n5 min\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nProblems with persistence when in the cloud\n\n\n3 min\n\n\n\n\n\n\n\nDec 8, 2023\n\n\nParallelization in R\n\n\n7 min\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n4 min\n\n\n\n\n\n\n\nJan 24, 2024\n\n\nThe importance of good programming\n\n\n6 min\n\n\n\n\n\n\n\nApr 19, 2024\n\n\nWorkplace articles\n\n\n1 min\n\n\n\n\n\n\n\nApr 19, 2024\n\n\nCoding write-ups and resources\n\n\n1 min\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n48 min\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nAccess to resources in Google, an exploration\n\n\n6 min\n\n\n\n\n\n\n\n \n\n\n \n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nTechnical writeups and musings\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nPresentations\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nLists\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nHome\n\n\n1 min\n\n\n\n\n\n\n\n \n\n\nAbout\n\n\n1 min\n\n\n\n\n\nNo matching items\n\n\nRefer to: https://quarto.org/docs/websites/website-listings.html"
   },
   {
     "objectID": "work/git-and-sagemaker.html",
@@ -768,5 +474,152 @@
     "title": "Problems with persistence when in the cloud",
     "section": "Alternatives",
     "text": "Alternatives\nThe old way “store a PAT as the GITHUB_PAT environment variable in .Renviron.” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the gh package for generating PATs like in Managing Personal Access Tokens\nAlternatively, there are some git config options from the terminal. See: Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR"
+  },
+  {
+    "objectID": "work/parallelization.html",
+    "href": "work/parallelization.html",
+    "title": "Parallelization in R",
+    "section": "",
+    "text": "https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide\nhttps://edavidaja.github.io/parallelooza/#/parallelooza\nhttps://github.com/edavidaja/parallelooza\nShiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html\nworkbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch"
+  },
+  {
+    "objectID": "work/parallelization.html#profvis",
+    "href": "work/parallelization.html#profvis",
+    "title": "Parallelization in R",
+    "section": "profvis",
+    "text": "profvis\nlibrary(profvis)\nlibrary(ggplot2)\nlibrary(shiny)\n#library(deSolve)\n\n# Simple example\nprofvis({\n  data(diamonds, package = \"ggplot2\")\n  \n  plot(price ~ carat, data = diamonds)\n  m &lt;- lm(price ~ carat, data = diamonds)\n  abline(m, col = \"red\")\n})\nMore complex example:\nprofvis({\n  # generate a dataset\n  data(diamonds, package = \"ggplot2\")\n  \n  # save it \n  write.csv(diamonds, \"diamonds.csv\")\n  \n  # load it\n  csv_diamonds &lt;- read.csv(\"diamonds.csv\")\n  \n  # summarize\n  summary(diamonds)\n  \n  # plot it  \n  plot(price ~ carat, data = csv_diamonds)\n  m &lt;- lm(price ~ carat, data = csv_diamonds)\n  abline(m, col = \"red\")\n  \n  #create histogram of values for price\n  ggplot(data=csv_diamonds, aes(x=price)) +\n    geom_histogram(fill=\"steelblue\", color=\"black\") +\n    ggtitle(\"Histogram of Price Values\")\n  \n  #create scatterplot of carat vs. price, using cut as color variable\n  ggplot(data=diamonds, aes(x=carat, y=price, color=cut)) + \n    geom_point()\n  \n  #create scatterplot of carat vs. price, using cut as color variable\n  ggplot(data=diamonds, aes(x=carat, y=price, color=cut)) + \n    geom_point()\n  \n  # Examples from: https://www.statology.org/diamonds-dataset-r/#:~:text=The%20diamonds%20dataset%20is%20a,the%20diamonds%20dataset%20in%20R. \n})\nShiny app example:\n\n#profvis({runApp()})\n\n#profvis({runApp(appDir = \"./test_profvis/\")})\n\nprofvis({runApp(appDir = \".\")})"
+  },
+  {
+    "objectID": "work/parallelization.html#other-packages",
+    "href": "work/parallelization.html#other-packages",
+    "title": "Parallelization in R",
+    "section": "Other packages",
+    "text": "Other packages\n\nbench\nmicrobenchmark"
+  },
+  {
+    "objectID": "work/parallelization.html#taking-advantage-of-native-parallelization",
+    "href": "work/parallelization.html#taking-advantage-of-native-parallelization",
+    "title": "Parallelization in R",
+    "section": "Taking advantage of native parallelization",
+    "text": "Taking advantage of native parallelization\nUse packages like data.table that implement parallelism natively\nlibrary(data.table)\n\ngetDTthreads()\nDT = as.data.table(iris)\nDT[Petal.Width &gt; 1.0, mean(Petal.Length), by = Species]"
+  },
+  {
+    "objectID": "work/parallelization.html#explicitly-programming-parallelization",
+    "href": "work/parallelization.html#explicitly-programming-parallelization",
+    "title": "Parallelization in R",
+    "section": "Explicitly programming parallelization",
+    "text": "Explicitly programming parallelization\nRead more: https://towardsdatascience.com/getting-started-with-parallel-programming-in-r-d5f801d43745\n\nfutureverse\nRead more: https://www.futureverse.org/\nlibrary(future)\nplan(multisession)\n\n## Evaluate an R expression sequentially\ny &lt;- slow_fcn(X[1])\n\n## Evaluate it in parallel in the background\nf &lt;- future(slow_fcn(X[1]))\ny &lt;- value(f)\n\n## future.apply: futurized version of base R apply\nlibrary(future.apply)\ny &lt;-        lapply(X, slow_fcn)\ny &lt;- future_lapply(X, slow_fcn)\n\n## furrr: futurized version of purrr\nlibrary(furrr)\ny &lt;- X |&gt;        map(slow_fcn)\ny &lt;- X |&gt; future_map(slow_fcn)\n\n## foreach: futurized version (modern)\nlibrary(foreach)\ny &lt;- foreach(x = X) %do%       slow_fcn(x)\ny &lt;- foreach(x = X) %dofuture% slow_fcn(x)\n\n## foreach: futurized version (traditional)\nlibrary(foreach)\ndoFuture::registerDoFuture()\ny &lt;- foreach(x = X) %do%    slow_fcn(x)\ny &lt;- foreach(x = X) %dopar% slow_fcn(x)\n\n\nparallel\nExample from: https://towardsdatascience.com/getting-started-with-parallel-programming-in-r-d5f801d43745\nlibrary(parallel)\n\n# Generate data\ndata &lt;- 1:1e9\ndata_list &lt;- list(\"1\" = data,\n                  \"2\" = data,\n                  \"3\" = data,\n                  \"4\" = data)\n\n# Single core\ntime = Sys.time()\n\ntime_benchmark &lt;- system.time(\n  lapply(data_list, mean)\n)\nsingle_core_time = difftime(Sys.time(), time)\n\n\n# Detect the number of available cores and create cluster\ntime = Sys.time()\n\ncores_avail= detectCores()\n\ncl &lt;- parallel::makeCluster(detectCores())\n# Run parallel computation\ntime_parallel &lt;- system.time(\n  parallel::parLapply(cl,\n                      data_list,\n                      mean)\n)\n\nmultiple_core_time = difftime(Sys.time(), time)\n\n# Close cluster\nparallel::stopCluster(cl)\n\n\nprint(single_core_time)\nprint(multiple_core_time)\nprint(cores_avail)\nRunning sequentially took 18.33 seconds. Running in parallel shortened that to 4.99 seconds.\n\n\nparallely (part of futureverse)\nRead more: https://parallelly.futureverse.org/\nlibrary(parallelly)\nparallelly::availableCores()\n\n\nforeach and futureverse\nlibrary(foreach)\nlibrary(doFuture)\n\nyears = 2024\n\nplan(multisession, workers = 20)\nresults &lt;- foreach(i=years, \n                   .combine = rbind) %dofuture% {\n                     get_api_stats(yr=i, tmt=tmt, product = \"litter\")}\n\n\nfuture.apply\nBefore:\ntable(okay2 &lt;- apply(tab2, 1, function(x) {...\nAfter:\nlibrary(future.apply)\nplan(multisession)\n\ntable(okay2 &lt;- future_apply(tab2, 1, function(x) {...\n\n\npurrr\nBefore:\nlibrary(tidyverse)\nsales_data_tbl %&gt;%\n  nest(data=c(date, value)) %&gt;%\n  mutate(model = purrr::map(data, function(df) {\n    lm(value ~month(date) + as.numeric(date) data=df)\n  })) \nAfter:\nlibrary(tidyverse)\nlibrary(purrr)\nsales_data_tbl %&gt;%\n  nest(data=c(date, value)) %&gt;%\n  mutate(model = furrr::map(data, function(df) {\n    lm(value ~month(date) + as.numeric(date) data=df)\n  })) \n\n\nforeach and doParallel\nlibrary(foreach)\nlibrary(doParallel)\n\ncl &lt;- makeCluster(20)\nregisterDoParallel(cl)\nresults &lt;- foreach(i=years, \n                   .combine = rbind) %dopar% {\n                     get_api_stats(yr=i, tmt=tmt, product = \"litter\")}\nstopCluster(cl)\n\n\nclustermq\nLifesaver, when working in a HPC environment.\nlibrary(foreach)\nlibrary(clustermq)\n\nn_cores &lt;- parallel::detectCores() - 1\noptions(clustermq.scheduler=\"multicore\")\ngetOption(\"clustermq.scheduler\")\n\nregister_dopar_cmq(n_jobs = n_cores)\nforeach(i = seq_len(n_cores)) %dopar% sqrt(i)\nThe future of clustermq: crew/mirai/nanonext"
+  },
+  {
+    "objectID": "work/parallelization.html#other-tips-and-tricks",
+    "href": "work/parallelization.html#other-tips-and-tricks",
+    "title": "Parallelization in R",
+    "section": "Other tips and tricks",
+    "text": "Other tips and tricks\nit seems they are testing quite a few models against their data that are indeed hard to parallelize. Couple of zero order recommendations\nonly select the data they really need from ess_multilevel\nparallelize the individual models via something like https://stackoverflow.com/a/44010698/20032741, suggested by the author of future himself.\nremove the ess_multilevel data structure right after the select statement, not when the user is running out of memory\nAdditionally, for real benchmarking of functions I recommend against Sys.time() in favour of packages like tictoc and microbenchmark , the latter especially if the time for each function call is short and you want to get rid of the so-called OS jitter (influence from OS level processes)\nLast but not least, I also would point out the existence of https://luwidmer.github.io/fastR-website/materials.html where an ex-colleague of Novartis and me are talking in great length about debugging, performance optimisations and eventually about parallelization in R. This material is good for a 3.5 hour workshop.\nAlso use setwd() with caution. Read a really good review of when to use setwd() and when not to here: https://rstats.wtf/projects#setwd"
+  },
+  {
+    "objectID": "work/parallelization.html#but-what-about-python",
+    "href": "work/parallelization.html#but-what-about-python",
+    "title": "Parallelization in R",
+    "section": "But what about Python?",
+    "text": "But what about Python?\n\ndask-jobqueue\nray"
+  },
+  {
+    "objectID": "work/securing-credentials.html",
+    "href": "work/securing-credentials.html",
+    "title": "Securing credentials",
+    "section": "",
+    "text": "When working with pulling data from secure databases or other sources a developer might find themselves in a situation of needing to provide very sensitive information, such as a password or a token, in order to access the data that is needed or to successfully deploy a project. Handling those secrets in way that doesn’t expose them in the code directly is critical and where using environmental variable’s for securing sensitive variables is strongly recommended.\nAdditionally there may be parameters that are often needed that can be accessed as a variable more easily rather than having to type in every time.\nFor both of these cases knowing how environment variables can be leveraged can be very rewarding and it is surprising how little effort it can to take to set up.\n\n\nWhen R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.\nHowever for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.\nWith increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files:\n\nUser\nProject\n\nOn startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf.\nJust to re-iterate the key takeaway: When in doubt note that the project level file is given preference over user level config files. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.\nThere is a really excellent overview of R’s startup process here but in short it can be thought of this way:\n\n\nusethis has a function for creating and editing the .Renviron file\nlibrary(usethis)\nusethis::edit_r_environ()\nAdd the variables to that file in the format variable_name = \"variable_value\" and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE\nSaved variables can be accessed with:\nvariable_name &lt;- Sys.getenv(\"variable_name\")\nWhen working in a more complex environment structure where separate project, site, and user environments are being support this support article has useful information with a deeper dive into R’s startup here.\n\n\n\nStoring secrets securely can be done using the edit_r_environ function from the usethis package. For more overview see this overview.\nExample:\nlibrary(usethis)\nusethis::edit_r_environ(scope = \"project\")\nAccessing those stored parameters later can be done using Sys.getenv(\"DB_NAME\").\nBe sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the edit_git_ignore(scope = c(\"user\", \"project\")) function. For more best practices see securing credentials.\n\nWhile typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: *.html.\n\nAfter updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).\n\n\n\nAnother approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}. In the R scripts they will be referenced as usual with something like Sys.getenv(\"DB_NAME\").\n\n\n\nStarting with version 1.6, RStudio Connect allows Environment Variables. The variables are encrypted on-disk, and in-memory.\nThis can be done at the project level with securing deployment through the Connect UI.\nUse Connect to manage environment variables through the UI: https://docs.posit.co/connect/user/content-settings/index.html#content-vars\nHave your admin use a supervisor script to add Environment Variables automatically: https://docs.posit.co/connect/admin/process-management/index.html#example-environment-variables\nSecuring credentials solutions article: https://solutions.posit.co/connections/db/best-practices/managing-credentials/"
+  },
+  {
+    "objectID": "work/securing-credentials.html#working-with-the-.renviron-file",
+    "href": "work/securing-credentials.html#working-with-the-.renviron-file",
+    "title": "Securing credentials",
+    "section": "",
+    "text": "When R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.\nHowever for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.\nWith increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files:\n\nUser\nProject\n\nOn startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf.\nJust to re-iterate the key takeaway: When in doubt note that the project level file is given preference over user level config files. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.\nThere is a really excellent overview of R’s startup process here but in short it can be thought of this way:\n\n\nusethis has a function for creating and editing the .Renviron file\nlibrary(usethis)\nusethis::edit_r_environ()\nAdd the variables to that file in the format variable_name = \"variable_value\" and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE\nSaved variables can be accessed with:\nvariable_name &lt;- Sys.getenv(\"variable_name\")\nWhen working in a more complex environment structure where separate project, site, and user environments are being support this support article has useful information with a deeper dive into R’s startup here.\n\n\n\nStoring secrets securely can be done using the edit_r_environ function from the usethis package. For more overview see this overview.\nExample:\nlibrary(usethis)\nusethis::edit_r_environ(scope = \"project\")\nAccessing those stored parameters later can be done using Sys.getenv(\"DB_NAME\").\nBe sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the edit_git_ignore(scope = c(\"user\", \"project\")) function. For more best practices see securing credentials.\n\nWhile typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: *.html.\n\nAfter updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).\n\n\n\nAnother approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}. In the R scripts they will be referenced as usual with something like Sys.getenv(\"DB_NAME\").\n\n\n\nStarting with version 1.6, RStudio Connect allows Environment Variables. The variables are encrypted on-disk, and in-memory.\nThis can be done at the project level with securing deployment through the Connect UI.\nUse Connect to manage environment variables through the UI: https://docs.posit.co/connect/user/content-settings/index.html#content-vars\nHave your admin use a supervisor script to add Environment Variables automatically: https://docs.posit.co/connect/admin/process-management/index.html#example-environment-variables\nSecuring credentials solutions article: https://solutions.posit.co/connections/db/best-practices/managing-credentials/"
+  },
+  {
+    "objectID": "work/vetiver.html",
+    "href": "work/vetiver.html",
+    "title": "Publish and version your models with Vetiver",
+    "section": "",
+    "text": "This is a minimal example of the ML development workflow in R using Vetiver and the Posit Pro products.\nFavorite resources:"
+  },
+  {
+    "objectID": "work/vetiver.html#the-steps",
+    "href": "work/vetiver.html#the-steps",
+    "title": "Publish and version your models with Vetiver",
+    "section": "The steps:",
+    "text": "The steps:\n\n\ncreate a deployable vetiver model: https://vetiver.rstudio.com/get-started/\n\n\npublish and version your model: https://vetiver.rstudio.com/get-started/version.html\n\n\ndeploy your model as a REST API: https://vetiver.rstudio.com/get-started/deploy.html"
+  },
+  {
+    "objectID": "work/vetiver.html#in-action",
+    "href": "work/vetiver.html#in-action",
+    "title": "Publish and version your models with Vetiver",
+    "section": "In action",
+    "text": "In action\nBike Predict (R): https://solutions.posit.co/gallery/bike_predict/ Bike Predict (Python): https://github.com/sol-eng/bike_predict_python\nFollowing steps outline in: https://vetiver.rstudio.com/get-started/version.html"
+  },
+  {
+    "objectID": "work/vetiver.html#train-a-model",
+    "href": "work/vetiver.html#train-a-model",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Train a model",
+    "text": "Train a model\nlibrary(tidymodels)\n\ncar_mod &lt;-\n    workflow(mpg ~ ., linear_reg()) %&gt;%\n    fit(mtcars)"
+  },
+  {
+    "objectID": "work/vetiver.html#create-a-vetiver-model",
+    "href": "work/vetiver.html#create-a-vetiver-model",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Create a vetiver model",
+    "text": "Create a vetiver model\nlibrary(vetiver)\nv &lt;- vetiver_model(car_mod, \"lisa.anders/cars_mpg_model\")\nv"
+  },
+  {
+    "objectID": "work/vetiver.html#store-and-version-your-model",
+    "href": "work/vetiver.html#store-and-version-your-model",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Store and version your model",
+    "text": "Store and version your model\nStore secrets in your environment so they aren’t exposed in your code directly with usethis::edit_r_environ(). Pinned to: https://colorado.posit.co/rsc/connect/#/apps/b858985c-4e7f-4e05-be35-1bb6f21c9cd4/access\nauth = “envvar” uses environment variables CONNECT_API_KEY and CONNECT_SERVER.\nlibrary(pins)\nmodel_board &lt;- board_connect(auth = \"envvar\") # authenticates to Connect via environment variables\nvetiver_pin_write(model_board, v)\nTo read the vetiver model object from your board, use model_board %&gt;% vetiver_pin_read(\"cars_mpg\")."
+  },
+  {
+    "objectID": "work/vetiver.html#create-a-rest-api-for-deployment",
+    "href": "work/vetiver.html#create-a-rest-api-for-deployment",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Create a REST API for deployment",
+    "text": "Create a REST API for deployment\nTo start a server using this object, pipe (%&gt;%) to pr_run(port = 8080) or your port of choice.\nFor RStudio Connect, you can deploy your versioned model with a single function, either vetiver_deploy_rsconnect() for R or vetiver.deploy_rsconnect() for Python. For more on these options, see the Connect documentation for using vetiver.\n# Run while developing\n\n# library(plumber)\n# pr() %&gt;%\n#   vetiver_api(v) %&gt;% \n#   pr_run(port = 8080)\n\n# system2(\"ls\")"
+  },
+  {
+    "objectID": "work/vetiver.html#deploy-to-connect",
+    "href": "work/vetiver.html#deploy-to-connect",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Deploy to Connect",
+    "text": "Deploy to Connect\nAPI deployed to: https://colorado.posit.co/rsc/connect/#/apps/01ef1a23-3cd3-459f-b5e1-9c002104c065/access\nvetiver_deploy_rsconnect( \n     model_board, \n     \"lisa.anders/cars_mpg_model\", \n     predict_args = list(debug = TRUE), \n     #server=\"\",\n     account = \"lisa.anders\" \n     )"
+  },
+  {
+    "objectID": "work/vetiver.html#predict-from-your-model-endpoint",
+    "href": "work/vetiver.html#predict-from-your-model-endpoint",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Predict from your model endpoint",
+    "text": "Predict from your model endpoint\nendpoint &lt;- vetiver_endpoint(\"https://server.url.co/rsc/content/01ef1a23-3cd3-459f-b5e1-9c002104c065/predict\")\n\napiKey &lt;- Sys.getenv(\"CONNECT_API_KEY\")\n\n\nnew_car &lt;- tibble(cyl = 4,  disp = 200,\n                  hp = 100, drat = 3,\n                  wt = 3,   qsec = 17,\n                  vs = 0,   am = 1,\n                  gear = 4, carb = 2)\n\n\ntime_start &lt;- Sys.time()\n\npredict(endpoint, new_car, httr::add_headers(Authorization = paste(\"Key\", apiKey)))\n\ntime_end &lt;- Sys.time()\n\ntime_diff &lt;- difftime(time_end, time_start)"
+  },
+  {
+    "objectID": "work/vetiver.html#compute-metrics",
+    "href": "work/vetiver.html#compute-metrics",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Compute metrics",
+    "text": "Compute metrics\nlibrary(vetiver)\nlibrary(tidyverse)\ncars &lt;- read_csv(\"https://vetiver.rstudio.com/get-started/new-cars.csv\")\noriginal_cars &lt;- slice(cars, 1:14)\n\noriginal_metrics &lt;-\n    augment(v, new_data = original_cars) %&gt;%\n    vetiver_compute_metrics(date_obs, \"week\", mpg, .pred)\n\noriginal_metrics\nSpecify the metrics you want to have for monitoring your model over time."
+  },
+  {
+    "objectID": "work/vetiver.html#pin-the-metrics",
+    "href": "work/vetiver.html#pin-the-metrics",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Pin the metrics",
+    "text": "Pin the metrics\nCreate a new board:\nmodel_board &lt;- board_connect(auth = \"envvar\") # authenticates to Connect via environment variables\n\nmodel_board %&gt;% pin_write(original_metrics, \"lisa.anders/tree_metrics\")\nLater we will want to update it so we can look back at how it is changing over time:\n# dates overlap with existing metrics:\nnew_cars &lt;- slice(cars, -1:-7)\nnew_metrics &lt;-\n    augment(v, new_data = new_cars) %&gt;%\n    vetiver_compute_metrics(date_obs, \"week\", mpg, .pred)\n\nmodel_board %&gt;%\n    vetiver_pin_metrics(new_metrics, \"lisa.anders/tree_metrics\", overwrite = TRUE)"
+  },
+  {
+    "objectID": "work/vetiver.html#visualize-performance-over-time",
+    "href": "work/vetiver.html#visualize-performance-over-time",
+    "title": "Publish and version your models with Vetiver",
+    "section": "Visualize performance over time",
+    "text": "Visualize performance over time\nlibrary(ggplot2)\nmonitoring_metrics &lt;- model_board %&gt;% pin_read(\"lisa.anders/tree_metrics\")\nvetiver_plot_metrics(monitoring_metrics) +\n    scale_size(range = c(2, 4))"
   }
 ]

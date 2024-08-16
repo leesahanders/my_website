@@ -13,8 +13,8 @@ website:
       - text: "Stuff"
         icon: fa-database
         menu:
-          - text: "Blog posts"
-            href: posts.qmd
+          - text: "Blog / Projects"
+            href: https://questionable.quarto.pub/posts/
           - text: "Lists"
             href: lists.qmd         
           - text: "Presentations"

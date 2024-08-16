@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -107,8 +107,8 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
         <li>
-    <a class="dropdown-item" href="../posts.html">
- <span class="dropdown-text">Blog posts</span></a>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/posts/">
+ <span class="dropdown-text">Blog / Projects</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../lists.html">
@@ -186,7 +186,27 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#azure-data-lake" id="toc-azure-data-lake" class="nav-link active" data-scroll-target="#azure-data-lake">Azure Data Lake</a>
+  <ul class="collapse">
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set up</a></li>
+  <li><a href="#add-data" id="toc-add-data" class="nav-link" data-scroll-target="#add-data">Add data</a></li>
+  </ul></li>
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
+  <li><a href="#reading-and-writing-delta-files" id="toc-reading-and-writing-delta-files" class="nav-link" data-scroll-target="#reading-and-writing-delta-files">Reading and Writing Delta Files</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a>
+  <ul class="collapse">
+  <li><a href="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" id="toc-azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="nav-link" data-scroll-target="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></li>
+  <li><a href="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html" id="toc-delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="nav-link" data-scroll-target="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: https://docs.delta.io/latest/delta-intro.html</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -893,7 +913,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
