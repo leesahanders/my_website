@@ -18,6 +18,28 @@ Check out some of the presentations I've made while working at Posit:
 :::
 
 ::: mycard-title
+Quarto for Reproduceable Reporting 
+:::
+
+::: mycard-description
+Quarto is an amazing technology, this presentation goes over the basics of setting up quarto projects and touches on advanced topics like content types, version control, and other bells and whistles (presentation now with Confetti!)
+:::
+
+::: mycard-link
+<br>
+[Check out the slides](https://questionable.quarto.pub/quarto-for-reproducible-reporting-demo/){target="_blank"}
+[Check out the repo](https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/presentation){target="_blank"}
+:::
+
+::::
+
+:::: mycard
+
+::: angle-open
+\>
+:::
+
+::: mycard-title
 It's dangerous to go alone - take this! 
 :::
 
@@ -82,7 +104,9 @@ Analyzing your R scripts for performance improvements using profvis, shinyloadte
 :::
 
 ::: mycard-link
+<br>
 [Check out the slides](https://questionable.quarto.pub/improving-app-performance-with-profvis/){target="_blank"}
+[Check out the repo](https://github.com/leesahanders/demo_app_perf/tree/main){target="_blank"}
 :::
 
 ::::
@@ -94,15 +118,18 @@ Analyzing your R scripts for performance improvements using profvis, shinyloadte
 :::
 
 ::: mycard-title
-Reproduceable Workflows
+Reproducible Workflows
 :::
 
 ::: mycard-description
-Creating reproduceable data science workflows. 
+Creating reproducible data science workflows. 
 :::
 
 ::: mycard-link
+<br>
 [Check out the slides](https://questionable.quarto.pub/reproduceable-workflows/){target="_blank"}
+[Check out the repo](https://github.com/leesahanders/demo_renv){target="_blank"}
+
 :::
 
 ::::

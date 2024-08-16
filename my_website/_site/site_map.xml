@@ -129,7 +129,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -157,7 +157,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -223,7 +223,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
@@ -2724,7 +2724,7 @@ font-style: inherit;"># Gargle uses port 1410 for auth, check if it is blocked w
 <p>You can add data manually by creating a container and then using the upload icon.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -2807,7 +2807,7 @@ spark_disconnect(sc)</code></pre>
 <p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -5451,7 +5451,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://questionable.quarto.pub/blog/work.html</guid>
-  <pubDate>Fri, 16 Aug 2024 18:56:47 GMT</pubDate>
+  <pubDate>Fri, 16 Aug 2024 19:24:58 GMT</pubDate>
 </item>
 <item>
   <title>Presentations</title>
@@ -5467,6 +5467,20 @@ No matching items
 </center>
 <div class="column-screen-inset">
 <div class="mycards-container">
+<div class="mycard">
+<div class="angle-open">
+<p>&gt;</p>
+</div>
+<div class="mycard-title">
+<p>Quarto for Reproduceable Reporting</p>
+</div>
+<div class="mycard-description">
+<p>Quarto is an amazing technology, this presentation goes over the basics of setting up quarto projects and touches on advanced topics like content types, version control, and other bells and whistles (presentation now with Confetti!)</p>
+</div>
+<div class="mycard-link">
+<p><br> <a href="https://questionable.quarto.pub/quarto-for-reproducible-reporting-demo/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/presentation" target="_blank">Check out the repo</a></p>
+</div>
+</div>
 <div class="mycard">
 <div class="angle-open">
 <p>&gt;</p>
@@ -5513,7 +5527,7 @@ No matching items
 <p>Analyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.</p>
 </div>
 <div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/" target="_blank">Check out the slides</a></p>
+<p><br> <a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/demo_app_perf/tree/main" target="_blank">Check out the repo</a></p>
 </div>
 </div>
 <div class="mycard">
@@ -5521,13 +5535,13 @@ No matching items
 <p>&gt;</p>
 </div>
 <div class="mycard-title">
-<p>Reproduceable Workflows</p>
+<p>Reproducible Workflows</p>
 </div>
 <div class="mycard-description">
-<p>Creating reproduceable data science workflows.</p>
+<p>Creating reproducible data science workflows.</p>
 </div>
 <div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/reproduceable-workflows/" target="_blank">Check out the slides</a></p>
+<p><br> <a href="https://questionable.quarto.pub/reproduceable-workflows/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/demo_renv" target="_blank">Check out the repo</a></p>
 </div>
 </div>
 </div>
@@ -5537,7 +5551,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/presentations.html</guid>
-  <pubDate>Fri, 16 Aug 2024 18:56:47 GMT</pubDate>
+  <pubDate>Fri, 16 Aug 2024 19:24:58 GMT</pubDate>
 </item>
 <item>
   <title>Lists</title>
@@ -5622,7 +5636,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://questionable.quarto.pub/blog/lists.html</guid>
-  <pubDate>Fri, 16 Aug 2024 18:56:47 GMT</pubDate>
+  <pubDate>Fri, 16 Aug 2024 19:24:58 GMT</pubDate>
 </item>
 <item>
   <title>Home</title>
@@ -5633,7 +5647,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/</guid>
-  <pubDate>Fri, 16 Aug 2024 18:56:47 GMT</pubDate>
+  <pubDate>Fri, 16 Aug 2024 19:24:58 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -5648,7 +5662,7 @@ No matching items
 
  ]]></description>
   <guid>https://questionable.quarto.pub/blog/about.html</guid>
-  <pubDate>Fri, 16 Aug 2024 18:56:47 GMT</pubDate>
+  <pubDate>Fri, 16 Aug 2024 19:24:58 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/images/Rocinante.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
