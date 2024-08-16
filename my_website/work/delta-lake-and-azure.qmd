@@ -19,7 +19,7 @@ categories:
   - code
 ---
 
-This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it's easy to find in the future! 
+This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it's easy to find in the future! 
 
 ## Azure Data Lake
 
