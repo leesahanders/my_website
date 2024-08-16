@@ -1,7 +1,7 @@
 ---
 title: "Technical writeups and musings"
 listing:
-  contents: posts-no-pictures
+  contents: work
   sort: "date desc"
   type: default
   categories: false

@@ -10,6 +10,7 @@ format:
 editor: source
 image: "img/"
 draft: false
+toc: true
 freeze: true
 filters:
    - lightbox

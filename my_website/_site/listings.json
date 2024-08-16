@@ -61,5 +61,16 @@
       "/posts/resin.html",
       "/posts/battlebots 2021.html"
     ]
+  },
+  {
+    "listing": "/work.html",
+    "items": [
+      "/work/google-resources.html",
+      "/work/renv-environments.html",
+      "/work/delta-lake-and-azure.html",
+      "/work/git-and-sagemaker.html",
+      "/work/securing-credentials.html",
+      "/work/sharepoint-oh-no.html"
+    ]
   }
 ]

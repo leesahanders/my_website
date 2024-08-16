@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-01-24">
-<meta name="description" content="Case studies">
+<meta name="dcterms.date" content="2024-01-11">
 
-<title>Lisa Anders - questionable.quarto - The importance of good programming</title>
+<title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -153,17 +155,9 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The importance of good programming</h1>
-                  <div>
-        <div class="description">
-          Case studies
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">datascience</div>
-                <div class="quarto-category">opinions</div>
-                <div class="quarto-category">hardware</div>
-                <div class="quarto-category">software</div>
+      <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">code</div>
               </div>
                   </div>
   </div>
@@ -181,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 24, 2024</p>
+        <p class="date">January 11, 2024</p>
       </div>
     </div>
     
@@ -200,78 +194,170 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means.</p>
-<section id="uk-post-office-scandal" class="level2">
-<h2 class="anchored" data-anchor-id="uk-post-office-scandal">UK Post Office Scandal</h2>
+<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this aware so it’s easy to find in the future!</p>
+<section id="azure-data-lake" class="level2">
+<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
+<section id="set-up" class="level3">
+<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
+<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
+<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
+<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
+<p>Steps:</p>
+<ol type="1">
+<li><p>Go to storage account</p></li>
+<li><p>Create and give it a name</p></li>
+<li><p>Select: LRS</p></li>
+<li><p>Switch to premium: block blobs</p></li>
+<li><p>Change to hierarchical blob</p></li>
+<li><p>Set tags:</p></li>
+</ol>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=h3UIdGRBGlY">Developers blamed for the post office scandal?</a></li>
-<li><a href="https://www.postofficetrial.com/2019/01/victims-testimony.html">Victim testimony</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/the-smoking-gun.html">Remote access and mistakes blamed on post masters, a smoking gun</a></li>
-<li><a href="https://www.reddit.com/r/it/s/i5NE3qQgv0">Example of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?</a></li>
-<li><a href="https://www.postofficetrial.com/2019/12/second-sights-ron-warmington-breaks-his.html?m=1">One of the independent investigators from 2012 breaks silence</a></li>
-<li><a href="https://www.postofficetrial.com/2021/07/second-sight-were-told-about-remote.html?m=1">Evidence that back in 2012 the indepent investigators were told about remote access, implying pejury in all later cases</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/horizon-trial-day-4-day-of-two-halves.html?m=1">They Could, And They Did Change Branch Transaction Data</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/miscarriages-of-justice.html?m=1">Miscarriage of justice - the Rose report</a></li>
-<li><a href="https://www.postofficescandal.uk/post/current-post-office-horizon-it-issues/">List of current issues / bugs as of 2017? with the software. One can only imagine how much worse it used to be</a></li>
-<li><a href="https://www.postofficescandal.uk/post/how-not-to-commission-a-complex-it-project/">Project manager on the original project discusses his impressions - how not to commission a complex project</a> <a href="https://www.postofficescandal.uk/post/inquiry-phase-2-star-witness-dave-gives-it-both-barrels/">Inquiry Phase 2: Star Witness – Dave gives it both barrels</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/horizon-trial-day-5-he-had-loaded-gun.html">Known errors in the software, perjury, and lack of disclosure</a></li>
-<li><a href="https://www.postofficetrial.com/2019/06/horizon-trial-day-16-that-surprises-me.html">Interview with IT - throwing coconuts</a></li>
-<li><a href="https://www.postofficetrial.com/2019/06/horizon-trial-day-18-dr-robert.html">Interview with the other IT</a></li>
-<li><a href="https://www.postofficetrial.com/2019/04/bates-v-post-office-recusal-judgment_9.html">Attempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?</a></li>
-<li><a href="https://www.postofficetrial.com/2020/07/the-post-office-cover-up-part-2-they.html">The cover up</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/why-did-post-office-accuse-aakash-patny.html">Why did the lawyer for the post office act this way?</a></li>
-<li><a href="https://www.civillitigationbrief.com/2015/07/23/thinking-of-alleging-or-pleading-fraud-better-read-this-first/">Thinking of alleging or pleading fraud: better read this first</a></li>
+<li><p>rs:owner</p></li>
+<li><p>rs:project = soleng</p></li>
+<li><p>rs:environment = dev</p></li>
 </ul>
+<ol start="7" type="1">
+<li>Once in just need access keys or shared access signature in order to gain access</li>
+</ol>
 </section>
-<section id="chinook-crash" class="level1">
-<h1>Chinook Crash</h1>
+<section id="add-data" class="level3">
+<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
+<p>You can add data manually by creating a container and then using the upload icon.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="authentication" class="level2">
+<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
+<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
+<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
+<p>You’ll need to know:</p>
 <ul>
-<li><a href="https://www.computerweekly.com/blog/Public-Sector-IT/Chinook-Mk2-we-publish-new-evidence-of-computer-problems">New evidence of computer problems</a></li>
+<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
+<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
 </ul>
-<blockquote class="blockquote">
-<p>Although only 17% of the code has been analysed [EDS, the code’s assessors, stopped work on the code because of the density of anomalies found] 21 category one and 153 category two anomalies have been revealed. One of these, the reliance on an undocumented and unproved feature of the processor [based on an Intel ASM96 chip] is considered to be positively dangerous.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>EDS was not satisfied with Hawker Siddeley’s assurances. In its report on the Fadec software, EDS said: “Correct operation (of the Fadec) depends on an undocumented feature of the Intel ASM 96 microcomputer. EDS-Scicon’s concern is that a change in the mask or process of the ASM chip at some point in the future may cause incorrect operation of the FADEC.]</p>
-</blockquote>
+<pre><code>library(AzureStor)
+
+blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
+
+bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
+
+# List containers and files in containers
+list_storage_containers(bl_endp_key)
+cont1 &lt;- storage_container(bl_endp_key, "container1")
+list_storage_files(cont1)
+
+# Download a file
+storage_download(cont1, "/crm_call_center_logs.parquet")
+
+# Upload a file 
+storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
+<p>You can also create and delete containers:</p>
+<pre><code># Create a container
+newcont &lt;- create_storage_container(bl_endp_key, "container3")
+
+# Create a directory in the container
+cont3 &lt;- storage_container(bl_endp_key, "container3")
+create_storage_dir(cont3, "newdir")
+
+# Delete a container
+delete_storage_container(newcont)</code></pre>
 </section>
-<section id="bugs-with-the-therac-25-computer-controlled-radiation-therapy-machine" class="level1">
-<h1>Bugs with the Therac-25 computer-controlled radiation therapy machine</h1>
-<ul>
-<li><a href="https://hackaday.com/2015/10/26/killed-by-a-machine-the-therac-25/">Killed by a machine</a></li>
-</ul>
-<blockquote class="blockquote">
-<p>If this story has a hero, it’s [Fritz Hager], the staff physicist at the East Texas Cancer Center in Tyler, Texas. After the second incident at his facility, he was determined to get to the bottom of the problem. In both cases, the Therac-25 displayed a “Malfunction 54” message. The message was not mentioned in the manuals. AECL explained that Malfunction 54 meant that the Therac-25’s computer could not determine if there a underdose OR overdose of radiation.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The same radiotherapy technician had been involved in both incidents, so [Fritz] brought her back into the control room to attempt to recreate the problem. The two “locked the doors” NASA style, working into the night and through the weekend trying to reproduce the problem. With the technician running the machine, the two were able to pinpoint the issue. The VT-100 console used to enter Therac-25 prescriptions allowed cursor movement via cursor up and down keys. If the user selected X-ray mode, the machine would begin setting up the machine for high-powered X-rays. This process took about 8 seconds. If the user switched to Electron mode within those 8 seconds, the turntable would not switch over to the correct position, leaving the turntable in an unknown state.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>As the investigations and lawsuits progressed, the software for the Therac-25 was placed under scrutiny. The Therac-25’s PDP-11 was programmed completely in assembly language. Not only the application, but the underlying executive, which took the place of an operating system. The computer was tasked with handling real-time control of the machine, both its normal operation and safety systems. Today this sort of job could be handled by a microcontroller or two, with a PC running a GUI front end.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>AECL never publicly released the source code, but several experts including [Nancy Leveson] did obtain access for the investigation. What they found was shocking. The software appeared to have been written by a programmer with little experience coding for real-time systems. There were few comments, and no proof that any timing analysis had been performed. According to AECL, a single programmer had written the software based upon the Therac-6 and 20 code. However, this programmer no longer worked for the company, and could not be found.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The lawsuits were settled out of court. It seemed like the problems were solved until January 17th, 1987, when another patient was overdosed at Yakima, Washington. This problem was a new one: A counter overflow. If the operator sent a command at the exact moment the counter overflowed, the machine would skip setting up some of the beam accessories – including moving the stainless steel aiming mirror. The result was once again an unscanned beam, and an overdose. The patient died 3 months later.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>It’s important to note that while the software was the lynch pin in the Therac-25, it wasn’t the root cause. The entire system design was the real problem. Safety-critical loads were placed upon a computer system that was not designed to control them. Timing analysis wasn’t performed. Unit testing never happened. Fault trees for both hardware and software were not created. These tasks are not only the responsibility of the software engineers, but the systems engineers on the project. Therac-25 is long gone, but its legacy will live on. This was the watershed event that showed how badly things can go wrong when software for life-critical systems is not properly designed and adequately tested.</p>
-</blockquote>
+<section id="reading-and-writing-delta-files" class="level2">
+<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
+<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
+<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
+<pre><code>library(sparklyr)
+
+#Install a local version of Spark
+spark_install(version=3.4)
+
+# Set Spark configuration to be able to read delta tables
+conf &lt;- spark_config()
+conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
+conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+
+# For spark 3.4 
+conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
+
+# Open a connection
+sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
+
+# For this example we will use a built-in dataframe to save example data files, including one for delta tables
+tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
+
+# Write spark dataframe to disk
+spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
+spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
+spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
+
+# Read dataframes into normal memory
+spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
+regular_df_csv &lt;- collect(spark_tbl_handle)
+spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
+regular_df_parquet &lt;- collect(spark_tbl_handle)
+spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
+regular_df_delta &lt;- collect(spark_tbl_handle)
+
+# Disconnect
+spark_disconnect(sc)</code></pre>
+<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
 </section>
-<section id="ai-hype-train" class="level1">
-<h1>AI Hype Train</h1>
-<p><a href="https://www.youtube.com/watch?v=ajGX7odA87k">That keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”</a></p>
-<p><a href="https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/">I Will Fu*king Piledrive You If You Mention AI Again</a></p>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<p>From R:</p>
+<pre><code># See spark details (troubleshooting)
+spark_config()
+spark_get_java()
+spark_available_versions()
+spark_installed_versions()
+
+# See session details
+utils::sessionInfo() </code></pre>
+<p>From bash:</p>
+<pre><code>namei -l /usr/lib/spark</code></pre>
+<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
 </section>
-<section id="others" class="level1">
-<h1>Others</h1>
-<p><a href="https://blog.grio.com/2021/07/when-small-software-bugs-cause-big-problems.html">WHEN SMALL SOFTWARE BUGS CAUSE BIG PROBLEMS</a></p>
-<p><a href="https://arstechnica.com/security/2024/03/backdoor-found-in-widely-used-linux-utility-breaks-encrypted-ssh-connections/">Backdoors into open source package</a></p>
-<p><a href="https://resend.com/blog/incident-report-for-february-21-2024">We immediately began the restoration process from a backup, which completed 6 hours later. Unfortunately, once it finished, we found that it failed to restore the data, so we had to start the restoration process a second time with a different backup</a></p>
-<p><a href="https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&amp;publication_id=27849&amp;post_id=137046759&amp;utm_medium=email&amp;utm_content=share&amp;utm_campaign=email-share&amp;triggerShare=true&amp;isFreemail=true&amp;r=yxnx">Counting explosions at Unity, a data analysts perspective</a></p>
+<section id="about" class="level2">
+<h2 class="anchored" data-anchor-id="about">About</h2>
+<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
+<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
+<blockquote class="blockquote">
+<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
+</blockquote>
+<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
+</section>
+<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
+<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
+<blockquote class="blockquote">
+<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
+</blockquote>
+<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
+<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">image</span>
+<span class="glightbox-desc lightbox-desc-2">image</span>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -807,6 +893,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

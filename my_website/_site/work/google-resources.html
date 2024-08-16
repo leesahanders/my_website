@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2023-08-29">
+<meta name="dcterms.date" content="2024-06-21">
 
-<title>Lisa Anders - questionable.quarto - Problems with persistence when in the cloud</title>
+<title>Lisa Anders - questionable.quarto - Access to resources in Google, an exploration</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -75,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -120,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Recipes</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../posts-no-pictures.html">
+    <a class="dropdown-item" href="../work.html">
  <span class="dropdown-text">Technical writeups</span></a>
   </li>  
     </ul>
@@ -152,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Problems with persistence when in the cloud</h1>
+      <h1 class="title">Access to resources in Google, an exploration</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">code</div>
               </div>
@@ -172,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 29, 2023</p>
+        <p class="date">June 21, 2024</p>
       </div>
     </div>
     
@@ -183,7 +217,25 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#interactive-workflow" id="toc-interactive-workflow" class="nav-link" data-scroll-target="#interactive-workflow">Interactive workflow</a></li>
+  <li><a href="#hacky-workflow-aka-oauth-user-token-re-discovered" id="toc-hacky-workflow-aka-oauth-user-token-re-discovered" class="nav-link" data-scroll-target="#hacky-workflow-aka-oauth-user-token-re-discovered">Hacky workflow AKA Oauth user token re-discovered</a></li>
+  <li><a href="#when-deployed-in-gcp-use-existing-cloud-credentials-and-go-keyless" id="toc-when-deployed-in-gcp-use-existing-cloud-credentials-and-go-keyless" class="nav-link" data-scroll-target="#when-deployed-in-gcp-use-existing-cloud-credentials-and-go-keyless">When deployed in GCP use existing cloud credentials and go “keyless”</a></li>
+  <li><a href="#non-interactive-workflow" id="toc-non-interactive-workflow" class="nav-link" data-scroll-target="#non-interactive-workflow">Non-interactive workflow</a>
+  <ul class="collapse">
+  <li><a href="#service-account-token" id="toc-service-account-token" class="nav-link" data-scroll-target="#service-account-token">Service account token</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -191,49 +243,155 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!</p>
-<section id="problem-when-on-linux" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-linux">Problem when on Linux:</h2>
-<blockquote class="blockquote">
-<p>In general gitcreds doesn’t work well on linux (which has led to this git issue <a href="https://github.com/r-lib/gitcreds/issues/47">(Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds</a> ). There is an excellent blog post that is very useful that goes deeper into what is going on: <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">Notes from a data witch - Managing GitHub credentials from R, difficulty level linux</a></p>
-</blockquote>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>Access to resources in google (bigquery, drive, etc) will depend on where the user is connecting from:</p>
+<ul>
+<li>Local desktop: any method is fine</li>
+<li>Workbench / server web app based: “OOB” workflows or non-interactive</li>
+<li>Connect / server web app non-interactive: Non-interactive only</li>
+</ul>
 </section>
-<section id="problem-when-on-sagemaker" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-sagemaker">Problem when on Sagemaker:</h2>
-<blockquote class="blockquote">
-<p>Additionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist.</p>
-</blockquote>
+<section id="interactive-workflow" class="level1">
+<h1>Interactive workflow</h1>
+<p>In order to get this working on Workbench, we need to use the OOB method so we don’t have to mess with bouncing between URL’s.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gargle)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googledrive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load/refresh existing credentials, if available</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># otherwise, go to browser for authentication and authorization (only works if not behind a proxy)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_auth</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_oauth_client_type =</span> <span class="st">"web"</span>)       <span class="co"># pseudo-OOB, use this when on Workbench, Connect, etc. </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># options(gargle_oauth_client_type = "installed") # conventional OOB - this doesn't work for me, looks like it was deprecated in 2023</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="tldr-solution" class="level2">
-<h2 class="anchored" data-anchor-id="tldr-solution">TLDR Solution:</h2>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
+<section id="hacky-workflow-aka-oauth-user-token-re-discovered" class="level1">
+<h1>Hacky workflow AKA Oauth user token re-discovered</h1>
+<p>The idea is to make it render once, then use the token in the cache for future authentications. This will likely need to be periodically updated (think, annually) whenever the token expires.</p>
+<p>This is the least recommended because of security challenges and having to manage an ecosystem of tokens, but it’s hard to deny the appeal because it means a service account isn’t needed!</p>
+<p>We’ll need to change the location of the cached token to within the project so that when we deploy to Connect it will be included. Security here is tricky since the token is an exposed file, so care should be taken.</p>
+<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#sidebar-1-deployment" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html#sidebar-1-deployment</a></p>
+<p>Step 1: Do this once interactively to get a token</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a token interactively, but we can reuse it later</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pseudo-OOB - this will bounce us out to a webpage, but we don't have to bounce back, we'll copy a code instead that we'll use like a password</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_oauth_client_type =</span> <span class="st">"web"</span>) </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># designate project-specific cache</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_oauth_cache =</span> <span class="st">".secrets"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># do anything that triggers auth, in this case I want to tie it to my email identity</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_oauth_email =</span> <span class="st">"lisamaeanders@gmail.com"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_auth</span>(<span class="at">email =</span> <span class="st">"lisamaeanders@gmail.com"</span>, <span class="at">cache =</span> <span class="st">".secrets"</span>, <span class="at">use_oob =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># use a 'read only' scope, so it's impossible to edit or delete files</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_auth</span>(<span class="at">scopes =</span> <span class="st">"drive.readonly"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># This sets an option that allows gargle to use cached tokens whenever there’s a unique match:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#options(gargle_oauth_email = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Step 2: Downstream use we will reuse the token we got interactively earlier</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Revise code so it uses the pre-authorized token </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_auth</span>(<span class="at">cache =</span> <span class="st">".secrets"</span>, <span class="at">email =</span> <span class="st">"lisamaeanders@gmail.com"</span>, <span class="at">use_oob =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># now use googledrive</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_find</span>(<span class="at">n_max =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">Testing</h2>
-<p>I’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.</p>
-<p>Load libraries:</p>
-<pre><code>library(usethis) 
-library(gitcreds) 
-library(gh) 
-library(credentials)</code></pre>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
-<p>From the documentation:</p>
-<blockquote class="blockquote">
-<p>The “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.</p>
-</blockquote>
-<p>Generate the PAT:</p>
-<p><code>usethis::create_github_token()</code></p>
-<p>Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:</p>
-<p><code>gitcreds::gitcreds_set()</code></p>
-<p>Check that it stored with:</p>
-<p><code>gitcreds_get()</code></p>
+<section id="when-deployed-in-gcp-use-existing-cloud-credentials-and-go-keyless" class="level1">
+<h1>When deployed in GCP use existing cloud credentials and go “keyless”</h1>
+<p>When deployed already in GCP then there is an underlying service account already assigned to your infrastructure. The gotcha is that it is unlikely that the pre-existing service account has the “scope” IE the access to what you need.</p>
+<p>Additional scopes need to be added to that service account identity, for example:</p>
+<ul>
+<li>That authentication might be successful for BigQuery, because the service account has the scope ‘cloud-platform’</li>
+<li>That authentication won’t be successful for drive, because it doesn’t have the ‘drive’ scope</li>
+</ul>
+<p>Additional scope is added at the GCP compute instance level either when the instance is created or the instance can be stopped and the scope added.</p>
+<p>Check for GCE credentials with (super curious what this returns for you, probably worth saving the output so it can be restored in the future if needed):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">credentials_gce</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This also means that if you are GCE and getting errors that may be because it is using that service account for access, which doesn’t have the correct scoping. You may need to remove the credentials for that account so it can try to create fresh credentials:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes `credentials_gce()` from gargle's registry</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gargle<span class="sc">::</span><span class="fu">cred_funs_add</span>(<span class="at">credentials_gce =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#embrace-credentials-available-in-certain-cloud-settings" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html#embrace-credentials-available-in-certain-cloud-settings</a></p>
 </section>
-<section id="alternatives" class="level2">
-<h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
-<p>The old way “store a PAT as the <code>GITHUB_PAT</code> environment variable in <code>.Renviron.</code>” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the <code>gh</code> package for generating PATs like in <a href="https://gh.r-lib.org/articles/managing-personal-access-tokens.html">Managing Personal Access Tokens</a></p>
-<p>Alternatively, there are some git config options from the terminal. See: <a href="https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux">Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR</a></p>
+<section id="non-interactive-workflow" class="level1">
+<h1>Non-interactive workflow</h1>
+<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a></p>
+<section id="service-account-token" class="level2">
+<h2 class="anchored" data-anchor-id="service-account-token">Service account token</h2>
+<p>Follow <a href="https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token">these</a> steps:</p>
+<ul>
+<li>Create a service account</li>
+<li>From the <a href="https://console.cloud.google.com">GCP Console</a>, in the target GCP Project, go to IAM &amp; Admin &gt; Service accounts</li>
+<li>Assign permissions: googledrive docs does not have any explicit roles, service account used to test bigrquery has roles BigQuery Admin and Storage Admin</li>
+<li>After creating the service account, click on the three dots and “actions”, manage keys, add key as json, download credentials as json file</li>
+<li>This key is a secret! Consider how it should be protected</li>
+<li>Provide path of json file to authentication</li>
+<li>Grant the service account permissions to resources as needed (it doesn’t inherit permissions) (For example, I had to visit https://console.developers.google.com/apis/api/drive.googleapis.com/overview?project=redacted to enable access for google drive and gogle sheets, which it gave me the link to in an error message for my specific project)</li>
+</ul>
+<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-a-service-account-token-directly" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-a-service-account-token-directly</a> and <a href="https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token" class="uri">https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token</a></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use a service account token, like drive_auth(path = "/path/to/your/service-account-token.json")</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># drive_auth(path = Sys.getenv("google_drive_service_account"), scopes = "drive.readonly")</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># drive_auth(path = Sys.getenv("google_drive_service_account"), scopes = "drive.readonly")</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">credentials_service_account</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scopes = "https://www.googleapis.com/auth/userinfo.email",</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="fu">Sys.getenv</span>(<span class="st">"google_drive_service_account"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># now use googledrive</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>googledrive<span class="sc">::</span><span class="fu">drive_find</span>(<span class="at">n_max =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="troubleshooting" class="level1">
+<h1>Troubleshooting</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># see user associated with current token</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_user</span>()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List credentials </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cred_funs_list</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># force the OAuth web dance</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#drive_auth(email = NA)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># provides an OAuth2 “situation report”, only relevant for oauth2 user tokens (not service accounts, etc)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gargle_oauth_sitrep</span>() </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># check if a oauth cache is being used</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>gargle<span class="sc">::</span><span class="fu">gargle_oauth_cache</span>()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is to cache OAuth access credentials in the folder ~/.cache/gargle between R sessions</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># retrieve the currently configured OAuth client and API key, respectively.</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># without configuring auth these are null</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_oauth_client</span>() </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">drive_api_key</span>() </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># see your token file in the cache</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">".secrets/"</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># For troubleshooting purposes, you can set a gargle option to see verbose output about the execution of gargle::token_fetch():</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">gargle_verbosity =</span> <span class="st">"debug"</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Gargle uses port 1410 for auth, check if it is blocked with (on nix systems): sudo lsof -i :1410</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="security" class="level1">
+<h1>Security</h1>
+<p>Want to learn more about managing tokens? Read <a href="https://gargle.r-lib.org/articles/managing-tokens-securely.html">this</a></p>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<ul>
+<li>Exploring non-interactive auth workflows would also be really useful (and set us up for successful deployments to Connect down the road): <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a></li>
+<li>Might also be useful to refer to the google docs on auth: <a href="https://cloud.google.com/bigquery/docs/authentication" class="uri">https://cloud.google.com/bigquery/docs/authentication</a></li>
+<li>This section is also really useful: <a href="https://bigrquery.r-dbi.org/#authentication-and-authorization" class="uri">https://bigrquery.r-dbi.org/#authentication-and-authorization</a></li>
+<li>Likely OOB auth is needed, with options(gargle_oob_default = TRUE)</li>
+<li>“If you are interacting with R within a browser (applies to RStudio Server, Posit Workbench, Posit Cloud, and Google Collaboratory), you need OOB auth or the pseudo-OOB variant. If this does not happen automatically, you can request it explicitly with use_oob = TRUE or, more persistently, by setting an option via options(gargle_oob_default = TRUE).”</li>
+<li>Reference: <a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="uri">https://googledrive.tidyverse.org/reference/drive_auth.html</a></li>
+<li>Also really useful: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a></li>
+<li>And another one that is really useful: <a href="https://bigrquery.r-dbi.org/#authentication-and-authorization" class="uri">https://bigrquery.r-dbi.org/#authentication-and-authorization</a></li>
+<li>There’s an example on this page using a json file downloaded from the google developers console: <a href="https://googledrive.tidyverse.org/reference/drive_auth_configure.html#ref-examples" class="uri">https://googledrive.tidyverse.org/reference/drive_auth_configure.html#ref-examples</a></li>
+<li>From the google cloud console these are the options we have for generating credentials: API key, Oauth client ID, service account. (<a href="https://console.cloud.google.com/" class="uri">https://console.cloud.google.com/</a> -&gt; API’s and Services -&gt; Create credentials)</li>
+<li>Basically you (1) create a service account then (2) create a key (see <a href="https://developers.google.com/identity/protocols/oauth2/service-account" class="uri">https://developers.google.com/identity/protocols/oauth2/service-account</a>)</li>
+<li>Auth from web: <a href="https://gargle.r-lib.org/articles/auth-from-web.html" class="uri">https://gargle.r-lib.org/articles/auth-from-web.html</a></li>
+</ul>
 
 
 </section>

@@ -22,7 +22,7 @@ website:
           - text: "Recipes"
             href: https://questionable.quarto.pub/recipes/
           - text: "Technical writeups"
-            href: posts-no-pictures.qmd  
+            href: work.qmd  
 
     right:
       - about.qmd
