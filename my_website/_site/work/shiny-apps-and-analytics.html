@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2024-04-29">
+<meta name="description" content="Add instrumentation to Shiny apps for viewer tracking, interactions,etc">
 
-<title>Lisa Anders - questionable.quarto - Technical writeups and musings</title>
+<title>Lisa Anders - questionable.quarto - Shiny apps and Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +26,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,67 +71,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -140,7 +83,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
     </a>
   </div>
@@ -151,7 +94,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -166,11 +109,11 @@ window.Quarto = {
  <span class="dropdown-text">Blog / Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./lists.html">
+    <a class="dropdown-item" href="../lists.html">
  <span class="dropdown-text">Lists</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presentations.html">
+    <a class="dropdown-item" href="../presentations.html">
  <span class="dropdown-text">Presentations</span></a>
   </li>  
         <li>
@@ -178,7 +121,7 @@ window.Quarto = {
  <span class="dropdown-text">Recipes</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./work.html">
+    <a class="dropdown-item" href="../work.html">
  <span class="dropdown-text">Technical writeups</span></a>
   </li>  
     </ul>
@@ -186,11 +129,11 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./site_map.html"> 
+    <a class="nav-link" href="../site_map.html"> 
 <span class="menu-text">Site Map</span></a>
   </li>  
   <li class="nav-item compact">
@@ -209,273 +152,77 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title">Technical writeups and musings</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Shiny apps and Analytics</h1>
+                  <div>
+        <div class="description">
+          Add instrumentation to Shiny apps for viewer tracking, interactions,etc
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lisa </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 29, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<p>Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.</p>
+<p>Adding instrumentation to your shiny apps can help you understand:</p>
+<ul>
+<li>User interaction</li>
+<li>Most viewed dashboards</li>
+<li>What is being exported and by who</li>
+<li>Trends with access over time</li>
+<li>Time spent on interactions</li>
+</ul>
+<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. HOwever, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
+<ul>
+<li>There’s more on the Connect API here: https://solutions.posit.co/operations/connect-apis/</li>
+<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, https://shiny.posit.co/r/reference/shiny/latest/builder.html</li>
+<li>This page in the Shiny docs give a walkthrough as well: https://shiny.posit.co/r/articles/build/google-analytics/</li>
+<li>Tracking where within the Shiny app users are spending their time (which tab, etc) is interesting.</li>
+<li>Monitoring user behavior with hotjar (paid): https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</li>
+<li>Here’s an article that outlines more free options: https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</li>
+<li>Javascript might need to be added to your site to support using google analytics: https://shiny.posit.co/r/reference/shiny/latest/builder.html</li>
+<li>Various examples for tracking built in to Connect: https://solutions.rstudio.com/data-science-admin/tracking/ and https://github.com/sol-eng/connect-usage</li>
+<li>Video showing how to use the Connect API: https://www.youtube.com/watch?v=0iljqY9j64U</li>
+</ul>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="code" data-listing-date-sort="1724220000000" data-listing-file-modified-sort="1726242809062" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="412">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/job-templating-k8s.html" class="no-external">Job templating in Kubernetes</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/job-templating-k8s.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/job-templating-k8s.html" class="no-external">
-<div class="listing-date">
-Aug 21, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-3 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="code" data-listing-date-sort="1718949600000" data-listing-file-modified-sort="1723829898988" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1091">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/google-resources.html" class="no-external">Access to resources in Google, an exploration</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/google-resources.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/google-resources.html" class="no-external">
-<div class="listing-date">
-Jun 21, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-6 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="code" data-listing-date-sort="1718949600000" data-listing-file-modified-sort="1723830667006" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="48" data-listing-word-count-sort="9523">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/renv-environments.html" class="no-external">Debugging R Package Environments (renv): A long winded writeup</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/renv-environments.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/renv-environments.html" class="no-external">
-<div class="listing-date">
-Jun 21, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-48 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="code" data-listing-date-sort="1714370400000" data-listing-file-modified-sort="1726243362100" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="192">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/shiny-apps-and-analytics.html" class="no-external">Shiny apps and Analytics</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/shiny-apps-and-analytics.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/shiny-apps-and-analytics.html" class="no-external">
-<div class="listing-date">
-Apr 29, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-1 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="code" data-listing-date-sort="1704956400000" data-listing-file-modified-sort="1723836587482" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="705">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/delta-lake-and-azure.html" class="no-external">Accessing data in Azure Data Lake (delta files)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/delta-lake-and-azure.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/delta-lake-and-azure.html" class="no-external">
-<div class="listing-date">
-Jan 11, 2024
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-4 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="code" data-listing-date-sort="1702018800000" data-listing-file-modified-sort="1723830976422" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1221">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/parallelization.html" class="no-external">Parallelization in R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/parallelization.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/parallelization.html" class="no-external">
-<div class="listing-date">
-Dec 8, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-7 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="code" data-listing-date-sort="1693288800000" data-listing-file-modified-sort="1726241820543" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="458">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/git-and-sagemaker.html" class="no-external">Problems with git credential persistence when in the cloud</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/git-and-sagemaker.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/git-and-sagemaker.html" class="no-external">
-<div class="listing-date">
-Aug 29, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-3 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="code" data-listing-date-sort="1691560800000" data-listing-file-modified-sort="1723830886180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="816">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/securing-credentials.html" class="no-external">Securing credentials</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/securing-credentials.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/securing-credentials.html" class="no-external">
-<div class="listing-date">
-Aug 9, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-5 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="code" data-listing-date-sort="1689314400000" data-listing-file-modified-sort="1723830315386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1977">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/sharepoint-oh-no.html" class="no-external">Connecting to resources in Microsoft 365 / Sharepoint</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/sharepoint-oh-no.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/sharepoint-oh-no.html" class="no-external">
-<div class="listing-date">
-Jul 14, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-10 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="code" data-listing-date-sort="1674630000000" data-listing-file-modified-sort="1723830998891" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="528">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./work/vetiver.html" class="no-external">Publish and version your models with Vetiver</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./work/vetiver.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./work/vetiver.html" class="no-external">
-<div class="listing-date">
-Jan 25, 2023
-</div>
-<div class="listing-author">
-Lisa
-</div>
-<div class="listing-reading-time">
-3 min
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
