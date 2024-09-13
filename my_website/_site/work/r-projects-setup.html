@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-08-21">
-<meta name="description" content="Add custom application labels using job templates for Posit Workbench with k8s">
+<meta name="dcterms.date" content="2024-09-13">
+<meta name="description" content="The power of renv!">
 
-<title>Lisa Anders - questionable.quarto - Job templating in Kubernetes</title>
+<title>Lisa Anders - questionable.quarto - R projects set up and maintenance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -187,10 +187,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Job templating in Kubernetes</h1>
+      <h1 class="title">R projects set up and maintenance</h1>
                   <div>
         <div class="description">
-          Add custom application labels using job templates for Posit Workbench with k8s
+          The power of renv!
         </div>
       </div>
                           <div class="quarto-categories">
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 21, 2024</p>
+        <p class="date">September 13, 2024</p>
       </div>
     </div>
     
@@ -228,8 +228,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#job-templating-for-custom-labels-for-posit-workbench-with-k8s" id="toc-job-templating-for-custom-labels-for-posit-workbench-with-k8s" class="nav-link active" data-scroll-target="#job-templating-for-custom-labels-for-posit-workbench-with-k8s">Job templating for custom labels for Posit Workbench with k8s</a></li>
-  <li><a href="#another-approach-using-json-over-rides-on-posit-workbench-with-k8s" id="toc-another-approach-using-json-over-rides-on-posit-workbench-with-k8s" class="nav-link" data-scroll-target="#another-approach-using-json-over-rides-on-posit-workbench-with-k8s">Another approach using json over-rides on Posit Workbench with k8s</a></li>
+  <li><a href="#r-projects-setup" id="toc-r-projects-setup" class="nav-link active" data-scroll-target="#r-projects-setup">R projects setup</a></li>
+  <li><a href="#deployment" id="toc-deployment" class="nav-link" data-scroll-target="#deployment">Deployment</a>
+  <ul class="collapse">
+  <li><a href="#push-button" id="toc-push-button" class="nav-link" data-scroll-target="#push-button">Push Button</a></li>
+  <li><a href="#rsconnect-package" id="toc-rsconnect-package" class="nav-link" data-scroll-target="#rsconnect-package">rsconnect package</a></li>
+  <li><a href="#git-backed" id="toc-git-backed" class="nav-link" data-scroll-target="#git-backed">Git-backed</a></li>
+  </ul></li>
+  <li><a href="#project-updates" id="toc-project-updates" class="nav-link" data-scroll-target="#project-updates">Project updates</a></li>
+  <li><a href="#all-about-renv" id="toc-all-about-renv" class="nav-link" data-scroll-target="#all-about-renv">All about renv</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#new-project" id="toc-new-project" class="nav-link" data-scroll-target="#new-project">New project</a></li>
+  <li><a href="#making-updates" id="toc-making-updates" class="nav-link" data-scroll-target="#making-updates">Making updates</a></li>
+  <li><a href="#how-to-revert" id="toc-how-to-revert" class="nav-link" data-scroll-target="#how-to-revert">How to revert</a></li>
+  <li><a href="#advanced-renv" id="toc-advanced-renv" class="nav-link" data-scroll-target="#advanced-renv">Advanced renv</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#library-paths" id="toc-library-paths" class="nav-link" data-scroll-target="#library-paths">Library paths</a></li>
+  <li><a href="#migrations" id="toc-migrations" class="nav-link" data-scroll-target="#migrations">Migrations</a></li>
+  <li><a href="#repositories" id="toc-repositories" class="nav-link" data-scroll-target="#repositories">Repositories</a></li>
   </ul>
 </nav>
     </div>
@@ -240,75 +256,184 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>This short writeup addresses a need to add an additional label to Workbench sessions started in a kubernetes environment. Specifically this was for an environemnt where an external Workbench server was launching sessions into a Kubernetes cluster. The recommended way to do this is to use job templating.</p>
-<section id="job-templating-for-custom-labels-for-posit-workbench-with-k8s" class="level2">
-<h2 class="anchored" data-anchor-id="job-templating-for-custom-labels-for-posit-workbench-with-k8s">Job templating for custom labels for Posit Workbench with k8s</h2>
-<p>These are the granular steps for taking advantage of <a href="https://docs.posit.co/ide/server-pro/job_launcher/kubernetes_plugin.html#kube-templating">kubernetes object templating</a> that would work with an external Workbench instance launching into k8s:</p>
-<ol type="1">
-<li>Add to <code>launcher.kubernetes.conf</code>, <code>use-templating = 1</code></li>
-<li>Use the launcher CLI to create the <code>job.tpl</code> and <code>service.tpl</code> files (see below for an example)</li>
-<li>Confirm that the version called out in <code>job.tpl</code> and <code>service.tpl</code> (using <code>head job.tpl</code> and <code>head service.tpl</code> for example) are compatible with your workbench version (version 2.3.1 is latest)</li>
-<li>Create <code>rstudio-library-templates-data.tpl</code> - for now this is a helm-only construct so it will need to be copied from the helm output (<a href="https://github.com/rstudio/helm/tree/main/charts/rstudio-workbench">helm repo</a>) (see example below for doing this with the <code>helm template</code> command)</li>
-<li>Copy <code>job.tpl</code>, <code>service.tpl</code>, and <code>rstudio-library-templates-data.tpl</code> into the launcher scratch directory on the host machine (in this case your Workbench server outside of k8s) (see below for default for where this is located) and make sure that rstudio-server has read/write access</li>
-</ol>
-<p>For adding the new labels/values, here are good options:</p>
-<ul>
-<li>Modify <code>rstudio-library-templates-data.tpl</code> directly (either in the header bit, or lower under values/labels)</li>
-<li>Modify the values in the helm values file (<a href="https://github.com/rstudio/helm/blob/5fb2ad5cecf84680c8e64e4d8123df9d4e0c1cc7/charts/rstudio-workbench/values.yaml#L82-L109">example</a>)</li>
-<li>Recommended: Add the values at time of making the template, IE with <code>--set launcher.templateValues.job.labels.test=value \</code> (see below)</li>
-</ul>
-<p>From talking with a colleague they shared this example using helm to create the template with the added label values:</p>
-<pre><code>helm template my-release rstudio/rstudio-workbench \
- --set launcher.useTemplates=true \
- --set launcherPem=test \
- --set session.defaultConfigMount=false \
- --set launcher.templateValues.job.labels.test=value \
- --set launcher.templateValues.job.labels.other=something-else \
- | less</code></pre>
-<p>In that helm example:</p>
-<ul>
-<li><code>session.defaultConfigMount=false</code> prevents defining volumes and volumeMounts that are only relevant for the helm chart</li>
-<li><code>launcherPem=test</code> speeds up templating</li>
-<li><code>launcher.useTemplates=true</code> turns on templating (instead of job json overrides)</li>
-</ul>
-<p><strong>What if things go wrong?</strong></p>
-<p>The rstudio-kubernetes-launcher CLI can <a href="https://docs.posit.co/ide/server-pro/job_launcher/kubernetes_plugin.html#validating-templates">verify templates</a> now!</p>
-<p><strong>Playing with the rstudio-kubernetes-launcher CLI:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher</span> <span class="at">--help</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher</span> <span class="at">--generate-templates</span> <span class="at">--scratch-path</span><span class="op">=</span>/tmp/hello</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Default scratch path:</strong></p>
-<pre><code> # mount into the default scratch-path
- - name: session-templates
-  mountPath: "/var/lib/rstudio-launcher/Kubernetes/rstudio-library-templates-data.tpl"
-  subPath: "rstudio-library-templates-data.tpl"
- - name: session-templates
-  mountPath: "/var/lib/rstudio-launcher/Kubernetes/job.tpl"
-  subPath: "job.tpl"
- - name: session-templates
-  mountPath: "/var/lib/rstudio-launcher/Kubernetes/service.tpl"
-  subPath: "service.tpl"</code></pre>
+<section id="r-projects-setup" class="level2">
+<h2 class="anchored" data-anchor-id="r-projects-setup">R projects setup</h2>
+<p>Setup the <code>renv</code> environment:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">activate</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To run the app either open <code>app/app.R</code> and click the “Run App” button at the top of the IDE code pane or use:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>shiny<span class="sc">::</span><span class="fu">runApp</span>(<span class="st">"app"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="another-approach-using-json-over-rides-on-posit-workbench-with-k8s" class="level2">
-<h2 class="anchored" data-anchor-id="another-approach-using-json-over-rides-on-posit-workbench-with-k8s">Another approach using json over-rides on Posit Workbench with k8s</h2>
-<p>Potentially json over-rides could work but my understanding is that this would overwrite ALL labels.</p>
-<p>use this to add a label:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/launcher.kubernetes.profiles.conf</strong></pre>
-</div>
-<div class="sourceCode" id="cb4" data-filename="/etc/rstudio/launcher.kubernetes.profiles.conf"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">job-json-overrides=</span><span class="st">"/spec/template/spec/labels"</span><span class="ex">:</span><span class="st">"/etc/rstudio/labels"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/labels</strong></pre>
-</div>
-<div class="sourceCode" id="cb5" data-filename="/etc/rstudio/labels"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"applicationid"</span>: <span class="st">"workbench"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="er">"label":</span> <span class="er">["value"</span><span class="ex">]</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="deployment" class="level2">
+<h2 class="anchored" data-anchor-id="deployment">Deployment</h2>
+<section id="push-button" class="level3">
+<h3 class="anchored" data-anchor-id="push-button">Push Button</h3>
+<p>Open <code>app/app.R</code> and use the blue publish icon in the upper right corner of the IDE code pane.</p>
+</section>
+<section id="rsconnect-package" class="level3">
+<h3 class="anchored" data-anchor-id="rsconnect-package">rsconnect package</h3>
+<p>You can also deploy using the rsconnect package:</p>
+<pre><code>rsconnect::deployApp(
+  appDir = "app",
+  appTitle = "Shiny Penguins"
+)</code></pre>
+</section>
+<section id="git-backed" class="level3">
+<h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
+<p>Update the code, and then run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">writeManifest</span>(<span class="st">"app"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Commit the new <code>manifest.json</code> file to the git repo along with the code.</p>
+</section>
+</section>
+<section id="project-updates" class="level2">
+<h2 class="anchored" data-anchor-id="project-updates">Project updates</h2>
+<p>Use <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> to record the r package versions used</p>
+<p>Create a <a href="https://docs.posit.co/connect/user/git-backed/#creating-a-manifest-file-from-r"><code>manifest.json</code> file</a> to support git-backed publishing</p>
+</section>
+<section id="all-about-renv" class="level2">
+<h2 class="anchored" data-anchor-id="all-about-renv">All about renv</h2>
+<p><strong>Why use renv?</strong></p>
+<p>There is an excellent video by David Aja discussing why he started using renv at the 2022 RStudio Conference <a href="https://www.rstudio.com/conference/2022/talks/you-should-use-renv/">here</a>.</p>
+<p>Ever had your code mysteriously stop working or start producing different results after upgrading packages, and had to spend hours debugging to find which package was the culprit? Ever tried to collaborate on code just to get stuck on trying to decipher various package dependencies?</p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> helps you track and control package changes - making it easy to revert back if you need to. It works with your current methods of installing packages (<code>install.packages()</code>), and was designed to work with most data science workflows.</p>
+<p>Who shouldn’t use renv?</p>
+<ul>
+<li>Package developers</li>
+<li>?</li>
+</ul>
+<p># Terms</p>
+<ul>
+<li>R Project - a special kind of directory of files and supporting functionality.</li>
+<li>Package - a collection of functions beyond base R that developers can install and use.</li>
+<li>Library - a directory containing installed packages.</li>
+</ul>
+</section>
+<section id="workflow" class="level1">
+<h1>Workflow</h1>
+<p>New project -&gt; updates -&gt; reverting -&gt; advanced</p>
+</section>
+<section id="new-project" class="level1">
+<h1>New project</h1>
+<p>Initialize your project with:</p>
+<pre><code>library(renv)
+renv::init()</code></pre>
+<p>Look at the renv.lock file and see the information that has been captured about the packages supporting your project.</p>
+</section>
+<section id="making-updates" class="level1">
+<h1>Making updates</h1>
+<p>Try installing a new package and then look at the renv.lock file. What did you expect to happen? What do you see?</p>
+<p>Now try running <code>renv::snapshot()</code>. What do you see now when you look at the renv.lock file?</p>
+<p>The renv lock file is updated by you when you run the command to snapshot. This means you can update packages, or install new packages, without changing your lock file.</p>
+</section>
+<section id="how-to-revert" class="level1">
+<h1>How to revert</h1>
+<p>Practice updating the packages your project relies on, each time saving to git. You can see the history of your changes with:</p>
+<p><code>renv::history()</code></p>
+<p>If you want to revert back to an earlier snapshot you can do that with:</p>
+<pre><code>## Revert to the most recent snapshot 
+renv::revert()
+
+## Alternatively we can revert to a specific snapshot by specifying the commit: 
+db &lt;- renv::history()
+
+# choose an older commit
+commit &lt;- db$commit[5]
+
+# revert to that version of the lockfile
+renv::revert(commit = commit)</code></pre>
+<p>Note: Currently, only Git repositories are supported by renv::history() and renv::revert().</p>
+</section>
+<section id="advanced-renv" class="level1">
+<h1>Advanced renv</h1>
+<p>There are a couple other commands that can be used depending on your workflow that are useful to know about.</p>
+<p>Say that your organization has a managed package host, for example Package Manager, and is using the <a href="strategy">Shared Baseline</a>. Meaning that all developers in the organization are pointed to a snapshot of available packages frozen to a particular date when the managing team had intentionally tested and made them available. On some cadence, let’s say quarterly, the managing team goes through, performs testing again, and provides a new updated snapshot that is available for developers to switch to. There are a lot of advantages in switching with new features, resolved bugs, etc.</p>
+<p>In order for developers to know that a new release has happened (that the local package dates are out of date in reference to the repo being pointed at) they can run:</p>
+<pre><code>view(old.packages())</code></pre>
+<p>The same process would be followed with then updating the packages, testing as needed, and then creating a new snapshot so the renv lock file is updated to the latest. This provides the added security that in case it does not pass testing the renv lock file will still point at the supported package versions and not the ones that caused the breakage.</p>
+<p>One of the more recent releases of the renv package has included <a href="https://rstudio.github.io/renv/articles/profiles.html">having separate profiles for the project</a>. Meaning that a developer could have a production profile, a validation profile, and testing profile that can be easily switched between while working through their workflow towards deployment into production.</p>
+<p>The renv.lock file can be manually changed to update the packages that are included with:</p>
+<p><code>renv::modify()</code></p>
+<p>Remove packages that are no longer needed with:</p>
+<p><code>renv::clean()</code></p>
+<p>Update everything to the latest for each package (according to the repository you are pointed at) with:</p>
+<p><code>renv::update()</code></p>
+</section>
+<section id="troubleshooting" class="level1">
+<h1>Troubleshooting</h1>
+<p>Running a diagnostic:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnostics</span>(<span class="at">project =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add more detail to logging:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">renv.download.trace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you are having particular issue with a package and it keeps being pulled in from the cache then doing a complete purge and reinstall can be useful:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">purge</span>(<span class="st">"stringr"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">purge</span>(<span class="st">"stringi"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stringr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>renv::purge</code> removes packages completely from the package cache (which may be shared across projects) rather than just removing the package from the project which is what <code>renv::remove</code> does. This can be useful if a package which had previously been installed in the cache has become corrupted or unusable, and needs to be re-installed.</p>
+<p>It may also be useful to verify both the OS you are currently useing as well as checking that the repository you are pointing towards is using the correct OS if it is pulling in the binaries.</p>
+<p>For debian/ubuntu distributions:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lsb_release</span> <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For other distributions (more broadly cross-linux compatible command):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /etc/os-release</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check the repository being pointed to and update it to use the URL from your package manager instance:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">'repos'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">REPO_NAME =</span> <span class="st">"https://packagemanager.posit.co/cran/__linux__/jammy/latest"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Some additional options and settings:</p>
+<ul>
+<li><p><code>Renv</code> comes with an over-ride option for the repository that could be recommended for users to run prior to re-initializing projects: <a href="https://rstudio.github.io/renv/reference/config.html?q=OS#renv-config-repos-override" class="uri">https://rstudio.github.io/renv/reference/config.html?q=OS#renv-config-repos-override</a></p>
+<ul>
+<li>It was discussed in <a href="https://stackoverflow.com/questions/65326540/how-to-change-r-repository-cran-from-renv-lock-to-get-packages-from-an-internal">this stackoverflow post</a> with this example (run from console): <code>Sys.setenv("RENV_CONFIG_REPOS_OVERRIDE" = "your_private_package_repository_url")</code></li>
+</ul></li>
+<li><p>As of renv 0.13.0 where it can now construct a prefix based on fields within the system’s /etc/os-release file: <a href="https://rstudio.github.io/renv/reference/paths.html#sharing-state-across-operating-systems" class="uri">https://rstudio.github.io/renv/reference/paths.html#sharing-state-across-operating-systems</a></p></li>
+</ul>
+</section>
+<section id="library-paths" class="level1">
+<h1>Library paths</h1>
+<p>Find where your library is:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">.libPaths</span>()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"/home/sagemaker-user/R/x86_64-pc-linux-gnu-library/4.2"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>] <span class="st">"/opt/R/4.2.1/lib/R/library"</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For example when working in a system that has a mounted share drive then would want to check that libraries are being written to that share so you get persistence. Typically this means writing to inside the home directory. Check mounted drives with: <code>df -h</code></p>
+<p>The next thing to check is permissions, for example with this command that shows full directory tree permissions</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namei</span> <span class="at">-l</span> /home/sagemaker-user/test/r-examples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="migrations" class="level1">
+<h1>Migrations</h1>
+<p>Consider using the script in this gist to migrate R and Python libraries: <a href="https://gist.github.com/edavidaja/5996ffeb042df2642c77c065c07f023d" class="uri">https://gist.github.com/edavidaja/5996ffeb042df2642c77c065c07f023d</a></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the existing libraries</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(<span class="st">"renv/library"</span>, <span class="at">recursive=</span><span class="cn">TRUE</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set repo address</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">REPO_NAME =</span> <span class="st">"https://colorado.posit.co/rspm/all/__linux__/jammy/latest"</span>))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (optional) add repo address to r profile</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_profile</span>()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart R session</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">.rs.restartR</span>()</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-install libraries</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>(<span class="at">rebuild =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the existing venv</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make note of all installed packages</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements-freeze.txt</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Deactivate the venv and delete</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> .venv/</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new virtual environment</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip wheel setuptools</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements-freeze.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="repositories" class="level1">
+<h1>Repositories</h1>
+<p>Check your current repo with: <code>options('repos')</code></p>
+<p>For example, you might see: <code>https://packagemanager.rstudio.com/all/latest</code> or <code>https://cran.rstudio.com/</code>.</p>
+<p>Change your repo with: <code>options(repos = c(REPO_NAME = "https://colorado.rstudio.com/rspm/cran/__linux__/focal/2022-06-29"))</code> or <code>options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))</code></p>
 
 
 </section>

@@ -4,7 +4,7 @@
     "href": "work.html",
     "title": "Technical writeups and musings",
     "section": "",
-    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nJob templating in Kubernetes\n\n\n\n\n\n\n\n\nAug 21, 2024\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nAccess to resources in Google, an exploration\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n48 min\n\n\n\n\n\n\n\nShiny apps and Analytics\n\n\n\n\n\n\n\n\nApr 29, 2024\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nParallelization in R\n\n\n\n\n\n\n\n\nDec 8, 2023\n\n\nLisa\n\n\n7 min\n\n\n\n\n\n\n\nProblems with git credential persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nSecuring credentials\n\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nLisa\n\n\n5 min\n\n\n\n\n\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nLisa\n\n\n10 min\n\n\n\n\n\n\n\nPublish and version your models with Vetiver\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nPython projects set up and maintenance\n\n\n\n\n\n\n\n\nSep 13, 2024\n\n\nLisa\n\n\n2 min\n\n\n\n\n\n\n\nR projects set up and maintenance\n\n\n\n\n\n\n\n\nSep 13, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nJob templating in Kubernetes\n\n\n\n\n\n\n\n\nAug 21, 2024\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nAccess to resources in Google, an exploration\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n48 min\n\n\n\n\n\n\n\nShiny apps and Analytics\n\n\n\n\n\n\n\n\nApr 29, 2024\n\n\nLisa\n\n\n1 min\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nParallelization in R\n\n\n\n\n\n\n\n\nDec 8, 2023\n\n\nLisa\n\n\n7 min\n\n\n\n\n\n\n\nProblems with git credential persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nSecuring credentials\n\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nLisa\n\n\n5 min\n\n\n\n\n\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nLisa\n\n\n10 min\n\n\n\n\n\n\n\nPublish and version your models with Vetiver\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "work/sharepoint-oh-no.html",
@@ -634,14 +634,14 @@
     "href": "work/job-templating-k8s.html#job-templating-for-custom-labels-for-posit-workbench-with-k8s",
     "title": "Job templating in Kubernetes",
     "section": "Job templating for custom labels for Posit Workbench with k8s",
-    "text": "Job templating for custom labels for Posit Workbench with k8s\nThese are the granular steps for taking advantage of kubernetes object templating that would work with an external Workbench instance launching into k8s:\n\nAdd to launcher.kubernetes.conf, use-templating = 1\nUse the launcher CLI to create the job.tpl and service.tpl files (see below for an example)\nConfirm that the version called out in job.tpl and service.tpl (using head job.tpl and head service.tpl for example) are compatible with your workbench version (version 2.3.1 is latest)\nCreate rstudio-library-templates-data.tpl - for now this is a helm-only construct so it will need to be copied from the helm output (helm repo) (see example below for doing this with the helm template command)\nCopy job.tpl, service.tpl, and rstudio-library-templates-data.tpl into the launcher scratch directory on the host machine (in this case your Workbench server outside of k8s) (see below for default for where this is located) and make sure that rstudio-server has read/write access\n\nFor adding the new labels/values, here are good options:\n\nModify rstudio-library-templates-data.tpl directly (either in the header bit, or lower under values/labels)\nModify the values in the helm values file (example)\nRecommended: Add the values at time of making the template, IE with --set launcher.templateValues.job.labels.test=value \\ (see below)\n\nFrom talking with a colleague they shared this example using helm to create the template with the added label values:\nhelm template my-release rstudio/rstudio-workbench \\\n --set launcher.useTemplates=true \\\n --set launcherPem=test \\\n --set session.defaultConfigMount=false \\\n --set launcher.templateValues.job.labels.test=value \\\n --set launcher.templateValues.job.labels.other=something-else \\\n | less\nIn that helm example:\n\nsession.defaultConfigMount=false prevents defining volumes and volumeMounts that are only relevant for the helm chart\nlauncherPem=test speeds up templating\nlauncher.useTemplates=true turns on templating (instead of job json overrides)\n\nWhat if things go wrong?\nThe rstudio-kubernetes-launcher CLI can verify templates now!\nPlaying with the rstudio-kubernetes-launcher CLI:\n/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --help\n/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --generate-templates --scratch-path=/tmp/hello\n Default scratch path:\n # mount into the default scratch-path\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/rstudio-library-templates-data.tpl\"\n  subPath: \"rstudio-library-templates-data.tpl\"\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/job.tpl\"\n  subPath: \"job.tpl\"\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/service.tpl\"\n  subPath: \"service.tpl\""
+    "text": "Job templating for custom labels for Posit Workbench with k8s\nThese are the granular steps for taking advantage of kubernetes object templating that would work with an external Workbench instance launching into k8s:\n\nAdd to launcher.kubernetes.conf, use-templating = 1\nUse the launcher CLI to create the job.tpl and service.tpl files (see below for an example)\nConfirm that the version called out in job.tpl and service.tpl (using head job.tpl and head service.tpl for example) are compatible with your workbench version (version 2.3.1 is latest)\nCreate rstudio-library-templates-data.tpl - for now this is a helm-only construct so it will need to be copied from the helm output (helm repo) (see example below for doing this with the helm template command)\nCopy job.tpl, service.tpl, and rstudio-library-templates-data.tpl into the launcher scratch directory on the host machine (in this case your Workbench server outside of k8s) (see below for default for where this is located) and make sure that rstudio-server has read/write access\n\nFor adding the new labels/values, here are good options:\n\nModify rstudio-library-templates-data.tpl directly (either in the header bit, or lower under values/labels)\nModify the values in the helm values file (example)\nRecommended: Add the values at time of making the template, IE with --set launcher.templateValues.job.labels.test=value \\ (see below)\n\nFrom talking with a colleague they shared this example using helm to create the template with the added label values:\nhelm template my-release rstudio/rstudio-workbench \\\n --set launcher.useTemplates=true \\\n --set launcherPem=test \\\n --set session.defaultConfigMount=false \\\n --set launcher.templateValues.job.labels.test=value \\\n --set launcher.templateValues.job.labels.other=something-else \\\n | less\nIn that helm example:\n\nsession.defaultConfigMount=false prevents defining volumes and volumeMounts that are only relevant for the helm chart\nlauncherPem=test speeds up templating\nlauncher.useTemplates=true turns on templating (instead of job json overrides)\n\nWhat if things go wrong?\nThe rstudio-kubernetes-launcher CLI can verify templates now!\nPlaying with the rstudio-kubernetes-launcher CLI:\n/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --help\n/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --generate-templates --scratch-path=/tmp/hello\nDefault scratch path:\n # mount into the default scratch-path\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/rstudio-library-templates-data.tpl\"\n  subPath: \"rstudio-library-templates-data.tpl\"\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/job.tpl\"\n  subPath: \"job.tpl\"\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/service.tpl\"\n  subPath: \"service.tpl\""
   },
   {
     "objectID": "work/job-templating-k8s.html#another-approach-using-json-over-rides-on-posit-workbench-with-k8s",
     "href": "work/job-templating-k8s.html#another-approach-using-json-over-rides-on-posit-workbench-with-k8s",
     "title": "Job templating in Kubernetes",
     "section": "Another approach using json over-rides on Posit Workbench with k8s",
-    "text": "Another approach using json over-rides on Posit Workbench with k8s\nPotentially json over-rides could work but my understanding is that this would overwrite ALL labels.\nuse this to add a label:\n/etc/rstudio/launcher.kubernetes.profiles.conf\njob-json-overrides=\"/spec/template/spec/labels\":\"/etc/rstudio/labels\"\n/etc/rstudio/labels\n[\n  {\n    \"applicationid\": \"workbench\",\n    \"label\": [\"value\"]\n  }\n]"
+    "text": "Another approach using json over-rides on Posit Workbench with k8s\nPotentially json over-rides could work but my understanding is that this would overwrite ALL labels.\nuse this to add a label:\n\n\n/etc/rstudio/launcher.kubernetes.profiles.conf\n\njob-json-overrides=\"/spec/template/spec/labels\":\"/etc/rstudio/labels\"\n\n\n\n/etc/rstudio/labels\n\n[\n  {\n    \"applicationid\": \"workbench\",\n    \"label\": [\"value\"]\n  }\n]"
   },
   {
     "objectID": "work/shiny-apps-and-analytics.html",
@@ -649,5 +649,82 @@
     "title": "Shiny apps and Analytics",
     "section": "",
     "text": "Adding instrumentation to your shiny apps can help you understand:\n\nUser interaction\nMost viewed dashboards\nWhat is being exported and by who\nTrends with access over time\nTime spent on interactions\n\nConnect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. HOwever, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.\n\nThere’s more on the Connect API here: https://solutions.posit.co/operations/connect-apis/\nGoogle analytics likely requires adding some JavaScript to your site which you can do with Shiny, https://shiny.posit.co/r/reference/shiny/latest/builder.html\nThis page in the Shiny docs give a walkthrough as well: https://shiny.posit.co/r/articles/build/google-analytics/\nTracking where within the Shiny app users are spending their time (which tab, etc) is interesting.\nMonitoring user behavior with hotjar (paid): https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/\nHere’s an article that outlines more free options: https://www.appsilon.com/post/monitoring-r-shiny-user-adoption\nJavascript might need to be added to your site to support using google analytics: https://shiny.posit.co/r/reference/shiny/latest/builder.html\nVarious examples for tracking built in to Connect: https://solutions.rstudio.com/data-science-admin/tracking/ and https://github.com/sol-eng/connect-usage\nVideo showing how to use the Connect API: https://www.youtube.com/watch?v=0iljqY9j64U"
+  },
+  {
+    "objectID": "work/r-projects-setup.html",
+    "href": "work/r-projects-setup.html",
+    "title": "R projects set up and maintenance",
+    "section": "",
+    "text": "Setup the renv environment:\nrenv::activate()\nrenv::restore()\nTo run the app either open app/app.R and click the “Run App” button at the top of the IDE code pane or use:\nshiny::runApp(\"app\")"
+  },
+  {
+    "objectID": "work/r-projects-setup.html#r-projects-setup",
+    "href": "work/r-projects-setup.html#r-projects-setup",
+    "title": "R projects set up and maintenance",
+    "section": "",
+    "text": "Setup the renv environment:\nrenv::activate()\nrenv::restore()\nTo run the app either open app/app.R and click the “Run App” button at the top of the IDE code pane or use:\nshiny::runApp(\"app\")"
+  },
+  {
+    "objectID": "work/r-projects-setup.html#deployment",
+    "href": "work/r-projects-setup.html#deployment",
+    "title": "R projects set up and maintenance",
+    "section": "Deployment",
+    "text": "Deployment\n\nPush Button\nOpen app/app.R and use the blue publish icon in the upper right corner of the IDE code pane.\n\n\nrsconnect package\nYou can also deploy using the rsconnect package:\nrsconnect::deployApp(\n  appDir = \"app\",\n  appTitle = \"Shiny Penguins\"\n)\n\n\nGit-backed\nUpdate the code, and then run:\nrsconnect::writeManifest(\"app\")\nCommit the new manifest.json file to the git repo along with the code."
+  },
+  {
+    "objectID": "work/r-projects-setup.html#project-updates",
+    "href": "work/r-projects-setup.html#project-updates",
+    "title": "R projects set up and maintenance",
+    "section": "Project updates",
+    "text": "Project updates\nUse renv to record the r package versions used\nCreate a manifest.json file to support git-backed publishing"
+  },
+  {
+    "objectID": "work/r-projects-setup.html#all-about-renv",
+    "href": "work/r-projects-setup.html#all-about-renv",
+    "title": "R projects set up and maintenance",
+    "section": "All about renv",
+    "text": "All about renv\nWhy use renv?\nThere is an excellent video by David Aja discussing why he started using renv at the 2022 RStudio Conference here.\nEver had your code mysteriously stop working or start producing different results after upgrading packages, and had to spend hours debugging to find which package was the culprit? Ever tried to collaborate on code just to get stuck on trying to decipher various package dependencies?\nrenv helps you track and control package changes - making it easy to revert back if you need to. It works with your current methods of installing packages (install.packages()), and was designed to work with most data science workflows.\nWho shouldn’t use renv?\n\nPackage developers\n?\n\n# Terms\n\nR Project - a special kind of directory of files and supporting functionality.\nPackage - a collection of functions beyond base R that developers can install and use.\nLibrary - a directory containing installed packages."
+  },
+  {
+    "objectID": "work/python-projects-setup.html",
+    "href": "work/python-projects-setup.html",
+    "title": "Python projects set up and maintenance",
+    "section": "",
+    "text": "Setup the venv environment:\npython -m venv .venv\n. .venv/bin/activate\n# .venv\\Scripts\\activate # Windows\nUpgrade pip and then install needed packages:\npip install --upgrade pip\npython -m pip install --upgrade pip wheel setuptools rsconnect-python\npip install -r requirements.txt\nRun the application:\nshiny run --reload app.py\nLeave a virtual environment with:\ndeactivate"
+  },
+  {
+    "objectID": "work/python-projects-setup.html#python-projects-setup",
+    "href": "work/python-projects-setup.html#python-projects-setup",
+    "title": "Python projects set up and maintenance",
+    "section": "",
+    "text": "Setup the venv environment:\npython -m venv .venv\n. .venv/bin/activate\n# .venv\\Scripts\\activate # Windows\nUpgrade pip and then install needed packages:\npip install --upgrade pip\npython -m pip install --upgrade pip wheel setuptools rsconnect-python\npip install -r requirements.txt\nRun the application:\nshiny run --reload app.py\nLeave a virtual environment with:\ndeactivate"
+  },
+  {
+    "objectID": "work/python-projects-setup.html#deploy",
+    "href": "work/python-projects-setup.html#deploy",
+    "title": "Python projects set up and maintenance",
+    "section": "Deploy",
+    "text": "Deploy\n\nrsconnect-python CLI\nrsconnect deploy shiny .\n\n\nGit-backed\nUpdate the code, and then run:\nrsconnect write-manifest shiny --overwrite .\nCommit the new manifest.json file to the git repo along with the code."
+  },
+  {
+    "objectID": "work/python-projects-setup.html#project-updates",
+    "href": "work/python-projects-setup.html#project-updates",
+    "title": "Python projects set up and maintenance",
+    "section": "Project updates",
+    "text": "Project updates\nCreate the requirements file:\npython -m pip freeze &gt; requirements.txt\nrsconnect write-manifest shiny .\nIf you are running into deploy issues where there are breaking packages you can edit the requirements file explicitly:\n# requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441\nstreamlit==1.11.0\nTo use a Package Manager repository with a specific project defined by a requirements.txt file, add -i [repositoryURL] to the top of your file, for example:\n-i https://packagemanager.posit.co/pypi/latest/simple\npandas\nscipy\nHow to configure a pypi repository globally (using pip.conf): https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository"
+  },
+  {
+    "objectID": "work/python-projects-setup.html#troubleshooting",
+    "href": "work/python-projects-setup.html#troubleshooting",
+    "title": "Python projects set up and maintenance",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\n\nIssues with Python not being on path\nSet it manually to an installed Python version with:\nalias python=\"/opt/python/3.9.17/bin/python\"\nSet it in your .bashrc on mac or linux so that it is set for your profile every time you log in (typically this is located in the root directory of your home folder):\n# add this to your .bashrc\nexport PATH=/opt/python/3.11.9/bin:$PATH\nCheck for the available python versions (if typically installed):\nls -ld /opt/python/*"
+  },
+  {
+    "objectID": "work/python-projects-setup.html#resources",
+    "href": "work/python-projects-setup.html#resources",
+    "title": "Python projects set up and maintenance",
+    "section": "Resources",
+    "text": "Resources\nPosit Connect User Guide: Shiny for Python"
   }
 ]

@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-08-21">
-<meta name="description" content="Add custom application labels using job templates for Posit Workbench with k8s">
+<meta name="dcterms.date" content="2024-09-13">
+<meta name="description" content="The power of venv!">
 
-<title>Lisa Anders - questionable.quarto - Job templating in Kubernetes</title>
+<title>Lisa Anders - questionable.quarto - Python projects set up and maintenance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -187,10 +187,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Job templating in Kubernetes</h1>
+      <h1 class="title">Python projects set up and maintenance</h1>
                   <div>
         <div class="description">
-          Add custom application labels using job templates for Posit Workbench with k8s
+          The power of venv!
         </div>
       </div>
                           <div class="quarto-categories">
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 21, 2024</p>
+        <p class="date">September 13, 2024</p>
       </div>
     </div>
     
@@ -228,8 +228,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#job-templating-for-custom-labels-for-posit-workbench-with-k8s" id="toc-job-templating-for-custom-labels-for-posit-workbench-with-k8s" class="nav-link active" data-scroll-target="#job-templating-for-custom-labels-for-posit-workbench-with-k8s">Job templating for custom labels for Posit Workbench with k8s</a></li>
-  <li><a href="#another-approach-using-json-over-rides-on-posit-workbench-with-k8s" id="toc-another-approach-using-json-over-rides-on-posit-workbench-with-k8s" class="nav-link" data-scroll-target="#another-approach-using-json-over-rides-on-posit-workbench-with-k8s">Another approach using json over-rides on Posit Workbench with k8s</a></li>
+  <li><a href="#python-projects-setup" id="toc-python-projects-setup" class="nav-link active" data-scroll-target="#python-projects-setup">Python projects setup</a></li>
+  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy">Deploy</a>
+  <ul class="collapse">
+  <li><a href="#rsconnect-python-cli" id="toc-rsconnect-python-cli" class="nav-link" data-scroll-target="#rsconnect-python-cli">rsconnect-python CLI</a></li>
+  <li><a href="#git-backed" id="toc-git-backed" class="nav-link" data-scroll-target="#git-backed">Git-backed</a></li>
+  </ul></li>
+  <li><a href="#project-updates" id="toc-project-updates" class="nav-link" data-scroll-target="#project-updates">Project updates</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#issues-with-python-not-being-on-path" id="toc-issues-with-python-not-being-on-path" class="nav-link" data-scroll-target="#issues-with-python-not-being-on-path">Issues with Python not being on path</a></li>
+  </ul></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -240,75 +250,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>This short writeup addresses a need to add an additional label to Workbench sessions started in a kubernetes environment. Specifically this was for an environemnt where an external Workbench server was launching sessions into a Kubernetes cluster. The recommended way to do this is to use job templating.</p>
-<section id="job-templating-for-custom-labels-for-posit-workbench-with-k8s" class="level2">
-<h2 class="anchored" data-anchor-id="job-templating-for-custom-labels-for-posit-workbench-with-k8s">Job templating for custom labels for Posit Workbench with k8s</h2>
-<p>These are the granular steps for taking advantage of <a href="https://docs.posit.co/ide/server-pro/job_launcher/kubernetes_plugin.html#kube-templating">kubernetes object templating</a> that would work with an external Workbench instance launching into k8s:</p>
-<ol type="1">
-<li>Add to <code>launcher.kubernetes.conf</code>, <code>use-templating = 1</code></li>
-<li>Use the launcher CLI to create the <code>job.tpl</code> and <code>service.tpl</code> files (see below for an example)</li>
-<li>Confirm that the version called out in <code>job.tpl</code> and <code>service.tpl</code> (using <code>head job.tpl</code> and <code>head service.tpl</code> for example) are compatible with your workbench version (version 2.3.1 is latest)</li>
-<li>Create <code>rstudio-library-templates-data.tpl</code> - for now this is a helm-only construct so it will need to be copied from the helm output (<a href="https://github.com/rstudio/helm/tree/main/charts/rstudio-workbench">helm repo</a>) (see example below for doing this with the <code>helm template</code> command)</li>
-<li>Copy <code>job.tpl</code>, <code>service.tpl</code>, and <code>rstudio-library-templates-data.tpl</code> into the launcher scratch directory on the host machine (in this case your Workbench server outside of k8s) (see below for default for where this is located) and make sure that rstudio-server has read/write access</li>
-</ol>
-<p>For adding the new labels/values, here are good options:</p>
-<ul>
-<li>Modify <code>rstudio-library-templates-data.tpl</code> directly (either in the header bit, or lower under values/labels)</li>
-<li>Modify the values in the helm values file (<a href="https://github.com/rstudio/helm/blob/5fb2ad5cecf84680c8e64e4d8123df9d4e0c1cc7/charts/rstudio-workbench/values.yaml#L82-L109">example</a>)</li>
-<li>Recommended: Add the values at time of making the template, IE with <code>--set launcher.templateValues.job.labels.test=value \</code> (see below)</li>
-</ul>
-<p>From talking with a colleague they shared this example using helm to create the template with the added label values:</p>
-<pre><code>helm template my-release rstudio/rstudio-workbench \
- --set launcher.useTemplates=true \
- --set launcherPem=test \
- --set session.defaultConfigMount=false \
- --set launcher.templateValues.job.labels.test=value \
- --set launcher.templateValues.job.labels.other=something-else \
- | less</code></pre>
-<p>In that helm example:</p>
-<ul>
-<li><code>session.defaultConfigMount=false</code> prevents defining volumes and volumeMounts that are only relevant for the helm chart</li>
-<li><code>launcherPem=test</code> speeds up templating</li>
-<li><code>launcher.useTemplates=true</code> turns on templating (instead of job json overrides)</li>
-</ul>
-<p><strong>What if things go wrong?</strong></p>
-<p>The rstudio-kubernetes-launcher CLI can <a href="https://docs.posit.co/ide/server-pro/job_launcher/kubernetes_plugin.html#validating-templates">verify templates</a> now!</p>
-<p><strong>Playing with the rstudio-kubernetes-launcher CLI:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher</span> <span class="at">--help</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher</span> <span class="at">--generate-templates</span> <span class="at">--scratch-path</span><span class="op">=</span>/tmp/hello</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Default scratch path:</strong></p>
-<pre><code> # mount into the default scratch-path
- - name: session-templates
-  mountPath: "/var/lib/rstudio-launcher/Kubernetes/rstudio-library-templates-data.tpl"
-  subPath: "rstudio-library-templates-data.tpl"
- - name: session-templates
-  mountPath: "/var/lib/rstudio-launcher/Kubernetes/job.tpl"
-  subPath: "job.tpl"
- - name: session-templates
-  mountPath: "/var/lib/rstudio-launcher/Kubernetes/service.tpl"
-  subPath: "service.tpl"</code></pre>
+<section id="python-projects-setup" class="level2">
+<h2 class="anchored" data-anchor-id="python-projects-setup">Python projects setup</h2>
+<p>Setup the <code>venv</code> environment:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> .venv/bin/activate</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># .venv\Scripts\activate # Windows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Upgrade pip and then install needed packages:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip wheel setuptools rsconnect-python</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the application:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shiny</span> run <span class="at">--reload</span> app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Leave a virtual environment with:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="another-approach-using-json-over-rides-on-posit-workbench-with-k8s" class="level2">
-<h2 class="anchored" data-anchor-id="another-approach-using-json-over-rides-on-posit-workbench-with-k8s">Another approach using json over-rides on Posit Workbench with k8s</h2>
-<p>Potentially json over-rides could work but my understanding is that this would overwrite ALL labels.</p>
-<p>use this to add a label:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/launcher.kubernetes.profiles.conf</strong></pre>
-</div>
-<div class="sourceCode" id="cb4" data-filename="/etc/rstudio/launcher.kubernetes.profiles.conf"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">job-json-overrides=</span><span class="st">"/spec/template/spec/labels"</span><span class="ex">:</span><span class="st">"/etc/rstudio/labels"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/labels</strong></pre>
-</div>
-<div class="sourceCode" id="cb5" data-filename="/etc/rstudio/labels"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"applicationid"</span>: <span class="st">"workbench"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="er">"label":</span> <span class="er">["value"</span><span class="ex">]</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="deploy" class="level2">
+<h2 class="anchored" data-anchor-id="deploy">Deploy</h2>
+<section id="rsconnect-python-cli" class="level3">
+<h3 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> deploy shiny .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="git-backed" class="level3">
+<h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
+<p>Update the code, and then run:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> write-manifest shiny <span class="at">--overwrite</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Commit the new <code>manifest.json</code> file to the git repo along with the code.</p>
+</section>
+</section>
+<section id="project-updates" class="level2">
+<h2 class="anchored" data-anchor-id="project-updates">Project updates</h2>
+<p>Create the requirements file:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> write-manifest shiny .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you are running into deploy issues where there are breaking packages you can edit the requirements file explicitly:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">streamlit</span><span class="op">=</span>=1.11.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To use a Package Manager repository with a specific project defined by a <code>requirements.txt</code> file, add <code>-i [repositoryURL]</code> to the top of your file, for example:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> https://packagemanager.posit.co/pypi/latest/simple</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandas</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">scipy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How to configure a pypi repository globally (using pip.conf): <a href="https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository" class="uri">https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository</a></p>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="issues-with-python-not-being-on-path" class="level3">
+<h3 class="anchored" data-anchor-id="issues-with-python-not-being-on-path">Issues with Python not being on path</h3>
+<p>Set it manually to an installed Python version with:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> python=<span class="st">"/opt/python/3.9.17/bin/python"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Set it in your .bashrc on mac or linux so that it is set for your profile every time you log in (typically this is located in the root directory of your home folder):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add this to your .bashrc</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span>/opt/python/3.11.9/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check for the available python versions (if typically installed):</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /opt/python/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<p><a href="https://docs.posit.co/connect/user/shiny-python/">Posit Connect User Guide: Shiny for Python</a></p>
 
 
 </section>

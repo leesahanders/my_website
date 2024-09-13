@@ -62,13 +62,12 @@ The rstudio-kubernetes-launcher CLI can [verify templates](https://docs.posit.co
 
 **Playing with the rstudio-kubernetes-launcher CLI:**
 
-```
+```bash
 /usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --help
 /usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --generate-templates --scratch-path=/tmp/hello
 ```
 
-**
-Default scratch path:**
+**Default scratch path:**
 
 ```
  # mount into the default scratch-path
@@ -88,13 +87,11 @@ Default scratch path:**
 Potentially json over-rides could work but my understanding is that this would overwrite ALL labels. 
 
 use this to add a label:
-```
-/etc/rstudio/launcher.kubernetes.profiles.conf
+```{.bash filename="/etc/rstudio/launcher.kubernetes.profiles.conf"}
 job-json-overrides="/spec/template/spec/labels":"/etc/rstudio/labels"
 ```
 
-```
-/etc/rstudio/labels
+```{.bash filename="/etc/rstudio/labels"}
 [
   {
     "applicationid": "workbench",
