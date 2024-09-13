@@ -1,6 +1,6 @@
 ---
 title: "Parallelization in R" 
-description: ""
+description: "Resources for scaling out your code"
 author: "Lisa"
 date: "2023-12-08"
 format:

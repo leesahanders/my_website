@@ -1,14 +1,18 @@
 ---
 title: "Technical writeups and musings"
 listing:
+  type: table
+  table-striped: true
+  table-hover: true
   contents: work
   sort: "date desc"
-  type: default
   categories: false
   sort-ui: false
   filter-ui: false
-  fields: [date, title, author, reading-time]
+  fields: [date, title, description, author, reading-time]
   image-placeholder: "img/62903-pencil-icon-963181669.png"
+  feed: 
+    items: 10
 page-layout: full
 title-block-banner: true
 ---

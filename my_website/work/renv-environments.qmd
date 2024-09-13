@@ -1,6 +1,6 @@
 ---
 title: "Debugging R Package Environments (renv): A long winded writeup" 
-description: ""
+description: "An overview of environment management in R and a comprehensive summary of the different options that can be configured to support different workflows"
 author: "Lisa"
 date: "2024-06-21"
 format:

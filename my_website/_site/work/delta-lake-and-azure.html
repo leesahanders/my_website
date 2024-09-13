@@ -8,6 +8,7 @@
 
 <meta name="author" content="Lisa">
 <meta name="dcterms.date" content="2024-01-11">
+<meta name="description" content="This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks">
 
 <title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
 <style>
@@ -156,7 +157,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">code</div>
               </div>
                   </div>
@@ -913,7 +919,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

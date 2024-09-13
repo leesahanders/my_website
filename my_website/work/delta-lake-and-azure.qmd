@@ -1,6 +1,6 @@
 ---
 title: "Accessing data in Azure Data Lake (delta files)"
-description: ""
+description: "This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks"
 author: "Lisa"
 date: "2024-01-11"
 format:

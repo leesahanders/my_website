@@ -2,23 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://questionable.quarto.pub/blog/work.html</loc>
-    <lastmod>2024-08-16T17:31:10.341Z</lastmod>
+    <lastmod>2024-09-13T17:26:34.512Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/sharepoint-oh-no.html</loc>
-    <lastmod>2024-08-16T17:45:15.386Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</loc>
+    <lastmod>2024-09-13T16:02:42.100Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/renv-environments.html</loc>
-    <lastmod>2024-08-16T17:51:07.006Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/securing-credentials.html</loc>
+    <lastmod>2024-09-13T16:55:48.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/r-projects-setup.html</loc>
+    <lastmod>2024-09-13T16:44:11.030Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/parallelization.html</loc>
+    <lastmod>2024-09-13T16:56:28.961Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/google-resources.html</loc>
-    <lastmod>2024-08-16T17:38:18.988Z</lastmod>
+    <lastmod>2024-09-13T16:56:45.694Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/delta-lake-and-azure.html</loc>
-    <lastmod>2024-08-16T17:55:56.572Z</lastmod>
+    <lastmod>2024-09-13T16:57:15.261Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
@@ -50,7 +58,7 @@
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
-    <lastmod>2023-10-05T15:54:28.278Z</lastmod>
+    <lastmod>2024-09-05T17:22:26.649Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
@@ -70,34 +78,26 @@
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/git-and-sagemaker.html</loc>
-    <lastmod>2024-09-13T15:37:00.543Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/parallelization.html</loc>
-    <lastmod>2024-08-16T17:56:16.422Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/securing-credentials.html</loc>
-    <lastmod>2024-08-16T17:54:46.180Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/vetiver.html</loc>
-    <lastmod>2024-08-16T17:56:38.891Z</lastmod>
+    <lastmod>2024-09-13T16:57:01.199Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/job-templating-k8s.html</loc>
     <lastmod>2024-09-13T16:08:16.230Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</loc>
-    <lastmod>2024-09-13T16:02:42.100Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/r-projects-setup.html</loc>
-    <lastmod>2024-09-13T16:44:11.030Z</lastmod>
-  </url>
-  <url>
     <loc>https://questionable.quarto.pub/blog/work/python-projects-setup.html</loc>
     <lastmod>2024-09-13T16:40:21.789Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/renv-environments.html</loc>
+    <lastmod>2024-09-13T16:56:07.088Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/sharepoint-oh-no.html</loc>
+    <lastmod>2024-09-13T16:55:29.542Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/vetiver.html</loc>
+    <lastmod>2024-09-13T16:54:53.679Z</lastmod>
   </url>
 </urlset>

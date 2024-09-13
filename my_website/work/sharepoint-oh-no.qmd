@@ -1,6 +1,6 @@
 ---
-title: "Connecting to resources in Microsoft 365 / Sharepoint" 
-description: ""
+title: "Microsoft 365 / Sharepoint and R" 
+description: "Connecting to resources in Microsoft 365 / Sharepoint"
 author: "Lisa"
 date: "2023-07-14"
 format:

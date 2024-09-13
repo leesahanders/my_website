@@ -1,6 +1,6 @@
 ---
-title: "Access to resources in Google, an exploration" 
-description: ""
+title: "Google data storage and R" 
+description: "Access to resources in Google, an exploration"
 author: "Lisa"
 date: "2024-06-21"
 format:

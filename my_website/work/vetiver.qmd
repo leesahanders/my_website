@@ -1,6 +1,6 @@
 ---
 title: "Publish and version your models with Vetiver" 
-description: ""
+description: "This is a minimal example of the ML development workflow in R using Vetiver and the Posit Pro products."
 author: "Lisa"
 date: "2023-01-25"
 format:

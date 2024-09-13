@@ -1,6 +1,6 @@
 ---
 title: "Problems with git credential persistence when in the cloud" 
-description: ""
+description: "This simple trick will save you so much time"
 author: "Lisa"
 date: "2023-08-29"
 format:
