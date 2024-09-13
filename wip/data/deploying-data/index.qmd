@@ -1,0 +1,191 @@
+---
+title: "Deploying Data for Content On Connect"
+date-meta: NA
+last-update: 2024-04-18
+# categories:
+# tags:
+---
+
+Apps and reports on Connect usually rely on one or more data
+sets. Depending on the resources your organization has and the use case,
+it might make sense to store that data in a database, a flat file like a
+`csv`, or some other kind of interface.
+
+This article will give an overview in terms of how to update data for an
+app or report on Connect.
+
+## Summary 
+
+| Data Method   | Recommended use case                                  |
+| ----------- | ----------- | 
+| **Data in the App Bundle**      | Data is updated as often or less often than the app code and doesn't need to be shared across projects |    
+| **Database**   | Gold standard for data storage and access  |
+| **Pins**   | Lightweight datasets, ephemeral data, models | 
+| **Blob Storage**   | Gold standard for storing large amounts of unstructured data | 
+| **Directory on Connect**  | Typically the method of last resort for unstructured data as it requires SSH access to the server for setup and often requires code changes between development and deployment, however for very large files, it may be the only option |  
+
+## Data in the App Bundle
+
+If your data lives inside your app directory and is only updated as
+often as the app code, you can upload your data with your code and
+access it with a relative file path.
+
+![Data in the Connect Bundle](bundled_data.drawio.svg){ align=center }
+
+In this configuration, your code would access the data at the same
+relative path regardless of whether the code is being developed locally
+or is deployed to Connect.
+
+The main limitation to including the data in the Connect bundle
+is that you must deploy everything (data and code) at the same time.
+
+:::{.callout-note}
+If you update the data more often than the app code, use a different method.
+:::
+
+## Data Outside the App Bundle
+
+If your data is updated more frequently than your app, the data can live
+in a database, in a pin on Connect, in a separate directory
+on Connect, or be accessed using other means.
+
+### Database
+
+Apps, reports, and APIs on Connect can pull data from a live
+connection to a database. 
+
+![Live Database Connection](db_storage.drawio.svg "Live Database Connection"){ align=center }
+
+If you're publishing an app or API, you might want all of the data
+pulled in at start up time or you might want a live connection that will
+pull data as input is received from the user.[^1] Either of these
+patterns can work.
+
+[^1]: How to close the connection when the content closes will depend on
+    the content type. For example, you can register
+    [`onStop`](https://shiny.posit.co/r/reference/shiny/latest/onstop)
+    calls in Shiny, or an [exit
+    hook](https://www.rplumber.io/reference/Plumber.html#method-) in
+    Plumber.
+
+![Pulling Data from a Database on Connect](db_data_init.drawio.svg "Pulling Data from a Database on Connect"){ align=center }
+
+If you are pulling data directly from a database into a Shiny app,
+you'll want to consider how you will protect your credentials. We have
+recommendations for these topics and more within our
+[database best practices pages](../db/).
+
+### Pins
+
+[Pins](https://pins.rstudio.com) is an R package that allows for easy
+storage and retrieval of data, models, and other R objects. Pins can be
+a good choice when you don't have write access to a database or when the
+data you're trying to save is something like a model that won't fit
+nicely into most databases.
+
+![Using a Pin on 
+Connect](pins.drawio.svg "Using a Pin on Connect"){ width="389" align=center }
+
+You can create a pin with the `pins::pin_write` command and retrieve the
+data with `pins::pin_read`. A major benefit of pins is that your code
+won't have to change at all when you deploy -- the read and write
+commands will work in both the IDE during development and on Connect.
+
+The [pins page](https://pins.rstudio.com) has more details on how to use
+pins.
+
+[Here](https://rviews.rstudio.com/2019/10/17/deploying-data-with-pins/)
+is an example of how to use pins with either a Shiny app or Plumber API.
+
+### Blob Storage
+
+Blob storage is the gold standard for storing unstructured data. It provides more options for access from developers compared to the challenges with file mounts experienced with traditional file storage. It comes with advantages over traditional file storage with low latency, integration with backup systems, and overall typically reduced cost. 
+
+Connection to your Blob storage is through forming the connection in your R or Python code, typically facilitated with a package. Common Blob storage providers include:
+
+- Azure Blob Storage through [AzureStor](https://cran.r-project.org/web/packages/AzureStor/) for R, [azure-storage-blob](https://pypi.org/project/azure-storage-blob/) for Python
+- Google Cloud through [googleCloudStorageR](https://cran.r-project.org/web/packages/googleCloudStorageR/) for R, [google.cloud.storage](https://pypi.org/project/google-cloud-storage/) for Python
+- AWS S3 through [aws.s3](https://cran.r-project.org/web/packages/aws.s3/) or [PAWS](https://paws-r.github.io/docs/s3/) for R, [boto3](https://pypi.org/project/boto3/) for Python
+
+Similar to when managing connections to a database you'll want to consider how you will protect your credentials. We have recommendations within our [securing credentials page](../db/best-practices/managing-credentials/).
+
+### Directory on Connect
+
+Content on Connect can use the server's file system to store
+data. This option is usually a last resort because it requires SSH
+access to the server for setup, and often requires code changes between
+the IDE and Connect. For very large files, it may be the only
+option.
+
+Content running on Connect is sandboxed within the server, so
+you must use an absolute path to access data, and must manually ensure
+that the relevant directory has the proper read/write permissions.[^2]
+
+[^2]: The user who runs the content will need access. By default this is
+    the `rstudio-connect` user. You can check which user a piece of
+    content will run as under the `Access` tab on the content in 
+    Connect under `Who runs this content on the server`.
+
+![Using Data from Persistent Storage on Connect](persistent_storage.drawio.svg "Using Data from Persistent Storage on Connect"){width="332" align=center}
+
+One potential difficulty in using data from persistent storage is that
+the data path will probably change between the RStudio IDE and Connect, unless the directory is in the same location on both computers.
+You can [use the `config` package](https://support.posit.co/hc/en-us/articles/360007981134-Persistent-Storage-on-RStudio-Connect)
+to have different paths in the development and deployed environment.
+
+### Other Methods for Accessing Data 
+
+Other sources of data can be integrated on a case by case basis. For example, for data stored in an external system often the developers will create an API through which data can be pulled.  
+
+Developers can interact directly with an API using packages such as [httr](https://httr.r-lib.org/) and [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) in R or [requests](https://pypi.org/project/requests/) in Python. Developers can also build and deploy their own APIs for handling integrations, for example using [Plumber](https://www.rplumber.io/) in R or [Flask](https://flask.palletsprojects.com/en/2.2.x/) in Python, that can then be [deployed and accessed on Connect](https://docs.posit.co/connect/user/accessing/). 
+
+For some APIs, in order to make them more accessible,  the interface is bundled as a package for developers to use. At the end of the day a lot of these systems are storing the data in blob storage under the hood. Some examples include [Microsoft365R](https://github.com/Azure/Microsoft365R) and [Office365-REST-Python-Client](https://pypi.org/project/Office365-REST-Python-Client/)(see our additional writeup [here](../microsoft365/)), [spotifyr](https://github.com/charlie86/spotifyr),  [rtweet](https://github.com/mkearney/rtweet), [googlesheets4](https://github.com/tidyverse/googlesheets4) and [pydrive](https://pypi.org/project/PyDrive/) and [pydrive2](https://pypi.org/project/PyDrive2/), [rdrop2](https://github.com/karthik/rdrop2), [paws](https://paws-r.github.io/), [boxr](https://r-box.github.io/boxr/), and many more. 
+
+For up to date information on the best practices for how to use a package see its documentation. 
+
+## Special Considerations for Shiny Apps
+
+### Pre-cache Data by Pulling it Outside the Shiny App 
+
+If real time data isn't critical then the data can be updated on some cadence using [scheduled reports](https://docs.posit.co/connect/user/scheduling/index.html) and caching it to a location that the Shiny app is able to access. This is usually the biggest bang for the buck for drastically improving the performance and speed of your Shiny app. Set the cadence of the data pre-processing to be scheduled to coincide with how often you are expecting the data to change. 
+
+### Pull Data on a Scheduler
+
+Shiny apps work entirely on a "pull" model, so Shiny will need to check
+if the data is updated, as opposed to the new data "pushing" itself into
+the app.
+
+If you want to write a general data-pulling function,
+[`shiny::reactivePoll`](https://shiny.posit.co/r/reference/shiny/latest/reactivepoll)
+allows you to periodically check a resource for changes and run an
+arbitrary function if it has. You can also use
+[`shiny::invalidateLater`](https://shiny.posit.co/r/reference/shiny/latest/invalidatelater)
+to invalidate a reactive on a schedule.
+
+There are also several useful functions that are specially designed to
+schedule data refreshes. If you're using a pin,
+[`pins::pin_reactive_read()`](https://pins.rstudio.com/reference/pin_reactive_read.html) 
+allows you to check for updates to a pin on a schedule. Similarly,
+[`shiny::reactiveFileReader`](https://shiny.posit.co/r/reference/shiny/latest/reactivefilereader)
+allows you to check for updates to a file on persistent storage.
+
+### Speedy data loading
+
+Regardless of how and where you load data, faster is always better. Some
+tips to speed load times for Shiny apps:
+
+**Do less!** Reducing the amount of data transmitted is the best way to
+reduce load times. Often, pre-aggregating data will prove sufficient for
+quick data loads.
+
+**Use Shiny Scoping + Connect Settings** Content outside a Shiny
+app's `server` block (i.e. in `global`) will only be loaded once per
+*process* on Connect. Setting Connect's `Min Processes`
+to 1 or greater will ensure that data is loaded before the first user
+arrives.[^3]
+
+[^3]: Reactive content only runs inside Shiny server blocks. If you want
+    to pre-load data ***and*** have the data respond to user input or
+    reactive polling, you can load the data in the global context and
+    then update it using the global assignment operator (`<<-`).
+

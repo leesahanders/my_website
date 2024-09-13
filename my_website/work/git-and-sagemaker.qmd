@@ -1,5 +1,5 @@
 ---
-title: "Problems with persistence when in the cloud" 
+title: "Problems with git credential persistence when in the cloud" 
 description: ""
 author: "Lisa"
 date: "2023-08-29"

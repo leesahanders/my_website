@@ -1,0 +1,550 @@
+---
+title: "Scaling Posit Team"
+date-meta: NA
+last-update: 2024-07-08
+# categories:
+# tags:
+---
+
+## ORIGINAL ##
+
+The Posit products can be scaled to leverage additional compute and High Performance Compute (HPC) resources.
+
+Scaling your Posit applications to leverage HPC and more powerful compute resources can provide various benefits such as computation scaleability, resource isolation, ease of management, reproducibility and resource allocation flexibility. This article will try to provide some additional context and rationale why you might want to implement the products in this way.
+
+## Summary
+
+Option 1:
+
+| Scaling Method   | Scaling Technology  | Recommended use case |
+| ----------- | ----------- | ----------- |
+| **HPC** | - Kubernetes<br>- Slurm | Allows for a shared compute pool that can be divided among users, with options for auto-scaling. Requires an admin to build and maintain an HPC environment. Through the use of containers with Docker or Singularity, multiple otherwise conflicting underlying environments can be available to users. |
+| **External compute resource** | -Custom architectures<br>- Spark | Launch jobs from the products to an external compute resource, returning results on completion. Often used when server isolation is important to prevent resource contention. Typically requires more configuration by the users. |
+| **Managed environment** | - AWS Sagemaker<br>- Azureml<br>- Databricks<br>- GCP Workstations<br>- Snowflake | Decreases admin overhead by using a managed service. Forced to use the vendor's architecture and configuration choices, which might not always be ideal. Particularly useful as an offloading strategy for larger than average user jobs in order to minimize the compute needed for a self-maintained instance. |
+
+## When is scaling needed?
+
+Before going down the rabbit hole of exploring the options that fall under HPC or external compute integrations, consider the issues being encountered and if a simpler solution would address them:
+
+- Adding an additional compute node to become load balanced / high availability
+- Implementing linux rules to address system crashes
+- Design a failover / backup plan so that worst-case-scenario outages are fast to recover from
+- Add staging servers so that infrastructure changes are tested before being rolled out to production
+
+## Why High-Performance Computing (HPC)?
+
+High-performance computing is sometimes used as a generic term to describe any system architecture that gives the ability to process data and perform complex calculations at high speeds. However, High-Performance Computing (HPC) more accurately is a specific type of distributed computing in which computer clusters are used to solve advanced computation problems.
+
+In an HPC environment, jobs are broken down into smaller pieces which are then farmed out across the cluster and calculated in a distributed fashion. Commonly containers will be used as a part of the HPC environment to define the environment for that particular job. This type of distributed computation is needed for working on extremely large data sets that would otherwise not lend themselves to being analyzed in more traditional environments.
+
+### Kubernetes
+
+Kubernetes is an open-source container orchestration system for automating software deployment, scaling, and management. Originally designed by Google, it is now an Open Source project maintained by the Cloud Native Computing Foundation.
+
+In a Kubernetes environment, applications run in containers (usually Docker) which are spun up and down based on rules and settings determined ahead of time. These pre-determined rules and settings represent "states" and the Kubernetes control system takes care of allocating resources as-needed to ensure that the system stays in a desired state at all times. This type of system is also known as a "declarative system", where the state is defined by the user, but the system itself implements the commands needed to achieve that state. This is different from a traditional "imperative system" in which the user is responsible for giving specific commands needed for the system to be running in a certain way.
+
+Posit Workbench integrates with the Job Launcher to allow you to run your JupyterLab, Jupyter Notebook, RStudio Pro, and VS Code Sessions within your Kubernetes cluster. Furthermore, users can submit standalone Workbench jobs to the Kubernetes cluster to run computationally expensive R or Python scripts separate from their active session.
+
+Posit Connect integrates with the Job Launcher to allow your different content types to run within your Kubernetes cluster. Publishers and admins can select the runtime environment, enabling different OS level configurations to be provided and easily accessed to support different content needs that may otherwise be incompatible.
+
+Posit Package Manager can be fully hosted within the Kubernetes environment, easing maintenance by providing the same configuration options as what is available for Workbench and Connect.
+
+#### Basic Kubernetes Components
+
+A basic understanding of Kubernetes components is helpful before delving into the recomended implementation patterns for running Posit applications in K8s.   A basic overview of pertinent terms is provided below.  We recommended that you have a working knowledge of Kubernetes and Helm when installing our products in Kubernetes.
+
+:::{.column-page-inset-right}
+```{mermaid}
+flowchart LR
+u1(User)
+u2(User)
+u3(User)
+b1(Browser)
+b2(Browser)
+b3(Browser)
+ingress(Ingress Controller <br/> nginx/nginx-ingress)
+workbench(Workbench <br/> Launcher <br/> ghcr.io/rstudio/rstudio-workbench)
+connect(Connect <br/> Launcher)
+packagemanager(Package Manager)
+rsession(RStudio Session <br/> docker.io/rstudio/r-session-complete)
+jupyter(Jupyter Session <br/> ghcr.io/rstudio/py-session-complete)
+vscode(VS Code Session <br/> ghcr.io/rstudio/py-session-complete)
+job(Workbench Job <br/> docker.io/rstudio/r-session-complete)
+qmd(Quarto<br/>ghcr.io/rstudio/content-base:r-40-py-3.8)
+flask(Flask App<br/>ghcr.io/rstudio/content-base:py-3.8)
+shiny(Shiny App<br/>ghcr.io/rstudio/content-base:r-4.0)
+dash(Dash App<br/>ghcr.io/rstudio/content-base:py-3.8)
+nfs(Shared Storage)
+pg(Postgres)
+
+
+u1---b1
+u2---b2
+u3---b3
+b1---ingress
+b2---ingress
+b3---ingress
+
+subgraph k8s [Kubernetes cluster]
+    ingress---workbench
+    ingress---connect
+    ingress---packagemanager
+    workbench---rsession
+    workbench---jupyter
+    workbench---vscode
+    workbench---job
+    connect---qmd
+    connect---flask
+    connect---shiny
+    connect---dash
+end
+
+k8s-..-pg
+k8s-..-nfs
+
+classDef server fill:#FAEEE9,stroke:#ab4d26
+classDef product fill:#447099,stroke:#213D4F,color:#F2F2F2
+classDef session fill:#7494B1,color:#F2F2F2,stroke:#213D4F
+classDef element fill:#C2C2C4,stroke:#213D4F
+classDef req fill:#72994E,stroke:#1F4F4F
+
+class k8s server
+class workbench,connect,packagemanager product
+class ingress,rsession,jupyter,vscode,job,qmd,flask,shiny,dash session
+class u1,u2,u3,b1,b2,b3,lb element
+class pg,nfs req
+```
+:::
+
+##### Nodes
+The smallest level of computing in Kubernetes is a Node.  A node can be thought of as an individual VM or compute instance with its own set of CPU and RAM resources.  Nodes are the smallest level of physical compute resource in a Kubernetes cluster and are where pods run.
+
+##### Clusters
+A cluster is a group of nodes which work together to form a larger, more flexible "machine" than a single node. Kubernetes manages the distribution of work across multiple nodes and when nodes are added or removed, work is shifted across the nodes, as necessary.
+
+##### Pods
+Pods are groups of one or more containers that share the same resources and local network, making it easy for different containers in the same pod to communicate with each other.   Pods spin up and down as a unit, so for example, a pod might contain 2 or 3 separate containers, each running a specific component needed for a larger, cohesive application.  The pod will spin up all of the containers as a unit, and shut them down as a unit when it is stopped. (Note that all of a pod's containers will be running on the same node.)
+
+##### Helm Charts
+Helm charts package together YAML files and templates that contain all of the information needed to deploy a container to a Kubernetes cluster.  This makes it possible to download a chart, customize it (if necessary) and deploy it to a cluster with a single command.  Helm charts make container deployment more efficient, reliable, and repeatable.
+
+#### Kubernetes Implementation Resources
+
+In the recommended configuration, each Posit product is installed in a Kubernetes cluster using a Posit-maintained [Helm chart](https://github.com/rstudio/helm/tree/main/).
+
+Want to explore the recommended implementation? Refer to [Architectural Overview of Posit Team: Running Inside a Kubernetes Cluster](../../architectures/posit-team/)
+
+**Ready to get started with Workbench and Kubernetes?**
+View the documentation for
+[Integrating Workbench with Kubernetes](https://docs.posit.co/ide/server-pro/integration/launcher-kubernetes.html)
+
+**Want to use custom Docker images with Kubernetes?**
+View the guide for
+[Using Docker images with Workbench, Launcher, and Kubernetes](https://support.posit.co/hc/en-us/articles/360019253393-Using-Docker-images-with-RStudio-Server-Pro-Launcher-and-Kubernetes)
+
+**Want to learn more about Workbench and Kubernetes?**
+Refer to the
+[FAQ for Workbench with Launcher and Kubernetes](https://support.posit.co/hc/en-us/articles/360021328733-FAQ-for-RStudio-Server-Pro-with-Launcher-and-Kubernetes)
+
+
+### Slurm
+
+Slurm is an open-source cluster management and job scheduling system for Linux compute clusters. It promises highly scaleable cluster management where it manages compute allocation to users for interactive work, a framework for running and monitoring scheduled jobs, and by managing a queue of work. Slurm is particularly notable for its modular design with optional plugins that can be installed and configured. Such plugins can be used for a wide range of additional capability like job prioritization algorithms, optimized resource selection, accounting, and running Apptainer/Singularity/Docker containers as the session environment with the Slurm compute resources.
+
+Posit Workbench integrates with the Slurm cluster using Job Launcher to allow you to run your JupyterLab, Jupyter Notebook, RStudio Pro, and VS Code Sessions. Furthermore, users can submit standalone Workbench jobs to your compute cluster(s) to run computationally expensive R or Python scripts. Workbench Jobs allow you to run scripts in new sessions independent of your current RStudio Pro or VS Code session. These jobs are helpful for executing long-running scripts such as training models or running multiple jobs simultaneously. This functionality can dramatically improve the productivity of data scientists and analysts since they can continue working in Workbench while jobs are running in the background.
+
+While native Slurm job launcher with Connect isn't currently developed, users can leverage the package [`clustermq`](). Interested in learning more? Refer to [Launching jobs from Connect to Slurm](../../../connections/connect-slurm/)
+
+#### Basic Slurm Components
+
+A basic understanding of Slurm components is helpful before delving into the recomended implementation patterns.   A basic overview of pertinent terms is provided below.  We recommended that you have a working knowledge of Slurm when installing our products with an integration with Slurm.
+
+:::{.column-page-inset-right}
+```{mermaid}
+flowchart LR
+u1(User)
+u2(User)
+u3(User)
+b1(Browser)
+b2(Browser)
+b3(Browser)
+smn(Slurm Head Node)
+workbench(Workbench)
+rsession(RStudio Session)
+jupyter(Jupyter Session)
+vscode(VS Code Session)
+job(Workbench Job)
+launcher(Launcher)
+nfs(Shared Storage)
+pg(Postgres)
+sj1(submits job)
+sj2(submits job)
+
+u1---b1
+u2---b2
+u3---b3
+b1---workbench
+b2---workbench
+b3---workbench
+
+subgraph hpc [HPC]
+
+    subgraph box [ ]
+
+        subgraph server [Submit Node]
+            workbench---launcher
+        end
+
+    %%launcher -- submits job --- smn
+
+    launcher --- sj1
+    sj1 --- smn
+
+    subgraph box2 [ ]
+
+    subgraph main [Head Node]
+        smn
+    end
+
+    smn--- sj2
+
+    sj2---rsession
+    sj2---jupyter
+    sj2---vscode
+    sj2---job
+
+
+    subgraph cluster [Compute Node]
+        rsession
+        jupyter
+        vscode
+        job
+
+    end
+    end
+    end
+
+    server-.-pg
+
+    server-.-nfs
+    main-.-nfs
+    cluster-.-nfs
+
+end
+
+classDef hpc fill:#eeeeee,stroke:#666666
+classDef server fill:#FAEEE9,stroke:#ab4d26
+classDef product fill:#7494B1,color:#F2F2F2,stroke:#213D4F
+classDef session fill:#7494B1,color:#F2F2F2,stroke:#213D4F
+classDef element fill:#C2C2C4,stroke:#213D4F
+classDef req fill:#72994E,stroke:#1F4F4F
+classDef note fill:#eeeeee,stroke:#333,stroke-width:0px,color:#fff,stroke-dasharray: 5 5
+classDef box fill:#eeeeee,stroke:#eeeeee
+
+class hpc hpc
+class server,cluster,main server
+class workbench,launcher,smn product
+class rsession,jupyter,vscode,job session
+class u1,u2,u3,b1,b2,b3,lb element
+class pg,nfs req
+class note,sj1,sj2 note
+class box,box2 box
+```
+:::
+
+
+##### Nodes
+The smallest level of computing resource in an HPC cluster is a Node.  A node can be thought of as an individual VM or compute instance with its own set of CPU and RAM resources.
+
+##### Submit Node
+
+Workbench acts as the Submit Node enabling users to run sessions and submit jobs via the SLURM Launcher against a SLURM cluster with arbitrary number of compute nodes of a given type. This Submit Node / Workbench Node can exist internal or external to the HPC environment.
+
+##### Head Node
+
+The Slurm Head Node allocates the appropriate computational resources to a request from the Workbench Submit Node according to the Slurm queue.
+
+##### Compute Node
+
+The compute node is within the HPC cluster where the requested user session or submitted jobs run. Session components will need to be accessible from the Slurm compute nodes (installed or mounted), or Singularity can be used as session containers.
+
+##### Shared Storage
+
+Users’ home directories must be stored on a shared file system (typically an NFS server), shared storage typically includes /home, /scratch, data folders, and session containers. Users must exist on both Workbench servers and the Slurm cluster node, for example by pointing to the same authentication provider.
+
+##### Postgres Database
+
+The use of an external PostgreSQL database server is necessary when using multiple Workbench servers.
+
+##### Docker / Apptainer / Singularity
+
+Launched sessions or jobs can optionally utilize reproduceable software environments via Docker or Apptainer / Singularity containers. These containers provide an additional level of isolation and the ability to have drastically different compute environments available for developers, for example different installed system dependencies or even different operating systems.
+
+#### Slurm Implementation Resources
+
+Ready to get started with Workbench and Slurm? Proceed to the documentation for [Integrating Workbench with Slurm](https://docs.posit.co/rsw/integration/launcher-slurm/)
+
+Interested in Using Apptainer/Singularity? Refer to [Workbench with Slurm and Singularity](../../architectures/pwb/)
+
+Want to explore the recommended implementation? Refer to [Architectural Overview of Posit Workbench in Slurm](../../launcher/singularity/)
+
+**Ready to get started with Workbench and Slurm?**
+Proceed to the documentation for
+[Integrating Workbench with Slurm](https://docs.posit.co/ide/server-pro/integration/launcher-slurm.html)
+
+**Want to learn more about Workbench and Slurm?**
+Refer to the
+[FAQ for Workbench with Launcher and Slurm](https://support.posit.co/hc/en-us/articles/360035543713-FAQ-for-RStudio-Server-Pro-with-Launcher-and-Slurm)
+
+**Interested in Using Apptainer/Singularity?**
+Refer to [Workbench with Slurm and Singularity](../../launcher/singularity/)
+
+## External Compute Resource
+
+Instead of running the Posit software where sessions are launched from within the compute environment, external server(s) running the software can be configured to offload a job to a separate external compute resource and later return the result. This can be useful in organizations where there is an external compute resource that doesn't support native integration, or for other reasons is required to have isolated server(s).
+
+One challenge is to keep the connection "alive" while the receiving server waits for the results to return, otherwise the connection may prematurely terminate. This challenge has been eliminated with the Spark/Databricks integration, when using the supported packages and integration method.
+
+#### Basic Configuration
+
+A basic configuration is shown below for a Posit Product to integrate with an external compute resource.
+
+:::{.column-page-inset-right}
+```{mermaid}
+flowchart LR
+u1(User)
+u2(User)
+u3(User)
+b1(Browser)
+b2(Browser)
+b3(Browser)
+
+workbench(Workbench)
+config1(Configuration/Authentication)
+
+rsession(RStudio Session)
+jupyter(Jupyter Session)
+vscode(VS Code Session)
+job1(Workbench Job)
+
+connect(Connect)
+config2(Configuration/Authentication)
+job2(Connect Job)
+
+mon(Monitoring)
+
+u1---b1
+u2---b2
+u3---b3
+b1---workbench
+b2---connect
+b3---connect
+
+subgraph environment1
+	workbench---config1
+    config1---rsession
+    config1---jupyter
+    config1---vscode
+end
+
+subgraph environment2
+    connect---config2
+end
+
+subgraph cluster [External Resource]
+	rsession---job1
+	jupyter---job1
+	vscode---job1
+	config2---job2
+end
+
+
+environment1-.-mon
+environment2-.-mon
+cluster-.-mon
+
+classDef server fill:#FAEEE9,stroke:#ab4d26
+classDef product fill:#447099,stroke:#213D4F,color:#F2F2F2
+classDef session fill:#7494B1,color:#F2F2F2,stroke:#213D4F
+classDef element fill:#C2C2C4,stroke:#213D4F
+classDef req fill:#72994E,stroke:#1F4F4F
+
+class server,cluster,environment1,environment2 server
+class workbench,launcher,connect,config1,config2 product
+class rsession,jupyter,vscode,job1,job2 session
+class u1,u2,u3,b1,b2,b3,lb element
+class pg,nfs,mon req
+```
+:::
+
+### Spark / Databricks
+
+The Spark / Databricks integration has built-in support for connection maintenance through using the `sparklyr` or `pyspark` packages, eliminating the need for manual handling to be developed by users.
+
+**Interested in integrating Workbench with Spark / Databricks?**
+Refer to the implementation resources:
+
+- [Integrate Workbench with Databricks](https://docs.posit.co/ide/server-pro/integration/databricks.html)
+- [Integrate Workbench with Spark and sparklyr](https://docs.posit.co/ide/server-pro/integration/sparklyr.html)
+- [Integrate Workbench and Jupyter with PySpark](https://docs.posit.co/ide/server-pro/integration/pyspark.html)
+- [Using `sparklyr` with Databricks](https://spark.posit.co/deployment/databricks-connect.html)
+
+**Interested in integrating Connect with Spark / Databricks?**
+Refer to the blog article [From Databricks to Posit Connect](https://posit.co/blog/databricks-shiny-r-app/).
+
+## Managed environments
+
+In these solutions, the administrative burden of provisioning and maintaining the HPC environment is being handled by the chosen vendor. This gives the advantage of running in a HPC environment, but without the downside of the additional labor. However, because these solutions are pre-configured that can mean being locked in to architecture choices that might not be ideal, that if self-managed could be adjusted.
+
+These managed environments offerings are Workbench-only:
+
+- AWS Sagemaker
+- Azureml
+- GCP Workstations
+- Snowflake
+
+Managed environments can be especially useful in organizations where there are "peaks" of computationally intensive jobs that are occasionally run and can be offloaded to a separate environment. Using this strategy, a "regular-use" Posit Team deployment can be the main environment and kept to a minimum scale, while the occasional jobs that need the larger compute are spun up on demand separately and then closed when finished.
+
+#### Basic Configuration
+
+A basic configuration is shown below for a Posit Product being accessed as a managed environment:
+
+:::{.column-page-inset-right}
+```{mermaid}
+flowchart LR
+u1(User)
+u2(User)
+u3(User)
+b1(Browser)
+b2(Browser)
+b3(Browser)
+
+u1---b1
+u2---b2
+u3---b3
+b1---workbench1
+b2---workbench2
+b3---workbench3
+
+    subgraph domain["Managed Domain"]
+
+        direction LR
+
+        subgraph note["**Note**"]
+            noteNote("Architecture not expanded in this diagram.\nDifferent vendor solutions have different key differences.\nRefer to vendor for specifics on desired solution.")
+        end
+
+        subgraph rstudioManaged["Managed Workbench"]
+
+            subgraph workbenchEC2["Posit Workbench"]
+                workbench1("Posit Workbench")
+                workbench2("Posit Workbench")
+                workbench3("Posit Workbench")
+                launcher1("Launcher")
+                launcher2("Launcher")
+                launcher3("Launcher")
+                workbench1---launcher1
+                workbench2---launcher2
+                workbench3---launcher3
+            end
+
+            subgraph ec2SpecA ["Session Compute Selection 1"]
+                rstudioIdeSession1("Developer IDE Session #1")
+            end
+
+            subgraph ec2SpecB ["Session Compute Selection 2"]
+                rstudioIdeSession2("Developer IDE Session #2")
+            end
+
+            subgraph ec2SpecC ["Session Compute Selection 3"]
+                rstudioIdeSession3("Developer IDE Session #3")
+            end
+
+        end
+
+        launcher1---rstudioIdeSession1
+        launcher2---rstudioIdeSession2
+        launcher3---rstudioIdeSession3
+
+	    nfs[["\n\nVendor Managed File System\n\n\n"]]
+
+	    workbenchEC2-.-nfs
+	    ec2SpecA-.-nfs
+	    ec2SpecB-.-nfs
+	    ec2SpecC-.-nfs
+
+    end
+
+    classDef ec2Class fill:#c6c7cc
+    classDef server fill:#FAEEE9,stroke:#ab4d26
+    classDef blackbox fill:#C2C2C4,stroke:#213D4F
+    classDef product fill:#447099,stroke:#213D4F,color:#F2F2F2
+    classDef session fill:#7494B1,color:#F2F2F2,stroke:#213D4F
+    classDef note fill:#C2C2C4,stroke-width:0px
+    classDef nfs fill:#72994E,stroke:#1F4F4F
+    classDef element fill:#C2C2C4,stroke:#213D4F
+
+    class workbenchEC2,ec2SpecA,ec2SpecB,ec2SpecC server
+    class note,rstudioManaged blackbox
+    class workbench,workbench1,workbench2,workbench3,launcher,launcher1,launcher2,launcher3 product
+    class rstudioIdeSession1,rstudioIdeSession2,rstudioIdeSession3 session
+    class noteNote note
+    class nfs nfs
+    class u1,u2,u3,b1,b2,b3,lb element
+
+    style domain fill:#f6f6f7,stroke-dasharray: 5 5
+```
+:::
+
+### Posit Workbench on AWS Sagemaker
+
+Posit on Amazon SageMaker is a fully managed solution for Workbench without a traditional installation. Interested in learning more about the underlying architecture? Refer to [Architecture for RStudio on SageMaker](../../sagemaker/architecture/)
+
+**Interested in Workbench on AWS Sagemaker?** You can learn how to initially setup and manage this in the [AWS documentation](https://docs.aws.amazon.com/sagemaker/latest/dg/rstudio.html). More details are available in the [Posit Workbench Administration Guide](https://docs.posit.co/ide/server-pro/integration/aws-sagemaker.html) and the [Using RStudio on Amazon SageMaker: Questions from the Community](https://www.rstudio.com/blog/using-rstudio-on-amazon-sagemaker-faq/) blog post.
+
+### Posit Workbench on AzureML
+
+**Interested in Workbench on AzureML?**[How to activate your license and get started in Posit Workbench on AzureML](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?tabs=python#setup-posit-workbench-formerly-rstudio-workbench)
+
+### Posit Workbench on Google Cloud Workstations
+
+**Interested in Workbench on Google Cloud Workstations?** [How to activate your license and get started in Posit Workbench on Google Cloud Workstations](https://cloud.google.com/workstations/docs/develop-code-using-posit-workbench-rstudio#create_the_workstation_configuration)
+
+### Snowflake
+
+**TODO**
+
+## Additional Considerations
+
+### Auto-scaling
+
+Auto-scaling settings can be enabled to dynamically add more resources. In general, scaling up is trivial, scaling down is where things can go wrong and resources can be left hanging. Having a monitoring system in place can be critical with any system set to enable auto-scaling to insure that budgets don't get exceeded.
+
+**Want to learn more about Posit recommendations with auto-scaling?**
+Refer to [Auto-Scaling with Workbench and Kubernetes](../../launcher/autoscaling/)
+
+### Containerization
+
+Posit products are designed to be long-running. Containerization is entirely supported, however care should be taken to ensure that the needed directories and logs are able to persist. In general this means setting the container to be long running, an may additionally involve increasing time-out settings if the container ever crashes, so that any logging programs or license deactivations are able to complete.
+
+**Want to learn more about Posit recommendations when running the products in containers?**
+Refer to [Running Posit Products in Containers](../../docker/)
+
+### Leveraging the HPC environment
+
+Users may be surprised to find that when they first start using the HPC environment that the performance of their code likely won't drastically improve. This is because both R and Python are single threaded and won't natively use parallelization to take advantage of the additional compute resources. Fortunately, there are many packages that have been developed by the open source community that can be used for dramatic performance improvement. For example:
+
+- [`clustermq`](https://mschubert.github.io/clustermq/)
+- [`batchtools`](https://future.batchtools.futureverse.org/)
+- [`crew.cluster`](https://wlandau.github.io/crew.cluster/)
+- [`future`](https://future.futureverse.org/)
+- [`purrr`](https://purrr.tidyverse.org/)
+- [`foreach`](https://www.rdocumentation.org/packages/foreach/versions/1.5.2/topics/foreach)
+- [`data.table`](https://rdatatable.gitlab.io/data.table/reference/openmp-utils.html)
+- [`crew`](https://cran.r-project.org/web/packages/crew/index.html): facilitates compute backens, also known as crew controllers
+- [`mirai`](https://cran.r-project.org/web/packages/mirai/index.html): Uses the [nanonext](https://cran.r-project.org/web/packages/nanonext/index.html) framework
+- [`crew.cluster`](https://wlandau.github.io/crew.cluster/): extension of [mirai](https://github.com/shikokuchuo/mirai) crew package
+
+CRAN has a [useful article](https://cran.r-project.org/web/views/HighPerformanceComputing.html) exploring the ecosystem of HPC packages. This is a very useful resource to explore for users considering optimizing their code in an environment that supports parallelization.
+
+

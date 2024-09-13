@@ -1,0 +1,309 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="451px" height="381px" viewBox="-0.5 -0.5 451 381" content="&lt;mxfile&gt;&lt;diagram id=&quot;dEe7r-ie-U-cEBnFhtOx&quot; name=&quot;Page-1&quot;&gt;3Vnfc6M2EP5r/BiPQAjsR/9Iru20nUw9016fbhSQsSYYUSHHTv/6rkAyCPDFyXEdz/nBllYSkna/3f0WT/Bqf/okabH7TSQsm/goOU3weuL7njcP4UdLXmsJCY0glTwxkxrBhv/LjBAZ6YEnrHQmKiEyxQtXGIs8Z7FyZFRKcXSnbUXm7lrQlPUEm5hmfelfPFG7WjojqJH/xHi6szt7yIzsqZ1sBOWOJuLYEuH7CV5JIVTd2p9WLNPKs3qp1z1cGD0fTLJcXbPArxe80Oxg7mbOpV7tZaU45AnT870JXh53XLFNQWM9egTzgmyn9pkZ3vIsW4lMyGotjshisV6CvFRSPDM7kouc6ckiVw90zzMNgz+ZTGhOQdy/g7nWC5OKnVoic6dPTOyZkq8wxY7OjH4NwM7IOTbmCqy5di1TYbuQGoik52c3WoSGUeSwUvGAUsNMmRtrwNXqA+k/B23ppb38WVCB16qxEeJt9WmLwlT/rgzSzT5wwnqrerRnU1Cjcg03bKCWNY2IZjzNoRuDcRjIl9ooHFxjYQb2PEn0NoNIabCEjDaMc/tBFw8bcZCw1Ecbmpfw8yiFXVKP4PVOKXB4n+AFfIFx9JeeUE5TIdKM0YKX01jsq4G4rKY+bOsNoHnegvjLehNotLYx6hrwqXfjEXfxGAzgcQCO/ghoDN5CY0IVvdPtu1LGDuBqBWv1PkwuqbZS7FmtjVKNSiuFtmE9PvYXRQHHWDz+DN9/sELIq93gfaGtQas364e6IIjQfH7Jk0bA0DmGvXbiVwtDXjgAIm8MFEW3haIrAXIV2mpwPPL8h4RNEAUObM6hqA0bbwA28xFQQ96mF4XgOpPcv8AVS5uMLCvSWSKh5e6cMt7KWBl9YtmjKLniYjBN/dqZ8CSUAgD285gS2pDioDKes9WZSKKhHAjnLfR19qdUE96p2G55zADZecwKQHsB2OqnOykUNacISB8ZD+vlfbAcBwQkdGMHDvsgsImijYEg+HYMzN7GAMuThablWqcZLUseX/ShSnPsxNVnM6bbf2vDTInprU/GTlXn1XZyOPfndqde5RPbb9ZVPbvQxVnbMPWIrQCCr5mqtJxFO1YtUlSmTDnRlSVO3dE3Z8tcQ+zVyiTLAFkvbrUyZEOzw6P2wVbIQJ1MgzuhoL6NWdWuLroPIh3Yddl1rYPegypIna99Fcq8oVBzSzRnBQs4RAsf/c6OztTGEaywPmUFeDgU8qLi9HF6BMGnuhxeQOvLUUK2ujbRaTxWAdN1x+trAMngFvSpep72pSrYV7YnywlZD7h2FcCXNH5Oqyz7Zj600aUbCs/Fv9l90q6vh0LkHZoihLCD13Acd5pNoxC1PsTZ5A5H02jmPhQSSMm+1SXmN+URFmLfuRDexEAWDhkQBh/9Ip4uIr0WP8mu5Ha4X/nMVLyzSajNiFKdI017jMICRVMXkv4sGCgtfDtr9OLC8wagOhJHsESgzvbRlSTBc0nC/84Roj5HCG6KI2Did0CDo4+yhC45nZHvxhKueN/ZJfMxL2Mx3cP3VL/Y/cJjTdnb0BsqYZyqxQWB//FypJd5B+uTi8HCCSlfKUcwmgy+/LsM8xHCEMadIDQnvSDkD72yHSMAhTeVK2+WPUpGkx+IPF7C6LvJYxAFwB49FCASQEYkLo0kqOKWHgkx8ZAf+uTdiIVu86dQHfiav9bw/X8=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs>
+        <style type="text/css">
+            /* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qPK7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNK7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qO67lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qN67lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qPK7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNK7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qO67lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qN67lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qPK7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNK7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qO67lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qN67lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lujVj9_mf.woff2") format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+        </style>
+    </defs>
+    <g>
+        <rect x="0" y="0" width="450" height="380" rx="57" ry="57" fill="#75aadb" stroke="none" pointer-events="all"/>
+        <rect x="200" y="30" width="40" height="20" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 40px; margin-left: 201px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 24px; font-family: &quot;Source Sans Pro&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; overflow-wrap: normal;">
+                                <font face="Verdana" color="#ffffff">
+                                    Connect
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="220" y="47" fill="rgb(0, 0, 0)" font-family="Source Sans Pro" font-size="24px" text-anchor="middle" font-weight="bold">
+                    Con...
+                </text>
+            </switch>
+        </g>
+        <rect x="30" y="240" width="160" height="120" rx="18" ry="18" fill="#447099" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 300px; margin-left: 31px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 18px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font data-font-src="https://fonts.googleapis.com/css?family=Source+Sans+Pro" face="Verdana" color="#ffffff">
+                                    App/API/Report
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="110" y="305" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="18px" text-anchor="middle">
+                    App/API/Report
+                </text>
+            </switch>
+        </g>
+        <rect x="294" y="170" width="110" height="90" rx="13.5" ry="13.5" fill="#447099" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 108px; height: 1px; padding-top: 215px; margin-left: 295px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 18px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font data-font-src="https://fonts.googleapis.com/css?family=Source+Sans+Pro" color="#ffffff" face="Verdana">
+                                    Pin
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="349" y="220" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="18px" text-anchor="middle">
+                    Pin
+                </text>
+            </switch>
+        </g>
+        <rect x="380" y="150" width="24" height="44" fill="none" stroke="none" transform="rotate(45,392,172)" pointer-events="all"/>
+        <path d="M 392 194 C 390.98 193.19 390.13 182.9 389.75 176.85 L 380 176.85 C 380.04 172.85 382.82 169.11 386.75 167.83 L 386.75 155.97 C 383.64 154.58 382.34 152.52 382.25 150 L 401.75 150 C 401.76 152.19 400.38 154.65 397.25 155.97 L 397.25 167.83 C 401.65 169.25 403.96 173.19 404 176.85 L 394.25 176.85 C 393.84 182.8 393.05 193.17 392 194 Z" fill="#fdbe4b" stroke="none" transform="rotate(45,392,172)" pointer-events="all"/>
+        <path d="M 190 134 L 283.57 186.63" fill="none" stroke="#fdbe4b" stroke-width="4" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 290.1 190.31 L 278.94 189.76 L 283.57 186.63 L 283.84 181.05 Z" fill="#fdbe4b" stroke="#fdbe4b" stroke-width="4" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 121px; margin-left: 294px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 24px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: nowrap;">
+                                <font data-font-src="https://fonts.googleapis.com/css?family=Source+Sans+Pro" face="Courier New" style="font-size: 17px" color="#ffffff">
+                                    pins::pin_write
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="294" y="128" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="24px" text-anchor="middle">
+                    pins::pin_write
+                </text>
+            </switch>
+        </g>
+        <rect x="27.5" y="74" width="162.5" height="120" rx="18" ry="18" fill="#447099" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 161px; height: 1px; padding-top: 134px; margin-left: 29px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 18px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <font data-font-src="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+                                    <font face="Verdana" color="#ffffff">
+                                        Scheduled Job
+                                    </font>
+                                    <br/>
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="109" y="139" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="18px" text-anchor="middle">
+                    Scheduled Job
+                </text>
+            </switch>
+        </g>
+        <path d="M 294 237.5 L 200.26 293.83" fill="none" stroke="#fdbe4b" stroke-width="4" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 193.83 297.7 L 199.83 288.26 L 200.26 293.83 L 204.98 296.83 Z" fill="#fdbe4b" stroke="#fdbe4b" stroke-width="4" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="155" y="85" width="20" height="30" fill="none" stroke="none" transform="rotate(30,165,100)" pointer-events="all"/>
+        <path d="M 175 90.58 L 175 115 L 155 115 L 155 85 L 169 85 Z" fill="none" stroke="#fdbe4b" stroke-width="2" stroke-miterlimit="10" transform="rotate(30,165,100)" pointer-events="all"/>
+        <path d="M 169 85 L 169 90.58 L 175 90.58" fill="none" stroke="#fdbe4b" stroke-miterlimit="10" transform="rotate(30,165,100)" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 291px; margin-left: 295px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 24px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: nowrap;">
+                                <font data-font-src="https://fonts.googleapis.com/css?family=Source+Sans+Pro" face="Courier New" style="font-size: 17px" color="#ffffff">
+                                    pins::pin_read
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="295" y="298" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="24px" text-anchor="middle">
+                    pins::pin_read
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Viewer does not support full SVG 1.1
+            </text>
+        </a>
+    </switch>
+</svg>

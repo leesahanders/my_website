@@ -4,7 +4,7 @@
     "href": "work.html",
     "title": "Technical writeups and musings",
     "section": "",
-    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nAccess to resources in Google, an exploration\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n48 min\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nParallelization in R\n\n\n\n\n\n\n\n\nDec 8, 2023\n\n\nLisa\n\n\n7 min\n\n\n\n\n\n\n\nProblems with persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nSecuring credentials\n\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nLisa\n\n\n5 min\n\n\n\n\n\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nLisa\n\n\n10 min\n\n\n\n\n\n\n\nPublish and version your models with Vetiver\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Some random technical writeups for things I’ve found useful, all brought to you by Quarto’s blogging capability.\n\n\n\n\n\n\n\n\n\nJob templating in Kubernetes\n\n\n\n\n\n\n\n\nAug 21, 2024\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nAccess to resources in Google, an exploration\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n6 min\n\n\n\n\n\n\n\nDebugging R Package Environments (renv): A long winded writeup\n\n\n\n\n\n\n\n\nJun 21, 2024\n\n\nLisa\n\n\n48 min\n\n\n\n\n\n\n\nAccessing data in Azure Data Lake (delta files)\n\n\n\n\n\n\n\n\nJan 11, 2024\n\n\nLisa\n\n\n4 min\n\n\n\n\n\n\n\nParallelization in R\n\n\n\n\n\n\n\n\nDec 8, 2023\n\n\nLisa\n\n\n7 min\n\n\n\n\n\n\n\nProblems with git credential persistence when in the cloud\n\n\n\n\n\n\n\n\nAug 29, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\n\nSecuring credentials\n\n\n\n\n\n\n\n\nAug 9, 2023\n\n\nLisa\n\n\n5 min\n\n\n\n\n\n\n\nConnecting to resources in Microsoft 365 / Sharepoint\n\n\n\n\n\n\n\n\nJul 14, 2023\n\n\nLisa\n\n\n10 min\n\n\n\n\n\n\n\nPublish and version your models with Vetiver\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nLisa\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "work/sharepoint-oh-no.html",
@@ -436,42 +436,42 @@
   {
     "objectID": "work/git-and-sagemaker.html",
     "href": "work/git-and-sagemaker.html",
-    "title": "Problems with persistence when in the cloud",
+    "title": "Problems with git credential persistence when in the cloud",
     "section": "",
     "text": "This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!"
   },
   {
     "objectID": "work/git-and-sagemaker.html#problem-when-on-linux",
     "href": "work/git-and-sagemaker.html#problem-when-on-linux",
-    "title": "Problems with persistence when in the cloud",
+    "title": "Problems with git credential persistence when in the cloud",
     "section": "Problem when on Linux:",
     "text": "Problem when on Linux:\n\nIn general gitcreds doesn’t work well on linux (which has led to this git issue (Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds ). There is an excellent blog post that is very useful that goes deeper into what is going on: Notes from a data witch - Managing GitHub credentials from R, difficulty level linux"
   },
   {
     "objectID": "work/git-and-sagemaker.html#problem-when-on-sagemaker",
     "href": "work/git-and-sagemaker.html#problem-when-on-sagemaker",
-    "title": "Problems with persistence when in the cloud",
+    "title": "Problems with git credential persistence when in the cloud",
     "section": "Problem when on Sagemaker:",
     "text": "Problem when on Sagemaker:\n\nAdditionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist."
   },
   {
     "objectID": "work/git-and-sagemaker.html#tldr-solution",
     "href": "work/git-and-sagemaker.html#tldr-solution",
-    "title": "Problems with persistence when in the cloud",
+    "title": "Problems with git credential persistence when in the cloud",
     "section": "TLDR Solution:",
     "text": "TLDR Solution:\nConfigure the global git to cache instead of store the credentials to a local file (from bash/terminal):\ngit config --global credential.helper 'store --file ~/.my-credentials'"
   },
   {
     "objectID": "work/git-and-sagemaker.html#testing",
     "href": "work/git-and-sagemaker.html#testing",
-    "title": "Problems with persistence when in the cloud",
+    "title": "Problems with git credential persistence when in the cloud",
     "section": "Testing",
     "text": "Testing\nI’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.\nLoad libraries:\nlibrary(usethis) \nlibrary(gitcreds) \nlibrary(gh) \nlibrary(credentials)\nConfigure the global git to cache instead of store the credentials to a local file (from bash/terminal):\ngit config --global credential.helper 'store --file ~/.my-credentials'\nFrom the documentation:\n\nThe “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.\n\nGenerate the PAT:\nusethis::create_github_token()\nCopy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:\ngitcreds::gitcreds_set()\nCheck that it stored with:\ngitcreds_get()"
   },
   {
     "objectID": "work/git-and-sagemaker.html#alternatives",
     "href": "work/git-and-sagemaker.html#alternatives",
-    "title": "Problems with persistence when in the cloud",
+    "title": "Problems with git credential persistence when in the cloud",
     "section": "Alternatives",
     "text": "Alternatives\nThe old way “store a PAT as the GITHUB_PAT environment variable in .Renviron.” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the gh package for generating PATs like in Managing Personal Access Tokens\nAlternatively, there are some git config options from the terminal. See: Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR"
   },
@@ -621,5 +621,26 @@
     "title": "Publish and version your models with Vetiver",
     "section": "Visualize performance over time",
     "text": "Visualize performance over time\nlibrary(ggplot2)\nmonitoring_metrics &lt;- model_board %&gt;% pin_read(\"lisa.anders/tree_metrics\")\nvetiver_plot_metrics(monitoring_metrics) +\n    scale_size(range = c(2, 4))"
+  },
+  {
+    "objectID": "work/job-templating-k8s.html",
+    "href": "work/job-templating-k8s.html",
+    "title": "Job templating in Kubernetes",
+    "section": "",
+    "text": "This short writeup addresses a need to add an additional label to Workbench sessions started in a kubernetes environment. Specifically this was for an environemnt where an external Workbench server was launching sessions into a Kubernetes cluster. The recommended way to do this is to use job templating."
+  },
+  {
+    "objectID": "work/job-templating-k8s.html#job-templating-for-custom-labels-for-posit-workbench-with-k8s",
+    "href": "work/job-templating-k8s.html#job-templating-for-custom-labels-for-posit-workbench-with-k8s",
+    "title": "Job templating in Kubernetes",
+    "section": "Job templating for custom labels for Posit Workbench with k8s",
+    "text": "Job templating for custom labels for Posit Workbench with k8s\nThese are the granular steps for taking advantage of kubernetes object templating that would work with an external Workbench instance launching into k8s:\n\nAdd to launcher.kubernetes.conf, use-templating = 1\nUse the launcher CLI to create the job.tpl and service.tpl files (see below for an example)\nConfirm that the version called out in job.tpl and service.tpl (using head job.tpl and head service.tpl for example) are compatible with your workbench version (version 2.3.1 is latest)\nCreate rstudio-library-templates-data.tpl - for now this is a helm-only construct so it will need to be copied from the helm output (helm repo) (see example below for doing this with the helm template command)\nCopy job.tpl, service.tpl, and rstudio-library-templates-data.tpl into the launcher scratch directory on the host machine (in this case your Workbench server outside of k8s) (see below for default for where this is located) and make sure that rstudio-server has read/write access\n\nFor adding the new labels/values, here are good options:\n\nModify rstudio-library-templates-data.tpl directly (either in the header bit, or lower under values/labels)\nModify the values in the helm values file (example)\nRecommended: Add the values at time of making the template, IE with --set launcher.templateValues.job.labels.test=value \\ (see below)\n\nFrom talking with a colleague they shared this example using helm to create the template with the added label values:\nhelm template my-release rstudio/rstudio-workbench \\\n --set launcher.useTemplates=true \\\n --set launcherPem=test \\\n --set session.defaultConfigMount=false \\\n --set launcher.templateValues.job.labels.test=value \\\n --set launcher.templateValues.job.labels.other=something-else \\\n | less\nIn that helm example:\n\nsession.defaultConfigMount=false prevents defining volumes and volumeMounts that are only relevant for the helm chart\nlauncherPem=test speeds up templating\nlauncher.useTemplates=true turns on templating (instead of job json overrides)\n\nWhat if things go wrong?\nThe rstudio-kubernetes-launcher CLI can verify templates now!\nPlaying with the rstudio-kubernetes-launcher CLI:\n/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --help\n/usr/lib/rstudio-server/bin/rstudio-kubernetes-launcher --generate-templates --scratch-path=/tmp/hello\n Default scratch path:\n # mount into the default scratch-path\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/rstudio-library-templates-data.tpl\"\n  subPath: \"rstudio-library-templates-data.tpl\"\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/job.tpl\"\n  subPath: \"job.tpl\"\n - name: session-templates\n  mountPath: \"/var/lib/rstudio-launcher/Kubernetes/service.tpl\"\n  subPath: \"service.tpl\""
+  },
+  {
+    "objectID": "work/job-templating-k8s.html#another-approach-using-json-over-rides-on-posit-workbench-with-k8s",
+    "href": "work/job-templating-k8s.html#another-approach-using-json-over-rides-on-posit-workbench-with-k8s",
+    "title": "Job templating in Kubernetes",
+    "section": "Another approach using json over-rides on Posit Workbench with k8s",
+    "text": "Another approach using json over-rides on Posit Workbench with k8s\nPotentially json over-rides could work but my understanding is that this would overwrite ALL labels.\nuse this to add a label:\n/etc/rstudio/launcher.kubernetes.profiles.conf\njob-json-overrides=\"/spec/template/spec/labels\":\"/etc/rstudio/labels\"\n/etc/rstudio/labels\n[\n  {\n    \"applicationid\": \"workbench\",\n    \"label\": [\"value\"]\n  }\n]"
   }
 ]

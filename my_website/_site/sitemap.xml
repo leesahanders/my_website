@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/git-and-sagemaker.html</loc>
-    <lastmod>2024-08-16T17:56:01.624Z</lastmod>
+    <lastmod>2024-09-13T15:37:00.543Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/parallelization.html</loc>
@@ -83,5 +83,9 @@
   <url>
     <loc>https://questionable.quarto.pub/blog/work/vetiver.html</loc>
     <lastmod>2024-08-16T17:56:38.891Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/job-templating-k8s.html</loc>
+    <lastmod>2024-09-13T15:53:29.062Z</lastmod>
   </url>
 </urlset>

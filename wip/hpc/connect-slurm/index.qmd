@@ -1,0 +1,169 @@
+---
+title: "Launching jobs from Connect to Slurm"
+date-meta: NA
+last-update: 2024-07-08
+# categories:
+# tags:
+---
+
+## ORIGINAL ##
+
+![Connect can launch jobs to Slurm](images/connect+slurm_logos.png){fig-alt="Posit Workbench logo + Apptainer logo + Slurm logo"}
+
+## Introduction and Motivation
+
+Running applications in Slurm can provide various benefits such as computation scaleability, resource isolation, ease of management, reproducibility and resource allocation flexibility. While native Slurm job launcher with Connect isn't currently developed, users can leverage various open source R packages for High Performance Computing (HPC) jobs to offload those large scale jobs to their HPC cluster. This article will try to provide some additional context and a general approach for users interested in their own implementation.
+
+## General Idea
+
+The suggested approach is outlined below. We recommended that you have a working knowledge of Slurm when installing our products with an integration with Slurm.
+
+
+
+
+
+## Possible Requirements
+
+
+
+With the appropriate configuration, when the developer deploys their application to the integrated Connect server they need to include the following pieces:
+
+- Typical deployment pieces, application code, manifest files, etc.
+- Appropriate configuration for the chosen HPC R package
+
+The developer will need knowledge of the language versions, available packages, and configuration options in the HPC environment.
+
+In order to set up the Connect server so that it can submit jobs to an HPC cluster, at a minimum, these components need to be considered: 
+
+- Auth subsystem
+- Mounted home directories
+- Process authentication (for example munge keys, SSL certs, or similar)
+- HPC binaries
+- Networking access from Connect to the HPC cluster
+- R, Python, and appropriate packages installed, or available Singularity images with same
+
+The Connect server will need appropriate permissions to launch jobs to the HPC cluster. This can mean either: 
+
+- Direct access: Set up Connect to directly submit jobs to the HPC cluster. 
+- SSH access: meaning setting up Connect so that the user has passwordless SSH access (public key)
+
+A reference architecture comparing the two options is shown below.
+
+**TODO* Add diagrams here
+
+![Two options for Connect setup in order to have the correct permissions and be able to launch jobs into the HPC cluster](images/connect_slurm_overview_options.png){fig-alt="Options for Connect setup to launch jobs into Slurm"}
+
+In general direct job submission is preferred for ease of use when possible. While SSH access may be appealing, it is worth noting that this will come with additional burden of creating and maintaining a template on the remote server where new R processes are being spawned and the creation and management of the .`RProfile` file. Most commonly we've found that HPC environments will prohibit SSH access to the compute nodes. SSH access, if used, should be to the head node, where the built in orchestrator will direct the job appropriately. Additionally, SSH access is usually fastest for users to implement over configuring the Connect server to have direct access. Once the requirements are met the relevant commands can be used to validate access (`sbatch`, `sinfo`, `scontrol` should work without warning / error).
+
+For the sake of choosing SSH access for the rest of the article.
+
+## Open source R packages for High Performance Computing (HPC) jobs
+
+There are many R packages that can be used to work with HPC jobs, here are the ones that we find most commonly mentioned:
+
+- [`clustermq`](https://mschubert.github.io/clustermq/): uses the [zeromq](https://zeromq.org/) framework
+- [`batchtools`](https://future.batchtools.futureverse.org/): direct SSH access, designed for Map Reduce calls
+- [`crew`](https://cran.r-project.org/web/packages/crew/index.html): facilitates compute backens, also known as crew controllers
+- [`mirai`](https://cran.r-project.org/web/packages/mirai/index.html): Uses the [nanonext](https://cran.r-project.org/web/packages/nanonext/index.html) framework
+- [`crew.cluster`](https://wlandau.github.io/crew.cluster/): extension of [mirai](https://github.com/shikokuchuo/mirai) crew package
+
+CRAN has a [useful article](https://cran.r-project.org/web/views/HighPerformanceComputing.html) exploring the ecosystem of HPC packages. This is a very useful resource to explore for users considering optimizing their code in an environment that supports parallelization.
+
+While all are useful, `clustermq` with it's minimal overhead will be used for the remainder of this article.
+
+## Example integration with clustermq
+
+## Example with integration with Altair GridEngine (SGE)
+
+The beautiful thing about clustermq is that it is able to
+Altair GridEngine (SGE)
+
+In the case of other HPC environments a similar process should be followed where it is configured so that jobs can be submitted from the Connect server. Likely this means installing any relevant clients, mounting the configuration file. The provided example of [hpc-penguins](https://github.com/michaelmayer2/penguins-hpc) will still work with an update to the cluster template. Refer to the `app.R` file and change `cmq_method == "slurm"` as needed.
+
+### Basics / Foundational tasks
+
+Follow these steps:
+
+- Make sure that from the Connect server the rsconnect user is able to submit jobs to the grid engine cluster.
+- Make sure that the rsconnect user exists on both the Connect server and the HPC cluster.
+- Make sure that the desired R version is accessible from all servers (either mounted or directly installed in the same location). All servers includes the launching Connect server and the HPC compute instances.
+- Make sure that all needed packages are installed for the correct R version and accessible from all servers by the rsconnect user (either mounted or directly installed in the same location). This should include: `install.packages("clustermq")`. All servers includes the launching Connect server and the HPC compute instances.
+- Ensure that networking is set accordingly
+
+Assuming that the integration is using SSH for access and that the configured server has no limitations in terms of outgoing network connections (egress), the incoming connections (ingress) should be opened to include:
+
+| Port Number/Range   |      Meaning      | CIDR Block | Where |
+|----------|-------------|------------|------------|
+| 22 | Secure Shell Access | 0.0.0.0 | |
+| 8617| SLURM Controller Daemon (slurmctld) | subnet | |
+| 8617| SLURM Compute Node Daemon (slurmd) | subnet | |
+| 32768-60999 | Port range for ephemera ports (ip_local_port_range) used by both rsession and slurmd | subnet |
+
+This assumes that the Connect server includes a ssl cert and is exposed on 443. If that is not the case, then port 3939 would need to be opened.
+
+If instead doing Connect as a direct submission node than no longer need SSH access on 22. Unlikely it will be used on a login node.
+
+Add diagram from https://github.com/sol-eng/Workbench-HPC-Webinar/tree/main/remote-clustermq
+
+#### (Optional) Next level of steps for [app](https://github.com/michaelmayer2/penguins-hpc/tree/main) preparation 
+
+Keep generic for clustermq, point to clustermq user guide where interfaces are listed that he supports
+
+Copy template from [https://mschubert.github.io/clustermq/articles/userguide.html#sge](https://mschubert.github.io/clustermq/articles/userguide.html#sge) into a new file `sge.tmpl`:
+
+`sge.tmpl`
+```
+#$ -N {{ job_name }}               # job name
+##$ -q default                      # submit to queue named "default"
+#$ -j y                            # combine stdout/error in one file
+#$ -o {{ log_file | /dev/null }}   # output file
+#$ -cwd                            # use pwd as work dir
+#$ -V                              # use environment variable
+#$ -t 1-{{ n_jobs }}               # submit jobs as array
+#$ -pe smp {{ cores | 1 }}         # number of cores to use per job
+#$ -l m_mem_free={{ memory | 1073741824 }} # 1 Gb in bytes
+
+ulimit -v $(( 1024 * {{ memory | 4096 }} ))
+CMQ_AUTH={{ auth }} ${R_HOME}/bin/R --no-save --no-restore -e 'clustermq:::worker("{{ master }}")'
+```
+
+Install, as the rsconnect user, the package clustermq (into the user library path) on the Connect server.
+
+Create a R code `test.R` file:
+
+`test.R`
+
+```
+# below is the reference to the template from https://mschubert.github.io/clustermq/articles/userguide.html#sge
+
+options(
+    clustermq.scheduler = "sge",
+    clustermq.template = "/home/rsconnect/sge.tmpl)
+)
+
+# load the package
+library(clustermq)
+
+# Define and run a function
+fx = function(x) x * 2
+Q(fx, x=1:3, n_jobs=1)
+
+# 1 job should be submitted and Q function return "2 4 6"
+```
+
+If the above code runs when run from the Connect server on the command line (e.g. Rscript) then you have gone above and beyond! This script has successfully launched a job to your HPC environment!
+
+### Modifications
+
+The next step will be to make a copy of the [penguins example app](https://github.com/michaelmayer2/penguins-hpc) with the template defined above and other modifications to use Altair GridEngine. 
+
+1. Add the `sge.tmpl` template created above to the [top level directory](https://github.com/michaelmayer2/penguins-hpc). 
+
+2. Modify the [`app.R`](https://github.com/michaelmayer2/penguins-hpc/blob/5929a2063bd97cc2d1970c185416c4fc515d62f1/app.R#L35) file to replace slurm to instead use SGE
+
+Modify the [`config.yml`](https://github.com/michaelmayer2/penguins-hpc/blob/main/config.yml) file**
+
+**TODO** Image of it working
+
+
+

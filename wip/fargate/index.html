@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="NA">
+
+<title>Lisa Anders - questionable.quarto - Using Amazon Fargate with Posit Team</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-database" role="img">
+</i> 
+ <span class="menu-text">Stuff</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/posts/">
+ <span class="dropdown-text">Blog / Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../lists.html">
+ <span class="dropdown-text">Lists</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../presentations.html">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/">
+ <span class="dropdown-text">Recipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../work.html">
+ <span class="dropdown-text">Technical writeups</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../site_map.html"> 
+<span class="menu-text">Site Map</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/leesahanders/my_website"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using Amazon Fargate with Posit Team</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This article explains how to set up Amazon Fargate with Posit Team and details the different mechanisms for its use as well as limitations and drawbacks and was up to date as of 2023-12.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p><a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html">Amazon Fargate</a> represents “containers as a service” in Amazon Web Services (AWS). It has two canonical uses:</p>
+<ul>
+<li>Inside the Elastic Container Service (ECS)</li>
+<li>Inside the Elastic Kubernetes Service (EKS)</li>
+</ul>
+<p>The usage of Posit products inside these different services will vary.</p>
+</section>
+<section id="elastic-container-service-ecs" class="level1">
+<h1>Elastic Container Service (ECS)</h1>
+<p>It is possible to run Posit Workbench and Posit Package Manager inside of ECS with Amazon Fargate. In order to do this, verify that neither product is running in <code>--privileged</code> mode (Fargate does not allow privileged containers).</p>
+<p>This is enabled by default in our <a href="https://github.com/rstudio/rstudio-docker-products">public docker images</a>, <a href="https://github.com/rstudio/rstudio-docker-products#privileged-containers">as discussed here</a>.</p>
+<p>It is currently not possible to run Posit Connect in <code>unprivileged</code> mode in Amazon ECS. As a result, we would recommend using another deployment mechanism. You can still use ECS on nodes, or you can use the EKS architecture, outlined below.</p>
+<p>Please keep in mind that Posit products do not have a direct integration with ECS or Amazon Fargate. As a result, all workloads (user sessions, app deployments, etc.) will run <em>inside of the main service container(s)</em>. This is different from the “off host execution” model articulated below.</p>
+<section id="elastic-kubernetes-service-eks" class="level2">
+<h2 class="anchored" data-anchor-id="elastic-kubernetes-service-eks">Elastic Kubernetes Service (EKS)</h2>
+<p>Amazon EKS can be used to deploy all Posit products. When deploying Posit products into Kubernetes, we generally recommend making use of <a href="https://github.com/rstudio/helm">our public helm charts</a>.</p>
+<p>When deploying Posit Connect and Posit Workbench, it is important to consider the axis of “off-host execution.” Posit Package Manager does not support (or need) off-host execution.</p>
+<ul>
+<li>Both products can run inside of Kubernetes with “local execution.” This is the default for Posit Connect, and it requires <code>privileged</code> execution in this context.</li>
+<li>Both products can run inside of Kubernetes with “off-host execution.” This means that user workloads are scheduled separately from the main service pods.</li>
+</ul>
+<p>When using a Fargate Profile with Amazon EKS, scheduling is similar to ECS above. However, scheduling is done via the Kubernetes Cluster API. Namely, Posit Connect with local execution requires a <code>privileged</code> container and therefore cannot be scheduled to run on Fargate.</p>
+<p>When using EKS, you do gain the ability to run off-host execution of user workloads and therefore for all Posit products to run in <code>unprivileged</code> containers. As a result, when using Kubernetes with off-host execution, all Posit products can be run via a Fargate profile.</p>
+<p>In addition, all off-host execution user workloads are also possible to run via a Fargate profile on EKS.</p>
+<section id="fargate-profile-set-up" class="level3">
+<h3 class="anchored" data-anchor-id="fargate-profile-set-up">Fargate Profile Set-Up</h3>
+<p>In order to create a Fargate profile on AWS EKS, defining “selectors:” is required, <a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html">either a namespace or a label that will identify</a> to Fargate that it is responsible for scheduling / running the container.</p>
+<p>For the purpose of our documentation, assume that our profile requires the selector label <code>fargate-job: true</code>.</p>
+</section>
+<section id="fargate-pod-execution-role" class="level3">
+<h3 class="anchored" data-anchor-id="fargate-pod-execution-role">Fargate Pod Execution Role</h3>
+<p>Specifying the <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html">pod execution role</a> is needed for the components that will be run inside Fargate using the defined profile.</p>
+</section>
+<section id="tradeoffs" class="level3">
+<h3 class="anchored" data-anchor-id="tradeoffs">Tradeoffs</h3>
+<p>These tradeoffs were accurate as of Sep 16th, 2022. Fargate is a developing service by AWS and has likely changed and improved as an offering since these benchmarks were taken.</p>
+<ul>
+<li><strong>Sizing</strong> - Fargate has <a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate-pod-configuration.html">an upper bound</a> on container size. Please keep this in mind when deciding what workloads are ideal for Fargate</li>
+<li><strong>Startup time</strong> - In our experience, container startup tie on Fargate can vary wildly, from 2 minutes to 10 minutes. Startup on Fargate requires AWS to build a new EC2 instance, and then to pull the container image completely before starting the container. This makes it very useful for batch / asynchronous jobs, but a poor fit for interactive or on-demand workloads. Fargate is a constantly evolving service, so this may change in the future and this article will need to be revisited.</li>
+<li><strong>Independent scheduling</strong> - Every job on Fargate gets its own computational resources. This means you pay AWS more money for a given workload since there is no resource sharing; there is also a premium on those resources imposed by Fargate. However, this can be a great fit when workloads are highly sporadic (hard to schedule reliably / can affect one another) or utilize the resources completely. Again, this makes Fargate jobs well-suited for batch processes or when strict resource scheduling is required.</li>
+<li><strong>Timeouts</strong> - Fargate jobs will continue running until they are complete. As discussed, this has implications on cost and on startup time to restart the task. VSCode sessions in Posit Workbench currently do not have a session timeout.</li>
+<li><strong>Orphans</strong> - If a process is left around (i.e., sessions forgotten without timeout, batch processes running forever, etc.), you will continue to incur costs on Amazon Fargate. This is at odds with an “EKS with nodes” paradigm where you pay for what your cluster collectively uses and node resources are often shared.</li>
+<li><strong>Volume options</strong> - Fargate has limited <a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate-pod-configuration.html#fargate-storage">options for storage volumes</a>. EFS file system mounting and other static file mount options are supported, however dynamic persistent volume provisioning is not. Note that when <a href="https://docs.posit.co/rstudio-team/integration/efs/">using EFS for file storage</a>, Workbench will not be able to support project sharing due to the underlying requirement for ACL’s.</li>
+</ul>
+</section>
+<section id="using-the-helm-charts" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-helm-charts">Using the Helm Charts</h3>
+<p>The helm charts have not currently been tested with the modifications to run selective user workloads on AWS Fargate ( i.e., allow users to decide whether to run on Fargate or not). However, it is possible to use the helm charts to run the services on Fargate <em>or</em> all user workloads on Fargate (or both).</p>
+<p>In this case, additional templates will be used to enable Fargate services. The Kubernetes YAML manifest can be generated based on the specified helm chart using something like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> template rstudio/rstudio-workbench <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--set</span> launcher.useTemplates=true <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--set-file</span> launcher.extraTemplates.job<span class="dt">\\</span>.tpl=job.tpl <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--set-file</span> launcher.extraTemplates.service<span class="dt">\\</span>.tpl=service.tpl <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--set</span> launcher.includeDefaultTemplates=false <span class="dt">\</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">less</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="service-on-fargate" class="level4">
+<h4 class="anchored" data-anchor-id="service-on-fargate">Service on Fargate</h4>
+<p>In order to run the service pod itself on Fargate, ensure that the service satisfies the Fargate profile. This is straightforward with a namespace. If using a selector label, you can set the label in the helm chart by setting:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">service</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    # whatever label satisfies the Fargate profile</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fargate-job</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="user-workloads-on-fargate" class="level4">
+<h4 class="anchored" data-anchor-id="user-workloads-on-fargate">User Workloads on Fargate</h4>
+<p>It is possible for either Posit Workbench or Posit Connect to run <em>all</em> user workloads on Fargate. This can be done by setting service labels under <code>launcher.templateValues</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">launcher</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">templateValues</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">service</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">        # whatever label satisfies the Fargate profile</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">fargate-job</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="experimental" class="level4">
+<h4 class="anchored" data-anchor-id="experimental">Experimental</h4>
+<p>However, for Posit Workbench, it is also possible to allow users (or just certain users) to opt into running jobs on AWS Fargate. This is achieved by using the notion of “placement constraints.” We must still set the label to satisfy the Fargate profile, but placement constraints can be chosen by users in the User Interface.</p>
+<p>Values like the following will make this possible for all users:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">launcher</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">templateValues</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">service</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        # using a templated expression to choose the value of the label</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">fargate-job</span><span class="kw">:</span><span class="at"> </span><span class="st">"{{ if }}true{{ else }}false{{ end }}"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">profiles</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">launcher.kubernetes.profiles.conf</span><span class="kw">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">"*"</span><span class="kw">:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">placement-constraints</span><span class="kw">:</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Posit Connect does not yet have a mechanism for exposing Fargate job selection or placement constraint selection to publishers.</p>
+</section>
+</section>
+<section id="standalone-workbench-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="standalone-workbench-configuration">Standalone Workbench Configuration</h3>
+<p>In Workbench, you can either define that <em>all</em> user jobs will run in Fargate, or allow users to choose which jobs run in Fargate. As discussed above, configuration varies based on your choice here.</p>
+<section id="all-workloads" class="level4">
+<h4 class="anchored" data-anchor-id="all-workloads">All Workloads</h4>
+<p>To run all user workloads in Fargate, you must ensure that your Fargate profile selector is set for every Workbench job. You can do this by using the namespace selector or using the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/job/">job templates</a> to hard-code a label. For instance, using the label in the namespace by adding this line to <code>service.tpl</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">app.kubernetes.io/managed-by</span><span class="kw">:</span><span class="at"> </span><span class="st">"launcher"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">posit.co/execution-type</span><span class="kw">:</span><span class="at"> </span><span class="st">"fargate"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- with .Job.metadata.job.labels </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- range $key</span><span class="kw">,</span><span class="at"> $val :\ . </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{ $key </span><span class="kw">}</span><span class="fu">}</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at">{ toYaml $val | indent 4 | trimPrefix (repeat 4 </span><span class="st">" "</span><span class="at">)</span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- with $templateData.job.labels </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- range $key</span><span class="kw">,</span><span class="at"> $val :\ . </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{ $key </span><span class="kw">}</span><span class="fu">}</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at">{ toYaml $val | indent 4 | trimPrefix (repeat 4 </span><span class="st">" "</span><span class="at">)</span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="select-workloads" class="level4">
+<h4 class="anchored" data-anchor-id="select-workloads">Select Workloads</h4>
+<p>In order to run select workloads on Fargate, you must provide a <code>placement-constraint</code> to appropriate users on your system so that they can decide which jobs to run on Fargate. Let us presume that our Fargate profile requires the fargate-job: true label. To do this, configure <code>launcher.kubernetes.profiles.conf</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[*]</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">placement-constraints: eks.amazonaws.com/compute-type:not-fargate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then you must customize the job templates so that labels are set appropriately upon placement constraint selection.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">backoffLimit</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- /* BEGIN CHANGE </span><span class="ot">*/</span><span class="at"> -</span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- $useFargate := false </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- range .Job.placementConstraints </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">{</span><span class="at">{- if and (eq .name </span><span class="st">"eks.amazonaws.com/compute-type"</span><span class="at">) (eq .value </span><span class="st">"fargate"</span><span class="at">) </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">{</span><span class="at">{- $useFargate := true </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- if $useFargate </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">fargate-job</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at">{ $useFargate | quote </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- end </span><span class="kw">}</span><span class="at">}</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">{</span><span class="at">{- /* END CHANGE </span><span class="ot">*/}}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This example will send jobs to Fargate by default. We use a “fake” placement constraint to indicate “not fargate”, because the Launcher (currently) does not have a notion of “default placement constraints”. This enables users to “opt out” of Fargate for job execution by selecting “not-fargate” from the drop down window.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./imgs/not-fargate-ui.png" class="img-fluid figure-img" alt="UI options for select workloads with Fargate"></p>
+<figcaption>UI options for select workloads with Fargate</figcaption>
+</figure>
+</div>
+<p>There are example templates here:</p>
+<ul>
+<li><a href="https://github.com/rstudio/helm/tree/main/examples/launcher-templates/fargate/default-fargate">Default Send Jobs to Fargate</a></li>
+<li><a href="https://github.com/rstudio/helm/tree/main/examples/launcher-templates/fargate/default-not">Let Users Send Jobs to Fargate</a></li>
+</ul>
+</section>
+</section>
+<section id="standalone-connect-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="standalone-connect-configuration">Standalone Connect Configuration</h3>
+<p>We do not recommend using a standalone Connect instance with the “off-host” execution feature required to use Fargate.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

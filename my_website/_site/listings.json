@@ -2,6 +2,7 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/job-templating-k8s.html",
       "/work/google-resources.html",
       "/work/renv-environments.html",
       "/work/delta-lake-and-azure.html",

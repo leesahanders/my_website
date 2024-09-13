@@ -1,0 +1,20 @@
+---
+title: "Deploying to Connect from CI/CD Pipelines"
+date-meta: NA
+last-update: NA
+# categories:
+# tags:
+---
+
+Content can be published to Connect from a CI/CD pipeline by utilizing the [Connect Server API](https://docs.posit.co/connect/api). A CI/CD pipeline can utilize the API directly, use a Posit-created [GitHub Action](https://github.com/rstudio/actions/tree/main/connect-publish), or use a package in Python/R ([rsconnect-python](https://github.com/rstudio/rsconnect-python) or [connectapi](https://github.com/rstudio/connectapi)).
+
+Each page in this section has detailed examples of how each CI/CD system can be utilized to deploy content to Connect.
+
+| CI/CD System | 
+|----|
+| [Azure Pipelines](azure-pipelines/)      |
+| [Bitbucket Pipelines](bitbucket-pipelines/)      |
+| [GitHub Actions](github-actions/)     |
+| [Gitlab CI/CD](gitlab-ci-cd/)       | 
+| [Jenkins](jenkins/)       | 
+
