@@ -13,18 +13,8 @@
       "/work/git-and-sagemaker.html",
       "/work/securing-credentials.html",
       "/work/sharepoint-oh-no.html",
-      "/work/vetiver.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
+      "/work/vetiver.html",
+      "/work/r-command-line.html"
     ]
   },
   {
@@ -32,6 +22,7 @@
     "items": [
       "/lists/data.html",
       "/lists/phone_games.html",
+      "/work/r-command-line.html",
       "/lists/sound.html",
       "/work/vetiver.html",
       "/work/sharepoint-oh-no.html",
@@ -54,6 +45,17 @@
       "/lists.html",
       "/index.html",
       "/about.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   }
 ]

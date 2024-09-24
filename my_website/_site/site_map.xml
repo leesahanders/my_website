@@ -1123,7 +1123,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -1151,7 +1151,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -1217,7 +1217,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
@@ -5752,6 +5752,777 @@ View this post on Instagram
   <media:content url="https://questionable.quarto.pub/blog/lists/img/otomata.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
+  <title>Command line / bash and R</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/r-command-line.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>Have you ever needed to run linux / mac / or windows commands from an R script? Do you have workflows where you have to create data files in R, pass to another system for processing, and then back into R for final visualization?</p>
+<p>One of the best things about the R ecosystem is the massive spread of packages and capability that have already been developed, including for running operating system commands already at your fingertips.</p>
+<p>Warning: With great power comes great responsibility. While the commands listed in this document are safe to run it’s always a good idea to double check what a system command actually does prior to running it, otherwise you could end up one of the examples <a href="https://en.wikipedia.org/wiki/List_of_security_hacking_incidents">here</a>.</p>
+</section>
+<section id="including-bash" class="level2">
+<h2 class="anchored" data-anchor-id="including-bash">Including Bash</h2>
+<p>RMarkdown supports bash, sh and awk (depending on the hosting operating system).</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">pwd</span></span></code></pre></div>
+<p>You could also run something a little bit more complex:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">current_date</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">date</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Today is </span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$current_date</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span></code></pre></div>
+<p>Notes from <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-bash.html">this resource</a>:</p>
+<ul>
+<li>Running bash within rmarkdown will ignore profile files like ~/.bash_profile and ~/.bash_login, in which you may have defined command aliases or modified environment variables like the PATH variable. If you want these profile files to be executed just like when you use the terminal, you may pass the argument -l to bash via engine.opts, e.g.,</li>
+</ul>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#bash, engine.opts='-l'</span></span>
+<span id="cb3-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PATH</span></span></code></pre></div>
+<ul>
+<li><p>If you want to enable the -l argument globally for all bash chunks, you may set it in the global chunk option in the beginning of your document:<code>knitr::opts_chunk$set(engine.opts = list(bash = "-l"))</code></p></li>
+<li><p>You can also pass other arguments to bash by providing them as a character vector to the chunk option engine.opts.</p></li>
+</ul>
+</section>
+<section id="system-commands-within-r" class="level2">
+<h2 class="anchored" data-anchor-id="system-commands-within-r">System commands within R</h2>
+<p>Note from <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-bash.html">this resource</a>: Please note that bash is invoked with the R function system2().</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># list all files and directories</span></span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">command =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ls"</span>)</span></code></pre></div>
+<p>We can use this to save a system output into our R workspace for later processing:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">var <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system2</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"whoami"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stdout =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stderr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(var)</span></code></pre></div>
+<p>You can also use <code>input=</code> for commands that will have a response from the system that needs a response, like logging in where you supply a username and then it prompts you for a password.</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'sudo -kS ls'</span>,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">input=</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">readline</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Enter your password: "</span>))</span></code></pre></div>
+</section>
+<section id="multi-line-system-commands-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="multi-line-system-commands-in-r">Multi-line system commands in R</h2>
+<p>There is a good discussion on nuances of using system commands within R in <a href="https://stackoverflow.com/questions/37860616/unable-to-get-r-language-system2-command-result">this stackoverflow post</a>.</p>
+<p>system and system2 functions are designed for simple commands, as evidenced by the separation of the command word and command arguments into separate function arguments. However that can be subverted using shell metacharacters to run more complex statements.</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'echo a b; echo c d'</span>);</span>
+<span id="cb7-2"></span>
+<span id="cb7-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system2</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'echo'</span>,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'a'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'b; echo c d'</span>));</span></code></pre></div>
+<p>At this point in the complexity it is probably worth considering writing the commands you want to run as a <a href="https://phoenixnap.com/kb/write-bash-script">bin bash script</a> which is then called by R to run from system.</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">bash_script <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#!/bin/bash</span></span>
+<span id="cb8-2"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># A simple Bash script</span></span>
+<span id="cb8-3"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">echo pwd</span></span>
+<span id="cb8-4"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">echo ls</span></span>
+<span id="cb8-5"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">echo Done!"</span></span>
+<span id="cb8-6"></span>
+<span id="cb8-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">writeLines</span>(bash_script, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bash_script.sh"</span>)</span>
+<span id="cb8-8"></span>
+<span id="cb8-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'chmod +x bash_script.sh'</span>)</span>
+<span id="cb8-10"></span>
+<span id="cb8-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system2</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./bash_script.sh'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stdout =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stderr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<p>We could also use the built in <a href="https://support.rstudio.com/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE">terminal in the Rstudio IDE</a> to write the .sh file (using vim, saving with escape/ctrl/cmd-c and :w, closing with escape/ctrl/cmd-c and typing :q). The permissions will need to be changed with <code>chmod +x demo.sh</code>. That file can then be run with <code>./demo.sh</code>.</p>
+</section>
+<section id="responding-to-bash-commands-from-r" class="level2">
+<h2 class="anchored" data-anchor-id="responding-to-bash-commands-from-r">Responding to Bash commands from R</h2>
+<p>There is a good example in <a href="https://stackoverflow.com/questions/32239069/invoke-a-system-command-and-pipe-a-variable-as-an-argument">stackoverflow here</a>.</p>
+<p>In some cases it is useful to run a command and then be able to add an additional input. For example when signing in to a server being able to respond with a password, or to provide a yes to a prompt when installing a package. The input arg to system2 will accomplish this.</p>
+<p><code>input: if a character vector is supplied, this is copied one string per line to a temporary file, and the standard input of ‘command’ is redirected to the file.</code></p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">foo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"foo"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bar"</span>)</span>
+<span id="cb9-2">result <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system2</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cat"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">input =</span> foo, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stdout =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb9-3"></span>
+<span id="cb9-4">result</span></code></pre></div>
+</section>
+<section id="mixing-r-and-bash-operations" class="level2">
+<h2 class="anchored" data-anchor-id="mixing-r-and-bash-operations">Mixing R and bash operations</h2>
+<p>Let’s save a file to disk using R:</p>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#my_data &lt;-  data.frame("fruits" = c("Mango","Orange","Grape","Guava","Apple"))</span></span>
+<span id="cb10-2"></span>
+<span id="cb10-3">my_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Mango, Orange, Grape, Guava, Apple"</span></span>
+<span id="cb10-4"></span>
+<span id="cb10-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">write.table</span>(my_data, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">file =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"my_data.txt"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">row.names =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb10-6"></span>
+<span id="cb10-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read.delim</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">file =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"my_data.txt"</span>)</span></code></pre></div>
+<p>Let’s run a multi-line bash command and see the output:</p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">count_words</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">wc</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-w</span> my_data.txt<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`</span></span>
+<span id="cb11-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Total words in my_data.txt is </span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$count_words</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span></code></pre></div>
+<p>We could also run a bin bash script with commands so we can pass the output back into R for further processing:</p>
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">bash_script2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#!/bin/bash</span></span>
+<span id="cb12-2"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"># A simple Bash script</span></span>
+<span id="cb12-3"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">sed 's/a//g' my_data.txt"</span></span>
+<span id="cb12-4"></span>
+<span id="cb12-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">writeLines</span>(bash_script2, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bash_script2.sh"</span>)</span>
+<span id="cb12-6"></span>
+<span id="cb12-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'chmod +x bash_script2.sh'</span>)</span>
+<span id="cb12-8"></span>
+<span id="cb12-9">my_data2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system2</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./bash_script2.sh'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stdout =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stderr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<p><a href="https://stackoverflow.com/questions/24257271/r-using-wait-false-in-system-with-multiline-commands">Some behavior</a> is reported that when running bash scripts in R with system using the wait argument (when used for running async with R) will only wait for the last line to complete. Solutions are discussed in that article.</p>
+</section>
+<section id="session-memory-from-r-and-python-bash-commands" class="level2">
+<h2 class="anchored" data-anchor-id="session-memory-from-r-and-python-bash-commands">Session memory from R and Python (bash commands)</h2>
+<p>There are several different ways to access this information, with the challenge coming in that depending on the command we can get host level information, system, rsession, kubernetes session, and different units (B vs iB vs bits).</p>
+<p>The below are various functions and approaches for determining a robust approach that most closely matches what is available via the RStudio IDE and the <a href="https://colorado.rstudio.com/rstudio/admin/sessions">Workbench Admin Dashboard</a>.</p>
+<p>Notes:</p>
+<ul>
+<li>Units: 1 MiB = 1,048,576 bytes, where mebibyte is MiB.</li>
+<li>Default session has 2048 MB -&gt; ~2 GB</li>
+</ul>
+<section id="from-r" class="level3">
+<h3 class="anchored" data-anchor-id="from-r">From R:</h3>
+<p>When inside kubernetes (similarly with docker containers) in order to get the session size we need to pull from inside the cgroups.</p>
+<p>All of the options:</p>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cat /sys/fs/cgroup/memory/memory.stat"</span>)</span></code></pre></div>
+<p>View the total memory with:</p>
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Total memory in session</span></span>
+<span id="cb14-2">total <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cat /sys/fs/cgroup/memory/memory.limit_in_bytes"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intern=</span>T)</span>
+<span id="cb14-3"></span>
+<span id="cb14-4">total_rounded <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> (((<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(total)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This is GiB</span></span>
+<span id="cb14-5"></span>
+<span id="cb14-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(total_rounded)</span></code></pre></div>
+<p>View the used memory with:</p>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Used memory </span></span>
+<span id="cb15-2">used <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cat /sys/fs/cgroup/memory/memory.usage_in_bytes"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intern=</span>T)</span>
+<span id="cb15-3"></span>
+<span id="cb15-4">used_rounded <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> (((<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(used)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This is GiB</span></span>
+<span id="cb15-5"></span>
+<span id="cb15-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(used_rounded)</span></code></pre></div>
+<p>We can then calculate the remaining memory with:</p>
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">remains <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(total) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(used) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># this is in Bytes</span></span>
+<span id="cb16-2"></span>
+<span id="cb16-3">remains_rounded <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> (((remains<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span>)</span>
+<span id="cb16-4"></span>
+<span id="cb16-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(remains_rounded) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This is GiB</span></span></code></pre></div>
+<p>Unfortunately the below approaches all use the hosting container, rather than the session container (IE getting 32GB for the total size rather than the 2GB specified).</p>
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free -t"</span>)</span></code></pre></div>
+<p>Free isn’t aware it is inside a container, it is giving memory of the parent server:</p>
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free --mega"</span>)</span></code></pre></div>
+<p>Running top also reports something different, with 32 as the total amount of memory (showing the parent).</p>
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"top"</span>)</span></code></pre></div>
+<p>We can also use the “garbage collector”, but note that this only gives us the used memory and not the total available.</p>
+<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gc</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">verbose=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+<p>Bringing these approaches together we can use the function created by this <a href="https://stackoverflow.com/questions/46690665/complete-r-session-size">stackoverflow post</a> which parses /proc/meminfo on linux as described in <a href="https://stackoverflow.com/questions/6457290/how-to-check-the-amount-of-ram/6457769#6457769">this stackoverflow post</a>.</p>
+<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">getAvailMem <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) {</span>
+<span id="cb21-2"></span>
+<span id="cb21-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gc</span>()</span>
+<span id="cb21-4"></span>
+<span id="cb21-5">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.info</span>()[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sysname"</span>]] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Windows"</span>) {</span>
+<span id="cb21-6">    memfree <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (utils<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">memory.limit</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> utils<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">memory.size</span>())</span>
+<span id="cb21-7">  } <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> {</span>
+<span id="cb21-8">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># http://stackoverflow.com/a/6457769/6103040</span></span>
+<span id="cb21-9">    memfree <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(</span>
+<span id="cb21-10">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"awk '/MemFree/ {print $2}' /proc/meminfo"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intern =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span>
+<span id="cb21-11">  }</span>
+<span id="cb21-12"></span>
+<span id="cb21-13">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">if</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>(format, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">format</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">structure</span>(memfree, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">class =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"object_size"</span>),</span>
+<span id="cb21-14">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">units =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"auto"</span>), memfree)</span>
+<span id="cb21-15">}</span>
+<span id="cb21-16"></span>
+<span id="cb21-17"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAvailMem</span>()</span></code></pre></div>
+<p>Or directly parsing meminfo, per <a href="https://www.faqcode4u.com/faq/44038/how-to-check-the-amount-of-ram-in-r">this reference</a>:</p>
+<div class="sourceCode" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1024 * as.numeric(system("grep MemFree /proc/meminfo"))</span></span>
+<span id="cb22-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grep MemFree /proc/meminfo"</span>)</span></code></pre></div>
+<p>Total amount of memory in kB that the OS thinks is available:</p>
+<div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1024 * as.numeric(system("grep MemFree /proc/meminfo"))</span></span>
+<span id="cb23-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grep MemTotal /proc/meminfo"</span>)</span></code></pre></div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">memfree <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"awk '/MemFree/ {print $2}' /proc/meminfo"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intern=</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span>
+<span id="cb24-2">memfree</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2748548</code></pre>
+</div>
+</div>
+<p>An alternative is the <a href="https://cran.r-project.org/web/packages/memuse/index.html">memuse package</a> with <a href="https://github.com/shinra-dev/memuse">git here</a>:</p>
+<div class="sourceCode" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(memuse)</span>
+<span id="cb26-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># memuse::Sys.meminfo()</span></span>
+<span id="cb26-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># memuse::Sys.swapinfo() </span></span>
+<span id="cb26-4">memuse<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.procmem</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gcFirst =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Our current size, matches the R Memory Usage Report. By setting gcFirst = FALSE we are not calling garbage collection prior to getting memory. </span></span>
+<span id="cb26-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># memuse::Sys.cachesize()</span></span>
+<span id="cb26-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># memuse::Sys.cachelinesize()</span></span>
+<span id="cb26-7"></span>
+<span id="cb26-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Expectations: </span></span>
+<span id="cb26-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#2076 MiB is expected total, 0.2721055 GB</span></span>
+<span id="cb26-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#1640 MiB remaining</span></span>
+<span id="cb26-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1 MiB = 1,048,576 bytes</span></span></code></pre></div>
+<p>Unfortunately it is reporting the parent container again:</p>
+<div class="sourceCode" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1">memuse<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.meminfo</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">compact.free =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div>
+<p>We can also try using <a href="https://lobstr.r-lib.org/">lobstr</a>:</p>
+<div class="sourceCode" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(lobstr)</span>
+<span id="cb28-2"></span>
+<span id="cb28-3">lobstr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mem_used</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1">usage <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>() {</span>
+<span id="cb29-2">    m1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gc</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)[, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(Mb)"</span>])</span>
+<span id="cb29-3">    m2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.double</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ps -p"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getpid</span>(), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"-o pmem="</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intern =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span>
+<span id="cb29-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gc (MiB)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> m1, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ps (%)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> m2)</span>
+<span id="cb29-5">}</span>
+<span id="cb29-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">usage</span>()</span></code></pre></div>
+</section>
+<section id="from-python-using-reticulate-but-would-also-work-from-another-ide-for-example-jupyter" class="level3">
+<h3 class="anchored" data-anchor-id="from-python-using-reticulate-but-would-also-work-from-another-ide-for-example-jupyter">From Python (using reticulate but would also work from another IDE, for example Jupyter):</h3>
+<div class="sourceCode" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(reticulate)</span></code></pre></div>
+<p>Note this approach is using free, which shows the hosting container’s memory, but the same approach as used in R above using cgroups can be applied.</p>
+<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb31-2">os.system(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free"</span>)</span></code></pre></div>
+</section>
+</section>
+<section id="too-long-didnt-read-tldr" class="level2">
+<h2 class="anchored" data-anchor-id="too-long-didnt-read-tldr">Too Long Didn’t Read (TLDR)</h2>
+<p>TLDR: Read <a href="https://www.r-bloggers.com/2021/09/how-to-use-system-commands-in-your-r-script-or-package/">the excellently written r-bloggers post here</a>.</p>
+<p>Commands to reference:</p>
+<ul>
+<li><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/system">system</a></li>
+<li><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/system2">system2</a></li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/commandArgs.html">commandArgs</a></li>
+<li><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/system">shell</a></li>
+</ul>
+<p>Other references:</p>
+<ul>
+<li>https://www.r-bloggers.com/2021/09/how-to-use-system-commands-in-your-r-script-or-package/</li>
+<li>https://bash-intro.rsquaredacademy.com/r-command-line.html</li>
+<li>https://bookdown.org/yihui/rmarkdown-cookbook/eng-bash.html</li>
+<li>https://wetlandsandr.wordpress.com/2018/09/15/integrating-bash-and-r/</li>
+</ul>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">Resources</h3>
+<p>Learn more about memory profiling: <a href="http://adv-r.had.co.nz/memory.html#memory-profiling">http://adv-r.had.co.nz/memory.html#memory-profiling</a></p>
+<p>Within a RStudio/Posit products from the admin side there are some additional tools that can be handy:</p>
+<ul>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/360046919174">https://support.rstudio.com/hc/en-us/articles/360046919174</a></li>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/360044800273">https://support.rstudio.com/hc/en-us/articles/360044800273</a></li>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/1500005616261-Understanding-Memory-Usage-in-the-RStudio-IDE">https://support.rstudio.com/hc/en-us/articles/1500005616261-Understanding-Memory-Usage-in-the-RStudio-IDE</a></li>
+<li><a href="http://adv-r.had.co.nz/memory.html">http://adv-r.had.co.nz/memory.html</a></li>
+<li><a href="https://stackoverflow.com/questions/46690665/complete-r-session-size">https://stackoverflow.com/questions/46690665/complete-r-session-size</a></li>
+<li>Read about what ubuntu load is: <a href="https://www.brendangregg.com/blog/2017-08-08/linux-load-averages.html">https://www.brendangregg.com/blog/2017-08-08/linux-load-averages.html</a></li>
+<li><a href="https://stackoverflow.com/questions/53333858/how-to-clean-up-r-memory-without-the-need-to-restart-r-session">https://stackoverflow.com/questions/53333858/how-to-clean-up-r-memory-without-the-need-to-restart-r-session</a></li>
+<li><a href="https://github.com/rstudio/rstudio/issues/9353">https://github.com/rstudio/rstudio/issues/9353</a></li>
+<li><a href="https://engineering.linkedin.com/blog/2016/08/don_t-let-linux-control-groups-uncontrolled">https://engineering.linkedin.com/blog/2016/08/don_t-let-linux-control-groups-uncontrolled</a></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/r-command-line.html</guid>
+  <pubDate>Tue, 20 Sep 2022 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
   <title>Phone games</title>
   <dc:creator>Lisa </dc:creator>
   <link>https://questionable.quarto.pub/blog/lists/phone_games.html</link>
@@ -6207,6 +6978,24 @@ Reading Time
 <span class="listing-reading-time">3 min</span>
 </td>
 </tr>
+<tr data-index="12" data-categories="code" data-listing-date-sort="1663653600000" data-listing-file-modified-sort="1727206001750" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1418" data-listing-title-sort="Command line / bash and R" data-listing-filename-sort="r-command-line.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<span class="listing-date">Sep 20, 2022</span>
+</td>
+<td>
+<a href="./work/r-command-line.html" class="title listing-title">Command line / bash and R</a>
+</td>
+<td>
+<span class="listing-description">Experiments in running command line from R</span>
+</td>
+<td>
+<span class="listing-author">Lisa </span>
+</td>
+<td>
+<span class="listing-reading-time">8 min</span>
+</td>
+</tr>
 </tbody>
 </table>
 <div class="listing-no-matching d-none">
@@ -6214,107 +7003,7 @@ No matching items
 </div>
 </div> ]]></description>
   <guid>https://questionable.quarto.pub/blog/work.html</guid>
-  <pubDate>Fri, 13 Sep 2024 17:28:39 GMT</pubDate>
-</item>
-<item>
-  <title>Presentations</title>
-  <link>https://questionable.quarto.pub/blog/presentations.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Check out some of the presentations I’ve made while working at Posit:</p>
-<center>
-<p><strong>2024</strong></p>
-</center>
-<div class="column-screen-inset">
-<div class="mycards-container">
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Quarto for Reproduceable Reporting</p>
-</div>
-<div class="mycard-description">
-<p>Quarto is an amazing technology, this presentation goes over the basics of setting up quarto projects and touches on advanced topics like content types, version control, and other bells and whistles (presentation now with Confetti!)</p>
-</div>
-<div class="mycard-link">
-<p><br> <a href="https://questionable.quarto.pub/quarto-for-reproducible-reporting-demo/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/presentation" target="_blank">Check out the repo</a></p>
-</div>
-</div>
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>It’s dangerous to go alone - take this!</p>
-</div>
-<div class="mycard-description">
-<p>Lisa’s best practices for pain-free data science</p>
-</div>
-<div class="mycard-link">
-<p><br> <a href="https://questionable.quarto.pub/its-dangerous-to-go-alone-take-this/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/painfree_data_science_demo_and_presentation" target="_blank">Check out the repo</a></p>
-</div>
-</div>
-</div>
-</div>
-<center>
-<p><strong>2023 and 2022</strong></p>
-</center>
-<div class="column-screen-inset">
-<div class="mycards-container">
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Reporting in R with Posit Team</p>
-</div>
-<div class="mycard-description">
-<p>Using the Posit Team set of products to create data science reports.</p>
-</div>
-<div class="mycard-link">
-<p><a href="https://questionable.quarto.pub/reporting-in-r-with-posit-team/" target="_blank">Check out the slides</a></p>
-</div>
-</div>
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Improving app performance</p>
-</div>
-<div class="mycard-description">
-<p>Analyzing your R scripts for performance improvements using profvis, shinyloadtest, and shinytest2.</p>
-</div>
-<div class="mycard-link">
-<p><br> <a href="https://questionable.quarto.pub/improving-app-performance-with-profvis/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/demo_app_perf/tree/main" target="_blank">Check out the repo</a></p>
-</div>
-</div>
-<div class="mycard">
-<div class="angle-open">
-<p>&gt;</p>
-</div>
-<div class="mycard-title">
-<p>Reproducible Workflows</p>
-</div>
-<div class="mycard-description">
-<p>Creating reproducible data science workflows.</p>
-</div>
-<div class="mycard-link">
-<p><br> <a href="https://questionable.quarto.pub/reproduceable-workflows/" target="_blank">Check out the slides</a> <a href="https://github.com/leesahanders/demo_renv" target="_blank">Check out the repo</a></p>
-</div>
-</div>
-</div>
-</div>
-
-
-
- ]]></description>
-  <guid>https://questionable.quarto.pub/blog/presentations.html</guid>
-  <pubDate>Fri, 13 Sep 2024 17:28:39 GMT</pubDate>
+  <pubDate>Tue, 24 Sep 2024 19:27:15 GMT</pubDate>
 </item>
 </channel>
 </rss>
