@@ -49,6 +49,46 @@ Leave a virtual environment with:
 deactivate
 ```
 
+## Jupyter kernels, Quarto, and VS Code
+
+```
+# Create a venv and install packages
+python -m venv .venv
+. .venv/bin/activate
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install --upgrade pip
+
+# Register as kernel
+pip install ipykernel jupyter
+python3 -m ipykernel install --name "new_venv" --user
+
+# Check for missing dependencies
+python -m pip check
+
+# Automatically uprade all packages from requirements.txt 
+pip install pip-upgrader
+pip-upgrade requirements.txt
+pip install -r requirements.txt
+
+# Freeze your requirements
+pip freeze > requirements.txt
+
+Requires jupyter extension
+```
+
+For quarto and vs code: 
+
+> If you create a virtual environment with venv in the env/ directory as described above, Visual Studio Code should automatically discover that environment when you load a workspace from the environment’s parent directory.
+Source: https://quarto.org/docs/projects/virtual-environments.html#vs-code
+
+```
+python3 -m venv env
+source env/bin/activate
+python3 -m pip freeze > requirements.txt
+python3 -m pip install -r requirements.txt
+```
+
 ## Deploy
 
 ### rsconnect-python CLI

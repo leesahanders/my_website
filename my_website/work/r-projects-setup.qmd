@@ -280,5 +280,7 @@ For example, you might see: `https://packagemanager.rstudio.com/all/latest` or `
 Change your repo with: `options(repos = c(REPO_NAME = "https://colorado.rstudio.com/rspm/cran/__linux__/focal/2022-06-29"))` or `options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))`
 
 
+## Troubleshooting 
 
+Bioconductor and Mass and R version: <https://forum.posit.co/t/mass-not-available-for-r-4-3-3/188156/2> 
 
