@@ -228,8 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
   <li><a href="#when-sessions-are-crashing" id="toc-when-sessions-are-crashing" class="nav-link" data-scroll-target="#when-sessions-are-crashing">When sessions are crashing</a></li>
   <li><a href="#things-to-watch-out-for" id="toc-things-to-watch-out-for" class="nav-link" data-scroll-target="#things-to-watch-out-for">Things to watch out for</a></li>
   <li><a href="#making-code-faster" id="toc-making-code-faster" class="nav-link" data-scroll-target="#making-code-faster">Making code faster</a></li>
@@ -253,9 +252,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#foreach-and-doparallel" id="toc-foreach-and-doparallel" class="nav-link" data-scroll-target="#foreach-and-doparallel">foreach and doParallel</a></li>
   <li><a href="#clustermq" id="toc-clustermq" class="nav-link" data-scroll-target="#clustermq">clustermq</a></li>
   </ul></li>
-  <li><a href="#other-tips-and-tricks" id="toc-other-tips-and-tricks" class="nav-link" data-scroll-target="#other-tips-and-tricks">Other tips and tricks</a></li>
   <li><a href="#but-what-about-python" id="toc-but-what-about-python" class="nav-link" data-scroll-target="#but-what-about-python">But what about Python?</a></li>
   </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -266,16 +266,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="references" class="level1">
-<h1>References</h1>
+<p>For compute heavy and long running jobs, HPC can come to the rescue!</p>
 <ul>
-<li>https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide</li>
-<li>https://edavidaja.github.io/parallelooza/#/parallelooza</li>
-<li>https://github.com/edavidaja/parallelooza</li>
-<li>Shiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html</li>
-<li>workbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch</li>
+<li>HPC clusters typically have far more compute power than a normal server or a laptop</li>
+<li>HPC clusters offer an infrastructure with significant compute power that can be leveraged as needed. So-called “jobs” on HPC have a well-defined start date but even more importantly so an end date.</li>
 </ul>
-</section>
+<p>As a user remember though:</p>
+<ul>
+<li>It is your responsibility to develop performant and fast code since you are working on a shared resource - there is no excuse to not optimize for performance</li>
+<li>Parallelization can speed up execution when done right, but there is no guarantee</li>
+<li>“With great power comes great responsibility” - Spider Man</li>
+</ul>
 <section id="getting-started" class="level1">
 <h1>Getting started</h1>
 <p>Read:</p>
@@ -558,25 +559,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The future of clustermq: crew/mirai/nanonext</p>
 </section>
 </section>
-<section id="other-tips-and-tricks" class="level2">
-<h2 class="anchored" data-anchor-id="other-tips-and-tricks">Other tips and tricks</h2>
-<p>it seems they are testing quite a few models against their data that are indeed hard to parallelize. Couple of zero order recommendations</p>
-<p>only select the data they really need from ess_multilevel</p>
-<p>parallelize the individual models via something like <a href="https://stackoverflow.com/a/44010698/20032741" class="uri">https://stackoverflow.com/a/44010698/20032741</a>, suggested by the author of future himself.</p>
-<p>remove the ess_multilevel data structure right after the select statement, not when the user is running out of memory</p>
-<p>Additionally, for real benchmarking of functions I recommend against Sys.time() in favour of packages like tictoc and microbenchmark , the latter especially if the time for each function call is short and you want to get rid of the so-called OS jitter (influence from OS level processes)</p>
-<p>Last but not least, I also would point out the existence of https://luwidmer.github.io/fastR-website/materials.html where an ex-colleague of Novartis and me are talking in great length about debugging, performance optimisations and eventually about parallelization in R. This material is good for a 3.5 hour workshop.</p>
-<p>Also use setwd() with caution. Read a really good review of when to use setwd() and when not to here: <a href="https://rstats.wtf/projects#setwd" class="uri">https://rstats.wtf/projects#setwd</a></p>
-</section>
 <section id="but-what-about-python" class="level2">
 <h2 class="anchored" data-anchor-id="but-what-about-python">But what about Python?</h2>
 <ul>
 <li><a href="https://docs.dask.org/en/stable/deploying-hpc.html">dask-jobqueue</a></li>
 <li><a href="https://docs.ray.io/en/latest/cluster/vms/user-guides/community/slurm.html">ray</a></li>
 </ul>
-
-
 </section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li>https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide</li>
+<li>https://edavidaja.github.io/parallelooza/#/parallelooza</li>
+<li>https://github.com/edavidaja/parallelooza</li>
+<li>Shiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html</li>
+<li>workbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch</li>
+</ul>
+</section>
+<section id="further-reading" class="level1">
+<h1>Further reading</h1>
+<ul>
+<li>Clustermq example: <a href="https://michaelmayer.quarto.pub/clustermq/example.html">https://michaelmayer.quarto.pub/clustermq/example.html</a></li>
+<li>Shiny app with HPC example: https://github.com/michaelmayer2/penguins-hpc</li>
+<li>Slurm GPU training by Michael:</li>
+<li>Slides: <a href="https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit">https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit</a></li>
+<li>Git repository: <a href="https://github.com/michaelmayer2/merck-slurm-gpu-training/">https://github.com/michaelmayer2/merck-slurm-gpu-training/</a></li>
+<li>Go fastR: High Performance Computing with R Workshop: S<a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

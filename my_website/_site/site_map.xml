@@ -1713,7 +1713,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -1741,7 +1741,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -1807,7 +1807,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
@@ -4000,7 +4000,7 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
 <p>You can add data manually by creating a container and then using the upload icon.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -4083,7 +4083,7 @@ spark_disconnect(sc)</code></pre>
 <p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -4148,16 +4148,17 @@ utils::sessionInfo() </code></pre>
 
 
 
-<section id="references" class="level1">
-<h1>References</h1>
+<p>For compute heavy and long running jobs, HPC can come to the rescue!</p>
 <ul>
-<li>https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide</li>
-<li>https://edavidaja.github.io/parallelooza/#/parallelooza</li>
-<li>https://github.com/edavidaja/parallelooza</li>
-<li>Shiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html</li>
-<li>workbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch</li>
+<li>HPC clusters typically have far more compute power than a normal server or a laptop</li>
+<li>HPC clusters offer an infrastructure with significant compute power that can be leveraged as needed. So-called “jobs” on HPC have a well-defined start date but even more importantly so an end date.</li>
 </ul>
-</section>
+<p>As a user remember though:</p>
+<ul>
+<li>It is your responsibility to develop performant and fast code since you are working on a shared resource - there is no excuse to not optimize for performance</li>
+<li>Parallelization can speed up execution when done right, but there is no guarantee</li>
+<li>“With great power comes great responsibility” - Spider Man</li>
+</ul>
 <section id="getting-started" class="level1">
 <h1>Getting started</h1>
 <p>Read:</p>
@@ -5036,25 +5037,36 @@ font-style: inherit;">sqrt</span>(i)</span></code></pre></div>
 <p>The future of clustermq: crew/mirai/nanonext</p>
 </section>
 </section>
-<section id="other-tips-and-tricks" class="level2">
-<h2 class="anchored" data-anchor-id="other-tips-and-tricks">Other tips and tricks</h2>
-<p>it seems they are testing quite a few models against their data that are indeed hard to parallelize. Couple of zero order recommendations</p>
-<p>only select the data they really need from ess_multilevel</p>
-<p>parallelize the individual models via something like <a href="https://stackoverflow.com/a/44010698/20032741" class="uri">https://stackoverflow.com/a/44010698/20032741</a>, suggested by the author of future himself.</p>
-<p>remove the ess_multilevel data structure right after the select statement, not when the user is running out of memory</p>
-<p>Additionally, for real benchmarking of functions I recommend against Sys.time() in favour of packages like tictoc and microbenchmark , the latter especially if the time for each function call is short and you want to get rid of the so-called OS jitter (influence from OS level processes)</p>
-<p>Last but not least, I also would point out the existence of https://luwidmer.github.io/fastR-website/materials.html where an ex-colleague of Novartis and me are talking in great length about debugging, performance optimisations and eventually about parallelization in R. This material is good for a 3.5 hour workshop.</p>
-<p>Also use setwd() with caution. Read a really good review of when to use setwd() and when not to here: <a href="https://rstats.wtf/projects#setwd" class="uri">https://rstats.wtf/projects#setwd</a></p>
-</section>
 <section id="but-what-about-python" class="level2">
 <h2 class="anchored" data-anchor-id="but-what-about-python">But what about Python?</h2>
 <ul>
 <li><a href="https://docs.dask.org/en/stable/deploying-hpc.html">dask-jobqueue</a></li>
 <li><a href="https://docs.ray.io/en/latest/cluster/vms/user-guides/community/slurm.html">ray</a></li>
 </ul>
-
-
 </section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li>https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide</li>
+<li>https://edavidaja.github.io/parallelooza/#/parallelooza</li>
+<li>https://github.com/edavidaja/parallelooza</li>
+<li>Shiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html</li>
+<li>workbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch</li>
+</ul>
+</section>
+<section id="further-reading" class="level1">
+<h1>Further reading</h1>
+<ul>
+<li>Clustermq example: <a href="https://michaelmayer.quarto.pub/clustermq/example.html">https://michaelmayer.quarto.pub/clustermq/example.html</a></li>
+<li>Shiny app with HPC example: https://github.com/michaelmayer2/penguins-hpc</li>
+<li>Slurm GPU training by Michael:</li>
+<li>Slides: <a href="https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit">https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit</a></li>
+<li>Git repository: <a href="https://github.com/michaelmayer2/merck-slurm-gpu-training/">https://github.com/michaelmayer2/merck-slurm-gpu-training/</a></li>
+<li>Go fastR: High Performance Computing with R Workshop: S<a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
+</ul>
+
+
 </section>
 
  ]]></description>

@@ -19,13 +19,16 @@ categories:
   - code
 ---
 
-# References
+For compute heavy and long running jobs, HPC can come to the rescue!
 
-- https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide
-- https://edavidaja.github.io/parallelooza/#/parallelooza
-- https://github.com/edavidaja/parallelooza
-- Shiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html
-- workbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch
+- HPC clusters typically have far more compute power than a normal server or a laptop
+- HPC clusters offer an infrastructure with significant compute power that can be leveraged as needed. So-called “jobs” on HPC have a well-defined start date but even more importantly so an end date. 
+
+As a user remember though: 
+
+- It is your responsibility to develop performant and fast code since you are working on a shared resource - there is no excuse to not optimize for performance
+- Parallelization can speed up execution when done right, but there is no guarantee
+- “With great power comes great responsibility” - Spider Man
 
 # Getting started 
 
@@ -156,7 +159,6 @@ profvis({runApp(appDir = ".")})
 - bench
 - microbenchmark 
 
-
 # Taking advantage of compute resources with parallelization in R
 
 ## Taking advantage of native parallelization
@@ -260,7 +262,6 @@ print(multiple_core_time)
 print(cores_avail)
 ```
 
-
 Running sequentially took 18.33 seconds. Running in parallel shortened that to 4.99 seconds. 
 
 ### parallely (part of futureverse)
@@ -361,23 +362,24 @@ foreach(i = seq_len(n_cores)) %dopar% sqrt(i)
 
 The future of clustermq: crew/mirai/nanonext 
 
-## Other tips and tricks 
-
-it seems they are testing quite a few models against their data that are indeed hard to parallelize. Couple of zero order recommendations
-
-only select the data they really need from ess_multilevel
-
-parallelize the individual models via something like <https://stackoverflow.com/a/44010698/20032741>, suggested by the author of future himself.
-
-remove the ess_multilevel data structure right after the select statement, not when the user is running out of memory
-
-Additionally, for real benchmarking of functions I recommend against Sys.time() in favour of packages like tictoc and  microbenchmark , the latter especially if the time for each function call is short and you want to get rid of the so-called OS jitter (influence from OS level processes)
-
-Last but not least, I also would point out the existence of https://luwidmer.github.io/fastR-website/materials.html where an ex-colleague of Novartis and me are talking in great length about debugging, performance optimisations and eventually about parallelization in R. This material is good for a 3.5 hour workshop.
-
-Also use setwd() with caution. Read a really good review of when to use setwd() and when not to here: <https://rstats.wtf/projects#setwd>
-
 ## But what about Python? 
 
 - [dask-jobqueue](https://docs.dask.org/en/stable/deploying-hpc.html)
 - [ray](https://docs.ray.io/en/latest/cluster/vms/user-guides/community/slurm.html) 
+
+# References
+
+- https://colorado.posit.co/rsc/parallel_thinking/Parallel_Thinking.html#/title-slide
+- https://edavidaja.github.io/parallelooza/#/parallelooza
+- https://github.com/edavidaja/parallelooza
+- Shiny apps on Connect that feature long running jobs https://wlandau.github.io/crew/articles/shiny.html
+- workbench jobs and AWS batch: https://github.com/wlandau/crew.aws.batch
+
+# Further reading 
+
+- Clustermq example: [https://michaelmayer.quarto.pub/clustermq/example.html](https://michaelmayer.quarto.pub/clustermq/example.html)
+- Shiny app with HPC example: https://github.com/michaelmayer2/penguins-hpc
+- Slurm GPU training by Michael: 
+ - Slides: [https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit](https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit)
+ - Git repository: [https://github.com/michaelmayer2/merck-slurm-gpu-training/](https://github.com/michaelmayer2/merck-slurm-gpu-training/) 
+- Go fastR: High Performance Computing with R Workshop:  [https://luwidmer.github.io/fastR-website/](https://luwidmer.github.io/fastR-website/)**
