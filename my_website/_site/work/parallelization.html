@@ -228,7 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#expectations" id="toc-expectations" class="nav-link active" data-scroll-target="#expectations">Expectations</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a></li>
   <li><a href="#when-sessions-are-crashing" id="toc-when-sessions-are-crashing" class="nav-link" data-scroll-target="#when-sessions-are-crashing">When sessions are crashing</a></li>
   <li><a href="#things-to-watch-out-for" id="toc-things-to-watch-out-for" class="nav-link" data-scroll-target="#things-to-watch-out-for">Things to watch out for</a></li>
   <li><a href="#making-code-faster" id="toc-making-code-faster" class="nav-link" data-scroll-target="#making-code-faster">Making code faster</a></li>
@@ -277,6 +278,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Parallelization can speed up execution when done right, but there is no guarantee</li>
 <li>“With great power comes great responsibility” - Spider Man</li>
 </ul>
+<section id="expectations" class="level1">
+<h1>Expectations</h1>
+<p>Pros</p>
+<ul>
+<li>CAN speed up otherwise long running tasks</li>
+<li>CAN optimize and more efficiently use resources</li>
+</ul>
+<p>Cons</p>
+<ul>
+<li>CAN hog computing resources delay other scheduled jobs/access requests</li>
+<li>CAN prevent others from getting work done (all requested resources are guaranteed and exclusively used by you)</li>
+<li>CAN mask bad code design choices</li>
+<li>CAN act as a denial-of-service attack to other systems</li>
+</ul>
+</section>
 <section id="getting-started" class="level1">
 <h1>Getting started</h1>
 <p>Read:</p>
@@ -585,7 +601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Slurm GPU training by Michael:</li>
 <li>Slides: <a href="https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit">https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit</a></li>
 <li>Git repository: <a href="https://github.com/michaelmayer2/merck-slurm-gpu-training/">https://github.com/michaelmayer2/merck-slurm-gpu-training/</a></li>
-<li>Go fastR: High Performance Computing with R Workshop: S<a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
+<li>Go fastR: High Performance Computing with R Workshop: <a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
 </ul>
 
 

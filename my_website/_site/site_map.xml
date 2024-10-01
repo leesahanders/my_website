@@ -573,21 +573,139 @@ font-style: inherit;">"CONNECT"</span>){</span>
 
 
 
+<p>Have you ever tried to use someone else’s repo and run into issues with package installation and breaking package versions? Or tried to work on a really old repository and been foiled while trying to set it up?</p>
+<p>Projects have a standards problem - we need to realize that all the work we are doing exist in the framework of a project. By defining the elements of a project we can identify the parts that need to be made transparent and the tools (renv/venv) for making that happen.</p>
+<p>What is a project?</p>
+<ul>
+<li>Code, data files, config files, images/assets</li>
+<li>Defined / reproducible environment</li>
+<li>Defined language version</li>
+<li>Defined package versions and requirements</li>
+</ul>
+<p>What it’s not:</p>
+<ul>
+<li>Your editor</li>
+<li>The actual packages / repositories</li>
+<li>System dependencies</li>
+</ul>
+<section id="reading" class="level1">
+<h1>Reading</h1>
+<p>Environment management:</p>
+<ul>
+<li>Get started with renv in the RStudio IDE: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html">https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html</a></li>
+<li>You should be using renv: <a href="https://www.youtube.com/watch?v=GwVx_pf2uz4">https://www.youtube.com/watch?v=GwVx_pf2uz4</a></li>
+<li>Using Public Package Manager : <a href="https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-RStudio-Public-Package-Manager">https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-RStudio-Public-Package-Manager</a></li>
+</ul>
+<section id="reproducible-package-environments-for-r---at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-package-environments-for-r---at-a-glance">Reproducible package environments for R - At a glance</h2>
+<p>Step 1: Use pre-compiled packages</p>
+<ul>
+<li>Go to Public Package Manager</li>
+<li>Click on Get Started -&gt; Setup -&gt; Distribution and select your OS -&gt; Select Latest or Freeze and follow the instructions below the calendar.</li>
+<li>For example:</li>
+</ul>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">options</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">REPO_NAME =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.rstudio.com/all/latest"</span>))</span></code></pre></div>
+<p>Step 2: Use environment tracking</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Set up a new version controlled R project and install renv:</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"renv"</span>)</span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(renv)</span>
+<span id="cb2-4"></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Initialize your project with renv and take a snapshot:</span></span>
+<span id="cb2-6">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">init</span>()</span>
+<span id="cb2-7">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">snapshot</span>()<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-8"></span>
+<span id="cb2-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Update all packages, or revert back to an earlier snapshot:</span></span>
+<span id="cb2-10">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">update</span>()</span>
+<span id="cb2-11">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">revert</span>()</span>
+<span id="cb2-12"></span>
+<span id="cb2-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># History is saved into version control:</span></span>
+<span id="cb2-14">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">history</span>()</span></code></pre></div>
+<p>Step 3: Easy collaboration</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Have your colleague configure their repository to match yours: </span></span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">options</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">REPO_NAME =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.rstudio.com/all/latest"</span>)) </span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Send a colleague the link to your project on git, they'll restore your environment with:</span></span>
+<span id="cb3-5">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">restore</span>()</span></code></pre></div>
+</section>
 <section id="r-projects-setup" class="level2">
 <h2 class="anchored" data-anchor-id="r-projects-setup">R projects setup</h2>
 <p>Setup the <code>renv</code> environment:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">renv<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">activate</span>()</span>
-<span id="cb1-2">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb4-2">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">restore</span>()</span></code></pre></div>
 <p>To run the app either open <code>app/app.R</code> and click the “Run App” button at the top of the IDE code pane or use:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">shiny<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">shiny<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -612,7 +730,7 @@ font-style: inherit;">"app"</span>)</span></code></pre></div>
 <section id="git-backed" class="level3">
 <h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
 <p>Update the code, and then run:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">rsconnect<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">rsconnect<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -644,6 +762,7 @@ font-style: inherit;">"app"</span>)</span></code></pre></div>
 <li>Package - a collection of functions beyond base R that developers can install and use.</li>
 <li>Library - a directory containing installed packages.</li>
 </ul>
+</section>
 </section>
 <section id="workflow" class="level1">
 <h1>Workflow</h1>
@@ -698,7 +817,7 @@ renv::revert(commit = commit)</code></pre>
 <section id="troubleshooting" class="level1">
 <h1>Troubleshooting</h1>
 <p>Running a diagnostic:</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">diagnostics</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -706,7 +825,7 @@ font-style: inherit;">project =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NULL</span>)</span></code></pre></div>
 <p>Add more detail to logging:</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">options</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -714,21 +833,21 @@ font-style: inherit;">renv.download.trace =</span> <span class="cn" style="color
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 <p>If you are having particular issue with a package and it keeps being pulled in from the cache then doing a complete purge and reinstall can be useful:</p>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">renv<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">purge</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"stringr"</span>)</span>
-<span id="cb10-2">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb13-2">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">purge</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"stringi"</span>)</span>
-<span id="cb10-3"><span class="fu" style="color: #4758AB;
+<span id="cb13-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -736,22 +855,22 @@ font-style: inherit;">"stringr"</span>)</span></code></pre></div>
 <p><code>renv::purge</code> removes packages completely from the package cache (which may be shared across projects) rather than just removing the package from the project which is what <code>renv::remove</code> does. This can be useful if a package which had previously been installed in the cache has become corrupted or unusable, and needs to be re-installed.</p>
 <p>It may also be useful to verify both the OS you are currently useing as well as checking that the repository you are pointing towards is using the correct OS if it is pulling in the binaries.</p>
 <p>For debian/ubuntu distributions:</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">lsb_release</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-a</span></span></code></pre></div>
 <p>For other distributions (more broadly cross-linux compatible command):</p>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cat</span> /etc/os-release</span></code></pre></div>
 <p>Check the repository being pointed to and update it to use the URL from your package manager instance:</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'repos'</span>)</span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;
+<span id="cb16-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">options</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -774,24 +893,24 @@ font-style: inherit;">"https://packagemanager.posit.co/cran/__linux__/jammy/late
 <section id="library-paths" class="level1">
 <h1>Library paths</h1>
 <p>Find where your library is:</p>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">.libPaths</span>()</span>
-<span id="cb14-2">[<span class="dv" style="color: #AD0000;
+<span id="cb17-2">[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>] <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/home/sagemaker-user/R/x86_64-pc-linux-gnu-library/4.2"</span></span>
-<span id="cb14-3">[<span class="dv" style="color: #AD0000;
+<span id="cb17-3">[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>] <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/opt/R/4.2.1/lib/R/library"</span> </span></code></pre></div>
 <p>For example when working in a system that has a mounted share drive then would want to check that libraries are being written to that share so you get persistence. Typically this means writing to inside the home directory. Check mounted drives with: <code>df -h</code></p>
 <p>The next thing to check is permissions, for example with this command that shows full directory tree permissions</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">namei</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -800,10 +919,10 @@ font-style: inherit;">-l</span> /home/sagemaker-user/test/r-examples</span></cod
 <section id="migrations" class="level1">
 <h1>Migrations</h1>
 <p>Consider using the script in this gist to migrate R and Python libraries: <a href="https://gist.github.com/edavidaja/5996ffeb042df2642c77c065c07f023d" class="uri">https://gist.github.com/edavidaja/5996ffeb042df2642c77c065c07f023d</a></p>
-<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Delete the existing libraries</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;
+<span id="cb19-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">unlink</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -812,11 +931,11 @@ background-color: null;
 font-style: inherit;">recursive=</span><span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span>
-<span id="cb16-3"></span>
-<span id="cb16-4"><span class="co" style="color: #5E5E5E;
+<span id="cb19-3"></span>
+<span id="cb19-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Set repo address</span></span>
-<span id="cb16-5"><span class="fu" style="color: #4758AB;
+<span id="cb19-5"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">options</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -827,27 +946,27 @@ background-color: null;
 font-style: inherit;">REPO_NAME =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"https://colorado.posit.co/rspm/all/__linux__/jammy/latest"</span>))</span>
-<span id="cb16-6"></span>
-<span id="cb16-7"><span class="co" style="color: #5E5E5E;
+<span id="cb19-6"></span>
+<span id="cb19-7"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># (optional) add repo address to r profile</span></span>
-<span id="cb16-8">usethis<span class="sc" style="color: #5E5E5E;
+<span id="cb19-8">usethis<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">edit_r_profile</span>()</span>
-<span id="cb16-9"></span>
-<span id="cb16-10"><span class="co" style="color: #5E5E5E;
+<span id="cb19-9"></span>
+<span id="cb19-10"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Restart R session</span></span>
-<span id="cb16-11"><span class="fu" style="color: #4758AB;
+<span id="cb19-11"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">.rs.restartR</span>()</span>
-<span id="cb16-12"></span>
-<span id="cb16-13"><span class="co" style="color: #5E5E5E;
+<span id="cb19-12"></span>
+<span id="cb19-13"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Re-install libraries</span></span>
-<span id="cb16-14">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb19-14">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -856,55 +975,55 @@ background-color: null;
 font-style: inherit;">rebuild =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Activate the existing venv</span></span>
-<span id="cb17-2"><span class="bu" style="color: null;
+<span id="cb20-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">source</span> .venv/bin/activate</span>
-<span id="cb17-3"></span>
-<span id="cb17-4"><span class="co" style="color: #5E5E5E;
+<span id="cb20-3"></span>
+<span id="cb20-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Make note of all installed packages</span></span>
-<span id="cb17-5"><span class="ex" style="color: null;
+<span id="cb20-5"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements-freeze.txt</span>
-<span id="cb17-6"></span>
-<span id="cb17-7"><span class="co" style="color: #5E5E5E;
+<span id="cb20-6"></span>
+<span id="cb20-7"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Deactivate the venv and delete</span></span>
-<span id="cb17-8"><span class="ex" style="color: null;
+<span id="cb20-8"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">deactivate</span></span>
-<span id="cb17-9"><span class="fu" style="color: #4758AB;
+<span id="cb20-9"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rm</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-rf</span> .venv/</span>
-<span id="cb17-10"></span>
-<span id="cb17-11"><span class="co" style="color: #5E5E5E;
+<span id="cb20-10"></span>
+<span id="cb20-11"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create a new virtual environment</span></span>
-<span id="cb17-12"><span class="ex" style="color: null;
+<span id="cb20-12"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> venv .venv</span>
-<span id="cb17-13"><span class="bu" style="color: null;
+<span id="cb20-13"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">source</span> .venv/bin/activate </span>
-<span id="cb17-14"><span class="ex" style="color: null;
+<span id="cb20-14"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span> pip wheel setuptools</span>
-<span id="cb17-15"><span class="ex" style="color: null;
+<span id="cb20-15"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -941,46 +1060,78 @@ font-style: inherit;">-r</span> requirements-freeze.txt</span></code></pre></div
 
 
 
+<p>Have you ever tried to use someone else’s repo and run into issues with package installation and breaking package versions? Or tried to work on a really old repository and been foiled while trying to set it up?</p>
+<p>Projects have a standards problem - we need to realize that all the work we are doing exist in the framework of a project. By defining the elements of a project we can identify the parts that need to be made transparent and the tools (renv/venv) for making that happen.</p>
+<p>What is a project?</p>
+<ul>
+<li>Code, data files, config files, images/assets</li>
+<li>Defined / reproducible environment</li>
+<li>Defined language version</li>
+<li>Defined package versions and requirements</li>
+</ul>
+<p>What it’s not:</p>
+<ul>
+<li>Your editor</li>
+<li>The actual packages / repositories</li>
+<li>System dependencies</li>
+</ul>
+<section id="reproducible-package-environments-for-python---at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-package-environments-for-python---at-a-glance">Reproducible package environments for Python - At a glance</h2>
+<p>Step 1: Use scanned Python packages</p>
+<pre><code># Pip is already set up for you by your admins whenever you use Workbench to use packages from package manager
+# Configure pip to use packages from public package manager: 
+pip config set global.index-url https://packagemanager.posit.co/pypi/latest/simple
+pip config set global.trusted-host packagemanager.posit.co</code></pre>
+<p>Step 2: Use environment tracking</p>
+<pre><code># Activate your virtual environment: 
+python -m venv .venv
+. .venv/bin/activate</code></pre>
+<pre><code># Take a snapshot of the environment: 
+pip freeze &gt; requirements.txt</code></pre>
+<p>Step 3: Easy collaboration</p>
+<pre><code># Send a colleague the link to your project on git, they'll restore your environment with:
+pip install -r requirements.txt</code></pre>
+</section>
 <section id="python-projects-setup" class="level2">
 <h2 class="anchored" data-anchor-id="python-projects-setup">Python projects setup</h2>
 <p>Setup the <code>venv</code> environment:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> venv .venv</span>
-<span id="cb1-2"><span class="bu" style="color: null;
+<span id="cb5-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">.</span> .venv/bin/activate</span>
-<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+<span id="cb5-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># .venv\Scripts\activate # Windows</span></span></code></pre></div>
 <p>Upgrade pip and then install needed packages:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span> pip</span>
-<span id="cb2-2"><span class="ex" style="color: null;
+<span id="cb6-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span> pip wheel setuptools rsconnect-python</span>
-<span id="cb2-3"><span class="ex" style="color: null;
+<span id="cb6-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
 <p>Run the application:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">shiny</span> run <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--reload</span> app.py</span></code></pre></div>
 <p>Leave a virtual environment with:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">deactivate</span></span></code></pre></div>
 </section>
@@ -1022,14 +1173,14 @@ python3 -m pip install -r requirements.txt</code></pre>
 <h2 class="anchored" data-anchor-id="deploy">Deploy</h2>
 <section id="rsconnect-python-cli" class="level3">
 <h3 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h3>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> deploy shiny .</span></code></pre></div>
 </section>
 <section id="git-backed" class="level3">
 <h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
 <p>Update the code, and then run:</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
@@ -1040,33 +1191,33 @@ font-style: inherit;">--overwrite</span> .</span></code></pre></div>
 <section id="project-updates" class="level2">
 <h2 class="anchored" data-anchor-id="project-updates">Project updates</h2>
 <p>Create the requirements file:</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements.txt</span></code></pre></div>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny .</span></code></pre></div>
 <p>If you are running into deploy issues where there are breaking packages you can edit the requirements file explicitly:</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441</span></span>
-<span id="cb11-2"><span class="va" style="color: #111111;
+<span id="cb15-2"><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">streamlit</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>=1.11.0</span></code></pre></div>
 <p>To use a Package Manager repository with a specific project defined by a <code>requirements.txt</code> file, add <code>-i [repositoryURL]</code> to the top of your file, for example:</p>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">-i</span> https://packagemanager.posit.co/pypi/latest/simple</span>
-<span id="cb12-2"><span class="ex" style="color: null;
+<span id="cb16-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pandas</span></span>
-<span id="cb12-3"><span class="ex" style="color: null;
+<span id="cb16-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">scipy</span></span></code></pre></div>
 <p>How to configure a pypi repository globally (using pip.conf): <a href="https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository" class="uri">https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository</a></p>
@@ -1076,16 +1227,16 @@ font-style: inherit;">scipy</span></span></code></pre></div>
 <section id="issues-with-python-not-being-on-path" class="level3">
 <h3 class="anchored" data-anchor-id="issues-with-python-not-being-on-path">Issues with Python not being on path</h3>
 <p>Set it manually to an installed Python version with:</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="bu" style="color: null;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">alias</span> python=<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/opt/python/3.9.17/bin/python"</span></span></code></pre></div>
 <p>Set it in your .bashrc on mac or linux so that it is set for your profile every time you log in (typically this is located in the root directory of your home folder):</p>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># add this to your .bashrc</span></span>
-<span id="cb14-2"><span class="bu" style="color: null;
+<span id="cb18-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">export</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -1095,7 +1246,7 @@ font-style: inherit;">=</span>/opt/python/3.11.9/bin:<span class="va" style="col
 background-color: null;
 font-style: inherit;">$PATH</span></span></code></pre></div>
 <p>Check for the available python versions (if typically installed):</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ls</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -1713,7 +1864,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -1741,7 +1892,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -1807,7 +1958,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
@@ -4000,7 +4151,7 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
 <p>You can add data manually by creating a container and then using the upload icon.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -4083,7 +4234,7 @@ spark_disconnect(sc)</code></pre>
 <p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
+<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
 <figcaption>image</figcaption>
 </figure>
 </div>
@@ -4159,6 +4310,21 @@ utils::sessionInfo() </code></pre>
 <li>Parallelization can speed up execution when done right, but there is no guarantee</li>
 <li>“With great power comes great responsibility” - Spider Man</li>
 </ul>
+<section id="expectations" class="level1">
+<h1>Expectations</h1>
+<p>Pros</p>
+<ul>
+<li>CAN speed up otherwise long running tasks</li>
+<li>CAN optimize and more efficiently use resources</li>
+</ul>
+<p>Cons</p>
+<ul>
+<li>CAN hog computing resources delay other scheduled jobs/access requests</li>
+<li>CAN prevent others from getting work done (all requested resources are guaranteed and exclusively used by you)</li>
+<li>CAN mask bad code design choices</li>
+<li>CAN act as a denial-of-service attack to other systems</li>
+</ul>
+</section>
 <section id="getting-started" class="level1">
 <h1>Getting started</h1>
 <p>Read:</p>
@@ -5063,7 +5229,7 @@ font-style: inherit;">sqrt</span>(i)</span></code></pre></div>
 <li>Slurm GPU training by Michael:</li>
 <li>Slides: <a href="https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit">https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit</a></li>
 <li>Git repository: <a href="https://github.com/michaelmayer2/merck-slurm-gpu-training/">https://github.com/michaelmayer2/merck-slurm-gpu-training/</a></li>
-<li>Go fastR: High Performance Computing with R Workshop: S<a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
+<li>Go fastR: High Performance Computing with R Workshop: <a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
 </ul>
 
 

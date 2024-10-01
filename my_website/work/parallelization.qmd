@@ -30,6 +30,20 @@ As a user remember though:
 - Parallelization can speed up execution when done right, but there is no guarantee
 - “With great power comes great responsibility” - Spider Man
 
+# Expectations 
+
+Pros
+
+- CAN speed up otherwise long running tasks
+- CAN optimize and more efficiently use resources
+
+Cons
+
+- CAN hog computing resources delay other scheduled jobs/access requests
+- CAN prevent others from getting work done (all requested resources are guaranteed and exclusively used by you)
+- CAN mask bad code design choices
+- CAN act as a denial-of-service attack to other systems
+
 # Getting started 
 
 Read: 
