@@ -56,13 +56,13 @@ Read:
 - Resources in this Article for getting started:
 <https://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/parallel.html>
 
-Workbench and HPC session: <https://github.com/sol-eng/Workbench-HPC-Webinar?tab=readme-ov-file> 
+- Workbench and HPC session: <https://github.com/sol-eng/Workbench-HPC-Webinar?tab=readme-ov-file> 
 
-Parallel: <https://www.davidzeleny.net/wiki/doku.php/recol:parallel> 
+- Parallel: <https://www.davidzeleny.net/wiki/doku.php/recol:parallel> 
 
-doparallel: <https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/> 
+- doparallel: <https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/> 
 
-Parallelization tutorial: <https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html> 
+- Parallelization tutorial: <https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html> 
 
 # When sessions are crashing 
 
