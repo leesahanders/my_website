@@ -19,6 +19,55 @@ categories:
   - code
 ---
 
+
+Have you ever tried to use someone else’s repo and run into issues with package installation and breaking package versions? Or tried to work on a really old repository and been foiled while trying to set it up?
+
+Projects have a standards problem - we need to realize that all the work we are doing exist in the framework of a project. By defining the elements of a project we can identify the parts that need to be made transparent and the tools (renv/venv) for making that happen. 
+
+What is a project?
+
+- Code, data files, config files, images/assets
+- Defined / reproducible environment
+- Defined language version
+- Defined package versions and requirements
+
+What it’s not: 
+
+- Your editor
+- The actual packages / repositories 
+- System dependencies 
+
+## Reproducible package environments for Python - At a glance
+
+Step 1: Use scanned Python packages
+
+```
+# Pip is already set up for you by your admins whenever you use Workbench to use packages from package manager
+# Configure pip to use packages from public package manager: 
+pip config set global.index-url https://packagemanager.posit.co/pypi/latest/simple
+pip config set global.trusted-host packagemanager.posit.co
+```
+
+Step 2: Use environment tracking
+
+```
+# Activate your virtual environment: 
+python -m venv .venv
+. .venv/bin/activate
+```
+
+```
+# Take a snapshot of the environment: 
+pip freeze > requirements.txt
+```
+
+Step 3: Easy collaboration
+
+```
+# Send a colleague the link to your project on git, they'll restore your environment with:
+pip install -r requirements.txt
+```
+
 ## Python projects setup
 
 Setup the `venv` environment:

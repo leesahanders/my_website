@@ -19,6 +19,72 @@ categories:
   - code
 ---
 
+Have you ever tried to use someone else’s repo and run into issues with package installation and breaking package versions? Or tried to work on a really old repository and been foiled while trying to set it up?
+
+Projects have a standards problem - we need to realize that all the work we are doing exist in the framework of a project. By defining the elements of a project we can identify the parts that need to be made transparent and the tools (renv/venv) for making that happen. 
+
+What is a project?
+
+- Code, data files, config files, images/assets
+- Defined / reproducible environment
+- Defined language version
+- Defined package versions and requirements
+
+What it’s not: 
+
+- Your editor
+- The actual packages / repositories 
+- System dependencies 
+
+# Reading 
+
+Environment management:
+
+- Get started with renv in the RStudio IDE: [https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html](https://docs.posit.co/ide/user/ide/guide/environments/r/renv.html)
+- You should be using renv: [https://www.youtube.com/watch?v=GwVx_pf2uz4](https://www.youtube.com/watch?v=GwVx_pf2uz4)
+- Using Public Package Manager : [https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-RStudio-Public-Package-Manager](https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-RStudio-Public-Package-Manager)
+
+## Reproducible package environments for R - At a glance
+
+Step 1: Use pre-compiled packages
+
+- Go to Public Package Manager
+- Click on Get Started -> Setup -> Distribution and select your OS -> Select Latest or Freeze and follow the instructions below the calendar.
+- For example:
+
+```r
+options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))
+```
+
+Step 2: Use environment tracking
+
+```r
+# Set up a new version controlled R project and install renv:
+install.packages("renv")
+library(renv)
+
+# Initialize your project with renv and take a snapshot:
+renv::init()
+renv::snapshot():
+
+# Update all packages, or revert back to an earlier snapshot:
+renv::update()
+renv::revert()
+
+# History is saved into version control:
+renv::history()
+```
+
+Step 3: Easy collaboration
+
+```r
+# Have your colleague configure their repository to match yours: 
+options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest")) 
+
+## Send a colleague the link to your project on git, they'll restore your environment with:
+renv::restore()
+```
+
 ## R projects setup
 
 
