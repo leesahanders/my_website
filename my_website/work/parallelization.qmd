@@ -396,4 +396,5 @@ The future of clustermq: crew/mirai/nanonext
 - Slurm GPU training by Michael: 
  - Slides: [https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit](https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit)
  - Git repository: [https://github.com/michaelmayer2/merck-slurm-gpu-training/](https://github.com/michaelmayer2/merck-slurm-gpu-training/) 
-- Go fastR: High Performance Computing with R Workshop:  [https://luwidmer.github.io/fastR-website/](https://luwidmer.github.io/fastR-website/)**
+- Go fastR: High Performance Computing with R Workshop:  [https://luwidmer.github.io/fastR-website/](https://luwidmer.github.io/fastR-website/)
+- HPC Training: <https://github.com/sol-eng/Workbench-HPC-Webinar>
