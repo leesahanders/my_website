@@ -229,6 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#python-projects-setup" id="toc-python-projects-setup" class="nav-link active" data-scroll-target="#python-projects-setup">Python projects setup</a></li>
+  <li><a href="#jupyter-kernels-quarto-and-vs-code" id="toc-jupyter-kernels-quarto-and-vs-code" class="nav-link" data-scroll-target="#jupyter-kernels-quarto-and-vs-code">Jupyter kernels, Quarto, and VS Code</a></li>
   <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy">Deploy</a>
   <ul class="collapse">
   <li><a href="#rsconnect-python-cli" id="toc-rsconnect-python-cli" class="nav-link" data-scroll-target="#rsconnect-python-cli">rsconnect-python CLI</a></li>
@@ -265,31 +266,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Leave a virtual environment with:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="jupyter-kernels-quarto-and-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="jupyter-kernels-quarto-and-vs-code">Jupyter kernels, Quarto, and VS Code</h2>
+<pre><code># Create a venv and install packages
+python -m venv .venv
+. .venv/bin/activate
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install --upgrade pip
+
+# Register as kernel
+pip install ipykernel jupyter
+python3 -m ipykernel install --name "new_venv" --user
+
+# Check for missing dependencies
+python -m pip check
+
+# Automatically uprade all packages from requirements.txt 
+pip install pip-upgrader
+pip-upgrade requirements.txt
+pip install -r requirements.txt
+
+# Freeze your requirements
+pip freeze &gt; requirements.txt
+
+Requires jupyter extension</code></pre>
+<p>For quarto and vs code:</p>
+<blockquote class="blockquote">
+<p>If you create a virtual environment with venv in the env/ directory as described above, Visual Studio Code should automatically discover that environment when you load a workspace from the environment’s parent directory. Source: https://quarto.org/docs/projects/virtual-environments.html#vs-code</p>
+</blockquote>
+<pre><code>python3 -m venv env
+source env/bin/activate
+python3 -m pip freeze &gt; requirements.txt
+python3 -m pip install -r requirements.txt</code></pre>
+</section>
 <section id="deploy" class="level2">
 <h2 class="anchored" data-anchor-id="deploy">Deploy</h2>
 <section id="rsconnect-python-cli" class="level3">
 <h3 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> deploy shiny .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> deploy shiny .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="git-backed" class="level3">
 <h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
 <p>Update the code, and then run:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> write-manifest shiny <span class="at">--overwrite</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> write-manifest shiny <span class="at">--overwrite</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Commit the new <code>manifest.json</code> file to the git repo along with the code.</p>
 </section>
 </section>
 <section id="project-updates" class="level2">
 <h2 class="anchored" data-anchor-id="project-updates">Project updates</h2>
 <p>Create the requirements file:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> write-manifest shiny .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsconnect</span> write-manifest shiny .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you are running into deploy issues where there are breaking packages you can edit the requirements file explicitly:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">streamlit</span><span class="op">=</span>=1.11.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="va">streamlit</span><span class="op">=</span>=1.11.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To use a Package Manager repository with a specific project defined by a <code>requirements.txt</code> file, add <code>-i [repositoryURL]</code> to the top of your file, for example:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> https://packagemanager.posit.co/pypi/latest/simple</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandas</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">scipy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-i</span> https://packagemanager.posit.co/pypi/latest/simple</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandas</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">scipy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>How to configure a pypi repository globally (using pip.conf): <a href="https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository" class="uri">https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository</a></p>
 </section>
 <section id="troubleshooting" class="level2">
@@ -297,12 +332,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="issues-with-python-not-being-on-path" class="level3">
 <h3 class="anchored" data-anchor-id="issues-with-python-not-being-on-path">Issues with Python not being on path</h3>
 <p>Set it manually to an installed Python version with:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> python=<span class="st">"/opt/python/3.9.17/bin/python"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> python=<span class="st">"/opt/python/3.9.17/bin/python"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Set it in your .bashrc on mac or linux so that it is set for your profile every time you log in (typically this is located in the root directory of your home folder):</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add this to your .bashrc</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span>/opt/python/3.11.9/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add this to your .bashrc</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span>/opt/python/3.11.9/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check for the available python versions (if typically installed):</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /opt/python/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /opt/python/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="resources" class="level2">

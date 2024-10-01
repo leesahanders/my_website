@@ -10,7 +10,559 @@
 <atom:link href="https://questionable.quarto.pub/blog/work.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Fri, 13 Sep 2024 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 01 Oct 2024 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Handling secrets and pinning files to Posit Connect</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/secrets-and-pinning-files.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Imagine a world where you can sleep peacefully at night knowing that your secrets (that you need for connecting to data sources) are being handled responsibly and will never leak.</p>
+<section id="built-in-with-your-version-control" class="level2">
+<h2 class="anchored" data-anchor-id="built-in-with-your-version-control">Built in with your version control</h2>
+<p>Github has secret scanning for enterprise accounts or public repositories: <a href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning" class="uri">https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning</a></p>
+</section>
+<section id="environment-variables" class="level2">
+<h2 class="anchored" data-anchor-id="environment-variables">Environment variables</h2>
+<p>When working with pulling data from secure databases or other sources a developer might find themselves in a situation of needing to provide very sensitive information, such as a password or a token, in order to access the data that is needed or to successfully deploy a project. Handling those secrets in way that doesn’t expose them in the code directly is critical and where using <a href="https://db.rstudio.com/best-practices/deployment/">environmental variable’s for securing sensitive variables</a> is strongly recommended.</p>
+<p>Additionally there may be parameters that are often needed that can be accessed as a variable more easily rather than having to type in every time.</p>
+<p>For both of these cases knowing how environment variables can be leveraged can be very rewarding and it is surprising how little effort it can to take to set up.</p>
+</section>
+<section id="python-os-package" class="level2">
+<h2 class="anchored" data-anchor-id="python-os-package">Python: <code>os</code> package</h2>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Setting a new environment variable</span></span>
+<span id="cb1-4">os.environ[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"API_KEY"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"YOUR_API_KEY"</span></span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Retrieving the environment variable</span></span>
+<span id="cb1-7">var <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> os.environ[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"variable_name"</span>]</span></code></pre></div>
+</section>
+<section id="r-usethis-package" class="level2">
+<h2 class="anchored" data-anchor-id="r-usethis-package">R: <code>usethis</code> package</h2>
+<p><code>usethis</code> has a function for creating and editing the .Renviron file:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(usethis)</span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Edit the global .Renviron file</span></span>
+<span id="cb2-4">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">edit_r_environ</span>()</span>
+<span id="cb2-5"></span>
+<span id="cb2-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Edit the project specific .Renviron file</span></span>
+<span id="cb2-7">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">edit_r_environ</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scope =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"project"</span>)</span></code></pre></div>
+<p>Add the variables to that file in the format variable_name = “variable_value” and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE with session -&gt; restart R.</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Saved variables can be accessed with:</span></span>
+<span id="cb3-2">variable_name <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"variable_name"</span>)</span></code></pre></div>
+<p>While it’s recommended to add env vars to the environ file and not use in your code (otherwise it defeats the point), you can set an env var on the fly with:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"value"</span>)</span></code></pre></div>
+</section>
+<section id="r-working-with-the-.renviron-file" class="level2">
+<h2 class="anchored" data-anchor-id="r-working-with-the-.renviron-file">R: Working with the .Renviron file</h2>
+<p>When R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.</p>
+<p>However for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.</p>
+<p>With increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files: - User - Project</p>
+<p>On startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf</a>.</p>
+<p>Just to re-iterate the key takeaway: When in doubt note that the <strong>project level file is given preference over user level config files</strong>. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.</p>
+<p>There is a really excellent <a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/">overview of R’s startup process here</a> but in short it can be thought of this way:</p>
+<section id="example-with-a-user-level-.renviron-config-file" class="level4">
+<h4 class="anchored" data-anchor-id="example-with-a-user-level-.renviron-config-file">Example with a user level .Renviron config file</h4>
+<p>usethis has a function for creating and editing the .Renviron file</p>
+<pre><code>library(usethis)
+usethis::edit_r_environ()</code></pre>
+<p>Add the variables to that file in the format <code>variable_name = "variable_value"</code> and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE</p>
+<p>Saved variables can be accessed with:</p>
+<pre><code>variable_name &lt;- Sys.getenv("variable_name")</code></pre>
+<p>When working in a more complex environment structure where separate project, site, and user environments are being support <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">this support article has useful information</a> with a <a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/">deeper dive into R’s startup here</a>.</p>
+</section>
+<section id="example-with-a-project-level-.renviron-config-file" class="level4">
+<h4 class="anchored" data-anchor-id="example-with-a-project-level-.renviron-config-file">Example with a project level .Renviron config file</h4>
+<p>Storing secrets securely can be done using the <a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ function from the usethis package</a>. For more overview see <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">this overview</a>.</p>
+<p>Example:</p>
+<pre><code>library(usethis)
+usethis::edit_r_environ(scope = "project")</code></pre>
+<p>Accessing those stored parameters later can be done using <code>Sys.getenv("DB_NAME")</code>.</p>
+<p>Be sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the <code>edit_git_ignore(scope = c("user", "project"))</code> function. For more best practices see <a href="https://db.rstudio.com/best-practices/managing-credentials">securing credentials</a>.</p>
+<p>After updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).</p>
+</section>
+<section id="gitignore" class="level4">
+<h4 class="anchored" data-anchor-id="gitignore">Gitignore</h4>
+<p>While typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: <code>*.html</code>.</p>
+<p>Example excluding a number of pieces that would be undesirable to check into version control:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>.gitignore</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename=".gitignore" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># History files</span></span>
+<span id="cb8-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.Rhistory</span></span>
+<span id="cb8-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.Rapp.history</span></span>
+<span id="cb8-4"></span>
+<span id="cb8-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Session Data files</span></span>
+<span id="cb8-6"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.RData</span></span>
+<span id="cb8-7"></span>
+<span id="cb8-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Example code in package build process</span></span>
+<span id="cb8-9"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">*-Ex.R</span></span>
+<span id="cb8-10"></span>
+<span id="cb8-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Output files from R CMD build</span></span>
+<span id="cb8-12"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/*.tar.gz</span></span>
+<span id="cb8-13"></span>
+<span id="cb8-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Output files from R CMD check</span></span>
+<span id="cb8-15"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/*.Rcheck/</span></span>
+<span id="cb8-16"></span>
+<span id="cb8-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RStudio files</span></span>
+<span id="cb8-18"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.Rproj.user/</span></span>
+<span id="cb8-19"></span>
+<span id="cb8-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># produced vignettes</span></span>
+<span id="cb8-21"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">vignettes/*.html</span></span>
+<span id="cb8-22"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">vignettes/*.pdf</span></span>
+<span id="cb8-23"></span>
+<span id="cb8-24"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3</span></span>
+<span id="cb8-25"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.httr-oauth</span></span>
+<span id="cb8-26"></span>
+<span id="cb8-27"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># knitr and R markdown default cache directories</span></span>
+<span id="cb8-28"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/*_cache/</span></span>
+<span id="cb8-29"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/cache/</span></span>
+<span id="cb8-30"></span>
+<span id="cb8-31"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Temporary files created by R markdown</span></span>
+<span id="cb8-32"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">*.utf8.md</span></span>
+<span id="cb8-33"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">*.knit.md</span></span>
+<span id="cb8-34"></span>
+<span id="cb8-35"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html</span></span>
+<span id="cb8-36"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rsconnect/</span></span>
+<span id="cb8-37"></span>
+<span id="cb8-38"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Deployment details from rsconnect-python</span></span>
+<span id="cb8-39"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rsconnect-python/</span></span>
+<span id="cb8-40"></span>
+<span id="cb8-41"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Temporary files</span></span>
+<span id="cb8-42"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.DS_Store</span></span>
+<span id="cb8-43"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">__pycache__</span></span>
+<span id="cb8-44"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.ipynb_checkpoints</span></span>
+<span id="cb8-45"></span>
+<span id="cb8-46"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rmarkdown-notebook/flights.csv</span></span>
+<span id="cb8-47"></span>
+<span id="cb8-48"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.venv</span></span>
+<span id="cb8-49"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">venv</span></span>
+<span id="cb8-50"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.env</span></span>
+<span id="cb8-51"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.Rprofile</span></span>
+<span id="cb8-52"></span>
+<span id="cb8-53"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/.luarc.json</span></span>
+<span id="cb8-54"></span>
+<span id="cb8-55"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># OS and python artifacts</span></span>
+<span id="cb8-56"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.DS_Store</span></span>
+<span id="cb8-57"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">__pycache__/</span></span>
+<span id="cb8-58"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">*.py[cod]</span></span>
+<span id="cb8-59"></span>
+<span id="cb8-60"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># docs artifacts</span></span>
+<span id="cb8-61"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/docs/_site</span></span>
+<span id="cb8-62"></span>
+<span id="cb8-63"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Package Manager license</span></span>
+<span id="cb8-64"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">/ppm.lic</span></span></code></pre></div>
+</div>
+</section>
+<section id="example-with-project-level-github-secrets-for-environment-variables" class="level4">
+<h4 class="anchored" data-anchor-id="example-with-project-level-github-secrets-for-environment-variables">Example with project level github secrets for environment variables</h4>
+<p>Another approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like <code>CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}</code>. In the R scripts they will be referenced as usual with something like <code>Sys.getenv("DB_NAME")</code>.</p>
+</section>
+<section id="references-for-adding-environment-variables-through-the-connect-ui" class="level4">
+<h4 class="anchored" data-anchor-id="references-for-adding-environment-variables-through-the-connect-ui">References for adding environment variables through the Connect UI</h4>
+<p>Starting with version 1.6, RStudio Connect allows <a href="https://docs.rstudio.com/connect/admin/security-and-auditing/#application-environment-variables">Environment Variables</a>. The variables are encrypted on-disk, and in-memory.</p>
+<p>This can be done at the project level with <a href="https://db.rstudio.com/best-practices/deployment/">securing deployment</a> through the <a href="https://support.rstudio.com/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a>.</p>
+</section>
+</section>
+<section id="handling-secret-files" class="level2">
+<h2 class="anchored" data-anchor-id="handling-secret-files">Handling secret files</h2>
+<p>Options:</p>
+<ul>
+<li>base64 encode the json string, set an environment variable, read the env var, and base64 decode it - If it fits in an env var, you could always cache it from the env var to your temp dir right before you use</li>
+<li>Save it somewhere on Connect, let developers know the path</li>
+<li>Use a supervisor script to save into the sandbox environment</li>
+<li>Possibly save it as a pin?</li>
+</ul>
+<section id="useful-linux-commands-and-generating-a-dummy-key-file" class="level3">
+<h3 class="anchored" data-anchor-id="useful-linux-commands-and-generating-a-dummy-key-file">Useful linux commands and generating a dummy key file</h3>
+<pre><code># cd ~/.ssh
+openssl genrsa -out test_key 4096
+openssl rsa -in test_key -pubout -out test_key.pub
+openssl pkcs8 -topk8 -inform pem -in test_key -outform PEM -v2 aes-256-cbc -out test_key.p8</code></pre>
+<ul>
+<li>The second command generate a RDS private key (unencrypted). https://www.openssl.org/docs/man1.1.1/man1/openssl-genrsa.html</li>
+<li>The third command generate a public key for the private key above.</li>
+<li>The fourth command generate an encrypted private key using a cipher aes-256-cbc. Please refer the following URL for more about AES 256 CBC.https://datatracker.ietf.org/doc/html/rfc3602</li>
+</ul>
+<pre><code># Set permissions 
+chmod -R 400 ~/.ssh/mykey.pem 
+
+# Add key to ssh-agent 
+ssh-agent -s
+eval `ssh-agent -s`
+ssh-add ~/.ssh/mykey.pem</code></pre>
+<p>If you already have a ssh key and want to get the key.pub public key info:</p>
+<pre><code>ssh-keygen -y -f ~/.ssh/mykey.pem
+ssh-keygen -y -f ~/.ssh/mykey.pem &gt; key.pub</code></pre>
+</section>
+<section id="pin-the-key-to-connect" class="level3">
+<h3 class="anchored" data-anchor-id="pin-the-key-to-connect">Pin the key to Connect</h3>
+<section id="setup" class="level4">
+<h4 class="anchored" data-anchor-id="setup">Setup</h4>
+<p>Env variables that need to be set are:</p>
+<pre><code>CONNECT_SERVER=&lt;server, eg https://colorado.posit.co&gt;
+CONNECT_API_KEY=&lt;API key from Connect server&gt;</code></pre>
+</section>
+<section id="code-for-pinning-a-file" class="level4">
+<h4 class="anchored" data-anchor-id="code-for-pinning-a-file">Code for pinning a file</h4>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb13-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb13-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(stringr)</span>
+<span id="cb13-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(readr)</span>
+<span id="cb13-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(pins)</span>
+<span id="cb13-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(rsconnect)</span>
+<span id="cb13-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(usethis)</span>
+<span id="cb13-8"></span>
+<span id="cb13-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#Check our environment variables</span></span>
+<span id="cb13-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># usethis::edit_r_environ()</span></span>
+<span id="cb13-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#Needs: </span></span>
+<span id="cb13-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># CONNECT_SERVER=&lt;server&gt;</span></span>
+<span id="cb13-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># CONNECT_API_KEY=&lt;API key from Connect server&gt;</span></span>
+<span id="cb13-14"></span>
+<span id="cb13-15">board <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">board_connect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">auth =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"envvar"</span>)</span>
+<span id="cb13-16"></span>
+<span id="cb13-17">board <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pin_upload</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">paths=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key"</span>)</span>
+<span id="cb13-18">board <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pin_upload</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">paths=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key.p8"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key-p8"</span>)</span>
+<span id="cb13-19">board <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pin_upload</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">paths=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key.pub"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key-pub"</span>)</span>
+<span id="cb13-20"></span>
+<span id="cb13-21">cache_path<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>board <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pin_download</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key"</span>)</span>
+<span id="cb13-22"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(cache_path)</span></code></pre></div>
+</section>
+<section id="python" class="level4">
+<h4 class="anchored" data-anchor-id="python">Python</h4>
+<p>Python pins package has parity: <a href="https://rstudio.github.io/pins-python/reference/pin_upload.html#pins.boards.BaseBoard.pin_upload" class="uri">https://rstudio.github.io/pins-python/reference/pin_upload.html#pins.boards.BaseBoard.pin_upload</a></p>
+</section>
+<section id="encode-key-file-as-base64-json-string" class="level4">
+<h4 class="anchored" data-anchor-id="encode-key-file-as-base64-json-string">Encode key file as base64 json string</h4>
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">librar</span>(readr)</span>
+<span id="cb14-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(openssl)</span>
+<span id="cb14-3"></span>
+<span id="cb14-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Locally, encode the key and save as environment variable</span></span>
+<span id="cb14-5">key <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> openssl<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">base64_encode</span>(readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_file</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">file=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test_key.pub"</span>))</span>
+<span id="cb14-6"></span>
+<span id="cb14-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Save as env var</span></span>
+<span id="cb14-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TEST_SSH_KEY"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"123"</span>)</span>
+<span id="cb14-9">test_key_set <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TEST_SSH_KEY"</span>)</span>
+<span id="cb14-10"></span>
+<span id="cb14-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create a tempfile in the sandboxed current location</span></span>
+<span id="cb14-12">cached_key <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tempfile</span>()</span>
+<span id="cb14-13"></span>
+<span id="cb14-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Cache the SSH file from the environment variable</span></span>
+<span id="cb14-15">readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">write_file</span>(openssl<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">base64_decode</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TEST_SSH_KEY"</span>)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">file =</span> cached_key)</span></code></pre></div>
+<p>it may be useful to nest in an if statement so that this only happens on Connect, but on Workbench it will still use the managed credentials:</p>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use SSH key if on Connect, otherwise use managed credentials</span></span>
+<span id="cb15-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"RSTUDIO_PRODUCT"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"CONNECT"</span>){</span>
+<span id="cb15-3">}</span></code></pre></div>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/secrets-and-pinning-files.html</guid>
+  <pubDate>Tue, 01 Oct 2024 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Python projects set up and maintenance</title>
   <dc:creator>Lisa </dc:creator>
@@ -64,18 +616,52 @@ font-style: inherit;">--reload</span> app.py</span></code></pre></div>
 background-color: null;
 font-style: inherit;">deactivate</span></span></code></pre></div>
 </section>
+<section id="jupyter-kernels-quarto-and-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="jupyter-kernels-quarto-and-vs-code">Jupyter kernels, Quarto, and VS Code</h2>
+<pre><code># Create a venv and install packages
+python -m venv .venv
+. .venv/bin/activate
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install --upgrade pip
+
+# Register as kernel
+pip install ipykernel jupyter
+python3 -m ipykernel install --name "new_venv" --user
+
+# Check for missing dependencies
+python -m pip check
+
+# Automatically uprade all packages from requirements.txt 
+pip install pip-upgrader
+pip-upgrade requirements.txt
+pip install -r requirements.txt
+
+# Freeze your requirements
+pip freeze &gt; requirements.txt
+
+Requires jupyter extension</code></pre>
+<p>For quarto and vs code:</p>
+<blockquote class="blockquote">
+<p>If you create a virtual environment with venv in the env/ directory as described above, Visual Studio Code should automatically discover that environment when you load a workspace from the environment’s parent directory. Source: https://quarto.org/docs/projects/virtual-environments.html#vs-code</p>
+</blockquote>
+<pre><code>python3 -m venv env
+source env/bin/activate
+python3 -m pip freeze &gt; requirements.txt
+python3 -m pip install -r requirements.txt</code></pre>
+</section>
 <section id="deploy" class="level2">
 <h2 class="anchored" data-anchor-id="deploy">Deploy</h2>
 <section id="rsconnect-python-cli" class="level3">
 <h3 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h3>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> deploy shiny .</span></code></pre></div>
 </section>
 <section id="git-backed" class="level3">
 <h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
 <p>Update the code, and then run:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
@@ -86,33 +672,33 @@ font-style: inherit;">--overwrite</span> .</span></code></pre></div>
 <section id="project-updates" class="level2">
 <h2 class="anchored" data-anchor-id="project-updates">Project updates</h2>
 <p>Create the requirements file:</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements.txt</span></code></pre></div>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny .</span></code></pre></div>
 <p>If you are running into deploy issues where there are breaking packages you can edit the requirements file explicitly:</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441</span></span>
-<span id="cb9-2"><span class="va" style="color: #111111;
+<span id="cb11-2"><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">streamlit</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>=1.11.0</span></code></pre></div>
 <p>To use a Package Manager repository with a specific project defined by a <code>requirements.txt</code> file, add <code>-i [repositoryURL]</code> to the top of your file, for example:</p>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">-i</span> https://packagemanager.posit.co/pypi/latest/simple</span>
-<span id="cb10-2"><span class="ex" style="color: null;
+<span id="cb12-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pandas</span></span>
-<span id="cb10-3"><span class="ex" style="color: null;
+<span id="cb12-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">scipy</span></span></code></pre></div>
 <p>How to configure a pypi repository globally (using pip.conf): <a href="https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository" class="uri">https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository</a></p>
@@ -122,16 +708,16 @@ font-style: inherit;">scipy</span></span></code></pre></div>
 <section id="issues-with-python-not-being-on-path" class="level3">
 <h3 class="anchored" data-anchor-id="issues-with-python-not-being-on-path">Issues with Python not being on path</h3>
 <p>Set it manually to an installed Python version with:</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="bu" style="color: null;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">alias</span> python=<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/opt/python/3.9.17/bin/python"</span></span></code></pre></div>
 <p>Set it in your .bashrc on mac or linux so that it is set for your profile every time you log in (typically this is located in the root directory of your home folder):</p>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># add this to your .bashrc</span></span>
-<span id="cb12-2"><span class="bu" style="color: null;
+<span id="cb14-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">export</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -141,7 +727,7 @@ font-style: inherit;">=</span>/opt/python/3.11.9/bin:<span class="va" style="col
 background-color: null;
 font-style: inherit;">$PATH</span></span></code></pre></div>
 <p>Check for the available python versions (if typically installed):</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ls</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -517,8 +1103,12 @@ font-style: inherit;">-r</span> requirements-freeze.txt</span></code></pre></div
 <p>Check your current repo with: <code>options('repos')</code></p>
 <p>For example, you might see: <code>https://packagemanager.rstudio.com/all/latest</code> or <code>https://cran.rstudio.com/</code>.</p>
 <p>Change your repo with: <code>options(repos = c(REPO_NAME = "https://colorado.rstudio.com/rspm/cran/__linux__/focal/2022-06-29"))</code> or <code>options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))</code></p>
+<section id="troubleshooting-1" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-1">Troubleshooting</h2>
+<p>Bioconductor and Mass and R version: <a href="https://forum.posit.co/t/mass-not-available-for-r-4-3-3/188156/2" class="uri">https://forum.posit.co/t/mass-not-available-for-r-4-3-3/188156/2</a></p>
 
 
+</section>
 </section>
 
  ]]></description>
@@ -3158,17 +3748,23 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
 <li>Trends with access over time</li>
 <li>Time spent on interactions</li>
 </ul>
-<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. HOwever, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
+<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. However, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
 <ul>
-<li>There’s more on the Connect API here: https://solutions.posit.co/operations/connect-apis/</li>
-<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, https://shiny.posit.co/r/reference/shiny/latest/builder.html</li>
-<li>This page in the Shiny docs give a walkthrough as well: https://shiny.posit.co/r/articles/build/google-analytics/</li>
+<li>There’s more on the Connect API here: <a href="https://solutions.posit.co/operations/connect-apis/" class="uri">https://solutions.posit.co/operations/connect-apis/</a></li>
+<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
+<li>This page in the Shiny docs give a walkthrough as well: <a href="https://shiny.posit.co/r/articles/build/google-analytics/" class="uri">https://shiny.posit.co/r/articles/build/google-analytics/</a></li>
 <li>Tracking where within the Shiny app users are spending their time (which tab, etc) is interesting.</li>
-<li>Monitoring user behavior with hotjar (paid): https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</li>
-<li>Here’s an article that outlines more free options: https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</li>
-<li>Javascript might need to be added to your site to support using google analytics: https://shiny.posit.co/r/reference/shiny/latest/builder.html</li>
-<li>Various examples for tracking built in to Connect: https://solutions.rstudio.com/data-science-admin/tracking/ and https://github.com/sol-eng/connect-usage</li>
-<li>Video showing how to use the Connect API: https://www.youtube.com/watch?v=0iljqY9j64U</li>
+<li>Monitoring user behavior with hotjar (paid): <a href="https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/" class="uri">https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</a></li>
+<li>Here’s an article that outlines more free options: <a href="https://www.appsilon.com/post/monitoring-r-shiny-user-adoption" class="uri">https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</a></li>
+<li>Javascript might need to be added to your site to support using google analytics: <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
+<li>Various examples for tracking built in to Connect: <a href="https://solutions.rstudio.com/data-science-admin/tracking/" class="uri">https://solutions.rstudio.com/data-science-admin/tracking/</a> and <a href="https://github.com/sol-eng/connect-usage" class="uri">https://github.com/sol-eng/connect-usage</a></li>
+<li>Video showing how to use the Connect API: <a href="https://www.youtube.com/watch?v=0iljqY9j64U" class="uri">https://www.youtube.com/watch?v=0iljqY9j64U</a></li>
+<li>This heatmap package for seeing where users click I think would be cool to explore: <a href="https://github.com/RinteRface/shinyHeatmap">https://github.com/RinteRface/shinyHeatmap</a></li>
+</ul>
+<p>You can also add debug messages throughtout your shiny app and then use that with parsing the logs to estimate user interactions.</p>
+<ul>
+<li>Add debug messages with: <a href="https://github.com/johnmyleswhite/log4r" class="uri">https://github.com/johnmyleswhite/log4r</a></li>
+<li>Learn about your user with client data: <a href="https://shiny.rstudio.com/articles/client-data.html" class="uri">https://shiny.rstudio.com/articles/client-data.html</a></li>
 </ul>
 
 
@@ -4344,89 +4940,6 @@ library(credentials)</code></pre>
   <category>code</category>
   <guid>https://questionable.quarto.pub/blog/work/git-and-sagemaker.html</guid>
   <pubDate>Tue, 29 Aug 2023 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Securing credentials</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/securing-credentials.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="the-easiest-method-environment-variables" class="level1">
-<h1>The Easiest Method: Environment Variables</h1>
-<p>When working with pulling data from secure databases or other sources a developer might find themselves in a situation of needing to provide very sensitive information, such as a password or a token, in order to access the data that is needed or to successfully deploy a project. Handling those secrets in way that doesn’t expose them in the code directly is critical and where using <a href="https://db.rstudio.com/best-practices/deployment/">environmental variable’s for securing sensitive variables</a> is strongly recommended.</p>
-<p>Additionally there may be parameters that are often needed that can be accessed as a variable more easily rather than having to type in every time.</p>
-<p>For both of these cases knowing how environment variables can be leveraged can be very rewarding and it is surprising how little effort it can to take to set up.</p>
-<section id="working-with-the-.renviron-file" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-the-.renviron-file">Working with the .Renviron file</h2>
-<p>When R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.</p>
-<p>However for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.</p>
-<p>With increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files:</p>
-<ul>
-<li>User</li>
-<li>Project</li>
-</ul>
-<p>On startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf</a>.</p>
-<p>Just to re-iterate the key takeaway: When in doubt note that the <strong>project level file is given preference over user level config files</strong>. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.</p>
-<p>There is a really excellent <a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/">overview of R’s startup process here</a> but in short it can be thought of this way:</p>
-<section id="example-with-a-user-level-.renviron-config-file" class="level4">
-<h4 class="anchored" data-anchor-id="example-with-a-user-level-.renviron-config-file">Example with a user level .Renviron config file</h4>
-<p>usethis has a function for creating and editing the .Renviron file</p>
-<pre><code>library(usethis)
-usethis::edit_r_environ()</code></pre>
-<p>Add the variables to that file in the format <code>variable_name = "variable_value"</code> and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE</p>
-<p>Saved variables can be accessed with:</p>
-<pre><code>variable_name &lt;- Sys.getenv("variable_name")</code></pre>
-<p>When working in a more complex environment structure where separate project, site, and user environments are being support <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">this support article has useful information</a> with a <a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/">deeper dive into R’s startup here</a>.</p>
-</section>
-<section id="example-with-a-project-level-.renviron-config-file" class="level4">
-<h4 class="anchored" data-anchor-id="example-with-a-project-level-.renviron-config-file">Example with a project level .Renviron config file</h4>
-<p>Storing secrets securely can be done using the <a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ function from the usethis package</a>. For more overview see <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">this overview</a>.</p>
-<p>Example:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(usethis)</span>
-<span id="cb3-2">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_environ</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">scope =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"project"</span>)</span></code></pre></div>
-<p>Accessing those stored parameters later can be done using <code>Sys.getenv("DB_NAME")</code>.</p>
-<p>Be sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the <code>edit_git_ignore(scope = c("user", "project"))</code> function. For more best practices see <a href="https://db.rstudio.com/best-practices/managing-credentials">securing credentials</a>.</p>
-<ul>
-<li>While typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: <code>*.html</code>.</li>
-</ul>
-<p>After updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).</p>
-</section>
-<section id="example-with-project-level-github-secrets-for-environment-variables" class="level4">
-<h4 class="anchored" data-anchor-id="example-with-project-level-github-secrets-for-environment-variables">Example with project level github secrets for environment variables</h4>
-<p>Another approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like <code>CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}</code>. In the R scripts they will be referenced as usual with something like <code>Sys.getenv("DB_NAME")</code>.</p>
-</section>
-<section id="references-for-adding-environment-variables-through-the-connect-ui" class="level4">
-<h4 class="anchored" data-anchor-id="references-for-adding-environment-variables-through-the-connect-ui">References for adding environment variables through the Connect UI</h4>
-<p>Starting with version 1.6, RStudio Connect allows <a href="https://docs.rstudio.com/connect/admin/security-and-auditing/#application-environment-variables">Environment Variables</a>. The variables are encrypted on-disk, and in-memory.</p>
-<p>This can be done at the project level with <a href="https://db.rstudio.com/best-practices/deployment/">securing deployment</a> through the <a href="https://support.rstudio.com/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a>.</p>
-<p>Use Connect to manage environment variables through the UI: <a href="https://docs.posit.co/connect/user/content-settings/index.html#content-vars" class="uri">https://docs.posit.co/connect/user/content-settings/index.html#content-vars</a></p>
-<p>Have your admin use a supervisor script to add Environment Variables automatically: <a href="https://docs.posit.co/connect/admin/process-management/index.html#example-environment-variables" class="uri">https://docs.posit.co/connect/admin/process-management/index.html#example-environment-variables</a></p>
-<p>Securing credentials solutions article: <a href="https://solutions.posit.co/connections/db/best-practices/managing-credentials/" class="uri">https://solutions.posit.co/connections/db/best-practices/managing-credentials/</a></p>
-
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/securing-credentials.html</guid>
-  <pubDate>Wed, 09 Aug 2023 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 </channel>

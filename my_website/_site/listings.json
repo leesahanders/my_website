@@ -2,6 +2,7 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/secrets-and-pinning-files.html",
       "/work/python-projects-setup.html",
       "/work/r-projects-setup.html",
       "/work/job-templating-k8s.html",
@@ -15,6 +16,17 @@
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
       "/work/r-command-line.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   },
   {
@@ -39,23 +51,13 @@
       "/work/job-templating-k8s.html",
       "/work/r-projects-setup.html",
       "/work/python-projects-setup.html",
+      "/work/secrets-and-pinning-files.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
       "/lists.html",
       "/index.html",
       "/about.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   }
 ]

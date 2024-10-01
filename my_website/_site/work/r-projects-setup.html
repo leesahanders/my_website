@@ -245,7 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   <li><a href="#library-paths" id="toc-library-paths" class="nav-link" data-scroll-target="#library-paths">Library paths</a></li>
   <li><a href="#migrations" id="toc-migrations" class="nav-link" data-scroll-target="#migrations">Migrations</a></li>
-  <li><a href="#repositories" id="toc-repositories" class="nav-link" data-scroll-target="#repositories">Repositories</a></li>
+  <li><a href="#repositories" id="toc-repositories" class="nav-link" data-scroll-target="#repositories">Repositories</a>
+  <ul class="collapse">
+  <li><a href="#troubleshooting-1" id="toc-troubleshooting-1" class="nav-link" data-scroll-target="#troubleshooting-1">Troubleshooting</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -434,8 +437,12 @@ renv::revert(commit = commit)</code></pre>
 <p>Check your current repo with: <code>options('repos')</code></p>
 <p>For example, you might see: <code>https://packagemanager.rstudio.com/all/latest</code> or <code>https://cran.rstudio.com/</code>.</p>
 <p>Change your repo with: <code>options(repos = c(REPO_NAME = "https://colorado.rstudio.com/rspm/cran/__linux__/focal/2022-06-29"))</code> or <code>options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))</code></p>
+<section id="troubleshooting-1" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-1">Troubleshooting</h2>
+<p>Bioconductor and Mass and R version: <a href="https://forum.posit.co/t/mass-not-available-for-r-4-3-3/188156/2" class="uri">https://forum.posit.co/t/mass-not-available-for-r-4-3-3/188156/2</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

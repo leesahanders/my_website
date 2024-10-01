@@ -207,17 +207,23 @@ ul.task-list li input[type="checkbox"] {
 <li>Trends with access over time</li>
 <li>Time spent on interactions</li>
 </ul>
-<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. HOwever, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
+<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. However, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
 <ul>
-<li>There’s more on the Connect API here: https://solutions.posit.co/operations/connect-apis/</li>
-<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, https://shiny.posit.co/r/reference/shiny/latest/builder.html</li>
-<li>This page in the Shiny docs give a walkthrough as well: https://shiny.posit.co/r/articles/build/google-analytics/</li>
+<li>There’s more on the Connect API here: <a href="https://solutions.posit.co/operations/connect-apis/" class="uri">https://solutions.posit.co/operations/connect-apis/</a></li>
+<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
+<li>This page in the Shiny docs give a walkthrough as well: <a href="https://shiny.posit.co/r/articles/build/google-analytics/" class="uri">https://shiny.posit.co/r/articles/build/google-analytics/</a></li>
 <li>Tracking where within the Shiny app users are spending their time (which tab, etc) is interesting.</li>
-<li>Monitoring user behavior with hotjar (paid): https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</li>
-<li>Here’s an article that outlines more free options: https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</li>
-<li>Javascript might need to be added to your site to support using google analytics: https://shiny.posit.co/r/reference/shiny/latest/builder.html</li>
-<li>Various examples for tracking built in to Connect: https://solutions.rstudio.com/data-science-admin/tracking/ and https://github.com/sol-eng/connect-usage</li>
-<li>Video showing how to use the Connect API: https://www.youtube.com/watch?v=0iljqY9j64U</li>
+<li>Monitoring user behavior with hotjar (paid): <a href="https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/" class="uri">https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</a></li>
+<li>Here’s an article that outlines more free options: <a href="https://www.appsilon.com/post/monitoring-r-shiny-user-adoption" class="uri">https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</a></li>
+<li>Javascript might need to be added to your site to support using google analytics: <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
+<li>Various examples for tracking built in to Connect: <a href="https://solutions.rstudio.com/data-science-admin/tracking/" class="uri">https://solutions.rstudio.com/data-science-admin/tracking/</a> and <a href="https://github.com/sol-eng/connect-usage" class="uri">https://github.com/sol-eng/connect-usage</a></li>
+<li>Video showing how to use the Connect API: <a href="https://www.youtube.com/watch?v=0iljqY9j64U" class="uri">https://www.youtube.com/watch?v=0iljqY9j64U</a></li>
+<li>This heatmap package for seeing where users click I think would be cool to explore: <a href="https://github.com/RinteRface/shinyHeatmap">https://github.com/RinteRface/shinyHeatmap</a></li>
+</ul>
+<p>You can also add debug messages throughtout your shiny app and then use that with parsing the logs to estimate user interactions.</p>
+<ul>
+<li>Add debug messages with: <a href="https://github.com/johnmyleswhite/log4r" class="uri">https://github.com/johnmyleswhite/log4r</a></li>
+<li>Learn about your user with client data: <a href="https://shiny.rstudio.com/articles/client-data.html" class="uri">https://shiny.rstudio.com/articles/client-data.html</a></li>
 </ul>
 
 
