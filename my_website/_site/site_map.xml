@@ -10,7 +10,470 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Tue, 01 Oct 2024 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 22 Jan 2025 07:00:00 GMT</lastBuildDate>
+<item>
+  <title>Using the remote CLI with package manager</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/rspm_remote_admin_cli.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>Remote CLI use: <a href="https://docs.posit.co/rspm/admin/admin-cli/#cli-remote-use" class="uri">https://docs.posit.co/rspm/admin/admin-cli/#cli-remote-use</a></p>
+<blockquote class="blockquote">
+<p>The entire admin CLI is now available for use remotely, with the exception of the offline, online and cluster commands. API tokens can be generated with the new global:admin scope to allow full access to the CLI.</p>
+</blockquote>
+<p>In order to use the admin CLI remotely you need an admin to create an API token for you (<code>rspm create token</code>)</p>
+<p>The admin will likely need to follow these steps:</p>
+<ul>
+<li>Enable the <code>Authentication.APITokenAuth</code> configuration setting and restart the Package Manager service.</li>
+<li>Create a token using the <code>rspm create token</code> command. For example <code>rspm create token --scope=global:admin --expires=never</code></li>
+<li>Give the token and the full address of the server (including the port if not using a default port like 80/443) to the remote user.</li>
+</ul>
+<p>As a user these are needed:</p>
+<ul>
+<li>Download the Package Manager CLI, ensuring that the CLI version matches the server version.</li>
+<li>Set an environment variable named <code>PACKAGEMANAGER_TOKEN</code> with the value of the token.</li>
+<li>Set an environment variable named <code>PACKAGEMANAGER_ADDRESS</code> with the address of the Package Manager server.</li>
+</ul>
+<p>Some other commands useful to know about:</p>
+<ul>
+<li><code>rspm encrypt generate</code> for creating the encryption token from the CLI before setting up the server.</li>
+<li>Generate a bootstrap key programmatically: <a href="https://docs.posit.co/rspm/admin/appendix/bootstrap/" class="uri">https://docs.posit.co/rspm/admin/appendix/bootstrap/</a></li>
+<li><code>rspm create token --scope=sources:write --description 'meatballhat is testing' --sources='*' --expires=1h</code> generates an API key for one hour</li>
+<li><code>rspm create token --description="user A" --sources=local-src --expires=30d --scope=sources:write</code> creates a token for adding binary packages remotely</li>
+<li>useful example showing setup instructions for a package manager instance: <a href="https://github.com/rstudio/evaluations/blob/main/src/scripts/config_rspm.sh" class="uri">https://github.com/rstudio/evaluations/blob/main/src/scripts/config_rspm.sh</a></li>
+<li>here’s the way we included the rspm cli in the container images: <a href="https://github.com/rstudio/sol-eng-demo-server/pull/110/files" class="uri">https://github.com/rstudio/sol-eng-demo-server/pull/110/files</a></li>
+<li>list of all commands: <a href="https://docs.posit.co/rspm/admin/appendix/cli/rspm/" class="uri">https://docs.posit.co/rspm/admin/appendix/cli/rspm/</a></li>
+</ul>
+</section>
+<section id="environment-set-up" class="level3">
+<h3 class="anchored" data-anchor-id="environment-set-up">Environment set-up</h3>
+<p>Current environment token:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PACKAGEMANAGER_ADDRESS</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=&lt;</span>redacted<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PACKAGEMANAGER_TOKEN</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=&lt;</span>redacted<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div>
+</section>
+<section id="running-commands" class="level3">
+<h3 class="anchored" data-anchor-id="running-commands">Running commands</h3>
+<p>As a user we can test our access with something like this:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Download the Package Manager CLI, ensuring that the CLI version matches the server version. For example RSPM_SERVER_VERSION=2024.04.2-29 or RSPM_SERVER_VERSION=2023.12.0-13, find the version through the UI or with rspm --version</span></span>
+<span id="cb2-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RSPM_SERVER_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>2024.08.2-9</span>
+<span id="cb2-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RSPM_SERVER_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>2024.08.4-10</span>
+<span id="cb2-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">curl</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-o</span> rspm <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-f</span> https://cdn.posit.co/package-manager/linux/amd64/rspm-cli-linux-<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${RSPM_SERVER_VERSION}</span></span>
+<span id="cb2-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">chmod</span> +x rspm</span>
+<span id="cb2-6"></span>
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Set an environment variable named PACKAGEMANAGER_TOKEN with the value of the token.</span></span>
+<span id="cb2-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>redacted<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb2-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PACKAGEMANAGER_TOKEN</span></span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Set an environment variable named PACKAGEMANAGER_ADDRESS with the address of the Package Manager server. </span></span>
+<span id="cb2-12"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PACKAGEMANAGER_ADDRESS</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=&lt;</span>redacted<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb2-13"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PACKAGEMANAGER_ADDRESS</span></span>
+<span id="cb2-14"></span>
+<span id="cb2-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Test it! </span></span>
+<span id="cb2-16"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> verify</span>
+<span id="cb2-17"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> list tokens</span>
+<span id="cb2-18"></span>
+<span id="cb2-19"></span>
+<span id="cb2-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Test it! </span></span>
+<span id="cb2-21"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> list blocklist-rules</span>
+<span id="cb2-22"></span>
+<span id="cb2-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Test it! Need a package to try to push to test these</span></span>
+<span id="cb2-24"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> add <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>internal <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--path</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>lisaPackageManagerDemo_0.0.1.tar.gz</span></code></pre></div>
+<p>Let’s create a new repository for blocked packages that is inspired by <a href="https://github.com/rstudio/evaluations/blob/main/src/scripts/config_rspm.sh" class="uri">https://github.com/rstudio/evaluations/blob/main/src/scripts/config_rspm.sh</a></p>
+<p>First we should create our .txt files with the desired subset of packages:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># curated cran</span></span>
+<span id="cb3-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-e</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'dplyr\nggplot2\narrow\nlubridate'</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> package_subset_r.csv</span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># curated pypi</span></span>
+<span id="cb3-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">echo</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-e</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'plotnine\npolars\npillow\ngreat-tables'</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> package_subset_py.txt</span>
+<span id="cb3-6"></span>
+<span id="cb3-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">snapshot</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>2025-01-22</span></code></pre></div>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># blocked packages -- R</span></span>
+<span id="cb4-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create source <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>curated-cran <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-r </span>
+<span id="cb4-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-r <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--vulns</span></span>
+<span id="cb4-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-r <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ggplot2 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Installation of 'ggplot2' is blocked"</span></span>
+<span id="cb4-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This  next line needs to updated to update in the future, add is deprecated</span></span>
+<span id="cb4-6"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> add <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-r <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--file-in</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'package_subset_r.csv'</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--commit</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--snapshot</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${snapshot}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span>
+<span id="cb4-7"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create repo <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-r <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Curated CRAN with vulnerability blocking enabled. Downloads of ggplot2 are also disallowed."</span></span>
+<span id="cb4-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> subscribe <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-r <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-r</span>
+<span id="cb4-9"></span>
+<span id="cb4-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># blocked packages -- python</span></span>
+<span id="cb4-11"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create source <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>curated-pypi</span>
+<span id="cb4-12"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--vulns</span></span>
+<span id="cb4-13"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>plotnine <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Installation of 'plotnine' is blocked."</span></span>
+<span id="cb4-14"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> update <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--file-in</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>package_subset_py.txt <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--snapshot</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${snapshot}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--commit</span></span>
+<span id="cb4-15"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create repo <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Curated PyPI with vulnerability blocking enabled. Downloads of plotnine are also disallowed."</span></span>
+<span id="cb4-16"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> subscribe <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-packages-python</span></code></pre></div>
+<p>Let’s check for package versions that violate the blocklist rule for blocking vulnerabilities:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#rspm test blocklist-rules --repo=[repo name] --package-name=[package name] --version=[version]</span></span>
+<span id="cb5-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> test blocklist-rules <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pillow</span>
+<span id="cb5-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> test blocklist-rules <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>blocked-python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pillow <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>10.0.1</span></code></pre></div>
+</section>
+<section id="troubleshooting" class="level3">
+<h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
+<blockquote class="blockquote">
+<p>“unsupported protocol scheme”“”</p>
+</blockquote>
+<p>This error is due to the missing <code>https://</code> in front of the URL. Add that and try again.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/rspm_remote_admin_cli.html</guid>
+  <pubDate>Wed, 22 Jan 2025 07:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>Dealing with ssh keys with ansible and pulumi</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Very specific learning for the day but if you are trying to run pulumi-with-ansible IAC and in a world of ssh key pain this bypasses the ssh-agent:</p>
+<p>Pulumi.yaml</p>
+<pre><code>  keypath: "~/.ssh/mykey.pem"</code></pre>
+<p><strong>main</strong>.py</p>
+<pre><code>pulumi.export('keypath', config.require("keypath"))</code></pre>
+<p>playbook.yml</p>
+<pre><code>    ansible_ssh_private_key_file: "{{ keypath }}"</code></pre>
+<p>Or just add things properly to your ssh-agent (even better, start using the config):</p>
+<pre><code># Set permissions 
+chmod -R 400 ~/.ssh/mykey.pem # 600 is also fine
+
+# Add keys to ssh-agent 
+ssh-agent -s
+eval `ssh-agent -s`
+ssh-add ~/.ssh/mykeyaws.pem
+ssh-add ~/.ssh/mykeyazure.pem</code></pre>
+
+
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</guid>
+  <pubDate>Wed, 02 Oct 2024 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Handling secrets and pinning files to Posit Connect</title>
   <dc:creator>Lisa </dc:creator>
@@ -4332,11 +4795,11 @@ utils::sessionInfo() </code></pre>
 <li><p>Learning to write code in parallel: <a href="https://forum.posit.co/t/learning-to-write-code-in-parallel/186992/4" class="uri">https://forum.posit.co/t/learning-to-write-code-in-parallel/186992/4</a></p></li>
 <li><p>Depending on how your CPU is being overloaded (a single thread, versus multiple threads), it may be worth using the Parallel package to allow for multi-threading in your application. More information on this can be found here: <a href="https://www.rdocumentation.org/packages/parallel/versions/3.6.2" class="uri">https://www.rdocumentation.org/packages/parallel/versions/3.6.2</a></p></li>
 <li><p>Resources in this Article for getting started: <a href="https://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/parallel.html" class="uri">https://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/parallel.html</a></p></li>
+<li><p>Workbench and HPC session: <a href="https://github.com/sol-eng/Workbench-HPC-Webinar?tab=readme-ov-file" class="uri">https://github.com/sol-eng/Workbench-HPC-Webinar?tab=readme-ov-file</a></p></li>
+<li><p>Parallel: <a href="https://www.davidzeleny.net/wiki/doku.php/recol:parallel" class="uri">https://www.davidzeleny.net/wiki/doku.php/recol:parallel</a></p></li>
+<li><p>doparallel: <a href="https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/" class="uri">https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/</a></p></li>
+<li><p>Parallelization tutorial: <a href="https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html" class="uri">https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html</a></p></li>
 </ul>
-<p>Workbench and HPC session: <a href="https://github.com/sol-eng/Workbench-HPC-Webinar?tab=readme-ov-file" class="uri">https://github.com/sol-eng/Workbench-HPC-Webinar?tab=readme-ov-file</a></p>
-<p>Parallel: <a href="https://www.davidzeleny.net/wiki/doku.php/recol:parallel" class="uri">https://www.davidzeleny.net/wiki/doku.php/recol:parallel</a></p>
-<p>doparallel: <a href="https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/" class="uri">https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/</a></p>
-<p>Parallelization tutorial: <a href="https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html" class="uri">https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html</a></p>
 </section>
 <section id="when-sessions-are-crashing" class="level1">
 <h1>When sessions are crashing</h1>
@@ -5225,11 +5688,12 @@ font-style: inherit;">sqrt</span>(i)</span></code></pre></div>
 <h1>Further reading</h1>
 <ul>
 <li>Clustermq example: <a href="https://michaelmayer.quarto.pub/clustermq/example.html">https://michaelmayer.quarto.pub/clustermq/example.html</a></li>
-<li>Shiny app with HPC example: https://github.com/michaelmayer2/penguins-hpc</li>
+<li>Shiny app with HPC example: <a href="https://github.com/michaelmayer2/penguins-hpc" class="uri">https://github.com/michaelmayer2/penguins-hpc</a> and <a href="https://docs.google.com/presentation/d/1tDGm2Y8emaLXeyNWxScGWHVNWyyjkICsShz5xxc0kLg/edit#slide=id.g25ca9e5dea3_0_25" class="uri">https://docs.google.com/presentation/d/1tDGm2Y8emaLXeyNWxScGWHVNWyyjkICsShz5xxc0kLg/edit#slide=id.g25ca9e5dea3_0_25</a></li>
 <li>Slurm GPU training by Michael:</li>
 <li>Slides: <a href="https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit">https://docs.google.com/presentation/d/1ktldUhNRbMKpo9NOQCWgmJJjgNdCrpcnQ0BSQSP8d3k/edit</a></li>
 <li>Git repository: <a href="https://github.com/michaelmayer2/merck-slurm-gpu-training/">https://github.com/michaelmayer2/merck-slurm-gpu-training/</a></li>
-<li>Go fastR: High Performance Computing with R Workshop: <a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a>**</li>
+<li>Go fastR: High Performance Computing with R Workshop: <a href="https://luwidmer.github.io/fastR-website/">https://luwidmer.github.io/fastR-website/</a></li>
+<li>HPC Training: <a href="https://github.com/sol-eng/Workbench-HPC-Webinar" class="uri">https://github.com/sol-eng/Workbench-HPC-Webinar</a> and slides: <a href="https://docs.google.com/presentation/d/1gawEL2cVq7LoktfCjG55pTAYWhy0JYlskZMl5MaYD7I/edit#slide=id.p" class="uri">https://docs.google.com/presentation/d/1gawEL2cVq7LoktfCjG55pTAYWhy0JYlskZMl5MaYD7I/edit#slide=id.p</a></li>
 </ul>
 
 
@@ -7295,210 +7759,6 @@ font-style: inherit;">"free"</span>)</span></code></pre></div>
   <guid>https://questionable.quarto.pub/blog/work/r-command-line.html</guid>
   <pubDate>Tue, 20 Sep 2022 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Phone games</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/lists/phone_games.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse" class="level2">
-<h2 class="anchored" data-anchor-id="random-assortment-of-games-that-i-particularly-enjoy-and-would-endorse">Random assortment of games that I particularly enjoy and would endorse</h2>
-<section id="seedship" class="level3">
-<h3 class="anchored" data-anchor-id="seedship">Seedship</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://questionable.quarto.pub/blog/lists/img/seedship.png" class="img-fluid figure-img"></p>
-<figcaption>Seedship</figcaption>
-</figure>
-</div>
-<p>A fun (and free game) where you are an AI exploring space trying to find the new home for the 1000 remaining survivors of the human race stored onboard.</p>
-<p>Link: <a href="https://philome.la/johnayliff/seedship/play/index.html" class="uri">https://philome.la/johnayliff/seedship/play/index.html</a></p>
-</section>
-<section id="garticphone" class="level3">
-<h3 class="anchored" data-anchor-id="garticphone">Garticphone</h3>
-<p><a href="https://garticphone.com/" class="uri">https://garticphone.com/</a></p>
-</section>
-<section id="urban-dead" class="level3">
-<h3 class="anchored" data-anchor-id="urban-dead">Urban dead</h3>
-<p><a href="https://www.urbandead.com/" class="uri">https://www.urbandead.com/</a></p>
-</section>
-<section id="robot-odyssey" class="level3">
-<h3 class="anchored" data-anchor-id="robot-odyssey">Robot Odyssey</h3>
-<p><a href="https://robotodyssey.online/" class="uri">https://robotodyssey.online/</a></p>
-</section>
-<section id="skribl.io" class="level3">
-<h3 class="anchored" data-anchor-id="skribl.io">skribl.io</h3>
-<p><a href="https://skribbl.io/" class="uri">https://skribbl.io/</a></p>
-</section>
-<section id="trickster-cards" class="level3">
-<h3 class="anchored" data-anchor-id="trickster-cards">Trickster cards</h3>
-<p><a href="https://www.trickstercards.com/home/euchre/" class="uri">https://www.trickstercards.com/home/euchre/</a></p>
-</section>
-<section id="codenames" class="level3">
-<h3 class="anchored" data-anchor-id="codenames">Codenames</h3>
-<p><a href="https://codenames.game/" class="uri">https://codenames.game/</a></p>
-</section>
-<section id="mario-cart-tour" class="level3">
-<h3 class="anchored" data-anchor-id="mario-cart-tour">Mario Cart Tour</h3>
-<p>Track your coverage gaps with: <a href="https://www.mkttoolbox.com/login/?ret_url=%2F" class="uri">https://www.mkttoolbox.com/login/?ret_url=%2F</a></p>
-</section>
-<section id="semantle" class="level3">
-<h3 class="anchored" data-anchor-id="semantle">Semantle</h3>
-<p><a href="https://semantle.com/" class="uri">https://semantle.com/</a></p>
-</section>
-<section id="knucklebones" class="level3">
-<h3 class="anchored" data-anchor-id="knucklebones">Knucklebones</h3>
-<p><a href="https://knucklebones.io/en" class="uri">https://knucklebones.io/en</a></p>
-</section>
-<section id="sky-children-of-light" class="level3">
-<h3 class="anchored" data-anchor-id="sky-children-of-light">Sky Children of Light</h3>
-</section>
-<section id="home-quest" class="level3">
-<h3 class="anchored" data-anchor-id="home-quest">Home Quest</h3>
-</section>
-<section id="hungry-shark" class="level3">
-<h3 class="anchored" data-anchor-id="hungry-shark">Hungry Shark</h3>
-</section>
-<section id="mine-sweeper" class="level3">
-<h3 class="anchored" data-anchor-id="mine-sweeper">Mine Sweeper</h3>
-</section>
-<section id="neko-atsune" class="level3">
-<h3 class="anchored" data-anchor-id="neko-atsune">Neko Atsune</h3>
-</section>
-<section id="noras-dream" class="level3">
-<h3 class="anchored" data-anchor-id="noras-dream">Nora’s Dream</h3>
-</section>
-<section id="spaceflight-simulator" class="level3">
-<h3 class="anchored" data-anchor-id="spaceflight-simulator">SpaceFlight Simulator</h3>
-</section>
-<section id="wordle" class="level3">
-<h3 class="anchored" data-anchor-id="wordle">Wordle</h3>
-</section>
-<section id="space-team" class="level3">
-<h3 class="anchored" data-anchor-id="space-team">Space Team</h3>
-</section>
-<section id="one-night-werewolf" class="level3">
-<h3 class="anchored" data-anchor-id="one-night-werewolf">One Night Werewolf</h3>
-</section>
-<section id="royal-game-of-ur" class="level3">
-<h3 class="anchored" data-anchor-id="royal-game-of-ur">Royal Game of Ur</h3>
-</section>
-<section id="boardgamearena" class="level3">
-<h3 class="anchored" data-anchor-id="boardgamearena">BoardGameArena</h3>
-</section>
-<section id="jackbox-games" class="level3">
-<h3 class="anchored" data-anchor-id="jackbox-games">Jackbox Games</h3>
-</section>
-<section id="wiki-race" class="level3">
-<h3 class="anchored" data-anchor-id="wiki-race">Wiki race</h3>
-</section>
-<section id="longwave-wavelength" class="level3">
-<h3 class="anchored" data-anchor-id="longwave-wavelength">Longwave (Wavelength)</h3>
-</section>
-<section id="neopets" class="level3">
-<h3 class="anchored" data-anchor-id="neopets">Neopets</h3>
-</section>
-<section id="kingdom-of-loathing" class="level3">
-<h3 class="anchored" data-anchor-id="kingdom-of-loathing">Kingdom of Loathing</h3>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>365</category>
-  <category>games</category>
-  <guid>https://questionable.quarto.pub/blog/lists/phone_games.html</guid>
-  <pubDate>Thu, 04 Aug 2022 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/lists/img/seedship.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>A little data goes a long way</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/lists/data.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>A little data goes a long way… here are some examples that I think illustrte this in a particularly fascinating way (at least to me).</p>
-<section id="fighting-the-gender-pay-gap-one-twitter-bot-at-a-time" class="level2">
-<h2 class="anchored" data-anchor-id="fighting-the-gender-pay-gap-one-twitter-bot-at-a-time">Fighting the gender pay gap one twitter bot at a time</h2>
-<p><a href="https://www.washingtonpost.com/lifestyle/2022/03/08/twitter-pay-gap-bot-international-womens-day/">Companies tweeted for International Women’s Day. Then this account called out their pay gaps.</a></p>
-<p>Check out <a href="https://twitter.com/PayGapApp">the bot</a> for yourself.</p>
-</section>
-<section id="for-better-science" class="level2">
-<h2 class="anchored" data-anchor-id="for-better-science">For Better Science</h2>
-</section>
-<section id="for-better-science-1" class="level2">
-<h2 class="anchored" data-anchor-id="for-better-science-1"><a href="https://forbetterscience.com/"><img src="https://questionable.quarto.pub/blog/lists/img/fbs.jpg" class="img-fluid" alt="For Better Science"></a></h2>
-<p>The rabbit hole of learning about how bad science is uncovered and recalled started with:</p>
-<ul>
-<li><p><a href="https://forbetterscience.com/2022/07/27/silvain-lesne-is-a-failed-scientist/">Sylvain Lesné is a failed scientist</a></p></li>
-<li><p><a href="https://forbetterscience.com/2021/12/15/cassava-fraud-and-alzheimers-capitalism/">Cassava fraud and Alzheimer’s capitalism</a></p></li>
-</ul>
-</section>
-<section id="researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town" class="level2">
-<h2 class="anchored" data-anchor-id="researchers-uncover-the-use-of-coal-ash-for-playground-materials-in-small-town">Researchers uncover the use of coal ash for playground materials in small town</h2>
-<p>A recent story about coal ash that was used in a playground and the work the local newspaper and the University (Duke) is doing to figure out the path forward:</p>
-<ul>
-<li><a href="https://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/" class="uri">https://www.knoxnews.com/story/news/local/tennessee/tvacoalash/2020/05/17/duke-testing-shows-kingston-coal-ash-uranium-triple-report-levels/5035210002/</a></li>
-<li><a href="https://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/" class="uri">https://www.knoxnews.com/story/news/crime/2021/08/09/claxton-playground-contaminated-radioactive-dust-still-open/5470284001/</a></li>
-<li><a href="https://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/" class="uri">https://www.knoxnews.com/story/news/2017/07/21/kingston-coal-ash-spill-workers-treated-expendables-lawsuit-sick-and-dying-contends/451537001/</a></li>
-</ul>
-</section>
-<section id="unprecedented-access-to-food-safety-and-consumer-recalls" class="level2">
-<h2 class="anchored" data-anchor-id="unprecedented-access-to-food-safety-and-consumer-recalls">Unprecedented access to food safety and consumer recalls</h2>
-<ul>
-<li><a href="https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts">Food safety</a></li>
-<li><a href="https://www.cpsc.gov/Recalls">Consumer products</a></li>
-</ul>
-</section>
-<section id="colorado-and-the-dirty-history-of-manufacturing" class="level2">
-<h2 class="anchored" data-anchor-id="colorado-and-the-dirty-history-of-manufacturing">Colorado and the dirty history of manufacturing</h2>
-<ul>
-<li><a href="https://denverite.com/2021/10/07/a-toxic-history-massive-concerts-and-neighborhood-pressure-bring-parking-problems-to-ruby-hill-park/">Toxic history of a neighborhood park</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Rocky_Flats_Plant">Wild history of the Rocky Flats Plant</a></li>
-</ul>
-</section>
-<section id="alaska-and-preventing-catastrophic-destruction-of-the-salmon-spawns" class="level2">
-<h2 class="anchored" data-anchor-id="alaska-and-preventing-catastrophic-destruction-of-the-salmon-spawns">Alaska and preventing catastrophic destruction of the Salmon spawns</h2>
-<ul>
-<li><a href="https://www.nrdc.org/stories/crushing-alaskas-pebble-mine">Legal effort to prevent Pebble Mine</a></li>
-<li><a href="https://www.wildconfluence.com/school-of-fish">Award winning video on the importance of Salmon in the Pebble Mine area</a></li>
-</ul>
-</section>
-<section id="the-origin-of-popcorn-lung" class="level2">
-<h2 class="anchored" data-anchor-id="the-origin-of-popcorn-lung">The origin of popcorn lung</h2>
-<ul>
-<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3115208/">Occupational Lung Disease Risk and Exposure to Butter-Flavoring Chemicals After Implementation of Controls at a Microwave Popcorn Plant</a></li>
-<li><a href="https://www.cdc.gov/niosh/flavoring-related-lung-disease/about/index.html?CDC_AAref_Val=https://www.cdc.gov/niosh/topics/flavorings/exposure.html">About Flavoring-related Lung Disease</a></li>
-</ul>
-</section>
-<section id="niosh-articles" class="level2">
-<h2 class="anchored" data-anchor-id="niosh-articles">NIOSH articles</h2>
-<ul>
-<li><a href="https://blogs.cdc.gov/niosh-science-blog/2023/04/07/medical-mystery13b/">Workplace Medical Mystery Solved: Unknown Illness in Worker at Greeting Card Plant - flock lung</a></li>
-<li><a href="https://blogs.cdc.gov/niosh-science-blog/2023/02/03/diy-filtration/">The Effectiveness of DIY Air Filtration Units</a></li>
-<li><a href="https://blogs.cdc.gov/niosh-science-blog/2023/11/08/sharps-or/">Bloodborne Pathogen Exposures Continue in Operating Room Settings</a></li>
-<li><a href="https://blogs.cdc.gov/niosh-science-blog/2024/01/24/most-viewed-2023/">Most-viewed NIOSH Products in 2023</a></li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>datascience</category>
-  <category>opinions</category>
-  <guid>https://questionable.quarto.pub/blog/lists/data.html</guid>
-  <pubDate>Tue, 02 Aug 2022 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/lists/img/fbs.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

@@ -1,6 +1,6 @@
 ---
 title: "Dealing with ssh keys with ansible and pulumi" 
-description: "A ver specific brief learning"
+description: "A very specific brief learning"
 author: "Lisa"
 date: "2024-10-02"
 format:
@@ -23,7 +23,7 @@ Very specific learning for the day but if you are trying to run pulumi-with-ansi
 
 Pulumi.yaml
 ```
-  keypath: "~/.ssh/lisa-eastus.pem"
+  keypath: "~/.ssh/mykey.pem"
 ```
 
 __main__.py

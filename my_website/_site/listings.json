@@ -2,6 +2,8 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/rspm_remote_admin_cli.html",
+      "/work/ansible-and-pulumi-ssh-keys.html",
       "/work/secrets-and-pinning-files.html",
       "/work/python-projects-setup.html",
       "/work/r-projects-setup.html",
@@ -52,6 +54,8 @@
       "/work/r-projects-setup.html",
       "/work/python-projects-setup.html",
       "/work/secrets-and-pinning-files.html",
+      "/work/ansible-and-pulumi-ssh-keys.html",
+      "/work/rspm_remote_admin_cli.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
