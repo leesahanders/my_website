@@ -67,6 +67,7 @@ As a user we can test our access with something like this:
 # Download the Package Manager CLI, ensuring that the CLI version matches the server version. For example RSPM_SERVER_VERSION=2024.04.2-29 or RSPM_SERVER_VERSION=2023.12.0-13, find the version through the UI or with rspm --version
 export RSPM_SERVER_VERSION=2024.08.2-9
 export RSPM_SERVER_VERSION=2024.08.4-10
+export RSPM_SERVER_VERSION=2024.11.0-7
 curl -o rspm -f https://cdn.posit.co/package-manager/linux/amd64/rspm-cli-linux-${RSPM_SERVER_VERSION}
 chmod +x rspm
 
@@ -96,7 +97,7 @@ First we should create our .txt files with the desired subset of packages:
 
 ```bash
 # curated cran
-echo -e 'dplyr\nggplot2\narrow\nlubridate' > package_subset_r.csv
+echo -e 'dplyr\nggplot2\narrow\nlubridate\njsonlite\nreadxl\nhaven\ngdata\nigraph\ncommonmark' > package_subset_r.csv
 
 # curated pypi
 echo -e 'plotnine\npolars\npillow\ngreat-tables' > package_subset_py.txt
@@ -109,8 +110,7 @@ export snapshot=2025-01-22
 ./rspm create source --type=curated-cran --name=blocked-packages-r 
 ./rspm create blocklist-rule --source=blocked-packages-r --vulns
 ./rspm create blocklist-rule --source=blocked-packages-r --package-name=ggplot2 --description="Installation of 'ggplot2' is blocked"
-# This  next line needs to updated to update in the future, add is deprecated
-./rspm add --source=blocked-packages-r --file-in='package_subset_r.csv' --commit --snapshot="${snapshot}"
+./rspm update --source=blocked-packages-r --file-in='package_subset_r.csv' --commit --snapshot="${snapshot}"
 ./rspm create repo --name=blocked-r --description="Curated CRAN with vulnerability blocking enabled. Downloads of ggplot2 are also disallowed."
 ./rspm subscribe --repo=blocked-r --source=blocked-packages-r
 
@@ -131,11 +131,83 @@ Let's check for package versions that violate the blocklist rule for blocking vu
 ./rspm test blocklist-rules --repo=blocked-python --package-name=pillow --version=10.0.1
 ```
 
+Let's set up a cran that has all vulnerable packages blocked (rather than a subset). This wasn't possible until the newest release. 
+
+```bash
+./rspm create repo --name=cran-vulns-blocked --type=r --description='Access CRAN packages with known vulnerabilities blocked'
+./rspm subscribe --repo=cran-vulns-blocked --source=cran
+./rspm create blocklist-rule --repo=cran-vulns-blocked --vulns
+```
+
+Let's now do the same for pypi: 
+
+```bash
+./rspm create repo --name=pypi-vulns-blocked --type=python --description='Access PyPi packages with known vulnerabilities blocked'
+./rspm subscribe --repo=pypi-vulns-blocked --source=pypi
+./rspm create blocklist-rule --repo=pypi-vulns-blocked --vulns
+```
+
+Let's check for package versions that violate the blocklist rule for blocking vulnerabilities: 
+
+```bash
+#rspm test blocklist-rules --repo=[repo name] --package-name=[package name] --version=[version]
+./rspm test blocklist-rules --repo=cran-vulns-blocked --package-name=jsonlite --version=1.8.7
+./rspm test blocklist-rules --repo=pypi-vulns-blocked --package-name=pillow --version=10.0.1
+```
+
+Let's create a blocklist rule to block a specific package: 
+
+```bash
+./rspm create blocklist-rule --repo=cran-vulns-blocked --package-name=ggplot2 --description="Installation of 'ggplot2' is blocked"
+./rspm test blocklist-rules --repo=cran-vulns-blocked --package-name=ggplot2
+```
+
+Remove a repository (oops!): 
+
+```bash
+./rspm delete repo --name=pypi-vulns-blocked
+```
+
+Try to download a blocked package: 
+
+```r
+library(remotes)
+options(repos = c(CRAN = "https://pkg.demo.posit.team/cran-vulns-blocked/__linux__/noble/latest"))
+install_version("jsonlite", "1.8.7")
+```
+
+or we can instead curl it to see what happens: 
+
+```bash
+curl https://pkg.demo.posit.team/cran-vulns-blocked/latest/src/contrib/Archive/jsonlite/jsonlite_1.8.7.tar.gz
+```
+
+### rosv
+
+rosv r package: <https://github.com/cran/rosv> 
+
+```r
+library(rosv)
+
+# Pull the entire set of PyPI vulnerability data
+pkg_vul <- osv_query(ecosystem = 'PyPI', all_affected = FALSE)
+pypi_vul <- create_osv_list(pkg_vul, as.data.frame = FALSE, NA_value = ' ')
+
+# Pull the entire set of cran vulnerability data
+pkg_vul <- osv_query(ecosystem = 'CRAN', all_affected = FALSE)
+cran_vul <- create_osv_list(pkg_vul, as.data.frame = FALSE, NA_value = ' ')
+
+# Scan an R project 
+df <- osv_scan('r_project')
+```
+
+### r-advisory-database
+
+r-advisory-database: <https://github.com/RConsortium/r-advisory-database> 
+
 ### Troubleshooting 
 
 > "unsupported protocol scheme """ 
 
 This error is due to the missing `https://` in front of the URL. Add that and try again. 
-
-
 
