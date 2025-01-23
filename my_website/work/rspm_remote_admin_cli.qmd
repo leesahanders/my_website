@@ -211,3 +211,8 @@ r-advisory-database: <https://github.com/RConsortium/r-advisory-database>
 
 This error is due to the missing `https://` in front of the URL. Add that and try again. 
 
+> "Error: unable to get the claims from the token: signature is invalid" 
+
+Was the package manager server recently updated? The encryption key changes between versions (is re-generated). It is used for all secret management in PPM, including JWT tokens, encrypted configuration values like database passwords, and credentials for git builders. Logic needs to be added to manage the key across versions if you want things like API keys to persist. Follow the docs [here](https://docs.posit.co/rspm/admin/appendix/encryption/) and consider setting the supported env var `PACKAGEMANAGER_ENCRYPTION_KEY`. 
+
+
