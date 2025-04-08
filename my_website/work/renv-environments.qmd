@@ -996,6 +996,23 @@ library(usethis)
 usethis::edit_r_environ() 
 ```
 
+## Scenario 9: Comparing two renv projects 
+
+Reference: <https://forum.posit.co/t/compare-two-renv-projects/145574> 
+
+```r
+library(jsonlite)
+library(tidyverse)
+my_renvlock <- fromJSON("renv.lock")
+
+map_dfr(my_renvlock$Packages, ~ enframe(.) |>
+  filter(name %in% c("Package", "Version")) |>
+  mutate(value = as.character(value)) |>
+  pivot_wider())
+```
+
+
+
 # Common issues and troubleshooting 
 
 ## Package installation errors on Workbench
