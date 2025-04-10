@@ -1,0 +1,506 @@
+---
+title: "AWS Connections from Posit Team"
+description: "This article walks through the different access options for data resources in AWS."
+author: "Lisa"
+date: "2025-01-21"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/aws-new-connection.png"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Overview
+
+This article walks through the different access options for data resources in AWS. Access patterns for AWS resources will vary based on several general factors:
+
+1.  Where the code is running (e.g. Posit Workbench vs. Posit Connect)
+2.  The credential (e.g. OIDC, IAM roles, kerberos authentication, IAM instance profile and policy, username/password, etc.)
+3.  The connection method (e.g. Workbench managed credentials, R or Python package, ODBC, etc.)
+4.  Which AWS resource is being accessed 
+
+### AWS data resources
+
+Popular data storage options in AWS include S3, Aurora, Redshift, and Athena. Each type is useful for different workflows. 
+
+|**Service**|**Type**|**Data Type**|**Best For**|
+|---|---|---|---|---|---|
+|**Amazon S3**|Object Storage|Unstructured, Semi-structured|Data lakes, blob storage, backups, archive|
+|**Amazon RDS / Aurora**|Relational Database|Structured|Real-time transactions, enterprise apps, Aurora/MySQL/PostgreSQL/MariaDB/Microsoft SQL Server/Oracle database engines|
+|**Amazon Redshift**|Data Warehouse|Structured, Semi-structured|Analytics, Business Intelligence|
+|**Amazon Athena**|Interactive Query to S3|Semi-structured, Structured|Ad-hoc queries on S3 data|
+
+### AWS Identity and Access Management (IAM)
+
+The foundation of identity management on AWS is through the [Identity and Access Management (IAM) web service](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html). The basic principles are: 
+
+- A user is set up on IAM (this can be synced with an external authentication agent)
+- Their sign-in credentials are used to authenticate with AWS (either as an AWS account root user, an IAM user, or assuming an IAM role)
+- Sign-in credentials are matched to a principal (an IAM user, federated user, IAM role, or application)
+- Access is requested and granted to a specific service according to the relevant services policy
+
+Vocabulary: 
+
+- [IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) are individual entities, typically a human user. By default IAM users have minimum permissions and access must be granted to them. 
+
+- [IAM groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html) can be used to describe a collection of IAM users and grant permissions to a larger set of users, rather than individually. 
+
+- [Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) are an identity that has specific permissions. Any IAM user can be granted a role which would then give them access to those permissions for the time alotted. Services can also be granted roles which allows the service to perform actions on your behalf. 
+
+- [Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) define permissions. They can be attached to identities or resources. These permissions define if a request is allowed or denied. 
+
+## Credentials
+
+This guide will focus on the recommended tools for authentication to AWS resources when using Posit. The different methods that are commonly used are: 
+
+- User: Workbench Managed Credentials using Identity and Access Management (IAM) (recommended) [🔗](#workbench-managed-creds-iam) 
+- User: Developer managed credentials using Identity and Access Management (IAM), Secrets manager, or Key Management Service (KMS) [🔗](#workbench-developer-creds) 
+- User or One-to-many: Developer managed keypair using an AWS secret key and access key [🔗](#keypair-creds) 
+- One-to-many: Grant trusted access to resource from VM using an IAM instance profile and policy or role [🔗](#trusted-creds-iam) 
+
+Not supported: 
+
+- Browser authentication methods. Posit Workbench does not support this method. After a successful login, AWS will redirect you to `localhost` instead of your Workbench instance. 
+
+## Connection Methods
+
+AWS supports many different types of connection methods. This guide will focus on the recommended connection methods when using Posit Workbench and Posit Connect.
+
+::: {.panel-tabset group="language"}
+### R
+
+Connection authentication is through the [paws](https://www.paws-r-sdk.com/)  package. In addition it provides the ability to return data objects for many of the resources inside AWS. For resources that are databases the [odbc](https://odbc.r-dbi.org/reference/dbConnect-OdbcDriver-method.html) and [DBI](https://dbi.r-dbi.org/) packages are also needed in order to create connection objects. Your Posit admin should follow the instructions on the [Install Pro Drivers](https://docs.posit.co/pro-drivers/) page of the documentation.
+
+### Python
+
+Connection authentication is through the [boto3](https://pypi.org/project/boto3/) package. For resources that are databases this can be used in conjunction with data frame libraries like [polars](https://docs.pola.rs/) or [pandas](https://pandas.pydata.org/). Your Posit admin should follow the instructions on the [Install Pro Drivers](https://docs.posit.co/pro-drivers/) page of the documentation.
+
+:::
+
+## User Credential Examples 
+
+### Development Environments (IE Workbench)
+
+Development environments refer to environments where users write and execute cod, which include Posit Workbench. In the development environment the running user is executing the code, so both interactive and non-interactive authentiation methods are possible. Most commonly the credential method chosen uses the credetials of the running user. 
+
+The admin for Workbench can configure credentials on Workbench to help make this process easier for developers. Currently, this feature is only supported for RStudio Pro and VS Code sessions. 
+
+### Example Access Patterns
+
+#### Workbench Managed Credentials  {#workbench-managed-creds-iam}
+
+Workbench Managed Credentials is the recommended way to access data on AWS from Posit Workbench. This method is secure and provides a nice user experience because Workbench manages the credentials for the user.This uses the AWS [web identity federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html) mechanism to securely set credentials in individual sessions. 
+
+An admin can configure Workbench to provide user-specific AWS credentials for sessions that are tied to their Single Sign-On credentials. Under the hood Workbench uses the AWS web identity federation mechanism (IAM with OpenID Connect) to set these credentials in individual sessions. For more details the administrator should refer to the [AWS Credentials](https://docs.posit.co/ide/server-pro/authenticating_users/aws_credentials.html) page in the Posit Workbench Admin Guide.
+
+##### AWS Configuration
+
+AWS will need to be configured with an appropriate IAM Identity Provider and IAM Roles that Workbench users will assume. See the [AWS Configuration](https://docs.posit.co/ide/server-pro/authenticating_users/aws_credentials.html#aws-configuration) page for step-by-step directions. 
+
+Users that need access to resources will need the policy associated with their IAM role updated.
+
+:::: {.panel-tabset group="resource"}
+
+##### S3
+
+For access from Workbench to S3 that could look like [this](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security_iam_service-with-iam.html): 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Allow user complete access to create and remove objects in the bucket",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::12345678901:user/user"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::amzn-s3-demo-bucket"
+        }
+    ]
+}
+```
+
+##### RDS / Aurora
+
+For access from Workbench to RDS / Aurora that could look like [this](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html) and [this](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html): 
+
+```
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"rds-db:connect"
+			],
+			"Resource": [
+				"arn:aws:rds:us-east-2:637485797898:db:cluster-db/username"
+			]
+		}
+	]
+}
+```
+
+The database will need to have user access granted, for example [for postgres use `GRANT rds_iam TO db_userx;`](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL). 
+
+##### Redshift
+
+For access from Workbench to Redshift that could look like [this](https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html): 
+
+```
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "redshift:GetClusterCredentials",
+			"Resource": "arn:aws:redshift:us-east-2:637485797898:dbuser:demo-cluster/username"
+		}
+	]
+}
+```
+
+The database will need to have user access granted, use the [GRANT](https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html) command. For more details refer to [the AWS documentation](https://docs.aws.amazon.com/redshift/latest/mgmt/generating-iam-credentials-steps.html). 
+
+##### Athena
+
+For access from Workbench to Aurora that could look like [this](https://docs.aws.amazon.com/athena/latest/ug/example-policies-workgroup.html): 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "athena:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
+There are two managed policies for Athena that are needed to grant access `AmazonAthenaFullAccess` and `AWSQuicksightAthenaAccess`. 
+
+Additional permissions may be needed in order to access the underlying dataset stored in S3. 
+
+::::
+
+##### User Configuration {#workbench-managed-creds-user}
+
+When starting a new Workbench session, users should click on the AWS credential selection widget to login to AWS. After selecting and starting the session with attached credentials, the credentials needed to connect to AWS resources (`AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`) are available within the session.
+
+![AWS accounts in the New Session dialog’s credential selection widget](img/aws-new-connection.png)
+
+The [Posit Workbench User Guide - Workbench-managed AWS Credentials](https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/aws.html) page in the Posit Workbench User Guide provides more details on logging into AWS via Posit Workbench.
+
+It is not possible to share credentials amongst users with Workbench Managed Credentials.
+
+##### R and Python Examples {#workbench-managed-credentials-r-and-python-examples}
+
+Users can verify the available credentials within their Workbench session by installing the [AWS CLI](https://aws.amazon.com/cli/). 
+
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install -i ~/.local/aws-cli -b ~/.local/bin
+
+aws sts get-caller-identity
+```
+
+:::: {.panel-tabset group="language"}
+##### R
+
+::: {.panel-tabset group="r-resource"}
+###### S3
+
+```{.r}
+library(paws)
+
+# create an S3 service object in the region you are working on
+s3 <- paws::s3(config = list(region = "us-east-2"))
+
+# Is this needed? 
+token <- rds$build_auth_token(endpoint = "demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com", region = "us-east-2", user = "username") 
+#
+
+# locate the s3 bucket you want
+bucket = 'demo-projects'
+s3$list_objects(Bucket = bucket)
+
+# upload data to s3 bucket
+s3$put_object(
+  Bucket = bucket,
+  Key = 'data.csv'
+)
+
+# read data from s3 bucket
+s3_download <- s3$get_object(
+  Bucket = bucket,
+  Key = 1
+)
+```
+
+###### RDS / Aurora
+
+Currently there is an [issue](https://github.com/paws-r/paws/issues/324) preventig the credentials from being correctly loaded. In order to get this working (until the issue is fixed) the AWS CLI can be used to retrieve a functional token with `aws rds generate-db-auth-token --hostname demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com --port 5432 --region us-east-2 --username username` or call out to Python and use boto3 (for example with reticulate).  
+
+```{.r}
+library(odbc)
+library(DBI)
+library(paws)
+rds <- paws::rds()
+token <- rds$build_auth_token(endpoint = "demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com", region = "us-east-2", user = "username") 
+con <- DBI::dbConnect(odbc::odbc(),
+                      Driver   = "PostgreSQL",
+                      Server   = "demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com",
+                      Database = "demo_db",
+                      UID      = "username",
+                      PWD      = token,
+                      Port     = 5432,
+                      )
+```
+
+###### Redshift
+
+```{.r}
+library(odbc)
+library(DBI)
+library(paws)
+DB_NAME = 'demo_db'
+CLUSTER_IDENTIFIER = 'demo-cluster'
+DB_USER = 'username'
+redshift <- paws::redshift(region = "us-east-2")
+temp_credentials <- redshift$get_cluster_credentials(DbUser = DB_USER, DbName = DB_NAME, ClusterIdentifier = CLUSTER_IDENTIFIER, AutoCreate = F)
+con <- DBI::dbConnect(odbc::odbc(),
+                      Driver   = "Redshift",
+                      Server   = "demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com",
+                      Database = DB_NAME,
+                      UID      = temp_credentials$DbUser,
+                      PWD      = temp_credentials$DbPassword,
+                      Port     = 5439
+                      )
+```
+
+###### Athena
+
+For R developers the [paws](https://www.paws-r-sdk.com/docs/athena/) package can be used. More commonly, users connect directly to the data stored in S3. 
+
+:::
+
+##### Python
+
+::: {.panel-tabset group="python-resource"}
+###### S3
+
+```{.bash}
+pip install boto3
+```
+
+```{.python}
+import pyodbc
+import boto3
+client = boto3.client('s3')
+# Is this needed?
+token = client.generate_db_auth_token(DBHostname='demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com', Port=5432,DBUsername="username", Region="us-east-2")
+print(token)
+# 
+bucket = s3.Bucket('amzn-s3-demo-bucket')
+for obj in bucket.objects.all():
+    print(obj.key)
+```
+
+###### RDS / Aurora
+
+```{.bash}
+pip install pyodbc boto3
+```
+
+```{.python}
+import pyodbc
+import boto3
+client = boto3.client('rds', region_name="us-east-2")
+token = client.generate_db_auth_token(DBHostname='demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com', Port=5432,DBUsername="username", Region="us-east-2")
+print(token)
+con=pyodbc.connect(driver='{PostgreSQL}',
+                   database='demo_db',
+                   uid='username',
+                   pwd=token,
+                   server='demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com',
+                   port=5432,
+                   )
+con
+```
+
+###### Redshift
+
+```{.bash}
+pip install pyodbc boto3
+```
+
+```{.python}
+import pyodbc
+import boto3
+DB_NAME = 'demo_db'
+CLUSTER_IDENTIFIER = 'demo-cluster'
+DB_USER = 'username'
+client = boto3.client('redshift', region_name="us-east-2")
+cluster_creds = client.get_cluster_credentials(DbUser=DB_USER, DbName=DB_NAME, ClusterIdentifier=CLUSTER_IDENTIFIER, AutoCreate=False)
+temp_user = cluster_creds['DbUser']
+temp_password = cluster_creds['DbPassword']
+con=pyodbc.connect(driver='{Redshift}',
+                   database=DB_NAME,
+                   uid=temp_user,
+                   pwd=temp_password,
+                   server='demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com',
+                   port=5439,
+                   )
+con
+```
+
+###### Athena
+
+For Python developers the [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/athena.html) package can be used. More commonly, users connect directly to the data stored in S3. 
+
+:::
+::::
+
+For more in depth information and examples, see:
+
+- The Workbench User Guide section on [Workbench managed AWS credentials](https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/aws.html)
+-   The Connect User Guide [OAuth Integrations](https://docs.posit.co/connect/user/oauth-integrations/) section for more detail on these concepts
+-   The [Connect Cookbook](https://docs.posit.co/connect/cookbook/) for complete examples of using OAuth credentials for deployment
+- The Connect Admin Guide section on [Oauth Integrations](https://docs.posit.co/connect/admin/integrations/oauth-integrations/) 
+
+#### Developer Managed Credentials {#workbench-developer-creds}
+
+If Workbench isn't managing credentials on the behalf of users then users need the additional step of populating their credentials. 
+
+The AWS CLI can be used to retrieve a functional token with `aws rds generate-db-auth-token --hostname cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com --port 5432 --region us-east-2 --username username`. This will grant a temporary token that by default lasts for 15 minutes. The developer will need to manually refresh the token as needed while working, unlike the case where Workbench will manage the token on their behalf. 
+
+After loading the token and performing appropriate authentication steps then the above steps can be taken to request resources from AWS. 
+
+:::: {.panel-tabset group="language"}
+##### R
+
+```{.r}
+library(paws)
+library(odbc)
+library(DBI)
+
+# Build a token 
+token <- rds$build_auth_token(endpoint = "demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com", region = "us-east-2", user = "username") 
+
+# Use the token with the ODBC connection 
+con <- DBI::dbConnect(odbc::odbc(),
+                      Driver   = "PostgreSQL",
+                      Server   = "demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com",
+                      Database = "demo_db",
+                      UID      = "username",
+                      PWD      = token,
+                      Port     = 5432,
+                      )
+
+# Gather temp credentials 
+temp_credentials <- redshift$get_cluster_credentials(DbUser = DB_USER, DbName = DB_NAME, ClusterIdentifier = CLUSTER_IDENTIFIER, AutoCreate = F)
+
+# Use the temp credentials with the ODBC connection
+con <- DBI::dbConnect(odbc::odbc(),
+                      Driver   = "Redshift",
+                      Server   = "demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com",
+                      Database = DB_NAME,
+                      UID      = temp_credentials$DbUser,
+                      PWD      = temp_credentials$DbPassword,
+                      Port     = 5439
+                      )
+```
+
+##### Python
+
+```{.bash}
+pip install pyodbc boto3
+```
+
+```{.python}
+import pyodbc
+import boto3
+
+# Build a token 
+token = client.generate_db_auth_token(DBHostname='demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com', Port=5432,DBUsername="username", Region="us-east-2")
+
+# Use the token with the ODBC connection 
+con=pyodbc.connect(driver='{PostgreSQL}',
+                   database='demo_db',
+                   uid='username',
+                   pwd=token,
+                   server='demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com',
+                   port=5432,
+                   )
+
+# Gather temp credentials 
+DB_NAME = 'demo_db'
+CLUSTER_IDENTIFIER = 'demo-cluster'
+DB_USER = 'username'
+client = boto3.client('redshift', region_name="us-east-2")
+cluster_creds = client.get_cluster_credentials(DbUser=DB_USER, DbName=DB_NAME, ClusterIdentifier=CLUSTER_IDENTIFIER, AutoCreate=False)
+temp_user = cluster_creds['DbUser']
+temp_password = cluster_creds['DbPassword']
+
+# Use the temp credentials with the ODBC connection
+con=pyodbc.connect(driver='{Redshift}',
+                   database=DB_NAME,
+                   uid=temp_user,
+                   pwd=temp_password,
+                   server='demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com',
+                   port=5439,
+                   )
+```
+::::
+
+
+## One-to-many Credential Examples
+
+### Other Environments (IE Connect, etc)
+
+In this section we will describe authentication patterns for all other environments for example production environments, deployed environments, etc. In these cases typically the code is executed by a service account making only non-interactive authentication methods possible.
+
+### Example Access Patterns
+
+#### Grant trusted access to resource from VM using an IAM instance profile and policy {#trusted-creds-iam}
+
+Trusted access between the server running the content and the resource can be granted using an IAM instance profile and policy. In this case all content running on the server has access to the resource. 
+
+##### AWS Configuration 
+
+Instead of assigning the roles to the IAM user it can be assigned to the AWS EC2 instance, slurm environment, or k8s cluster to allow access. This will broadlly allow access to that resource specifically for only that environment. 
+
+In this case  the admin will need to: 
+
+- Create an AWS role that has the correct trusted entity type (for example, EC2)
+- Create a custom policy that provides access to the needed resources 
+- Attach the IAM role to the environment (for example, the EC2 server)
+- Verify network connectivity
+
+See the AWS [use IAM roles to grant permissions to applications running on EC2 instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) and the [EC2 IAM roles](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) pages for more details. 
+
+#### Developer Managed Credentials {#keypair-creds}
+
+If granting access through a trusted relationship between the VM and the resource isn't feasible, then a non-interactive authentication method can be used like a developer managed keypair using an AWS secret key and access key. However this approach comes with security risks if the keypair isn't closely guarded. In this case [securing credentials](https://solutions.posit.co/connections/db/best-practices/managing-credentials/) is critical. 
+
+The documentation for [paws](https://www.paws-r-sdk.com/) and [boto3](https://pypi.org/project/boto3/) have extensive examples using keypair authentication. 
+
+
+
