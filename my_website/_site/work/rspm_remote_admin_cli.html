@@ -231,6 +231,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#environment-set-up" id="toc-environment-set-up" class="nav-link" data-scroll-target="#environment-set-up">Environment set-up</a></li>
   <li><a href="#running-commands" id="toc-running-commands" class="nav-link" data-scroll-target="#running-commands">Running commands</a></li>
+  <li><a href="#rosv" id="toc-rosv" class="nav-link" data-scroll-target="#rosv">rosv</a></li>
+  <li><a href="#r-advisory-database" id="toc-r-advisory-database" class="nav-link" data-scroll-target="#r-advisory-database">r-advisory-database</a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   </ul>
 </nav>
@@ -285,31 +287,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the Package Manager CLI, ensuring that the CLI version matches the server version. For example RSPM_SERVER_VERSION=2024.04.2-29 or RSPM_SERVER_VERSION=2023.12.0-13, find the version through the UI or with rspm --version</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">RSPM_SERVER_VERSION</span><span class="op">=</span>2024.08.2-9</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">RSPM_SERVER_VERSION</span><span class="op">=</span>2024.08.4-10</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> rspm <span class="at">-f</span> https://cdn.posit.co/package-manager/linux/amd64/rspm-cli-linux-<span class="va">${RSPM_SERVER_VERSION}</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x rspm</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set an environment variable named PACKAGEMANAGER_TOKEN with the value of the token.</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="op">&lt;</span>redacted<span class="op">&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PACKAGEMANAGER_TOKEN</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set an environment variable named PACKAGEMANAGER_ADDRESS with the address of the Package Manager server. </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PACKAGEMANAGER_ADDRESS</span><span class="op">=&lt;</span>redacted<span class="op">&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PACKAGEMANAGER_ADDRESS</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it! </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> verify</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> list tokens</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">RSPM_SERVER_VERSION</span><span class="op">=</span>2024.11.0-7</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> rspm <span class="at">-f</span> https://cdn.posit.co/package-manager/linux/amd64/rspm-cli-linux-<span class="va">${RSPM_SERVER_VERSION}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x rspm</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set an environment variable named PACKAGEMANAGER_TOKEN with the value of the token.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="op">&lt;</span>redacted<span class="op">&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PACKAGEMANAGER_TOKEN</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set an environment variable named PACKAGEMANAGER_ADDRESS with the address of the Package Manager server. </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PACKAGEMANAGER_ADDRESS</span><span class="op">=&lt;</span>redacted<span class="op">&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PACKAGEMANAGER_ADDRESS</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it! </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> verify</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> list tokens</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it! </span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> list blocklist-rules</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it! Need a package to try to push to test these</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> add <span class="at">--source</span><span class="op">=</span>internal <span class="at">--path</span><span class="op">=</span>lisaPackageManagerDemo_0.0.1.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it! </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> list blocklist-rules</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Test it! Need a package to try to push to test these</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> add <span class="at">--source</span><span class="op">=</span>internal <span class="at">--path</span><span class="op">=</span>lisaPackageManagerDemo_0.0.1.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s create a new repository for blocked packages that is inspired by <a href="https://github.com/rstudio/evaluations/blob/main/src/scripts/config_rspm.sh" class="uri">https://github.com/rstudio/evaluations/blob/main/src/scripts/config_rspm.sh</a></p>
 <p>First we should create our .txt files with the desired subset of packages:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># curated cran</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">'dplyr\nggplot2\narrow\nlubridate'</span> <span class="op">&gt;</span> package_subset_r.csv</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">'dplyr\nggplot2\narrow\nlubridate\njsonlite\nreadxl\nhaven\ngdata\nigraph\ncommonmark'</span> <span class="op">&gt;</span> package_subset_r.csv</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># curated pypi</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">'plotnine\npolars\npillow\ngreat-tables'</span> <span class="op">&gt;</span> package_subset_py.txt</span>
@@ -319,22 +322,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create source <span class="at">--type</span><span class="op">=</span>curated-cran <span class="at">--name</span><span class="op">=</span>blocked-packages-r </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--source</span><span class="op">=</span>blocked-packages-r <span class="at">--vulns</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--source</span><span class="op">=</span>blocked-packages-r <span class="at">--package-name</span><span class="op">=</span>ggplot2 <span class="at">--description</span><span class="op">=</span><span class="st">"Installation of 'ggplot2' is blocked"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This  next line needs to updated to update in the future, add is deprecated</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> add <span class="at">--source</span><span class="op">=</span>blocked-packages-r <span class="at">--file-in</span><span class="op">=</span><span class="st">'package_subset_r.csv'</span> <span class="at">--commit</span> <span class="at">--snapshot</span><span class="op">=</span><span class="st">"</span><span class="va">${snapshot}</span><span class="st">"</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create repo <span class="at">--name</span><span class="op">=</span>blocked-r <span class="at">--description</span><span class="op">=</span><span class="st">"Curated CRAN with vulnerability blocking enabled. Downloads of ggplot2 are also disallowed."</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> subscribe <span class="at">--repo</span><span class="op">=</span>blocked-r <span class="at">--source</span><span class="op">=</span>blocked-packages-r</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># blocked packages -- python</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create source <span class="at">--name</span><span class="op">=</span>blocked-packages-python <span class="at">--type</span><span class="op">=</span>curated-pypi</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--source</span><span class="op">=</span>blocked-packages-python <span class="at">--vulns</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--source</span><span class="op">=</span>blocked-packages-python <span class="at">--package-name</span><span class="op">=</span>plotnine <span class="at">--description</span><span class="op">=</span><span class="st">"Installation of 'plotnine' is blocked."</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> update <span class="at">--source</span><span class="op">=</span>blocked-packages-python <span class="at">--file-in</span><span class="op">=</span>package_subset_py.txt <span class="at">--snapshot</span><span class="op">=</span><span class="st">"</span><span class="va">${snapshot}</span><span class="st">"</span> <span class="at">--commit</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create repo <span class="at">--name</span><span class="op">=</span>blocked-python <span class="at">--type</span><span class="op">=</span>python <span class="at">--description</span><span class="op">=</span><span class="st">"Curated PyPI with vulnerability blocking enabled. Downloads of plotnine are also disallowed."</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> subscribe <span class="at">--repo</span><span class="op">=</span>blocked-python <span class="at">--source</span><span class="op">=</span>blocked-packages-python</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> update <span class="at">--source</span><span class="op">=</span>blocked-packages-r <span class="at">--file-in</span><span class="op">=</span><span class="st">'package_subset_r.csv'</span> <span class="at">--commit</span> <span class="at">--snapshot</span><span class="op">=</span><span class="st">"</span><span class="va">${snapshot}</span><span class="st">"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create repo <span class="at">--name</span><span class="op">=</span>blocked-r <span class="at">--description</span><span class="op">=</span><span class="st">"Curated CRAN with vulnerability blocking enabled. Downloads of ggplot2 are also disallowed."</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> subscribe <span class="at">--repo</span><span class="op">=</span>blocked-r <span class="at">--source</span><span class="op">=</span>blocked-packages-r</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># blocked packages -- python</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create source <span class="at">--name</span><span class="op">=</span>blocked-packages-python <span class="at">--type</span><span class="op">=</span>curated-pypi</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--source</span><span class="op">=</span>blocked-packages-python <span class="at">--vulns</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--source</span><span class="op">=</span>blocked-packages-python <span class="at">--package-name</span><span class="op">=</span>plotnine <span class="at">--description</span><span class="op">=</span><span class="st">"Installation of 'plotnine' is blocked."</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> update <span class="at">--source</span><span class="op">=</span>blocked-packages-python <span class="at">--file-in</span><span class="op">=</span>package_subset_py.txt <span class="at">--snapshot</span><span class="op">=</span><span class="st">"</span><span class="va">${snapshot}</span><span class="st">"</span> <span class="at">--commit</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create repo <span class="at">--name</span><span class="op">=</span>blocked-python <span class="at">--type</span><span class="op">=</span>python <span class="at">--description</span><span class="op">=</span><span class="st">"Curated PyPI with vulnerability blocking enabled. Downloads of plotnine are also disallowed."</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> subscribe <span class="at">--repo</span><span class="op">=</span>blocked-python <span class="at">--source</span><span class="op">=</span>blocked-packages-python</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s check for package versions that violate the blocklist rule for blocking vulnerabilities:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rspm test blocklist-rules --repo=[repo name] --package-name=[package name] --version=[version]</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> test blocklist-rules <span class="at">--repo</span><span class="op">=</span>blocked-python <span class="at">--package-name</span><span class="op">=</span>pillow</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> test blocklist-rules <span class="at">--repo</span><span class="op">=</span>blocked-python <span class="at">--package-name</span><span class="op">=</span>pillow <span class="at">--version</span><span class="op">=</span>10.0.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s set up a cran that has all vulnerable packages blocked (rather than a subset). This wasn’t possible until the newest release.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create repo <span class="at">--name</span><span class="op">=</span>cran-vulns-blocked <span class="at">--type</span><span class="op">=</span>r <span class="at">--description</span><span class="op">=</span><span class="st">'Access CRAN packages with known vulnerabilities blocked'</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> subscribe <span class="at">--repo</span><span class="op">=</span>cran-vulns-blocked <span class="at">--source</span><span class="op">=</span>cran</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--repo</span><span class="op">=</span>cran-vulns-blocked <span class="at">--vulns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s now do the same for pypi:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create repo <span class="at">--name</span><span class="op">=</span>pypi-vulns-blocked <span class="at">--type</span><span class="op">=</span>python <span class="at">--description</span><span class="op">=</span><span class="st">'Access PyPi packages with known vulnerabilities blocked'</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> subscribe <span class="at">--repo</span><span class="op">=</span>pypi-vulns-blocked <span class="at">--source</span><span class="op">=</span>pypi</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--repo</span><span class="op">=</span>pypi-vulns-blocked <span class="at">--vulns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s check for package versions that violate the blocklist rule for blocking vulnerabilities:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rspm test blocklist-rules --repo=[repo name] --package-name=[package name] --version=[version]</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> test blocklist-rules <span class="at">--repo</span><span class="op">=</span>cran-vulns-blocked <span class="at">--package-name</span><span class="op">=</span>jsonlite <span class="at">--version</span><span class="op">=</span>1.8.7</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> test blocklist-rules <span class="at">--repo</span><span class="op">=</span>pypi-vulns-blocked <span class="at">--package-name</span><span class="op">=</span>pillow <span class="at">--version</span><span class="op">=</span>10.0.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s create a blocklist rule to block a specific package:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> create blocklist-rule <span class="at">--repo</span><span class="op">=</span>cran-vulns-blocked <span class="at">--package-name</span><span class="op">=</span>ggplot2 <span class="at">--description</span><span class="op">=</span><span class="st">"Installation of 'ggplot2' is blocked"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> test blocklist-rules <span class="at">--repo</span><span class="op">=</span>cran-vulns-blocked <span class="at">--package-name</span><span class="op">=</span>ggplot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Remove a repository (oops!):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./rspm</span> delete repo <span class="at">--name</span><span class="op">=</span>pypi-vulns-blocked</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Try to download a blocked package:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://pkg.demo.posit.team/cran-vulns-blocked/__linux__/noble/latest"</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_version</span>(<span class="st">"jsonlite"</span>, <span class="st">"1.8.7"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or we can instead curl it to see what happens:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://pkg.demo.posit.team/cran-vulns-blocked/latest/src/contrib/Archive/jsonlite/jsonlite_1.8.7.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rosv" class="level3">
+<h3 class="anchored" data-anchor-id="rosv">rosv</h3>
+<p>rosv r package: <a href="https://github.com/cran/rosv" class="uri">https://github.com/cran/rosv</a></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rosv)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull the entire set of PyPI vulnerability data</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pkg_vul <span class="ot">&lt;-</span> <span class="fu">osv_query</span>(<span class="at">ecosystem =</span> <span class="st">'PyPI'</span>, <span class="at">all_affected =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pypi_vul <span class="ot">&lt;-</span> <span class="fu">create_osv_list</span>(pkg_vul, <span class="at">as.data.frame =</span> <span class="cn">FALSE</span>, <span class="at">NA_value =</span> <span class="st">' '</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull the entire set of cran vulnerability data</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>pkg_vul <span class="ot">&lt;-</span> <span class="fu">osv_query</span>(<span class="at">ecosystem =</span> <span class="st">'CRAN'</span>, <span class="at">all_affected =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>cran_vul <span class="ot">&lt;-</span> <span class="fu">create_osv_list</span>(pkg_vul, <span class="at">as.data.frame =</span> <span class="cn">FALSE</span>, <span class="at">NA_value =</span> <span class="st">' '</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Scan an R project </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">osv_scan</span>(<span class="st">'r_project'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="r-advisory-database" class="level3">
+<h3 class="anchored" data-anchor-id="r-advisory-database">r-advisory-database</h3>
+<p>r-advisory-database: <a href="https://github.com/RConsortium/r-advisory-database" class="uri">https://github.com/RConsortium/r-advisory-database</a></p>
 </section>
 <section id="troubleshooting" class="level3">
 <h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
@@ -342,6 +387,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>“unsupported protocol scheme”“”</p>
 </blockquote>
 <p>This error is due to the missing <code>https://</code> in front of the URL. Add that and try again.</p>
+<blockquote class="blockquote">
+<p>“Error: unable to get the claims from the token: signature is invalid”</p>
+</blockquote>
+<p>Was the package manager server recently updated? The encryption key changes between versions (is re-generated). It is used for all secret management in PPM, including JWT tokens, encrypted configuration values like database passwords, and credentials for git builders. Logic needs to be added to manage the key across versions if you want things like API keys to persist. Follow the docs <a href="https://docs.posit.co/rspm/admin/appendix/encryption/">here</a> and consider setting the supported env var <code>PACKAGEMANAGER_ENCRYPTION_KEY</code>.</p>
 
 
 </section>

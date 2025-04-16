@@ -10,7 +10,55 @@
 <atom:link href="https://questionable.quarto.pub/blog/work.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Wed, 22 Jan 2025 07:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 16 Apr 2025 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Mounting drives on a server for Posit Team</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/mounting-drives-server.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Workbench (and Connect) will work with the underlying linux system to make resources available to users. This includes things like mounted drives.</p>
+<p>Workbench doesn’t natively mount drives, this isn’t done through a config. Drive mounts are done through linux operations.</p>
+<section id="servervm" class="level3">
+<h3 class="anchored" data-anchor-id="servervm">Server/VM</h3>
+<p>Typically we see this looking like</p>
+<ol type="1">
+<li>Create a local directory</li>
+<li><code>mount -t nfs -o optionshere sharehost:sharepath</code></li>
+</ol>
+<p>It can also involve <a href="https://www.baeldung.com/linux/network-drive-etc-fstab">fstab</a> or <a href="https://help.ubuntu.com/community/Autofs">AutoFS</a>.</p>
+<p>Some specific situations may have some complexity: specific formats, cloud situations, or verifying NFS export options, but in general the mounting process is much simpler than installing the posit products and configuring them and is the same as what would be done on any linux server.</p>
+<p>For SMB/CIFS this could look like mounting via PAM, discussed here: <a href="https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM" class="uri">https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM</a></p>
+</section>
+</section>
+<section id="failures" class="level2">
+<h2 class="anchored" data-anchor-id="failures">Failures</h2>
+<section id="checking-mounted-drives-and-noexec-option" class="level3">
+<h3 class="anchored" data-anchor-id="checking-mounted-drives-and-noexec-option">Checking mounted drives and noexec option</h3>
+<p>Check if <code>/home</code> on the server, or is it a network mount (NFS or CIFS). In NFS, for example, there can be the use of access control lists which can impact permissions. Similarly, when working in a system that has a mounted share drive then would want to check that libraries are being written to that share so you get persistence. Typically this means writing to inside the home directory. Check mounted drives with: <code>df -h</code></p>
+<p>Check <code>/etc/fstab</code> to see if the home directories are mounted with <code>noexec</code></p>
+<p>For example, this shows that the home directories were mounted with <code>noexec</code>: <code>/dev/mapper/rhel-home  /home  xfs    defaults,noexec,nosuid,nodev   0 0</code></p>
+<p>This resulted in this error message:</p>
+<pre><code>library(stringi)Error: package or namespace load failed for 'stringi' in dyn.load(file, DLLpath = DLLpath, ...):
+unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':
+  /home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object</code></pre>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/mounting-drives-server.html</guid>
+  <pubDate>Wed, 16 Apr 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Using the remote CLI with package manager</title>
   <dc:creator>Lisa </dc:creator>
@@ -94,7 +142,14 @@ background-color: null;
 font-style: inherit;">RSPM_SERVER_VERSION</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>2024.08.4-10</span>
-<span id="cb2-4"><span class="ex" style="color: null;
+<span id="cb2-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RSPM_SERVER_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>2024.11.0-7</span>
+<span id="cb2-5"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">curl</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -103,30 +158,30 @@ background-color: null;
 font-style: inherit;">-f</span> https://cdn.posit.co/package-manager/linux/amd64/rspm-cli-linux-<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">${RSPM_SERVER_VERSION}</span></span>
-<span id="cb2-5"><span class="fu" style="color: #4758AB;
+<span id="cb2-6"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">chmod</span> +x rspm</span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+<span id="cb2-7"></span>
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Set an environment variable named PACKAGEMANAGER_TOKEN with the value of the token.</span></span>
-<span id="cb2-8"><span class="bu" style="color: null;
+<span id="cb2-9"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">export</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>redacted<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span></span>
-<span id="cb2-9"><span class="bu" style="color: null;
+<span id="cb2-10"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">echo</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">$PACKAGEMANAGER_TOKEN</span></span>
-<span id="cb2-10"></span>
-<span id="cb2-11"><span class="co" style="color: #5E5E5E;
+<span id="cb2-11"></span>
+<span id="cb2-12"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Set an environment variable named PACKAGEMANAGER_ADDRESS with the address of the Package Manager server. </span></span>
-<span id="cb2-12"><span class="bu" style="color: null;
+<span id="cb2-13"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">export</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -135,34 +190,34 @@ background-color: null;
 font-style: inherit;">=&lt;</span>redacted<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span></span>
-<span id="cb2-13"><span class="bu" style="color: null;
+<span id="cb2-14"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">echo</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">$PACKAGEMANAGER_ADDRESS</span></span>
-<span id="cb2-14"></span>
-<span id="cb2-15"><span class="co" style="color: #5E5E5E;
+<span id="cb2-15"></span>
+<span id="cb2-16"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Test it! </span></span>
-<span id="cb2-16"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">./rspm</span> verify</span>
 <span id="cb2-17"><span class="ex" style="color: null;
 background-color: null;
+font-style: inherit;">./rspm</span> verify</span>
+<span id="cb2-18"><span class="ex" style="color: null;
+background-color: null;
 font-style: inherit;">./rspm</span> list tokens</span>
-<span id="cb2-18"></span>
 <span id="cb2-19"></span>
-<span id="cb2-20"><span class="co" style="color: #5E5E5E;
+<span id="cb2-20"></span>
+<span id="cb2-21"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Test it! </span></span>
-<span id="cb2-21"><span class="ex" style="color: null;
+<span id="cb2-22"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> list blocklist-rules</span>
-<span id="cb2-22"></span>
-<span id="cb2-23"><span class="co" style="color: #5E5E5E;
+<span id="cb2-23"></span>
+<span id="cb2-24"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Test it! Need a package to try to push to test these</span></span>
-<span id="cb2-24"><span class="ex" style="color: null;
+<span id="cb2-25"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> add <span class="at" style="color: #657422;
 background-color: null;
@@ -184,7 +239,7 @@ font-style: inherit;">echo</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-e</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'dplyr\nggplot2\narrow\nlubridate'</span> <span class="op" style="color: #5E5E5E;
+font-style: inherit;">'dplyr\nggplot2\narrow\nlubridate\njsonlite\nreadxl\nhaven\ngdata\nigraph\ncommonmark'</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> package_subset_r.csv</span>
 <span id="cb3-3"></span>
@@ -248,12 +303,9 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Installation of 'ggplot2' is blocked"</span></span>
-<span id="cb4-5"><span class="co" style="color: #5E5E5E;
+<span id="cb4-5"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;"># This  next line needs to updated to update in the future, add is deprecated</span></span>
-<span id="cb4-6"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">./rspm</span> add <span class="at" style="color: #657422;
+font-style: inherit;">./rspm</span> update <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -276,7 +328,7 @@ background-color: null;
 font-style: inherit;">${snapshot}</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span></span>
-<span id="cb4-7"><span class="ex" style="color: null;
+<span id="cb4-6"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> create repo <span class="at" style="color: #657422;
 background-color: null;
@@ -289,7 +341,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Curated CRAN with vulnerability blocking enabled. Downloads of ggplot2 are also disallowed."</span></span>
-<span id="cb4-8"><span class="ex" style="color: null;
+<span id="cb4-7"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> subscribe <span class="at" style="color: #657422;
 background-color: null;
@@ -300,11 +352,11 @@ background-color: null;
 font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>blocked-packages-r</span>
-<span id="cb4-9"></span>
-<span id="cb4-10"><span class="co" style="color: #5E5E5E;
+<span id="cb4-8"></span>
+<span id="cb4-9"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># blocked packages -- python</span></span>
-<span id="cb4-11"><span class="ex" style="color: null;
+<span id="cb4-10"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> create source <span class="at" style="color: #657422;
 background-color: null;
@@ -315,7 +367,7 @@ background-color: null;
 font-style: inherit;">--type</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>curated-pypi</span>
-<span id="cb4-12"><span class="ex" style="color: null;
+<span id="cb4-11"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
 background-color: null;
@@ -324,7 +376,7 @@ background-color: null;
 font-style: inherit;">=</span>blocked-packages-python <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--vulns</span></span>
-<span id="cb4-13"><span class="ex" style="color: null;
+<span id="cb4-12"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
 background-color: null;
@@ -341,7 +393,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Installation of 'plotnine' is blocked."</span></span>
-<span id="cb4-14"><span class="ex" style="color: null;
+<span id="cb4-13"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> update <span class="at" style="color: #657422;
 background-color: null;
@@ -364,7 +416,7 @@ background-color: null;
 font-style: inherit;">"</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--commit</span></span>
-<span id="cb4-15"><span class="ex" style="color: null;
+<span id="cb4-14"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> create repo <span class="at" style="color: #657422;
 background-color: null;
@@ -381,7 +433,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Curated PyPI with vulnerability blocking enabled. Downloads of plotnine are also disallowed."</span></span>
-<span id="cb4-16"><span class="ex" style="color: null;
+<span id="cb4-15"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./rspm</span> subscribe <span class="at" style="color: #657422;
 background-color: null;
@@ -422,6 +474,261 @@ background-color: null;
 font-style: inherit;">--version</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>10.0.1</span></code></pre></div>
+<p>Let’s set up a cran that has all vulnerable packages blocked (rather than a subset). This wasn’t possible until the newest release.</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create repo <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>r <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Access CRAN packages with known vulnerabilities blocked'</span></span>
+<span id="cb6-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> subscribe <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran</span>
+<span id="cb6-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--vulns</span></span></code></pre></div>
+<p>Let’s now do the same for pypi:</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create repo <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pypi-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>python <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Access PyPi packages with known vulnerabilities blocked'</span></span>
+<span id="cb7-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> subscribe <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pypi-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--source</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pypi</span>
+<span id="cb7-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pypi-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--vulns</span></span></code></pre></div>
+<p>Let’s check for package versions that violate the blocklist rule for blocking vulnerabilities:</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#rspm test blocklist-rules --repo=[repo name] --package-name=[package name] --version=[version]</span></span>
+<span id="cb8-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> test blocklist-rules <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>jsonlite <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>1.8.7</span>
+<span id="cb8-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> test blocklist-rules <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pypi-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pillow <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>10.0.1</span></code></pre></div>
+<p>Let’s create a blocklist rule to block a specific package:</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> create blocklist-rule <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ggplot2 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--description</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Installation of 'ggplot2' is blocked"</span></span>
+<span id="cb9-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> test blocklist-rules <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--repo</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>cran-vulns-blocked <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--package-name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ggplot2</span></code></pre></div>
+<p>Remove a repository (oops!):</p>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./rspm</span> delete repo <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pypi-vulns-blocked</span></code></pre></div>
+<p>Try to download a blocked package:</p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(remotes)</span>
+<span id="cb11-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">options</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">CRAN =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://pkg.demo.posit.team/cran-vulns-blocked/__linux__/noble/latest"</span>))</span>
+<span id="cb11-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install_version</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"jsonlite"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1.8.7"</span>)</span></code></pre></div>
+<p>or we can instead curl it to see what happens:</p>
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">curl</span> https://pkg.demo.posit.team/cran-vulns-blocked/latest/src/contrib/Archive/jsonlite/jsonlite_1.8.7.tar.gz</span></code></pre></div>
+</section>
+<section id="rosv" class="level3">
+<h3 class="anchored" data-anchor-id="rosv">rosv</h3>
+<p>rosv r package: <a href="https://github.com/cran/rosv" class="uri">https://github.com/cran/rosv</a></p>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(rosv)</span>
+<span id="cb13-2"></span>
+<span id="cb13-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Pull the entire set of PyPI vulnerability data</span></span>
+<span id="cb13-4">pkg_vul <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">osv_query</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ecosystem =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'PyPI'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">all_affected =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb13-5">pypi_vul <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">create_osv_list</span>(pkg_vul, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">as.data.frame =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">NA_value =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">' '</span>)</span>
+<span id="cb13-6"></span>
+<span id="cb13-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Pull the entire set of cran vulnerability data</span></span>
+<span id="cb13-8">pkg_vul <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">osv_query</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ecosystem =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'CRAN'</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">all_affected =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb13-9">cran_vul <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">create_osv_list</span>(pkg_vul, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">as.data.frame =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">NA_value =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">' '</span>)</span>
+<span id="cb13-10"></span>
+<span id="cb13-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Scan an R project </span></span>
+<span id="cb13-12">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">osv_scan</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'r_project'</span>)</span></code></pre></div>
+</section>
+<section id="r-advisory-database" class="level3">
+<h3 class="anchored" data-anchor-id="r-advisory-database">r-advisory-database</h3>
+<p>r-advisory-database: <a href="https://github.com/RConsortium/r-advisory-database" class="uri">https://github.com/RConsortium/r-advisory-database</a></p>
 </section>
 <section id="troubleshooting" class="level3">
 <h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
@@ -429,6 +736,10 @@ font-style: inherit;">=</span>10.0.1</span></code></pre></div>
 <p>“unsupported protocol scheme”“”</p>
 </blockquote>
 <p>This error is due to the missing <code>https://</code> in front of the URL. Add that and try again.</p>
+<blockquote class="blockquote">
+<p>“Error: unable to get the claims from the token: signature is invalid”</p>
+</blockquote>
+<p>Was the package manager server recently updated? The encryption key changes between versions (is re-generated). It is used for all secret management in PPM, including JWT tokens, encrypted configuration values like database passwords, and credentials for git builders. Logic needs to be added to manage the key across versions if you want things like API keys to persist. Follow the docs <a href="https://docs.posit.co/rspm/admin/appendix/encryption/">here</a> and consider setting the supported env var <code>PACKAGEMANAGER_ENCRYPTION_KEY</code>.</p>
 
 
 </section>
@@ -438,6 +749,1156 @@ font-style: inherit;">=</span>10.0.1</span></code></pre></div>
   <guid>https://questionable.quarto.pub/blog/work/rspm_remote_admin_cli.html</guid>
   <pubDate>Wed, 22 Jan 2025 07:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>AWS Connections from Posit Team</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/aws-data-sources.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This article walks through the different access options for data resources in AWS. Access patterns for AWS resources will vary based on several general factors:</p>
+<ol type="1">
+<li>Where the code is running (e.g.&nbsp;Posit Workbench vs.&nbsp;Posit Connect)</li>
+<li>The credential (e.g.&nbsp;OIDC, IAM roles, kerberos authentication, IAM instance profile and policy, username/password, etc.)</li>
+<li>The connection method (e.g.&nbsp;Workbench managed credentials, R or Python package, ODBC, etc.)</li>
+<li>Which AWS resource is being accessed</li>
+</ol>
+<section id="aws-data-resources" class="level3">
+<h3 class="anchored" data-anchor-id="aws-data-resources">AWS data resources</h3>
+<p>Popular data storage options in AWS include S3, Aurora, Redshift, and Athena. Each type is useful for different workflows.</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Service</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Data Type</strong></th>
+<th><strong>Best For</strong></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Amazon S3</strong></td>
+<td>Object Storage</td>
+<td>Unstructured, Semi-structured</td>
+<td>Data lakes, blob storage, backups, archive</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Amazon RDS / Aurora</strong></td>
+<td>Relational Database</td>
+<td>Structured</td>
+<td>Real-time transactions, enterprise apps, Aurora/MySQL/PostgreSQL/MariaDB/Microsoft SQL Server/Oracle database engines</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Amazon Redshift</strong></td>
+<td>Data Warehouse</td>
+<td>Structured, Semi-structured</td>
+<td>Analytics, Business Intelligence</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Amazon Athena</strong></td>
+<td>Interactive Query to S3</td>
+<td>Semi-structured, Structured</td>
+<td>Ad-hoc queries on S3 data</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aws-identity-and-access-management-iam" class="level3">
+<h3 class="anchored" data-anchor-id="aws-identity-and-access-management-iam">AWS Identity and Access Management (IAM)</h3>
+<p>The foundation of identity management on AWS is through the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">Identity and Access Management (IAM) web service</a>. The basic principles are:</p>
+<ul>
+<li>A user is set up on IAM (this can be synced with an external authentication agent)</li>
+<li>Their sign-in credentials are used to authenticate with AWS (either as an AWS account root user, an IAM user, or assuming an IAM role)</li>
+<li>Sign-in credentials are matched to a principal (an IAM user, federated user, IAM role, or application)</li>
+<li>Access is requested and granted to a specific service according to the relevant services policy</li>
+</ul>
+<p>Vocabulary:</p>
+<ul>
+<li><p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html">IAM users</a> are individual entities, typically a human user. By default IAM users have minimum permissions and access must be granted to them.</p></li>
+<li><p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html">IAM groups</a> can be used to describe a collection of IAM users and grant permissions to a larger set of users, rather than individually.</p></li>
+<li><p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">Roles</a> are an identity that has specific permissions. Any IAM user can be granted a role which would then give them access to those permissions for the time alotted. Services can also be granted roles which allows the service to perform actions on your behalf.</p></li>
+<li><p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">Policies</a> define permissions. They can be attached to identities or resources. These permissions define if a request is allowed or denied.</p></li>
+</ul>
+</section>
+</section>
+<section id="credentials" class="level2">
+<h2 class="anchored" data-anchor-id="credentials">Credentials</h2>
+<p>This guide will focus on the recommended tools for authentication to AWS resources when using Posit. The different methods that are commonly used are:</p>
+<ul>
+<li>User: Workbench Managed Credentials using Identity and Access Management (IAM) (recommended) 🔗</li>
+<li>User: Developer managed credentials using Identity and Access Management (IAM), Secrets manager, or Key Management Service (KMS) 🔗</li>
+<li>User or One-to-many: Developer managed keypair using an AWS secret key and access key 🔗</li>
+<li>One-to-many: Grant trusted access to resource from VM using an IAM instance profile and policy or role 🔗</li>
+</ul>
+<p>Not supported:</p>
+<ul>
+<li>Browser authentication methods. Posit Workbench does not support this method. After a successful login, AWS will redirect you to <code>localhost</code> instead of your Workbench instance.</li>
+</ul>
+</section>
+<section id="connection-methods" class="level2">
+<h2 class="anchored" data-anchor-id="connection-methods">Connection Methods</h2>
+<p>AWS supports many different types of connection methods. This guide will focus on the recommended connection methods when using Posit Workbench and Posit Connect.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
+<p>Connection authentication is through the <a href="https://www.paws-r-sdk.com/">paws</a> package. In addition it provides the ability to return data objects for many of the resources inside AWS. For resources that are databases the <a href="https://odbc.r-dbi.org/reference/dbConnect-OdbcDriver-method.html">odbc</a> and <a href="https://dbi.r-dbi.org/">DBI</a> packages are also needed in order to create connection objects. Your Posit admin should follow the instructions on the <a href="https://docs.posit.co/pro-drivers/">Install Pro Drivers</a> page of the documentation.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
+<p>Connection authentication is through the <a href="https://pypi.org/project/boto3/">boto3</a> package. For resources that are databases this can be used in conjunction with data frame libraries like <a href="https://docs.pola.rs/">polars</a> or <a href="https://pandas.pydata.org/">pandas</a>. Your Posit admin should follow the instructions on the <a href="https://docs.posit.co/pro-drivers/">Install Pro Drivers</a> page of the documentation.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="user-credential-examples" class="level2">
+<h2 class="anchored" data-anchor-id="user-credential-examples">User Credential Examples</h2>
+<section id="development-environments-ie-workbench" class="level3">
+<h3 class="anchored" data-anchor-id="development-environments-ie-workbench">Development Environments (IE Workbench)</h3>
+<p>Development environments refer to environments where users write and execute cod, which include Posit Workbench. In the development environment the running user is executing the code, so both interactive and non-interactive authentiation methods are possible. Most commonly the credential method chosen uses the credetials of the running user.</p>
+<p>The admin for Workbench can configure credentials on Workbench to help make this process easier for developers. Currently, this feature is only supported for RStudio Pro and VS Code sessions.</p>
+</section>
+<section id="example-access-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="example-access-patterns">Example Access Patterns</h3>
+<section id="workbench-managed-creds-iam" class="level4">
+<h4 class="anchored" data-anchor-id="workbench-managed-creds-iam">Workbench Managed Credentials</h4>
+<p>Workbench Managed Credentials is the recommended way to access data on AWS from Posit Workbench. This method is secure and provides a nice user experience because Workbench manages the credentials for the user.This uses the AWS <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html">web identity federation</a> mechanism to securely set credentials in individual sessions.</p>
+<p>An admin can configure Workbench to provide user-specific AWS credentials for sessions that are tied to their Single Sign-On credentials. Under the hood Workbench uses the AWS web identity federation mechanism (IAM with OpenID Connect) to set these credentials in individual sessions. For more details the administrator should refer to the <a href="https://docs.posit.co/ide/server-pro/authenticating_users/aws_credentials.html">AWS Credentials</a> page in the Posit Workbench Admin Guide.</p>
+<section id="aws-configuration" class="level5">
+<h5 class="anchored" data-anchor-id="aws-configuration">AWS Configuration</h5>
+<p>AWS will need to be configured with an appropriate IAM Identity Provider and IAM Roles that Workbench users will assume. See the <a href="https://docs.posit.co/ide/server-pro/authenticating_users/aws_credentials.html#aws-configuration">AWS Configuration</a> page for step-by-step directions.</p>
+<p>Users that need access to resources will need the policy associated with their IAM role updated.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="resource">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" aria-controls="tabset-2-1" aria-selected="true">S3</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" aria-controls="tabset-2-2" aria-selected="false">RDS / Aurora</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" aria-controls="tabset-2-3" aria-selected="false">Redshift</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" aria-controls="tabset-2-4" aria-selected="false">Athena</a></li></ul>
+<div class="tab-content" data-group="resource">
+<div id="tabset-2-1" class="tab-pane active" aria-labelledby="tabset-2-1-tab">
+<p>For access from Workbench to S3 that could look like <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security_iam_service-with-iam.html">this</a>:</p>
+<pre><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Allow user complete access to create and remove objects in the bucket",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::12345678901:user/user"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::amzn-s3-demo-bucket"
+        }
+    ]
+}</code></pre>
+</div>
+<div id="tabset-2-2" class="tab-pane" aria-labelledby="tabset-2-2-tab">
+<p>For access from Workbench to RDS / Aurora that could look like <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html">this</a> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html">this</a>:</p>
+<pre><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rds-db:connect"
+            ],
+            "Resource": [
+                "arn:aws:rds:us-east-2:637485797898:db:cluster-db/username"
+            ]
+        }
+    ]
+}</code></pre>
+<p>The database will need to have user access granted, for example <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL">for postgres use <code>GRANT rds_iam TO db_userx;</code></a>.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" aria-labelledby="tabset-2-3-tab">
+<p>For access from Workbench to Redshift that could look like <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">this</a>:</p>
+<pre><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "redshift:GetClusterCredentials",
+            "Resource": "arn:aws:redshift:us-east-2:637485797898:dbuser:demo-cluster/username"
+        }
+    ]
+}</code></pre>
+<p>The database will need to have user access granted, use the <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html">GRANT</a> command. For more details refer to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-iam-credentials-steps.html">the AWS documentation</a>.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" aria-labelledby="tabset-2-4-tab">
+<p>For access from Workbench to Aurora that could look like <a href="https://docs.aws.amazon.com/athena/latest/ug/example-policies-workgroup.html">this</a>:</p>
+<pre><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "athena:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}</code></pre>
+<p>There are two managed policies for Athena that are needed to grant access <code>AmazonAthenaFullAccess</code> and <code>AWSQuicksightAthenaAccess</code>.</p>
+<p>Additional permissions may be needed in order to access the underlying dataset stored in S3.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="workbench-managed-creds-user" class="level5">
+<h5 class="anchored" data-anchor-id="workbench-managed-creds-user">User Configuration</h5>
+<p>When starting a new Workbench session, users should click on the AWS credential selection widget to login to AWS. After selecting and starting the session with attached credentials, the credentials needed to connect to AWS resources (<code>AWS_ROLE_ARN</code> and <code>AWS_WEB_IDENTITY_TOKEN_FILE</code>) are available within the session.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/aws-new-connection.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
+<figcaption>AWS accounts in the New Session dialog’s credential selection widget</figcaption>
+</figure>
+</div>
+<p>The <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/aws.html">Posit Workbench User Guide - Workbench-managed AWS Credentials</a> page in the Posit Workbench User Guide provides more details on logging into AWS via Posit Workbench.</p>
+<p>It is not possible to share credentials amongst users with Workbench Managed Credentials.</p>
+</section>
+<section id="workbench-managed-credentials-r-and-python-examples" class="level5">
+<h5 class="anchored" data-anchor-id="workbench-managed-credentials-r-and-python-examples">R and Python Examples</h5>
+<p>Users can verify the available credentials within their Workbench session by installing the <a href="https://aws.amazon.com/cli/">AWS CLI</a>.</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">curl</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-o</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"awscliv2.zip"</span></span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unzip</span> awscliv2.zip</span>
+<span id="cb5-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">./aws/install</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-i</span> ~/.local/aws-cli <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-b</span> ~/.local/bin</span>
+<span id="cb5-4"></span>
+<span id="cb5-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">aws</span> sts get-caller-identity</span></code></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" aria-controls="tabset-5-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-5-1" class="tab-pane active" aria-labelledby="tabset-5-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="r-resource">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" aria-controls="tabset-3-1" aria-selected="true">S3</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" aria-controls="tabset-3-2" aria-selected="false">RDS / Aurora</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" aria-controls="tabset-3-3" aria-selected="false">Redshift</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" aria-controls="tabset-3-4" aria-selected="false">Athena</a></li></ul>
+<div class="tab-content" data-group="r-resource">
+<div id="tabset-3-1" class="tab-pane active" aria-labelledby="tabset-3-1-tab">
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(paws)</span>
+<span id="cb6-2"></span>
+<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># create an S3 service object in the region you are working on</span></span>
+<span id="cb6-4">s3 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> paws<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">s3</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">config =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>))</span>
+<span id="cb6-5"></span>
+<span id="cb6-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Is this needed? </span></span>
+<span id="cb6-7">token <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rds<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">build_auth_token</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">endpoint =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">user =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>) </span>
+<span id="cb6-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#</span></span>
+<span id="cb6-9"></span>
+<span id="cb6-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># locate the s3 bucket you want</span></span>
+<span id="cb6-11">bucket <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-projects'</span></span>
+<span id="cb6-12">s3<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list_objects</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Bucket =</span> bucket)</span>
+<span id="cb6-13"></span>
+<span id="cb6-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># upload data to s3 bucket</span></span>
+<span id="cb6-15">s3<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">put_object</span>(</span>
+<span id="cb6-16">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Bucket =</span> bucket,</span>
+<span id="cb6-17">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Key =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'data.csv'</span></span>
+<span id="cb6-18">)</span>
+<span id="cb6-19"></span>
+<span id="cb6-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># read data from s3 bucket</span></span>
+<span id="cb6-21">s3_download <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> s3<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_object</span>(</span>
+<span id="cb6-22">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Bucket =</span> bucket,</span>
+<span id="cb6-23">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Key =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb6-24">)</span></code></pre></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" aria-labelledby="tabset-3-2-tab">
+<p>Currently there is an <a href="https://github.com/paws-r/paws/issues/324">issue</a> preventig the credentials from being correctly loaded. In order to get this working (until the issue is fixed) the AWS CLI can be used to retrieve a functional token with <code>aws rds generate-db-auth-token --hostname demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com --port 5432 --region us-east-2 --username username</code> or call out to Python and use boto3 (for example with reticulate).</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(odbc)</span>
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(DBI)</span>
+<span id="cb7-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(paws)</span>
+<span id="cb7-4">rds <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> paws<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rds</span>()</span>
+<span id="cb7-5">token <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rds<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">build_auth_token</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">endpoint =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">user =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>) </span>
+<span id="cb7-6">con <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> DBI<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbConnect</span>(odbc<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">odbc</span>(),</span>
+<span id="cb7-7">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Driver   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PostgreSQL"</span>,</span>
+<span id="cb7-8">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Server   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com"</span>,</span>
+<span id="cb7-9">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Database =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo_db"</span>,</span>
+<span id="cb7-10">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">UID      =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>,</span>
+<span id="cb7-11">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PWD      =</span> token,</span>
+<span id="cb7-12">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Port     =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,</span>
+<span id="cb7-13">                      )</span></code></pre></div>
+</div>
+<div id="tabset-3-3" class="tab-pane" aria-labelledby="tabset-3-3-tab">
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(odbc)</span>
+<span id="cb8-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(DBI)</span>
+<span id="cb8-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(paws)</span>
+<span id="cb8-4">DB_NAME <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo_db'</span></span>
+<span id="cb8-5">CLUSTER_IDENTIFIER <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster'</span></span>
+<span id="cb8-6">DB_USER <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'username'</span></span>
+<span id="cb8-7">redshift <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> paws<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">redshift</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb8-8">temp_credentials <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> redshift<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_cluster_credentials</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">DbUser =</span> DB_USER, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">DbName =</span> DB_NAME, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ClusterIdentifier =</span> CLUSTER_IDENTIFIER, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">AutoCreate =</span> F)</span>
+<span id="cb8-9">con <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> DBI<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbConnect</span>(odbc<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">odbc</span>(),</span>
+<span id="cb8-10">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Driver   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Redshift"</span>,</span>
+<span id="cb8-11">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Server   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com"</span>,</span>
+<span id="cb8-12">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Database =</span> DB_NAME,</span>
+<span id="cb8-13">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">UID      =</span> temp_credentials<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>DbUser,</span>
+<span id="cb8-14">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PWD      =</span> temp_credentials<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>DbPassword,</span>
+<span id="cb8-15">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Port     =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5439</span></span>
+<span id="cb8-16">                      )</span></code></pre></div>
+</div>
+<div id="tabset-3-4" class="tab-pane" aria-labelledby="tabset-3-4-tab">
+<p>For R developers the <a href="https://www.paws-r-sdk.com/docs/athena/">paws</a> package can be used. More commonly, users connect directly to the data stored in S3.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" aria-labelledby="tabset-5-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="python-resource">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" aria-controls="tabset-4-1" aria-selected="true">S3</a></li><li class="nav-item"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" aria-controls="tabset-4-2" aria-selected="false">RDS / Aurora</a></li><li class="nav-item"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" aria-controls="tabset-4-3" aria-selected="false">Redshift</a></li><li class="nav-item"><a class="nav-link" id="tabset-4-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-4" aria-controls="tabset-4-4" aria-selected="false">Athena</a></li></ul>
+<div class="tab-content" data-group="python-resource">
+<div id="tabset-4-1" class="tab-pane active" aria-labelledby="tabset-4-1-tab">
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install boto3</span></code></pre></div>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pyodbc</span>
+<span id="cb10-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> boto3</span>
+<span id="cb10-3">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> boto3.client(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'s3'</span>)</span>
+<span id="cb10-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Is this needed?</span></span>
+<span id="cb10-5">token <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.generate_db_auth_token(DBHostname<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com'</span>, Port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,DBUsername<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>, Region<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb10-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(token)</span>
+<span id="cb10-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># </span></span>
+<span id="cb10-8">bucket <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> s3.Bucket(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'amzn-s3-demo-bucket'</span>)</span>
+<span id="cb10-9"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> obj <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> bucket.objects.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">all</span>():</span>
+<span id="cb10-10">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(obj.key)</span></code></pre></div>
+</div>
+<div id="tabset-4-2" class="tab-pane" aria-labelledby="tabset-4-2-tab">
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install pyodbc boto3</span></code></pre></div>
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pyodbc</span>
+<span id="cb12-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> boto3</span>
+<span id="cb12-3">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> boto3.client(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rds'</span>, region_name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb12-4">token <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.generate_db_auth_token(DBHostname<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com'</span>, Port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,DBUsername<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>, Region<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb12-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(token)</span>
+<span id="cb12-6">con<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pyodbc.<span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">connect</span>(driver<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{PostgreSQL}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>,</span>
+<span id="cb12-7">                   database<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo_db'</span>,</span>
+<span id="cb12-8">                   uid<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'username'</span>,</span>
+<span id="cb12-9">                   pwd<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>token,</span>
+<span id="cb12-10">                   server<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com'</span>,</span>
+<span id="cb12-11">                   port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,</span>
+<span id="cb12-12">                   )</span>
+<span id="cb12-13">con</span></code></pre></div>
+</div>
+<div id="tabset-4-3" class="tab-pane" aria-labelledby="tabset-4-3-tab">
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install pyodbc boto3</span></code></pre></div>
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pyodbc</span>
+<span id="cb14-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> boto3</span>
+<span id="cb14-3">DB_NAME <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo_db'</span></span>
+<span id="cb14-4">CLUSTER_IDENTIFIER <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster'</span></span>
+<span id="cb14-5">DB_USER <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'username'</span></span>
+<span id="cb14-6">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> boto3.client(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'redshift'</span>, region_name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb14-7">cluster_creds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.get_cluster_credentials(DbUser<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>DB_USER, DbName<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>DB_NAME, ClusterIdentifier<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>CLUSTER_IDENTIFIER, AutoCreate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb14-8">temp_user <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cluster_creds[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'DbUser'</span>]</span>
+<span id="cb14-9">temp_password <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cluster_creds[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'DbPassword'</span>]</span>
+<span id="cb14-10">con<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pyodbc.<span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">connect</span>(driver<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{Redshift}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>,</span>
+<span id="cb14-11">                   database<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>DB_NAME,</span>
+<span id="cb14-12">                   uid<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp_user,</span>
+<span id="cb14-13">                   pwd<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp_password,</span>
+<span id="cb14-14">                   server<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com'</span>,</span>
+<span id="cb14-15">                   port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5439</span>,</span>
+<span id="cb14-16">                   )</span>
+<span id="cb14-17">con</span></code></pre></div>
+</div>
+<div id="tabset-4-4" class="tab-pane" aria-labelledby="tabset-4-4-tab">
+<p>For Python developers the <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/athena.html">boto3</a> package can be used. More commonly, users connect directly to the data stored in S3.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>For more in depth information and examples, see:</p>
+<ul>
+<li>The Workbench User Guide section on <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/aws.html">Workbench managed AWS credentials</a></li>
+<li>The Connect User Guide <a href="https://docs.posit.co/connect/user/oauth-integrations/">OAuth Integrations</a> section for more detail on these concepts</li>
+<li>The <a href="https://docs.posit.co/connect/cookbook/">Connect Cookbook</a> for complete examples of using OAuth credentials for deployment</li>
+<li>The Connect Admin Guide section on <a href="https://docs.posit.co/connect/admin/integrations/oauth-integrations/">Oauth Integrations</a></li>
+</ul>
+</section>
+</section>
+<section id="workbench-developer-creds" class="level4">
+<h4 class="anchored" data-anchor-id="workbench-developer-creds">Developer Managed Credentials</h4>
+<p>If Workbench isn’t managing credentials on the behalf of users then users need the additional step of populating their credentials.</p>
+<p>The AWS CLI can be used to retrieve a functional token with <code>aws rds generate-db-auth-token --hostname cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com --port 5432 --region us-east-2 --username username</code>. This will grant a temporary token that by default lasts for 15 minutes. The developer will need to manually refresh the token as needed while working, unlike the case where Workbench will manage the token on their behalf.</p>
+<p>After loading the token and performing appropriate authentication steps then the above steps can be taken to request resources from AWS.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" aria-controls="tabset-6-1" aria-selected="true">R</a></li><li class="nav-item"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" aria-controls="tabset-6-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-6-1" class="tab-pane active" aria-labelledby="tabset-6-1-tab">
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(paws)</span>
+<span id="cb15-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(odbc)</span>
+<span id="cb15-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(DBI)</span>
+<span id="cb15-4"></span>
+<span id="cb15-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Build a token </span></span>
+<span id="cb15-6">token <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rds<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">build_auth_token</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">endpoint =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">region =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">user =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>) </span>
+<span id="cb15-7"></span>
+<span id="cb15-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use the token with the ODBC connection </span></span>
+<span id="cb15-9">con <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> DBI<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbConnect</span>(odbc<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">odbc</span>(),</span>
+<span id="cb15-10">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Driver   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PostgreSQL"</span>,</span>
+<span id="cb15-11">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Server   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com"</span>,</span>
+<span id="cb15-12">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Database =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo_db"</span>,</span>
+<span id="cb15-13">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">UID      =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>,</span>
+<span id="cb15-14">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PWD      =</span> token,</span>
+<span id="cb15-15">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Port     =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,</span>
+<span id="cb15-16">                      )</span>
+<span id="cb15-17"></span>
+<span id="cb15-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Gather temp credentials </span></span>
+<span id="cb15-19">temp_credentials <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> redshift<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_cluster_credentials</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">DbUser =</span> DB_USER, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">DbName =</span> DB_NAME, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ClusterIdentifier =</span> CLUSTER_IDENTIFIER, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">AutoCreate =</span> F)</span>
+<span id="cb15-20"></span>
+<span id="cb15-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use the temp credentials with the ODBC connection</span></span>
+<span id="cb15-22">con <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> DBI<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbConnect</span>(odbc<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">odbc</span>(),</span>
+<span id="cb15-23">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Driver   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Redshift"</span>,</span>
+<span id="cb15-24">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Server   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com"</span>,</span>
+<span id="cb15-25">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Database =</span> DB_NAME,</span>
+<span id="cb15-26">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">UID      =</span> temp_credentials<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>DbUser,</span>
+<span id="cb15-27">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PWD      =</span> temp_credentials<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>DbPassword,</span>
+<span id="cb15-28">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Port     =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5439</span></span>
+<span id="cb15-29">                      )</span></code></pre></div>
+</div>
+<div id="tabset-6-2" class="tab-pane" aria-labelledby="tabset-6-2-tab">
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install pyodbc boto3</span></code></pre></div>
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pyodbc</span>
+<span id="cb17-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> boto3</span>
+<span id="cb17-3"></span>
+<span id="cb17-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Build a token </span></span>
+<span id="cb17-5">token <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.generate_db_auth_token(DBHostname<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com'</span>, Port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,DBUsername<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"username"</span>, Region<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb17-6"></span>
+<span id="cb17-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use the token with the ODBC connection </span></span>
+<span id="cb17-8">con<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pyodbc.<span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">connect</span>(driver<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{PostgreSQL}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>,</span>
+<span id="cb17-9">                   database<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo_db'</span>,</span>
+<span id="cb17-10">                   uid<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'username'</span>,</span>
+<span id="cb17-11">                   pwd<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>token,</span>
+<span id="cb17-12">                   server<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster-db.cpbvczwgws3n.us-east-2.rds.amazonaws.com'</span>,</span>
+<span id="cb17-13">                   port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span>,</span>
+<span id="cb17-14">                   )</span>
+<span id="cb17-15"></span>
+<span id="cb17-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Gather temp credentials </span></span>
+<span id="cb17-17">DB_NAME <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo_db'</span></span>
+<span id="cb17-18">CLUSTER_IDENTIFIER <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster'</span></span>
+<span id="cb17-19">DB_USER <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'username'</span></span>
+<span id="cb17-20">client <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> boto3.client(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'redshift'</span>, region_name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"us-east-2"</span>)</span>
+<span id="cb17-21">cluster_creds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> client.get_cluster_credentials(DbUser<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>DB_USER, DbName<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>DB_NAME, ClusterIdentifier<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>CLUSTER_IDENTIFIER, AutoCreate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span>
+<span id="cb17-22">temp_user <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cluster_creds[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'DbUser'</span>]</span>
+<span id="cb17-23">temp_password <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> cluster_creds[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'DbPassword'</span>]</span>
+<span id="cb17-24"></span>
+<span id="cb17-25"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use the temp credentials with the ODBC connection</span></span>
+<span id="cb17-26">con<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pyodbc.<span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">connect</span>(driver<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{Redshift}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>,</span>
+<span id="cb17-27">                   database<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>DB_NAME,</span>
+<span id="cb17-28">                   uid<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp_user,</span>
+<span id="cb17-29">                   pwd<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>temp_password,</span>
+<span id="cb17-30">                   server<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'demo-cluster.cyvu3e2plbhb.us-east-2.redshift.amazonaws.com'</span>,</span>
+<span id="cb17-31">                   port<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5439</span>,</span>
+<span id="cb17-32">                   )</span></code></pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="one-to-many-credential-examples" class="level2">
+<h2 class="anchored" data-anchor-id="one-to-many-credential-examples">One-to-many Credential Examples</h2>
+<section id="other-environments-ie-connect-etc" class="level3">
+<h3 class="anchored" data-anchor-id="other-environments-ie-connect-etc">Other Environments (IE Connect, etc)</h3>
+<p>In this section we will describe authentication patterns for all other environments for example production environments, deployed environments, etc. In these cases typically the code is executed by a service account making only non-interactive authentication methods possible.</p>
+</section>
+<section id="example-access-patterns-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-access-patterns-1">Example Access Patterns</h3>
+<section id="trusted-creds-iam" class="level4">
+<h4 class="anchored" data-anchor-id="trusted-creds-iam">Grant trusted access to resource from VM using an IAM instance profile and policy</h4>
+<p>Trusted access between the server running the content and the resource can be granted using an IAM instance profile and policy. In this case all content running on the server has access to the resource.</p>
+<section id="aws-configuration-1" class="level5">
+<h5 class="anchored" data-anchor-id="aws-configuration-1">AWS Configuration</h5>
+<p>Instead of assigning the roles to the IAM user it can be assigned to the AWS EC2 instance, slurm environment, or k8s cluster to allow access. This will broadlly allow access to that resource specifically for only that environment.</p>
+<p>In this case the admin will need to:</p>
+<ul>
+<li>Create an AWS role that has the correct trusted entity type (for example, EC2)</li>
+<li>Create a custom policy that provides access to the needed resources</li>
+<li>Attach the IAM role to the environment (for example, the EC2 server)</li>
+<li>Verify network connectivity</li>
+</ul>
+<p>See the AWS <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">use IAM roles to grant permissions to applications running on EC2 instances</a> and the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">EC2 IAM roles</a> pages for more details.</p>
+</section>
+</section>
+<section id="keypair-creds" class="level4">
+<h4 class="anchored" data-anchor-id="keypair-creds">Developer Managed Credentials</h4>
+<p>If granting access through a trusted relationship between the VM and the resource isn’t feasible, then a non-interactive authentication method can be used like a developer managed keypair using an AWS secret key and access key. However this approach comes with security risks if the keypair isn’t closely guarded. In this case <a href="https://solutions.posit.co/connections/db/best-practices/managing-credentials/">securing credentials</a> is critical.</p>
+<p>The documentation for <a href="https://www.paws-r-sdk.com/">paws</a> and <a href="https://pypi.org/project/boto3/">boto3</a> have extensive examples using keypair authentication.</p>
+
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/aws-data-sources.html</guid>
+  <pubDate>Tue, 21 Jan 2025 07:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" medium="image" type="image/png" height="78" width="144"/>
 </item>
 <item>
   <title>Dealing with ssh keys with ansible and pulumi</title>
@@ -1054,10 +2515,20 @@ font-style: inherit;">"CONNECT"</span>){</span>
 <section id="reproducible-package-environments-for-python---at-a-glance" class="level2">
 <h2 class="anchored" data-anchor-id="reproducible-package-environments-for-python---at-a-glance">Reproducible package environments for Python - At a glance</h2>
 <p>Step 1: Use scanned Python packages</p>
-<pre><code># Pip is already set up for you by your admins whenever you use Workbench to use packages from package manager
-# Configure pip to use packages from public package manager: 
-pip config set global.index-url https://packagemanager.posit.co/pypi/latest/simple
-pip config set global.trusted-host packagemanager.posit.co</code></pre>
+<p><code>Pip</code> can be already set up for you by your admins (with <code>sudo pip config set --global global.index-url https://pkg.current.posit.team/blocked-python/latest/simple</code>) whenever you use Workbench to use packages from package manager, no configuration needed. Check with:</p>
+<pre><code>pip config list
+
+# pip from stackoverflow article: https://stackoverflow.com/questions/51874974/how-can-i-get-pip-to-list-the-repositories-its-using
+pip download --no-cache-dir "foo&lt;0" 2&gt;&amp;1 | grep Looking
+
+# uv: https://docs.astral.sh/uv/guides/integration/alternative-indexes/
+cat pyproject.toml</code></pre>
+<p>As a user, configure pip to use your repository of choice with:</p>
+<pre><code>pip config set global.index-url https://pkg.current.posit.team/blocked-python/latest/simple
+pip config set --global global.trusted-host pkg.current.posit.team</code></pre>
+<p>Alternatively, for a specific project add these to the top of the <code>requirements.txt</code> file</p>
+<pre><code>--index-url https://pkg.current.posit.team/blocked-python/latest/simple
+--trusted-host pkg.current.posit.team</code></pre>
 <p>Step 2: Use environment tracking</p>
 <pre><code># Activate your virtual environment: 
 python -m venv .venv
@@ -1071,43 +2542,43 @@ pip install -r requirements.txt</code></pre>
 <section id="python-projects-setup" class="level2">
 <h2 class="anchored" data-anchor-id="python-projects-setup">Python projects setup</h2>
 <p>Setup the <code>venv</code> environment:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> venv .venv</span>
-<span id="cb5-2"><span class="bu" style="color: null;
+<span id="cb7-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">.</span> .venv/bin/activate</span>
-<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+<span id="cb7-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># .venv\Scripts\activate # Windows</span></span></code></pre></div>
 <p>Upgrade pip and then install needed packages:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span> pip</span>
-<span id="cb6-2"><span class="ex" style="color: null;
+<span id="cb8-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span> pip wheel setuptools rsconnect-python</span>
-<span id="cb6-3"><span class="ex" style="color: null;
+<span id="cb8-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
 <p>Run the application:</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">shiny</span> run <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--reload</span> app.py</span></code></pre></div>
 <p>Leave a virtual environment with:</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">deactivate</span></span></code></pre></div>
 </section>
@@ -1149,14 +2620,14 @@ python3 -m pip install -r requirements.txt</code></pre>
 <h2 class="anchored" data-anchor-id="deploy">Deploy</h2>
 <section id="rsconnect-python-cli" class="level3">
 <h3 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h3>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> deploy shiny .</span></code></pre></div>
 </section>
 <section id="git-backed" class="level3">
 <h3 class="anchored" data-anchor-id="git-backed">Git-backed</h3>
 <p>Update the code, and then run:</p>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
@@ -1167,33 +2638,33 @@ font-style: inherit;">--overwrite</span> .</span></code></pre></div>
 <section id="project-updates" class="level2">
 <h2 class="anchored" data-anchor-id="project-updates">Project updates</h2>
 <p>Create the requirements file:</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements.txt</span></code></pre></div>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny .</span></code></pre></div>
 <p>If you are running into deploy issues where there are breaking packages you can edit the requirements file explicitly:</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># requirements.txt generated by rsconnect-python on 2022-09-21 14:59:58.865441</span></span>
-<span id="cb15-2"><span class="va" style="color: #111111;
+<span id="cb17-2"><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">streamlit</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>=1.11.0</span></code></pre></div>
 <p>To use a Package Manager repository with a specific project defined by a <code>requirements.txt</code> file, add <code>-i [repositoryURL]</code> to the top of your file, for example:</p>
-<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">-i</span> https://packagemanager.posit.co/pypi/latest/simple</span>
-<span id="cb16-2"><span class="ex" style="color: null;
+<span id="cb18-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pandas</span></span>
-<span id="cb16-3"><span class="ex" style="color: null;
+<span id="cb18-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">scipy</span></span></code></pre></div>
 <p>How to configure a pypi repository globally (using pip.conf): <a href="https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository" class="uri">https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository</a></p>
@@ -1203,16 +2674,16 @@ font-style: inherit;">scipy</span></span></code></pre></div>
 <section id="issues-with-python-not-being-on-path" class="level3">
 <h3 class="anchored" data-anchor-id="issues-with-python-not-being-on-path">Issues with Python not being on path</h3>
 <p>Set it manually to an installed Python version with:</p>
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><span class="bu" style="color: null;
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">alias</span> python=<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/opt/python/3.9.17/bin/python"</span></span></code></pre></div>
 <p>Set it in your .bashrc on mac or linux so that it is set for your profile every time you log in (typically this is located in the root directory of your home folder):</p>
-<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># add this to your .bashrc</span></span>
-<span id="cb18-2"><span class="bu" style="color: null;
+<span id="cb20-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">export</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -1222,7 +2693,7 @@ font-style: inherit;">=</span>/opt/python/3.11.9/bin:<span class="va" style="col
 background-color: null;
 font-style: inherit;">$PATH</span></span></code></pre></div>
 <p>Check for the available python versions (if typically installed):</p>
-<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ls</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -4073,6 +5544,60 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">edit_r_environ</span>() </span></code></pre></div>
 </section>
+<section id="scenario-9-comparing-two-renv-projects" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-9-comparing-two-renv-projects">Scenario 9: Comparing two renv projects</h2>
+<p>Reference: <a href="https://forum.posit.co/t/compare-two-renv-projects/145574" class="uri">https://forum.posit.co/t/compare-two-renv-projects/145574</a></p>
+<div class="sourceCode" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(jsonlite)</span>
+<span id="cb28-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb28-3">my_renvlock <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fromJSON</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"renv.lock"</span>)</span>
+<span id="cb28-4"></span>
+<span id="cb28-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_dfr</span>(my_renvlock<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Packages, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enframe</span>(.) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb28-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(name <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Package"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Version"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb28-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">value =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(value)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb28-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_wider</span>())</span></code></pre></div>
+</section>
 </section>
 <section id="common-issues-and-troubleshooting" class="level1">
 <h1>Common issues and troubleshooting</h1>
@@ -4100,36 +5625,36 @@ font-style: inherit;">edit_r_environ</span>() </span></code></pre></div>
 <section id="problems-with-renv-cache-location" class="level3">
 <h3 class="anchored" data-anchor-id="problems-with-renv-cache-location">Problems with renv : cache location</h3>
 <p>Check the location of the renv cache:</p>
-<div class="sourceCode" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1">renv<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>()</span>
-<span id="cb28-2"><span class="fu" style="color: #4758AB;
+<span id="cb29-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'RENV_PATHS_CACHE'</span>)</span>
-<span id="cb28-3"><span class="fu" style="color: #4758AB;
+<span id="cb29-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'renv.config.external.libraries'</span>)</span>
-<span id="cb28-4"><span class="fu" style="color: #4758AB;
+<span id="cb29-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'renv.download.trace'</span>)</span>
-<span id="cb28-5">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb29-5">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cache</span>()</span>
-<span id="cb28-6"><span class="fu" style="color: #4758AB;
+<span id="cb29-6"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -4171,49 +5696,49 @@ renv::restore(rebuild = TRUE)</code></pre>
 <li>Take a diagnostic: <code>renv::diagnostics()</code></li>
 </ul>
 <p>If you are having particular issue with a package and it keeps being pulled in from the cache then doing a complete purge and reinstall can be useful:</p>
-<div class="sourceCode" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1">renv<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">purge</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"stringr"</span>)</span>
-<span id="cb30-2">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb31-2">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">purge</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"stringi"</span>)</span>
-<span id="cb30-3"><span class="fu" style="color: #4758AB;
+<span id="cb31-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"stringr"</span>)</span></code></pre></div>
 <p><code>renv::purge</code> removes packages completely from the package cache (which may be shared across projects) rather than just removing the package from the project which is what <code>renv::remove</code> does. This can be useful if a package which had previously been installed in the cache has become corrupted or unusable, and needs to be re-installed.</p>
 <p>Follow these steps to “flush” and rebuild the renv environment, without losing the important parts of your renv.lock that are defining the R version and package versions:</p>
-<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">renv<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">snapshot</span>()</span>
-<span id="cb31-2"><span class="co" style="color: #5E5E5E;
+<span id="cb32-2"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Make the appropriate changes (for example, changing OS) </span></span>
-<span id="cb31-3"><span class="co" style="color: #5E5E5E;
+<span id="cb32-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Update the renv.lock file manually to reflect any needed changes (for example, changing the repository URL) </span></span>
-<span id="cb31-4">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb32-4">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">deactivate</span>()</span>
-<span id="cb31-5">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb32-5">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">activate</span>()</span>
-<span id="cb31-6">renv<span class="sc" style="color: #5E5E5E;
+<span id="cb32-6">renv<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -4240,13 +5765,13 @@ font-style: inherit;">TRUE</span>) </span></code></pre></div>
 <p>Check in <code>/etc/rstudio/rsession.conf</code> if there is anything that would set the library location, for example <code>r-libs-user=~/R/library</code>.</p>
 <p>It may also be useful to verify both the OS you are currently useing as well as checking that the repository you are pointing towards is using the correct OS if it is pulling in the binaries.</p>
 <p>For debian/ubuntu distributions:</p>
-<div class="sourceCode" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><span class="ex" style="color: null;
+<div class="sourceCode" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">lsb_release</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-a</span></span></code></pre></div>
 <p>For other distributions (more broadly cross-linux compatible command):</p>
-<div class="sourceCode" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cat</span> /etc/os-release</span></code></pre></div>
 </section>
@@ -4342,230 +5867,6 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
   <category>code</category>
   <guid>https://questionable.quarto.pub/blog/work/renv-environments.html</guid>
   <pubDate>Fri, 21 Jun 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Shiny apps and Analytics</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Adding instrumentation to your shiny apps can help you understand:</p>
-<ul>
-<li>User interaction</li>
-<li>Most viewed dashboards</li>
-<li>What is being exported and by who</li>
-<li>Trends with access over time</li>
-<li>Time spent on interactions</li>
-</ul>
-<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. However, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
-<ul>
-<li>There’s more on the Connect API here: <a href="https://solutions.posit.co/operations/connect-apis/" class="uri">https://solutions.posit.co/operations/connect-apis/</a></li>
-<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
-<li>This page in the Shiny docs give a walkthrough as well: <a href="https://shiny.posit.co/r/articles/build/google-analytics/" class="uri">https://shiny.posit.co/r/articles/build/google-analytics/</a></li>
-<li>Tracking where within the Shiny app users are spending their time (which tab, etc) is interesting.</li>
-<li>Monitoring user behavior with hotjar (paid): <a href="https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/" class="uri">https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</a></li>
-<li>Here’s an article that outlines more free options: <a href="https://www.appsilon.com/post/monitoring-r-shiny-user-adoption" class="uri">https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</a></li>
-<li>Javascript might need to be added to your site to support using google analytics: <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
-<li>Various examples for tracking built in to Connect: <a href="https://solutions.rstudio.com/data-science-admin/tracking/" class="uri">https://solutions.rstudio.com/data-science-admin/tracking/</a> and <a href="https://github.com/sol-eng/connect-usage" class="uri">https://github.com/sol-eng/connect-usage</a></li>
-<li>Video showing how to use the Connect API: <a href="https://www.youtube.com/watch?v=0iljqY9j64U" class="uri">https://www.youtube.com/watch?v=0iljqY9j64U</a></li>
-<li>This heatmap package for seeing where users click I think would be cool to explore: <a href="https://github.com/RinteRface/shinyHeatmap">https://github.com/RinteRface/shinyHeatmap</a></li>
-</ul>
-<p>You can also add debug messages throughtout your shiny app and then use that with parsing the logs to estimate user interactions.</p>
-<ul>
-<li>Add debug messages with: <a href="https://github.com/johnmyleswhite/log4r" class="uri">https://github.com/johnmyleswhite/log4r</a></li>
-<li>Learn about your user with client data: <a href="https://shiny.rstudio.com/articles/client-data.html" class="uri">https://shiny.rstudio.com/articles/client-data.html</a></li>
-</ul>
-
-
-
- ]]></description>
-  <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</guid>
-  <pubDate>Mon, 29 Apr 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Accessing data in Azure Data Lake (delta files)</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/delta-lake-and-azure.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it’s easy to find in the future!</p>
-<section id="azure-data-lake" class="level2">
-<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
-<section id="set-up" class="level3">
-<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
-<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
-<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
-<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
-<p>Steps:</p>
-<ol type="1">
-<li><p>Go to storage account</p></li>
-<li><p>Create and give it a name</p></li>
-<li><p>Select: LRS</p></li>
-<li><p>Switch to premium: block blobs</p></li>
-<li><p>Change to hierarchical blob</p></li>
-<li><p>Set tags:</p></li>
-</ol>
-<ul>
-<li><p>rs:owner</p></li>
-<li><p>rs:project = soleng</p></li>
-<li><p>rs:environment = dev</p></li>
-</ul>
-<ol start="7" type="1">
-<li>Once in just need access keys or shared access signature in order to gain access</li>
-</ol>
-</section>
-<section id="add-data" class="level3">
-<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
-<p>You can add data manually by creating a container and then using the upload icon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
-<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
-<p>You’ll need to know:</p>
-<ul>
-<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
-<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
-</ul>
-<pre><code>library(AzureStor)
-
-blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
-
-bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
-
-# List containers and files in containers
-list_storage_containers(bl_endp_key)
-cont1 &lt;- storage_container(bl_endp_key, "container1")
-list_storage_files(cont1)
-
-# Download a file
-storage_download(cont1, "/crm_call_center_logs.parquet")
-
-# Upload a file 
-storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
-<p>You can also create and delete containers:</p>
-<pre><code># Create a container
-newcont &lt;- create_storage_container(bl_endp_key, "container3")
-
-# Create a directory in the container
-cont3 &lt;- storage_container(bl_endp_key, "container3")
-create_storage_dir(cont3, "newdir")
-
-# Delete a container
-delete_storage_container(newcont)</code></pre>
-</section>
-<section id="reading-and-writing-delta-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
-<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
-<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
-<pre><code>library(sparklyr)
-
-#Install a local version of Spark
-spark_install(version=3.4)
-
-# Set Spark configuration to be able to read delta tables
-conf &lt;- spark_config()
-conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
-conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
-
-# For spark 3.4 
-conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
-
-# Open a connection
-sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
-
-# For this example we will use a built-in dataframe to save example data files, including one for delta tables
-tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
-
-# Write spark dataframe to disk
-spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
-spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
-spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
-
-# Read dataframes into normal memory
-spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
-regular_df_csv &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
-regular_df_parquet &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
-regular_df_delta &lt;- collect(spark_tbl_handle)
-
-# Disconnect
-spark_disconnect(sc)</code></pre>
-<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
-</section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<p>From R:</p>
-<pre><code># See spark details (troubleshooting)
-spark_config()
-spark_get_java()
-spark_available_versions()
-spark_installed_versions()
-
-# See session details
-utils::sessionInfo() </code></pre>
-<p>From bash:</p>
-<pre><code>namei -l /usr/lib/spark</code></pre>
-<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
-</section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
-<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
-<blockquote class="blockquote">
-<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
-</blockquote>
-<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
-</section>
-<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
-<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
-<blockquote class="blockquote">
-<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
-</blockquote>
-<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
-<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
-
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/delta-lake-and-azure.html</guid>
-  <pubDate>Thu, 11 Jan 2024 07:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 </channel>

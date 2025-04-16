@@ -41,11 +41,30 @@ What it’s not:
 
 Step 1: Use scanned Python packages
 
+`Pip` can be already set up for you by your admins (with `sudo pip config set --global global.index-url https://pkg.current.posit.team/blocked-python/latest/simple`) whenever you use Workbench to use packages from package manager, no configuration needed. Check with: 
+
 ```
-# Pip is already set up for you by your admins whenever you use Workbench to use packages from package manager
-# Configure pip to use packages from public package manager: 
-pip config set global.index-url https://packagemanager.posit.co/pypi/latest/simple
-pip config set global.trusted-host packagemanager.posit.co
+pip config list
+
+# pip from stackoverflow article: https://stackoverflow.com/questions/51874974/how-can-i-get-pip-to-list-the-repositories-its-using
+pip download --no-cache-dir "foo<0" 2>&1 | grep Looking
+
+# uv: https://docs.astral.sh/uv/guides/integration/alternative-indexes/
+cat pyproject.toml
+```
+
+As a user, configure pip to use your repository of choice with: 
+
+```
+pip config set global.index-url https://pkg.current.posit.team/blocked-python/latest/simple
+pip config set --global global.trusted-host pkg.current.posit.team
+```
+
+Alternatively, for a specific project add these to the top of the `requirements.txt` file
+
+```
+--index-url https://pkg.current.posit.team/blocked-python/latest/simple
+--trusted-host pkg.current.posit.team
 ```
 
 Step 2: Use environment tracking
