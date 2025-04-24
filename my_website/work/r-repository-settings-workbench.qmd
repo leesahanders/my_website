@@ -46,8 +46,27 @@ R_LIBS_SITE=R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R/site-library:/usr/local/
 
 Set `.libPaths()` in `.Rprofile.site`: 
 
-```{.bash filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site"}
+```{.bash filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site"}
+options(repos = c(CRAN = "https://packagemanager.posit.co/all/latest"))
 
+if (interactive()) {
+  options(width = 120)
+}
+
+if (Sys.info()[["sysname"]] == "Windows") {
+Sys.setenv(RENV_DOWNLOAD_METHOD = "curl")
+}
+
+if ("folder" %in% tolower(list.files("C:/"))) {
+if (!"Rlib" %in% list.files("C:/username/")) {
+print("Creating Rlib folder")
+dir.create("C:/username/Rlib",mode = "0777",recursive = T)
+}
+cat("\033[0;32;1mSetting local user lib\033[0m\n")
+.libPaths(c("C:/username/Rlib" , .libPaths() ) )
+} else {
+cat("\033[0;33;1mYou should consider getting the access right so we can put your local R-lib there, instead of OneDrive.\033[0m\n")
+}
 
 ```
 
