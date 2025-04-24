@@ -38,6 +38,12 @@ Some specific situations may have some complexity: specific formats, cloud situa
 
 For SMB/CIFS this could look like mounting via PAM, discussed here: <https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM>
 
+### Permissions 
+
+When mounting on the server it will need the appropriate permissions so that users are able to access the contents of the drive. 
+
+For example for content running on Posit Connect the rstudio-connect user will need access to the drive, for example via `chmod 644`. Alternatively the drive could be mapped so that an alternate linux user has access and a user with admin access through the Connect UI can set the runAs user to the selected linux user. This will provide more security around protecting the files that are mounted. 
+
 ## Failures 
 
 ### Checking mounted drives and noexec option

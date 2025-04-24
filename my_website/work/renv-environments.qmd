@@ -1011,7 +1011,15 @@ map_dfr(my_renvlock$Packages, ~ enframe(.) |>
   pivot_wider())
 ```
 
+## Scenario 10: Script for updating packages from rspm that have changed to site library
 
+```
+# update existing packages
+update.packages(lib.loc=<site.library>, repos=<PPM Repo>, ask=FALSE)
+
+# add any new packages
+new.packages(lib.loc=<site.library>, repos=<PPM Repo>, ask=FALSE)
+```
 
 # Common issues and troubleshooting 
 

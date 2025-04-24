@@ -1,0 +1,234 @@
+---
+title: "Setting the R package repository on Posit Workbench"
+description: "Tips and tricks"
+author: "Lisa"
+date: "2025-04-24"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Overview
+
+The repository for packages being used for installation by users is often important to configure. When using something like Package Manager you'll want users to install packages from there, rather than the broader internet. 
+
+## At a glance 
+
+The best pattern is to configure the repository across R sessions using R config options, not RStudio configs. A shared site library can be created  (leveraging `Rprofile.site` and `Renviron.site` for example) or using `renv` with a shared `renv` package cache (maintaining reproduceability through the `renv.lock` file).
+
+The `Renviron.site` would override the `Rprofile.site` setting and therefore may be more robust. 
+
+### Renviron.site
+
+Referencing: <https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R> 
+
+Create a `Renviron.site` file and define: 
+
+```{.bash filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site"}
+RENV_PATHS_PREFIX_AUTO=TRUE
+RENV_PATHS_CACHE=/scratch/renv
+R_LIBS_SITE=R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'}
+
+```
+
+### .Rprofile.site
+
+Set `.libPaths()` in `.Rprofile.site`: 
+
+```{.bash filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site"}
+
+
+```
+
+### Test 
+
+Test this by running and checking the outputs of: 
+
+- `.libPaths()` 
+- ` options()$repos` 
+
+## Long-winded
+
+### Startup behavior of R when loading package environment details
+
+R Startup behavior (funny): <https://rstats.wtf/r-startup.html>
+
+> Credit: This section was largely taken from an internal Posit resource of unknown authorship
+
+From bash it is different than from the editor. 
+
+See [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html") for the official startup docs from R. 
+
+
+R from the command line/bash will take the user's environment. It will not read any additional bash files during start-up (which the RStudio products will do). It will still read in the R startup files (Renviron/Rprofile).
+
+Prior to loading the R session from the bash shell any commands in this file will be read and execute commands if it exists: `/etc/profile`
+ 
+Next, the the first of the following files that exists and is readable will have commands executed from (only one of these files will be read and executed):
+
+- `~/.bash_profile`
+
+- `~/.bash_login`
+
+- `~/.profile`
+
+R then always loads the following (in order):
+
+-   `R_HOME/etc/Renviron.site` (set for all users)
+    
+-   `.Renviron` - user-specific, typically in the user's home directory, but can be elsewhere (for instance, in a Project folder)
+    
+-   `R_HOME/etc/Rprofile.site` (set for all users)
+    
+-   `.Rprofile` - user-specific, typically in the user's home directory, but can be elsewhere (for instance, in a Project folder)
+
+Beyond this, what gets put in the environment depends on the product.
+
+- RStudio Server / Workbench: before any of this executes, RStudio Server will first include the contents of /etc/rstudio/rsession-profile if it exists. It will also add anything set in rsession-ld-library-path in rserver.conf to the LD_LIBRARY_PATH environment variable.
+
+- Shiny Server / Connect: you can affect the environment variables for a specific application using program supervisors
+
+This page in the documentation is the new home for the golden source of info for startup behavior: <https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html> 
+
+### R sessions across all Workbench IDE's
+
+Relying on `repos.conf` for R repository configuration IMHO is a clear anti-pattern which especially large customers with large setups should not use. `repos.conf` is a relic from a time where there was only RSP.
+
+Configure the repository settings in R directly, rather than through the RStudio settings.
+
+Resources: 
+
+- A great resource for setting this up simply is: <https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html> 
+
+- For a more complex example that could be used in slurm environments refer to: <https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R> 
+
+The `Renviron.site` would override the `Rprofile.site` setting and therefore may be more robust.
+
+#### Renviron.site
+
+Create a `Renviron.site` file and define: 
+
+```{.bash filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site"}
+Key1=value1
+RENV_PATHS_PREFIX_AUTO=TRUE
+RENV_PATHS_CACHE=/scratch/renv
+R_LIBS_SITE=R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'}
+
+```
+
+And then `Sys.getenv("Key1")` will return `"value1"` in a users R session.
+
+This can be set at the user or system level. Users have the choice between user or project level (project taking preference). The [usethis](https://usethis.r-lib.org/) package includes a helper function for editing `.Renviron` files from an R session with `usethis::edit_r_environ()`. For a system level install it is placed per R version, for example at `/opt/R/4.1.1/lib/R/etc/Renviron.site`.
+
+#### .Rprofile.site
+
+Set `.libPaths()` in `.Rprofile.site`: 
+
+```{.bash filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site"}
+options(repos = c(CRAN = "https://packagemanager.posit.co/all/latest"))
+
+if (interactive()) {
+  options(width = 120)
+}
+```
+
+Again this file can be se at the user or system level. At the user level the easiest way to edit your `.Rprofile` file is to use the `usethis::edit_r_profile()` function from within an R session. You can specify whether you want to edit the user or project level `.Rprofile.` For a system level install it is placed per R version, for example at `/opt/R/4.2.0/lib/R/etc/Rprofile.site`. 
+
+#### Configuring a shared library 
+
+Taken from an [internal discussion](https://positpbc.slack.com/archives/C2P7MTJKE/p1738088423395249?thread_ts=1737982807.176319&cid=C2P7MTJKE )
+
+Set `.libPaths()` in `.Rprofile.site`. 
+
+There are two main options: 
+
+- Install a set of R packages in a shared library. The users here would need to specify which packages they really need and then their IT team could install those into a `site-library` in each R version, ideally leveraging a time-based snapshot from package manager for reproducibility reason. Users in this case would be limited to a certain package version for some time. They however can update those packages regularly (e.g. quarterly) to lessen the pain here. As mentioned above, do **NOT** use any recommendation from the Posit Admin guide for this setup but follow the standard approach to configure the same in R (leveraging `Rprofile.site` and `Renviron.site` for example).
+
+- Educate/train the users to all use `renv` - then every user would have maximum degree of freedom to choose which packages and which version they want to use for each project. They then would maintain `renv.lock` files for each project and the admin team can then configure a shared `renv` package cache to ensure that any given package/version combination is only stored once.
+
+Both options in their own right also protect the data scientists from producing irreproducible code since in neither case they rely on that melting pot of R package mess that typically piles up in `R_LIBS_USER` (in particular for systems where R points to latest CRAN which IMHO is another anti-pattern)
+
+##### Script for updating packages from rspm that have changed to site library
+
+```
+# update existing packages
+update.packages(lib.loc=<site.library>, repos=<PPM Repo>, ask=FALSE)
+
+# add any new packages
+new.packages(lib.loc=<site.library>, repos=<PPM Repo>, ask=FALSE)
+```
+
+### Workbench and RStudio sessions only 
+
+The oft recommended path is to use the `repos.conf` or `rsession.conf` file to configure the repository URL. 
+
+This might look like: 
+
+```{.bash filename="/etc/rstudio/rsession.conf"}
+r-cran-repos=http://cran.at.r-project.org/
+```
+
+Or: 
+
+```{.bash filename="/etc/rstudio/repos.conf"}
+RSPM=https://packagemanager.posit.co/cran/__linux__/jammy/latest
+CRAN=https://packagemanager.posit.co/cran/__linux__/jammy/latest
+Australia=https://cran.ms.unimelb.edu.au/
+Austria=https://lib.ugent.be/CRAN/
+```
+
+And adding to `rsession.conf`:
+
+```{.bash filename="/etc/rstudio/rsession.conf"}
+# Use this to change the location / name of the repos.conf file
+r-cran-repos-file=/etc/rstudio/repos.conf
+```
+
+Reference: <https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html> 
+
+### LD_LIBRARY_PATH
+
+Reference: <https://rstudioide.zendesk.com/agent/tickets/107856> 
+
+There are a few different places the LD_LIBRARY_PATH can be modified within Workbench settings, only some of which will work for packages like `rJava`. For instance, including the ldpaths script in `/etc/rstudio/r-versions` can ensure the correct library is set on R session startup. The final step in this support article shows a method of setting this up which should work even on non-containerized Workbench sessions (the mkdir command can be excluded, since that directory should already exist on a server-installed version of Workbench):
+ 
+We need to force the installed R version to use it's own ldpaths startup script when it starts inside the container.
+
+`RUN mkdir -p /etc/rstudio && printf "Path: /opt/R/${R_VERSION}\nScript: /opt/R/${R_VERSION}/lib/R/etc/ldpaths" > /etc/rstudio/r-versions`
+
+These steps are good to follow: <https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench> 
+
+The additional steps that need to be followed on Workbench are: 
+
+```{.bash filename="/etc/rstudio/r-versions"}
+Path: /opt/R/4.2.0
+Script: /opt/R/4.2.0/lib/R/etc/ldpaths
+```
+
+### Troubleshooting 
+
+To determine the environment details it can be useful to run `Sys.getenv()` from inside and outside RStudio, to see if the user's bash files are setting environment variables inappropriately for the system. 
+
+If the issue is occurring within RStudio it can be helpful to capture the output of`system("ldd /usr/lib/rstudio-server/bin/rsession")` from inside and outside RStudio to see which R libraries are being loaded.
+
+Test from a user session the repository details with: 
+
+- `.libPaths()` 
+- ` options()$repos` 
+
+Permissions on the various configs can cause various issues with soft fails, for example a working permission is: `chmod 644`, or for the rstudio directory consider `chmod 0755 /etc/rstudio` or `chmod o+x /etc/rstudio` to add the `x` bit for just rstudio-server without opening up the other permissions if it is desired to keep it restricted (may result in odd behavior). 
+
+Check permissions with: `ls -la /etc/rstudio`
+
+
