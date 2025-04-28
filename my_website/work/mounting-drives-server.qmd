@@ -32,11 +32,22 @@ Typically we see this looking like
 1. Create a local directory 
 2. `mount -t nfs -o optionshere sharehost:sharepath`
 
+The important bit would be to set permissions with chown, chmod, and maybe facl for either the rstudio-connect user, or the alternate user they choose, for example something like: 
+
+```
+sudo chown user:group /folder
+chmod 764 /folder
+```
+
 It can also involve [fstab](https://www.baeldung.com/linux/network-drive-etc-fstab) or [AutoFS](https://help.ubuntu.com/community/Autofs). 
 
 Some specific situations may have some complexity: specific formats, cloud situations, or verifying NFS export options, but in general the mounting process is much simpler than installing the posit products and configuring them and is the same as what would be done on any linux server. 
 
 For SMB/CIFS this could look like mounting via PAM, discussed here: <https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM>
+
+If running in kubernetes then the mount needs to be added to each job pod and it gets more complicated. 
+
+A linux based forum like [serverfault](https://serverfault.com/) can be useful for getting more answers for linux topics like this. 
 
 ### Permissions 
 

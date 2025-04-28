@@ -87,7 +87,7 @@ R Startup behavior (funny): <https://rstats.wtf/r-startup.html>
 
 From bash it is different than from the editor. 
 
-See [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html") for the official startup docs from R. 
+See [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html") for the official startup docs from R. 
 
 
 R from the command line/bash will take the user's environment. It will not read any additional bash files during start-up (which the RStudio products will do). It will still read in the R startup files (Renviron/Rprofile).
@@ -104,13 +104,13 @@ Next, the the first of the following files that exists and is readable will have
 
 R then always loads the following (in order):
 
--   `R_HOME/etc/Renviron.site` (set for all users)
+-   `R_HOME/etc/Renviron.site` (set for all users)
     
--   `.Renviron` - user-specific, typically in the user's home directory, but can be elsewhere (for instance, in a Project folder)
+-   `.Renviron` - user-specific, typically in the user's home directory, but can be elsewhere (for instance, in a Project folder)
     
--   `R_HOME/etc/Rprofile.site` (set for all users)
+-   `R_HOME/etc/Rprofile.site` (set for all users)
     
--   `.Rprofile` - user-specific, typically in the user's home directory, but can be elsewhere (for instance, in a Project folder)
+-   `.Rprofile` - user-specific, typically in the user's home directory, but can be elsewhere (for instance, in a Project folder)
 
 Beyond this, what gets put in the environment depends on the product.
 
