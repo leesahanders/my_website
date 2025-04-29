@@ -10,7 +10,7 @@
 <atom:link href="https://questionable.quarto.pub/blog/work.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Wed, 16 Apr 2025 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 29 Apr 2025 06:00:00 GMT</lastBuildDate>
 <item>
   <title>Mounting drives on a server for Posit Team</title>
   <dc:creator>Lisa </dc:creator>
@@ -23,19 +23,46 @@
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>Workbench (and Connect) will work with the underlying linux system to make resources available to users. This includes things like mounted drives.</p>
-<p>Workbench doesn’t natively mount drives, this isn’t done through a config. Drive mounts are done through linux operations.</p>
-<section id="servervm" class="level3">
-<h3 class="anchored" data-anchor-id="servervm">Server/VM</h3>
+<p>Workbench and Connect will work with the underlying linux system to make resources available to users. This includes things like mounted drives.</p>
+<p>Neither Workbench nor Connect natively mount drives, this isn’t done through a config. Drive mounts are done through linux operations.</p>
+<section id="nfs" class="level3">
+<h3 class="anchored" data-anchor-id="nfs">NFS</h3>
 <p>Typically we see this looking like</p>
 <ol type="1">
 <li>Create a local directory</li>
 <li><code>mount -t nfs -o optionshere sharehost:sharepath</code></li>
 </ol>
+<p>The important bit would be to set permissions with chown, chmod, and maybe facl for either the rstudio-connect user, or the alternate user they choose, for example something like:</p>
+<pre><code>sudo chown user:group /folder
+chmod 764 /folder</code></pre>
 <p>It can also involve <a href="https://www.baeldung.com/linux/network-drive-etc-fstab">fstab</a> or <a href="https://help.ubuntu.com/community/Autofs">AutoFS</a>.</p>
 <p>Some specific situations may have some complexity: specific formats, cloud situations, or verifying NFS export options, but in general the mounting process is much simpler than installing the posit products and configuring them and is the same as what would be done on any linux server.</p>
-<p>For SMB/CIFS this could look like mounting via PAM, discussed here: <a href="https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM" class="uri">https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM</a></p>
+<p>If running in kubernetes then the mount needs to be added to each job pod and it gets more complicated.</p>
 </section>
+</section>
+<section id="smbcifs" class="level2">
+<h2 class="anchored" data-anchor-id="smbcifs">SMB/CIFS</h2>
+<p>For SMB/CIFS this could look like mounting via PAM, discussed here: <a href="https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM" class="uri">https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM</a></p>
+<p>Alternatively, the SMB/CIFS could be <a href="https://www.techrepublic.com/article/how-to-permanently-mount-a-windows-share-on-linux/">mounted directly</a> with <code>cifs-utils</code> using a service account if traceability or access controls aren’t needed with <code>sudo mount -t cifs -o username=&lt;user&gt;,password=&lt;password&gt; //&lt;server&gt;/&lt;share&gt; /mnt/&lt;mountpoint&gt;</code>.</p>
+<p><a href="https://infohub.delltechnologies.com/en-us/l/dell-unity-nas-capabilities/multiprotocol-17/">Multiprotocol NAS</a> is another option for a more enterprise solution.</p>
+</section>
+<section id="copying-a-project-from-one-users-home-directory-to-another" class="level2">
+<h2 class="anchored" data-anchor-id="copying-a-project-from-one-users-home-directory-to-another">Copying a project from one users home directory to another</h2>
+<p>Reference: <a href="https://support.posit.co/hc/en-us/articles/12959116352663-Transferring-project-ownership-in-Posit-Workbench" class="uri">https://support.posit.co/hc/en-us/articles/12959116352663-Transferring-project-ownership-in-Posit-Workbench</a></p>
+<p>This will recursively copy the project from user1’s home directory to user2’s home directory</p>
+<p>`sudo cp -R /home/user1/project /home/user2/``</p>
+<p>And this will change the owner recursively to user2</p>
+<p><code>sudo chown -R user2:user2 /home/user2/project</code></p>
+</section>
+<section id="permissions" class="level2">
+<h2 class="anchored" data-anchor-id="permissions">Permissions</h2>
+<p>When mounting on the server it will need the appropriate permissions so that users are able to access the contents of the drive.</p>
+<p>For example for content running on Posit Connect the rstudio-connect user will need access to the drive, for example via <code>chmod 644</code>. Alternatively the drive could be mapped so that an alternate linux user has access and a user with admin access through the Connect UI can set the runAs user to the selected linux user. This will provide more security around protecting the files that are mounted.</p>
+</section>
+<section id="logging-user-actions" class="level2">
+<h2 class="anchored" data-anchor-id="logging-user-actions">Logging user actions</h2>
+<p>For customers wanting to log user actions on NFS shares that is done through linux admin utilities, like <code>auditd</code>.</p>
+<p>Alternatively kerberized NFS shares can be used for centralized logging/auditing but is significantly more admin overhead.</p>
 </section>
 <section id="failures" class="level2">
 <h2 class="anchored" data-anchor-id="failures">Failures</h2>
@@ -46,8 +73,514 @@
 <p>For example, this shows that the home directories were mounted with <code>noexec</code>: <code>/dev/mapper/rhel-home  /home  xfs    defaults,noexec,nosuid,nodev   0 0</code></p>
 <p>This resulted in this error message:</p>
 <pre><code>library(stringi)Error: package or namespace load failed for 'stringi' in dyn.load(file, DLLpath = DLLpath, ...):
-unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':
-  /home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object</code></pre>
+unable to load shared object '/home/username/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':
+  /home/username/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object</code></pre>
+</section>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<p>A linux based forum like <a href="https://serverfault.com/">serverfault</a> can be useful for getting more answers for linux topics like this.</p>
+<ul>
+<li><a href="https://www.golinuxcloud.com/linux-mount-nfs/" class="uri">https://www.golinuxcloud.com/linux-mount-nfs/</a></li>
+<li><a href="https://planetscale.com/blog/io-devices-and-latency#storage-in-the-cloud" class="uri">https://planetscale.com/blog/io-devices-and-latency#storage-in-the-cloud</a></li>
+<li><a href="https://solutions.posit.co/admin-training/courses/workbench/04_datasources.html#smbcifs" class="uri">https://solutions.posit.co/admin-training/courses/workbench/04_datasources.html#smbcifs</a></li>
+<li>Really interesting community post with script for automounting windows shares: <a href="https://community.rstudio.com/t/active-directory-ad-permissions-and-file-share-mounting-for-rsp/5427/5" class="uri">https://community.rstudio.com/t/active-directory-ad-permissions-and-file-share-mounting-for-rsp/5427/5</a></li>
+<li>Example for mounting a drive: <a href="https://superuser.com/questions/134734/how-to-mount-a-drive-from-terminal-in-ubuntu" class="uri">https://superuser.com/questions/134734/how-to-mount-a-drive-from-terminal-in-ubuntu</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/mounting-drives-server.html</guid>
+  <pubDate>Tue, 29 Apr 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>Setting the R package repository on Posit Workbench</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/r-repository-settings-workbench.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The repository for packages being used for installation by users is often important to configure. When using something like Package Manager you’ll want users to install packages from there, rather than the broader internet.</p>
+</section>
+<section id="at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
+<p>The best pattern is to configure the repository across R sessions using R config options, not RStudio configs. A shared site library can be created (leveraging <code>Rprofile.site</code> and <code>Renviron.site</code> for example) or using <code>renv</code> with a shared <code>renv</code> package cache (maintaining reproduceability through the <code>renv.lock</code> file).</p>
+<p>The <code>Renviron.site</code> would override the <code>Rprofile.site</code> setting and therefore may be more robust.</p>
+<section id="renviron.site" class="level3">
+<h3 class="anchored" data-anchor-id="renviron.site">Renviron.site</h3>
+<p>Referencing: <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R" class="uri">https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R</a></p>
+<p>Create a <code>Renviron.site</code> file and define:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Renviron.site</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_PREFIX_AUTO</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>TRUE</span>
+<span id="cb1-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_CACHE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>/scratch/renv</span>
+<span id="cb1-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>R_LIBS_SITE=<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+</div>
+</section>
+<section id="rprofile.site" class="level3">
+<h3 class="anchored" data-anchor-id="rprofile.site">.Rprofile.site</h3>
+<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Rprofile.site</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">repos</span> = c<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">CRAN</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.posit.co/all/latest"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">))</span></span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">interactive()</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-4">  <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">width</span> = 120<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb2-6"></span>
+<span id="cb2-7"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.info()</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sysname"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">]]</span> == <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Windows"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Sys.setenv</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">RENV_DOWNLOAD_METHOD</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"curl"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-9"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"folder"</span> %in% tolower<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">list.files</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)))</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-12"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">!</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rlib"</span> %in% list.files<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/username/"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">))</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-13"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">print</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Creating Rlib folder"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-14"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dir.create</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/username/Rlib"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">,mode</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0777"</span>,recursive = T<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-15"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb2-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"\033[0;32;1mSetting local user lib\033[0m\n"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-17"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.libPaths</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">c</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/username/Rlib"</span> , .libPaths<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-18"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">}</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb2-19"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"\033[0;33;1mYou should consider getting the access right so we can put your local R-lib there, instead of OneDrive.\033[0m\n"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb2-20"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+</div>
+</section>
+<section id="test" class="level3">
+<h3 class="anchored" data-anchor-id="test">Test</h3>
+<p>Test this by running and checking the outputs of:</p>
+<ul>
+<li><code>.libPaths()</code></li>
+<li><code>options()$repos</code></li>
+</ul>
+</section>
+</section>
+<section id="long-winded" class="level2">
+<h2 class="anchored" data-anchor-id="long-winded">Long-winded</h2>
+<section id="startup-behavior-of-r-when-loading-package-environment-details" class="level3">
+<h3 class="anchored" data-anchor-id="startup-behavior-of-r-when-loading-package-environment-details">Startup behavior of R when loading package environment details</h3>
+<p>R Startup behavior (funny): <a href="https://rstats.wtf/r-startup.html" class="uri">https://rstats.wtf/r-startup.html</a></p>
+<blockquote class="blockquote">
+<p>Credit: This section was largely taken from an internal Posit resource of unknown authorship</p>
+</blockquote>
+<p>From bash it is different than from the editor.</p>
+<p>See <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html" title="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">here</a> for the official startup docs from R.</p>
+<p>R from the command line/bash will take the user’s environment. It will not read any additional bash files during start-up (which the RStudio products will do). It will still read in the R startup files (Renviron/Rprofile).</p>
+<p>Prior to loading the R session from the bash shell any commands in this file will be read and execute commands if it exists: <code>/etc/profile</code></p>
+<p>Next, the the first of the following files that exists and is readable will have commands executed from (only one of these files will be read and executed):</p>
+<ul>
+<li><p><code>~/.bash_profile</code></p></li>
+<li><p><code>~/.bash_login</code></p></li>
+<li><p><code>~/.profile</code></p></li>
+</ul>
+<p>R then always loads the following (in order):</p>
+<ul>
+<li><p><code>R_HOME/etc/Renviron.site</code> (set for all users)</p></li>
+<li><p><code>.Renviron</code> - user-specific, typically in the user’s home directory, but can be elsewhere (for instance, in a Project folder)</p></li>
+<li><p><code>R_HOME/etc/Rprofile.site</code> (set for all users)</p></li>
+<li><p><code>.Rprofile</code> - user-specific, typically in the user’s home directory, but can be elsewhere (for instance, in a Project folder)</p></li>
+</ul>
+<p>Beyond this, what gets put in the environment depends on the product.</p>
+<ul>
+<li><p>RStudio Server / Workbench: before any of this executes, RStudio Server will first include the contents of /etc/rstudio/rsession-profile if it exists. It will also add anything set in rsession-ld-library-path in rserver.conf to the LD_LIBRARY_PATH environment variable.</p></li>
+<li><p>Shiny Server / Connect: you can affect the environment variables for a specific application using program supervisors</p></li>
+</ul>
+<p>This page in the documentation is the new home for the golden source of info for startup behavior: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html" class="uri">https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html</a></p>
+</section>
+<section id="r-sessions-across-all-workbench-ides" class="level3">
+<h3 class="anchored" data-anchor-id="r-sessions-across-all-workbench-ides">R sessions across all Workbench IDE’s</h3>
+<p>Relying on <code>repos.conf</code> for R repository configuration IMHO is a clear anti-pattern which especially large customers with large setups should not use. <code>repos.conf</code> is a relic from a time where there was only RSP.</p>
+<p>Configure the repository settings in R directly, rather than through the RStudio settings.</p>
+<p>Resources:</p>
+<ul>
+<li><p>A great resource for setting this up simply is: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html" class="uri">https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html</a></p></li>
+<li><p>For a more complex example that could be used in slurm environments refer to: <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R" class="uri">https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R</a></p></li>
+</ul>
+<p>The <code>Renviron.site</code> would override the <code>Rprofile.site</code> setting and therefore may be more robust.</p>
+<section id="renviron.site-1" class="level4">
+<h4 class="anchored" data-anchor-id="renviron.site-1">Renviron.site</h4>
+<p>Create a <code>Renviron.site</code> file and define:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Renviron.site</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Key1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>value1</span>
+<span id="cb3-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_PREFIX_AUTO</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>TRUE</span>
+<span id="cb3-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_CACHE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>/scratch/renv</span>
+<span id="cb3-4"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>R_LIBS_SITE=<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+</div>
+<p>And then <code>Sys.getenv("Key1")</code> will return <code>"value1"</code> in a users R session.</p>
+<p>This can be set at the user or system level. Users have the choice between user or project level (project taking preference). The <a href="https://usethis.r-lib.org/">usethis</a> package includes a helper function for editing <code>.Renviron</code> files from an R session with&nbsp;<code>usethis::edit_r_environ()</code>. For a system level install it is placed per R version, for example at <code>/opt/R/4.1.1/lib/R/etc/Renviron.site</code>.</p>
+</section>
+<section id="rprofile.site-1" class="level4">
+<h4 class="anchored" data-anchor-id="rprofile.site-1">.Rprofile.site</h4>
+<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Rprofile.site</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">repos</span> = c<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">CRAN</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.posit.co/all/latest"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">))</span></span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">interactive()</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb4-4">  <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">width</span> = 120<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb4-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+</div>
+<p>Again this file can be se at the user or system level. At the user level the easiest way to edit your <code>.Rprofile</code> file is to use the <code>usethis::edit_r_profile()</code> function from within an R session. You can specify whether you want to edit the user or project level <code>.Rprofile.</code> For a system level install it is placed per R version, for example at <code>/opt/R/4.2.0/lib/R/etc/Rprofile.site</code>.</p>
+</section>
+<section id="configuring-a-shared-library" class="level4">
+<h4 class="anchored" data-anchor-id="configuring-a-shared-library">Configuring a shared library</h4>
+<p>Taken from an <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1738088423395249?thread_ts=1737982807.176319&amp;cid=C2P7MTJKE">internal discussion</a></p>
+<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>.</p>
+<p>There are two main options:</p>
+<ul>
+<li><p>Install a set of R packages in a shared library. The users here would need to specify which packages they really need and then their IT team could install those into a <code>site-library</code> in each R version, ideally leveraging a time-based snapshot from package manager for reproducibility reason. Users in this case would be limited to a certain package version for some time. They however can update those packages regularly (e.g.&nbsp;quarterly) to lessen the pain here. As mentioned above, do <strong>NOT</strong> use any recommendation from the Posit Admin guide for this setup but follow the standard approach to configure the same in R (leveraging <code>Rprofile.site</code> and <code>Renviron.site</code> for example).</p></li>
+<li><p>Educate/train the users to all use <code>renv</code> - then every user would have maximum degree of freedom to choose which packages and which version they want to use for each project. They then would maintain <code>renv.lock</code> files for each project and the admin team can then configure a shared <code>renv</code> package cache to ensure that any given package/version combination is only stored once.</p></li>
+</ul>
+<p>Both options in their own right also protect the data scientists from producing irreproducible code since in neither case they rely on that melting pot of R package mess that typically piles up in <code>R_LIBS_USER</code> (in particular for systems where R points to latest CRAN which IMHO is another anti-pattern)</p>
+<section id="script-for-updating-packages-from-rspm-that-have-changed-to-site-library" class="level5">
+<h5 class="anchored" data-anchor-id="script-for-updating-packages-from-rspm-that-have-changed-to-site-library">Script for updating packages from rspm that have changed to site library</h5>
+<pre><code># update existing packages
+update.packages(lib.loc=&lt;site.library&gt;, repos=&lt;PPM Repo&gt;, ask=FALSE)
+
+# add any new packages
+new.packages(lib.loc=&lt;site.library&gt;, repos=&lt;PPM Repo&gt;, ask=FALSE)</code></pre>
+</section>
+</section>
+</section>
+<section id="workbench-and-rstudio-sessions-only" class="level3">
+<h3 class="anchored" data-anchor-id="workbench-and-rstudio-sessions-only">Workbench and RStudio sessions only</h3>
+<p>The oft recommended path is to use the <code>repos.conf</code> or <code>rsession.conf</code> file to configure the repository URL.</p>
+<p>This might look like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="/etc/rstudio/rsession.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">r-cran-repos=http://cran.at.r-project.org/</span></span></code></pre></div>
+</div>
+<p>Or:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/repos.conf</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="/etc/rstudio/repos.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RSPM</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://packagemanager.posit.co/cran/__linux__/jammy/latest</span>
+<span id="cb7-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">CRAN</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://packagemanager.posit.co/cran/__linux__/jammy/latest</span>
+<span id="cb7-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Australia</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://cran.ms.unimelb.edu.au/</span>
+<span id="cb7-4"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Austria</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://lib.ugent.be/CRAN/</span></code></pre></div>
+</div>
+<p>And adding to <code>rsession.conf</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="/etc/rstudio/rsession.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use this to change the location / name of the repos.conf file</span></span>
+<span id="cb8-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">r-cran-repos-file=/etc/rstudio/repos.conf</span></span></code></pre></div>
+</div>
+<p>Reference: <a href="https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html" class="uri">https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html</a></p>
+</section>
+<section id="ld_library_path" class="level3">
+<h3 class="anchored" data-anchor-id="ld_library_path">LD_LIBRARY_PATH</h3>
+<p>Reference: <a href="https://rstudioide.zendesk.com/agent/tickets/107856" class="uri">https://rstudioide.zendesk.com/agent/tickets/107856</a></p>
+<p>There are a few different places the LD_LIBRARY_PATH can be modified within Workbench settings, only some of which will work for packages like <code>rJava</code>. For instance, including the ldpaths script in <code>/etc/rstudio/r-versions</code> can ensure the correct library is set on R session startup. The final step in this support article shows a method of setting this up which should work even on non-containerized Workbench sessions (the mkdir command can be excluded, since that directory should already exist on a server-installed version of Workbench):</p>
+<p>We need to force the installed R version to use it’s own ldpaths startup script when it starts inside the container.</p>
+<p><code>RUN mkdir -p /etc/rstudio &amp;&amp; printf "Path: /opt/R/${R_VERSION}\nScript: /opt/R/${R_VERSION}/lib/R/etc/ldpaths" &gt; /etc/rstudio/r-versions</code></p>
+<p>These steps are good to follow: <a href="https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench" class="uri">https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench</a></p>
+<p>The additional steps that need to be followed on Workbench are:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/r-versions</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="/etc/rstudio/r-versions" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Path:</span> /opt/R/4.2.0</span>
+<span id="cb9-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Script:</span> /opt/R/4.2.0/lib/R/etc/ldpaths</span></code></pre></div>
+</div>
+</section>
+<section id="troubleshooting" class="level3">
+<h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
+<p>To determine the environment details it can be useful to run <code>Sys.getenv()</code> from inside and outside RStudio, to see if the user’s bash files are setting environment variables inappropriately for the system.</p>
+<p>If the issue is occurring within RStudio it can be helpful to capture the output of<code>system("ldd /usr/lib/rstudio-server/bin/rsession")</code> from inside and outside RStudio to see which R libraries are being loaded.</p>
+<p>Test from a user session the repository details with:</p>
+<ul>
+<li><code>.libPaths()</code></li>
+<li><code>options()$repos</code></li>
+</ul>
+<p>Permissions on the various configs can cause various issues with soft fails, for example a working permission is: <code>chmod 644</code>, or for the rstudio directory consider <code>chmod 0755 /etc/rstudio</code> or <code>chmod o+x /etc/rstudio</code> to add the <code>x</code> bit for just rstudio-server without opening up the other permissions if it is desired to keep it restricted (may result in odd behavior).</p>
+<p>Check permissions with: <code>ls -la /etc/rstudio</code></p>
 
 
 </section>
@@ -55,8 +588,8 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
 
  ]]></description>
   <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/mounting-drives-server.html</guid>
-  <pubDate>Wed, 16 Apr 2025 06:00:00 GMT</pubDate>
+  <guid>https://questionable.quarto.pub/blog/work/r-repository-settings-workbench.html</guid>
+  <pubDate>Thu, 24 Apr 2025 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 <item>
@@ -3677,2195 +4210,6 @@ font-style: inherit;"># Gargle uses port 1410 for auth, check if it is blocked w
  ]]></description>
   <category>code</category>
   <guid>https://questionable.quarto.pub/blog/work/google-resources.html</guid>
-  <pubDate>Fri, 21 Jun 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Debugging R Package Environments (renv): A long winded writeup</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/renv-environments.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#| echo: false</span></span>
-<span id="cb1-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#| include: false</span></span>
-<span id="cb1-3"></span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(renv)</span></code></pre></div>
-<p>This vignette is an overview of environment management in R and a comprehensive summary of the different options that can be configured to support different workflows. Environment management in R is intentionally complex, so figuring out where to even start when debugging can be a challenge. This vignette also goes into specific scenarios that might come up with environment management and recommendations.</p>
-<section id="at-a-glance" class="level2">
-<h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
-<p>Overview of the R environment:</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph LR
-    
-    subgraph ENV[Working R Environment]
-    
-    subgraph CONFIG[Config]
-    
-      subgraph LOCAL[Local R Config]
-      RENVIRON[.Renviron]
-      RPROFILE[.Rprofile]
-      end
-    
-      subgraph SERVER[Server R Config]
-      SRENVIRON[Renviron.site&lt;br/&gt;etc/R.home/Renviron.site]
-      SRRPROFILE[Rprofile.site&lt;/br&gt;etc/Rprofile.site]
-      
-        subgraph W[Posit Workbench]
-        REPOS["repos.conf"]
-        RSESSION["rsession.conf"] 
-        end
-    
-      end
-      
-      LOCAL-- User settings &lt;br/&gt;override&lt;br/&gt;global settings --&gt; SERVER
-      
-      subgraph RENVCONFIG[Renv Config]
-      RENVPROJECT[Project Settings&lt;br/&gt;renv/settings.json]
-      
-        subgraph RENVUSER[Config: User Level Settings]
-        RENVUR["User Renviron&lt;br/&gt;~/.Renviron"]
-        RENVRI["R installation&lt;br/&gt;etc/Rprofile.site"]
-        RENVP["Project&lt;br/&gt;.Rprofile"]
-        end
-      end      
-      
-    end
-    
-    subgraph LIBRARY[Package Library Path]
-
-      USERLIBRARY["User&lt;br/&gt;R_HOME/library&lt;br/&gt;~/R"]
-
-      SITELIBRARY[Site&lt;br/&gt;R_HOME/site-library]
-      
-      subgraph RENV[Renv]
-      direction TB
-      CACHE["Cache&lt;br/&gt;~/.cache/R/renv/"]
-      PROJECTCACHE["Project Cache&lt;br/&gt;~/renv/library/"]
-      CACHE-- Unless isolated, symlink --&gt; PROJECTCACHE; 
-      SHAREDCACHE[Cross-User Shared Cache]
-      end
-
-    end  
-    
-    LIBRARY --&gt; CONFIG
-    CONFIG --&gt; LIBRARY
-    
-    end
-    
-    subgraph REPOSITORY[Package Repository Source]
-      direction TB
-    
-      subgraph PPM[Posit Package Manager]
-      RE[Package Binaries]
-      RP[Package Sources]
-      end
-    
-      CRAN[CRAN/Pypi/BioConductor/etc]
-    
-      CRAN -- Posit sync service --&gt; PPM;
-
-    end
-    
-    UA[User-Agent request header]-- Binary requested&lt;br/&gt;Details: OS, R version --&gt;PPM
-    
-    UA --&gt; ENV
-
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<section id="environment-management-strategies" class="level2">
-<h2 class="anchored" data-anchor-id="environment-management-strategies">Environment Management strategies</h2>
-<p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
-<figcaption>alt text</figcaption>
-</figure>
-</div>
-<p>Image: <a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="uri">https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png</a></p>
-<table class="table">
-<thead>
-<tr class="header">
-<th><a href="https://solutions.posit.co/envs-pkgs/environments/snapshot/">Snapshot and Restore</a></th>
-<th><a href="https://solutions.posit.co/envs-pkgs/environments/shared/">Shared Baseline</a></th>
-<th><a href="https://solutions.posit.co/envs-pkgs/environments/validated/">Validated</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>All developers are responsible for their own environment management, and enabled for making their enviornments reproduceable through the use of renv’s <code>snapshot()</code> capability. Users can freely access and install packages while following a package-centric workflow. Users are responsible for recording their dependencies for their projects.</td>
-<td>All developers in the organization are pointed to a snapshot of available packages frozen to a particular date when the managing team had intentionally tested and made them available. On some cadence, let’s say quarterly, the managing team goes through, performs testing again, and provides a new updated snapshot that is available for developers to switch to. There are a lot of advantages in switching with new features, resolved bugs, etc.</td>
-<td>Similar to the shared baseline stratgey the difference is that changes to the package environment go through an approval and auditing process, and access to packages is strictly enforced.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="understanding-rs-startup-behavior" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-rs-startup-behavior">Understanding R’s startup behavior</h2>
-<p>R has a lot of flexibility for different workflows, which is a great thing. However, it also means that the answer to trying to change specific pieces of that customized behavior can have complex answers that depend on example what has been implemented in your environment.</p>
-<p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
-<figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
-</figure>
-</div>
-<p>Posit <a href="https://docs.posit.co/resources/install-r/">provides precompiled R binaries</a> for anyone to use, free of charge. The <a href="https://github.com/rstudio/r-builds">public respository</a> can be visited to understand how they are compiled.</p>
-</section>
-<section id="where-packages-come-from" class="level2">
-<h2 class="anchored" data-anchor-id="where-packages-come-from">Where packages come from</h2>
-<p>Packages can come from a couple places, a tarball, version control location, but most commonly is the URL of the repository that the package will be installed from. The package source can be set by assigning an environment variable with the desired location. More than one repository can be specified, for example with:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">repos <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">CRAN =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://cloud.r-project.org"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">WORK =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://work.example.org"</span>)</span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> repos)</span></code></pre></div>
-<p>Setting it this way would be a “one off” that would change the “package repository” for the current session. In order to persist the change of repository location, and other settings, various configurations can be applied.</p>
-<p>Typically “package repository”, among developers, is used to refer to R and Python package repositories (not to be confused with linux package repositories, etc). Most R and Python package managers serve only R and Python packages, and don’t handle additional management of system dependencies or packages, which would be risky in a shared server system where conflicts could come up.</p>
-<p>The most famous R and Python package repositories are:</p>
-<ul>
-<li><a href="https://cran.r-project.org/">CRAN</a> - hosting public packages, checking, distributing, and archiving R packages for various platforms</li>
-<li><a href="https://www.bioconductor.org/">BioConductor</a> - hosting public packages, checking, distributing, and archiving R packages for various platforms</li>
-<li><a href="https://pypi.org/">PyPi</a> - hosting public packages, checking, distributing, and archiving Python packages for various platforms</li>
-</ul>
-<p>Posit Package Manager can be deployed within your organization, completely air-gapped, or with a sync service to Posit, to receive package sources and binaries.</p>
-<ul>
-<li><a href="https://pypi.org/">Posit Package Manager</a> - hosting public packages, hosting internal packages, checking, distributing, blocking vulnerabilities, and archiving R and Python packages for various platforms</li>
-</ul>
-</section>
-<section id="server-vs-individual-environments" class="level2">
-<h2 class="anchored" data-anchor-id="server-vs-individual-environments">Server vs individual environments</h2>
-<p>Developers can work locally on their local machines, in a cloud environment, or using a shared server environment (for example, by using Posit Workbench).</p>
-<p>Having multiple developers working on a centralized server using Posit Workbench has a couple primary advantages:</p>
-<ul>
-<li>Better IT oversight and security with encrypted traffic and restricted IP addresses</li>
-<li>Additional configuration options and settings</li>
-<li>Auditing and logging</li>
-<li>Less time spent on software installation and management</li>
-<li>Access to larger compute resources</li>
-<li>Options for standardizing settings across all users</li>
-</ul>
-<p>When sharing a server environment users will sign in separately and work will live in separate user home directories. Workbench can act as an auth client to different data sources. However, the shared system dependencies will need to be carefully managed to support the different workflows that the users are doing.</p>
-</section>
-<section id="the-renv-package" class="level2">
-<h2 class="anchored" data-anchor-id="the-renv-package">The renv package</h2>
-<p>Renv is an open source R package that allows users to better manage their package environments.</p>
-<p>Ever had your code mysteriously stop working or start producing different results after upgrading packages, and had to spend hours debugging to find which package was the culprit? Ever tried to collaborate on code just to get stuck on trying to decipher various package dependencies?</p>
-<p><a href="https://rstudio.github.io/renv/articles/renv.html">renv</a> helps you track and control package changes - making it easy to revert back if you need to. It works with your current methods of installing packages (<code>install.packages()</code>). It comes with a great degree of flexibility and supports a wide range of user workflows.</p>
-<p>Renv assumes:</p>
-<ul>
-<li>Users are familiar with a version control system, like git</li>
-<li>Users are following a project-centric methodology where the goal is to simultaneously work on different projects with different package environment needs</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
-<figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
-</figure>
-</div>
-<p>There is an excellent video by David Aja discussing why he started using renv at the 2022 RStudio Conference here: <a href="https://www.rstudio.com/conference/2022/talks/you-should-use-renv/" class="uri">https://www.rstudio.com/conference/2022/talks/you-should-use-renv/</a></p>
-<p>Usefully, <a href="https://p3m.dev/client/#/repos/cran/packages/renv/616174/overview?search=renv#package-details:~:text=1.14%20MB-,SYSTEM%20REQUIREMENTS,-none">renv doesn’t have system requirements</a>.</p>
-<section id="the-lock-file" class="level3">
-<h3 class="anchored" data-anchor-id="the-lock-file">The lock file</h3>
-<p>The renv lock file is what is generated that allows the environment to be recreated on another system. It might look something like this:</p>
-<details>
-<summary>
-Click here to expand an example renv lock file
-</summary>
-<pre><code>{
-  "R": {
-    "Version": "4.3.2",
-    "Repositories": [
-      {
-        "Name": "CRAN",
-        "URL": "https://p3m.dev/cran/latest"
-      }
-    ]
-  },
-  "Packages": {
-    "MASS": {
-      "Package": "MASS",
-      "Version": "7.3-60",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "a56a6365b3fa73293ea8d084be0d9bb0"
-    },
-    "Matrix": {
-      "Package": "Matrix",
-      "Version": "1.6-4",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "grid",
-        "lattice",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "d9c655b30a2edc6bb2244c1d1e8d549d"
-    },
-    "yaml": {
-      "Package": "yaml",
-      "Version": "2.3.7",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "0d0056cc5383fbc240ccd0cb584bf436"
-    }
-  }
-}</code></pre>
-</details>
-<p>It’s in a json format. There are two main sections:</p>
-<ul>
-<li>Header : This is where the R version is declared as well as package sources (if declared)</li>
-<li>Packages : This is where the specific package versions are specified, as well as various metadata</li>
-</ul>
-<p>For an overview on package sources, see the <a href="https://rstudio.github.io/renv/articles/package-sources.html">Package Sources vignette</a>.</p>
-<p>The package source can be set for three different scenarios:</p>
-<ul>
-<li><code>RemoteType</code> - packages installed by devtools, remotes, and pak</li>
-<li><code>Repository</code> - packages installed from a package repository; CRAN, Posit Package Manager, etc</li>
-<li><code>biocViews</code> - packages installed from BioConductor repositories</li>
-</ul>
-<p>Let’s understand how the <code>Repository</code> is set. Notice how under each package the repository is declared like this:</p>
-<pre><code>Repository: &lt;a name&gt;,</code></pre>
-<p>The <code>Repository: &lt;a name&gt;</code> field is used to denote the repository that the package was originally installed from. Most commonly it might like look:</p>
-<ul>
-<li><code>Repository: CRAN</code> - This indicates that the package was installed from a repository call CRAN, likely a CRAN mirror</li>
-<li><code>Repository: RSPM</code> - This indicates that the package was installed from Posit Package Manager, regardless of whether it was a binary or source package</li>
-</ul>
-<p>There is a fail over order for determining the correct URL:</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph TD;
-    A(Assign repository URL) --&gt;lock; 
-    
-    subgraph lock[renv.lock file]
-    B[Repository name in package definition]
-    c[Repository URL in header]
-    end
-    
-    lock -- Repository name in header --&gt;D;
-    D[Select matching URL] --&gt;END;
-    lock -- Repository name not in header --&gt;E;
-    
-    E{Check env for first repository listed &lt;br&gt; for required package version} -- package exists --&gt;F;
-    F[Select first repository URL] --&gt;END; 
-    E -- package does not exist --&gt;G;
-
-    G{Check env for .. repository listed &lt;br&gt; for required package version} -- package exists --&gt;H;
-    H[Select .. repository URL] --&gt;END; 
-    G -- package does not exist --&gt;I;
-    
-    I{Check env for last repository listed &lt;br&gt; for required package version} -- package exists --&gt;J;
-    J[Select last repository URL] --&gt;END; 
-    I -- package does not exist --&gt;K;
-    
-    K{Check the cellar} -- package exists --&gt;L;
-    L[Select cellar] --&gt;END; 
-    K -- package does not exist --&gt;M;    
-    
-    M[Package does not exist, unable to restore]
-    
-    END(End)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>In words, for a package repository declaration of <code>Repository: RSPM</code>, if there happens to be a repository called <code>RSPM</code> in the repository list, then that repository will be preferred when restoring the package; otherwise, renv will check each repository from first to last for the required version of each package. The <a href="https://rstudio.github.io/renv/articles/package-sources.html#the-package-cellar">renv package cellar</a> is meant to help with packages that aren’t available or accessible for installation. The cellar can be set to point at tarball locations for these tricky packages as an ultimate fail safe.</p>
-</section>
-</section>
-<section id="the-pak-package" class="level2">
-<h2 class="anchored" data-anchor-id="the-pak-package">The pak package</h2>
-<p>Pak is a useful R package that can help with package installation and dependency look up.</p>
-<p>If an error is encountered, we may need to enable the package pak to work with renv (or be patient and wait a couple minutes after installing pak). There is a useful git issue discussing this <a href="https://github.com/r-lib/pak/issues/325">here</a>.</p>
-<p>Renv can be told to use pak for package installation with: <code>RENV_CONFIG_PAK_ENABLED = TRUE</code></p>
-<p>For example temporarily with: <code>Sys.setenv("RENV_CONFIG_PAK_ENABLED" = TRUE)</code>)</p>
-<p>Check that it set with: <code>Sys.getenv('RENV_CONFIG_PAK_ENABLED')</code></p>
-</section>
-<section id="package-installation" class="level2">
-<h2 class="anchored" data-anchor-id="package-installation">Package installation</h2>
-<p>Packages are installed into a package library, a directory that exists somewhere on disk.</p>
-<p>Packages are associated with that the OS, the particular version of R being used, and if using renv, with that particular project directory. The current library path(s) can be found with: <code>.libPaths()</code>. When packages are installed they will install to a sub folder that is specific to the combination of both of those.</p>
-<section id="the-default-library-location" class="level3">
-<h3 class="anchored" data-anchor-id="the-default-library-location">The default library location</h3>
-<p>The default R installation will install packages into the users home directory, by default located at <code>R_HOME/library</code>. For example, on Windows:</p>
-<pre><code>\-- C:/Users/LisaAnders/AppData/Local/R
-    \-- win-library
-        \-- 4.3
-            \-- ..packages
-\-- C:/Program Files/R
-    \-- R-4.3.1
-        \-- library
-            \-- ..packages</code></pre>
-<p>Learn more about <a href="https://rstudio.github.io/r-manuals/r-admin/Add-on-packages.html#managing-libraries">managing libraries in base R</a>.</p>
-</section>
-<section id="shared-site-library-location" class="level3">
-<h3 class="anchored" data-anchor-id="shared-site-library-location">Shared site library location</h3>
-<p>A shared site library can be set it up that will make packages from a global directory available to all users on the system, without the need for them to go through the installation steps. Through configuring Workbench, default repository locations can be set, an alternative directory can be set for use for package installation instead of user home directories, and user package installations can be disabled.</p>
-<p>A default site library can be used, at <code>R_HOME/site-library</code> (in this case <code>/opt/R/3.4.4/lib/R/library</code>), or a site library can be set up by setting <code>.Library.site</code> in <code>R_HOME/etc/Rprofile.site</code> / <code>{$R_HOME}/etc/Rprofile.site</code>. Multiple library locations can be set up to be used.</p>
-<p>When using a shared library, user options to change repository settings and package installation can be disabled if desired (typically as part of a validated environment management workflow). In this case, all users are accessing packages from that global site library and packages are added / updated by going through an approvals process with an admin ultimately running the commands that make the change.</p>
-<p>A site library can also be set up that allows users to access both the globally installed packages as well as install packages into the user directory. This is often “the best of both worlds”. New users are able to hit the ground running quickly, and advanced users have control over packages and package versions for their projects.</p>
-</section>
-<section id="renv-library-location" class="level3">
-<h3 class="anchored" data-anchor-id="renv-library-location">Renv library location</h3>
-<p>Packages installed with renv, depending on some configuration options, will use two locations:</p>
-<ul>
-<li>User’s cache - <code>~/.cache/R/renv/</code></li>
-<li>Project cache - <code>~/renv/library/</code></li>
-</ul>
-<p>By default, the project cache will symlink to the users cache in order to preserve space. Projects can <a href="https://rstudio.github.io/renv/reference/isolate.html">be isolated</a> in order to have the packages copied into the project library so that the project is completely independent of the broader renv cache.</p>
-<p>The folder structure (note that it is specific to the possible OS’s, and the possible R versions and this is just an example) is:</p>
-<p><em><code>~/.cache/R/renv/</code></em></p>
-<pre><code>+-- projects 
-+-- index
-\-- binary
-    \-- linux-centos-7
-        \-- R-4.3
-            \-- x86_64-pc-linux-gnu
-                \-- repository
-                    \-- ..packages
-        \-- R-4.4
-            \-- x86_64-pc-linux-gnu
-                \-- repository
-                    \-- ..packages
-    \-- linux-rocky-8.9
-        \-- R-4.3
-            \-- x86_64-pc-linux-gnu
-                \-- repository
-                    \-- ..packages
-\-- source
-    \-- repository
-        \-- ..packages</code></pre>
-<p><em><code>~/renv/</code></em></p>
-<pre><code>+-- activate.R
-+-- settings.json
-+-- staging
-\-- library
-    \-- linux-centos-7
-        \-- R-4.3
-            \-- x86_64-pc-linux-gnu
-                \-- repository
-                    \-- ..packages
-        \-- R-4.4
-            \-- x86_64-pc-linux-gnu
-                \-- repository
-                    \-- ..packages
-    \-- linux-rocky-8.9
-        \-- R-4.3
-            \-- x86_64-pc-linux-gnu
-                \-- repository
-                    \-- ..packages
-\-- source
-    \-- repository
-        \-- ..packages</code></pre>
-</section>
-</section>
-</section>
-<section id="configuration" class="level1">
-<h1>Configuration</h1>
-<section id="local-r-config-files" class="level2">
-<h2 class="anchored" data-anchor-id="local-r-config-files">Local R config files</h2>
-<p>These two configuration files, that may or may not be set, are the moste common for changing the behavior as relates to setting the repository for package installations:</p>
-<ul>
-<li><a href="https://rstats.wtf/r-startup#renviron">.Renviron</a> : The user R environ file contains all environment variables, often including renv settings, etc (typically located at ~/.Renviron)</li>
-<li><a href="https://rstats.wtf/r-startup#rprofile">.Rprofile</a> : The user R profile file contains various settings and configuration properties (typically located at ~/.Rprofile)</li>
-</ul>
-<p>The easiest way to access either of this files is with the usethis package.</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(usethis)</span>
-<span id="cb8-2">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_environ</span>() </span>
-<span id="cb8-3">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_profile</span>()</span></code></pre></div>
-<p>These <a href="https://rstats.wtf/r-startup#disabling-startup-files">startup files can be disabled</a>.</p>
-</section>
-<section id="shared-server-r-config-files" class="level2">
-<h2 class="anchored" data-anchor-id="shared-server-r-config-files">Shared server R config files</h2>
-<p>Instead of setting individually with <a href="https://rstats.wtf/r-startup#renviron">.Renviron</a> and <a href="https://rstats.wtf/r-startup#rprofile">.Rprofile</a>, the same parameters can be set at the server and R installation level. When set, any configuration will be active for any R sessions launched on that server.</p>
-<ul>
-<li><a href="https://packagemanager.rstudio.com/__docs__/user/configure-r/#configure-base-r">Rprofile.site</a> : The RProfile.site file is typically located at <code>etc/Rprofile.site</code></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">Renviron.site</a> : The Renviron.site file is specific to the R installation, typically located at <code>file.path(R.home("etc"), "Renviron.site")</code>.</li>
-</ul>
-<p>For example, this code can be used to maintain the repository configuration across R sessions by adding to the individual users <code>.Rprofile</code> file. It can be maintained across all users on the server by adding to the <code>Rprofile.site</code> file.</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">local</span>({</span>
-<span id="cb9-2">  repos <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">PackageManager =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/cran/__linux__/centos7/latest"</span>)</span>
-<span id="cb9-3">  repos[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"LocalPackages"</span>] <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/local/__linux__/centos7/latest"</span></span>
-<span id="cb9-4">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># add the new repositories first, but keep the existing ones</span></span>
-<span id="cb9-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(repos, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getOption</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"repos"</span>)))</span>
-<span id="cb9-6">})</span>
-<span id="cb9-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getOption</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"repos"</span>)</span></code></pre></div>
-<p>Users can override the global settings in these files <code>Rprofile.site</code> and <code>Renviron.site</code> with their individual <code>.Rprofile</code> files.</p>
-</section>
-<section id="workbench-files-for-rstudio-pro-sessions" class="level2">
-<h2 class="anchored" data-anchor-id="workbench-files-for-rstudio-pro-sessions">Workbench files for RStudio Pro sessions</h2>
-<p>Similarly, there are configuration files used in Workbench that can set repository preference for package installations:</p>
-<ul>
-<li><a href="https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html">/etc/rstudio/repos.conf</a></li>
-<li><a href="https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html">/etc/rstudio/rsession.conf</a></li>
-</ul>
-<p>When using a shared library, user options to change repository settings and package installation can be disabled if desired:</p>
-<pre><code># /etc/rstudio/rsession.conf
-allow-r-cran-repos-edit=0
-allow-package-installation=0</code></pre>
-</section>
-<section id="configuration-of-renv" class="level2">
-<h2 class="anchored" data-anchor-id="configuration-of-renv">Configuration of renv</h2>
-<p>For most users, renv’s default behavior is powerful and doesn’t need modification.</p>
-<p>However, the behavior can also be manually set / modified. Generally speaking though, relying on the defaults is the recommended happy path as renv is designed to just magically work. This does mean that troubleshooting when things go wrong can be tricky, see the troubleshooting section below for some tips on what to look out for.</p>
-<p>There are also a number of environment variables that can be set that will also similarly effect the behavior as relates to setting the repositories being used as the source for package installation.</p>
-<p>Commonly, these settings are set in the <code>.Renviron</code> file to be set across all sessions for that user, or in the R installation’s <code>Renviron.site</code> file so it is active for all users on that server.</p>
-<p>Settings:</p>
-<ul>
-<li><a href="https://rstudio.github.io/renv/reference/paths.html#sharing-state-across-operating-systems">RENV_PATHS_PREFIX</a> : Used for sharing state across operating systems</li>
-<li><a href="https://rstudio.github.io/renv/articles/package-sources.html#the-package-cellar">RENV_PATHS_CELLAR</a> : Path to tarballs, used as a last ditch effort for installing tricky packages</li>
-<li><a href="https://rstudio.github.io/renv/articles/package-install.html#cache-location">RENV_PATHS_CACHE</a> : Path location for a cache shared across multiple users</li>
-<li><a href="https://rstudio.github.io/renv/articles/package-install.html?q=PATH#shared-cache-locations">RENV_CACHE_USER</a> : When using a shared cache, renv can re-assign ownershp of the cache’d package to a separate user account</li>
-<li><a href="https://rstudio.github.io/renv/articles/package-install.html?q=renv.download.trace#debugging">renv.download.trace</a> : Run <code>options(renv.download.trace = TRUE)</code> to temporarily have more verbose logging</li>
-</ul>
-<p>Config settings:</p>
-<ul>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-repos-override">renv.config.repos.override</a> : Enforce the use of some repositories over what is defined in the renv.lock file</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-ppm-enabled">renv.config.ppm.enabled</a> : Attempt to transform the repository URL in order to receive binaries on your behalf (defaults to TRUE)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-ppm-default">renv.config.ppm.default</a> : If repos have not already been set (for example, from the startup .Rprofile) then projects using renv will use the Posit Public Package Manager instance by default</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-ppm-url">renv.config.ppm.url</a> : The URL for Posit Package Manager to be used for new renv projects</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-user-environ">renv.config.user.environ</a> : Load the users R environ file, usually encouraged (defaults to true)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-user-profile">renv.config.user.profile</a> : Load the users R profile file, usually discouraged since it can break project encapsulation (defaults to false)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-user-library">renv.config.user.library</a> : option to include the system library on the library paths for projects, usually discouraged since it can break project encapsulation (defaults to false)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-external-libraries">renv.config.external.libraries</a> : Similar to <code>renv.config.user.library</code>, external libraries can be included with the project, usually discouraged since it can break project encapsulation (defaults to false)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-cache-enabled">renv.config.cache.enabled</a> : Enable the global renv package cache, so that packages are installed into the global cache and then linked or copied into the users R library in order to save space (defaults to true)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html?q=link#renv-config-cache-symlinks">renv.config.cache.symlinks</a> : Use symlinks to reference packages installed into the global renv package cache (if set to FALSE packages are copied from the cache into your project library) (enabled by default, defaults to NULL)</li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-pak-enabled">renv.config.pak.enabled</a> : Use pak with renv to install packages</li>
-</ul>
-<p>Since the configuration settings can be set in multiple places, the priority is given according to:</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph TD;
-    A(Renv configuration selection) --&gt;B;
-    B{R option &lt;br/&gt; renv.config.&lt;name&gt;} -- Not set --&gt;C;
-    B{R option &lt;br/&gt; renv.config.&lt;name&gt;} -- Set --&gt;F;
-    C{Environment variable &lt;br/&gt; RENV_CONFIG_&lt;NAME&gt;} -- Not set --&gt;D;
-    C{Environment variable &lt;br/&gt; RENV_CONFIG_&lt;NAME&gt;} -- Set --&gt;F;
-    D{Default} --&gt;F;
-    F(End)
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>If both the R option and the environment variable option are defined, the R option is preferred.</p>
-<p>We can check the value of any of these parameters a couple ways:</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Checking the renv options by reading environment variables and renv config properties</span></span>
-<span id="cb11-2">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>()</span>
-<span id="cb11-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'RENV_PATHS_CACHE'</span>)</span>
-<span id="cb11-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'RENV_CACHE_USER'</span>)</span>
-<span id="cb11-5">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cache</span>()</span>
-<span id="cb11-6"></span>
-<span id="cb11-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check the r_environ and r_profile contents using the usethis package</span></span>
-<span id="cb11-8"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(usethis)</span>
-<span id="cb11-9">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_environ</span>() </span>
-<span id="cb11-10">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_profile</span>()</span></code></pre></div>
-<section id="renv-and-binary-package-os-and-r-version-detection" class="level3">
-<h3 class="anchored" data-anchor-id="renv-and-binary-package-os-and-r-version-detection">Renv and binary package OS and R version detection</h3>
-<p>By default, renv used with Package Manager will dynamically set the URL of your repository to pull package binaries for your respective system.</p>
-<blockquote class="blockquote">
-<p>Starting with R 4.4.0, renv automatically uses a platform prefix for library paths on linux (the equivalent to setting <code>RENV_PATHS_PREFIX_AUTO = TRUE</code>). This means that, for example, upgrading to a new version of an OS will automatically signal to renv that new library + cache directories will be required.</p>
-</blockquote>
-<section id="sharing-state-across-operating-systems" class="level4">
-<h4 class="anchored" data-anchor-id="sharing-state-across-operating-systems">Sharing state across operating systems</h4>
-<p>As of renv 0.13.0, <a href="https://rstudio.github.io/renv/reference/paths.html#sharing-state-across-operating-systems">sharing state across operating systems</a> is now possible. By default, it will construct a prefix based on fields within the system’s /etc/os-release file.</p>
-<p>also possible to explicitly set with the <code>RENV_PATHS_PREFIX</code> environment variable. For example, it could be set like <code>RENV_PATHS_PREFIX = "ubuntu-bionic"</code> in order to programmatically generate a cache path like <code>/mnt/shared/renv/cache/v2/ubuntu-bionic/R-3.5/x86_64-pc-linux-gnu</code>. Alternatively the auto feature can be enabled with <code>RENV_PATHS_PREFIX_AUTO = TRUE</code> to automatically detect the environment and set the path.</p>
-<p>Commonly, this would be set in the <code>.Renviron</code> file to be set across all sessions for that user, or in the R installation’s <code>Renviron.site</code> file so it is active for all users on that server.</p>
-</section>
-</section>
-<section id="renv-and-binary-package-os-and-r-version-detection-1" class="level3">
-<h3 class="anchored" data-anchor-id="renv-and-binary-package-os-and-r-version-detection-1">Renv and binary package OS and R version detection</h3>
-<p>Renv’s default behavior is powerful when using it with Posit Package Manager. It will <em>automatically</em> try to detect the details about your underlying system and set the corrrect URL path so that the appropriate binaries are downloading. If it is unable to find a binary, then it will fail over to the source URL.</p>
-</section>
-</section>
-<section id="configuration-of-posit-package-manager" class="level2">
-<h2 class="anchored" data-anchor-id="configuration-of-posit-package-manager">Configuration of Posit Package Manager</h2>
-<p>Posit Package Manager is a hosting repository that can be deployed inside a companies network. It is often used in conjunction with vulnerability detection and package blocking for security. It is also useful for hosting internally developed packages that are meant to stay confidential and only used within that particular enterprise organization.</p>
-<ul>
-<li><a href="https://packagemanager.rstudio.com/__docs__/user/configure-r/#configure-r">Configuring R Environments</a></li>
-<li><a href="https://packagemanager.rstudio.com/__docs__/user/configure-python/">Configuring Python Environments</a></li>
-</ul>
-<p>For Workbench the URL for Package Manager is commonly configured so that it is at least used as the default repository for both R and Python packages from within the customers enterprise network.</p>
-<p>Optionally, the Posit Package Manager url can be configured to be specific to:</p>
-<ul>
-<li>Snapshot dates</li>
-<li>Particular curated repository/repositories</li>
-<li>Particular OS (in order to install binaries)</li>
-</ul>
-<section id="package-manager-and-binary-package-os-and-r-version-detection" class="level3">
-<h3 class="anchored" data-anchor-id="package-manager-and-binary-package-os-and-r-version-detection">Package Manager and binary package OS and R version detection</h3>
-<p>Binary packages are incredibly useful, enabling faster downloads by skipping the compilation step. When a binary package is requested (by using the <code>__linux__</code> URL), Package Manager will make a best effort to serve the requested binary package. If that package is unavailable or <em>unsupported on the user’s binary distribution</em> Package Manager will fall back to serving the packages source version.</p>
-<p>Posit Package Manager has the option for the <a href="https://packagemanager.rstudio.com/__docs__/admin/serving-binaries/#binary-user-agents">R user agent header can be configured</a>. The user’s User-Agent request header indicates to Package manager which appropriate binary package to server, based on the R version and the OS. A <a href="https://packagemanager.rstudio.com/__docs__/admin/check-user-agent.R">diagnostic script</a> is provided for generating a diagnostic to make sure this is set correctly. The diagnostic will fail to indicate that the OS and R version in the User-Agent request header needs to be updated.</p>
-<details>
-<summary>
-Click here to expand for the diagnostic script
-</summary>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># User agent diagnostic script for Posit Package Manager binary packages</span></span>
-<span id="cb12-2"></span>
-<span id="cb12-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">local</span>({</span>
-<span id="cb12-4">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (.Platform<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>OS.type <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"unix"</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">||</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.info</span>()[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"sysname"</span>] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Darwin"</span>) {</span>
-<span id="cb12-5">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">message</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Success! Posit Package Manager does not require additional configuration to install binary packages on macOS or Windows."</span>)</span>
-<span id="cb12-6">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">invisible</span>())</span>
-<span id="cb12-7">  }</span>
-<span id="cb12-8"></span>
-<span id="cb12-9">  dl_method <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getOption</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"download.file.method"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span>
-<span id="cb12-10">  dl_extra_args <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getOption</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"download.file.extra"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span>
-<span id="cb12-11">  user_agent <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getOption</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"HTTPUserAgent"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>)</span>
-<span id="cb12-12"></span>
-<span id="cb12-13">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (dl_method <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>) {</span>
-<span id="cb12-14">    dl_method <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">isTRUE</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">capabilities</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"libcurl"</span>))) <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"libcurl"</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">else</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"internal"</span></span>
-<span id="cb12-15">  }</span>
-<span id="cb12-16"></span>
-<span id="cb12-17">  default_ua <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"R (%s)"</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getRversion</span>(), R.version<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>platform, R.version<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>arch, R.version<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>os))</span>
-<span id="cb12-18"></span>
-<span id="cb12-19">  instruction_template <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'You must configure your HTTP user agent in R to install binary packages.</span></span>
-<span id="cb12-20"></span>
-<span id="cb12-21"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">In your site-wide startup file (Rprofile.site) or user startup file (.Rprofile), add:</span></span>
-<span id="cb12-22"></span>
-<span id="cb12-23"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;"># Set default user agent</span></span>
-<span id="cb12-24"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">%s</span></span>
-<span id="cb12-25"></span>
-<span id="cb12-26"></span>
-<span id="cb12-27"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">Then restart your R session and run this diagnostic script again.</span></span>
-<span id="cb12-28"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span></span>
-<span id="cb12-29"></span>
-<span id="cb12-30">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">message</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(</span>
-<span id="cb12-31">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"R installation path: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">R.home</span>()),</span>
-<span id="cb12-32">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"R version: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, R.version.string),</span>
-<span id="cb12-33">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"OS version: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, utils<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sessionInfo</span>()<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>running),</span>
-<span id="cb12-34">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"HTTPUserAgent: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, user_agent),</span>
-<span id="cb12-35">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Download method: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, dl_method),</span>
-<span id="cb12-36">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Download extra args: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, dl_extra_args),</span>
-<span id="cb12-37">    <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">----------------------------</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span></span>
-<span id="cb12-38">  ))</span>
-<span id="cb12-39"></span>
-<span id="cb12-40">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (dl_method <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"libcurl"</span>) {</span>
-<span id="cb12-41">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">grepl</span>(default_ua, user_agent, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fixed =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">||</span></span>
-<span id="cb12-42">        (<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getRversion</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"3.6.0"</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;&amp;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">substr</span>(user_agent, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"R ("</span>)) {</span>
-<span id="cb12-43">      config <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'options(HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])))'</span></span>
-<span id="cb12-44">      <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">message</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(instruction_template, config))</span>
-<span id="cb12-45">      <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">invisible</span>())</span>
-<span id="cb12-46">    }</span>
-<span id="cb12-47">  } <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">else</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (dl_method <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"curl"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"wget"</span>)) {</span>
-<span id="cb12-48">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">grepl</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--header </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">User-Agent: %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>, default_ua), dl_extra_args, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fixed =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)) {</span>
-<span id="cb12-49">      ua_arg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"sprintf(</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">--header </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\\\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">User-Agent: R (%s)</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\\\"\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">, paste(getRversion(), R.version[</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">platform</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">], R.version[</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">arch</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">], R.version[</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">os</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\"</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">]))"</span></span>
-<span id="cb12-50">      <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (dl_extra_args <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span>) {</span>
-<span id="cb12-51">        config <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"options(download.file.extra = %s)"</span>, ua_arg)</span>
-<span id="cb12-52">      } <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">else</span> {</span>
-<span id="cb12-53">        config <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"options(download.file.extra = paste(%s, %s))"</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">shQuote</span>(dl_extra_args), ua_arg)</span>
-<span id="cb12-54">      }</span>
-<span id="cb12-55">      <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">message</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sprintf</span>(instruction_template, config))</span>
-<span id="cb12-56">      <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">return</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">invisible</span>())</span>
-<span id="cb12-57">    }</span>
-<span id="cb12-58">  }</span>
-<span id="cb12-59"></span>
-<span id="cb12-60">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">message</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Success! Your user agent is correctly configured."</span>)</span>
-<span id="cb12-61">})</span></code></pre></div>
-</details>
-</section>
-</section>
-<section id="configuration-on-workbench-for-r-repository-using-run.r-programmatically-setting-the-repository-location" class="level2">
-<h2 class="anchored" data-anchor-id="configuration-on-workbench-for-r-repository-using-run.r-programmatically-setting-the-repository-location">Configuration on Workbench for R repository using run.R / Programmatically setting the repository location</h2>
-<p>Instead of the above, a run.R file can be used to programmatically set the repository and library location for users. This is commonly used in validated workflows, where the additional oversight is critical.</p>
-<p>Example created by Michael <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/r-session-complete/jammy/scripts/run.R">here</a>.</p>
-</section>
-</section>
-<section id="scenarios" class="level1">
-<h1>Scenarios</h1>
-<section id="scenario-1-setting-up-a-shared-site-library-on-workbench" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-1-setting-up-a-shared-site-library-on-workbench">Scenario 1: Setting up a shared site library on Workbench</h2>
-<p>The <a href="https://solutions.posit.co/envs-pkgs/environments/shared/">shared site library</a> is specific to an installed version of R. For example for R version <code>4.3.2</code> installed to: <code>/opt/R/4.3.2/lib/R/library</code>:</p>
-<ol type="1">
-<li>Edit the Rprofile.site file to set the repository URL</li>
-</ol>
-<pre><code># /opt/R/4.3.2/etc/Rprofile.site
-local({
-  options(repos = c(CRAN = "https://r-pkgs.example.com/cran/128"))
-})</code></pre>
-<ol start="2" type="1">
-<li><p>(optional) The default site library can be used, at <code>R_HOME/site-library</code> (in this case <code>/opt/R/3.4.4/lib/R/library</code>), or a site library can be set up by setting <code>.Library.site</code> in <code>R_HOME/etc/Rprofile.site</code>. Multiple library locations can be set up to be used.</p></li>
-<li><p>Run R as the root/admin account and install all desired packages</p></li>
-</ol>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Multiple packages can be installed at the same time like this: </span></span>
-<span id="cb14-2">export R_VERSION<span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>.<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3.2</span></span>
-<span id="cb14-3"></span>
-<span id="cb14-4"><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>opt<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>R<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">$</span>{R_VERSION}<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>bin<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>R</span>
-<span id="cb14-5"></span>
-<span id="cb14-6">sudo <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>opt<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>R<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">$</span>{R_VERSION}<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>bin<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>Rscript <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>e <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'install.packages(c("haven","forcats","readr","lubridate","shiny", "DBI", "odbc", "rvest", "plotly","rmarkdown", "rsconnect","pins","png","tidyverse", "Rcpp"), repos = "http://cran.us.r-project.org")'</span></span>
-<span id="cb14-7"></span>
-<span id="cb14-8"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">q</span>()</span></code></pre></div>
-<ol start="4" type="1">
-<li>Users access packages on the system (without needing to install)</li>
-</ol>
-<p>When using a shared library, the ability for users to change repository settings and package installation can be disabled:</p>
-<pre><code># /etc/rstudio/rsession.conf
-allow-r-cran-repos-edit=0
-allow-package-installation=0</code></pre>
-</section>
-<section id="scenario-2-setting-up-a-project-to-use-renv" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-2-setting-up-a-project-to-use-renv">Scenario 2: Setting up a project to use renv</h2>
-<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># install renv</span></span>
-<span id="cb16-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">install.package</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"renv"</span>) </span>
-<span id="cb16-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(renv)</span>
-<span id="cb16-4"></span>
-<span id="cb16-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># activate the project as an renv project</span></span>
-<span id="cb16-6">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">activate</span>()</span>
-<span id="cb16-7"></span>
-<span id="cb16-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># generate the renv.lock file </span></span>
-<span id="cb16-9">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>()</span>
-<span id="cb16-10"></span>
-<span id="cb16-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># check the status of renv </span></span>
-<span id="cb16-12">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">status</span>()</span>
-<span id="cb16-13"></span>
-<span id="cb16-14"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># On a separate system the snapshot can be used to install the specific packages and versions </span></span>
-<span id="cb16-15">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>() </span>
-<span id="cb16-16"></span>
-<span id="cb16-17"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Restore a project with an explicit repository URL, note that this does not update the renv.lock file, it will need to be manually edited</span></span>
-<span id="cb16-18">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"COLORADO"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://colorado.posit.co/rspm/all/latest"</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb16-19"></span>
-<span id="cb16-20"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Add additional logging</span></span>
-<span id="cb16-21"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">renv.download.trace =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
-</section>
-<section id="scenario-3-determining-the-root-package-that-is-causing-a-failing-dependency" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-3-determining-the-root-package-that-is-causing-a-failing-dependency">Scenario 3: Determining the root package that is causing a failing dependency</h2>
-<p>For example, error message:</p>
-<blockquote class="blockquote">
-<p>2024/05/17 9:24:10 AM: Error in dyn.load(file, DLLpath = DLLpath, …) : 2024/05/17 9:24:10 AM: unable to load shared object ‘/opt/rstudio-connect/mnt/app/packrat/lib/x86_64-pc-linux-gnu/4.3.2/magick/libs/magick.so’: 2024/05/17 9:24:10 AM: libMagick++-6.Q16.so.8: cannot open shared object file: No such file or directory 2024/05/17 9:24:10 AM: Calls: loadNamespace -&gt; library.dynam -&gt; dyn.load</p>
-</blockquote>
-<p>We can look through our project repository and see that the <code>magick</code> package isn’t directly being called. So the question is, which package is calling it as dependency?</p>
-<p>The easiest way to look up the dependency is to open the renv.lock file and find which package has it listed as a dependency.</p>
-<p>Some other tricks that might be useful are:</p>
-<ul>
-<li>We can use renv to look at top level dependencies: <code>renv::dependencies()</code></li>
-<li>We can use base R to look up package dependencies: <code>tools::package_dependencies("leaflet", recursive = TRUE)[[1]]</code></li>
-<li>Renv can be told to use pak for package installation with: <code>RENV_CONFIG_PAK_ENABLED = TRUE</code></li>
-<li>Check that it set with: <code>Sys.getenv('renv.config.pak.enabled')</code></li>
-<li>We can use pak to look up all package dependencies in a tree format: <code>pak::pkg_deps_tree("tibble")</code></li>
-<li>We can also get more details about the packages with: <code>pak::pak_sitrep()</code></li>
-<li>If an error is encountered, we may need to enable the package pak to work with renv (or be patient and wait a couple minutes after installing pak). There is a useful git issue discussing this <a href="https://github.com/r-lib/pak/issues/325">here</a>.</li>
-</ul>
-<p>We can then clean up the project and remove packages that are installed, but no longer referenced in the project source, with <code>renv::clean()</code> and save that to the renv lock file with <code>renv::snapshot()</code>. Don’t forget to update your manifest.json file if this is a project being published to Connect with <code>rsconnect::writeManifest()</code>.</p>
-</section>
-<section id="scenario-4-upgrading-a-project-using-renv-from-r-4.1-to-r-4.4" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-4-upgrading-a-project-using-renv-from-r-4.1-to-r-4.4">Scenario 4: Upgrading a project using renv from R 4.1 to R 4.4</h2>
-<blockquote class="blockquote">
-<p>Why is this relevant? <a href="https://support.posit.co/hc/en-us/articles/23170092899607-CVE-2024-27322-R-bitrary-Code-Execution">R CVE detection, vulnerability removed with R 4.4</a></p>
-</blockquote>
-<p>What is recommended: For each project, individually capture the requirements with renv. Change the R version and use the renv.lock file to install the captured requirements for the new R version. Perform tests, updating code and package versions as needed.</p>
-<p>What is not recommended: An in-place upgrading. Meaning, we do not recommend removing existing R versions and forcing all projects to use R 4.4. It is likely that code will break and will need developer work to make compatible with the new R version.</p>
-</section>
-<section id="scenario-5-os-migration-for-individual-r-projects-using-renv" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-5-os-migration-for-individual-r-projects-using-renv">Scenario 5: OS migration for individual R projects using renv</h2>
-<p>Refer to <a href="https://docs.posit.co/how-to-guides/upgrade-os-and-product/phase2-migrate/?h=migrat#workbench-post-migration">here</a></p>
-<p>All packages will need to be rebuilt.</p>
-<p>These two locations in particular, the user home directories and global R or Python directories, will likely need to be flushed and rebuilt:</p>
-<ul>
-<li><code>~/R</code></li>
-<li><code>~/.local/lib/python3.*</code></li>
-</ul>
-<p>Reference <a href="https://gist.github.com/edavidaja/5996ffeb042df2642c77c065c07f023d">this script</a> from David which programmatically reinstalls all packages installed into user home directories, or the global R or Python directories.</p>
-<p>Rebuild renv:</p>
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Delete existing libraries</span></span>
-<span id="cb17-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">unlink</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"renv/library"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">recursive=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb17-3"></span>
-<span id="cb17-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Restart R session</span></span>
-<span id="cb17-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">.rs.restartR</span>()</span>
-<span id="cb17-6"></span>
-<span id="cb17-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Change anything that is needed, repository URL, etc</span></span>
-<span id="cb17-8"></span>
-<span id="cb17-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Re-install libraries</span></span>
-<span id="cb17-10">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
-<p>Rebuild venv:</p>
-<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Activate existing venv</span></span>
-<span id="cb18-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">source</span> .venv/bin/activate</span>
-<span id="cb18-3"></span>
-<span id="cb18-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Capture all installed packages</span></span>
-<span id="cb18-5"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">python</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> requirements-freeze.txt</span>
-<span id="cb18-6"></span>
-<span id="cb18-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Deactivate and delete</span></span>
-<span id="cb18-8"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">deactivate</span></span>
-<span id="cb18-9"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rm</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-rf</span> .venv/</span>
-<span id="cb18-10"></span>
-<span id="cb18-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Change anything that is needed, repository URL, etc</span></span>
-<span id="cb18-12"></span>
-<span id="cb18-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create a new virtual environment</span></span>
-<span id="cb18-14"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">python</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-m</span> venv .venv</span>
-<span id="cb18-15"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">source</span> .venv/bin/activate </span>
-<span id="cb18-16"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">python</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">--upgrade</span> pip wheel setuptools</span>
-<span id="cb18-17"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">python</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-r</span> requirements-freeze.txt</span></code></pre></div>
-<p>For Connect, the content runtimes will need to be cleared and rebuilt. This can be <a href="https://docs.posit.co/connect/admin/server-management/runtime-caches/#workflow">done pre-emptively</a>.</p>
-<p>Delete:</p>
-<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Enumerate the caches known to your server.</span></span>
-<span id="cb19-2">rsconnect system caches list \</span>
-<span id="cb19-3">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>server https<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">//</span>connect.example.org<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3939</span> \</span>
-<span id="cb19-4">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key my<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key</span>
-<span id="cb19-5"></span>
-<span id="cb19-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Validate cache targeted for deletion.</span></span>
-<span id="cb19-7">rsconnect system caches delete \</span>
-<span id="cb19-8">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>server https<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">//</span>connect.example.org<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3939</span> \</span>
-<span id="cb19-9">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key my<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key \</span>
-<span id="cb19-10">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>language Python \</span>
-<span id="cb19-11">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>version <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>.<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9.5</span> \</span>
-<span id="cb19-12">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>dry<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>run</span>
-<span id="cb19-13"></span>
-<span id="cb19-14"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Delete one cache.</span></span>
-<span id="cb19-15">rsconnect system caches delete \</span>
-<span id="cb19-16">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>server https<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">//</span>connect.example.org<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3939</span> \</span>
-<span id="cb19-17">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key my<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key \</span>
-<span id="cb19-18">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>language Python \</span>
-<span id="cb19-19">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>version <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>.<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9.5</span></span></code></pre></div>
-<p>Rebuild:</p>
-<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Enumerate every "published" content item and save its GUID.</span></span>
-<span id="cb20-2">rsconnect content search \</span>
-<span id="cb20-3">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>server https<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">//</span>connect.example.org<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3939</span> \</span>
-<span id="cb20-4">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key my<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key \</span>
-<span id="cb20-5">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>published <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> jq <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'.[].guid'</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> guids.txt</span>
-<span id="cb20-6"></span>
-<span id="cb20-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Queue each GUID for build.</span></span>
-<span id="cb20-8">xargs printf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'-g %s</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> guids.txt <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span> xargs rsconnect content build add \</span>
-<span id="cb20-9">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>server https<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">//</span>connect.example.org<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3939</span> \</span>
-<span id="cb20-10">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key my<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key</span>
-<span id="cb20-11"></span>
-<span id="cb20-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Build each queued content item.</span></span>
-<span id="cb20-13">rsconnect content build run \</span>
-<span id="cb20-14">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>server https<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">//</span>connect.example.org<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3939</span> \</span>
-<span id="cb20-15">    <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">--</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key my<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>api<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>key</span></code></pre></div>
-</section>
-<section id="scenario-6-changing-the-project-repository-url" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-6-changing-the-project-repository-url">Scenario 6: Changing the project repository URL</h2>
-<p>Often the package repository is set to a specific source URL. This can be due to it being within your network, or so that you are getting binaries for a specific OS version, etc.</p>
-<p>Using the <code>RENV_CONFIG_REPOS_OVERRIDE</code> setting:</p>
-<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'repos'</span>)</span>
-<span id="cb21-2"></span>
-<span id="cb21-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Set the override as a one off </span></span>
-<span id="cb21-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RENV_CONFIG_REPOS_OVERRIDE"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"COLORADO"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://colorado.posit.co/rspm/all/latest"</span>)) </span>
-<span id="cb21-5"></span>
-<span id="cb21-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check that it set </span></span>
-<span id="cb21-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RENV_CONFIG_REPOS_OVERRIDE"</span>)</span>
-<span id="cb21-8"></span>
-<span id="cb21-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Turn on debug logging so we can see more information about where packages are coming from and verify it's using the correct URL</span></span>
-<span id="cb21-10"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">renv.download.trace =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb21-11"></span>
-<span id="cb21-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Rebuild the environment using that URL</span></span>
-<span id="cb21-13">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) </span>
-<span id="cb21-14"></span>
-<span id="cb21-15"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#Override only applies during restore, and won't update the renv.lock file, so either manually update the renv.lock file with the appropriate URLor using renv::snapshot(repos = "")</span></span></code></pre></div>
-<p>Using the <code>repos</code> setting during rebuild:</p>
-<div class="sourceCode" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Rebuild </span></span>
-<span id="cb22-2">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"COLORADO"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://colorado.posit.co/rspm/all/latest"</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb22-3"></span>
-<span id="cb22-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Snapshot s the URL change is reflected</span></span>
-<span id="cb22-5">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"COLORADO"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://colorado.posit.co/rspm/all/latest"</span>)) </span></code></pre></div>
-<p>Changing it directly in the renv.lock file:</p>
-<div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'repos'</span>)</span>
-<span id="cb23-2"></span>
-<span id="cb23-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Either manually update the renv.lock file with the appropriate URL or using</span></span>
-<span id="cb23-4">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"COLORADO"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://colorado.posit.co/rspm/all/latest"</span>)) </span>
-<span id="cb23-5"></span>
-<span id="cb23-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Rebuild the environment using that URL</span></span>
-<span id="cb23-7">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) </span></code></pre></div>
-</section>
-<section id="scenario-7-recovering-an-old-project-that-didnt-have-an-renv-and-isnt-working-with-latest-r-package-versions" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-7-recovering-an-old-project-that-didnt-have-an-renv-and-isnt-working-with-latest-r-package-versions">Scenario 7: Recovering an old project that didn’t have an renv and isn’t working with latest R, package versions</h2>
-<p>Use the snapshot date option with package manager to “guess” when the environment would have been built with renv so that package versions can be individually tweaked until the project works. Use the <code>renv::revert</code> feature with version control to update the packages with the ability to downgrade as needed.</p>
-</section>
-<section id="scenario-8-going-between-os-on-the-same-workbench-system-using-slurm-singularity-with-a-renv-project" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-8-going-between-os-on-the-same-workbench-system-using-slurm-singularity-with-a-renv-project">Scenario 8: Going between OS on the same Workbench system using slurm / singularity with a renv project</h2>
-<p>With the interaction between renv and package manager, as well as the additions with recognition from renv when the OS and R version has changed, things should just work magically as long as the project is configured to use these pieces:</p>
-<ul>
-<li>renv</li>
-<li>package manager (binaries enabled)</li>
-</ul>
-<p>On a system that has been configured to use slurm with singularity images (that are different OS’s) we can run these lines to get a feel for what is going on:</p>
-<div class="sourceCode" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Turn on debug logging so we can see more information about where packages are coming from and verify it's using the correct URL</span></span>
-<span id="cb24-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">renv.download.trace =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb24-3"></span>
-<span id="cb24-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check the default repository URL</span></span>
-<span id="cb24-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'repos'</span>)</span>
-<span id="cb24-6"></span>
-<span id="cb24-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check the OS version</span></span>
-<span id="cb24-8"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"cat /etc/os-release"</span>)</span>
-<span id="cb24-9"></span>
-<span id="cb24-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check the details of our singularity environment</span></span>
-<span id="cb24-11"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">system</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"env | grep SINGULARITY"</span>)</span>
-<span id="cb24-12"></span>
-<span id="cb24-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check that auto-path prefix re-writing is set</span></span>
-<span id="cb24-14"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RENV_PATHS_PREFIX_AUTO"</span>)</span>
-<span id="cb24-15"></span>
-<span id="cb24-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># We can attempt to set the URL to a specific binary, when we snapshot it will update the lock file to have the generic URL</span></span>
-<span id="cb24-17">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RSPM"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/cran/__linux__/centos8/latest"</span>)) </span>
-<span id="cb24-18"></span>
-<span id="cb24-19"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># We can attempt to set the URL to a specific binary, when we snapshot it will update the lock file to have the generic URL</span></span>
-<span id="cb24-20">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RSPM"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/cran/__linux__/jammy/latest"</span>)) </span>
-<span id="cb24-21"></span>
-<span id="cb24-22"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Update the renv to use a source URL as RSPM </span></span>
-<span id="cb24-23">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RSPM"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/cran/latest"</span>)) </span>
-<span id="cb24-24"></span>
-<span id="cb24-25"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># We can also manually set the repo outside of renv this way, for example to successfully download renv</span></span>
-<span id="cb24-26"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">repos=</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">CRAN=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://cran.r-project.org"</span>))</span>
-<span id="cb24-27"></span>
-<span id="cb24-28"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Rebuild the environment using that URL</span></span>
-<span id="cb24-29">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) </span></code></pre></div>
-<p>Inside the renv lock file we might see a couple different things:</p>
-<pre><code>    "Repositories": [
-      {
-        "Name": "CRAN",
-        "URL": "https://packagemanager.posit.co/cran/__linux__/centos8/latest"
-      },</code></pre>
-<p>This will cause problems and will tell renv to install the wrong version of packages for the wrong OS.</p>
-<p>If we try to snapshot a binary repository URL with <code>renv::snapshot(repos = c("RSPM" = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))</code> then we will see the renv.lock will be updated to:</p>
-<pre><code>    "Repositories": [
-      {
-        "Name": "RSPM",
-        "URL": "https://packagemanager.posit.co/cran/latest"
-      }</code></pre>
-<p>This correction from the binary URL to the base URL will happen regardless of whether the OS matches the one we are using or not.</p>
-<p>When we install a package we will see that it is downloading the binary. This is the magic of <code>RENV_PATHS_PREFIX_AUTO</code>! This happens regardless of whether our package source is <code>CRAN</code> or <code>RSPM</code>.</p>
-<p>We can test what the outputs are for each scenario:</p>
-<ul>
-<li>Before a project has been initialized</li>
-<li>Once a project has been initialized, with renv</li>
-<li>Closing the project and re-opening it with a different image (different OS) and restoring packages (‘renv::restore(rebuild=TRUE)’)</li>
-</ul>
-<p>The auto-path prefix re-writing is really powerful. This means that, for example, upgrading to a new version of an OS will automatically signal to renv that new library + cache directories will be required. The caveats to know are:</p>
-<ul>
-<li>Starting with 4.4, renv automatically uses a platform prefix for library paths on linux.</li>
-<li>R versions below this may need to have the paths prefix set (for example for just the session with <code>Sys.setenv("RENV_PATHS_PREFIX_AUTO" = TRUE)</code>, though most likely this should be set at the user or global level).</li>
-</ul>
-<p>We can set auto-path prefix re-writing at the user level by adding <code>RENV_PATHS_PREFIX_AUTO = TRUE</code> into the user r environ file:</p>
-<div class="sourceCode" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(usethis)</span>
-<span id="cb27-2">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_environ</span>() </span></code></pre></div>
-</section>
-<section id="scenario-9-comparing-two-renv-projects" class="level2">
-<h2 class="anchored" data-anchor-id="scenario-9-comparing-two-renv-projects">Scenario 9: Comparing two renv projects</h2>
-<p>Reference: <a href="https://forum.posit.co/t/compare-two-renv-projects/145574" class="uri">https://forum.posit.co/t/compare-two-renv-projects/145574</a></p>
-<div class="sourceCode" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(jsonlite)</span>
-<span id="cb28-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidyverse)</span>
-<span id="cb28-3">my_renvlock <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">fromJSON</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"renv.lock"</span>)</span>
-<span id="cb28-4"></span>
-<span id="cb28-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">map_dfr</span>(my_renvlock<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>Packages, <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">enframe</span>(.) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb28-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(name <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Package"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Version"</span>)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb28-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">value =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.character</span>(value)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb28-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_wider</span>())</span></code></pre></div>
-</section>
-</section>
-<section id="common-issues-and-troubleshooting" class="level1">
-<h1>Common issues and troubleshooting</h1>
-<section id="package-installation-errors-on-workbench" class="level2">
-<h2 class="anchored" data-anchor-id="package-installation-errors-on-workbench">Package installation errors on Workbench</h2>
-<p>Here’s an example error message that occurred during package installation inside Workbench (<code>install.packages(askpass)</code>):</p>
-<blockquote class="blockquote">
-<p>* installing <em>binary</em> package ‘askpass’ … cp: cannot open ‘./libs/askpass.so’ for reading: Operation not permitted /usr/bin/gtar: You may not specify more than one ‘-Acdtrux’, ‘–delete’ or ‘–test-label’ option Try ‘/usr/bin/gtar –help’ or ‘/usr/bin/gtar –usage’ for more information. /usr/bin/gtar: This does not look like a tar archive /usr/bin/gtar: Exiting with failure status due to previous errors</p>
-</blockquote>
-<p>A good first trouble shooting step is to SSH on the server and open an R session as root and attempt to install the same package. This helps to rule out where the issue is coming from, the global R configuration, the server, or a specific user issue or something with the Workbench configuration. Create a R session after SSH-ing into the server with <code>/opt/R/${R_VERSION}/bin/R</code></p>
-<section id="where-to-start" class="level3">
-<h3 class="anchored" data-anchor-id="where-to-start">Where to start</h3>
-<p>Get the system information: <code>Sys.info()</code></p>
-<p>Get session details: <code>sessionInfo()</code></p>
-</section>
-<section id="problems-with-pak" class="level3">
-<h3 class="anchored" data-anchor-id="problems-with-pak">Problems with pak</h3>
-<p>Get details about pak (if used): <code>pak::pak_sitrep()</code></p>
-<p>Check if <a href="https://rstudio.github.io/renv/reference/config.html#renv-config-pak-enabled">renv has been configured to use pak</a>: <code>Sys.getenv('renv.config.pak.enabled')</code></p>
-</section>
-<section id="problems-with-renv-where-to-start" class="level3">
-<h3 class="anchored" data-anchor-id="problems-with-renv-where-to-start">Problems with renv : where to start</h3>
-<p>Can they provide a renv diagnostic? It is generated by running this: <code>renv::diagnostics()</code>.</p>
-</section>
-<section id="problems-with-renv-cache-location" class="level3">
-<h3 class="anchored" data-anchor-id="problems-with-renv-cache-location">Problems with renv : cache location</h3>
-<p>Check the location of the renv cache:</p>
-<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>()</span>
-<span id="cb29-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'RENV_PATHS_CACHE'</span>)</span>
-<span id="cb29-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'renv.config.external.libraries'</span>)</span>
-<span id="cb29-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'renv.download.trace'</span>)</span>
-<span id="cb29-5">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span>paths<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cache</span>()</span>
-<span id="cb29-6"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'RENV_PATHS_PREFIX_AUTO'</span>)</span></code></pre></div>
-<p>Make sure that it is located to a writeable location (if it is a mount, see the note about file mounts below, this could be a source of issues):</p>
-<p><code>system('namei -l /rsspdata/common/renv_cache/renv/v5/R-3.6/x86_64-pc-linux-gnu')</code></p>
-<p>Check that the renv cache location matches the library locations: <code>.libPaths()</code></p>
-<p>By default packages are installed into the global cache at <code>~/.cache/R/renv/</code> and symlinked from the users cache within the project at <code>~/renv/library/</code>.</p>
-<p>Are they using a <a href="https://rstudio.github.io/renv/articles/package-install.html?q=PATH#shared-cache-locations">shared renv cache</a>, or an <a href="https://rstudio.github.io/renv/reference/config.html#renv-config-external-libraries">external library</a>,</p>
-<p>Do they know if they’ve implemented settings in either of these, and could they share the contents?</p>
-<ul>
-<li><a href="https://packagemanager.rstudio.com/__docs__/user/configure-r/#configure-base-r">Rprofile.site</a> : The <code>RProfile.site</code> file is typically located at <code>etc/Rprofile.site</code></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">Renviron.site</a> : The <code>Renviron.site</code> file is specific to the R installation (in this case I’m interested in if it exists for R 4.3 and R 3.6), typically located at <code>file.path(R.home("etc"), "Renviron.site")</code>.</li>
-<li>Check if an external library is referenced in the environment: <code>options('renv.config.external.libraries')</code></li>
-</ul>
-<p>Is the goal to use a <a href="https://rstudio.github.io/renv/articles/package-install.html?q=PATH#shared-cache-locations">shared renv cache</a> location? There are a couple caveats with shared cache’s that can make them tricky. (1) cache permissions can be set with ACL’s, needing admin oversight to make sure are set correctly, (2) packages in the cache are owned by the requesting user, unless the RENV_CACHE_USER option is set. When set, renv will attempt to run <code>chown -R &lt;package&gt; &lt;user&gt;</code> to update cache ownership after the package has been copied into the cache.</p>
-<p>If the desired behavior is to have a <a href="https://rstudio.github.io/renv/articles/package-install.html?q=PATH#shared-cache-locations">shared renv cache</a> then these two settings will likely need to be added to the project .Renviron, user .Renviron, or site Renviron.site file:</p>
-<ul>
-<li><a href="https://rstudio.github.io/renv/articles/package-install.html#cache-location">RENV_PATHS_CACHE</a> : Path location for a cache shared across multiple users</li>
-<li><a href="https://rstudio.github.io/renv/articles/package-install.html?q=PATH#shared-cache-locations">RENV_CACHE_USER</a> : When using a shared cache, renv can re-assign ownership of the cache’d package to a separate user account</li>
-</ul>
-<p>I’d be curious, if it’s possible for them, to see if they are able to use R 4.4, or to set that parameter <code>RENV_PATHS_PREFIX_AUTO</code> to true (for example for just the session with <code>Sys.setenv("RENV_PATHS_PREFIX_AUTO" = TRUE)</code>) using their current version of R, and repeat the steps of installing a package:</p>
-<blockquote class="blockquote">
-<p>Starting with R 4.4.0, renv automatically uses a platform prefix for library paths on linux (the equivalent to setting <code>RENV_PATHS_PREFIX_AUTO = TRUE</code>). This means that, for example, upgrading to a new version of an OS will automatically signal to renv that new library + cache directories will be required.</p>
-</blockquote>
-<p>Of course, they could also try this for installing the package, bypassing the cache, and see if it works (but I’m worried that there is a ghost setting somewhere that needs to be removed so that issues don’t keep popping up):</p>
-<pre class="plaintext"><code># install a package, bypassing the cache
-renv::install("&lt;package&gt;", rebuild = TRUE)
-
-# restore packages from the lockfile, bypassing the cache
-renv::restore(rebuild = TRUE)</code></pre>
-</section>
-<section id="problems-with-renv-other" class="level3">
-<h3 class="anchored" data-anchor-id="problems-with-renv-other">Problems with renv : other</h3>
-<p>Check:</p>
-<ul>
-<li>Are you running the latest renv? If not, upgrade</li>
-<li>Add additional logging: <code>options(renv.download.trace = TRUE)</code></li>
-<li>Take a diagnostic: <code>renv::diagnostics()</code></li>
-</ul>
-<p>If you are having particular issue with a package and it keeps being pulled in from the cache then doing a complete purge and reinstall can be useful:</p>
-<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">purge</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"stringr"</span>)</span>
-<span id="cb31-2">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">purge</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"stringi"</span>)</span>
-<span id="cb31-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"stringr"</span>)</span></code></pre></div>
-<p><code>renv::purge</code> removes packages completely from the package cache (which may be shared across projects) rather than just removing the package from the project which is what <code>renv::remove</code> does. This can be useful if a package which had previously been installed in the cache has become corrupted or unusable, and needs to be re-installed.</p>
-<p>Follow these steps to “flush” and rebuild the renv environment, without losing the important parts of your renv.lock that are defining the R version and package versions:</p>
-<div class="sourceCode" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">snapshot</span>()</span>
-<span id="cb32-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Make the appropriate changes (for example, changing OS) </span></span>
-<span id="cb32-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Update the renv.lock file manually to reflect any needed changes (for example, changing the repository URL) </span></span>
-<span id="cb32-4">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">deactivate</span>()</span>
-<span id="cb32-5">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">activate</span>()</span>
-<span id="cb32-6">renv<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">restore</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rebuild=</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) </span></code></pre></div>
-<p>Check that the packages either installed into the global cache at <code>~/.cache/R/renv/</code> or the users cache within the project at <code>~/renv/library/</code>. The folder structure will give some clues for whether source, binaries were installed, and which OS and R version they were installed for if specified.</p>
-</section>
-<section id="problems-with-packages-not-persisting" class="level3">
-<h3 class="anchored" data-anchor-id="problems-with-packages-not-persisting">Problems with packages not persisting</h3>
-<p>Is this on a cloud vendor? IE sagemaker, google workstations, azureml? Check that the package repository location is being saved to the mounted drive. If it is saved to the general OS that is ephemeral it will be lost when the session is spun down. This also applies for things like git credentials.</p>
-</section>
-<section id="incorrect-corrupted-r-installation" class="level3">
-<h3 class="anchored" data-anchor-id="incorrect-corrupted-r-installation">Incorrect / corrupted R installation</h3>
-<p>Check for an incorrect R installation for the OS, or a R installation that has gotten corrupted. An easy way to test this is to install a new R version, making sure to closely follow <a href="https://docs.posit.co/resources/install-r/">the instructions</a> as well as verifying the OS version.</p>
-</section>
-<section id="incorrect-package-repository-source-url-for-the-particular-system-os" class="level3">
-<h3 class="anchored" data-anchor-id="incorrect-package-repository-source-url-for-the-particular-system-os">Incorrect package repository source URL for the particular system OS</h3>
-<p>When R installs a binary package, it doesn’t actually check if the package can be loaded after installation, which is different from source packages. So it is unfortunately possible to install a binary package only to find out later that it can’t actually be loaded.</p>
-<p>Check the URL that the user is installing from: <code>options('repos')</code></p>
-<p>Temporarily point the repository to global CRAN and check if the packages will successfully install. For example by running this: <code>options(repos=c(CRAN="https://cran.r-project.org"))</code> and then installing any package with <code>install.packages("ggplot2")</code></p>
-<p>Check in <code>/etc/rstudio/rsession.conf</code> if there is anything that would set the library location, for example <code>r-libs-user=~/R/library</code>.</p>
-<p>It may also be useful to verify both the OS you are currently useing as well as checking that the repository you are pointing towards is using the correct OS if it is pulling in the binaries.</p>
-<p>For debian/ubuntu distributions:</p>
-<div class="sourceCode" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">lsb_release</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-a</span></span></code></pre></div>
-<p>For other distributions (more broadly cross-linux compatible command):</p>
-<div class="sourceCode" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cat</span> /etc/os-release</span></code></pre></div>
-</section>
-<section id="users-lacking-readwrite-permissions-to-their-home-directory" class="level3">
-<h3 class="anchored" data-anchor-id="users-lacking-readwrite-permissions-to-their-home-directory">Users lacking read/write permissions to their home directory</h3>
-<p>Check the home directory permissions on <code>/home/username/</code>. For example with <code>namei -l /home/username/</code>.</p>
-<p>If useful, could try recursively chown-ing the directory with the user experiencing the issue and <code>chmod 750</code> to make sure there is access.</p>
-<p>This can commonly happen after a migration from one server to another, if the correct permissions weren’t correctly carried over. This is why we commonly recommend using rsync with the -a flag for transfer any files / directories. This syncs directories recursively and preserve symbolic links, groups, ownership, and permissions. Additionally, rsync needs to be used in root mode in order to completely move the various software and home directory components as it includes files with restrictive read and write permissions.</p>
-<p>For example, the permissions should look something like: <code>-rwx-r--r--</code></p>
-</section>
-<section id="users-lacking-permissions-to-.libs" class="level3">
-<h3 class="anchored" data-anchor-id="users-lacking-permissions-to-.libs">Users lacking permissions to ./libs</h3>
-<p>Check the permissions on <code>./libs/</code>. For example with <code>namei -l ./libs</code> and <code>ls -la ./libs</code></p>
-</section>
-<section id="incorrect-pam-configuration-for-users" class="level3">
-<h3 class="anchored" data-anchor-id="incorrect-pam-configuration-for-users">Incorrect PAM configuration for users</h3>
-<p>Check the output of <code>sudo getent passwd username</code></p>
-<p>From a workbench session the output of the environment, <code>Sys.getenv()</code> and compare between a Workbench session and logged into a R session as root on the server (after SSH-ing in)</p>
-<p>From an SSH session as root check the outputs of the user verification commands: <code>sudo /usr/lib/rstudio-server/bin/pamtester --verbose &lt;session-profile&gt; &lt;user&gt; authenticate acct_mgmt setcred open_session</code></p>
-<p>For example this command will likely look like: <code>sudo /usr/lib/rstudio-server/bin/pamtester --verbose rstudio-session username authenticate acct_mgmt setcred open_session</code></p>
-<p>Check for any umask or mask lines used during user provisioning, in the <code>/etc/sssd/sssd.conf</code> file</p>
-</section>
-<section id="server-hardening" class="level3">
-<h3 class="anchored" data-anchor-id="server-hardening">Server hardening</h3>
-<p>Another thing to check is whether <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/changing-selinux-states-and-modes_using-selinux">SELinux is enabled on the system</a>. Check the mode with <code>getenforce</code></p>
-<p>This can result in user specific errors, in that case compare the SELinux context for a user that has successfully package installations to the one that is having errors.</p>
-<p>Often the following command will work to fix SELinux context issues: <code>restorecon -Rv /home/users/username</code></p>
-<p>Great article from our support team discussing <a href="https://support.posit.co/hc/en-us/articles/4579112985751-SELinux-a-quick-primer-and-troubleshooter">how to use selinux</a></p>
-<p>Disable SELINUX (RHEL only): <code>setenforce 0 &amp;&amp; sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config</code></p>
-<p>Check for <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/security_hardening/assembly_installing-the-system-in-fips-mode_security-hardening">FIPS being enabled</a>: <code>fips-mode-setup --check</code></p>
-<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/security_hardening/assembly_installing-the-system-in-fips-mode_security-hardening">This article from redhat on FIPS mode</a> is also very useful.</p>
-</section>
-<section id="mounted-share-drive" class="level3">
-<h3 class="anchored" data-anchor-id="mounted-share-drive">Mounted share drive</h3>
-<p>Check if <code>/home</code> on the server, or is it a network mount (NFS or CIFS). In NFS, for example, there can be the use of access control lists which can impact permissions. Similarly, when working in a system that has a mounted share drive then would want to check that libraries are being written to that share so you get persistence. Typically this means writing to inside the home directory. Check mounted drives with: <code>df -h</code></p>
-<p>Check <code>/etc/fstab</code> to see if the home directories are mounted with <code>noexec</code></p>
-<p>For example, this shows that the home directories were mounted with <code>noexec</code>: <code>/dev/mapper/rhel-home  /home  xfs    defaults,noexec,nosuid,nodev   0 0</code></p>
-<p>This resulted in this error message:</p>
-<pre><code>library(stringi)Error: package or namespace load failed for 'stringi' in dyn.load(file, DLLpath = DLLpath, ...):
-unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':
-  /home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object</code></pre>
-</section>
-<section id="azure-cloud-images" class="level3">
-<h3 class="anchored" data-anchor-id="azure-cloud-images">Azure cloud images</h3>
-<p>The default Azure RHEL images are unfortunately constricted in their ability to do some things.</p>
-</section>
-<section id="slurm" class="level3">
-<h3 class="anchored" data-anchor-id="slurm">Slurm</h3>
-<p>The Slurm service account should have full privileges to the Slurm environment (like killing jobs).</p>
-<p>In regards to not being able to run the diagnostics command, could you please provide the following:</p>
-<ul>
-<li>Enable debug logging by setting enable-debug-logging=1 in /etc/rstudio/launcher.slurm.conf</li>
-<li>Trigger the issue you are experiencing after restarting the launcher.</li>
-<li>Resulting logs will be in: - /var/lib/rstudio-launcher/Slurm/rstudio-slurm-launcher.log</li>
-<li>The Slurm version, which can be found by running sinfo –version</li>
-<li>The installation location of Slurm on the host</li>
-<li>Your /etc/slurm.conf (or equivalent) configuration file</li>
-<li>The output of running sinfo as the Slurm service user configured in /etc/rstudio/launcher.slurm.conf</li>
-<li>Run test job with srun date</li>
-<li>Replace <user> with a valid username of a user that is set up to run Posit - Workbench in your installation, in the commands below:</user></li>
-<li>sudo rstudio-server stop</li>
-<li>sudo rstudio-server verify-installation –verify-user=<user></user></li>
-<li>sudo rstudio-server start</li>
-<li>The output of running sudo rstudio-launcher status</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<ul>
-<li><a href="https://rstudio.github.io/renv/reference/paths.html#sharing-state-across-operating-systems">Sharing state across operating systems</a></li>
-<li><a href="https://rstats.wtf/r-startup">What they forgot to teach you about R</a></li>
-<li><a href="https://rstudio.github.io/renv/reference/config.html#renv-config-repos-override">renv.config.repos.override</a></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf</a></li>
-<li><a href="https://packagemanager.rstudio.com/__docs__/user/configure-r/">Package Manager admin guide: Configuring R Environments</a></li>
-<li><a href="https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html">Workbench admin guide: Rstudio Pro Sessions: Package Installation</a></li>
-<li><a href="https://solutions.posit.co/envs-pkgs/environments/">Reproduceable Environments</a></li>
-<li><a href="https://packagemanager.rstudio.com/__docs__/admin/serving-binaries/#binary-user-agents">R user agent header can be configured</a></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/218730228-Resetting-a-user-s-state-in-the-RStudio-IDE-on-Posit-RStudio-Workbench-RStudio-Server">Reset users state on Workbench</a></li>
-<li><a href="https://support.posit.co/hc/en-us/articles/215733837-Managing-libraries-for-RStudio-Workbench-RStudio-Server">Managing libraries for RStudio Workbench / RStudio Server</a></li>
-<li><a href="https://solutions.posit.co/envs-pkgs/rsw_defaults/">Setting Default Repositories in Workbench</a></li>
-<li><a href="https://rstudio.github.io/r-manuals/r-admin/">R Manuals :: R Installation and Administration</a></li>
-<li>It was discussed in <a href="https://stackoverflow.com/questions/65326540/how-to-change-r-repository-cran-from-renv-lock-to-get-packages-from-an-internal">this stackoverflow post</a> with this example (run from console): `Sys.setenv(“RENV_CONFIG_REPOS_OVERRIDE” = “your_private_package_repository_url”)</li>
-<li>Internal slack thread: <a href="https://positpbc.slack.com/archives/CFLAY27EH/p1715370382325929" class="uri">https://positpbc.slack.com/archives/CFLAY27EH/p1715370382325929</a></li>
-</ul>
-
-
-
-</section>
-
- ]]></description>
-  <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/renv-environments.html</guid>
   <pubDate>Fri, 21 Jun 2024 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>

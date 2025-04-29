@@ -2,7 +2,7 @@
 title: "Mounting drives on a server for Posit Team"
 description: "Various methods and failure modes with mounted drives"
 author: "Lisa"
-date: "2025-04-16"
+date: "2025-04-29"
 format:
   html:
     code-fold: true
@@ -21,11 +21,11 @@ categories:
 
 ## Overview
 
-Workbench (and Connect) will work with the underlying linux system to make resources available to users. This includes things like mounted drives. 
+Workbench and Connect will work with the underlying linux system to make resources available to users. This includes things like mounted drives. 
 
-Workbench doesn't natively mount drives, this isn't done through a config. Drive mounts are done through linux operations. 
+Neither Workbench nor Connect natively mount drives, this isn't done through a config. Drive mounts are done through linux operations. 
 
-### Server/VM
+### NFS
 
 Typically we see this looking like 
 
@@ -43,17 +43,39 @@ It can also involve [fstab](https://www.baeldung.com/linux/network-drive-etc-fst
 
 Some specific situations may have some complexity: specific formats, cloud situations, or verifying NFS export options, but in general the mounting process is much simpler than installing the posit products and configuring them and is the same as what would be done on any linux server. 
 
-For SMB/CIFS this could look like mounting via PAM, discussed here: <https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM>
-
 If running in kubernetes then the mount needs to be added to each job pod and it gets more complicated. 
 
-A linux based forum like [serverfault](https://serverfault.com/) can be useful for getting more answers for linux topics like this. 
+## SMB/CIFS 
 
-### Permissions 
+For SMB/CIFS this could look like mounting via PAM, discussed here: <https://support.posit.co/hc/en-us/articles/360044190234-How-to-mount-a-Windows-SMB-CIFS-share-via-PAM>
+
+Alternatively, the SMB/CIFS could be [mounted directly](https://www.techrepublic.com/article/how-to-permanently-mount-a-windows-share-on-linux/) with `cifs-utils` using a service account if traceability or access controls aren't needed with `sudo mount -t cifs -o username=<user>,password=<password> //<server>/<share> /mnt/<mountpoint>`. 
+
+[Multiprotocol NAS](https://infohub.delltechnologies.com/en-us/l/dell-unity-nas-capabilities/multiprotocol-17/) is another option for a more enterprise solution. 
+
+## Copying a project from one users home directory to another 
+
+Reference: <https://support.posit.co/hc/en-us/articles/12959116352663-Transferring-project-ownership-in-Posit-Workbench> 
+
+This will recursively copy the project from user1's home directory to user2's home directory
+
+`sudo cp -R /home/user1/project /home/user2/``
+
+And this will change the owner recursively to user2
+
+`sudo chown -R user2:user2 /home/user2/project`
+
+## Permissions 
 
 When mounting on the server it will need the appropriate permissions so that users are able to access the contents of the drive. 
 
 For example for content running on Posit Connect the rstudio-connect user will need access to the drive, for example via `chmod 644`. Alternatively the drive could be mapped so that an alternate linux user has access and a user with admin access through the Connect UI can set the runAs user to the selected linux user. This will provide more security around protecting the files that are mounted. 
+
+## Logging user actions 
+
+For customers wanting to log user actions on NFS shares that is done through linux admin utilities, like `auditd`. 
+
+Alternatively kerberized NFS shares can be used for centralized logging/auditing but is significantly more admin overhead. 
 
 ## Failures 
 
@@ -69,8 +91,19 @@ This resulted in this error message:
 
 ```         
 library(stringi)Error: package or namespace load failed for 'stringi' in dyn.load(file, DLLpath = DLLpath, ...):
-unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':
-  /home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object
+unable to load shared object '/home/username/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so':
+  /home/username/R/x86_64-pc-linux-gnu-library/4.3/stringi/libs/stringi.so: failed to map segment from shared object
 ```
+## Resources
+
+A linux based forum like [serverfault](https://serverfault.com/) can be useful for getting more answers for linux topics like this. 
+
+- <https://www.golinuxcloud.com/linux-mount-nfs/> 
+- <https://planetscale.com/blog/io-devices-and-latency#storage-in-the-cloud> 
+- <https://solutions.posit.co/admin-training/courses/workbench/04_datasources.html#smbcifs> 
+- Really interesting community post with script for automounting windows shares: <https://community.rstudio.com/t/active-directory-ad-permissions-and-file-share-mounting-for-rsp/5427/5>
+- Example for mounting a drive: <https://superuser.com/questions/134734/how-to-mount-a-drive-from-terminal-in-ubuntu> 
+
+
 
 

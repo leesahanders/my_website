@@ -3,6 +3,7 @@
     "listing": "/work.html",
     "items": [
       "/work/mounting-drives-server.html",
+      "/work/r-repository-settings-workbench.html",
       "/work/rspm_remote_admin_cli.html",
       "/work/aws-data-sources.html",
       "/work/ansible-and-pulumi-ssh-keys.html",
@@ -20,17 +21,6 @@
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
       "/work/r-command-line.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   },
   {
@@ -59,6 +49,7 @@
       "/work/ansible-and-pulumi-ssh-keys.html",
       "/work/aws-data-sources.html",
       "/work/rspm_remote_admin_cli.html",
+      "/work/r-repository-settings-workbench.html",
       "/work/mounting-drives-server.html",
       "/presentations_posit.html",
       "/work.html",
@@ -66,6 +57,17 @@
       "/lists.html",
       "/index.html",
       "/about.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   }
 ]
