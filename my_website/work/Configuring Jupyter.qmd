@@ -1,0 +1,97 @@
+---
+title: "Configuring Jupyter for use with Posit Workbench"
+description: "and some troubleshooting notes when things go wrong"
+author: "Lisa"
+date: "2025-05-01"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Overview
+
+Configuring Jupyter to work on Posit Workbench is very doable, but there are a couple gotchas. Hopefully these steps are useful!
+
+## Install steps
+
+Try following these steps for installing jupyter: <https://docs.posit.co/ide/server-pro/integration/jupyter-standalone.html>
+
+This may look like: 
+
+```
+## Set variables 
+export JUPYTER_PYTHON_VERSION=3.12.4
+export JUPYTERLAB_VERSION=4.2.5
+export WORKBENCH_JUPYTERLAB_VERSION=1.0
+
+## Install Jupyter 
+sudo /opt/python/"${JUPYTER_PYTHON_VERSION}"/bin/pip install jupyterlab=="${JUPYTERLAB_VERSION}" notebook pwb_jupyterlab~="${WORKBENCH_JUPYTERLAB_VERSION}"
+
+## Set the jupyter.conf to the jupyter-exe location
+# jupyter.conf
+cat > /etc/rstudio/jupyter.conf <<EOF
+jupyter-exe=/opt/python/${JUPYTER_PYTHON_VERSION}/bin/jupyter
+labs-enabled=1
+notebooks-enabled=1
+default-session-cluster=Local
+
+EOF
+```
+
+Jupyter ports for HA: FromPort=8888,ToPort=8898
+
+## Troubleshooting 
+
+Uninstall the current version of Jupyter Notebook: `pip uninstall jupyter`
+
+Restart RStudio Server: Restart the RStudio Server to apply the changes:
+
+`sudo rstudio-server restart`
+
+Restart Launcher: If you are using the Launcher, restart it as well:
+
+`sudo rstudio-launcher restart`
+
+Can you also try to start a notebook manually by running the following from the Linux shell?  `/opt/python/3.9.14/bin/jupyter notebook`
+
+Does that complete as an unprivileged user?  What about with sudo?  `sudo /opt/python/3.9.14/bin/jupyter notebook`
+
+Similarly, `sudo /opt/python/3.9.14/bin/jupyter lab`
+
+Umask in STIG systems is typically set to 077 (on rhel9) which will make the libraries installed under the python version unable to be used by normal users. Set umask to 022 and then reinstall python and jupyter to fix this. Alternatively could try to fix the file permissions with the -exec flag and chmod, for example with `chmod -R o+rx /opt/python/3.10.8` which would set the permissions to 755. 
+
+
+Uninstall Python: <https://docs.posit.co/resources/install-python.html#uninstall>
+Re-install Python: <https://docs.posit.co/resources/install-python.html#install-required-dependencies>
+
+Add Python to the path: 
+
+```
+# add this to your .bashrc
+export PATH=/opt/python/3.11.9/bin:$PATH
+```
+
+Manage kernels: <https://docs.posit.co/ide/server-pro/user/jupyter-lab/guide/jupyter-kernel-management.html> 
+
+Users can register their own virtual kernel with the ipykernel package running the command (within an activated environment on the CLI/terminal):
+
+```
+python -m ipykernel install --user --name short-name --display-name "Long Name"
+```
+
+Upon launching a new jupyterlab or VS Code session this environment can be selected from this menu.
+
+
+
+

@@ -1,0 +1,60 @@
+---
+title: "Monitoring Posit Team"
+description: "Various methods for monitoring the Posit Team software"
+author: "Lisa"
+date: "2025-04-30"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Software Monitoring
+
+Each of our products has their own method for monitoring. In addition to each individual monitoring method, Chronicle exists to pull that same information but aggregate it for customers. IMO it's particularly useful for customers that have multiple environments that want their own single report to see the stuff they care about.
+
+**Workbench**
+
+- Metrics endpoint (Prometheus) that can be pulled into other systems: [https://docs.posit.co/ide/server-pro/auditing_and_monitoring/prometheus_metrics.html](https://docs.posit.co/ide/server-pro/auditing_and_monitoring/prometheus_metrics.html)
+- API for more bespoke metrics (new): [https://docs.posit.co/ide/server-pro/workbench_api/workbench_api.html](https://docs.posit.co/ide/server-pro/workbench_api/workbench_api.html)
+- Build-in admin dashboard shows metrics around sessions (needs to be enabled): [https://docs.posit.co/ide/server-pro/server_management/administrative_dashboard.html](https://docs.posit.co/ide/server-pro/server_management/administrative_dashboard.html)
+
+**Connect**
+
+- Metrics endpoint (Prometheus) that can be pulled into other systems: [https://docs.posit.co/connect/admin/operational-metrics/index.html](https://docs.posit.co/connect/admin/operational-metrics/index.html)
+- API for more bespoke metrics: [https://docs.posit.co/connect/api/](https://docs.posit.co/connect/api/) and [https://docs.posit.co/connect/cookbook/](https://docs.posit.co/connect/cookbook/)
+- Built-in admin dashboard shows metrics around resource consumption, scheduled jobs, etc
+
+**Package Manager**  
+
+- Metrics endpoint (Prometheus) that can be pulled into other systems: [https://docs.posit.co/rspm/admin/operational-metrics.html](https://docs.posit.co/rspm/admin/operational-metrics.html)
+- API for more bespoke metrics: [https://docs.posit.co/rspm/admin/admin-cli.html#cli-remote-setup](https://docs.posit.co/rspm/admin/admin-cli.html#cli-remote-setup)
+- Configure space alerts: [https://docs.posit.co/rspm/admin/alerts.html](https://docs.posit.co/rspm/admin/alerts.html)
+- Built-in admin dashboard shows metrics around packages being downloaded
+
+Chronicle is still very early in development and customers have to build their own reports. Typically that looks like installing Chronicle on the Connect server and then publishing a quarto report that they made to Connect.There are a bunch of metrics reporting software that can take a stream of data and display it. You might hear datadog, splunk, grafana mentioned as the actual visualization tool being used in organizations.
+
+Reach out to Posit to learn more about Chronicle and how to install it. 
+
+## Application Monitoring 
+
+Information like who accessed the platform, who accessed each app can be gotten with the Connect API, for example with this cookbook recipe: <https://docs.posit.co/connect/cookbook/metrics/viewing-content-usage-information/>
+
+Getting what someone did inside of the application is harder. I've seen customers use [google analytics](https://shiny.posit.co/r/articles/build/google-analytics/) for this ([example for quarto](https://quarto.org/docs/websites/website-tools.html#google-analytics)).  I've been really interested in exploring packages like [shiny.telemetry](https://appsilon.github.io/shiny.telemetry/) by Appsilon for digging into this data also (it uses an external database to store this data).
+
+Alternativelyl a simple way to add user information is to simply add print statements through the code so it will print choices to the log. The log files can be accessed over this endpoint with the Connect API: <https://docs.posit.co/connect/api/#get-/v1/content/-guid-/jobs/-key-/download>
+
+Admin logs on Connect are restricted to the admin user: <https://docs.posit.co/connect/admin/auditing/index.html#audit-log-output> 
+
+By default, audited events are only recorded in the database. Admin users are able to view audit entries in the dashboard: <https://docs.posit.co/connect/api/#get-/v1/audit_logs> 
+

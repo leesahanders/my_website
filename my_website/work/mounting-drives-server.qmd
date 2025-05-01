@@ -39,6 +39,8 @@ sudo chown user:group /folder
 chmod 764 /folder
 ```
 
+Change the code (764) for what the folder is being locked down to in order to prevent other users from being able to access it. Those lines will make that user the owner of the folder, and then chmod 764 should give only the owner access. But I recommend referencing your linux team. 
+
 It can also involve [fstab](https://www.baeldung.com/linux/network-drive-etc-fstab) or [AutoFS](https://help.ubuntu.com/community/Autofs). 
 
 Some specific situations may have some complexity: specific formats, cloud situations, or verifying NFS export options, but in general the mounting process is much simpler than installing the posit products and configuring them and is the same as what would be done on any linux server. 
