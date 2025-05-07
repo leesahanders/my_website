@@ -2,6 +2,9 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/saml-entraid-posit-team.html",
+      "/work/Configuring Jupyter.html",
+      "/work/Monitoring Posit Team.html",
       "/work/mounting-drives-server.html",
       "/work/r-repository-settings-workbench.html",
       "/work/rspm_remote_admin_cli.html",
@@ -51,6 +54,9 @@
       "/work/rspm_remote_admin_cli.html",
       "/work/r-repository-settings-workbench.html",
       "/work/mounting-drives-server.html",
+      "/work/Monitoring Posit Team.html",
+      "/work/Configuring Jupyter.html",
+      "/work/saml-entraid-posit-team.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",

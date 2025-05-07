@@ -1,0 +1,74 @@
+---
+title: "Validation"
+description: "Challenges, tribulations, and learnings"
+author: "Lisa"
+date: "2025-05-05"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: true
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Frame of mind 
+
+My colleagues recommendation while reading these resources: Put yourself in a mental model that you are at a certain company, you want to build a whole new IT system that's addressing certain unmet needs. Due to the nature of the use case you need to use this CSV approach. Your goal is to meet user requirements while keeping risks under control. 
+
+As an exercise, think about can you come up with some guiding principles on how to set up Posit Team to make it GXP compliant. For example, what happens if deploy a shiny app and what part of processes are happening there when it comes to GXP, CSV, and such. The icing on the cake is how can we change the Connect configuration to make it compliant. 
+
+## Resources 
+
+### Start here 
+
+Michael had a post in the Life science and healthcare channel - posted pdf document - https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489
+
+Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md
+
+On a similar note, this post from MichaelM is useful about validated environments: https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&cid=C2P7MTJKE
+
+We as posit are not in the business of validating packages. We can talk about ow to do it high level but its up to them to build such a process or point them at Atorus OpenVal, or Jumping Rivers Litmus system. 
+OpenVAL offers validation services: 
+
+
+
+
+
+### Now add some more documents 
+
+Phil resources: (See Trevor chat) 
+
+Posit pro products (still says Rstudio everything): <https://posit.co/wp-content/uploads/2024/11/rstudio_compliance_validation.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w>
+
+R validation: <https://www.r-project.org/doc/R-FDA.pdf>
+
+Tidyverse, tidymodels: <https://posit.co/wp-content/uploads/2024/11/validation-tidy.pdf?_gl=1*1rog1io*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDI4LjAuMC4w>
+
+Shiny and rmarkdown:<https://posit.co/wp-content/uploads/2024/11/validation-shiny-rmd.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w>
+
+### Finally lets check out the stories on the Posit blog 
+
+[Deploying a Shiny App in R using clinical trial data with Posit Connect](https://posit.co/blog/publishing-a-shiny-app-in-r-with-clinical-trial-data-to-posit-connect/)
+
+[Securing Workbench for Clinical Workflows, with JnJ](https://posit.co/blog/team-101-posit-workbench/) 
+
+[Johnson & Johnson x Posit Live Event March 2025 Q&A](https://posit.co/blog/jnj-posit-live-event-march-2025-qa/)
+
+[Roche x Posit Live Event Sept 2024 Q&A](https://posit.co/blog/roche-posit-live-event-sept-2024-qa/)
+
+[Roche’s end-to-end R submission for a new drug application](https://posit.co/blog/roches-first-end-to-end-r-journey-to-submission/)
+
+[How pharma is pioneering WebAssembly with webR & Shiny for FDA clinical trial submissions](https://posit.co/blog/webr-fda-pilot/)
+
+
+## Take aways 
+
+

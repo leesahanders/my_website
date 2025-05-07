@@ -63,16 +63,14 @@ Restart Launcher: If you are using the Launcher, restart it as well:
 
 `sudo rstudio-launcher restart`
 
-Can you also try to start a notebook manually by running the following from the Linux shell?  `/opt/python/3.9.14/bin/jupyter notebook`
-
-Does that complete as an unprivileged user?  What about with sudo?  `sudo /opt/python/3.9.14/bin/jupyter notebook`
+Can you also try to start a notebook manually by running the following from the Linux shell?  `/opt/python/3.9.14/bin/jupyter notebook`. Does that complete as an unprivileged user?  What about with sudo?  `sudo /opt/python/3.9.14/bin/jupyter notebook`
 
 Similarly, `sudo /opt/python/3.9.14/bin/jupyter lab`
 
-Umask in STIG systems is typically set to 077 (on rhel9) which will make the libraries installed under the python version unable to be used by normal users. Set umask to 022 and then reinstall python and jupyter to fix this. Alternatively could try to fix the file permissions with the -exec flag and chmod, for example with `chmod -R o+rx /opt/python/3.10.8` which would set the permissions to 755. 
-
+Umask in STIG systems is typically set to `0077` (on rhel9) which will make the libraries installed under the python version unable to be used by normal users. Set umask to `0022` and then reinstall python and jupyter to fix this. Alternatively could try to fix the file permissions with the -exec flag and chmod, for example with `chmod -R o+rx /opt/python/<version>` which would set the permissions to 755 or `chmod -R og+rX /opt/python/<version>` which gives read permissions to all files but only execute permissions to those that already had execute permissions (typically the owner). 
 
 Uninstall Python: <https://docs.posit.co/resources/install-python.html#uninstall>
+
 Re-install Python: <https://docs.posit.co/resources/install-python.html#install-required-dependencies>
 
 Add Python to the path: 

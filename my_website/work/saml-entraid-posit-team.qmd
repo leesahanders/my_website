@@ -1,0 +1,374 @@
+---
+title: "Using SAML and SCIM with EntraID with Posit Team"
+description: "I was confused, so I went through this with a friend and wrote up the steps"
+author: "Lisa"
+date: "2025-05-07"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+# Configuring Azure EntraID for SAML Auth in Workbench (with SCIM for user provisioning) and Connect (no user provisioning, UI access only)
+
+To configure Microsoft Entra ID for SAML, both the software address and an additional path, if being used, must be known. If there is not an additional path being served from then omit that from the below instructions. In addition Azure requires a secure connection, and so a valid SSL certificate (cannot be self-signed) is needed. 
+
+## Networking requirements
+
+Relevant cheat sheet in docs: [https://docs.posit.co/getting-started/networking.html](https://docs.posit.co/getting-started/networking.html)
+
+Getting info from azure is on a push basis for SCIM provisioning, so we need connectivity open on port 443 via the express route or however so there is access. In order for authentication via SAML and Azure to work these ports need to be enabled:
+
+- 443 (for https)
+    
+
+Networking access is needed between the Connect and Workbench servers and the Azure service.
+
+Connect will also need web sockets enabled. Will be needed for each of the redirects (as detailed in the lower section).
+
+## System dependencies
+
+On Rhel9:
+
+```
+yum install -y oddjob oddjob-mkhomedir
+```
+
+## SSL requirements
+
+Azure restricts to only using https addresses, not http, for doing redirects and authentication via API. A SSL certificate must be installed on each server. This SSL cert must be recognizable by Azure, meaning that it can’t be an internal CA.
+
+Does the cert need to be installed on the server, or does installing it for the prox work? It just needs the “front door” address to have HTTPS, if running with an App gateway, then you only need SSL on that load balancer/proxy.
+
+### Workbench
+
+```
+openssl req -new -key $URL.key -out $URL.csr -config $URL.cnf
+openssl genrsa -out $URL.key 2048
+```
+
+```
+#-----------------------------------------------------------------------------------------#
+# HTTPS Configuration Section
+#
+# The certificate key should be owned by rstudio and have perms: sudo chmod 600 /var/certs/rstudio.key
+# Unfortunately at this time, RStudio doesn't support a passphrase on the SSL cert.
+ssl-enabled=1
+ssl-certificate-key=/path/to/key/posit.key
+ssl-certificate=/path/to/certificate/posit.crt
+ssl-protocols=TLSv1.2 TLSv1.3
+```
+
+```
+openssl x509 -noout -modulus -in /etc/rstudio/fullchain.cer | openssl md5
+openssl rsa -noout -modulus -in /etc/rstudio/fullchain.key | openssl md5
+```
+
+### Connect
+
+```
+nano root.crt ← paste contents of root certificate 
+sudo cp root.crt /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust
+trust list | grep -i <name>
+```
+
+```
+[HTTPS]
+; https://docs.posit.co/connect/admin/appendix/configuration/#HTTPS
+; RStudio Connect will listen on this network address for HTTPS connections.
+Listen = :443
+;Path to a PEM encoded TLS certificate file. If the certificate is signed by a certificate authority,
+;the certificate file should be the concatenation of the server's certificate followed by the CA's certificate
+Certificate =  /path/to/certificate/connect.crt
+;Path to a PEM encoded private key file corresponding to the certificate specified with
+Key = /path/to/key/connect.key
+; Force HTTPS
+; https://docs.posit.co/connect/admin/security/#guaranteeing-https
+;Permanent = True
+MinimumTLS = 1.2
+```
+
+## Create the Azure applications
+
+Two separate applications inside Azure need to be created to support authentication on Connect and Workbench (different reply url assertion consumer service url’s).
+
+- Through the marketplace: Manage → enterprise apps → add a new one → search for rstudio
+    
+- **Rstudio-server-pro SAML authentication** - is what you want for Workbench (refer to [here](https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html))
+    
+- **Rstudio Connect SAML authentication** - is what you want for Connect (refer to [here](https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html))
+    
+
+See the [Customize user provisioning attribute mappings tutorial](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes) in Microsoft’s documentation for more information on adding custom user attributes in Microsoft Entra ID.
+
+### Create the Azure application for Workbench
+
+Refer to [here](https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html)
+
+For the URL's if there is an additional path that Workbench is being served from then it should be added in the `<path>` field, otherwise that can be omitted. For example, the URL would be `https://<RSW-SERVER>/saml/metadataif` there isn't an additional path. 
+
+In the Identifier (Entity ID) section, click Add identifier and in the Enter an identifier text box, type a URL using the following pattern:
+`https://<RSW-SERVER>/<PATH>/saml/metadata.`
+
+In the Reply URL (Assertion Consumer Server URL) section, click Add reply URL and type the URL using the following pattern:
+`https://<RSW-SERVER>/<PATH>/saml/acs.`
+
+### Configure Workbench with SAML
+
+Relevant page in docs: [https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html](https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html) and [https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html](https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html)
+
+Enable SAML auth:
+
+```
+#/etc/rstudio/rserver.conf
+auth-saml=1
+```
+
+Complete the SAML section in the config to match the user attributes from EntraID:
+
+```
+#/etc/rstudio/rserver.conf
+auth-saml=1
+auth-saml-metadata-url=<federation-metadata-URI>
+auth-saml-sp-name-id-format=emailaddress
+auth-saml-sp-attribute-username=NameID
+auth-saml-sp-base-uri=<RStudio-Server-URI>
+auth-saml-idp-post-binding=1
+```
+
+Create the auth profile:
+
+```
+sudo authselect create-profile pwb --base-on=minimal
+```
+
+Edit the /etc/authselect/custom/pwb/nsswitch.conf file and add the pwb entry:
+
+```
+#/etc/authselect/custom/pwb/nsswitch.conf
+passwd:     files {if "with-altfiles":altfiles }systemd pwb {exclude if "with-custom-passwd"}
+group:      files {if "with-altfiles":altfiles }systemd pwb {exclude if "with-custom-group"}
+shadow:     files pwb                                       {exclude if "with-custom-shadow"}
+```
+
+Enable the profile:
+
+```
+authselect select custom/pwb --with-mkhomedir --force
+```
+
+Note: At this time the docs aren’t accurate and say to run `sudo authselect select pwb --with-mkhomedir` instead of `authselect select custom/pwb --with-mkhomedir --force`
+
+Make sure the odd job service is active:
+
+```
+systemctl enable --now oddjobd.service
+```
+
+Prevent NSCD from caching information:
+
+```
+vi /etc/nscd.conf
+enable-cache passwd no
+enable-cache group no
+sudo systemctl restart nscd
+ps -ef | grep nsc
+```
+
+### Configure SCIM Provisioning for Workbench
+
+Relevant page in docs: [https://docs.posit.co/ide/server-pro/user_provisioning/azure.html](https://docs.posit.co/ide/server-pro/user_provisioning/azure.html)
+
+Complete the user provisioning section in the config to match the user attributes from EntraID (modify the user-provisioning-start-uidas needed, might not matter and can be left off) :
+
+```
+#/etc/rstudio/rserver.conf
+user-provisioning-enabled=1
+user-provisioning-start-uid=2000
+```
+
+### Configuring the SCIM Provisioning token for Workbench
+
+Relevant page in docs: [https://docs.posit.co/ide/server-pro/user_provisioning/managing_tokens.html](https://docs.posit.co/ide/server-pro/user_provisioning/managing_tokens.html)
+
+For SCIM provisioning and the token, I believe you will also need user provisioning turned on. You can do this with: 
+
+```
+#rserver.conf
+user-provisioning-enabled=1
+```
+
+Create a token:
+
+```
+sudo rstudio-server user-service generate-token "My Token"
+```
+
+Input the token through the Azure profile.
+
+Provision a user by having a user log all the way in to Workbench.
+
+Test it from command line:
+
+```
+/usr/lib/rstudio-server/bin/pamtester --verbose rstudio <user> authenticate acct_mgmt setcred open_session close_session
+```
+
+### Create the Azure application for Connect
+
+Refer to [here](https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html)
+
+### Configure Connect with SAML
+
+Relevant page in docs: [https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/](https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/)
+
+```
+#; /etc/rstudio-connect/rstudio-connect.gcfg
+
+[Server]
+Address = https://posit.company.com
+
+[Authentication]
+Provider = "saml"
+
+[SAML]
+IdPMetaDataURL = "https://login.microsoftonline.com/{tenantid}/federationmetadata/2007-06/federationmetadata.xml?appid={appid}"
+IdPAttributeProfile = azure
+; Enable this for a better user experience, unless
+; managing a large number of groups is a concern:
+;GroupsAutoProvision = true
+; When troubleshooting a SAML problem, more verbose logging
+; is produced by uncommenting the following line:
+;Logging = true
+```
+
+EntraID limits group membership to 150. If a user is a member of more than 150 groups than their group list will be concatenated, potentially missing important ones that are needed inside Connect.
+
+Register on first login can be disabled with:
+
+```
+#; /etc/rstudio-connect/rstudio-connect.gcfg
+[SAML]
+RegisterOnFirstLogin = false
+```
+
+In that case, users need to be created via the Connect API: [https://docs.posit.co/connect/api/#post-/v1/users](https://docs.posit.co/connect/api/#post-/v1/users)
+
+```
+#!/bin/bash
+
+API_KEY="your api key"
+
+DATA='{
+  "email": "john_doe@posit.co",
+  "first_name": "John",
+  "last_name": "Doe",
+  "password": "",
+  "unique_id": "string",
+  "user_must_set_password": false,
+  "user_role": "viewer",
+  "username": "john_doe"
+}'
+
+curl --silent --show-error -L --max-redirs 0 --fail \
+    -X POST \
+    -H "Authorization: Key ${API_KEY}" \
+    --data-raw "${DATA}" \
+    "https://connect.example.com/__api__/v1/users"
+```
+
+## Restart
+
+### Workbench
+
+```
+sudo rstudio-server restart
+```
+
+### Connect
+
+```
+sudo systemctl restart rstudio-connect
+```
+
+## Assertions
+
+This image shows the needed assertions on the left, and the assertions associated with a test user on the right. Test user is failing to log into Workbench due to missing assertions. Once the last name and email were added logins were successful.
+
+The list of assertions expected by Connect are documented [here](https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/#the-azure-profile):
+
+```
+; /etc/rstudio-connect/rstudio-connect.gcfg
+[SAML]
+UniqueIdAttribute = NameID
+NameIDFormat = persistent
+UsernameAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+FirstNameAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
+LastNameAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
+EmailAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+GroupsAttribute = http://schemas.microsoft.com/ws/2008/06/identity/claims/groups
+```
+
+## Troubleshooting
+
+If no useful messages are showing in the Connect or Workbench logs, it could be an issue with the auth provider configuration, URL’s, or network access. Turning on debug logging may help with errors outside of the auth provider configuration.
+
+## But what about proxies?
+
+Example endpoint for app: whole host name including proxy information scim v2, for example [https://workbench-hostname](https://workbench-hostname)>/scim/v2. Example in the case they are running with a proxy at root wb: [https://<Workbench URL>/<PATH>/scim/v2](https://<Workbench URL>/<PATH>/scim/v2)
+
+### Workbench
+
+Relevant page in docs: [https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html](https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html) and [https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html#proxy-considerations](https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html#proxy-considerations)
+
+The reverse proxy should be correctly forwarding the connection and the certificate on the proxy is publicly trusted. Workbench needs to know it's running on HTTPS however. Generally that's done by the proxy forwarding the X-Forward-Proto header as https.
+
+We have an example here showing setting the X-Forward-Proto headers, an example without SSL is described as "If the Nginx proxy is using SSL and Workbench has ssl-enabled=0" : [https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html#nginx-configuration](https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html#nginx-configuration)  
+
+The documentation default is: 
+
+```
+#/etc/rstudio/rserver.conf
+www-root-path=/rstudio
+```
+
+However, in the proxy configuration you are actually being hosted on /wb not rstudio so I believe it should look like: 
+
+```
+#/etc/rstudio/rserver.conf
+www-root-path=/wb
+```
+
+I believe in your URL to your tenant that it will need the /wb prefix as well, IE instead of <https://<Workbench URL>/scim/v2> it should be <https://<Workbench URL>/<PATH>/scim/v2>
+
+The path prefix will need to be propagated throughout, what comes to mind is also the ACS URL configuration in the Enterprise App which is currently pointing to <https://<Workbench URL>/saml/acs>but should be <https://<Workbench URL>/<PATH>/saml/acs>
+
+### Connect
+
+Relevant page in docs: [https://docs.posit.co/connect/admin/proxy/](https://docs.posit.co/connect/admin/proxy/) and [https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/index.html#authenticating-with-saml-using-multiple-network-aliases](https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/index.html#authenticating-with-saml-using-multiple-network-aliases)
+
+Connect needs web sockets to be enabled.
+
+```
+# Support proxying of web-socket connections
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
+}
+```
+
+## What happens when users leave the organization? 
+
+When users leave the organization, or removed from the application, than their account will be locked. This is the advantage of configuring it with SCIM / integrating directly with the authentication provider. Any home directories, deployed content, etc will remain on the server and can be cleaned up using any internal policies. 
+

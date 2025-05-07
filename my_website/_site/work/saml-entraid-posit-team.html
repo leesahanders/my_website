@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-01-11">
-<meta name="description" content="This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks">
+<meta name="dcterms.date" content="2025-05-07">
+<meta name="description" content="I was confused, so I went through this with a friend and wrote up the steps">
 
-<title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
+<title>Lisa Anders - questionable.quarto - Using SAML and SCIM with EntraID with Posit Team</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,9 +44,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -156,10 +153,10 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
+      <h1 class="title">Using SAML and SCIM with EntraID with Posit Team</h1>
                   <div>
         <div class="description">
-          This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks
+          I was confused, so I went through this with a friend and wrote up the steps
         </div>
       </div>
                           <div class="quarto-categories">
@@ -181,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 11, 2024</p>
+        <p class="date">May 7, 2025</p>
       </div>
     </div>
     
@@ -197,18 +194,37 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#azure-data-lake" id="toc-azure-data-lake" class="nav-link active" data-scroll-target="#azure-data-lake">Azure Data Lake</a>
+  <li><a href="#configuring-azure-entraid-for-saml-auth-in-workbench-with-scim-for-user-provisioning-and-connect-no-user-provisioning-ui-access-only" id="toc-configuring-azure-entraid-for-saml-auth-in-workbench-with-scim-for-user-provisioning-and-connect-no-user-provisioning-ui-access-only" class="nav-link active" data-scroll-target="#configuring-azure-entraid-for-saml-auth-in-workbench-with-scim-for-user-provisioning-and-connect-no-user-provisioning-ui-access-only">Configuring Azure EntraID for SAML Auth in Workbench (with SCIM for user provisioning) and Connect (no user provisioning, UI access only)</a>
   <ul class="collapse">
-  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set up</a></li>
-  <li><a href="#add-data" id="toc-add-data" class="nav-link" data-scroll-target="#add-data">Add data</a></li>
+  <li><a href="#networking-requirements" id="toc-networking-requirements" class="nav-link" data-scroll-target="#networking-requirements">Networking requirements</a></li>
+  <li><a href="#system-dependencies" id="toc-system-dependencies" class="nav-link" data-scroll-target="#system-dependencies">System dependencies</a></li>
+  <li><a href="#ssl-requirements" id="toc-ssl-requirements" class="nav-link" data-scroll-target="#ssl-requirements">SSL requirements</a>
+  <ul class="collapse">
+  <li><a href="#workbench" id="toc-workbench" class="nav-link" data-scroll-target="#workbench">Workbench</a></li>
+  <li><a href="#connect" id="toc-connect" class="nav-link" data-scroll-target="#connect">Connect</a></li>
   </ul></li>
-  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-  <li><a href="#reading-and-writing-delta-files" id="toc-reading-and-writing-delta-files" class="nav-link" data-scroll-target="#reading-and-writing-delta-files">Reading and Writing Delta Files</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
-  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a>
+  <li><a href="#create-the-azure-applications" id="toc-create-the-azure-applications" class="nav-link" data-scroll-target="#create-the-azure-applications">Create the Azure applications</a>
   <ul class="collapse">
-  <li><a href="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" id="toc-azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="nav-link" data-scroll-target="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></li>
-  <li><a href="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html" id="toc-delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="nav-link" data-scroll-target="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: https://docs.delta.io/latest/delta-intro.html</a></li>
+  <li><a href="#create-the-azure-application-for-workbench" id="toc-create-the-azure-application-for-workbench" class="nav-link" data-scroll-target="#create-the-azure-application-for-workbench">Create the Azure application for Workbench</a></li>
+  <li><a href="#configure-workbench-with-saml" id="toc-configure-workbench-with-saml" class="nav-link" data-scroll-target="#configure-workbench-with-saml">Configure Workbench with SAML</a></li>
+  <li><a href="#configure-scim-provisioning-for-workbench" id="toc-configure-scim-provisioning-for-workbench" class="nav-link" data-scroll-target="#configure-scim-provisioning-for-workbench">Configure SCIM Provisioning for Workbench</a></li>
+  <li><a href="#configuring-the-scim-provisioning-token-for-workbench" id="toc-configuring-the-scim-provisioning-token-for-workbench" class="nav-link" data-scroll-target="#configuring-the-scim-provisioning-token-for-workbench">Configuring the SCIM Provisioning token for Workbench</a></li>
+  <li><a href="#create-the-azure-application-for-connect" id="toc-create-the-azure-application-for-connect" class="nav-link" data-scroll-target="#create-the-azure-application-for-connect">Create the Azure application for Connect</a></li>
+  <li><a href="#configure-connect-with-saml" id="toc-configure-connect-with-saml" class="nav-link" data-scroll-target="#configure-connect-with-saml">Configure Connect with SAML</a></li>
+  </ul></li>
+  <li><a href="#restart" id="toc-restart" class="nav-link" data-scroll-target="#restart">Restart</a>
+  <ul class="collapse">
+  <li><a href="#workbench-1" id="toc-workbench-1" class="nav-link" data-scroll-target="#workbench-1">Workbench</a></li>
+  <li><a href="#connect-1" id="toc-connect-1" class="nav-link" data-scroll-target="#connect-1">Connect</a></li>
+  </ul></li>
+  <li><a href="#assertions" id="toc-assertions" class="nav-link" data-scroll-target="#assertions">Assertions</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#but-what-about-proxies" id="toc-but-what-about-proxies" class="nav-link" data-scroll-target="#but-what-about-proxies">But what about proxies?</a>
+  <ul class="collapse">
+  <li><a href="#workbench-2" id="toc-workbench-2" class="nav-link" data-scroll-target="#workbench-2">Workbench</a></li>
+  <li><a href="#connect-2" id="toc-connect-2" class="nav-link" data-scroll-target="#connect-2">Connect</a></li>
+  </ul></li>
+  <li><a href="#what-happens-when-users-leave-the-organization" id="toc-what-happens-when-users-leave-the-organization" class="nav-link" data-scroll-target="#what-happens-when-users-leave-the-organization">What happens when users leave the organization?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -220,169 +236,249 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it’s easy to find in the future!</p>
-<section id="azure-data-lake" class="level2">
-<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
-<section id="set-up" class="level3">
-<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
-<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
-<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
-<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
-<p>Steps:</p>
-<ol type="1">
-<li><p>Go to storage account</p></li>
-<li><p>Create and give it a name</p></li>
-<li><p>Select: LRS</p></li>
-<li><p>Switch to premium: block blobs</p></li>
-<li><p>Change to hierarchical blob</p></li>
-<li><p>Set tags:</p></li>
-</ol>
+<section id="configuring-azure-entraid-for-saml-auth-in-workbench-with-scim-for-user-provisioning-and-connect-no-user-provisioning-ui-access-only" class="level1">
+<h1>Configuring Azure EntraID for SAML Auth in Workbench (with SCIM for user provisioning) and Connect (no user provisioning, UI access only)</h1>
+<p>To configure Microsoft Entra ID for SAML, both the software address and an additional path, if being used, must be known. If there is not an additional path being served from then omit that from the below instructions. In addition Azure requires a secure connection, and so a valid SSL certificate (cannot be self-signed) is needed.</p>
+<section id="networking-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="networking-requirements">Networking requirements</h2>
+<p>Relevant cheat sheet in docs: <a href="https://docs.posit.co/getting-started/networking.html">https://docs.posit.co/getting-started/networking.html</a></p>
+<p>Getting info from azure is on a push basis for SCIM provisioning, so we need connectivity open on port 443 via the express route or however so there is access. In order for authentication via SAML and Azure to work these ports need to be enabled:</p>
 <ul>
-<li><p>rs:owner</p></li>
-<li><p>rs:project = soleng</p></li>
-<li><p>rs:environment = dev</p></li>
+<li>443 (for https)</li>
 </ul>
-<ol start="7" type="1">
-<li>Once in just need access keys or shared access signature in order to gain access</li>
-</ol>
+<p>Networking access is needed between the Connect and Workbench servers and the Azure service.</p>
+<p>Connect will also need web sockets enabled. Will be needed for each of the redirects (as detailed in the lower section).</p>
 </section>
-<section id="add-data" class="level3">
-<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
-<p>You can add data manually by creating a container and then using the upload icon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<section id="system-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="system-dependencies">System dependencies</h2>
+<p>On Rhel9:</p>
+<pre><code>yum install -y oddjob oddjob-mkhomedir</code></pre>
+</section>
+<section id="ssl-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="ssl-requirements">SSL requirements</h2>
+<p>Azure restricts to only using https addresses, not http, for doing redirects and authentication via API. A SSL certificate must be installed on each server. This SSL cert must be recognizable by Azure, meaning that it can’t be an internal CA.</p>
+<p>Does the cert need to be installed on the server, or does installing it for the prox work? It just needs the “front door” address to have HTTPS, if running with an App gateway, then you only need SSL on that load balancer/proxy.</p>
+<section id="workbench" class="level3">
+<h3 class="anchored" data-anchor-id="workbench">Workbench</h3>
+<pre><code>openssl req -new -key $URL.key -out $URL.csr -config $URL.cnf
+openssl genrsa -out $URL.key 2048</code></pre>
+<pre><code>#-----------------------------------------------------------------------------------------#
+# HTTPS Configuration Section
+#
+# The certificate key should be owned by rstudio and have perms: sudo chmod 600 /var/certs/rstudio.key
+# Unfortunately at this time, RStudio doesn't support a passphrase on the SSL cert.
+ssl-enabled=1
+ssl-certificate-key=/path/to/key/posit.key
+ssl-certificate=/path/to/certificate/posit.crt
+ssl-protocols=TLSv1.2 TLSv1.3</code></pre>
+<pre><code>openssl x509 -noout -modulus -in /etc/rstudio/fullchain.cer | openssl md5
+openssl rsa -noout -modulus -in /etc/rstudio/fullchain.key | openssl md5</code></pre>
+</section>
+<section id="connect" class="level3">
+<h3 class="anchored" data-anchor-id="connect">Connect</h3>
+<pre><code>nano root.crt ← paste contents of root certificate 
+sudo cp root.crt /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust
+trust list | grep -i &lt;name&gt;</code></pre>
+<pre><code>[HTTPS]
+; https://docs.posit.co/connect/admin/appendix/configuration/#HTTPS
+; RStudio Connect will listen on this network address for HTTPS connections.
+Listen = :443
+;Path to a PEM encoded TLS certificate file. If the certificate is signed by a certificate authority,
+;the certificate file should be the concatenation of the server's certificate followed by the CA's certificate
+Certificate =  /path/to/certificate/connect.crt
+;Path to a PEM encoded private key file corresponding to the certificate specified with
+Key = /path/to/key/connect.key
+; Force HTTPS
+; https://docs.posit.co/connect/admin/security/#guaranteeing-https
+;Permanent = True
+MinimumTLS = 1.2</code></pre>
 </section>
 </section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
-<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
-<p>You’ll need to know:</p>
+<section id="create-the-azure-applications" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-azure-applications">Create the Azure applications</h2>
+<p>Two separate applications inside Azure need to be created to support authentication on Connect and Workbench (different reply url assertion consumer service url’s).</p>
 <ul>
-<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
-<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
+<li><p>Through the marketplace: Manage → enterprise apps → add a new one → search for rstudio</p></li>
+<li><p><strong>Rstudio-server-pro SAML authentication</strong> - is what you want for Workbench (refer to <a href="https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html">here</a>)</p></li>
+<li><p><strong>Rstudio Connect SAML authentication</strong> - is what you want for Connect (refer to <a href="https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html">here</a>)</p></li>
 </ul>
-<pre><code>library(AzureStor)
-
-blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
-
-bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
-
-# List containers and files in containers
-list_storage_containers(bl_endp_key)
-cont1 &lt;- storage_container(bl_endp_key, "container1")
-list_storage_files(cont1)
-
-# Download a file
-storage_download(cont1, "/crm_call_center_logs.parquet")
-
-# Upload a file 
-storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
-<p>You can also create and delete containers:</p>
-<pre><code># Create a container
-newcont &lt;- create_storage_container(bl_endp_key, "container3")
-
-# Create a directory in the container
-cont3 &lt;- storage_container(bl_endp_key, "container3")
-create_storage_dir(cont3, "newdir")
-
-# Delete a container
-delete_storage_container(newcont)</code></pre>
+<p>See the <a href="https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes">Customize user provisioning attribute mappings tutorial</a> in Microsoft’s documentation for more information on adding custom user attributes in Microsoft Entra ID.</p>
+<section id="create-the-azure-application-for-workbench" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-azure-application-for-workbench">Create the Azure application for Workbench</h3>
+<p>Refer to <a href="https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html">here</a></p>
+<p>For the URL’s if there is an additional path that Workbench is being served from then it should be added in the <code>&lt;path&gt;</code> field, otherwise that can be omitted. For example, the URL would be&nbsp;<code>https://&lt;RSW-SERVER&gt;/saml/metadataif</code> there isn’t an additional path.&nbsp;</p>
+<p>In the&nbsp;Identifier (Entity ID)&nbsp;section, click&nbsp;Add identifier&nbsp;and in the&nbsp;Enter an identifier&nbsp;text box, type a URL using the following pattern: <code>https://&lt;RSW-SERVER&gt;/&lt;PATH&gt;/saml/metadata.</code></p>
+<p>In the&nbsp;Reply URL (Assertion Consumer Server URL)&nbsp;section, click&nbsp;Add reply URL&nbsp;and type the URL using the following pattern: <code>https://&lt;RSW-SERVER&gt;/&lt;PATH&gt;/saml/acs.</code></p>
 </section>
-<section id="reading-and-writing-delta-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
-<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
-<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
-<pre><code>library(sparklyr)
+<section id="configure-workbench-with-saml" class="level3">
+<h3 class="anchored" data-anchor-id="configure-workbench-with-saml">Configure Workbench with SAML</h3>
+<p>Relevant page in docs: <a href="https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html">https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html</a> and <a href="https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html">https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html</a></p>
+<p>Enable SAML auth:</p>
+<pre><code>#/etc/rstudio/rserver.conf
+auth-saml=1</code></pre>
+<p>Complete the SAML section in the config to match the user attributes from EntraID:</p>
+<pre><code>#/etc/rstudio/rserver.conf
+auth-saml=1
+auth-saml-metadata-url=&lt;federation-metadata-URI&gt;
+auth-saml-sp-name-id-format=emailaddress
+auth-saml-sp-attribute-username=NameID
+auth-saml-sp-base-uri=&lt;RStudio-Server-URI&gt;
+auth-saml-idp-post-binding=1</code></pre>
+<p>Create the auth profile:</p>
+<pre><code>sudo authselect create-profile pwb --base-on=minimal</code></pre>
+<p>Edit the /etc/authselect/custom/pwb/nsswitch.conf file and add the pwb entry:</p>
+<pre><code>#/etc/authselect/custom/pwb/nsswitch.conf
+passwd:     files {if "with-altfiles":altfiles }systemd pwb {exclude if "with-custom-passwd"}
+group:      files {if "with-altfiles":altfiles }systemd pwb {exclude if "with-custom-group"}
+shadow:     files pwb                                       {exclude if "with-custom-shadow"}</code></pre>
+<p>Enable the profile:</p>
+<pre><code>authselect select custom/pwb --with-mkhomedir --force</code></pre>
+<p>Note: At this time the docs aren’t accurate and say to run <code>sudo authselect select pwb --with-mkhomedir</code> instead of <code>authselect select custom/pwb --with-mkhomedir --force</code></p>
+<p>Make sure the odd job service is active:</p>
+<pre><code>systemctl enable --now oddjobd.service</code></pre>
+<p>Prevent NSCD from caching information:</p>
+<pre><code>vi /etc/nscd.conf
+enable-cache passwd no
+enable-cache group no
+sudo systemctl restart nscd
+ps -ef | grep nsc</code></pre>
+</section>
+<section id="configure-scim-provisioning-for-workbench" class="level3">
+<h3 class="anchored" data-anchor-id="configure-scim-provisioning-for-workbench">Configure SCIM Provisioning for Workbench</h3>
+<p>Relevant page in docs: <a href="https://docs.posit.co/ide/server-pro/user_provisioning/azure.html">https://docs.posit.co/ide/server-pro/user_provisioning/azure.html</a></p>
+<p>Complete the user provisioning section in the config to match the user attributes from EntraID (modify the user-provisioning-start-uidas needed, might not matter and can be left off) :</p>
+<pre><code>#/etc/rstudio/rserver.conf
+user-provisioning-enabled=1
+user-provisioning-start-uid=2000</code></pre>
+</section>
+<section id="configuring-the-scim-provisioning-token-for-workbench" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-the-scim-provisioning-token-for-workbench">Configuring the SCIM Provisioning token for Workbench</h3>
+<p>Relevant page in docs: <a href="https://docs.posit.co/ide/server-pro/user_provisioning/managing_tokens.html">https://docs.posit.co/ide/server-pro/user_provisioning/managing_tokens.html</a></p>
+<p>For SCIM provisioning&nbsp;and the token, I believe you will also need user provisioning turned on. You can do this with:&nbsp;</p>
+<pre><code>#rserver.conf
+user-provisioning-enabled=1</code></pre>
+<p>Create a token:</p>
+<pre><code>sudo rstudio-server user-service generate-token "My Token"</code></pre>
+<p>Input the token through the Azure profile.</p>
+<p>Provision a user by having a user log all the way in to Workbench.</p>
+<p>Test it from command line:</p>
+<pre><code>/usr/lib/rstudio-server/bin/pamtester --verbose rstudio &lt;user&gt; authenticate acct_mgmt setcred open_session close_session</code></pre>
+</section>
+<section id="create-the-azure-application-for-connect" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-azure-application-for-connect">Create the Azure application for Connect</h3>
+<p>Refer to <a href="https://docs.posit.co/ide/server-pro/authenticating_users/integrated_providers/azure_ad_saml.html">here</a></p>
+</section>
+<section id="configure-connect-with-saml" class="level3">
+<h3 class="anchored" data-anchor-id="configure-connect-with-saml">Configure Connect with SAML</h3>
+<p>Relevant page in docs: <a href="https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/">https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/</a></p>
+<pre><code>#; /etc/rstudio-connect/rstudio-connect.gcfg
 
-#Install a local version of Spark
-spark_install(version=3.4)
+[Server]
+Address = https://posit.company.com
 
-# Set Spark configuration to be able to read delta tables
-conf &lt;- spark_config()
-conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
-conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+[Authentication]
+Provider = "saml"
 
-# For spark 3.4 
-conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
+[SAML]
+IdPMetaDataURL = "https://login.microsoftonline.com/{tenantid}/federationmetadata/2007-06/federationmetadata.xml?appid={appid}"
+IdPAttributeProfile = azure
+; Enable this for a better user experience, unless
+; managing a large number of groups is a concern:
+;GroupsAutoProvision = true
+; When troubleshooting a SAML problem, more verbose logging
+; is produced by uncommenting the following line:
+;Logging = true</code></pre>
+<p>EntraID limits group membership to 150. If a user is a member of more than 150 groups than their group list will be concatenated, potentially missing important ones that are needed inside Connect.</p>
+<p>Register on first login can be disabled with:</p>
+<pre><code>#; /etc/rstudio-connect/rstudio-connect.gcfg
+[SAML]
+RegisterOnFirstLogin = false</code></pre>
+<p>In that case, users need to be created via the Connect API: <a href="https://docs.posit.co/connect/api/#post-/v1/users">https://docs.posit.co/connect/api/#post-/v1/users</a></p>
+<pre><code>#!/bin/bash
 
-# Open a connection
-sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
+API_KEY="your api key"
 
-# For this example we will use a built-in dataframe to save example data files, including one for delta tables
-tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
+DATA='{
+  "email": "john_doe@posit.co",
+  "first_name": "John",
+  "last_name": "Doe",
+  "password": "",
+  "unique_id": "string",
+  "user_must_set_password": false,
+  "user_role": "viewer",
+  "username": "john_doe"
+}'
 
-# Write spark dataframe to disk
-spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
-spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
-spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
-
-# Read dataframes into normal memory
-spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
-regular_df_csv &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
-regular_df_parquet &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
-regular_df_delta &lt;- collect(spark_tbl_handle)
-
-# Disconnect
-spark_disconnect(sc)</code></pre>
-<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
+curl --silent --show-error -L --max-redirs 0 --fail \
+    -X POST \
+    -H "Authorization: Key ${API_KEY}" \
+    --data-raw "${DATA}" \
+    "https://connect.example.com/__api__/v1/users"</code></pre>
+</section>
+</section>
+<section id="restart" class="level2">
+<h2 class="anchored" data-anchor-id="restart">Restart</h2>
+<section id="workbench-1" class="level3">
+<h3 class="anchored" data-anchor-id="workbench-1">Workbench</h3>
+<pre><code>sudo rstudio-server restart</code></pre>
+</section>
+<section id="connect-1" class="level3">
+<h3 class="anchored" data-anchor-id="connect-1">Connect</h3>
+<pre><code>sudo systemctl restart rstudio-connect</code></pre>
+</section>
+</section>
+<section id="assertions" class="level2">
+<h2 class="anchored" data-anchor-id="assertions">Assertions</h2>
+<p>This image shows the needed assertions on the left, and the assertions associated with a test user on the right. Test user is failing to log into Workbench due to missing assertions. Once the last name and email were added logins were successful.</p>
+<p>The list of assertions expected by Connect are documented <a href="https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/#the-azure-profile">here</a>:</p>
+<pre><code>; /etc/rstudio-connect/rstudio-connect.gcfg
+[SAML]
+UniqueIdAttribute = NameID
+NameIDFormat = persistent
+UsernameAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+FirstNameAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
+LastNameAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
+EmailAttribute = http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+GroupsAttribute = http://schemas.microsoft.com/ws/2008/06/identity/claims/groups</code></pre>
 </section>
 <section id="troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<p>From R:</p>
-<pre><code># See spark details (troubleshooting)
-spark_config()
-spark_get_java()
-spark_available_versions()
-spark_installed_versions()
-
-# See session details
-utils::sessionInfo() </code></pre>
-<p>From bash:</p>
-<pre><code>namei -l /usr/lib/spark</code></pre>
-<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
+<p>If no useful messages are showing in the Connect or Workbench logs, it could be an issue with the auth provider configuration, URL’s, or network access. Turning on debug logging may help with errors outside of the auth provider configuration.</p>
 </section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
-<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
-<blockquote class="blockquote">
-<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
-</blockquote>
-<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
+<section id="but-what-about-proxies" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-proxies">But what about proxies?</h2>
+<p>Example endpoint for app: whole host name including proxy information scim v2, for example <a href="https://workbench-hostname">https://workbench-hostname</a>&gt;/scim/v2. Example in the case they are running with a proxy at root wb: <a href="https://%3CWorkbench%20URL%3E/%3CPATH%3E/scim/v2">https://<workbench url="">/<path>/scim/v2</path></workbench></a></p>
+<section id="workbench-2" class="level3">
+<h3 class="anchored" data-anchor-id="workbench-2">Workbench</h3>
+<p>Relevant page in docs: <a href="https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html">https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html</a> and <a href="https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html#proxy-considerations">https://docs.posit.co/ide/server-pro/authenticating_users/saml_sso.html#proxy-considerations</a></p>
+<p>The reverse proxy should be correctly forwarding the connection and the certificate on the proxy is publicly trusted. Workbench needs to know it’s running on HTTPS however. Generally that’s done by the proxy forwarding the X-Forward-Proto header as https.</p>
+<p>We have an example here showing setting the X-Forward-Proto&nbsp;headers, an example without SSL is described as “If the Nginx proxy is using SSL and Workbench has ssl-enabled=0” :&nbsp;<a href="https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html#nginx-configuration">https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html#nginx-configuration</a> &nbsp;</p>
+<p>The documentation default is:&nbsp;</p>
+<pre><code>#/etc/rstudio/rserver.conf
+www-root-path=/rstudio</code></pre>
+<p>However, in the proxy configuration you are actually being hosted on /wb not rstudio so I believe it should look like:&nbsp;</p>
+<pre><code>#/etc/rstudio/rserver.conf
+www-root-path=/wb</code></pre>
+<p>I believe in your URL to your tenant that it will need the /wb prefix as well, IE instead of &lt;https://<workbench url="">/scim/v2&gt; it should be&nbsp;&lt;https://<workbench url="">/<path>/scim/v2&gt;</path></workbench></workbench></p>
+<p>The path prefix will need to be propagated throughout, what comes to mind is also the ACS URL configuration in the Enterprise App which is currently pointing to&nbsp;&lt;https://<workbench url="">/saml/acs&gt;but should be &lt;https://<workbench url="">/<path>/saml/acs&gt;</path></workbench></workbench></p>
 </section>
-<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
-<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
-<blockquote class="blockquote">
-<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
-</blockquote>
-<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
-<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
+<section id="connect-2" class="level3">
+<h3 class="anchored" data-anchor-id="connect-2">Connect</h3>
+<p>Relevant page in docs: <a href="https://docs.posit.co/connect/admin/proxy/">https://docs.posit.co/connect/admin/proxy/</a> and <a href="https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/index.html#authenticating-with-saml-using-multiple-network-aliases">https://docs.posit.co/connect/admin/authentication/saml-based/entra-id-saml/index.html#authenticating-with-saml-using-multiple-network-aliases</a></p>
+<p>Connect needs web sockets to be enabled.</p>
+<pre><code># Support proxying of web-socket connections
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
+}</code></pre>
+</section>
+</section>
+<section id="what-happens-when-users-leave-the-organization" class="level2">
+<h2 class="anchored" data-anchor-id="what-happens-when-users-leave-the-organization">What happens when users leave the organization?</h2>
+<p>When users leave the organization, or removed from the application, than their account will be locked. This is the advantage of configuring it with SCIM / integrating directly with the authentication provider. Any home directories, deployed content, etc will remain on the server and can be cleaned up using any internal policies.</p>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">image</span>
-<span class="glightbox-desc lightbox-desc-2">image</span>
-</div>
 </section>
 </section>
 
@@ -919,31 +1015,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"selector":".lightbox","openEffect":"zoom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 
