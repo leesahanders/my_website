@@ -17,6 +17,7 @@ filters:
 lightbox: auto
 categories:
   - code
+  - security
 ---
 
 This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it's easy to find in the future! 

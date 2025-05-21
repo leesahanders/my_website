@@ -1,0 +1,145 @@
+---
+title: "Finding R System Dependencies"
+description: "Now with the power of pak"
+author: "Lisa"
+date: "2025-05-21"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: true
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Using pak and renv to find R system dependencies
+
+Let's try to get an environment of packages and understand the system dependencies. This would be useful for fresh installs into a new environment. 
+
+## A note on methodology 
+
+In an ideal world a user will be able to identify what packages they are using. Do you really need that package from 3 years ago that you installed but ended up not using? Technology doesn't solve all problems! Sometimes the "soft" method is the best way to solve a problem. 
+
+## Steps
+
+### Create the current environment as a renv project and snapshot it
+
+```r
+library(pak)
+library(renv)
+
+# Or restore a project with renv::restore() if using a pre-existing projectd
+renv::init()
+renv::snapshot()
+```
+
+### Find what OS we are on 
+
+```r
+# R.version # Nope
+# version # Nope
+# .Platform # nope
+# .Platform$OS.type # nope
+# Sys.info() # nope
+# Sys.info()["sysname"] # nope
+# system("cat /etc/*release") # closer
+# system("lsb_release -a") # closer
+# pak::system_r_platform_data()$distribution # this is the one!
+
+if(.Platform$OS.type == "unix"){
+  Sys.setenv("PKG_SYSREQS_PLATFORM"=pak::system_r_platform_data()$distribution)
+  print(Sys.getenv("PKG_SYSREQS_PLATFORM"))
+} else { ## windows
+  Sys.setenv("PKG_SYSREQS_PLATFORM"="windows") # supported by pak
+  print(Sys.getenv("PKG_SYSREQS_PLATFORM"))
+  warning("Windows is not support by pak")
+}
+
+```
+
+### Optionally, recreate the environment on another server using renv and pak
+
+```
+cp rserver/renv.lock /new-location 
+
+cd /new-location && \
+    echo -e 'options(renv.config.pak.enabled=TRUE)\noptions(repos=c(CRAN="https://packagemanager.posit.co/cran/__linux__/rhel9/2025-03-10")) Sys.getenv("PKG_SYSREQS_PLATFORM" > .Rprofile && \
+    R -q -e 'install.packages(c("renv"))' && \
+    R -q -e 'renv::activate()' && \
+    R -q -e 'renv::restore()'
+```
+
+### Find the installed packages
+
+```r
+library(jsonlite)
+library(tidyverse)
+my_renvlock <- fromJSON("renv.lock")
+
+pkgs_df<- map_dfr(my_renvlock$Packages, ~ enframe(.) |>
+  filter(name %in% c("Package", "Version")) |>
+  mutate(value = as.character(value)) |>
+  pivot_wider())
+```
+
+### Find the system dependencies for those installed packages
+
+```r
+deps<-pak::pkg_sysreqs(pkgs_df$Package, upgrade = FALSE,sysreqs_platform=Sys.getenv("PKG_SYSREQS_PLATFORM"))
+
+# Get the commands to run to install system deps to support the package environment
+if (!identical(deps$pre_install,character(0))) cat(unique(deps$pre_install),sep="\n")
+if (!identical(deps$install_scripts,character(0))) cat(deps$install_scripts,sep="\n")
+if (!identical(deps$post_install,character(0))) cat(unique(deps$post_install),sep="\n")
+```
+
+### Alternatively, find the most common package downloaed from package manager and support those 
+
+Credit: <https://github.com/rstudio/rstudio-pro/issues/6536#issuecomment-2694317773> 
+
+```r
+library(httr)
+library(jsonlite)
+library(pak)
+
+base_url <- "https://packagemanager.posit.co/__api__/metrics/packages"
+query_params <- list(
+  "_sort" = "count",
+  "_order" = "desc",
+  "_days" = 30,
+  "_sourceType" = "r",
+  "_limit" = 1000
+)
+
+# Make the GET request
+response <- GET(url = base_url, query = query_params)
+
+if (status_code(response) == 200) {
+  # Parse the JSON content
+  content <- content(response, "text")
+  data <- fromJSON(content)
+  
+  # Set platform name ()
+  Sys.setenv("PKG_SYSREQS_PLATFORM"="rockylinux-9")
+  # extract system reqs using pak
+  deps<-pak::pkg_sysreqs(data$name)
+  
+  # Print commands
+  if (!identical(deps$pre_install,character(0))) cat(unique(deps$pre_install),sep="\n")
+  if (!identical(deps$install_scripts,character(0))) cat(deps$install_scripts,sep="\n")
+  if (!identical(deps$post_install,character(0))) cat(unique(deps$post_install),sep="\n")
+  
+} else {
+  cat("Error: Unable to fetch data from P3M. Status code:", status_code(response), "\n")
+}
+
+```
+
+

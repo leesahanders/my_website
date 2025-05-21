@@ -17,6 +17,7 @@ filters:
 lightbox: auto
 categories:
   - code
+  - data
 ---
 
 

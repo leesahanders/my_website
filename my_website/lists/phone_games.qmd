@@ -104,6 +104,8 @@ Track your coverage gaps with: <https://www.mkttoolbox.com/login/?ret_url=%2F>
 
 <twitch.io> has a bunch of fun games (not just for phones). This is where the indie game scene is. 
 
+For example: <https://william-rous.itch.io/type-help> and the gradual hints in <https://dfabulich.github.io/type-help-hints.html> 
+
 
 
 

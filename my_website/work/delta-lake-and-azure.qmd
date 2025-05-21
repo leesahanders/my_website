@@ -17,6 +17,7 @@ filters:
 lightbox: auto
 categories:
   - code
+  - data
 ---
 
 This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it's easy to find in the future! 

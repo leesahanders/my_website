@@ -17,6 +17,7 @@ filters:
 lightbox: auto
 categories:
   - code
+  - R
 ---
 
 Have you ever tried to use someone else’s repo and run into issues with package installation and breaking package versions? Or tried to work on a really old repository and been foiled while trying to set it up?

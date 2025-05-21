@@ -21,26 +21,57 @@ categories:
 
 ## Frame of mind 
 
-My colleagues recommendation while reading these resources: Put yourself in a mental model that you are at a certain company, you want to build a whole new IT system that's addressing certain unmet needs. Due to the nature of the use case you need to use this CSV approach. Your goal is to meet user requirements while keeping risks under control. 
+My colleagues recommendation while reading these resources: 
 
-As an exercise, think about can you come up with some guiding principles on how to set up Posit Team to make it GXP compliant. For example, what happens if deploy a shiny app and what part of processes are happening there when it comes to GXP, CSV, and such. The icing on the cake is how can we change the Connect configuration to make it compliant. 
+>Put yourself in a mental model that you are at a certain company and you want to build a whole new IT system that's addressing certain unmet needs. Due to the nature of the use case you need to use this CSV (Computer System Validation) approach. Your goal is to meet user requirements while keeping risks under control. 
+
+>As an exercise, think about can you come up with some guiding principles on how to set up Posit Team to make it GXP compliant. For example, what happens if deploy a shiny app and what part of processes are happening there when it comes to GXP, CSV, and such. The icing on the cake is how can we change the Connect configuration to make it compliant. 
+
+## Definitions 
+
+**DQ** Design Qualification - a design is assessed and documented to make sure it meets user requirements and regulatory standards (typically doesn't apply to Posit software)
+
+**IQ** Installation Qualification - verifies that equipment and systems are installed correctly according to the manufacturers instructions
+
+**OQ** Operational Qualification - verifies that a system performs as required over time, typically requires implementation of control systems, alarms, and testing of functions under different conditions
+
+**PQ** Performance Qualification - verifies the system performance while operating under normal operating conditions, typically involves real production environments or batches and monitors quality outcomes
+
+**CSV** Computer System Validation is a form of software validation to ensure that a regulated computerized system is as safe, secure, and reliable as paper based records. 
+
+**URD/URS** User Requirements Document or User Requirements Specification specifies what the user expects the software to be able to do. 
+
+**GXP** A set of principles that govern the use of various systems and recommend the implementation of strict controls 
+
+**GMP** Good Manufacturing Practices, guidelines that govern the manufacture and sale of food, beverages, cosmetics, pharmaceuticals, dietary supplements, and medical devices
+
+**SCE** Statistical Compute Environment - typically computerized systems where late-stage clinical development workloads run
+
+**SOP** Standard Operating Procedure is a set of repeatable steps and instructions that an organization can follow in order to achieve a common activity.
+
+**Production** Day to day system for productive use. Change control for system-wide changes is in place.
+
+**Development** Small replica of the production system. No change control. Used for IT internal testing of new features/changes.
+
+**Test/Staging/QA** Small replica of the production system. Fully change controlled. Used to allow for business testing before rolling out the change to Production.
 
 ## Resources 
 
 ### Start here 
 
-Michael had a post in the Life science and healthcare channel - posted pdf document - https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489
+Internal to Posit resources: 
 
-Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md
+- Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - <https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md>
 
-On a similar note, this post from MichaelM is useful about validated environments: https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&cid=C2P7MTJKE
+- Michael had a post in the Life science and healthcare channel - posted pdf document - <https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489>
 
-We as posit are not in the business of validating packages. We can talk about ow to do it high level but its up to them to build such a process or point them at Atorus OpenVal, or Jumping Rivers Litmus system. 
-OpenVAL offers validation services: 
+- This post from MichaelM is useful about validated environments: <https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&cid=C2P7MTJKE>
 
+- Another internal post about the limitations of renv - <https://positpbc.slack.com/archives/C2P7MTJKE/p1746653854586919?thread_ts=1746118620.637929&cid=C2P7MTJKE>
 
+### As a vendor - disclaimer
 
-
+We as posit are not in the business of validating packages. We can talk about how to do it high level but its up to them to build such a process or point them at Atorus OpenVal (which doesn't use Package Manager), or Jumping Rivers Litmus system. 
 
 ### Now add some more documents 
 
@@ -68,7 +99,105 @@ Shiny and rmarkdown:<https://posit.co/wp-content/uploads/2024/11/validation-shin
 
 [How pharma is pioneering WebAssembly with webR & Shiny for FDA clinical trial submissions](https://posit.co/blog/webr-fda-pilot/)
 
+### Tools that will help make this easier 
+
+- [Posit Package Manager](https://posit.co/products/enterprise/package-manager/)
+- R package [litmus](https://www.jumpingrivers.com/blog/should-i-use-your-r-pkg/) by Jumping Rivers and service
+- R package [oysteR](https://sonatype-nexus-community.github.io/oysteR/) by Sonatype Nexus for checking package vulnerabilities against the OSS index
+- R package [pak](https://pak.r-lib.org/)
+- R package [riskmetric](https://pharmar.github.io/riskmetric/)
+- [Atorus OpenVal](https://www.atorusresearch.com/openval/)
+- [teal.logger](https://insightsengineering.github.io/teal.logger/latest-tag/index.html) for logging actions taken inside a shiny app
 
 ## Take aways 
 
+### What has worked in the past? 
 
+There has been one successfully submission of a shiny app to the FDA and it was stripped down so that there weren't any interactive elements and it ran via WASM. While aditional monitoring and logging is really exciting, and I hope is something we can see in the future, at the moment it may be worth being grounded that what a validated output may look like will be more like a compendium of static documents that are navigated via a shiny app rather than a true interactive application. 
+
+### What are the guiding principles? 
+
+They key guiding principle is to understand what your use case is and where risks could be introduced. 
+
+Common risk areas: 
+
+- Was it installed correctly? 
+- When changes are made, IE upgrades to packages or software, how would any newly introduced risks be detected? 
+- Is the way users will use the system understood and can be turned into tests in order to validate the system? 
+- How is data or code being handled so that things like patient data are handled securely? 
+
+Whenever there is a change to the system it needs to through either a full validation or mini-validation 
+
+### Developing a SOP 
+
+- New system is identified for CSV based on a risk assessment (collaboration between QA, Business and IT)
+- URS (USer Requirement Specifications) are drafted (typically in the form of user stories) (business)
+- Design specifications are produced where technical design and identified business needs are aligned (IT)
+- The Validation plan is created that documents the overall solution and how the system will be validated (IT) 
+- 
+
+#### Managing installations 
+
+The name of the game here is transparency, security, and reproducability. Whether using docker, singularity, k8s, slurm, a load balanced servers, or a single server it doesn't really matter as long as all steps are followed and documented. 
+
+#### Upgrades
+
+When upgrade, security risks with old OS, then need to understand where the risks are and have tests and re-validate to make sure same results before and after the upgrade. Qualification documentation will allow you to replicate the system the same as it was back then when you are asked years later to re-do some piece of the data analysis from a health authority. Your documentation needs to be in a state where you can replicate it. Money at that point is no object because the risk of losing a submissions is monumental. 
+
+#### Managing packages 
+
+Sophisticated math libraries for linear algebra like BLAS then those things are so performance optimized that they use different code for diff OS's. You could get different results. 
+
+Need a process that gives assurance that a package is ready for use - use atorus openval, preinstall packages and test them in their respective locations, or if you allow the users to allow packages then every user is responsible for testing, validating their stuff each and every time. 
+
+Strong misconception - that technology can solve all the problems. People will always try to find loopholes, no matter how clever you configure it. That's the important thing with business processes. If they follow the processes then they will be compliant, otherwise they will be out of compliance and there is nothing IT can do about it. 
+
+Docker images are acting as a site library in a way - installing packages into a direct instance where deploying packages. Could have been an EC2 just the same. Using a site library. Pre-install all the needed packages and dependencies, run testing on those packages and document that. 
+
+current is tested-r package repositories that has meta data - intentionally called tested not validated because it is all automated but wouldn't recommend all to do because some of the packages have a higher risk, if serious about risk mitigation you would want to a different level of testing for high risk packages than low risk packages. In a real world not possible to automate everything. A human being still needs to accept those. 
+
+Litmus is 30+ different risk numbers weighted together 
+
+Testing needs to be done every time you install the package with that given version. Any change needs to be documented. Need to do an impact analysis, will inform how many other things need to be tested again. Site library with 100 packages and install 1 more then need to asses how other packages will be impacted, do we need to upgrade the other packages, test and so on and so forth. 
+
+When user installs would need to rerun test suite, produce suite of documentation, if allowed to install directly otherwise site library is a huge pro because do the tests and documentation once for all users. 
+
+Code is a change to the system also, need to justify the changes too. Critical analyses sometimes also have two different teams that are segregated and do the same analysis independently to make sure risk of making wrong decision is mitigated - double programming. 
+
+This is leaning on the cautious side of things. 
+
+Need repository that you can rely on in 3-5 maybe 10 years, if trust local package manager more than cran mirrors then useful for that purpose. meta data is cosmetics. 
+
+##### Why not renv? Or just installing packages into user home directories? 
+
+[renv](https://rstudio.github.io/renv) is a very common and useful R package that helps users maintain project specific package environments. It is very similar in function to Python `venv` environments. 
+
+`renv` gives you a snapshot in time for your project for which packages you had and what their versions were. This is very useful and an important part of reproduceability. 
+
+Unfortunately using `renv` on its own without other pieces for how packages are installaed can lead to breaking qualification requirements. Re-downloading packages would introduce risk. Every time a package is downloaded that constitutes a change in the system and needs to go through a validation process to ensure that no new risks have been introduced. If that is done once and periodically after, to install packages in a site library, that can be a manageable level of effort. But to do that for every user every time they install a package would be an unreasonable amount of effort. 
+
+renv is the answer for knowledge of what packges you used, some level of reproduceability, but if you think about what learned with the CSV stuff. Any package installation on the system constitutes a change, any change needs to be documented tested and approved. 
+
+### Shiny application submissions to the FDA 
+
+The first every shiny submission was done in such a way the FDA was only accepting the app once the team had removed all the interactive elements so it was more like a clickable document in the end. 
+
+### Workbench config settings 
+
+### Connect config settings 
+
+### Package Manager config settings 
+
+## But what about Python? 
+
+- `pak` -> `uv`
+- `riskmetric` -> no equivalent today
+- `renv` -> `venv` (note taken that this is useful for recording package versions, a risk if used to install packages)
+- Package Manager -> Package Manager
+
+I've been eyeing:  
+
+1. [pip-audit](https://pypi.org/project/pip-audit/) (uses the data from [advisory database](https://github.com/pypa/advisory-database))
+2. googles [osv-scanner](https://github.com/google/osv-scanner) (that uses the data from [osv.dev](http://osv.dev/))
+
+But those are just very surface level tools that check if a vulnerability has been detected

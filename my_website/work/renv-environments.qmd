@@ -17,6 +17,7 @@ filters:
 lightbox: auto
 categories:
   - code
+  - R
 ---
 
 ```r
@@ -1005,7 +1006,7 @@ library(jsonlite)
 library(tidyverse)
 my_renvlock <- fromJSON("renv.lock")
 
-map_dfr(my_renvlock$Packages, ~ enframe(.) |>
+pkgs_df<- map_dfr(my_renvlock$Packages, ~ enframe(.) |>
   filter(name %in% c("Package", "Version")) |>
   mutate(value = as.character(value)) |>
   pivot_wider())
@@ -1019,6 +1020,79 @@ update.packages(lib.loc=<site.library>, repos=<PPM Repo>, ask=FALSE)
 
 # add any new packages
 new.packages(lib.loc=<site.library>, repos=<PPM Repo>, ask=FALSE)
+```
+
+## Scenario 11: Going from a package environment to a list of system dependencies 
+
+Let's try to get an environment of packages and understand the system dependencies. This would be useful for fresh installs. 
+
+```
+# create the current environment as a renv project and snapshot it, or restore a project with renv::restore()
+renv::init()
+renv::snapshot()
+```
+
+Find what OS we are on 
+
+```
+R.version # Nope
+version # Nope
+.Platform # nope
+.Platform$OS.type # nope
+Sys.info() # nope
+Sys.info()["sysname"] # nope
+system("cat /etc/*release") # closer
+system("lsb_release -a") # closer
+pak::system_r_platform() # closer
+pak::system_r_platform_data()$distribution # this is the one!
+
+if(.Platform$OS.type == "unix"){
+  Sys.setenv("PKG_SYSREQS_PLATFORM"=pak::system_r_platform_data()$distribution)
+  print(PKG_SYSREQS_PLATFORM)
+} else { ## windows
+  Sys.setenv("PKG_SYSREQS_PLATFORM"="windows") # supported by pak
+  print(PKG_SYSREQS_PLATFORM)
+  warning("Windows is not support by pak")
+}
+
+```
+
+Optionally, recreate the environment on another server using renv and pak
+
+```
+cp rserver/renv.lock /code 
+
+cd /code && \
+    echo -e 'options(renv.config.pak.enabled=TRUE)\noptions(repos=c(CRAN="https://packagemanager.posit.co/cran/__linux__/rhel9/2025-03-10"))\nSys.getenv("PKG_SYSREQS_PLATFORM" > .Rprofile && \
+    R -q -e 'install.packages(c("renv"))' && \
+    R -q -e 'renv::activate()' && \
+    R -q -e 'renv::restore()'
+```
+
+Can also take a broader approach 
+
+```
+pak::sysreqs_db_list()
+pak::sysreqs_list_system_packages()
+```
+
+Most importantly, let's take our renv.lock file and use that to find our system dependencies
+
+```
+# pak::pkg_sysreqs(c("curl", "xml2", "devtools", "CHRONOS"))
+pkgs = c("curl", "xml2", "devtools", "CHRONOS")
+
+pak::pkg_sysreqs(pkg = pkgs, upgrade = FALSE, sysreqs_platform = Sys.getenv("PKG_SYSREQS_PLATFORM"))
+
+# When we are ready we can update upgrade to TRUE and then install the system dependencies for these packages 
+#pak::pkg_sysreqs(pkg = pkgs, upgrade = TRUE, sysreqs_platform = Sys.getenv("PKG_SYSREQS_PLATFORM"))
+```
+
+Alternatively can check that the system requirements are installed and if not install them
+
+```
+sysreqs_check_installed(packages = NULL, library = .libPaths()[1])
+sysreqs_fix_installed(packages = NULL, library = .libPaths()[1])
 ```
 
 # Common issues and troubleshooting 

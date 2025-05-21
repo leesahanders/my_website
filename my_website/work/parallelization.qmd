@@ -17,6 +17,8 @@ filters:
 lightbox: auto
 categories:
   - code
+  - R
+  - HPC
 ---
 
 For compute heavy and long running jobs, HPC can come to the rescue!

@@ -17,6 +17,7 @@ filters:
 lightbox: auto
 categories:
   - code
+  - HPC
 ---
 
 This short writeup addresses a need to add an additional label to Workbench sessions started in a kubernetes environment. Specifically this was for an environemnt where an external Workbench server was launching sessions into a Kubernetes cluster. The recommended way to do this is to use job templating. 
