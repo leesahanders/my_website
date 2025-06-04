@@ -1,0 +1,85 @@
+---
+title: "Exploring Positron"
+description: "A diehard RStudio loyalist takes on a new IDE"
+author: "Lisa"
+date: "2025-06-03"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+Positron is a new IDE developed by Posit. I've been putting off giving it a deep dive. I love RStudio. Maybe it's the green icons, or the simple 4 box layout, or even just that it's what I've been using for so long but it really feels like a happy place to me. 
+
+I was the same way with RMarkdown. You could have torn it from my cold dead hands, but eventually that feature comes along that makes going through the process of changing worth it. And for me with Quarto that was `lightbox` with its ability to magically resize images. Such a simple thing, such a challenging thing to do outside of Quarto. 
+
+## First impressions 
+
+Changing the theme made it feel like less of a sterile and "other" place. I'm a big fan of dark modes and I actually really liked the built in dark mode. 
+
+gear -> theme -> positron dark  
+
+There are some good resources for porting your own theme also: <https://www.r-bloggers.com/2025/05/porting-my-favorite-rstudio-color-theme-to-positron/> 
+
+## Viewing data 
+
+::: {#fig-elephants layout-ncol=2}
+
+![Light theme](img/positron-theme-light.png){#fig-light-theme}
+
+![dark theme](img/positron-data.png){#fig-dark-theme}
+
+Data Previewer now shows distributions!
+:::
+
+## My extensions 
+
+Since Positron is a fork of VS Code it relies on extensions for adding various features. Here are some of my favorites: 
+
+- Air (R Language Support)
+- Posit Publisher
+- Black Formatter
+- Gitlive
+- Pyright
+- Jupyter
+- Jupter Cell Tags 
+- Jupyter Keymap 
+- Jupyter Slide Show 
+- Project Manager
+- Python Debugger 
+- Quarto
+- Ruff
+- Shiny 
+- Scope to this
+- vscode-pets
+
+<!--
+Soon: 
+
+- [databot](https://positpbc.atlassian.net/wiki/spaces/POSITRON/pages/1613365269/Databot+Getting+Started#Installation)
+- [Positron Assistant](https://connect.posit.it/positron-wiki/positron-assistant.html)
+-->
+
+## Remote connections with SSH 
+
+This is bundled with Positron and there’s no need to install anything.
+
+Resource: <https://positron.posit.co/remote-ssh.html> 
+
+## LLM integrations 
+
+Stay tuned for Posit::Conf 2025!
+
+## Resources 
+
+Inspired by: <https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/> 
