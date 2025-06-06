@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-01-11">
-<meta name="description" content="This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks">
+<meta name="dcterms.date" content="2023-08-23">
+<meta name="description" content="Fork n merge with the experts">
 
-<title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
+<title>Lisa Anders - questionable.quarto - Github setup on a new computer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -44,9 +78,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -156,15 +187,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
+      <h1 class="title">Github setup on a new computer</h1>
                   <div>
         <div class="description">
-          This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks
+          Fork n merge with the experts
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">code</div>
-                <div class="quarto-category">data</div>
               </div>
                   </div>
   </div>
@@ -182,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 11, 2024</p>
+        <p class="date">August 23, 2023</p>
       </div>
     </div>
     
@@ -198,18 +228,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#azure-data-lake" id="toc-azure-data-lake" class="nav-link active" data-scroll-target="#azure-data-lake">Azure Data Lake</a>
+  <li><a href="#at-a-glance" id="toc-at-a-glance" class="nav-link active" data-scroll-target="#at-a-glance">At a glance</a></li>
+  <li><a href="#check-how-a-piece-of-content-was-cloned-from-git" id="toc-check-how-a-piece-of-content-was-cloned-from-git" class="nav-link" data-scroll-target="#check-how-a-piece-of-content-was-cloned-from-git">Check how a piece of content was cloned from git</a></li>
+  <li><a href="#pat" id="toc-pat" class="nav-link" data-scroll-target="#pat">PAT</a></li>
+  <li><a href="#ssh-key" id="toc-ssh-key" class="nav-link" data-scroll-target="#ssh-key">SSH key</a>
   <ul class="collapse">
-  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set up</a></li>
-  <li><a href="#add-data" id="toc-add-data" class="nav-link" data-scroll-target="#add-data">Add data</a></li>
+  <li><a href="#from-inside-rstudio" id="toc-from-inside-rstudio" class="nav-link" data-scroll-target="#from-inside-rstudio">From inside RStudio:</a></li>
+  <li><a href="#from-terminal" id="toc-from-terminal" class="nav-link" data-scroll-target="#from-terminal">From terminal:</a></li>
+  <li><a href="#for-various-modifications-and-needing-to-update-passphrases" id="toc-for-various-modifications-and-needing-to-update-passphrases" class="nav-link" data-scroll-target="#for-various-modifications-and-needing-to-update-passphrases">For various modifications and needing to update passphrases:</a></li>
   </ul></li>
-  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-  <li><a href="#reading-and-writing-delta-files" id="toc-reading-and-writing-delta-files" class="nav-link" data-scroll-target="#reading-and-writing-delta-files">Reading and Writing Delta Files</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
-  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a>
+  <li><a href="#other-tips-and-tricks" id="toc-other-tips-and-tricks" class="nav-link" data-scroll-target="#other-tips-and-tricks">Other tips and tricks</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
   <ul class="collapse">
-  <li><a href="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" id="toc-azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="nav-link" data-scroll-target="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></li>
-  <li><a href="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html" id="toc-delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="nav-link" data-scroll-target="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: https://docs.delta.io/latest/delta-intro.html</a></li>
+  <li><a href="#unable-to-fork" id="toc-unable-to-fork" class="nav-link" data-scroll-target="#unable-to-fork">“Unable to Fork”</a></li>
+  <li><a href="#persistence-in-sagemaker" id="toc-persistence-in-sagemaker" class="nav-link" data-scroll-target="#persistence-in-sagemaker">Persistence in Sagemaker</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -221,169 +253,132 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it’s easy to find in the future!</p>
-<section id="azure-data-lake" class="level2">
-<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
-<section id="set-up" class="level3">
-<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
-<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
-<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
-<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://happygitwithr.com/https-pat.html" class="uri">https://happygitwithr.com/https-pat.html</a></li>
+<li><a href="https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/">Oh sh!t git</a></li>
+<li><a href="https://twitter.com/allison_horst/status/1563210538510737409">Allison Horst’s git</a></li>
+<li>Getting started with git in rstudio: <a href="https://www.youtube.com/watch?v=jN6tvgt3GK8" class="uri">https://www.youtube.com/watch?v=jN6tvgt3GK8</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gitcreds)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
+<p>Check for previous credentials and set username if needed:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"lisa.anders@posit.co"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"leesahanders"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Switch to rstudio terminal, checking for credentials:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gh<span class="sc">::</span><span class="fu">gh_whoami</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Generate the PAT:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check that it stored with:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gitcreds_get</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now you can clone down a project. For the first time using a PAT it will give you a link to visit for authenticating the first time.</p>
+<p>For Sagemaker you need to configure the global git to cache instead of store the credentials to a local file (from bash/terminal):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'store --file ~/.my-credentials'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="check-how-a-piece-of-content-was-cloned-from-git" class="level2">
+<h2 class="anchored" data-anchor-id="check-how-a-piece-of-content-was-cloned-from-git">Check how a piece of content was cloned from git</h2>
+<pre><code>git remote show origin</code></pre>
+</section>
+<section id="pat" class="level2">
+<h2 class="anchored" data-anchor-id="pat">PAT</h2>
+<p>Not the recommended way when on linux - gitcreds doesn’t actually “work” on linux. Tom Mock has chatted w/ Jenny about this a few times, which eventually led to: <a href="https://github.com/r-lib/gitcreds/issues/47" class="uri">https://github.com/r-lib/gitcreds/issues/47</a></p>
+<p>Alternatively, there are some git config options from the terminal. See: <a href="https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux" class="uri">https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux</a></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I highly recommend selecting “repo”, “user”, and “workflow”.</p>
+<p>Copy the generated PAT to your clipboard. Provide this PAT next time a Git operation asks for your password OR store the PAT explicitly.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Fix my email:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"lisa.anders@posit.co"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check that it stored with:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gitcreds_get</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Other useful functions:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">gh_token_help</span>()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">git_sitrep</span>()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>gh<span class="sc">::</span><span class="fu">gh_whoami</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use the HTTPS address for opening a new project.</p>
+</section>
+<section id="ssh-key" class="level2">
+<h2 class="anchored" data-anchor-id="ssh-key">SSH key</h2>
+<section id="from-inside-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="from-inside-rstudio">From inside RStudio:</h3>
 <p>Steps:</p>
-<ol type="1">
-<li><p>Go to storage account</p></li>
-<li><p>Create and give it a name</p></li>
-<li><p>Select: LRS</p></li>
-<li><p>Switch to premium: block blobs</p></li>
-<li><p>Change to hierarchical blob</p></li>
-<li><p>Set tags:</p></li>
-</ol>
 <ul>
-<li><p>rs:owner</p></li>
-<li><p>rs:project = soleng</p></li>
-<li><p>rs:environment = dev</p></li>
+<li><p>Go to Tools -&gt; Global Options -&gt; Git / SVN</p></li>
+<li><p>Create SSH Key</p></li>
+<li><p>Approve the key and add a password (if appropriate)</p></li>
+<li><p>View Public Key</p></li>
+<li><p>Copy that public key that was provided into the SSH and GPG keys section in your git under your profile settings.</p></li>
 </ul>
-<ol start="7" type="1">
-<li>Once in just need access keys or shared access signature in order to gain access</li>
-</ol>
+<p>You’ll copy / update code using the <code>SSH</code> method from git.</p>
 </section>
-<section id="add-data" class="level3">
-<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
-<p>You can add data manually by creating a container and then using the upload icon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<section id="from-terminal" class="level3">
+<h3 class="anchored" data-anchor-id="from-terminal">From terminal:</h3>
+<p>Generate a new key with: <code>ssh-keygen -t ed25519 -C "your_email@example.com"</code></p>
+<p>Add your ssh key to the background client: <code>eval "$(ssh-agent -s)"</code> <code>ssh-add ~/.ssh/id_ed25519</code></p>
+<p>Or find an existing key with: <code>ls -al ~/.ssh</code></p>
+<p>Copy the key to your clipboard: <code>clip &lt; ~/.ssh/id_ed25519.pub</code></p>
+<p>clip &lt; ~/.ssh/id_ed25519.pub</p>
+<p>Tip: With Windows Subsystem for Linux (WSL), you can use clip.exe. Otherwise if clip isn’t working, you can locate the hidden .ssh folder, open the file in your favorite text editor, and copy it to your clipboard.</p>
+<p>Follow <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">here</a> to add it to your github account.</p>
+</section>
+<section id="for-various-modifications-and-needing-to-update-passphrases" class="level3">
+<h3 class="anchored" data-anchor-id="for-various-modifications-and-needing-to-update-passphrases">For various modifications and needing to update passphrases:</h3>
+<p>How to remove / add a password: <a href="https://stackoverflow.com/questions/112396/how-do-i-remove-the-passphrase-for-the-ssh-key-without-having-to-create-a-new-ke" class="uri">https://stackoverflow.com/questions/112396/how-do-i-remove-the-passphrase-for-the-ssh-key-without-having-to-create-a-new-ke</a></p>
+<p><a href="https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html" class="uri">https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html</a></p>
+<p>Set up SSH keys and use with Git. Follow the instructions <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">here</a>.</p>
+<p>You can check that SSH keys exist and the name with:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> ~/.ssh</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-p</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"leesahanders"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"lisa.anders@rstudio.com"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"lisa.anders@posit.co"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"lisamaeanders@gmail.com"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> /root/.ssh/id_ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Get the key and add to git in UI: <code>clip &lt; /root/.ssh/id_ed25519.pub</code></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /root/.ssh/id_ed25519.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use the SSH address to clone new projects.</p>
 </section>
 </section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
-<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
-<p>You’ll need to know:</p>
-<ul>
-<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
-<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
-</ul>
-<pre><code>library(AzureStor)
-
-blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
-
-bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
-
-# List containers and files in containers
-list_storage_containers(bl_endp_key)
-cont1 &lt;- storage_container(bl_endp_key, "container1")
-list_storage_files(cont1)
-
-# Download a file
-storage_download(cont1, "/crm_call_center_logs.parquet")
-
-# Upload a file 
-storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
-<p>You can also create and delete containers:</p>
-<pre><code># Create a container
-newcont &lt;- create_storage_container(bl_endp_key, "container3")
-
-# Create a directory in the container
-cont3 &lt;- storage_container(bl_endp_key, "container3")
-create_storage_dir(cont3, "newdir")
-
-# Delete a container
-delete_storage_container(newcont)</code></pre>
-</section>
-<section id="reading-and-writing-delta-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
-<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
-<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
-<pre><code>library(sparklyr)
-
-#Install a local version of Spark
-spark_install(version=3.4)
-
-# Set Spark configuration to be able to read delta tables
-conf &lt;- spark_config()
-conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
-conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
-
-# For spark 3.4 
-conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
-
-# Open a connection
-sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
-
-# For this example we will use a built-in dataframe to save example data files, including one for delta tables
-tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
-
-# Write spark dataframe to disk
-spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
-spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
-spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
-
-# Read dataframes into normal memory
-spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
-regular_df_csv &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
-regular_df_parquet &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
-regular_df_delta &lt;- collect(spark_tbl_handle)
-
-# Disconnect
-spark_disconnect(sc)</code></pre>
-<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
+<section id="other-tips-and-tricks" class="level2">
+<h2 class="anchored" data-anchor-id="other-tips-and-tricks">Other tips and tricks</h2>
+<p>If switching to a project that was shared with you need to run: <code>git config --global --add safe.directory /usr/home/xu.fei/shiny-test1</code></p>
+<p>And then close and reopen the session</p>
 </section>
 <section id="troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<p>From R:</p>
-<pre><code># See spark details (troubleshooting)
-spark_config()
-spark_get_java()
-spark_available_versions()
-spark_installed_versions()
-
-# See session details
-utils::sessionInfo() </code></pre>
-<p>From bash:</p>
-<pre><code>namei -l /usr/lib/spark</code></pre>
-<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
+<section id="unable-to-fork" class="level3">
+<h3 class="anchored" data-anchor-id="unable-to-fork">“Unable to Fork”</h3>
+<p>This can happen if you’re using ssh to fetch the remote and you don’t have ssh installed.</p>
+<p>However note that support for password authentication was removed on August 13, 2021 from Workbench.</p>
+<p>This means that one of the methods above needs to be done instead http of using ssh as part of the built in UI for git cloning</p>
 </section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
-<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
-<blockquote class="blockquote">
-<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
-</blockquote>
-<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
+<section id="persistence-in-sagemaker" class="level3">
+<h3 class="anchored" data-anchor-id="persistence-in-sagemaker">Persistence in Sagemaker</h3>
+<p>“Sessions on SageMaker cannot be suspended and resumed. This is b/c the underlying compute is ephemeral, so any session state is lost.”</p>
+<p>The behavior that can be expected and is normal is that credentials will work when a session is launched. But the credentials are not being preserved once the session is suspended and you try to resume it.</p>
+<ul>
+<li><a href="https://usethis.r-lib.org/articles/articles/git-credentials.html" class="uri">https://usethis.r-lib.org/articles/articles/git-credentials.html</a></li>
+<li><a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/" class="uri">https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/</a></li>
+</ul>
+<section id="change-where-the-credentials-are-stored" class="level5">
+<h5 class="anchored" data-anchor-id="change-where-the-credentials-are-stored">Change where the credentials are stored</h5>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'store --file ~/.my-credentials'</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'cache --file ~/.my-credentials --timeout=10000000'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
 </section>
-<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
-<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
-<blockquote class="blockquote">
-<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
-</blockquote>
-<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
-<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
-
-
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">image</span>
-<span class="glightbox-desc lightbox-desc-2">image</span>
-</div>
 </section>
 </section>
 
@@ -920,31 +915,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 

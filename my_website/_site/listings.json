@@ -2,6 +2,8 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/resources/CSV.html",
+      "/work/Positron.html",
       "/work/saml-entraid-posit-team.html",
       "/work/Configuring Jupyter.html",
       "/work/Monitoring Posit Team.html",
@@ -20,6 +22,7 @@
       "/work/delta-lake-and-azure.html",
       "/work/parallelization.html",
       "/work/git-and-sagemaker.html",
+      "/work/version-control.html",
       "/work/securing-credentials.html",
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
@@ -36,6 +39,7 @@
       "/work/vetiver.html",
       "/work/sharepoint-oh-no.html",
       "/work/securing-credentials.html",
+      "/work/version-control.html",
       "/work/git-and-sagemaker.html",
       "/work/parallelization.html",
       "/work/delta-lake-and-azure.html",
@@ -57,11 +61,13 @@
       "/work/Monitoring Posit Team.html",
       "/work/Configuring Jupyter.html",
       "/work/saml-entraid-posit-team.html",
+      "/work/Positron.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
       "/lists.html",
       "/index.html",
+      "/work/resources/CSV.html",
       "/about.html"
     ]
   },

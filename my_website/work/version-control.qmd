@@ -26,7 +26,7 @@ Resources:
 -   [Allison Horst's git](https://twitter.com/allison_horst/status/1563210538510737409)
 -   Getting started with git in rstudio: <https://www.youtube.com/watch?v=jN6tvgt3GK8>
 
-```{r}
+```r
 library(usethis)
 library(gitcreds)
 library(gh)
@@ -79,8 +79,6 @@ git config --global credential.helper 'store --file ~/.my-credentials'
 git remote show origin
 ```
 
-
-
 ## PAT
 
 Not the recommended way when on linux - gitcreds doesn’t actually “work” on linux.
@@ -88,7 +86,7 @@ Tom Mock has chatted w/ Jenny about this a few times, which eventually led to: <
 
 Alternatively, there are some git config options from the terminal. See: <https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux>
 
-```{r}
+```r
 usethis::create_github_token()
 ```
 
@@ -96,25 +94,25 @@ I highly recommend selecting "repo", "user", and "workflow".
 
 Copy the generated PAT to your clipboard. Provide this PAT next time a Git operation asks for your password OR store the PAT explicitly.
 
-```{r}
+```r
 gitcreds::gitcreds_set()
 ```
 
 Fix my email:
 
-```{bash}
+```bash
 git config --global user.email "lisa.anders@posit.co"
 ```
 
 Check that it stored with:
 
-```{r}
+```r
 gitcreds_get()
 ```
 
 Other useful functions:
 
-```{r}
+```r
 usethis::gh_token_help()
 
 usethis::git_sitrep()
@@ -168,13 +166,13 @@ Set up SSH keys and use with Git. Follow the instructions [here](https://docs.gi
 
 You can check that SSH keys exist and the name with:
 
-```         
+```bash         
 ls ~/.ssh
 
 ssh-keygen -p
 ```
 
-```         
+```bash         
 git config --global user.name "leesahanders"
 git config --global user.email "lisa.anders@rstudio.com"
 git config --global user.email "lisa.anders@posit.co"
@@ -182,14 +180,14 @@ git config --global user.email "lisamaeanders@gmail.com"
 git config --global --list
 ```
 
-```         
+```bash         
 eval "$(ssh-agent -s)"
 ssh-add /root/.ssh/id_ed25519
 ```
 
 Get the key and add to git in UI: `clip < /root/.ssh/id_ed25519.pub`
 
-```         
+```bash         
 nano /root/.ssh/id_ed25519.pub
 ```
 

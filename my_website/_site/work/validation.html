@@ -195,13 +195,26 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#frame-of-mind" id="toc-frame-of-mind" class="nav-link active" data-scroll-target="#frame-of-mind">Frame of mind</a></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions">Definitions</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
   <ul class="collapse">
   <li><a href="#start-here" id="toc-start-here" class="nav-link" data-scroll-target="#start-here">Start here</a></li>
+  <li><a href="#as-a-vendor---disclaimer" id="toc-as-a-vendor---disclaimer" class="nav-link" data-scroll-target="#as-a-vendor---disclaimer">As a vendor - disclaimer</a></li>
   <li><a href="#now-add-some-more-documents" id="toc-now-add-some-more-documents" class="nav-link" data-scroll-target="#now-add-some-more-documents">Now add some more documents</a></li>
   <li><a href="#finally-lets-check-out-the-stories-on-the-posit-blog" id="toc-finally-lets-check-out-the-stories-on-the-posit-blog" class="nav-link" data-scroll-target="#finally-lets-check-out-the-stories-on-the-posit-blog">Finally lets check out the stories on the Posit blog</a></li>
+  <li><a href="#tools-that-will-help-make-this-easier" id="toc-tools-that-will-help-make-this-easier" class="nav-link" data-scroll-target="#tools-that-will-help-make-this-easier">Tools that will help make this easier</a></li>
   </ul></li>
-  <li><a href="#take-aways" id="toc-take-aways" class="nav-link" data-scroll-target="#take-aways">Take aways</a></li>
+  <li><a href="#take-aways" id="toc-take-aways" class="nav-link" data-scroll-target="#take-aways">Take aways</a>
+  <ul class="collapse">
+  <li><a href="#what-has-worked-in-the-past" id="toc-what-has-worked-in-the-past" class="nav-link" data-scroll-target="#what-has-worked-in-the-past">What has worked in the past?</a></li>
+  <li><a href="#what-are-the-guiding-principles" id="toc-what-are-the-guiding-principles" class="nav-link" data-scroll-target="#what-are-the-guiding-principles">What are the guiding principles?</a></li>
+  <li><a href="#developing-a-sop" id="toc-developing-a-sop" class="nav-link" data-scroll-target="#developing-a-sop">Developing a SOP</a></li>
+  <li><a href="#shiny-application-submissions-to-the-fda" id="toc-shiny-application-submissions-to-the-fda" class="nav-link" data-scroll-target="#shiny-application-submissions-to-the-fda">Shiny application submissions to the FDA</a></li>
+  <li><a href="#workbench-config-settings" id="toc-workbench-config-settings" class="nav-link" data-scroll-target="#workbench-config-settings">Workbench config settings</a></li>
+  <li><a href="#connect-config-settings" id="toc-connect-config-settings" class="nav-link" data-scroll-target="#connect-config-settings">Connect config settings</a></li>
+  <li><a href="#package-manager-config-settings" id="toc-package-manager-config-settings" class="nav-link" data-scroll-target="#package-manager-config-settings">Package Manager config settings</a></li>
+  </ul></li>
+  <li><a href="#but-what-about-python" id="toc-but-what-about-python" class="nav-link" data-scroll-target="#but-what-about-python">But what about Python?</a></li>
   </ul>
 </nav>
     </div>
@@ -214,17 +227,45 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="frame-of-mind" class="level2">
 <h2 class="anchored" data-anchor-id="frame-of-mind">Frame of mind</h2>
-<p>My colleagues recommendation while reading these resources: Put yourself in a mental model that you are at a certain company, you want to build a whole new IT system that’s addressing certain unmet needs. Due to the nature of the use case you need to use this CSV approach. Your goal is to meet user requirements while keeping risks under control.</p>
+<p>My colleagues recommendation while reading these resources:</p>
+<blockquote class="blockquote">
+<p>Put yourself in a mental model that you are at a certain company and you want to build a whole new IT system that’s addressing certain unmet needs. Due to the nature of the use case you need to use this CSV (Computer System Validation) approach. Your goal is to meet user requirements while keeping risks under control.</p>
+</blockquote>
+<blockquote class="blockquote">
 <p>As an exercise, think about can you come up with some guiding principles on how to set up Posit Team to make it GXP compliant. For example, what happens if deploy a shiny app and what part of processes are happening there when it comes to GXP, CSV, and such. The icing on the cake is how can we change the Connect configuration to make it compliant.</p>
+</blockquote>
+</section>
+<section id="definitions" class="level2">
+<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<p><strong>DQ</strong> Design Qualification - a design is assessed and documented to make sure it meets user requirements and regulatory standards (typically doesn’t apply to Posit software)</p>
+<p><strong>IQ</strong> Installation Qualification - verifies that equipment and systems are installed correctly according to the manufacturers instructions</p>
+<p><strong>OQ</strong> Operational Qualification - verifies that a system performs as required over time, typically requires implementation of control systems, alarms, and testing of functions under different conditions</p>
+<p><strong>PQ</strong> Performance Qualification - verifies the system performance while operating under normal operating conditions, typically involves real production environments or batches and monitors quality outcomes</p>
+<p><strong>CSV</strong> Computer System Validation is a form of software validation to ensure that a regulated computerized system is as safe, secure, and reliable as paper based records.</p>
+<p><strong>URD/URS</strong> User Requirements Document or User Requirements Specification specifies what the user expects the software to be able to do.</p>
+<p><strong>GXP</strong> A set of principles that govern the use of various systems and recommend the implementation of strict controls</p>
+<p><strong>GMP</strong> Good Manufacturing Practices, guidelines that govern the manufacture and sale of food, beverages, cosmetics, pharmaceuticals, dietary supplements, and medical devices</p>
+<p><strong>SCE</strong> Statistical Compute Environment - typically computerized systems where late-stage clinical development workloads run</p>
+<p><strong>SOP</strong> Standard Operating Procedure is a set of repeatable steps and instructions that an organization can follow in order to achieve a common activity.</p>
+<p><strong>Production</strong> Day to day system for productive use. Change control for system-wide changes is in place.</p>
+<p><strong>Development</strong> Small replica of the production system. No change control. Used for IT internal testing of new features/changes.</p>
+<p><strong>Test/Staging/QA</strong> Small replica of the production system. Fully change controlled. Used to allow for business testing before rolling out the change to Production.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <section id="start-here" class="level3">
 <h3 class="anchored" data-anchor-id="start-here">Start here</h3>
-<p>Michael had a post in the Life science and healthcare channel - posted pdf document - https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489</p>
-<p>Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md</p>
-<p>On a similar note, this post from MichaelM is useful about validated environments: https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE</p>
-<p>We as posit are not in the business of validating packages. We can talk about ow to do it high level but its up to them to build such a process or point them at Atorus OpenVal, or Jumping Rivers Litmus system. OpenVAL offers validation services:</p>
+<p>Internal to Posit resources:</p>
+<ul>
+<li><p>Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - <a href="https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md" class="uri">https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md</a></p></li>
+<li><p>Michael had a post in the Life science and healthcare channel - posted pdf document - <a href="https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489" class="uri">https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489</a></p></li>
+<li><p>This post from MichaelM is useful about validated environments: <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE" class="uri">https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE</a></p></li>
+<li><p>Another internal post about the limitations of renv - <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1746653854586919?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE" class="uri">https://positpbc.slack.com/archives/C2P7MTJKE/p1746653854586919?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE</a></p></li>
+</ul>
+</section>
+<section id="as-a-vendor---disclaimer" class="level3">
+<h3 class="anchored" data-anchor-id="as-a-vendor---disclaimer">As a vendor - disclaimer</h3>
+<p>We as posit are not in the business of validating packages. We can talk about how to do it high level but its up to them to build such a process or point them at Atorus OpenVal (which doesn’t use Package Manager), or Jumping Rivers Litmus system.</p>
 </section>
 <section id="now-add-some-more-documents" class="level3">
 <h3 class="anchored" data-anchor-id="now-add-some-more-documents">Now add some more documents</h3>
@@ -243,9 +284,104 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://posit.co/blog/roches-first-end-to-end-r-journey-to-submission/">Roche’s end-to-end R submission for a new drug application</a></p>
 <p><a href="https://posit.co/blog/webr-fda-pilot/">How pharma is pioneering WebAssembly with webR &amp; Shiny for FDA clinical trial submissions</a></p>
 </section>
+<section id="tools-that-will-help-make-this-easier" class="level3">
+<h3 class="anchored" data-anchor-id="tools-that-will-help-make-this-easier">Tools that will help make this easier</h3>
+<ul>
+<li><a href="https://posit.co/products/enterprise/package-manager/">Posit Package Manager</a></li>
+<li>R package <a href="https://www.jumpingrivers.com/blog/should-i-use-your-r-pkg/">litmus</a> by Jumping Rivers and service</li>
+<li>R package <a href="https://sonatype-nexus-community.github.io/oysteR/">oysteR</a> by Sonatype Nexus for checking package vulnerabilities against the OSS index</li>
+<li>R package <a href="https://pak.r-lib.org/">pak</a></li>
+<li>R package <a href="https://pharmar.github.io/riskmetric/">riskmetric</a></li>
+<li><a href="https://www.atorusresearch.com/openval/">Atorus OpenVal</a></li>
+<li><a href="https://insightsengineering.github.io/teal.logger/latest-tag/index.html">teal.logger</a> for logging actions taken inside a shiny app</li>
+</ul>
+</section>
 </section>
 <section id="take-aways" class="level2">
 <h2 class="anchored" data-anchor-id="take-aways">Take aways</h2>
+<section id="what-has-worked-in-the-past" class="level3">
+<h3 class="anchored" data-anchor-id="what-has-worked-in-the-past">What has worked in the past?</h3>
+<p>There has been one successfully submission of a shiny app to the FDA and it was stripped down so that there weren’t any interactive elements and it ran via WASM. While aditional monitoring and logging is really exciting, and I hope is something we can see in the future, at the moment it may be worth being grounded that what a validated output may look like will be more like a compendium of static documents that are navigated via a shiny app rather than a true interactive application.</p>
+</section>
+<section id="what-are-the-guiding-principles" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-guiding-principles">What are the guiding principles?</h3>
+<p>They key guiding principle is to understand what your use case is and where risks could be introduced.</p>
+<p>Common risk areas:</p>
+<ul>
+<li>Was it installed correctly?</li>
+<li>When changes are made, IE upgrades to packages or software, how would any newly introduced risks be detected?</li>
+<li>Is the way users will use the system understood and can be turned into tests in order to validate the system?</li>
+<li>How is data or code being handled so that things like patient data are handled securely?</li>
+</ul>
+<p>Whenever there is a change to the system it needs to through either a full validation or mini-validation</p>
+</section>
+<section id="developing-a-sop" class="level3">
+<h3 class="anchored" data-anchor-id="developing-a-sop">Developing a SOP</h3>
+<ul>
+<li>New system is identified for CSV based on a risk assessment (collaboration between QA, Business and IT)</li>
+<li>URS (USer Requirement Specifications) are drafted (typically in the form of user stories) (business)</li>
+<li>Design specifications are produced where technical design and identified business needs are aligned (IT)</li>
+<li>The Validation plan is created that documents the overall solution and how the system will be validated (IT)</li>
+<li></li>
+</ul>
+<section id="managing-installations" class="level4">
+<h4 class="anchored" data-anchor-id="managing-installations">Managing installations</h4>
+<p>The name of the game here is transparency, security, and reproducability. Whether using docker, singularity, k8s, slurm, a load balanced servers, or a single server it doesn’t really matter as long as all steps are followed and documented.</p>
+</section>
+<section id="upgrades" class="level4">
+<h4 class="anchored" data-anchor-id="upgrades">Upgrades</h4>
+<p>When upgrade, security risks with old OS, then need to understand where the risks are and have tests and re-validate to make sure same results before and after the upgrade. Qualification documentation will allow you to replicate the system the same as it was back then when you are asked years later to re-do some piece of the data analysis from a health authority. Your documentation needs to be in a state where you can replicate it. Money at that point is no object because the risk of losing a submissions is monumental.</p>
+</section>
+<section id="managing-packages" class="level4">
+<h4 class="anchored" data-anchor-id="managing-packages">Managing packages</h4>
+<p>Sophisticated math libraries for linear algebra like BLAS then those things are so performance optimized that they use different code for diff OS’s. You could get different results.</p>
+<p>Need a process that gives assurance that a package is ready for use - use atorus openval, preinstall packages and test them in their respective locations, or if you allow the users to allow packages then every user is responsible for testing, validating their stuff each and every time.</p>
+<p>Strong misconception - that technology can solve all the problems. People will always try to find loopholes, no matter how clever you configure it. That’s the important thing with business processes. If they follow the processes then they will be compliant, otherwise they will be out of compliance and there is nothing IT can do about it.</p>
+<p>Docker images are acting as a site library in a way - installing packages into a direct instance where deploying packages. Could have been an EC2 just the same. Using a site library. Pre-install all the needed packages and dependencies, run testing on those packages and document that.</p>
+<p>current is tested-r package repositories that has meta data - intentionally called tested not validated because it is all automated but wouldn’t recommend all to do because some of the packages have a higher risk, if serious about risk mitigation you would want to a different level of testing for high risk packages than low risk packages. In a real world not possible to automate everything. A human being still needs to accept those.</p>
+<p>Litmus is 30+ different risk numbers weighted together</p>
+<p>Testing needs to be done every time you install the package with that given version. Any change needs to be documented. Need to do an impact analysis, will inform how many other things need to be tested again. Site library with 100 packages and install 1 more then need to asses how other packages will be impacted, do we need to upgrade the other packages, test and so on and so forth.</p>
+<p>When user installs would need to rerun test suite, produce suite of documentation, if allowed to install directly otherwise site library is a huge pro because do the tests and documentation once for all users.</p>
+<p>Code is a change to the system also, need to justify the changes too. Critical analyses sometimes also have two different teams that are segregated and do the same analysis independently to make sure risk of making wrong decision is mitigated - double programming.</p>
+<p>This is leaning on the cautious side of things.</p>
+<p>Need repository that you can rely on in 3-5 maybe 10 years, if trust local package manager more than cran mirrors then useful for that purpose. meta data is cosmetics.</p>
+<section id="why-not-renv-or-just-installing-packages-into-user-home-directories" class="level5">
+<h5 class="anchored" data-anchor-id="why-not-renv-or-just-installing-packages-into-user-home-directories">Why not renv? Or just installing packages into user home directories?</h5>
+<p><a href="https://rstudio.github.io/renv">renv</a> is a very common and useful R package that helps users maintain project specific package environments. It is very similar in function to Python <code>venv</code> environments.</p>
+<p><code>renv</code> gives you a snapshot in time for your project for which packages you had and what their versions were. This is very useful and an important part of reproduceability.</p>
+<p>Unfortunately using <code>renv</code> on its own without other pieces for how packages are installaed can lead to breaking qualification requirements. Re-downloading packages would introduce risk. Every time a package is downloaded that constitutes a change in the system and needs to go through a validation process to ensure that no new risks have been introduced. If that is done once and periodically after, to install packages in a site library, that can be a manageable level of effort. But to do that for every user every time they install a package would be an unreasonable amount of effort.</p>
+<p>renv is the answer for knowledge of what packges you used, some level of reproduceability, but if you think about what learned with the CSV stuff. Any package installation on the system constitutes a change, any change needs to be documented tested and approved.</p>
+</section>
+</section>
+</section>
+<section id="shiny-application-submissions-to-the-fda" class="level3">
+<h3 class="anchored" data-anchor-id="shiny-application-submissions-to-the-fda">Shiny application submissions to the FDA</h3>
+<p>The first every shiny submission was done in such a way the FDA was only accepting the app once the team had removed all the interactive elements so it was more like a clickable document in the end.</p>
+</section>
+<section id="workbench-config-settings" class="level3">
+<h3 class="anchored" data-anchor-id="workbench-config-settings">Workbench config settings</h3>
+</section>
+<section id="connect-config-settings" class="level3">
+<h3 class="anchored" data-anchor-id="connect-config-settings">Connect config settings</h3>
+</section>
+<section id="package-manager-config-settings" class="level3">
+<h3 class="anchored" data-anchor-id="package-manager-config-settings">Package Manager config settings</h3>
+</section>
+</section>
+<section id="but-what-about-python" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-python">But what about Python?</h2>
+<ul>
+<li><code>pak</code> -&gt; <code>uv</code></li>
+<li><code>riskmetric</code> -&gt; no equivalent today</li>
+<li><code>renv</code> -&gt; <code>venv</code> (note taken that this is useful for recording package versions, a risk if used to install packages)</li>
+<li>Package Manager -&gt; Package Manager</li>
+</ul>
+<p>I’ve been eyeing:</p>
+<ol type="1">
+<li><a href="https://pypi.org/project/pip-audit/">pip-audit</a> (uses the data from <a href="https://github.com/pypa/advisory-database">advisory database</a>)</li>
+<li>googles <a href="https://github.com/google/osv-scanner">osv-scanner</a> (that uses the data from <a href="http://osv.dev/">osv.dev</a>)</li>
+</ol>
+<p>But those are just very surface level tools that check if a vulnerability has been detected</p>
 
 
 </section>

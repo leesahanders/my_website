@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-01-11">
-<meta name="description" content="This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks">
+<meta name="dcterms.date" content="2025-06-03">
+<meta name="description" content="A diehard RStudio loyalist takes on a new IDE">
 
-<title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
+<title>Lisa Anders - questionable.quarto - Exploring Positron</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,15 +156,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
+      <h1 class="title">Exploring Positron</h1>
                   <div>
         <div class="description">
-          This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks
+          A diehard RStudio loyalist takes on a new IDE
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">code</div>
-                <div class="quarto-category">data</div>
               </div>
                   </div>
   </div>
@@ -182,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 11, 2024</p>
+        <p class="date">June 3, 2025</p>
       </div>
     </div>
     
@@ -198,19 +197,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#azure-data-lake" id="toc-azure-data-lake" class="nav-link active" data-scroll-target="#azure-data-lake">Azure Data Lake</a>
-  <ul class="collapse">
-  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set up</a></li>
-  <li><a href="#add-data" id="toc-add-data" class="nav-link" data-scroll-target="#add-data">Add data</a></li>
-  </ul></li>
-  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-  <li><a href="#reading-and-writing-delta-files" id="toc-reading-and-writing-delta-files" class="nav-link" data-scroll-target="#reading-and-writing-delta-files">Reading and Writing Delta Files</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
-  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a>
-  <ul class="collapse">
-  <li><a href="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" id="toc-azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="nav-link" data-scroll-target="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></li>
-  <li><a href="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html" id="toc-delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="nav-link" data-scroll-target="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: https://docs.delta.io/latest/delta-intro.html</a></li>
-  </ul></li>
+  <li><a href="#first-impressions" id="toc-first-impressions" class="nav-link active" data-scroll-target="#first-impressions">First impressions</a></li>
+  <li><a href="#viewing-data" id="toc-viewing-data" class="nav-link" data-scroll-target="#viewing-data">Viewing data</a></li>
+  <li><a href="#my-extensions" id="toc-my-extensions" class="nav-link" data-scroll-target="#my-extensions">My extensions</a></li>
+  <li><a href="#remote-connections-with-ssh" id="toc-remote-connections-with-ssh" class="nav-link" data-scroll-target="#remote-connections-with-ssh">Remote connections with SSH</a></li>
+  <li><a href="#llm-integrations" id="toc-llm-integrations" class="nav-link" data-scroll-target="#llm-integrations">LLM integrations</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -221,170 +213,98 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it’s easy to find in the future!</p>
-<section id="azure-data-lake" class="level2">
-<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
-<section id="set-up" class="level3">
-<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
-<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
-<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
-<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
-<p>Steps:</p>
-<ol type="1">
-<li><p>Go to storage account</p></li>
-<li><p>Create and give it a name</p></li>
-<li><p>Select: LRS</p></li>
-<li><p>Switch to premium: block blobs</p></li>
-<li><p>Change to hierarchical blob</p></li>
-<li><p>Set tags:</p></li>
-</ol>
-<ul>
-<li><p>rs:owner</p></li>
-<li><p>rs:project = soleng</p></li>
-<li><p>rs:environment = dev</p></li>
-</ul>
-<ol start="7" type="1">
-<li>Once in just need access keys or shared access signature in order to gain access</li>
-</ol>
+<p>Positron is a new IDE developed by Posit. I’ve been putting off giving it a deep dive. I love RStudio. Maybe it’s the green icons, or the simple 4 box layout, or even just that it’s what I’ve been using for so long but it really feels like a happy place to me.</p>
+<p>I was the same way with RMarkdown. You could have torn it from my cold dead hands, but eventually that feature comes along that makes going through the process of changing worth it. And for me with Quarto that was <code>lightbox</code> with its ability to magically resize images. Such a simple thing, such a challenging thing to do outside of Quarto.</p>
+<section id="first-impressions" class="level2">
+<h2 class="anchored" data-anchor-id="first-impressions">First impressions</h2>
+<p>Changing the theme made it feel like less of a sterile and “other” place. I’m a big fan of dark modes and I actually really liked the built in dark mode.</p>
+<p>gear -&gt; theme -&gt; positron dark</p>
+<p>There are some good resources for porting your own theme also: <a href="https://www.r-bloggers.com/2025/05/porting-my-favorite-rstudio-color-theme-to-positron/" class="uri">https://www.r-bloggers.com/2025/05/porting-my-favorite-rstudio-color-theme-to-positron/</a></p>
 </section>
-<section id="add-data" class="level3">
-<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
-<p>You can add data manually by creating a container and then using the upload icon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
+<section id="viewing-data" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-data">Viewing data</h2>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-light-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/positron-theme-light.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-1"><img src="img/positron-theme-light.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Light theme
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-dark-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/positron-data.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-2"><img src="img/positron-data.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) dark theme
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Data Previewer now shows distributions!
+</figcaption>
 </figure>
 </div>
 </section>
-</section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
-<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
-<p>You’ll need to know:</p>
+<section id="my-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="my-extensions">My extensions</h2>
+<p>Since Positron is a fork of VS Code it relies on extensions for adding various features. Here are some of my favorites:</p>
 <ul>
-<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
-<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
+<li>Air (R Language Support)</li>
+<li>Posit Publisher</li>
+<li>Black Formatter</li>
+<li>Gitlive</li>
+<li>Pyright</li>
+<li>Jupyter</li>
+<li>Jupter Cell Tags</li>
+<li>Jupyter Keymap</li>
+<li>Jupyter Slide Show</li>
+<li>Project Manager</li>
+<li>Python Debugger</li>
+<li>Quarto</li>
+<li>Ruff</li>
+<li>Shiny</li>
+<li>Scope to this</li>
+<li>vscode-pets</li>
 </ul>
-<pre><code>library(AzureStor)
+<!--
+Soon: 
 
-blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
-
-bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
-
-# List containers and files in containers
-list_storage_containers(bl_endp_key)
-cont1 &lt;- storage_container(bl_endp_key, "container1")
-list_storage_files(cont1)
-
-# Download a file
-storage_download(cont1, "/crm_call_center_logs.parquet")
-
-# Upload a file 
-storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
-<p>You can also create and delete containers:</p>
-<pre><code># Create a container
-newcont &lt;- create_storage_container(bl_endp_key, "container3")
-
-# Create a directory in the container
-cont3 &lt;- storage_container(bl_endp_key, "container3")
-create_storage_dir(cont3, "newdir")
-
-# Delete a container
-delete_storage_container(newcont)</code></pre>
+- [databot](https://positpbc.atlassian.net/wiki/spaces/POSITRON/pages/1613365269/Databot+Getting+Started#Installation)
+- [Positron Assistant](https://connect.posit.it/positron-wiki/positron-assistant.html)
+-->
 </section>
-<section id="reading-and-writing-delta-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
-<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
-<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
-<pre><code>library(sparklyr)
-
-#Install a local version of Spark
-spark_install(version=3.4)
-
-# Set Spark configuration to be able to read delta tables
-conf &lt;- spark_config()
-conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
-conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
-
-# For spark 3.4 
-conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
-
-# Open a connection
-sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
-
-# For this example we will use a built-in dataframe to save example data files, including one for delta tables
-tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
-
-# Write spark dataframe to disk
-spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
-spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
-spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
-
-# Read dataframes into normal memory
-spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
-regular_df_csv &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
-regular_df_parquet &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
-regular_df_delta &lt;- collect(spark_tbl_handle)
-
-# Disconnect
-spark_disconnect(sc)</code></pre>
-<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
+<section id="remote-connections-with-ssh" class="level2">
+<h2 class="anchored" data-anchor-id="remote-connections-with-ssh">Remote connections with SSH</h2>
+<p>This is bundled with Positron and there’s no need to install anything.</p>
+<p>Resource: <a href="https://positron.posit.co/remote-ssh.html" class="uri">https://positron.posit.co/remote-ssh.html</a></p>
 </section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<p>From R:</p>
-<pre><code># See spark details (troubleshooting)
-spark_config()
-spark_get_java()
-spark_available_versions()
-spark_installed_versions()
-
-# See session details
-utils::sessionInfo() </code></pre>
-<p>From bash:</p>
-<pre><code>namei -l /usr/lib/spark</code></pre>
-<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
+<section id="llm-integrations" class="level2">
+<h2 class="anchored" data-anchor-id="llm-integrations">LLM integrations</h2>
+<p>Stay tuned for Posit::Conf 2025!</p>
 </section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
-<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
-<blockquote class="blockquote">
-<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
-</blockquote>
-<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
-</section>
-<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
-<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
-<blockquote class="blockquote">
-<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
-</blockquote>
-<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
-<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<p>Inspired by: <a href="https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/" class="uri">https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/</a></p>
 
 
 <div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">image</span>
-<span class="glightbox-desc lightbox-desc-2">image</span>
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;1&nbsp;(a): Light theme</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;1&nbsp;(b): dark theme</span>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -920,7 +840,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
