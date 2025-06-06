@@ -25,6 +25,8 @@ Resources:
 -   [Oh sh!t git](https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/)
 -   [Allison Horst's git](https://twitter.com/allison_horst/status/1563210538510737409)
 -   Getting started with git in rstudio: <https://www.youtube.com/watch?v=jN6tvgt3GK8>
+- Cheat sheet: <https://posit.co/wp-content/uploads/2022/10/git-github.pdf> 
+- Great writeup: <https://github.com/AaronGullickson/git_cheat_sheet> 
 
 ```r
 library(usethis)
@@ -72,6 +74,14 @@ For Sagemaker you need to configure the global git to cache instead of store the
 ```bash
 git config --global credential.helper 'store --file ~/.my-credentials'
 ```
+
+### SAML SSO error 
+
+You might then get an error like this: 
+
+![SAML SSO error](img/SAML-version-control-error.png)
+
+Which you resolve by opening the URL it puts in the error and clicking through the dialog options. 
 
 ## Check how a piece of content was cloned from git 
 

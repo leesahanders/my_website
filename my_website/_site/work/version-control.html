@@ -78,6 +78,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -228,7 +231,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#at-a-glance" id="toc-at-a-glance" class="nav-link active" data-scroll-target="#at-a-glance">At a glance</a></li>
+  <li><a href="#at-a-glance" id="toc-at-a-glance" class="nav-link active" data-scroll-target="#at-a-glance">At a glance</a>
+  <ul class="collapse">
+  <li><a href="#saml-sso-error" id="toc-saml-sso-error" class="nav-link" data-scroll-target="#saml-sso-error">SAML SSO error</a></li>
+  </ul></li>
   <li><a href="#check-how-a-piece-of-content-was-cloned-from-git" id="toc-check-how-a-piece-of-content-was-cloned-from-git" class="nav-link" data-scroll-target="#check-how-a-piece-of-content-was-cloned-from-git">Check how a piece of content was cloned from git</a></li>
   <li><a href="#pat" id="toc-pat" class="nav-link" data-scroll-target="#pat">PAT</a></li>
   <li><a href="#ssh-key" id="toc-ssh-key" class="nav-link" data-scroll-target="#ssh-key">SSH key</a>
@@ -259,6 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/">Oh sh!t git</a></li>
 <li><a href="https://twitter.com/allison_horst/status/1563210538510737409">Allison Horst’s git</a></li>
 <li>Getting started with git in rstudio: <a href="https://www.youtube.com/watch?v=jN6tvgt3GK8" class="uri">https://www.youtube.com/watch?v=jN6tvgt3GK8</a></li>
+<li>Cheat sheet: <a href="https://posit.co/wp-content/uploads/2022/10/git-github.pdf" class="uri">https://posit.co/wp-content/uploads/2022/10/git-github.pdf</a></li>
+<li>Great writeup: <a href="https://github.com/AaronGullickson/git_cheat_sheet" class="uri">https://github.com/AaronGullickson/git_cheat_sheet</a></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gitcreds)</span>
@@ -280,6 +288,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now you can clone down a project. For the first time using a PAT it will give you a link to visit for authenticating the first time.</p>
 <p>For Sagemaker you need to configure the global git to cache instead of store the credentials to a local file (from bash/terminal):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'store --file ~/.my-credentials'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="saml-sso-error" class="level3">
+<h3 class="anchored" data-anchor-id="saml-sso-error">SAML SSO error</h3>
+<p>You might then get an error like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/SAML-version-control-error.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="SAML SSO error"><img src="img/SAML-version-control-error.png" class="img-fluid figure-img" alt="SAML SSO error"></a></p>
+<figcaption>SAML SSO error</figcaption>
+</figure>
+</div>
+<p>Which you resolve by opening the URL it puts in the error and clicking through the dialog options.</p>
+</section>
 </section>
 <section id="check-how-a-piece-of-content-was-cloned-from-git" class="level2">
 <h2 class="anchored" data-anchor-id="check-how-a-piece-of-content-was-cloned-from-git">Check how a piece of content was cloned from git</h2>
@@ -378,6 +397,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'cache --file ~/.my-credentials --timeout=10000000'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">SAML SSO error</span>
+</div>
 </section>
 </section>
 </section>
@@ -915,6 +937,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
