@@ -1,0 +1,229 @@
+---
+title: "Github setup on a new computer"
+description: "Fork n merge with the experts"
+author: "Lisa"
+date: "2023-08-23"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+Resources:
+
+-   <https://happygitwithr.com/https-pat.html>
+-   [Oh sh!t git](https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/)
+-   [Allison Horst's git](https://twitter.com/allison_horst/status/1563210538510737409)
+-   Getting started with git in rstudio: <https://www.youtube.com/watch?v=jN6tvgt3GK8>
+
+```{r}
+library(usethis)
+library(gitcreds)
+library(gh)
+```
+
+
+## At a glance 
+
+Check for previous credentials and set username if needed: 
+
+```bash
+git config --list 
+git config --global user.email "lisa.anders@posit.co"
+git config --global user.name "leesahanders"
+```
+
+
+Switch to rstudio terminal, checking for credentials: 
+```r
+gh::gh_whoami()
+```
+
+Generate the PAT:
+```r
+usethis::create_github_token()
+```
+ 
+Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:
+```r
+gitcreds::gitcreds_set()
+
+```
+Check that it stored with:
+
+```r
+gitcreds_get()
+```
+
+Now you can clone down a project. For the first time using a PAT it will give you a link to visit for authenticating the first time. 
+
+For Sagemaker you need to configure the global git to cache instead of store the credentials to a local file (from bash/terminal):
+
+```bash
+git config --global credential.helper 'store --file ~/.my-credentials'
+```
+
+## Check how a piece of content was cloned from git 
+
+```
+git remote show origin
+```
+
+
+
+## PAT
+
+Not the recommended way when on linux - gitcreds doesn’t actually “work” on linux.
+Tom Mock has chatted w/ Jenny about this a few times, which eventually led to: <https://github.com/r-lib/gitcreds/issues/47>
+
+Alternatively, there are some git config options from the terminal. See: <https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux>
+
+```{r}
+usethis::create_github_token()
+```
+
+I highly recommend selecting "repo", "user", and "workflow".
+
+Copy the generated PAT to your clipboard. Provide this PAT next time a Git operation asks for your password OR store the PAT explicitly.
+
+```{r}
+gitcreds::gitcreds_set()
+```
+
+Fix my email:
+
+```{bash}
+git config --global user.email "lisa.anders@posit.co"
+```
+
+Check that it stored with:
+
+```{r}
+gitcreds_get()
+```
+
+Other useful functions:
+
+```{r}
+usethis::gh_token_help()
+
+usethis::git_sitrep()
+
+gh::gh_whoami()
+```
+
+Use the HTTPS address for opening a new project.
+
+## SSH key
+
+### From inside RStudio:
+
+Steps:
+
+-   Go to Tools -\> Global Options -\> Git / SVN
+
+-   Create SSH Key
+
+-   Approve the key and add a password (if appropriate)
+
+-   View Public Key
+
+-   Copy that public key that was provided into the SSH and GPG keys section in your git under your profile settings.
+
+You'll copy / update code using the `SSH` method from git.
+
+### From terminal:
+
+Generate a new key with: `ssh-keygen -t ed25519 -C "your_email@example.com"`
+
+Add your ssh key to the background client: `eval "$(ssh-agent -s)"` `ssh-add ~/.ssh/id_ed25519`
+
+Or find an existing key with: `ls -al ~/.ssh`
+
+Copy the key to your clipboard: `clip < ~/.ssh/id_ed25519.pub`
+
+clip \< \~/.ssh/id_ed25519.pub
+
+Tip: With Windows Subsystem for Linux (WSL), you can use clip.exe. Otherwise if clip isn't working, you can locate the hidden .ssh folder, open the file in your favorite text editor, and copy it to your clipboard.
+
+Follow [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add it to your github account.
+
+### For various modifications and needing to update passphrases:
+
+How to remove / add a password: <https://stackoverflow.com/questions/112396/how-do-i-remove-the-passphrase-for-the-ssh-key-without-having-to-create-a-new-ke>
+
+<https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html>
+
+Set up SSH keys and use with Git. Follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+You can check that SSH keys exist and the name with:
+
+```         
+ls ~/.ssh
+
+ssh-keygen -p
+```
+
+```         
+git config --global user.name "leesahanders"
+git config --global user.email "lisa.anders@rstudio.com"
+git config --global user.email "lisa.anders@posit.co"
+git config --global user.email "lisamaeanders@gmail.com"
+git config --global --list
+```
+
+```         
+eval "$(ssh-agent -s)"
+ssh-add /root/.ssh/id_ed25519
+```
+
+Get the key and add to git in UI: `clip < /root/.ssh/id_ed25519.pub`
+
+```         
+nano /root/.ssh/id_ed25519.pub
+```
+
+Use the SSH address to clone new projects.
+
+## Other tips and tricks
+
+If switching to a project that was shared with you need to run: `git config --global --add safe.directory /usr/home/xu.fei/shiny-test1`
+
+And then close and reopen the session
+
+## Troubleshooting 
+
+### "Unable to Fork" 
+
+This can happen if you're using ssh to fetch the remote and you don't have ssh installed.
+
+However note that support for password authentication was removed on August 13, 2021 from Workbench. 
+
+This means that one of the methods above needs to be done instead http of using ssh as part of the built in UI for git cloning
+
+### Persistence in Sagemaker 
+
+"Sessions on SageMaker cannot be suspended and resumed. This is b/c the underlying compute is ephemeral, so any session state is lost."
+
+The behavior that can be expected and is normal is that credentials will work when a session is launched. But the credentials are not being preserved once the session is suspended and you try to resume it. 
+
+-   <https://usethis.r-lib.org/articles/articles/git-credentials.html> 
+-   <https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/> 
+
+##### Change where the credentials are stored
+
+```bash
+git config --global credential.helper 'store --file ~/.my-credentials'
+
+git config --global credential.helper 'cache --file ~/.my-credentials --timeout=10000000'
+```

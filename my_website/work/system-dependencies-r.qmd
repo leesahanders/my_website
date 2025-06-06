@@ -100,7 +100,7 @@ if (!identical(deps$install_scripts,character(0))) cat(deps$install_scripts,sep=
 if (!identical(deps$post_install,character(0))) cat(unique(deps$post_install),sep="\n")
 ```
 
-### Alternatively, find the most common package downloaed from package manager and support those 
+### Alternatively, find the most common package downloaded from package manager and support those 
 
 Credit: <https://github.com/rstudio/rstudio-pro/issues/6536#issuecomment-2694317773> 
 
