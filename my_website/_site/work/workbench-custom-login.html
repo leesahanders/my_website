@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2025-06-03">
-<meta name="description" content="A diehard RStudio loyalist takes on a new IDE">
+<meta name="dcterms.date" content="2025-06-18">
+<meta name="description" content="An exploration">
 
-<title>Lisa Anders - questionable.quarto - Exploring Positron</title>
+<title>Lisa Anders - questionable.quarto - Creating a custom Workbench login page</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,10 +156,10 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Exploring Positron</h1>
+      <h1 class="title">Creating a custom Workbench login page</h1>
                   <div>
         <div class="description">
-          A diehard RStudio loyalist takes on a new IDE
+          An exploration
         </div>
       </div>
                           <div class="quarto-categories">
@@ -181,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 3, 2025</p>
+        <p class="date">June 18, 2025</p>
       </div>
     </div>
     
@@ -197,12 +197,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#first-impressions" id="toc-first-impressions" class="nav-link active" data-scroll-target="#first-impressions">First impressions</a></li>
-  <li><a href="#viewing-data" id="toc-viewing-data" class="nav-link" data-scroll-target="#viewing-data">Viewing data</a></li>
-  <li><a href="#my-extensions" id="toc-my-extensions" class="nav-link" data-scroll-target="#my-extensions">My extensions</a></li>
-  <li><a href="#remote-connections-with-ssh" id="toc-remote-connections-with-ssh" class="nav-link" data-scroll-target="#remote-connections-with-ssh">Remote connections with SSH</a></li>
-  <li><a href="#llm-integrations" id="toc-llm-integrations" class="nav-link" data-scroll-target="#llm-integrations">LLM integrations</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#why-would-someone-want-to-do-this" id="toc-why-would-someone-want-to-do-this" class="nav-link active" data-scroll-target="#why-would-someone-want-to-do-this">Why would someone want to do this?</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#plain-html" id="toc-plain-html" class="nav-link" data-scroll-target="#plain-html">Plain html</a></li>
+  <li><a href="#with-more-jazz" id="toc-with-more-jazz" class="nav-link" data-scroll-target="#with-more-jazz">With more jazz</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -213,97 +212,90 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Positron is a new IDE developed by Posit. I’ve been putting off giving it a deep dive. I love RStudio. Maybe it’s the green icons, or the simple 4 box layout, or even just that it’s what I’ve been using for so long but it really feels like a happy place to me.</p>
-<p>I was the same way with RMarkdown. You could have torn it from my cold dead hands, but eventually that feature comes along that makes going through the process of changing worth it. And for me with Quarto that was <code>lightbox</code> with its ability to magically resize images. Such a simple thing, such a challenging thing to do outside of Quarto.</p>
-<section id="first-impressions" class="level2">
-<h2 class="anchored" data-anchor-id="first-impressions">First impressions</h2>
-<p>Changing the theme made it feel like less of a sterile and “other” place. I’m a big fan of dark modes and I actually really liked the built in dark mode.</p>
-<p>gear -&gt; theme -&gt; positron dark</p>
-<p>There are some good resources for porting your own theme also: <a href="https://www.r-bloggers.com/2025/05/porting-my-favorite-rstudio-color-theme-to-positron/" class="uri">https://www.r-bloggers.com/2025/05/porting-my-favorite-rstudio-color-theme-to-positron/</a></p>
+<section id="why-would-someone-want-to-do-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-would-someone-want-to-do-this">Why would someone want to do this?</h2>
+<p>Login can be a challenging process for many users and having the admin provide additional details can be very handy to point folks in the right direction. Also, being able to include your own branding isn’t just a nice jazzy thing but can be a security requirement for some teams to help provide another layer of protection via visual indicators.</p>
 </section>
-<section id="viewing-data" class="level2">
-<h2 class="anchored" data-anchor-id="viewing-data">Viewing data</h2>
-<div id="fig-elephants" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-light-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/positron-theme-light.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-1"><img src="img/positron-theme-light.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) Light theme
-</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-elephants" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-dark-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/positron-data.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-2"><img src="img/positron-data.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) dark theme
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Data Previewer now shows distributions!
-</figcaption>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A customer requested that this page be made clearer: <a href="https://docs.posit.co/ide/server-pro/admin/authenticating_users/customizing_signin.html" class="uri">https://docs.posit.co/ide/server-pro/admin/authenticating_users/customizing_signin.html</a></p>
+<p>They were confused that an example wasn’t built for them at the called out location <code>/opt/config/rstudio-login.html</code>.</p>
+<p>This support article has some useful examples that are useful: <a href="https://support.posit.co/hc/en-us/articles/231327847-Customizing-the-Posit-Workbench-RStudio-Server-Pro-Login-Page" class="uri">https://support.posit.co/hc/en-us/articles/231327847-Customizing-the-Posit-Workbench-RStudio-Server-Pro-Login-Page</a></p>
+<p>There are also some templates in this folder that might be useful to reference: <code>/usr/lib/rstudio-server/www/templates/encrypted-sign-in.html</code></p>
+</section>
+<section id="plain-html" class="level2">
+<h2 class="anchored" data-anchor-id="plain-html">Plain html</h2>
+<p>For this particular customer request I’ve been working on their goal is to modify that actual contents of the login information pane. Here is some (hopefully) useful exploration -</p>
+<p>Modifying the config&nbsp;<code>/etc/rstudio/rserver.conf</code>&nbsp;with:</p>
+<pre><code>auth-login-page-html=/etc/rstudio/login.html</code></pre>
+<p>And then creating that file&nbsp;<code>/etc/rstudio/login.html</code>&nbsp;with contents like:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Requesting access&lt;/h1&gt;
+    &lt;p&gt;In order to get access to this software a ticket will need to be submitted through IT.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>This results in a login page with the information appended at the bottom:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/workbench-custom-login-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Workbench login page"><img src="img/workbench-custom-login-1.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<figcaption>Workbench login page</figcaption>
 </figure>
 </div>
 </section>
-<section id="my-extensions" class="level2">
-<h2 class="anchored" data-anchor-id="my-extensions">My extensions</h2>
-<p>Since Positron is a fork of VS Code it relies on extensions for adding various features. Here are some of my favorites:</p>
-<ul>
-<li>Air (R Language Support)</li>
-<li>Posit Publisher</li>
-<li>Black Formatter</li>
-<li>Gitlive</li>
-<li>Pyright</li>
-<li>Jupyter</li>
-<li>Jupter Cell Tags</li>
-<li>Jupyter Keymap</li>
-<li>Jupyter Slide Show</li>
-<li>Project Manager</li>
-<li>Python Debugger</li>
-<li>Quarto</li>
-<li>Ruff</li>
-<li>Shiny</li>
-<li>Scope to this</li>
-<li>vscode-pets</li>
-</ul>
-<!--
-Soon: 
+<section id="with-more-jazz" class="level2">
+<h2 class="anchored" data-anchor-id="with-more-jazz">With more jazz</h2>
+<p>If we append the instructions on the support article and add a logo to <code>/usr/lib/rstudio-server/www/images</code> then we can jazz things up further.</p>
+<p>Note there are already files/images in <code>/usr/lib/rstudio-server/www/images</code> and in this example instead of using <code>logo.png</code> we made a custom image called <code>frog.png</code> by downloading an image from the internet with: <code>wget http://images.clipartpanda.com/frog-clip-art-frog_green.png -O /usr/lib/rstudio-server/www/images/logo.png</code></p>
+<p><code>/etc/rstudio/login.html</code>:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Requesting access&lt;/h1&gt;
+    &lt;p&gt;In order to get access to this software a ticket will need to be submitted through IT.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 
-- [databot](https://positpbc.atlassian.net/wiki/spaces/POSITRON/pages/1613365269/Databot+Getting+Started#Installation)
-- [Positron Assistant](https://connect.posit.it/positron-wiki/positron-assistant.html)
--->
+&lt;script type="text/javascript"&gt;
+window.onload=function(){
+
+var logo = document.createElement("img");
+logo.setAttribute("src","images/frog.png");
+logo.setAttribute("height", "36px");
+logo.setAttribute("width", "36px");
+logo.setAttribute("style", "float: right;");
+document.getElementById("banner").appendChild(logo);
+
+var cap = document.getElementById("caption_header");
+cap.innerHTML = "This is a message added by your admin. Sign into Posit with your assigned credentials credentials";    
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#banner {background-color: #4682b4;}
+#caption {border-bottom-color: #4682b4;}
+&lt;/style&gt;</code></pre>
+<p>This results in a login page with information appended at the bottom as well as custom coloring and a logo and the header for the login blurb changed:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/workbench-custom-login-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="Workbench login page"><img src="img/workbench-custom-login-2.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<figcaption>Workbench login page</figcaption>
+</figure>
+</div>
 </section>
-<section id="remote-connections-with-ssh" class="level2">
-<h2 class="anchored" data-anchor-id="remote-connections-with-ssh">Remote connections with SSH</h2>
-<p>This is bundled with Positron and there’s no need to install anything.</p>
-<p>Resource: <a href="https://positron.posit.co/remote-ssh.html" class="uri">https://positron.posit.co/remote-ssh.html</a></p>
-</section>
-<section id="llm-integrations" class="level2">
-<h2 class="anchored" data-anchor-id="llm-integrations">LLM integrations</h2>
-<p>Stay tuned for Posit::Conf 2025!</p>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<p>Inspired by: <a href="https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/" class="uri">https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/</a></p>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p><a href="https://github.com/rstudio/rstudio-pro/issues/8378">Git issue</a></p>
 
 
 <div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;1&nbsp;(a): Light theme</span>
-<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;1&nbsp;(b): dark theme</span>
+<span class="glightbox-desc lightbox-desc-1">Workbench login page</span>
+<span class="glightbox-desc lightbox-desc-2">Workbench login page</span>
 </div>
 </section>
 
@@ -840,7 +832,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

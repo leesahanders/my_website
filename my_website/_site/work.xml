@@ -10,7 +10,107 @@
 <atom:link href="https://questionable.quarto.pub/blog/work.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Tue, 03 Jun 2025 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 18 Jun 2025 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Creating a custom Workbench login page</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/workbench-custom-login.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="why-would-someone-want-to-do-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-would-someone-want-to-do-this">Why would someone want to do this?</h2>
+<p>Login can be a challenging process for many users and having the admin provide additional details can be very handy to point folks in the right direction. Also, being able to include your own branding isn’t just a nice jazzy thing but can be a security requirement for some teams to help provide another layer of protection via visual indicators.</p>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A customer requested that this page be made clearer: <a href="https://docs.posit.co/ide/server-pro/admin/authenticating_users/customizing_signin.html" class="uri">https://docs.posit.co/ide/server-pro/admin/authenticating_users/customizing_signin.html</a></p>
+<p>They were confused that an example wasn’t built for them at the called out location <code>/opt/config/rstudio-login.html</code>.</p>
+<p>This support article has some useful examples that are useful: <a href="https://support.posit.co/hc/en-us/articles/231327847-Customizing-the-Posit-Workbench-RStudio-Server-Pro-Login-Page" class="uri">https://support.posit.co/hc/en-us/articles/231327847-Customizing-the-Posit-Workbench-RStudio-Server-Pro-Login-Page</a></p>
+<p>There are also some templates in this folder that might be useful to reference: <code>/usr/lib/rstudio-server/www/templates/encrypted-sign-in.html</code></p>
+</section>
+<section id="plain-html" class="level2">
+<h2 class="anchored" data-anchor-id="plain-html">Plain html</h2>
+<p>For this particular customer request I’ve been working on their goal is to modify that actual contents of the login information pane. Here is some (hopefully) useful exploration -</p>
+<p>Modifying the config&nbsp;<code>/etc/rstudio/rserver.conf</code>&nbsp;with:</p>
+<pre><code>auth-login-page-html=/etc/rstudio/login.html</code></pre>
+<p>And then creating that file&nbsp;<code>/etc/rstudio/login.html</code>&nbsp;with contents like:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Requesting access&lt;/h1&gt;
+    &lt;p&gt;In order to get access to this software a ticket will need to be submitted through IT.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>This results in a login page with the information appended at the bottom:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/workbench-custom-login-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-1.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<figcaption>Workbench login page</figcaption>
+</figure>
+</div>
+</section>
+<section id="with-more-jazz" class="level2">
+<h2 class="anchored" data-anchor-id="with-more-jazz">With more jazz</h2>
+<p>If we append the instructions on the support article and add a logo to <code>/usr/lib/rstudio-server/www/images</code> then we can jazz things up further.</p>
+<p>Note there are already files/images in <code>/usr/lib/rstudio-server/www/images</code> and in this example instead of using <code>logo.png</code> we made a custom image called <code>frog.png</code> by downloading an image from the internet with: <code>wget http://images.clipartpanda.com/frog-clip-art-frog_green.png -O /usr/lib/rstudio-server/www/images/logo.png</code></p>
+<p><code>/etc/rstudio/login.html</code>:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Requesting access&lt;/h1&gt;
+    &lt;p&gt;In order to get access to this software a ticket will need to be submitted through IT.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;script type="text/javascript"&gt;
+window.onload=function(){
+
+var logo = document.createElement("img");
+logo.setAttribute("src","images/frog.png");
+logo.setAttribute("height", "36px");
+logo.setAttribute("width", "36px");
+logo.setAttribute("style", "float: right;");
+document.getElementById("banner").appendChild(logo);
+
+var cap = document.getElementById("caption_header");
+cap.innerHTML = "This is a message added by your admin. Sign into Posit with your assigned credentials credentials";    
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#banner {background-color: #4682b4;}
+#caption {border-bottom-color: #4682b4;}
+&lt;/style&gt;</code></pre>
+<p>This results in a login page with information appended at the bottom as well as custom coloring and a logo and the header for the login blurb changed:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/workbench-custom-login-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-2.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<figcaption>Workbench login page</figcaption>
+</figure>
+</div>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p><a href="https://github.com/rstudio/rstudio-pro/issues/8378">Git issue</a></p>
+
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/workbench-custom-login.html</guid>
+  <pubDate>Wed, 18 Jun 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Exploring Positron</title>
   <dc:creator>Lisa </dc:creator>
@@ -116,6 +216,542 @@ Soon:
   <category>code</category>
   <guid>https://questionable.quarto.pub/blog/work/Positron.html</guid>
   <pubDate>Tue, 03 Jun 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>Finding R System Dependencies</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/system-dependencies-r.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="using-pak-and-renv-to-find-r-system-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="using-pak-and-renv-to-find-r-system-dependencies">Using pak and renv to find R system dependencies</h2>
+<p>Let’s try to get an environment of packages and understand the system dependencies. This would be useful for fresh installs into a new environment.</p>
+</section>
+<section id="a-note-on-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-on-methodology">A note on methodology</h2>
+<p>In an ideal world a user will be able to identify what packages they are using. Do you really need that package from 3 years ago that you installed but ended up not using? Technology doesn’t solve all problems! Sometimes the “soft” method is the best way to solve a problem.</p>
+</section>
+<section id="steps" class="level2">
+<h2 class="anchored" data-anchor-id="steps">Steps</h2>
+<section id="create-the-current-environment-as-a-renv-project-and-snapshot-it" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-current-environment-as-a-renv-project-and-snapshot-it">Create the current environment as a renv project and snapshot it</h3>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(pak)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(renv)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Or restore a project with renv::restore() if using a pre-existing projectd</span></span>
+<span id="cb1-5">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">init</span>()</span>
+<span id="cb1-6">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">snapshot</span>()</span></code></pre></div>
+</section>
+<section id="find-what-os-we-are-on" class="level3">
+<h3 class="anchored" data-anchor-id="find-what-os-we-are-on">Find what OS we are on</h3>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># R.version # Nope</span></span>
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># version # Nope</span></span>
+<span id="cb2-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># .Platform # nope</span></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># .Platform$OS.type # nope</span></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Sys.info() # nope</span></span>
+<span id="cb2-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Sys.info()["sysname"] # nope</span></span>
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># system("cat /etc/*release") # closer</span></span>
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># system("lsb_release -a") # closer</span></span>
+<span id="cb2-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># pak::system_r_platform_data()$distribution # this is the one!</span></span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span>(.Platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>OS.type <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"unix"</span>){</span>
+<span id="cb2-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system_r_platform_data</span>()<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>distribution)</span>
+<span id="cb2-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span>))</span>
+<span id="cb2-14">} <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> { <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## windows</span></span>
+<span id="cb2-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"windows"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># supported by pak</span></span>
+<span id="cb2-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span>))</span>
+<span id="cb2-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">warning</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Windows is not support by pak"</span>)</span>
+<span id="cb2-18">}</span></code></pre></div>
+</section>
+<section id="optionally-recreate-the-environment-on-another-server-using-renv-and-pak" class="level3">
+<h3 class="anchored" data-anchor-id="optionally-recreate-the-environment-on-another-server-using-renv-and-pak">Optionally, recreate the environment on another server using renv and pak</h3>
+<pre><code>cp rserver/renv.lock /new-location 
+
+cd /new-location &amp;&amp; \
+    echo -e 'options(renv.config.pak.enabled=TRUE)\noptions(repos=c(CRAN="https://packagemanager.posit.co/cran/__linux__/rhel9/2025-03-10")) Sys.getenv("PKG_SYSREQS_PLATFORM" &gt; .Rprofile &amp;&amp; \
+    R -q -e 'install.packages(c("renv"))' &amp;&amp; \
+    R -q -e 'renv::activate()' &amp;&amp; \
+    R -q -e 'renv::restore()'</code></pre>
+</section>
+<section id="find-the-installed-packages" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-installed-packages">Find the installed packages</h3>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(jsonlite)</span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb4-3">my_renvlock <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fromJSON</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"renv.lock"</span>)</span>
+<span id="cb4-4"></span>
+<span id="cb4-5">pkgs_df<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_dfr</span>(my_renvlock<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Packages, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enframe</span>(.) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(name <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Package"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Version"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">value =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(value)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_wider</span>())</span></code></pre></div>
+</section>
+<section id="find-the-system-dependencies-for-those-installed-packages" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-system-dependencies-for-those-installed-packages">Find the system dependencies for those installed packages</h3>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">deps<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pkg_sysreqs</span>(pkgs_df<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Package, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">upgrade =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sysreqs_platform=</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span>))</span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Get the commands to run to install system deps to support the package environment</span></span>
+<span id="cb5-4"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-6"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+</section>
+<section id="alternatively-find-the-most-common-package-downloaded-from-package-manager-and-support-those" class="level3">
+<h3 class="anchored" data-anchor-id="alternatively-find-the-most-common-package-downloaded-from-package-manager-and-support-those">Alternatively, find the most common package downloaded from package manager and support those</h3>
+<p>Credit: <a href="https://github.com/rstudio/rstudio-pro/issues/6536#issuecomment-2694317773" class="uri">https://github.com/rstudio/rstudio-pro/issues/6536#issuecomment-2694317773</a></p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(httr)</span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(jsonlite)</span>
+<span id="cb6-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(pak)</span>
+<span id="cb6-4"></span>
+<span id="cb6-5">base_url <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.posit.co/__api__/metrics/packages"</span></span>
+<span id="cb6-6">query_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb6-7">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_sort"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"count"</span>,</span>
+<span id="cb6-8">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_order"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"desc"</span>,</span>
+<span id="cb6-9">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_days"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>,</span>
+<span id="cb6-10">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_sourceType"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"r"</span>,</span>
+<span id="cb6-11">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_limit"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb6-12">)</span>
+<span id="cb6-13"></span>
+<span id="cb6-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Make the GET request</span></span>
+<span id="cb6-15">response <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">GET</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">url =</span> base_url, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">query =</span> query_params)</span>
+<span id="cb6-16"></span>
+<span id="cb6-17"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">status_code</span>(response) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>) {</span>
+<span id="cb6-18">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Parse the JSON content</span></span>
+<span id="cb6-19">  content <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">content</span>(response, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>)</span>
+<span id="cb6-20">  data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fromJSON</span>(content)</span>
+<span id="cb6-21">  </span>
+<span id="cb6-22">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Set platform name ()</span></span>
+<span id="cb6-23">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rockylinux-9"</span>)</span>
+<span id="cb6-24">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># extract system reqs using pak</span></span>
+<span id="cb6-25">  deps<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pkg_sysreqs</span>(data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>name)</span>
+<span id="cb6-26">  </span>
+<span id="cb6-27">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Print commands</span></span>
+<span id="cb6-28">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-29">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-30">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-31">  </span>
+<span id="cb6-32">} <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> {</span>
+<span id="cb6-33">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Error: Unable to fetch data from P3M. Status code:"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">status_code</span>(response), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-34">}</span></code></pre></div>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/system-dependencies-r.html</guid>
+  <pubDate>Wed, 21 May 2025 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 <item>
@@ -1994,7 +2630,7 @@ font-style: inherit;">'r_project'</span>)</span></code></pre></div>
 <p>When starting a new Workbench session, users should click on the AWS credential selection widget to login to AWS. After selecting and starting the session with attached credentials, the credentials needed to connect to AWS resources (<code>AWS_ROLE_ARN</code> and <code>AWS_WEB_IDENTITY_TOKEN_FILE</code>) are available within the session.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/aws-new-connection.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
+<p><a href="img/aws-new-connection.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
 <figcaption>AWS accounts in the New Session dialog’s credential selection widget</figcaption>
 </figure>
 </div>
@@ -2924,595 +3560,6 @@ font-style: inherit;">5439</span>,</span>
   <guid>https://questionable.quarto.pub/blog/work/aws-data-sources.html</guid>
   <pubDate>Tue, 21 Jan 2025 07:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" medium="image" type="image/png" height="78" width="144"/>
-</item>
-<item>
-  <title>Dealing with ssh keys with ansible and pulumi</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Very specific learning for the day but if you are trying to run pulumi-with-ansible IAC and in a world of ssh key pain this bypasses the ssh-agent:</p>
-<p>Pulumi.yaml</p>
-<pre><code>  keypath: "~/.ssh/mykey.pem"</code></pre>
-<p><strong>main</strong>.py</p>
-<pre><code>pulumi.export('keypath', config.require("keypath"))</code></pre>
-<p>playbook.yml</p>
-<pre><code>    ansible_ssh_private_key_file: "{{ keypath }}"</code></pre>
-<p>Or just add things properly to your ssh-agent (even better, start using the config):</p>
-<pre><code># Set permissions 
-chmod -R 400 ~/.ssh/mykey.pem # 600 is also fine
-
-# Add keys to ssh-agent 
-ssh-agent -s
-eval `ssh-agent -s`
-ssh-add ~/.ssh/mykeyaws.pem
-ssh-add ~/.ssh/mykeyazure.pem</code></pre>
-
-
-
- ]]></description>
-  <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</guid>
-  <pubDate>Wed, 02 Oct 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Handling secrets and pinning files to Posit Connect</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/secrets-and-pinning-files.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Imagine a world where you can sleep peacefully at night knowing that your secrets (that you need for connecting to data sources) are being handled responsibly and will never leak.</p>
-<section id="built-in-with-your-version-control" class="level2">
-<h2 class="anchored" data-anchor-id="built-in-with-your-version-control">Built in with your version control</h2>
-<p>Github has secret scanning for enterprise accounts or public repositories: <a href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning" class="uri">https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning</a></p>
-</section>
-<section id="environment-variables" class="level2">
-<h2 class="anchored" data-anchor-id="environment-variables">Environment variables</h2>
-<p>When working with pulling data from secure databases or other sources a developer might find themselves in a situation of needing to provide very sensitive information, such as a password or a token, in order to access the data that is needed or to successfully deploy a project. Handling those secrets in way that doesn’t expose them in the code directly is critical and where using <a href="https://db.rstudio.com/best-practices/deployment/">environmental variable’s for securing sensitive variables</a> is strongly recommended.</p>
-<p>Additionally there may be parameters that are often needed that can be accessed as a variable more easily rather than having to type in every time.</p>
-<p>For both of these cases knowing how environment variables can be leveraged can be very rewarding and it is surprising how little effort it can to take to set up.</p>
-</section>
-<section id="python-os-package" class="level2">
-<h2 class="anchored" data-anchor-id="python-os-package">Python: <code>os</code> package</h2>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> os</span>
-<span id="cb1-2"></span>
-<span id="cb1-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Setting a new environment variable</span></span>
-<span id="cb1-4">os.environ[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"API_KEY"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"YOUR_API_KEY"</span></span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Retrieving the environment variable</span></span>
-<span id="cb1-7">var <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> os.environ[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"variable_name"</span>]</span></code></pre></div>
-</section>
-<section id="r-usethis-package" class="level2">
-<h2 class="anchored" data-anchor-id="r-usethis-package">R: <code>usethis</code> package</h2>
-<p><code>usethis</code> has a function for creating and editing the .Renviron file:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(usethis)</span>
-<span id="cb2-2"></span>
-<span id="cb2-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Edit the global .Renviron file</span></span>
-<span id="cb2-4">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_environ</span>()</span>
-<span id="cb2-5"></span>
-<span id="cb2-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Edit the project specific .Renviron file</span></span>
-<span id="cb2-7">usethis<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">edit_r_environ</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">scope =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"project"</span>)</span></code></pre></div>
-<p>Add the variables to that file in the format variable_name = “variable_value” and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE with session -&gt; restart R.</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Saved variables can be accessed with:</span></span>
-<span id="cb3-2">variable_name <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"variable_name"</span>)</span></code></pre></div>
-<p>While it’s recommended to add env vars to the environ file and not use in your code (otherwise it defeats the point), you can set an env var on the fly with:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"name"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"value"</span>)</span></code></pre></div>
-</section>
-<section id="r-working-with-the-.renviron-file" class="level2">
-<h2 class="anchored" data-anchor-id="r-working-with-the-.renviron-file">R: Working with the .Renviron file</h2>
-<p>When R starts it loads a bunch of variables, settings, and configs for the user. This is really powerful and some of the magic for how it can work so apparently seamlessly.</p>
-<p>However for power users we can leverage these behind the scenes config files so that we can include such things as variables in our project without including it in our code. The .Renviron file is the one most commonly interacted with for adding sensitive variables to a project in order to protect them from being exposed in the code.</p>
-<p>With increased use of these behind the scenes config files and the growing direction of arranging code into projects there was the development of giving, on startup, having multiple options for each config file that can be loaded depending on what the user specifies. Broadly speaking there are two levels of config files: - User - Project</p>
-<p>On startup, since R is trying to make things as seamless as possible for the user, it will use some logic to figure out which config to use. It will assume that if a project level config exists it should load that one (and not any others). If that project level config doesn’t exist, then it will default to the user level config. For more details on the different config files and the nuances see <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site, rsession.conf, and repos.conf</a>.</p>
-<p>Just to re-iterate the key takeaway: When in doubt note that the <strong>project level file is given preference over user level config files</strong>. Only if the project level config file doesn’t exist will the user level file be sourced/pulled in.</p>
-<p>There is a really excellent <a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/">overview of R’s startup process here</a> but in short it can be thought of this way:</p>
-<section id="example-with-a-user-level-.renviron-config-file" class="level4">
-<h4 class="anchored" data-anchor-id="example-with-a-user-level-.renviron-config-file">Example with a user level .Renviron config file</h4>
-<p>usethis has a function for creating and editing the .Renviron file</p>
-<pre><code>library(usethis)
-usethis::edit_r_environ()</code></pre>
-<p>Add the variables to that file in the format <code>variable_name = "variable_value"</code> and save it. Restart the session so the new environment variables will be loaded with ctrl shift f10 or through the RStudio IDE</p>
-<p>Saved variables can be accessed with:</p>
-<pre><code>variable_name &lt;- Sys.getenv("variable_name")</code></pre>
-<p>When working in a more complex environment structure where separate project, site, and user environments are being support <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">this support article has useful information</a> with a <a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/">deeper dive into R’s startup here</a>.</p>
-</section>
-<section id="example-with-a-project-level-.renviron-config-file" class="level4">
-<h4 class="anchored" data-anchor-id="example-with-a-project-level-.renviron-config-file">Example with a project level .Renviron config file</h4>
-<p>Storing secrets securely can be done using the <a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ function from the usethis package</a>. For more overview see <a href="https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf">this overview</a>.</p>
-<p>Example:</p>
-<pre><code>library(usethis)
-usethis::edit_r_environ(scope = "project")</code></pre>
-<p>Accessing those stored parameters later can be done using <code>Sys.getenv("DB_NAME")</code>.</p>
-<p>Be sure to add the project level .Renviron file to your .gitignore so you aren’t exposing secrets when code is being saved to your git repository. Similarly this can be done with the <code>edit_git_ignore(scope = c("user", "project"))</code> function. For more best practices see <a href="https://db.rstudio.com/best-practices/managing-credentials">securing credentials</a>.</p>
-<p>After updating these files the project should be closed and re-opened for any additions to be pulled in. One way to do this is through session -&gt; restart R (ctrl-shift-f10).</p>
-</section>
-<section id="gitignore" class="level4">
-<h4 class="anchored" data-anchor-id="gitignore">Gitignore</h4>
-<p>While typically explicitly listing the file name is the desired addition, wildcards can be added to exclude a type of file. For example: <code>*.html</code>.</p>
-<p>Example excluding a number of pieces that would be undesirable to check into version control:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>.gitignore</strong></pre>
-</div>
-<div class="sourceCode" id="cb8" data-filename=".gitignore" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># History files</span></span>
-<span id="cb8-2"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.Rhistory</span></span>
-<span id="cb8-3"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.Rapp.history</span></span>
-<span id="cb8-4"></span>
-<span id="cb8-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Session Data files</span></span>
-<span id="cb8-6"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.RData</span></span>
-<span id="cb8-7"></span>
-<span id="cb8-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Example code in package build process</span></span>
-<span id="cb8-9"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">*-Ex.R</span></span>
-<span id="cb8-10"></span>
-<span id="cb8-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Output files from R CMD build</span></span>
-<span id="cb8-12"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/*.tar.gz</span></span>
-<span id="cb8-13"></span>
-<span id="cb8-14"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Output files from R CMD check</span></span>
-<span id="cb8-15"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/*.Rcheck/</span></span>
-<span id="cb8-16"></span>
-<span id="cb8-17"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># RStudio files</span></span>
-<span id="cb8-18"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.Rproj.user/</span></span>
-<span id="cb8-19"></span>
-<span id="cb8-20"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># produced vignettes</span></span>
-<span id="cb8-21"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">vignettes/*.html</span></span>
-<span id="cb8-22"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">vignettes/*.pdf</span></span>
-<span id="cb8-23"></span>
-<span id="cb8-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3</span></span>
-<span id="cb8-25"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.httr-oauth</span></span>
-<span id="cb8-26"></span>
-<span id="cb8-27"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># knitr and R markdown default cache directories</span></span>
-<span id="cb8-28"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/*_cache/</span></span>
-<span id="cb8-29"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/cache/</span></span>
-<span id="cb8-30"></span>
-<span id="cb8-31"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Temporary files created by R markdown</span></span>
-<span id="cb8-32"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">*.utf8.md</span></span>
-<span id="cb8-33"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">*.knit.md</span></span>
-<span id="cb8-34"></span>
-<span id="cb8-35"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html</span></span>
-<span id="cb8-36"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">rsconnect/</span></span>
-<span id="cb8-37"></span>
-<span id="cb8-38"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Deployment details from rsconnect-python</span></span>
-<span id="cb8-39"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">rsconnect-python/</span></span>
-<span id="cb8-40"></span>
-<span id="cb8-41"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Temporary files</span></span>
-<span id="cb8-42"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.DS_Store</span></span>
-<span id="cb8-43"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">__pycache__</span></span>
-<span id="cb8-44"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.ipynb_checkpoints</span></span>
-<span id="cb8-45"></span>
-<span id="cb8-46"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">rmarkdown-notebook/flights.csv</span></span>
-<span id="cb8-47"></span>
-<span id="cb8-48"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.venv</span></span>
-<span id="cb8-49"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">venv</span></span>
-<span id="cb8-50"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.env</span></span>
-<span id="cb8-51"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.Rprofile</span></span>
-<span id="cb8-52"></span>
-<span id="cb8-53"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/.luarc.json</span></span>
-<span id="cb8-54"></span>
-<span id="cb8-55"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># OS and python artifacts</span></span>
-<span id="cb8-56"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.DS_Store</span></span>
-<span id="cb8-57"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">__pycache__/</span></span>
-<span id="cb8-58"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">*.py[cod]</span></span>
-<span id="cb8-59"></span>
-<span id="cb8-60"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># docs artifacts</span></span>
-<span id="cb8-61"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/docs/_site</span></span>
-<span id="cb8-62"></span>
-<span id="cb8-63"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Package Manager license</span></span>
-<span id="cb8-64"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">/ppm.lic</span></span></code></pre></div>
-</div>
-</section>
-<section id="example-with-project-level-github-secrets-for-environment-variables" class="level4">
-<h4 class="anchored" data-anchor-id="example-with-project-level-github-secrets-for-environment-variables">Example with project level github secrets for environment variables</h4>
-<p>Another approach, particularly useful when automating testing and deployments using github actions, is to include the environment variables as secrets. Once this has been added through the git UI for the project they can then be referenced in the relevant deployment .yaml file with something like <code>CONNECT_ENV_SET_ZD_USER: ${{ secrets.ZD_USER }}</code>. In the R scripts they will be referenced as usual with something like <code>Sys.getenv("DB_NAME")</code>.</p>
-</section>
-<section id="references-for-adding-environment-variables-through-the-connect-ui" class="level4">
-<h4 class="anchored" data-anchor-id="references-for-adding-environment-variables-through-the-connect-ui">References for adding environment variables through the Connect UI</h4>
-<p>Starting with version 1.6, RStudio Connect allows <a href="https://docs.rstudio.com/connect/admin/security-and-auditing/#application-environment-variables">Environment Variables</a>. The variables are encrypted on-disk, and in-memory.</p>
-<p>This can be done at the project level with <a href="https://db.rstudio.com/best-practices/deployment/">securing deployment</a> through the <a href="https://support.rstudio.com/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a>.</p>
-</section>
-</section>
-<section id="handling-secret-files" class="level2">
-<h2 class="anchored" data-anchor-id="handling-secret-files">Handling secret files</h2>
-<p>Options:</p>
-<ul>
-<li>base64 encode the json string, set an environment variable, read the env var, and base64 decode it - If it fits in an env var, you could always cache it from the env var to your temp dir right before you use</li>
-<li>Save it somewhere on Connect, let developers know the path</li>
-<li>Use a supervisor script to save into the sandbox environment</li>
-<li>Possibly save it as a pin?</li>
-</ul>
-<section id="useful-linux-commands-and-generating-a-dummy-key-file" class="level3">
-<h3 class="anchored" data-anchor-id="useful-linux-commands-and-generating-a-dummy-key-file">Useful linux commands and generating a dummy key file</h3>
-<pre><code># cd ~/.ssh
-openssl genrsa -out test_key 4096
-openssl rsa -in test_key -pubout -out test_key.pub
-openssl pkcs8 -topk8 -inform pem -in test_key -outform PEM -v2 aes-256-cbc -out test_key.p8</code></pre>
-<ul>
-<li>The second command generate a RDS private key (unencrypted). https://www.openssl.org/docs/man1.1.1/man1/openssl-genrsa.html</li>
-<li>The third command generate a public key for the private key above.</li>
-<li>The fourth command generate an encrypted private key using a cipher aes-256-cbc. Please refer the following URL for more about AES 256 CBC.https://datatracker.ietf.org/doc/html/rfc3602</li>
-</ul>
-<pre><code># Set permissions 
-chmod -R 400 ~/.ssh/mykey.pem 
-
-# Add key to ssh-agent 
-ssh-agent -s
-eval `ssh-agent -s`
-ssh-add ~/.ssh/mykey.pem</code></pre>
-<p>If you already have a ssh key and want to get the key.pub public key info:</p>
-<pre><code>ssh-keygen -y -f ~/.ssh/mykey.pem
-ssh-keygen -y -f ~/.ssh/mykey.pem &gt; key.pub</code></pre>
-</section>
-<section id="pin-the-key-to-connect" class="level3">
-<h3 class="anchored" data-anchor-id="pin-the-key-to-connect">Pin the key to Connect</h3>
-<section id="setup" class="level4">
-<h4 class="anchored" data-anchor-id="setup">Setup</h4>
-<p>Env variables that need to be set are:</p>
-<pre><code>CONNECT_SERVER=&lt;server, eg https://colorado.posit.co&gt;
-CONNECT_API_KEY=&lt;API key from Connect server&gt;</code></pre>
-</section>
-<section id="code-for-pinning-a-file" class="level4">
-<h4 class="anchored" data-anchor-id="code-for-pinning-a-file">Code for pinning a file</h4>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(dplyr)</span>
-<span id="cb13-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidyverse)</span>
-<span id="cb13-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(stringr)</span>
-<span id="cb13-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(readr)</span>
-<span id="cb13-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(pins)</span>
-<span id="cb13-6"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(rsconnect)</span>
-<span id="cb13-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(usethis)</span>
-<span id="cb13-8"></span>
-<span id="cb13-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#Check our environment variables</span></span>
-<span id="cb13-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># usethis::edit_r_environ()</span></span>
-<span id="cb13-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#Needs: </span></span>
-<span id="cb13-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># CONNECT_SERVER=&lt;server&gt;</span></span>
-<span id="cb13-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># CONNECT_API_KEY=&lt;API key from Connect server&gt;</span></span>
-<span id="cb13-14"></span>
-<span id="cb13-15">board <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">board_connect</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">auth =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"envvar"</span>)</span>
-<span id="cb13-16"></span>
-<span id="cb13-17">board <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pin_upload</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">paths=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key"</span>)</span>
-<span id="cb13-18">board <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pin_upload</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">paths=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key.p8"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key-p8"</span>)</span>
-<span id="cb13-19">board <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pin_upload</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">paths=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key.pub"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key-pub"</span>)</span>
-<span id="cb13-20"></span>
-<span id="cb13-21">cache_path<span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span>board <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pin_download</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key"</span>)</span>
-<span id="cb13-22"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">print</span>(cache_path)</span></code></pre></div>
-</section>
-<section id="python" class="level4">
-<h4 class="anchored" data-anchor-id="python">Python</h4>
-<p>Python pins package has parity: <a href="https://rstudio.github.io/pins-python/reference/pin_upload.html#pins.boards.BaseBoard.pin_upload" class="uri">https://rstudio.github.io/pins-python/reference/pin_upload.html#pins.boards.BaseBoard.pin_upload</a></p>
-</section>
-<section id="encode-key-file-as-base64-json-string" class="level4">
-<h4 class="anchored" data-anchor-id="encode-key-file-as-base64-json-string">Encode key file as base64 json string</h4>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">librar</span>(readr)</span>
-<span id="cb14-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(openssl)</span>
-<span id="cb14-3"></span>
-<span id="cb14-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Locally, encode the key and save as environment variable</span></span>
-<span id="cb14-5">key <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> openssl<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">base64_encode</span>(readr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">read_file</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">file=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"test_key.pub"</span>))</span>
-<span id="cb14-6"></span>
-<span id="cb14-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Save as env var</span></span>
-<span id="cb14-8"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"TEST_SSH_KEY"</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"123"</span>)</span>
-<span id="cb14-9">test_key_set <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"TEST_SSH_KEY"</span>)</span>
-<span id="cb14-10"></span>
-<span id="cb14-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create a tempfile in the sandboxed current location</span></span>
-<span id="cb14-12">cached_key <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tempfile</span>()</span>
-<span id="cb14-13"></span>
-<span id="cb14-14"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Cache the SSH file from the environment variable</span></span>
-<span id="cb14-15">readr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">write_file</span>(openssl<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">base64_decode</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"TEST_SSH_KEY"</span>)), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">file =</span> cached_key)</span></code></pre></div>
-<p>it may be useful to nest in an if statement so that this only happens on Connect, but on Workbench it will still use the managed credentials:</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Use SSH key if on Connect, otherwise use managed credentials</span></span>
-<span id="cb15-2"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"RSTUDIO_PRODUCT"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"CONNECT"</span>){</span>
-<span id="cb15-3">}</span></code></pre></div>
-
-
-</section>
-</section>
-</section>
-
- ]]></description>
-  <category>code</category>
-  <category>data</category>
-  <category>security</category>
-  <guid>https://questionable.quarto.pub/blog/work/secrets-and-pinning-files.html</guid>
-  <pubDate>Tue, 01 Oct 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 </channel>
 </rss>

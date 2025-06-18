@@ -10,7 +10,107 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Tue, 03 Jun 2025 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 18 Jun 2025 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Creating a custom Workbench login page</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/workbench-custom-login.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="why-would-someone-want-to-do-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-would-someone-want-to-do-this">Why would someone want to do this?</h2>
+<p>Login can be a challenging process for many users and having the admin provide additional details can be very handy to point folks in the right direction. Also, being able to include your own branding isn’t just a nice jazzy thing but can be a security requirement for some teams to help provide another layer of protection via visual indicators.</p>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A customer requested that this page be made clearer: <a href="https://docs.posit.co/ide/server-pro/admin/authenticating_users/customizing_signin.html" class="uri">https://docs.posit.co/ide/server-pro/admin/authenticating_users/customizing_signin.html</a></p>
+<p>They were confused that an example wasn’t built for them at the called out location <code>/opt/config/rstudio-login.html</code>.</p>
+<p>This support article has some useful examples that are useful: <a href="https://support.posit.co/hc/en-us/articles/231327847-Customizing-the-Posit-Workbench-RStudio-Server-Pro-Login-Page" class="uri">https://support.posit.co/hc/en-us/articles/231327847-Customizing-the-Posit-Workbench-RStudio-Server-Pro-Login-Page</a></p>
+<p>There are also some templates in this folder that might be useful to reference: <code>/usr/lib/rstudio-server/www/templates/encrypted-sign-in.html</code></p>
+</section>
+<section id="plain-html" class="level2">
+<h2 class="anchored" data-anchor-id="plain-html">Plain html</h2>
+<p>For this particular customer request I’ve been working on their goal is to modify that actual contents of the login information pane. Here is some (hopefully) useful exploration -</p>
+<p>Modifying the config&nbsp;<code>/etc/rstudio/rserver.conf</code>&nbsp;with:</p>
+<pre><code>auth-login-page-html=/etc/rstudio/login.html</code></pre>
+<p>And then creating that file&nbsp;<code>/etc/rstudio/login.html</code>&nbsp;with contents like:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Requesting access&lt;/h1&gt;
+    &lt;p&gt;In order to get access to this software a ticket will need to be submitted through IT.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>This results in a login page with the information appended at the bottom:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/workbench-custom-login-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-1.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<figcaption>Workbench login page</figcaption>
+</figure>
+</div>
+</section>
+<section id="with-more-jazz" class="level2">
+<h2 class="anchored" data-anchor-id="with-more-jazz">With more jazz</h2>
+<p>If we append the instructions on the support article and add a logo to <code>/usr/lib/rstudio-server/www/images</code> then we can jazz things up further.</p>
+<p>Note there are already files/images in <code>/usr/lib/rstudio-server/www/images</code> and in this example instead of using <code>logo.png</code> we made a custom image called <code>frog.png</code> by downloading an image from the internet with: <code>wget http://images.clipartpanda.com/frog-clip-art-frog_green.png -O /usr/lib/rstudio-server/www/images/logo.png</code></p>
+<p><code>/etc/rstudio/login.html</code>:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Requesting access&lt;/h1&gt;
+    &lt;p&gt;In order to get access to this software a ticket will need to be submitted through IT.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;script type="text/javascript"&gt;
+window.onload=function(){
+
+var logo = document.createElement("img");
+logo.setAttribute("src","images/frog.png");
+logo.setAttribute("height", "36px");
+logo.setAttribute("width", "36px");
+logo.setAttribute("style", "float: right;");
+document.getElementById("banner").appendChild(logo);
+
+var cap = document.getElementById("caption_header");
+cap.innerHTML = "This is a message added by your admin. Sign into Posit with your assigned credentials credentials";    
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#banner {background-color: #4682b4;}
+#caption {border-bottom-color: #4682b4;}
+&lt;/style&gt;</code></pre>
+<p>This results in a login page with information appended at the bottom as well as custom coloring and a logo and the header for the login blurb changed:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/workbench-custom-login-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-2.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<figcaption>Workbench login page</figcaption>
+</figure>
+</div>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p><a href="https://github.com/rstudio/rstudio-pro/issues/8378">Git issue</a></p>
+
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/workbench-custom-login.html</guid>
+  <pubDate>Wed, 18 Jun 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Exploring Positron</title>
   <dc:creator>Lisa </dc:creator>
@@ -116,6 +216,542 @@ Soon:
   <category>code</category>
   <guid>https://questionable.quarto.pub/blog/work/Positron.html</guid>
   <pubDate>Tue, 03 Jun 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>Finding R System Dependencies</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/system-dependencies-r.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="using-pak-and-renv-to-find-r-system-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="using-pak-and-renv-to-find-r-system-dependencies">Using pak and renv to find R system dependencies</h2>
+<p>Let’s try to get an environment of packages and understand the system dependencies. This would be useful for fresh installs into a new environment.</p>
+</section>
+<section id="a-note-on-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-on-methodology">A note on methodology</h2>
+<p>In an ideal world a user will be able to identify what packages they are using. Do you really need that package from 3 years ago that you installed but ended up not using? Technology doesn’t solve all problems! Sometimes the “soft” method is the best way to solve a problem.</p>
+</section>
+<section id="steps" class="level2">
+<h2 class="anchored" data-anchor-id="steps">Steps</h2>
+<section id="create-the-current-environment-as-a-renv-project-and-snapshot-it" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-current-environment-as-a-renv-project-and-snapshot-it">Create the current environment as a renv project and snapshot it</h3>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(pak)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(renv)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Or restore a project with renv::restore() if using a pre-existing projectd</span></span>
+<span id="cb1-5">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">init</span>()</span>
+<span id="cb1-6">renv<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">snapshot</span>()</span></code></pre></div>
+</section>
+<section id="find-what-os-we-are-on" class="level3">
+<h3 class="anchored" data-anchor-id="find-what-os-we-are-on">Find what OS we are on</h3>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># R.version # Nope</span></span>
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># version # Nope</span></span>
+<span id="cb2-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># .Platform # nope</span></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># .Platform$OS.type # nope</span></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Sys.info() # nope</span></span>
+<span id="cb2-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Sys.info()["sysname"] # nope</span></span>
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># system("cat /etc/*release") # closer</span></span>
+<span id="cb2-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># system("lsb_release -a") # closer</span></span>
+<span id="cb2-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># pak::system_r_platform_data()$distribution # this is the one!</span></span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span>(.Platform<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>OS.type <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"unix"</span>){</span>
+<span id="cb2-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system_r_platform_data</span>()<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>distribution)</span>
+<span id="cb2-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span>))</span>
+<span id="cb2-14">} <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> { <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## windows</span></span>
+<span id="cb2-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"windows"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># supported by pak</span></span>
+<span id="cb2-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span>))</span>
+<span id="cb2-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">warning</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Windows is not support by pak"</span>)</span>
+<span id="cb2-18">}</span></code></pre></div>
+</section>
+<section id="optionally-recreate-the-environment-on-another-server-using-renv-and-pak" class="level3">
+<h3 class="anchored" data-anchor-id="optionally-recreate-the-environment-on-another-server-using-renv-and-pak">Optionally, recreate the environment on another server using renv and pak</h3>
+<pre><code>cp rserver/renv.lock /new-location 
+
+cd /new-location &amp;&amp; \
+    echo -e 'options(renv.config.pak.enabled=TRUE)\noptions(repos=c(CRAN="https://packagemanager.posit.co/cran/__linux__/rhel9/2025-03-10")) Sys.getenv("PKG_SYSREQS_PLATFORM" &gt; .Rprofile &amp;&amp; \
+    R -q -e 'install.packages(c("renv"))' &amp;&amp; \
+    R -q -e 'renv::activate()' &amp;&amp; \
+    R -q -e 'renv::restore()'</code></pre>
+</section>
+<section id="find-the-installed-packages" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-installed-packages">Find the installed packages</h3>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(jsonlite)</span>
+<span id="cb4-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb4-3">my_renvlock <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fromJSON</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"renv.lock"</span>)</span>
+<span id="cb4-4"></span>
+<span id="cb4-5">pkgs_df<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_dfr</span>(my_renvlock<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Packages, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enframe</span>(.) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(name <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Package"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Version"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">value =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(value)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_wider</span>())</span></code></pre></div>
+</section>
+<section id="find-the-system-dependencies-for-those-installed-packages" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-system-dependencies-for-those-installed-packages">Find the system dependencies for those installed packages</h3>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">deps<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pkg_sysreqs</span>(pkgs_df<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Package, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">upgrade =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sysreqs_platform=</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span>))</span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Get the commands to run to install system deps to support the package environment</span></span>
+<span id="cb5-4"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb5-6"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+</section>
+<section id="alternatively-find-the-most-common-package-downloaded-from-package-manager-and-support-those" class="level3">
+<h3 class="anchored" data-anchor-id="alternatively-find-the-most-common-package-downloaded-from-package-manager-and-support-those">Alternatively, find the most common package downloaded from package manager and support those</h3>
+<p>Credit: <a href="https://github.com/rstudio/rstudio-pro/issues/6536#issuecomment-2694317773" class="uri">https://github.com/rstudio/rstudio-pro/issues/6536#issuecomment-2694317773</a></p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(httr)</span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(jsonlite)</span>
+<span id="cb6-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(pak)</span>
+<span id="cb6-4"></span>
+<span id="cb6-5">base_url <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.posit.co/__api__/metrics/packages"</span></span>
+<span id="cb6-6">query_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb6-7">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_sort"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"count"</span>,</span>
+<span id="cb6-8">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_order"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"desc"</span>,</span>
+<span id="cb6-9">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_days"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>,</span>
+<span id="cb6-10">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_sourceType"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"r"</span>,</span>
+<span id="cb6-11">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_limit"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span></span>
+<span id="cb6-12">)</span>
+<span id="cb6-13"></span>
+<span id="cb6-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Make the GET request</span></span>
+<span id="cb6-15">response <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">GET</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">url =</span> base_url, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">query =</span> query_params)</span>
+<span id="cb6-16"></span>
+<span id="cb6-17"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">status_code</span>(response) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>) {</span>
+<span id="cb6-18">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Parse the JSON content</span></span>
+<span id="cb6-19">  content <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">content</span>(response, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>)</span>
+<span id="cb6-20">  data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fromJSON</span>(content)</span>
+<span id="cb6-21">  </span>
+<span id="cb6-22">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Set platform name ()</span></span>
+<span id="cb6-23">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.setenv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PKG_SYSREQS_PLATFORM"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rockylinux-9"</span>)</span>
+<span id="cb6-24">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># extract system reqs using pak</span></span>
+<span id="cb6-25">  deps<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pkg_sysreqs</span>(data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>name)</span>
+<span id="cb6-26">  </span>
+<span id="cb6-27">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Print commands</span></span>
+<span id="cb6-28">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pre_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-29">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>install_scripts,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-30">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">identical</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">character</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(deps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>post_install),<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-31">  </span>
+<span id="cb6-32">} <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> {</span>
+<span id="cb6-33">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Error: Unable to fetch data from P3M. Status code:"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">status_code</span>(response), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb6-34">}</span></code></pre></div>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/system-dependencies-r.html</guid>
+  <pubDate>Wed, 21 May 2025 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 <item>
@@ -1994,7 +2630,7 @@ font-style: inherit;">'r_project'</span>)</span></code></pre></div>
 <p>When starting a new Workbench session, users should click on the AWS credential selection widget to login to AWS. After selecting and starting the session with attached credentials, the credentials needed to connect to AWS resources (<code>AWS_ROLE_ARN</code> and <code>AWS_WEB_IDENTITY_TOKEN_FILE</code>) are available within the session.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/aws-new-connection.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
+<p><a href="img/aws-new-connection.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
 <figcaption>AWS accounts in the New Session dialog’s credential selection widget</figcaption>
 </figure>
 </div>
@@ -4829,7 +5465,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -4857,7 +5493,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -4923,7 +5559,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
@@ -7096,279 +7732,6 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
   <guid>https://questionable.quarto.pub/blog/lists/code.html</guid>
   <pubDate>Fri, 19 Apr 2024 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
-</item>
-<item>
-  <title>The importance of good programming</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/lists/good-programming.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>A handful of articles that have stood out over the years as interesting case studies into the importance of good programming, and what that actually means.</p>
-<section id="uk-post-office-scandal" class="level2">
-<h2 class="anchored" data-anchor-id="uk-post-office-scandal">UK Post Office Scandal</h2>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=h3UIdGRBGlY">Developers blamed for the post office scandal?</a></li>
-<li><a href="https://www.postofficetrial.com/2019/01/victims-testimony.html">Victim testimony</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/the-smoking-gun.html">Remote access and mistakes blamed on post masters, a smoking gun</a></li>
-<li><a href="https://www.reddit.com/r/it/s/i5NE3qQgv0">Example of the terrible quality of the code - were they paid by line of code submitted? Does this imply a fauly language conversion? Risks of overflow errors?</a></li>
-<li><a href="https://www.postofficetrial.com/2019/12/second-sights-ron-warmington-breaks-his.html?m=1">One of the independent investigators from 2012 breaks silence</a></li>
-<li><a href="https://www.postofficetrial.com/2021/07/second-sight-were-told-about-remote.html?m=1">Evidence that back in 2012 the indepent investigators were told about remote access, implying pejury in all later cases</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/horizon-trial-day-4-day-of-two-halves.html?m=1">They Could, And They Did Change Branch Transaction Data</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/miscarriages-of-justice.html?m=1">Miscarriage of justice - the Rose report</a></li>
-<li><a href="https://www.postofficescandal.uk/post/current-post-office-horizon-it-issues/">List of current issues / bugs as of 2017? with the software. One can only imagine how much worse it used to be</a></li>
-<li><a href="https://www.postofficescandal.uk/post/how-not-to-commission-a-complex-it-project/">Project manager on the original project discusses his impressions - how not to commission a complex project</a> <a href="https://www.postofficescandal.uk/post/inquiry-phase-2-star-witness-dave-gives-it-both-barrels/">Inquiry Phase 2: Star Witness – Dave gives it both barrels</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/horizon-trial-day-5-he-had-loaded-gun.html">Known errors in the software, perjury, and lack of disclosure</a></li>
-<li><a href="https://www.postofficetrial.com/2019/06/horizon-trial-day-16-that-surprises-me.html">Interview with IT - throwing coconuts</a></li>
-<li><a href="https://www.postofficetrial.com/2019/06/horizon-trial-day-18-dr-robert.html">Interview with the other IT</a></li>
-<li><a href="https://www.postofficetrial.com/2019/04/bates-v-post-office-recusal-judgment_9.html">Attempt by the post to recuse the judge - right after a verdict was handed down. Sour grapes, anyone?</a></li>
-<li><a href="https://www.postofficetrial.com/2020/07/the-post-office-cover-up-part-2-they.html">The cover up</a></li>
-<li><a href="https://www.postofficetrial.com/2019/03/why-did-post-office-accuse-aakash-patny.html">Why did the lawyer for the post office act this way?</a></li>
-<li><a href="https://www.civillitigationbrief.com/2015/07/23/thinking-of-alleging-or-pleading-fraud-better-read-this-first/">Thinking of alleging or pleading fraud: better read this first</a></li>
-</ul>
-</section>
-<section id="chinook-crash" class="level1">
-<h1>Chinook Crash</h1>
-<ul>
-<li><a href="https://www.computerweekly.com/blog/Public-Sector-IT/Chinook-Mk2-we-publish-new-evidence-of-computer-problems">New evidence of computer problems</a></li>
-</ul>
-<blockquote class="blockquote">
-<p>Although only 17% of the code has been analysed [EDS, the code’s assessors, stopped work on the code because of the density of anomalies found] 21 category one and 153 category two anomalies have been revealed. One of these, the reliance on an undocumented and unproved feature of the processor [based on an Intel ASM96 chip] is considered to be positively dangerous.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>EDS was not satisfied with Hawker Siddeley’s assurances. In its report on the Fadec software, EDS said: “Correct operation (of the Fadec) depends on an undocumented feature of the Intel ASM 96 microcomputer. EDS-Scicon’s concern is that a change in the mask or process of the ASM chip at some point in the future may cause incorrect operation of the FADEC.]</p>
-</blockquote>
-</section>
-<section id="bugs-with-the-therac-25-computer-controlled-radiation-therapy-machine" class="level1">
-<h1>Bugs with the Therac-25 computer-controlled radiation therapy machine</h1>
-<ul>
-<li><a href="https://hackaday.com/2015/10/26/killed-by-a-machine-the-therac-25/">Killed by a machine</a></li>
-</ul>
-<blockquote class="blockquote">
-<p>If this story has a hero, it’s [Fritz Hager], the staff physicist at the East Texas Cancer Center in Tyler, Texas. After the second incident at his facility, he was determined to get to the bottom of the problem. In both cases, the Therac-25 displayed a “Malfunction 54” message. The message was not mentioned in the manuals. AECL explained that Malfunction 54 meant that the Therac-25’s computer could not determine if there a underdose OR overdose of radiation.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The same radiotherapy technician had been involved in both incidents, so [Fritz] brought her back into the control room to attempt to recreate the problem. The two “locked the doors” NASA style, working into the night and through the weekend trying to reproduce the problem. With the technician running the machine, the two were able to pinpoint the issue. The VT-100 console used to enter Therac-25 prescriptions allowed cursor movement via cursor up and down keys. If the user selected X-ray mode, the machine would begin setting up the machine for high-powered X-rays. This process took about 8 seconds. If the user switched to Electron mode within those 8 seconds, the turntable would not switch over to the correct position, leaving the turntable in an unknown state.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>As the investigations and lawsuits progressed, the software for the Therac-25 was placed under scrutiny. The Therac-25’s PDP-11 was programmed completely in assembly language. Not only the application, but the underlying executive, which took the place of an operating system. The computer was tasked with handling real-time control of the machine, both its normal operation and safety systems. Today this sort of job could be handled by a microcontroller or two, with a PC running a GUI front end.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>AECL never publicly released the source code, but several experts including [Nancy Leveson] did obtain access for the investigation. What they found was shocking. The software appeared to have been written by a programmer with little experience coding for real-time systems. There were few comments, and no proof that any timing analysis had been performed. According to AECL, a single programmer had written the software based upon the Therac-6 and 20 code. However, this programmer no longer worked for the company, and could not be found.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The lawsuits were settled out of court. It seemed like the problems were solved until January 17th, 1987, when another patient was overdosed at Yakima, Washington. This problem was a new one: A counter overflow. If the operator sent a command at the exact moment the counter overflowed, the machine would skip setting up some of the beam accessories – including moving the stainless steel aiming mirror. The result was once again an unscanned beam, and an overdose. The patient died 3 months later.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>It’s important to note that while the software was the lynch pin in the Therac-25, it wasn’t the root cause. The entire system design was the real problem. Safety-critical loads were placed upon a computer system that was not designed to control them. Timing analysis wasn’t performed. Unit testing never happened. Fault trees for both hardware and software were not created. These tasks are not only the responsibility of the software engineers, but the systems engineers on the project. Therac-25 is long gone, but its legacy will live on. This was the watershed event that showed how badly things can go wrong when software for life-critical systems is not properly designed and adequately tested.</p>
-</blockquote>
-</section>
-<section id="ai-hype-train" class="level1">
-<h1>AI Hype Train</h1>
-<p><a href="https://www.youtube.com/watch?v=ajGX7odA87k">That keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”</a></p>
-<p><a href="https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/">I Will Fu*king Piledrive You If You Mention AI Again</a></p>
-</section>
-<section id="others" class="level1">
-<h1>Others</h1>
-<p><a href="https://blog.grio.com/2021/07/when-small-software-bugs-cause-big-problems.html">WHEN SMALL SOFTWARE BUGS CAUSE BIG PROBLEMS</a></p>
-<p><a href="https://arstechnica.com/security/2024/03/backdoor-found-in-widely-used-linux-utility-breaks-encrypted-ssh-connections/">Backdoors into open source package</a></p>
-<p><a href="https://resend.com/blog/incident-report-for-february-21-2024">We immediately began the restoration process from a backup, which completed 6 hours later. Unfortunately, once it finished, we found that it failed to restore the data, so we had to start the restoration process a second time with a different backup</a></p>
-<p><a href="https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&amp;publication_id=27849&amp;post_id=137046759&amp;utm_medium=email&amp;utm_content=share&amp;utm_campaign=email-share&amp;triggerShare=true&amp;isFreemail=true&amp;r=yxnx">Counting explosions at Unity, a data analysts perspective</a></p>
-
-
-</section>
-
- ]]></description>
-  <category>datascience</category>
-  <category>opinions</category>
-  <category>hardware</category>
-  <category>software</category>
-  <guid>https://questionable.quarto.pub/blog/lists/good-programming.html</guid>
-  <pubDate>Wed, 24 Jan 2024 07:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
-</item>
-<item>
-  <title>Accessing data in Azure Data Lake (delta files)</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/delta-lake-and-azure.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it’s easy to find in the future!</p>
-<section id="azure-data-lake" class="level2">
-<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
-<section id="set-up" class="level3">
-<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
-<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
-<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
-<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
-<p>Steps:</p>
-<ol type="1">
-<li><p>Go to storage account</p></li>
-<li><p>Create and give it a name</p></li>
-<li><p>Select: LRS</p></li>
-<li><p>Switch to premium: block blobs</p></li>
-<li><p>Change to hierarchical blob</p></li>
-<li><p>Set tags:</p></li>
-</ol>
-<ul>
-<li><p>rs:owner</p></li>
-<li><p>rs:project = soleng</p></li>
-<li><p>rs:environment = dev</p></li>
-</ul>
-<ol start="7" type="1">
-<li>Once in just need access keys or shared access signature in order to gain access</li>
-</ol>
-</section>
-<section id="add-data" class="level3">
-<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
-<p>You can add data manually by creating a container and then using the upload icon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
-<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
-<p>You’ll need to know:</p>
-<ul>
-<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
-<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
-</ul>
-<pre><code>library(AzureStor)
-
-blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
-
-bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
-
-# List containers and files in containers
-list_storage_containers(bl_endp_key)
-cont1 &lt;- storage_container(bl_endp_key, "container1")
-list_storage_files(cont1)
-
-# Download a file
-storage_download(cont1, "/crm_call_center_logs.parquet")
-
-# Upload a file 
-storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
-<p>You can also create and delete containers:</p>
-<pre><code># Create a container
-newcont &lt;- create_storage_container(bl_endp_key, "container3")
-
-# Create a directory in the container
-cont3 &lt;- storage_container(bl_endp_key, "container3")
-create_storage_dir(cont3, "newdir")
-
-# Delete a container
-delete_storage_container(newcont)</code></pre>
-</section>
-<section id="reading-and-writing-delta-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
-<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
-<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
-<pre><code>library(sparklyr)
-
-#Install a local version of Spark
-spark_install(version=3.4)
-
-# Set Spark configuration to be able to read delta tables
-conf &lt;- spark_config()
-conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
-conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
-
-# For spark 3.4 
-conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
-
-# Open a connection
-sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
-
-# For this example we will use a built-in dataframe to save example data files, including one for delta tables
-tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
-
-# Write spark dataframe to disk
-spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
-spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
-spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
-
-# Read dataframes into normal memory
-spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
-regular_df_csv &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
-regular_df_parquet &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
-regular_df_delta &lt;- collect(spark_tbl_handle)
-
-# Disconnect
-spark_disconnect(sc)</code></pre>
-<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
-</section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<p>From R:</p>
-<pre><code># See spark details (troubleshooting)
-spark_config()
-spark_get_java()
-spark_available_versions()
-spark_installed_versions()
-
-# See session details
-utils::sessionInfo() </code></pre>
-<p>From bash:</p>
-<pre><code>namei -l /usr/lib/spark</code></pre>
-<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
-</section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
-<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
-<blockquote class="blockquote">
-<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
-</blockquote>
-<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
-</section>
-<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
-<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
-<blockquote class="blockquote">
-<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
-</blockquote>
-<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
-<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
-
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>code</category>
-  <category>data</category>
-  <guid>https://questionable.quarto.pub/blog/work/delta-lake-and-azure.html</guid>
-  <pubDate>Thu, 11 Jan 2024 07:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 </channel>
 </rss>
