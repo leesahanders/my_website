@@ -50,7 +50,7 @@
 <p>This results in a login page with the information appended at the bottom:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/workbench-custom-login-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-1.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<p><a href="img/workbench-custom-login-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-1.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
 <figcaption>Workbench login page</figcaption>
 </figure>
 </div>
@@ -92,7 +92,7 @@ cap.innerHTML = "This is a message added by your admin. Sign into Posit with you
 <p>This results in a login page with information appended at the bottom as well as custom coloring and a logo and the header for the login blurb changed:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/workbench-custom-login-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-2.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
+<p><a href="img/workbench-custom-login-2.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="Workbench login page"><img src="https://questionable.quarto.pub/blog/work/img/workbench-custom-login-2.png" class="img-fluid figure-img" alt="Workbench login page"></a></p>
 <figcaption>Workbench login page</figcaption>
 </figure>
 </div>
@@ -139,7 +139,7 @@ cap.innerHTML = "This is a message added by your admin. Sign into Posit with you
 <div id="fig-light-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/positron-theme-light.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-1"><img src="https://questionable.quarto.pub/blog/work/img/positron-theme-light.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
+<a href="img/positron-theme-light.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="fig-elephants"><img src="https://questionable.quarto.pub/blog/work/img/positron-theme-light.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Light theme
@@ -151,7 +151,7 @@ cap.innerHTML = "This is a message added by your admin. Sign into Posit with you
 <div id="fig-dark-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/positron-data.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-2"><img src="https://questionable.quarto.pub/blog/work/img/positron-data.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
+<a href="img/positron-data.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="fig-elephants"><img src="https://questionable.quarto.pub/blog/work/img/positron-data.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) dark theme
@@ -203,6 +203,275 @@ Soon:
 <section id="llm-integrations" class="level2">
 <h2 class="anchored" data-anchor-id="llm-integrations">LLM integrations</h2>
 <p>Stay tuned for Posit::Conf 2025!</p>
+</section>
+<section id="running-a-python-project" class="level2">
+<h2 class="anchored" data-anchor-id="running-a-python-project">Running a python project</h2>
+<p>Reference: <a href="https://positron.posit.co/start.html" class="uri">https://positron.posit.co/start.html</a></p>
+<p>I’m a big fan of using the git integration to clone down a project, for example this set of <a href="https://github.com/rstudio/posit-demo-assets">demo examples</a>.</p>
+<p>We’ll want to make sure that <code>ipykernel</code> is installed:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python3</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> pip install ipykernel</span></code></pre></div>
+<p>We can discover which python versions we have access to with:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ls</span> /opt/python/</span></code></pre></div>
+<section id="select-the-python-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="select-the-python-interpreter">Select the python interpreter</h3>
+<p>Manage the interpreter in the session (virtual environment) through the top right icon:</p>
+<div id="fig-python-interp" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-python-interp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/python-interpreter.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="https://questionable.quarto.pub/blog/work/img/python-interpreter.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-interp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Python interpreter selection
+</figcaption>
+</figure>
+</div>
+<p>Reference: <a href="https://positron.posit.co/managing-interpreters.html" class="uri">https://positron.posit.co/managing-interpreters.html</a></p>
+<p>You can also manually select the python interpreter with <code>ctrl-shift-p</code> and then <code>Python: Select Interpreter</code> command and select the <code>Enter interpreter path...</code> option.</p>
+<p>This gives you the ability to refresh the visible interpreters with the circle arrow symbol.</p>
+<div id="fig-python-interp-manually" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-python-interp-manually-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/select-interpreter-manually.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="https://questionable.quarto.pub/blog/work/img/select-interpreter-manually.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-interp-manually-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Python interpreter manual selection
+</figcaption>
+</figure>
+</div>
+<p>We can create a new interpreter (and then select it through the dropdown) either with uv or pip.</p>
+<section id="the-uv-way" class="level4">
+<h4 class="anchored" data-anchor-id="the-uv-way">The uv way</h4>
+<p>Use <a href="https://github.com/astral-sh/uv">uv</a>. It will detect that this is a project and create the venv for us when we go to run the application.</p>
+<p>Run the application:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run app.py</span>
+<span id="cb3-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run shiny run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--reload</span> app.py</span></code></pre></div>
+</section>
+<section id="the-pip-way" class="level4">
+<h4 class="anchored" data-anchor-id="the-pip-way">The pip way</h4>
+<p>Setup the <code>venv</code> environment:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> venv env</span>
+<span id="cb4-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">.</span> env/bin/activate</span>
+<span id="cb4-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># source env/bin/activate</span></span>
+<span id="cb4-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--upgrade</span> pip</span>
+<span id="cb4-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
+<p>I recommend using <code>env</code> instead of <code>.venv</code> because quarto will automatically pick it up.</p>
+<p>Run the application:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">shiny</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--reload</span> app.py</span></code></pre></div>
+</section>
+<section id="register-new-interpreter-as-kernel-likely-optional" class="level4">
+<h4 class="anchored" data-anchor-id="register-new-interpreter-as-kernel-likely-optional">Register new interpreter as kernel (likely optional)</h4>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Register as kernel</span></span>
+<span id="cb6-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install ipykernel jupyter</span>
+<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># python -m ipykernel install --name "my-new-project_venv" --user </span></span>
+<span id="cb6-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> ipykernel install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"shiny-income-share"</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--user</span></span></code></pre></div>
+</section>
+</section>
+<section id="running-and-previewing-an-app" class="level3">
+<h3 class="anchored" data-anchor-id="running-and-previewing-an-app">Running and previewing an app</h3>
+<p>Open the folder so that the root directory is the content example you want to run.</p>
+<p>Make sure the appropriate virtual environment has been created (following the steps above) and selected as the interpreter.</p>
+<p>Click the play button to launch the application.</p>
+<div id="fig-python-app" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-python-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/running-shiny-python-app.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="https://questionable.quarto.pub/blog/work/img/running-shiny-python-app.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Python Shiny App
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="creating-a-new-project" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-new-project">Creating a new project</h3>
+<section id="the-pip-way-1" class="level4">
+<h4 class="anchored" data-anchor-id="the-pip-way-1">The pip way</h4>
+<p>Create a <code>venv</code> to isolate environments and generate a <code>requirements.txt</code> file so that only the minimum packages needed to support your project are included. Read <a href="https://docs.posit.co/connect/admin/python/package-management/index.html">this</a> for more on Python package management.</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python3</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> requirements.txt</span>
+<span id="cb7-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python3</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-r</span> requirements.txt</span></code></pre></div>
+</section>
+<section id="the-uv-way-1" class="level4">
+<h4 class="anchored" data-anchor-id="the-uv-way-1">The uv way</h4>
+<p>Create a <a href="https://docs.posit.co/connect/user/publishing-cli-notebook/index.html#creating-a-manifest-for-future-deployment"><code>manifest.json</code> file</a> to support git-backed publishing</p>
+<p>For uv projects, they can be initialized and updated with (change format and packages as needed):</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--app</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--python</span> 3.12.6</span>
+<span id="cb8-2">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> add numpy matplotlib jupyter</span>
+<span id="cb8-3">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> sync <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--upgrade</span></span>
+<span id="cb8-4">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> export <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-o</span> requirements.txt <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--no-hashes</span></span>
+<span id="cb8-5">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run rsconnect write-manifest api .</span>
+<span id="cb8-6"></span>
+<span id="cb8-7">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Dev dependencies may need to be added </span></span>
+<span id="cb8-8">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> add <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--dev</span> uv ipykernel</span></code></pre></div>
+</section>
+</section>
+<section id="deploying" class="level3">
+<h3 class="anchored" data-anchor-id="deploying">Deploying</h3>
+<p>Reference the <a href="https://docs.posit.co/connect/user/shiny-python/">Posit Connect User Guide: Shiny for Python</a></p>
+<section id="using-posit-publisher" class="level4">
+<h4 class="anchored" data-anchor-id="using-posit-publisher">Using Posit Publisher</h4>
+<p>Make sure the Posit Publisher extension is installed.</p>
+<p>Click <code>new deployment</code> and follow the screens to add your developer information and an API key.</p>
+<p>Make sure to add any files that need to be included in the bundle to (1) the .toml file (2) the project files list.</p>
+<p>For example, the .toml file might look like:</p>
+<pre><code># Configuration file generated by Posit Publisher.
+# Please review and modify as needed. See the documentation for more options:
+# https://github.com/posit-dev/publisher/blob/main/docs/configuration.md
+'$schema' = 'https://cdn.posit.co/publisher/schemas/posit-publishing-schema-v3.json'
+type = 'python-shiny'
+entrypoint = 'app.py'
+validate = true
+files = [
+  '/app.py',
+  '/data,csv',
+  '/requirements.txt',
+  '/.posit/publish/shiny-income-share-positron-FLKH.toml',
+  '/.posit/publish/deployments/deployment-NVOJ.toml',
+  '/data.csv'
+]
+title = 'shiny-income-share-positron'
+
+[python]
+version = "3.11.9"
+package_file = "requirements.txt"
+package_manager = "pip"
+</code></pre>
+<p>Reference: <a href="https://github.com/posit-dev/publisher/blob/main/docs/configuration.md" class="uri">https://github.com/posit-dev/publisher/blob/main/docs/configuration.md</a></p>
+</section>
+<section id="rsconnect-python-cli" class="level4">
+<h4 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h4>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># With uv</span></span>
+<span id="cb10-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run rsconnect deploy shiny .</span>
+<span id="cb10-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Without uv</span></span>
+<span id="cb10-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rsconnect</span> deploy shiny .</span></code></pre></div>
+</section>
+<section id="git-backed" class="level4">
+<h4 class="anchored" data-anchor-id="git-backed">Git-backed</h4>
+<p>Update the code, and then run:</p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># With uv</span></span>
+<span id="cb11-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> export <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-o</span> requirements.txt <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--no-hashes</span></span>
+<span id="cb11-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> run rsconnect write-manifest shiny <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--overwrite</span> .</span>
+<span id="cb11-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Without uv</span></span>
+<span id="cb11-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> freeze <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> requirements.txt </span>
+<span id="cb11-6"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">rsconnect</span> write-manifest shiny <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--overwrite</span> .</span></code></pre></div>
+<p>Commit the new <code>manifest.json</code> file to the git repo along with the code.</p>
+</section>
+</section>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
@@ -5465,7 +5734,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -5493,7 +5762,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -5559,7 +5828,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
