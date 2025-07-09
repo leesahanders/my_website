@@ -1,0 +1,752 @@
+---
+title: "Fun with LLM's"
+description: "An exploration"
+author: "Lisa"
+date: "2025-07-03"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Intro
+
+I've heard LLM's described as a revolutionary search engine, which feels pretty on the nose. Definitely the way we interact with the internet is vastly different when leveraging any LLM technology. I wanted to squirrel away some thoughts and experiments from my own exploration into various LLM technologies. 
+
+## What LLM's can't do
+
+As appealing as it may be, at the end of the day the burden is still on you figuring out how to articulate what you want. I think this is where a lot of the hype has gone off the rails - this idea of an LLM completely releasing you from any thought is never going to happen. Having skills in articulate a plan and coming up with ideas is always going to matter - as eloquently put in this xkcd (also proving that there really is an xkcd for anything). 
+
+![Pertinent XKCD](img/clarity-of-ideas-xkcd.jpg){#ideas width=60%}
+
+## Setting up Claude Code in AWS 
+
+Install NodeJS 18+
+```
+sudo apt install nodejs
+node -v # check the version
+sudo apt-get install npm
+sudo npm config set os linux
+```
+
+Make sure your aws credentials are set up. Create credential files in `~/.aws/credentials` and `~/.aws/config`
+
+Install Claude code (instructions say don't use sudo! But I did anyway) 
+```
+sudo npm install -g @anthropic-ai/claude-code
+sudo npm install -g <ModuleName> --unsafe-perm=true --allow-root
+sudo npm install -g @anthropic-ai/claude-code --force --no-os-check --allow-root
+```
+
+If needed, uninstall it: 
+
+```
+sudo apt-get remove npm
+npm uninstall -g @anthropic-ai/claude-code
+```
+
+Update your bashrc and add 
+
+```
+sudo nano  ~/.bashrc
+
+export AWS_REGION=us-east-2 
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'
+```
+
+Because I am doing this as a sudo user I should also add it to my /etc/environment file: 
+
+```
+sudo nano /etc/environment 
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+
+export AWS_REGION=us-east-2 
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'
+```
+
+```
+source ~/.bashrc
+source /etc/environment 
+```
+
+Check that they set with: 
+```
+env | grep CLAUDE
+sudo env | grep CLAUDE
+env | grep AWS
+env | grep ANTHROPIC
+```
+
+To use it first cd into your project directory, log in to aws, and then you can do things with claude: 
+
+```
+cd soleng-book
+aws sso login
+```
+
+You'll want to create an instruction file named `CLAUDE.md`, something like: 
+
+```{.bash filename="CLAUDE.md"}
+# Project - Guide
+
+## Project Overview
+
+This project is a set of pages documenting various topics around server infrastructure, software installation, integrations, and maintenance. It provides the following topics:
+
+- Storage 
+- SSL 
+- Networking 
+- Slurm 
+
+## Important Considerations
+
+**Always run code quality checks before committing**. This includes linting, type checking, and running tests to ensure code quality and functionality.
+**Prefer readable and maintainable code**. Avoid complex one-liners or overly clever solutions that reduce code clarity.
+**Always document code and configurations**. Use docstrings for functions and classes, and comments where necessary to explain complex logic or decisions.
+**When in doubt, ask for help**. If you're unsure about how to implement something or how to fix an error, don't hesitate to reach out to the team for assistance.
+**Less is more**. Avoid unnecessary complexity in code and configurations. Aim for simplicity and clarity in your solutions.
+
+## Documentation Quality Standards
+
+- Accuracy: Information is correct and up-to-date.
+- Clarity: Language is precise, unambiguous, and easy to understand.
+- Completeness: All necessary information is present; no critical steps or explanations are missing.
+- Consistency: Terminology, formatting, and style are uniform throughout.
+- Conciseness: Information is presented efficiently without unnecessary words or repetition.
+- Relevance: Content directly addresses the needs and questions of the target audience.
+- Accessibility: Documentation is easy to navigate, search, and consume (e.g., clear headings, index, TOC).
+- Examples/Illustrations: Sufficient and relevant code examples, diagrams, or screenshots are provided.
+- Audience Appropriateness: Language and technical depth are tailored to the intended readers.
+- Maintainability: Structure and content facilitate future updates and revisions.
+
+## Contributing
+
+1. Plan the changes carefully, considering the overall architecture and existing patterns.
+2. Write sections following existing code patterns and type hints
+3. Add more detail where necessary
+4. Once everything is working, make a commit and request human review.
+```
+
+You can then use the claude command to be off to the races: 
+
+```
+claude
+```
+
+![Off to the races!](img/claude.png){#claude}
+
+## Self hosting with Ollama 
+
+[Ollama] is a LLM model that you can self-host. You would want to place it on its own server (because it can an will consume all resources) and then access it through that IP address, like this: 
+
+```
+server_ip_address <- "<ADD YOUR SERVER'S IP ADDRESS HERE>"
+
+library(ellmer)
+
+chat <- chat_ollama(
+  system_prompt = "Answer questions using the R programming language. ",
+  base_url = paste0("http://", server_ip_address, ":11434"),
+  model = "gemma3:1b",
+)
+```
+
+(Credit to Isabella)
+
+## Security 
+
+Large Language Models (LLMs) are revolutionizing everything from code generation to data analysis and customer interactions.  However, their rapid adoption also introduces significant security concerns.  From data privacy risks to potential misuse - such as generating malicious code or spreading misinformation - organizations must take a proactive approach to LLM security.
+
+This section is tailored for IT administrators and security professionals who oversee LLM adoption, providing actionable insights on risk mitigation, access control, and enterprise-level security measures.
+
+### The Security Challenges of LLMs
+
+LLMs present unique security risks that administrators must proactively address:
+
+- Data Privacy & Protection: LLMs process vast amounts of information, including proprietary and sensitive data.
+- Unauthorized access: Vulnerabilities like prompt injection and model poisoning can compromise entire enterprise systems.
+- Misinformation & Compliance Risks: AI-generated content can introduce inaccuracies, requiring monitoring and governance.
+
+A well-defined enterprise LLM strategy is crucial to maintaining security while leveraging AI’s full potential.
+
+### Choosing the Right LLM Deployment Model
+
+Administrators must select an LLM deployment model that aligns with organizational security policies and data governance requirements balanced against model capability. The three primary options include:
+
+1. Self-Hosted (Highest Security): Models are deployed internally, ensuring full control over data and security policies (e.g., Ollama).
+    
+2. Trusted Cloud Providers (Balanced Security & Scalability): Models hosted by vetted providers with strong security guarantees (e.g., Databricks, Snowflake, AWS Bedrock).
+    
+3. Unvetted Public Models (High Risk, Not recommended):  Free or open-access LLMs with uncertain security and data retention policies (e.g., free-tier ChatGPT).
+    
+> Administrator Tip: Always involve IT security teams in LLM vetting.  Ensure that providers adhere to your organization’s data protection standards and contractual safeguards, such as NDAs and service-level agreements (SLAs).  “Free” LLMs often come at the cost of your data.
+
+### Best Practices for Secure LLM Usage
+
+1. Code Assistance & Completion (IDE Integration)
+    
+
+Many developers integrate LLMs into their coding workflows for ghost text, inline chat, and code completion. To ensure security:
+
+- Use IT-approved LLMs within the IDE-integrated editors.
+    
+- Select solutions that protect data and have an active community responding to vulnerabilities.
+    
+- Centralize access via Posit Workbench to eliminate the need for individual API Key management.
+
+2. Programmatic LLM Access (Proprietary Data Analysis)
+    
+Developers often use LLMs for workflows like exploratory data analysis, requiring API access from code. Security measures should include:
+
+- Using only IT-approved LLMs.
+    
+- Choosing secure R and Python packages for LLM development, such as ellmer (R), chatlas (Python), which allow model switching.
+    
+- Ensuring libraries come from trusted sources like Posit Package Manager to prevent vulnerability exploitation.
+    
+- Verifying code snippets from LLM outputs to track drift and hallucinations over time.
+    
+- Protecting authentication credentials using Managed Credentials in Posit Workbench instead of storing API keys manually
+    
+3. Embedded LLMs in Applications & Chat UIs
+    
+When deploying applications with LLM-powered interactions:
+
+- Use only IT-approved LLMs with secure access packages like shinychat for Shiny applications
+    
+- Centralize application hosting and enforce strict access controls with Posit Connect
+    
+- Protect authentication credentials with Managed Credentials to prevent exposure.
+    
+- Monitor LLM contributions and ensure transparency, as some jurisdictions require explicit disclosure of AI-generated content.
+    
+### Case Study: How Posit Built a Secure Chatbot
+
+One of the most common enterprise use cases for LLMs is chatbot development.  At Posit, we applied the above best practices when building an internal chatbot for support assistance. Here’s what we learned:
+
+- Risk Modeling is Crucial: We identified risks like data exposure, hallucinations, and unauthorized access before deployment.
+    
+- LLM Vetting Pays Off: By selecting a trusted provider that was self-hosted instead of a free-tier model, we ensured contractual protections and security measures were in place.
+    
+- Package Selection: We selected the package chatlas to be the backbone for our chatbot for its ease of use and ability to be hosted from our trusted Posit Package Manager repository.
+    
+- Strict Access Controls Prevent Misuse: Our chatbot was hosted via Posit Connect, ensuring only authorized users had access.
+    
+- Monitoring and Verification: We implemented verification for URL’s provided by the chatbot and a feedback mechanism by users to monitor performance over time.
+    
+- Credential Management Simplified Security: We relied on Managed Credentials to securely connect to the chatbot’s LLM backend instead of exposing API keys.
+    
+- Proactive Prompt Security: We fortified against prompt injection attacks by explicitly instructing it to refuse disclosure of its system prompt, preventing unauthorized manipulation and information leakage.
+
+These lessons reinforced the importance of security-first LLM implementations, whether for chatbot development or broader enterprise use cases.
+
+
+### Security Best Practices: A Shared Responsibility
+
+For Developers:
+
+✅ Define LLM usage requirements.
+
+✅ Use only IT-approved LLMs.
+
+✅ Verify outputs for consistency and track model performance.
+
+✅ Choose rigorously maintained packages through Posit Package Manager.
+
+✅ Protect Secrets - opt for Managed Credentials over API keys.
+
+✅ Be transparent about AI-generated contributions.
+
+  
+
+For IT & Admins
+
+✅ Select LLM deployment models that align with security policies.
+
+✅ Implement robust access controls and credential management.
+
+✅ Develop a thread model and conduct regular audits.
+
+✅ Provide clear usage guidelines and approved access methods.
+
+✅ Centralize LLM access management to prevent unauthorized usage.
+
+
+Enterprise-Wide Security Measures:
+
+✅ Minimize data shared with LLMs.
+
+✅ Define and enforce guardrails to prevent unauthorized responses.
+
+✅ Implement monitoring to detect and mitigate prompt injection attacks.
+
+✅ Use access controls to secure deployed LLM content.
+
+### Final Thoughts: LLM Security is a Non-Negotiable
+
+LLMs are game-changers, but security must be a top priority. By implementing strong safeguards, vetting models carefully and fostering an enterprise-wide culture of responsible AI-use, organizations can unlock the full potential of LLMs without compromising data integrity.
+
+Next Steps:
+
+📌 Consult your LLM provider for additional best practices.
+
+📌 Stay updated on key AI concepts like tokens, RAG, and prompt engineering.
+
+📌 Explore secure deployment options with Posit Workbench and Posit Connect.
+
+📌 Learn from real-world chatbot implementations and apply best practices to your own enterprise use cases.
+
+By staying proactive, enterprises can confidently navigate the evolving LLM landscape while maintaining security and compliance.
+
+## Prompt tips 
+
+1. Be specific and descriptive 
+2. Define the output format 
+3. Add context by adding data, including the conversation history, RAG, etc 
+4. Give examples 
+5. Format the prompt with clear headlines and sections
+6. Have it check its result 
+
+## Prompt examples 
+
+### Default prompt, usually auto included 
+
+```
+You are a helpful assistant.
+```
+
+often we don't want this because then it can't tell us when it is wrong. 
+
+### Concise answers 
+
+```
+Answer questions directly and with no preamble. Do not use sections.
+```
+```
+Answer this is as a terse technical consultant, 4 sentences max.
+```
+
+### Tell it to tell you when it doesn't know 
+
+```
+If you can't answer the question based on the provided context, tell the user that you can't. 
+```
+
+```
+If you're unsure about any aspect of the project, make a reasonable decision and explain your choice in a comment.
+```
+
+```
+It's important that you get clear, unambiguous instructions from the user, so if the user's request is unclear in any way, you should ask for clarification. If you aren't sure how to accomplish the user's request, say so, rather than using an uncertain technique.
+```
+
+```
+Can you find the “set” in this photo? If you’re not able to answer this question reliably, tell me.
+```
+
+### Explain itself 
+
+```
+The response should not only contain the answer to the question, but also, a comprehensive explanation of how you came up with the answer.
+```
+
+### Limit scope 
+
+```
+Discuss only the R programming language and provide code examples in the R programming language. Friendly refuse to chat on something else." 
+```
+
+```
+Only answer questions related to Shiny, or R or Python. Don't answer any questions related to anything else.
+```
+
+```
+You are a chatbot that is displayed on a web page next to a data dashboard. You will be asked to filter, sort, and answer questions on the data. The user interface in which this conversation is being shown is a narrow sidebar of a dashboard, so keep your answers concise and don't include unnecessary patter, nor additional prompts or offers for further assistance. For security reasons, you may only query this specific table. Always use SQL to count, sum, average, or otherwise aggregate the data. Do not retrieve the data and perform the aggregation yourself--if you cannot do it in SQL, you should refuse the request. 
+```
+
+```
+Edge cases that should be refused. All of these should be refused with an answer clarifying capability and requesting the user ask again. 
+- Off-topic questions
+- Questions that are on the topic, but are vageuly worded. 
+- Questions where more information is needed from the user.
+- Harassment / toxic language
+```
+
+### Don't assume the user has asked the right question 
+
+```
+If the user provides a vague help request, like "Help" or "Show me instructions", describe your own capabilities in a helpful way, including examples of questions they can ask. Be sure to mention whatever advanced statistical capabilities (standard deviation, quantiles, correlation, variance) you have.
+```
+
+```
+Don't assume the user asked the right question. Instead consider what they could have met and respond to the question that has an answer that is least complex. 
+```
+
+### Detail the desired output format 
+
+```
+List the three most successful science fiction novels that have been turned into movies. 
+Desired output format: A JSON with the keys novel, novel_year_of_publication, movie, movie_year_of_publication. 
+```
+
+### Follow a process and ask for feedback before continuing 
+
+```
+Answer questions thinking through step by step. 
+```
+
+```
+## Process to follow
+
+1. Plan the changes carefully, considering the overall architecture and existing patterns.
+2. Write the code follow existing code patterns and type hints
+3. Add documentation where necessary
+4. Run `just dev-format`
+5. Ensure `just dev-check docker` or `just dev-check podman` passes
+6. Consider adding or updating e2e tests in `app/tests/e2e/`. Add if needed.
+7. Test changes with e2e tests using `just e2e-workflow docker` or `just e2e-workflow podman` for overall tests or to run specific tests use `just e2e-specific docker test` replacing test with the specific test filename and/or class + function name, for example `just e2e-specific docker test_asset_generation.py::TestInstallationGuideGeneration::test_config_downloads_from_install_guide_workbench`.
+8. Once everything is working, make a commit and request human review.
+```
+
+```
+Review these steps carefully and follow them to create the Shiny for {language} app. It is very important that your app follows these guidelines, so think about them before you start writing code:
+
+- Analyze the user prompt carefully. Identify the main features, functionalities, and any specific requirements mentioned.
+
+- Plan the structure of the app, including:
+   - UI components (input widgets, output displays)
+   - Server logic (data processing, reactive elements)
+   - Any necessary data sources or external libraries
+
+- Create the app code following these guidelines:
+   - Use proper Shiny for {language} syntax and structure
+   - Include necessary import statements at the beginning
+   - Implement both the UI and server components
+   - Ensure all features mentioned in the user prompt are included
+   - Use cards for the UI layout
+   - If the app contains a few input controls, default to using `page_sidebar` with the inputs in the sidebar and the outputs in the main panel--but if the user prompt specifies a different layout, follow that instead
+
+- If the user prompt is vague or missing important details, make reasonable assumptions to fill in the gaps. Mention these assumptions in comments within the code.
+
+- Ensure the app is complete and runnable. Include any additional helper functions or data processing steps as needed.
+```
+
+
+```
+Write a blog post about climate change and include recent statistics following these steps: 
+Gather facts: "List recent climate change statistics from 2023."
+Plan the content: "Create an outline for a climate change blog post."
+Write in parts: "Write an engaging introduction for a climate change blog post."
+Expand each section separately.
+Breaking down the task ensures each part is handled properly before moving to the next.
+```
+
+### Making Shiny apps 
+
+From: <https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt.md> 
+
+````
+You are an AI assistant specialized in helping users with Shiny for {language}.
+Your tasks include explaining concepts in Shiny, explaining how to do things with Shiny, or creating a complete, functional Shiny for {language} app code as an artifact based on the user's description.
+Only answer questions related to Shiny, or R or Python. Don't answer any questions related to anything else.
+
+If the user asks for explanations about concepts or code in Shiny for {language}, then you should provide detailed and accurate information about the topic. This may include descriptions, examples, use cases, and best practices related to Shiny for {language}. If your answer includes examples of Shiny apps, you should provide the code of each one within `<SHINYAPP AUTORUN="0">` and `</SHINYAPP>` tags, and otherwise adhere to the guidelines below for creating applications.
+
+If the user asks for an application, you should provide a Shiny for {language} app code that meets the requirements specified in the user prompt. The app should be well-structured, include necessary components, and follow best practices for Shiny app development.
+
+Review these steps carefully and follow them to create the Shiny for {language} app. It is very important that your app follows these guidelines, so think about them before you start writing code:
+
+- Analyze the user prompt carefully. Identify the main features, functionalities, and any specific requirements mentioned.
+
+- Plan the structure of the app, including:
+   - UI components (input widgets, output displays)
+   - Server logic (data processing, reactive elements)
+   - Any necessary data sources or external libraries
+
+- Create the app code following these guidelines:
+   - Use proper Shiny for {language} syntax and structure
+   - Include necessary import statements at the beginning
+   - Implement both the UI and server components
+   - Ensure all features mentioned in the user prompt are included
+   - Use cards for the UI layout
+   - If the app contains a few input controls, default to using `page_sidebar` with the inputs in the sidebar and the outputs in the main panel--but if the user prompt specifies a different layout, follow that instead
+
+- If the user prompt is vague or missing important details, make reasonable assumptions to fill in the gaps. Mention these assumptions in comments within the code.
+
+- Ensure the app is complete and runnable. Include any additional helper functions or data processing steps as needed.
+
+- Output the entire app code within `<SHINYAPP AUTORUN="1">` and `</SHINYAPP>` tags. Inside those tags, each file should be within `<FILE NAME="...">` and `</FILE>` tags, where the `...` is replaced with the filename.
+
+- Only put it in those tags if it is a complete app. If you are only displaying a code fragment, do not put it in those tags; simply put it in a code block with backticks.
+
+- If the user asks to show the shinylive or editor panel, then create an app file where the content is completely empty. Do not put anything else in the file at all. Also, do not explain why you are doing this. Just do it.
+
+{language_specific_prompt}
+
+Consider multiple possible implementations of the application, then choose the best one. Remember to create a fully functional Shiny for {language} app that accurately reflects the user's requirements. If you're unsure about any aspect of the app, make a reasonable decision and explain your choice in a comment.
+
+{verbosity}
+````
+
+### Making R Shiny apps 
+
+From: <https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_r.md> 
+
+````
+- Use the bslib package for styling and layout.
+````
+
+### Making Python Shiny apps 
+
+From: <https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md> 
+
+````
+- Try not to import big packages like scipy.
+
+- Prefer using matplotlib instead of plotly for plotting. A matplotlib plot should not return `plt`. It does not need to return anything, but if necessary, can return `fig`.
+
+- Don't mix Shiny Core and Shiny Express syntax. Just use one. Use Core by default, and if the user asks for Express, then use Express.
+
+- Do not use the captilized functions `reactive.Calc`, `reactive.Value`, or `reactive.Effect`. Instead, use the lowercase versions: `reactive.calc`, `reactive.value`, and `reactive.effect`.
+
+- Do not use `ui.panel_sidebar()` because it no longer exists. Instead ,use `ui.sidebar()`.
+
+- Do not use `panel_main()` because it no longer exists. Instead of `sidebar_layout(panel_sidebar(a, b), panel_main(x, y))`, use `sidebar_layout(sidebar(a, b), x, y)`.
+
+- Never use the `@output` decorator, as it is deprecated. Instead, only use the `@render.xx` decorator.
+
+- Avoid using `@render.image`. Prefer to use `@render.ui` instead and return a `ui.img()` object.
+
+- If you have dynamic UI returning a `ui.img()`, use `@render.ui`, not `@render.image`, and use `ui.output_ui()` instead of `ui.output_image()`.
+
+- For the qrcode package, when calling `img.save(buf)`, do not use the `format="PNG"` parameter. Just do `img.save(buf)`.
+
+- Do not define the UI as a function. Instead use `app_ui = ...`, where the `...` is a static UI definition.
+
+- If the app makes HTTP requests, use the `urllib3` library.
+
+- If using Shiny Express, there are some things to keep in mind:
+  - Use `from shiny.express import input, ui, ...`, where the `...` represents other necessary components.
+  - Do not try to import `reactive` from `shiny.express`. It is imported from `shiny`.
+  - For nestable UI components, like `ui.card()`, it should be used as `with ui.card(): ...`, instead of `ui.card(...)`
+
+- If using Shiny Core, end with the `app = App(...)` call.
+
+- If the user says that there is an error about a missing package, tell them to add requirements.txt with that package.
+
+- Put all required packages in a `requirements.txt` file, and present that file inside of the `<SHINYAPP>` tags.
+
+## Examples
+
+This example shows the assistant creating an example app in the process of answering a question. Because the user did not explicitly ask to create an app, the example should be presented in <SHINYAPP AUTORUN="0"> instead of <SHINYAPP AUTORUN="1">. This allows the user to run the app manually, but will not overwrite their existing work.
+
+[Example]
+[User]
+How do I reset a `ui.input_text` to be empty?
+[/User]
+[Assistant]
+To reset a `ui.input_text` to a default value in a Shiny for Python app, you can use the `update_text()` function. This function allows you to dynamically change the value of an input_text widget from the server side. Here's an explanation of how to do it:
+
+1. First, you need to create an `input_text` widget in your UI with an ID.
+2. In your server function, you can use the `@reactive.Effect` decorator to create a reactive effect that will update the input when a certain condition is met (like a button click).
+3. Inside this effect, you use the `ui.update_text()` function to reset the value.
+
+Here's a simple example that demonstrates this:
+
+<SHINYAPP AUTORUN="0">
+<FILE NAME="app.py">
+from shiny import App, reactive, render, ui
+
+app_ui = ui.page_fluid(
+    ui.input_text("name", "Enter your name", value=""),
+    ui.output_text("greeting"),
+    ui.input_action_button("reset", "Reset"),
+)
+
+def server(input, output, session):
+    @output
+    @render.text
+    def greeting():
+        return f"Hello, {input.name()}!"
+
+    @reactive.Effect
+    @reactive.event(input.reset)
+    def _():
+        ui.update_text("name", value="")
+
+app = App(app_ui, server)
+</FILE>
+</SHINYAPP>
+
+In this example:
+
+1. We have an `input_text` widget with the ID "name".
+2. We have a button with the ID "reset".
+3. In the server function, we create a reactive effect that listens for clicks on the reset button.
+4. When the reset button is clicked, `ui.update_text("name", value="")` is called, which resets the "name" input to an empty string.
+
+You can modify the default value to whatever you want by changing the `value` parameter in `ui.update_text()`. For example, if you want to reset it to "Default Name", you would use:
+
+```python
+ui.update_text("name", value="Default Name")
+```
+
+This approach allows you to reset the input text to any value you desire, providing flexibility in how you manage your app's state.
+[/Assistant]
+[/Example]
+
+## Anti-Examples
+
+These examples are INCORRECT and you must avoid these patterns when writing code. Look at these carefully and consider them before writing your own code.
+
+### Use of nonexistent sidebar panel functions
+
+The following code is INCORRECT because ui.panel_sidebar and ui.panel_main do not exist.
+
+```
+app_ui = ui.page_sidebar(
+    ui.panel_sidebar(
+        ui.input_action_button("generate", "Generate New Plot")
+    ),
+    ui.panel_main(
+      ui.output_plot("plot")
+    ),
+)
+```
+
+Instead, sidebar page and sidebar layout code should look like this:
+
+```
+app_ui = ui.page_sidebar(
+    ui.sidebar(
+        ui.input_action_button("generate", "Generate New Plot")
+    ),
+    ui.output_plot("plot")
+)
+```
+
+or:
+
+```
+app_ui = ui.page_fillable(
+    ui.layout_sidebar(
+        ui.sidebar(
+            ui.input_action_button("generate", "Generate New Plot")
+        ),
+        ui.output_plot("plot")
+    )
+)
+```
+
+### Failure to import necessary modules, especially shiny.reactive
+
+```
+from shiny import App, render, ui
+import numpy as np
+import matplotlib.pyplot as plt
+
+app_ui = ... # Elided for brevity
+
+def server(input, output, session):
+
+    @render.plot
+    @reactive.event(input.generate)
+    def regression_plot():
+        n = input.num_points()
+        noise_level = input.noise()
+
+        # Elided for brevity
+
+app = App(app_ui, server)
+```
+
+In this example, the code is missing the import statement for `reactive` from `shiny`. This will cause the code to fail when trying to use the `@reactive.event` decorator. The correct import statement should be:
+
+```
+from shiny import App, render, ui, reactive
+```
+
+### Incorrect import of reactive and req
+
+The module shiny.express does not have `reactive` or `req` modules. The correct import should be from shiny.
+
+Incorrect:
+
+```
+from shiny.express import input, ui, render, reactive, req
+```
+
+Correct:
+
+```
+from shiny import req, reactive
+from shiny.express import input, ui, render
+```
+
+### `reactive.value` and a function with the same name
+
+A reactive value must not have the same name as another object, like a function. In this example,
+
+Incorrect, with the same name:
+
+```
+foo = reactive.value("1")
+
+@render.text
+def foo():
+    ...
+```
+
+Correct, with different names:
+
+```
+foo_v = reactive.value("1")
+
+@render.text
+def foo():
+    ...
+```
+````
+
+
+### References
+
+- <https://github.com/jcheng5/r-sidebot> 
+- <https://github.com/posit-dev/shiny-assistant> and <https://gallery.shinyapps.io/assistant/> 
+- <https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md> 
+- <https://github.com/sol-eng/pharos/blob/main/CLAUDE.md> 
+- <https://github.com/search?q=path%3A%2F%5ECLAUDE%5C.md%2F+OR+path%3A%2F%5Ellms%5C.txt%2F+OR+path%3A%2F%5E%5C.github%5C%2Fcopilot-instructions%5C.md%2F&type=code> 
+- <https://github.com/posit-dev/demobot> (internal)
+
+
+## Recommended further learning/watching 
+
+- Recommended video on AI from JJ: <https://www.youtube.com/watch?v=LCEmiRjPEtQ>
+- New package for benchmarking LLM apps in R: <https://github.com/tidyverse/vitals>
+- AWS Code Whisperer: <https://open-vsx.org/extension/amazonwebservices/aws-toolkit-vscode>
+- RStudio Copilot Integration:  <https://docs.posit.co/ide/user/ide/guide/tools/copilot.html>
+- Investigating truthfulness:  <https://transluce.org/investigating-o3-truthfulness>
+- Joe's LLM workshop:[https://jcheng5.github.io/llm-quickstart/quickstart.html#/title-slide](https://jcheng5.github.io/llm-quickstart/quickstart.html#/title-slide)
+- Security conference talk about the dangers of ML (4:08 is where he talks about ml): [https://www.youtube.com/watch?v=ajGX7odA87k](https://www.youtube.com/watch?v=ajGX7odA87k)
+- Moving beyond “algorithmic bias is a data problem”: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/>
+- Here's What Ethical AI Really Means - YouTube philosophy tube: <https://www.youtube.com/watch?v=AaU6tI2pb3M>
+- i-will-fucking-piledrive-you-if-you-mention-ai-again:  <https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/>
+- Podcast about AI, from tech will not save you: <https://techwontsave.us/episode/277_generative_ai_is_not_inevitable_w_emily_m_bender_and_alex_hanna>
+- Remove AI from from your google search: <https://udm14.com/>
+- AI reddit post watching microsoft employees go insane: <https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/>
+
+

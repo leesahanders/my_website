@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2025-07-03">
+<meta name="description" content="An exploration">
+
+<title>Lisa Anders - questionable.quarto - Fun with LLM’s</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-database" role="img">
+</i> 
+ <span class="menu-text">Stuff</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/posts/">
+ <span class="dropdown-text">Blog / Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../lists.html">
+ <span class="dropdown-text">Lists</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../presentations.html">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/">
+ <span class="dropdown-text">Recipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../work.html">
+ <span class="dropdown-text">Technical writeups</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../site_map.html"> 
+<span class="menu-text">Site Map</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/leesahanders/my_website"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Fun with LLM’s</h1>
+                  <div>
+        <div class="description">
+          An exploration
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lisa </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 3, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
+  <li><a href="#what-llms-cant-do" id="toc-what-llms-cant-do" class="nav-link" data-scroll-target="#what-llms-cant-do">What LLM’s can’t do</a></li>
+  <li><a href="#setting-up-claude-code-in-aws" id="toc-setting-up-claude-code-in-aws" class="nav-link" data-scroll-target="#setting-up-claude-code-in-aws">Setting up Claude Code in AWS</a></li>
+  <li><a href="#self-hosting-with-ollama" id="toc-self-hosting-with-ollama" class="nav-link" data-scroll-target="#self-hosting-with-ollama">Self hosting with Ollama</a></li>
+  <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a>
+  <ul class="collapse">
+  <li><a href="#the-security-challenges-of-llms" id="toc-the-security-challenges-of-llms" class="nav-link" data-scroll-target="#the-security-challenges-of-llms">The Security Challenges of LLMs</a></li>
+  <li><a href="#choosing-the-right-llm-deployment-model" id="toc-choosing-the-right-llm-deployment-model" class="nav-link" data-scroll-target="#choosing-the-right-llm-deployment-model">Choosing the Right LLM Deployment Model</a></li>
+  <li><a href="#best-practices-for-secure-llm-usage" id="toc-best-practices-for-secure-llm-usage" class="nav-link" data-scroll-target="#best-practices-for-secure-llm-usage">Best Practices for Secure LLM Usage</a></li>
+  <li><a href="#case-study-how-posit-built-a-secure-chatbot" id="toc-case-study-how-posit-built-a-secure-chatbot" class="nav-link" data-scroll-target="#case-study-how-posit-built-a-secure-chatbot">Case Study: How Posit Built a Secure Chatbot</a></li>
+  <li><a href="#security-best-practices-a-shared-responsibility" id="toc-security-best-practices-a-shared-responsibility" class="nav-link" data-scroll-target="#security-best-practices-a-shared-responsibility">Security Best Practices: A Shared Responsibility</a></li>
+  <li><a href="#final-thoughts-llm-security-is-a-non-negotiable" id="toc-final-thoughts-llm-security-is-a-non-negotiable" class="nav-link" data-scroll-target="#final-thoughts-llm-security-is-a-non-negotiable">Final Thoughts: LLM Security is a Non-Negotiable</a></li>
+  </ul></li>
+  <li><a href="#prompt-tips" id="toc-prompt-tips" class="nav-link" data-scroll-target="#prompt-tips">Prompt tips</a></li>
+  <li><a href="#prompt-examples" id="toc-prompt-examples" class="nav-link" data-scroll-target="#prompt-examples">Prompt examples</a>
+  <ul class="collapse">
+  <li><a href="#default-prompt-usually-auto-included" id="toc-default-prompt-usually-auto-included" class="nav-link" data-scroll-target="#default-prompt-usually-auto-included">Default prompt, usually auto included</a></li>
+  <li><a href="#concise-answers" id="toc-concise-answers" class="nav-link" data-scroll-target="#concise-answers">Concise answers</a></li>
+  <li><a href="#tell-it-to-tell-you-when-it-doesnt-know" id="toc-tell-it-to-tell-you-when-it-doesnt-know" class="nav-link" data-scroll-target="#tell-it-to-tell-you-when-it-doesnt-know">Tell it to tell you when it doesn’t know</a></li>
+  <li><a href="#explain-itself" id="toc-explain-itself" class="nav-link" data-scroll-target="#explain-itself">Explain itself</a></li>
+  <li><a href="#limit-scope" id="toc-limit-scope" class="nav-link" data-scroll-target="#limit-scope">Limit scope</a></li>
+  <li><a href="#dont-assume-the-user-has-asked-the-right-question" id="toc-dont-assume-the-user-has-asked-the-right-question" class="nav-link" data-scroll-target="#dont-assume-the-user-has-asked-the-right-question">Don’t assume the user has asked the right question</a></li>
+  <li><a href="#detail-the-desired-output-format" id="toc-detail-the-desired-output-format" class="nav-link" data-scroll-target="#detail-the-desired-output-format">Detail the desired output format</a></li>
+  <li><a href="#follow-a-process-and-ask-for-feedback-before-continuing" id="toc-follow-a-process-and-ask-for-feedback-before-continuing" class="nav-link" data-scroll-target="#follow-a-process-and-ask-for-feedback-before-continuing">Follow a process and ask for feedback before continuing</a></li>
+  <li><a href="#making-shiny-apps" id="toc-making-shiny-apps" class="nav-link" data-scroll-target="#making-shiny-apps">Making Shiny apps</a></li>
+  <li><a href="#making-r-shiny-apps" id="toc-making-r-shiny-apps" class="nav-link" data-scroll-target="#making-r-shiny-apps">Making R Shiny apps</a></li>
+  <li><a href="#making-python-shiny-apps" id="toc-making-python-shiny-apps" class="nav-link" data-scroll-target="#making-python-shiny-apps">Making Python Shiny apps</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#recommended-further-learningwatching" id="toc-recommended-further-learningwatching" class="nav-link" data-scroll-target="#recommended-further-learningwatching">Recommended further learning/watching</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>I’ve heard LLM’s described as a revolutionary search engine, which feels pretty on the nose. Definitely the way we interact with the internet is vastly different when leveraging any LLM technology. I wanted to squirrel away some thoughts and experiments from my own exploration into various LLM technologies.</p>
+</section>
+<section id="what-llms-cant-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-llms-cant-do">What LLM’s can’t do</h2>
+<p>As appealing as it may be, at the end of the day the burden is still on you figuring out how to articulate what you want. I think this is where a lot of the hype has gone off the rails - this idea of an LLM completely releasing you from any thought is never going to happen. Having skills in articulate a plan and coming up with ideas is always going to matter - as eloquently put in this xkcd (also proving that there really is an xkcd for anything).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/clarity-of-ideas-xkcd.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Pertinent XKCD"><img src="img/clarity-of-ideas-xkcd.jpg" class="img-fluid figure-img" style="width:60.0%" alt="Pertinent XKCD"></a></p>
+<figcaption>Pertinent XKCD</figcaption>
+</figure>
+</div>
+</section>
+<section id="setting-up-claude-code-in-aws" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-claude-code-in-aws">Setting up Claude Code in AWS</h2>
+<p>Install NodeJS 18+</p>
+<pre><code>sudo apt install nodejs
+node -v # check the version
+sudo apt-get install npm
+sudo npm config set os linux</code></pre>
+<p>Make sure your aws credentials are set up. Create credential files in <code>~/.aws/credentials</code> and <code>~/.aws/config</code></p>
+<p>Install Claude code (instructions say don’t use sudo! But I did anyway)</p>
+<pre><code>sudo npm install -g @anthropic-ai/claude-code
+sudo npm install -g &lt;ModuleName&gt; --unsafe-perm=true --allow-root
+sudo npm install -g @anthropic-ai/claude-code --force --no-os-check --allow-root</code></pre>
+<p>If needed, uninstall it:</p>
+<pre><code>sudo apt-get remove npm
+npm uninstall -g @anthropic-ai/claude-code</code></pre>
+<p>Update your bashrc and add</p>
+<pre><code>sudo nano  ~/.bashrc
+
+export AWS_REGION=us-east-2 
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'</code></pre>
+<p>Because I am doing this as a sudo user I should also add it to my /etc/environment file:</p>
+<pre><code>sudo nano /etc/environment 
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+
+export AWS_REGION=us-east-2 
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'</code></pre>
+<pre><code>source ~/.bashrc
+source /etc/environment </code></pre>
+<p>Check that they set with:</p>
+<pre><code>env | grep CLAUDE
+sudo env | grep CLAUDE
+env | grep AWS
+env | grep ANTHROPIC</code></pre>
+<p>To use it first cd into your project directory, log in to aws, and then you can do things with claude:</p>
+<pre><code>cd soleng-book
+aws sso login</code></pre>
+<p>You’ll want to create an instruction file named <code>CLAUDE.md</code>, something like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CLAUDE.md</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="CLAUDE.md"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Project - Guide</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Project Overview</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">This</span> project is a set of pages documenting various topics around server infrastructure, software installation, integrations, and maintenance. It provides the following topics:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Storage </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> SSL </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Networking </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Slurm </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Important Considerations</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ex">**Always</span> run code quality checks before committing<span class="pp">**</span>. This includes linting, type checking, and running tests to ensure code quality and functionality.</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ex">**Prefer</span> readable and maintainable code<span class="pp">**</span>. Avoid complex one-liners or overly clever solutions that reduce code clarity.</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">**Always</span> document code and configurations<span class="pp">**</span>. Use docstrings for functions and classes, and comments where necessary to explain complex logic or decisions.</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">**When</span> in doubt, ask for help<span class="pp">**</span>. If you<span class="st">'re unsure about how to implement something or how to fix an error, don'</span>t hesitate to reach out to the team for assistance.</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ex">**Less</span> is more<span class="pp">**</span>. Avoid unnecessary complexity in code and configurations. Aim for simplicity and clarity in your solutions.</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">## Documentation Quality Standards</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Accuracy: Information is correct and up-to-date.</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Clarity: Language is precise, unambiguous, and easy to understand.</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Completeness: All necessary information is present<span class="kw">;</span> <span class="ex">no</span> critical steps or explanations are missing.</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Consistency: Terminology, formatting, and style are uniform throughout.</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Conciseness: Information is presented efficiently without unnecessary words or repetition.</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Relevance: Content directly addresses the needs and questions of the target audience.</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Accessibility: Documentation is easy to navigate, search, and consume <span class="er">(</span><span class="ex">e.g.,</span> clear headings, index, TOC<span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Examples/Illustrations: Sufficient and relevant code examples, diagrams, or screenshots are provided.</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Audience Appropriateness: Language and technical depth are tailored to the intended readers.</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Maintainability: Structure and content facilitate future updates and revisions.</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">## Contributing</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ex">1.</span> Plan the changes carefully, considering the overall architecture and existing patterns.</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="ex">2.</span> Write sections following existing code patterns and type hints</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="ex">3.</span> Add more detail where necessary</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="ex">4.</span> Once everything is working, make a commit and request human review.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can then use the claude command to be off to the races:</p>
+<pre><code>claude</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/claude.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="Off to the races!"><img src="img/claude.png" class="img-fluid figure-img" alt="Off to the races!"></a></p>
+<figcaption>Off to the races!</figcaption>
+</figure>
+</div>
+</section>
+<section id="self-hosting-with-ollama" class="level2">
+<h2 class="anchored" data-anchor-id="self-hosting-with-ollama">Self hosting with Ollama</h2>
+<p>[Ollama] is a LLM model that you can self-host. You would want to place it on its own server (because it can an will consume all resources) and then access it through that IP address, like this:</p>
+<pre><code>server_ip_address &lt;- "&lt;ADD YOUR SERVER'S IP ADDRESS HERE&gt;"
+
+library(ellmer)
+
+chat &lt;- chat_ollama(
+  system_prompt = "Answer questions using the R programming language. ",
+  base_url = paste0("http://", server_ip_address, ":11434"),
+  model = "gemma3:1b",
+)</code></pre>
+<p>(Credit to Isabella)</p>
+</section>
+<section id="security" class="level2">
+<h2 class="anchored" data-anchor-id="security">Security</h2>
+<p>Large Language Models (LLMs) are revolutionizing everything from code generation to data analysis and customer interactions.&nbsp; However, their rapid adoption also introduces significant security concerns.&nbsp; From data privacy risks to potential misuse - such as generating malicious code or spreading misinformation - organizations must take a proactive approach to LLM security.</p>
+<p>This section is tailored for IT administrators and security professionals who oversee LLM adoption, providing actionable insights on risk mitigation, access control, and enterprise-level security measures.</p>
+<section id="the-security-challenges-of-llms" class="level3">
+<h3 class="anchored" data-anchor-id="the-security-challenges-of-llms">The Security Challenges of LLMs</h3>
+<p>LLMs present unique security risks that administrators must proactively address:</p>
+<ul>
+<li>Data Privacy &amp; Protection: LLMs process vast amounts of information, including proprietary and sensitive data.</li>
+<li>Unauthorized access: Vulnerabilities like prompt injection and model poisoning can compromise entire enterprise systems.</li>
+<li>Misinformation &amp; Compliance Risks: AI-generated content can introduce inaccuracies, requiring monitoring and governance.</li>
+</ul>
+<p>A well-defined enterprise LLM strategy is crucial to maintaining security while leveraging AI’s full potential.</p>
+</section>
+<section id="choosing-the-right-llm-deployment-model" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-right-llm-deployment-model">Choosing the Right LLM Deployment Model</h3>
+<p>Administrators must select an LLM deployment model that aligns with organizational security policies and data governance requirements balanced against model capability. The three primary options include:</p>
+<ol type="1">
+<li><p>Self-Hosted (Highest Security): Models are deployed internally, ensuring full control over data and security policies (e.g., Ollama).</p></li>
+<li><p>Trusted Cloud Providers (Balanced Security &amp; Scalability): Models hosted by vetted providers with strong security guarantees (e.g., Databricks, Snowflake, AWS Bedrock).</p></li>
+<li><p>Unvetted Public Models (High Risk, Not recommended):&nbsp; Free or open-access LLMs with uncertain security and data retention policies (e.g., free-tier ChatGPT).</p></li>
+</ol>
+<blockquote class="blockquote">
+<p>Administrator Tip: Always involve IT security teams in LLM vetting.&nbsp; Ensure that providers adhere to your organization’s data protection standards and contractual safeguards, such as NDAs and service-level agreements (SLAs).&nbsp; “Free” LLMs often come at the cost of your data.</p>
+</blockquote>
+</section>
+<section id="best-practices-for-secure-llm-usage" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices-for-secure-llm-usage">Best Practices for Secure LLM Usage</h3>
+<ol type="1">
+<li>Code Assistance &amp; Completion (IDE Integration)</li>
+</ol>
+<p>Many developers integrate LLMs into their coding workflows for ghost text, inline chat, and code completion. To ensure security:</p>
+<ul>
+<li><p>Use IT-approved LLMs within the IDE-integrated editors.</p></li>
+<li><p>Select solutions that protect data and have an active community responding to vulnerabilities.</p></li>
+<li><p>Centralize access via Posit Workbench to eliminate the need for individual API Key management.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Programmatic LLM Access (Proprietary Data Analysis)</li>
+</ol>
+<p>Developers often use LLMs for workflows like exploratory data analysis, requiring API access from code. Security measures should include:</p>
+<ul>
+<li><p>Using only IT-approved LLMs.</p></li>
+<li><p>Choosing secure R and Python packages for LLM development, such as ellmer (R), chatlas (Python), which allow model switching.</p></li>
+<li><p>Ensuring libraries come from trusted sources like Posit Package Manager to prevent vulnerability exploitation.</p></li>
+<li><p>Verifying code snippets from LLM outputs to track drift and hallucinations over time.</p></li>
+<li><p>Protecting authentication credentials using Managed Credentials in Posit Workbench instead of storing API keys manually</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Embedded LLMs in Applications &amp; Chat UIs</li>
+</ol>
+<p>When deploying applications with LLM-powered interactions:</p>
+<ul>
+<li><p>Use only IT-approved LLMs with secure access packages like shinychat for Shiny applications</p></li>
+<li><p>Centralize application hosting and enforce strict access controls with Posit Connect</p></li>
+<li><p>Protect authentication credentials with Managed Credentials to prevent exposure.</p></li>
+<li><p>Monitor LLM contributions and ensure transparency, as some jurisdictions require explicit disclosure of AI-generated content.</p></li>
+</ul>
+</section>
+<section id="case-study-how-posit-built-a-secure-chatbot" class="level3">
+<h3 class="anchored" data-anchor-id="case-study-how-posit-built-a-secure-chatbot">Case Study: How Posit Built a Secure Chatbot</h3>
+<p>One of the most common enterprise use cases for LLMs is chatbot development.&nbsp; At Posit, we applied the above best practices when building an internal chatbot for support assistance. Here’s what we learned:</p>
+<ul>
+<li><p>Risk Modeling is Crucial: We identified risks like data exposure, hallucinations, and unauthorized access before deployment.</p></li>
+<li><p>LLM Vetting Pays Off: By selecting a trusted provider that was self-hosted instead of a free-tier model, we ensured contractual protections and security measures were in place.</p></li>
+<li><p>Package Selection: We selected the package chatlas to be the backbone for our chatbot for its ease of use and ability to be hosted from our trusted Posit Package Manager repository.</p></li>
+<li><p>Strict Access Controls Prevent Misuse: Our chatbot was hosted via Posit Connect, ensuring only authorized users had access.</p></li>
+<li><p>Monitoring and Verification: We implemented verification for URL’s provided by the chatbot and a feedback mechanism by users to monitor performance over time.</p></li>
+<li><p>Credential Management Simplified Security: We relied on Managed Credentials to securely connect to the chatbot’s LLM backend instead of exposing API keys.</p></li>
+<li><p>Proactive Prompt Security: We fortified against prompt injection attacks by explicitly instructing it to refuse disclosure of its system prompt, preventing unauthorized manipulation and information leakage.</p></li>
+</ul>
+<p>These lessons reinforced the importance of security-first LLM implementations, whether for chatbot development or broader enterprise use cases.</p>
+</section>
+<section id="security-best-practices-a-shared-responsibility" class="level3">
+<h3 class="anchored" data-anchor-id="security-best-practices-a-shared-responsibility">Security Best Practices: A Shared Responsibility</h3>
+<p>For Developers:</p>
+<p>✅ Define LLM usage requirements.</p>
+<p>✅ Use only IT-approved LLMs.</p>
+<p>✅ Verify outputs for consistency and track model performance.</p>
+<p>✅ Choose rigorously maintained packages through Posit Package Manager.</p>
+<p>✅ Protect Secrets - opt for Managed Credentials over API keys.</p>
+<p>✅ Be transparent about AI-generated contributions.</p>
+<p>For IT &amp; Admins</p>
+<p>✅ Select LLM deployment models that align with security policies.</p>
+<p>✅ Implement robust access controls and credential management.</p>
+<p>✅ Develop a thread model and conduct regular audits.</p>
+<p>✅ Provide clear usage guidelines and approved access methods.</p>
+<p>✅ Centralize LLM access management to prevent unauthorized usage.</p>
+<p>Enterprise-Wide Security Measures:</p>
+<p>✅ Minimize data shared with LLMs.</p>
+<p>✅ Define and enforce guardrails to prevent unauthorized responses.</p>
+<p>✅ Implement monitoring to detect and mitigate prompt injection attacks.</p>
+<p>✅ Use access controls to secure deployed LLM content.</p>
+</section>
+<section id="final-thoughts-llm-security-is-a-non-negotiable" class="level3">
+<h3 class="anchored" data-anchor-id="final-thoughts-llm-security-is-a-non-negotiable">Final Thoughts: LLM Security is a Non-Negotiable</h3>
+<p>LLMs are game-changers, but security must be a top priority. By implementing strong safeguards, vetting models carefully and fostering an enterprise-wide culture of responsible AI-use, organizations can unlock the full potential of LLMs without compromising data integrity.</p>
+<p>Next Steps:</p>
+<p>📌 Consult your LLM provider for additional best practices.</p>
+<p>📌 Stay updated on key AI concepts like tokens, RAG, and prompt engineering.</p>
+<p>📌 Explore secure deployment options with Posit Workbench and Posit Connect.</p>
+<p>📌 Learn from real-world chatbot implementations and apply best practices to your own enterprise use cases.</p>
+<p>By staying proactive, enterprises can confidently navigate the evolving LLM landscape while maintaining security and compliance.</p>
+</section>
+</section>
+<section id="prompt-tips" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-tips">Prompt tips</h2>
+<ol type="1">
+<li>Be specific and descriptive</li>
+<li>Define the output format</li>
+<li>Add context by adding data, including the conversation history, RAG, etc</li>
+<li>Give examples</li>
+<li>Format the prompt with clear headlines and sections</li>
+<li>Have it check its result</li>
+</ol>
+</section>
+<section id="prompt-examples" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-examples">Prompt examples</h2>
+<section id="default-prompt-usually-auto-included" class="level3">
+<h3 class="anchored" data-anchor-id="default-prompt-usually-auto-included">Default prompt, usually auto included</h3>
+<pre><code>You are a helpful assistant.</code></pre>
+<p>often we don’t want this because then it can’t tell us when it is wrong.</p>
+</section>
+<section id="concise-answers" class="level3">
+<h3 class="anchored" data-anchor-id="concise-answers">Concise answers</h3>
+<pre><code>Answer questions directly and with no preamble. Do not use sections.</code></pre>
+<pre><code>Answer this is as a terse technical consultant, 4 sentences max.</code></pre>
+</section>
+<section id="tell-it-to-tell-you-when-it-doesnt-know" class="level3">
+<h3 class="anchored" data-anchor-id="tell-it-to-tell-you-when-it-doesnt-know">Tell it to tell you when it doesn’t know</h3>
+<pre><code>If you can't answer the question based on the provided context, tell the user that you can't. </code></pre>
+<pre><code>If you're unsure about any aspect of the project, make a reasonable decision and explain your choice in a comment.</code></pre>
+<pre><code>It's important that you get clear, unambiguous instructions from the user, so if the user's request is unclear in any way, you should ask for clarification. If you aren't sure how to accomplish the user's request, say so, rather than using an uncertain technique.</code></pre>
+<pre><code>Can you find the “set” in this photo? If you’re not able to answer this question reliably, tell me.</code></pre>
+</section>
+<section id="explain-itself" class="level3">
+<h3 class="anchored" data-anchor-id="explain-itself">Explain itself</h3>
+<pre><code>The response should not only contain the answer to the question, but also, a comprehensive explanation of how you came up with the answer.</code></pre>
+</section>
+<section id="limit-scope" class="level3">
+<h3 class="anchored" data-anchor-id="limit-scope">Limit scope</h3>
+<pre><code>Discuss only the R programming language and provide code examples in the R programming language. Friendly refuse to chat on something else." </code></pre>
+<pre><code>Only answer questions related to Shiny, or R or Python. Don't answer any questions related to anything else.</code></pre>
+<pre><code>You are a chatbot that is displayed on a web page next to a data dashboard. You will be asked to filter, sort, and answer questions on the data. The user interface in which this conversation is being shown is a narrow sidebar of a dashboard, so keep your answers concise and don't include unnecessary patter, nor additional prompts or offers for further assistance. For security reasons, you may only query this specific table. Always use SQL to count, sum, average, or otherwise aggregate the data. Do not retrieve the data and perform the aggregation yourself--if you cannot do it in SQL, you should refuse the request. </code></pre>
+<pre><code>Edge cases that should be refused. All of these should be refused with an answer clarifying capability and requesting the user ask again. 
+- Off-topic questions
+- Questions that are on the topic, but are vageuly worded. 
+- Questions where more information is needed from the user.
+- Harassment / toxic language</code></pre>
+</section>
+<section id="dont-assume-the-user-has-asked-the-right-question" class="level3">
+<h3 class="anchored" data-anchor-id="dont-assume-the-user-has-asked-the-right-question">Don’t assume the user has asked the right question</h3>
+<pre><code>If the user provides a vague help request, like "Help" or "Show me instructions", describe your own capabilities in a helpful way, including examples of questions they can ask. Be sure to mention whatever advanced statistical capabilities (standard deviation, quantiles, correlation, variance) you have.</code></pre>
+<pre><code>Don't assume the user asked the right question. Instead consider what they could have met and respond to the question that has an answer that is least complex. </code></pre>
+</section>
+<section id="detail-the-desired-output-format" class="level3">
+<h3 class="anchored" data-anchor-id="detail-the-desired-output-format">Detail the desired output format</h3>
+<pre><code>List the three most successful science fiction novels that have been turned into movies. 
+Desired output format: A JSON with the keys novel, novel_year_of_publication, movie, movie_year_of_publication. </code></pre>
+</section>
+<section id="follow-a-process-and-ask-for-feedback-before-continuing" class="level3">
+<h3 class="anchored" data-anchor-id="follow-a-process-and-ask-for-feedback-before-continuing">Follow a process and ask for feedback before continuing</h3>
+<pre><code>Answer questions thinking through step by step. </code></pre>
+<pre><code>## Process to follow
+
+1. Plan the changes carefully, considering the overall architecture and existing patterns.
+2. Write the code follow existing code patterns and type hints
+3. Add documentation where necessary
+4. Run `just dev-format`
+5. Ensure `just dev-check docker` or `just dev-check podman` passes
+6. Consider adding or updating e2e tests in `app/tests/e2e/`. Add if needed.
+7. Test changes with e2e tests using `just e2e-workflow docker` or `just e2e-workflow podman` for overall tests or to run specific tests use `just e2e-specific docker test` replacing test with the specific test filename and/or class + function name, for example `just e2e-specific docker test_asset_generation.py::TestInstallationGuideGeneration::test_config_downloads_from_install_guide_workbench`.
+8. Once everything is working, make a commit and request human review.</code></pre>
+<pre><code>Review these steps carefully and follow them to create the Shiny for {language} app. It is very important that your app follows these guidelines, so think about them before you start writing code:
+
+- Analyze the user prompt carefully. Identify the main features, functionalities, and any specific requirements mentioned.
+
+- Plan the structure of the app, including:
+   - UI components (input widgets, output displays)
+   - Server logic (data processing, reactive elements)
+   - Any necessary data sources or external libraries
+
+- Create the app code following these guidelines:
+   - Use proper Shiny for {language} syntax and structure
+   - Include necessary import statements at the beginning
+   - Implement both the UI and server components
+   - Ensure all features mentioned in the user prompt are included
+   - Use cards for the UI layout
+   - If the app contains a few input controls, default to using `page_sidebar` with the inputs in the sidebar and the outputs in the main panel--but if the user prompt specifies a different layout, follow that instead
+
+- If the user prompt is vague or missing important details, make reasonable assumptions to fill in the gaps. Mention these assumptions in comments within the code.
+
+- Ensure the app is complete and runnable. Include any additional helper functions or data processing steps as needed.</code></pre>
+<pre><code>Write a blog post about climate change and include recent statistics following these steps: 
+Gather facts: "List recent climate change statistics from 2023."
+Plan the content: "Create an outline for a climate change blog post."
+Write in parts: "Write an engaging introduction for a climate change blog post."
+Expand each section separately.
+Breaking down the task ensures each part is handled properly before moving to the next.</code></pre>
+</section>
+<section id="making-shiny-apps" class="level3">
+<h3 class="anchored" data-anchor-id="making-shiny-apps">Making Shiny apps</h3>
+<p>From: <a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt.md</a></p>
+<pre><code>You are an AI assistant specialized in helping users with Shiny for {language}.
+Your tasks include explaining concepts in Shiny, explaining how to do things with Shiny, or creating a complete, functional Shiny for {language} app code as an artifact based on the user's description.
+Only answer questions related to Shiny, or R or Python. Don't answer any questions related to anything else.
+
+If the user asks for explanations about concepts or code in Shiny for {language}, then you should provide detailed and accurate information about the topic. This may include descriptions, examples, use cases, and best practices related to Shiny for {language}. If your answer includes examples of Shiny apps, you should provide the code of each one within `&lt;SHINYAPP AUTORUN="0"&gt;` and `&lt;/SHINYAPP&gt;` tags, and otherwise adhere to the guidelines below for creating applications.
+
+If the user asks for an application, you should provide a Shiny for {language} app code that meets the requirements specified in the user prompt. The app should be well-structured, include necessary components, and follow best practices for Shiny app development.
+
+Review these steps carefully and follow them to create the Shiny for {language} app. It is very important that your app follows these guidelines, so think about them before you start writing code:
+
+- Analyze the user prompt carefully. Identify the main features, functionalities, and any specific requirements mentioned.
+
+- Plan the structure of the app, including:
+   - UI components (input widgets, output displays)
+   - Server logic (data processing, reactive elements)
+   - Any necessary data sources or external libraries
+
+- Create the app code following these guidelines:
+   - Use proper Shiny for {language} syntax and structure
+   - Include necessary import statements at the beginning
+   - Implement both the UI and server components
+   - Ensure all features mentioned in the user prompt are included
+   - Use cards for the UI layout
+   - If the app contains a few input controls, default to using `page_sidebar` with the inputs in the sidebar and the outputs in the main panel--but if the user prompt specifies a different layout, follow that instead
+
+- If the user prompt is vague or missing important details, make reasonable assumptions to fill in the gaps. Mention these assumptions in comments within the code.
+
+- Ensure the app is complete and runnable. Include any additional helper functions or data processing steps as needed.
+
+- Output the entire app code within `&lt;SHINYAPP AUTORUN="1"&gt;` and `&lt;/SHINYAPP&gt;` tags. Inside those tags, each file should be within `&lt;FILE NAME="..."&gt;` and `&lt;/FILE&gt;` tags, where the `...` is replaced with the filename.
+
+- Only put it in those tags if it is a complete app. If you are only displaying a code fragment, do not put it in those tags; simply put it in a code block with backticks.
+
+- If the user asks to show the shinylive or editor panel, then create an app file where the content is completely empty. Do not put anything else in the file at all. Also, do not explain why you are doing this. Just do it.
+
+{language_specific_prompt}
+
+Consider multiple possible implementations of the application, then choose the best one. Remember to create a fully functional Shiny for {language} app that accurately reflects the user's requirements. If you're unsure about any aspect of the app, make a reasonable decision and explain your choice in a comment.
+
+{verbosity}</code></pre>
+</section>
+<section id="making-r-shiny-apps" class="level3">
+<h3 class="anchored" data-anchor-id="making-r-shiny-apps">Making R Shiny apps</h3>
+<p>From: <a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_r.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_r.md</a></p>
+<pre><code>- Use the bslib package for styling and layout.</code></pre>
+</section>
+<section id="making-python-shiny-apps" class="level3">
+<h3 class="anchored" data-anchor-id="making-python-shiny-apps">Making Python Shiny apps</h3>
+<p>From: <a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md</a></p>
+<pre><code>- Try not to import big packages like scipy.
+
+- Prefer using matplotlib instead of plotly for plotting. A matplotlib plot should not return `plt`. It does not need to return anything, but if necessary, can return `fig`.
+
+- Don't mix Shiny Core and Shiny Express syntax. Just use one. Use Core by default, and if the user asks for Express, then use Express.
+
+- Do not use the captilized functions `reactive.Calc`, `reactive.Value`, or `reactive.Effect`. Instead, use the lowercase versions: `reactive.calc`, `reactive.value`, and `reactive.effect`.
+
+- Do not use `ui.panel_sidebar()` because it no longer exists. Instead ,use `ui.sidebar()`.
+
+- Do not use `panel_main()` because it no longer exists. Instead of `sidebar_layout(panel_sidebar(a, b), panel_main(x, y))`, use `sidebar_layout(sidebar(a, b), x, y)`.
+
+- Never use the `@output` decorator, as it is deprecated. Instead, only use the `@render.xx` decorator.
+
+- Avoid using `@render.image`. Prefer to use `@render.ui` instead and return a `ui.img()` object.
+
+- If you have dynamic UI returning a `ui.img()`, use `@render.ui`, not `@render.image`, and use `ui.output_ui()` instead of `ui.output_image()`.
+
+- For the qrcode package, when calling `img.save(buf)`, do not use the `format="PNG"` parameter. Just do `img.save(buf)`.
+
+- Do not define the UI as a function. Instead use `app_ui = ...`, where the `...` is a static UI definition.
+
+- If the app makes HTTP requests, use the `urllib3` library.
+
+- If using Shiny Express, there are some things to keep in mind:
+  - Use `from shiny.express import input, ui, ...`, where the `...` represents other necessary components.
+  - Do not try to import `reactive` from `shiny.express`. It is imported from `shiny`.
+  - For nestable UI components, like `ui.card()`, it should be used as `with ui.card(): ...`, instead of `ui.card(...)`
+
+- If using Shiny Core, end with the `app = App(...)` call.
+
+- If the user says that there is an error about a missing package, tell them to add requirements.txt with that package.
+
+- Put all required packages in a `requirements.txt` file, and present that file inside of the `&lt;SHINYAPP&gt;` tags.
+
+## Examples
+
+This example shows the assistant creating an example app in the process of answering a question. Because the user did not explicitly ask to create an app, the example should be presented in &lt;SHINYAPP AUTORUN="0"&gt; instead of &lt;SHINYAPP AUTORUN="1"&gt;. This allows the user to run the app manually, but will not overwrite their existing work.
+
+[Example]
+[User]
+How do I reset a `ui.input_text` to be empty?
+[/User]
+[Assistant]
+To reset a `ui.input_text` to a default value in a Shiny for Python app, you can use the `update_text()` function. This function allows you to dynamically change the value of an input_text widget from the server side. Here's an explanation of how to do it:
+
+1. First, you need to create an `input_text` widget in your UI with an ID.
+2. In your server function, you can use the `@reactive.Effect` decorator to create a reactive effect that will update the input when a certain condition is met (like a button click).
+3. Inside this effect, you use the `ui.update_text()` function to reset the value.
+
+Here's a simple example that demonstrates this:
+
+&lt;SHINYAPP AUTORUN="0"&gt;
+&lt;FILE NAME="app.py"&gt;
+from shiny import App, reactive, render, ui
+
+app_ui = ui.page_fluid(
+    ui.input_text("name", "Enter your name", value=""),
+    ui.output_text("greeting"),
+    ui.input_action_button("reset", "Reset"),
+)
+
+def server(input, output, session):
+    @output
+    @render.text
+    def greeting():
+        return f"Hello, {input.name()}!"
+
+    @reactive.Effect
+    @reactive.event(input.reset)
+    def _():
+        ui.update_text("name", value="")
+
+app = App(app_ui, server)
+&lt;/FILE&gt;
+&lt;/SHINYAPP&gt;
+
+In this example:
+
+1. We have an `input_text` widget with the ID "name".
+2. We have a button with the ID "reset".
+3. In the server function, we create a reactive effect that listens for clicks on the reset button.
+4. When the reset button is clicked, `ui.update_text("name", value="")` is called, which resets the "name" input to an empty string.
+
+You can modify the default value to whatever you want by changing the `value` parameter in `ui.update_text()`. For example, if you want to reset it to "Default Name", you would use:
+
+```python
+ui.update_text("name", value="Default Name")
+```
+
+This approach allows you to reset the input text to any value you desire, providing flexibility in how you manage your app's state.
+[/Assistant]
+[/Example]
+
+## Anti-Examples
+
+These examples are INCORRECT and you must avoid these patterns when writing code. Look at these carefully and consider them before writing your own code.
+
+### Use of nonexistent sidebar panel functions
+
+The following code is INCORRECT because ui.panel_sidebar and ui.panel_main do not exist.
+
+```
+app_ui = ui.page_sidebar(
+    ui.panel_sidebar(
+        ui.input_action_button("generate", "Generate New Plot")
+    ),
+    ui.panel_main(
+      ui.output_plot("plot")
+    ),
+)
+```
+
+Instead, sidebar page and sidebar layout code should look like this:
+
+```
+app_ui = ui.page_sidebar(
+    ui.sidebar(
+        ui.input_action_button("generate", "Generate New Plot")
+    ),
+    ui.output_plot("plot")
+)
+```
+
+or:
+
+```
+app_ui = ui.page_fillable(
+    ui.layout_sidebar(
+        ui.sidebar(
+            ui.input_action_button("generate", "Generate New Plot")
+        ),
+        ui.output_plot("plot")
+    )
+)
+```
+
+### Failure to import necessary modules, especially shiny.reactive
+
+```
+from shiny import App, render, ui
+import numpy as np
+import matplotlib.pyplot as plt
+
+app_ui = ... # Elided for brevity
+
+def server(input, output, session):
+
+    @render.plot
+    @reactive.event(input.generate)
+    def regression_plot():
+        n = input.num_points()
+        noise_level = input.noise()
+
+        # Elided for brevity
+
+app = App(app_ui, server)
+```
+
+In this example, the code is missing the import statement for `reactive` from `shiny`. This will cause the code to fail when trying to use the `@reactive.event` decorator. The correct import statement should be:
+
+```
+from shiny import App, render, ui, reactive
+```
+
+### Incorrect import of reactive and req
+
+The module shiny.express does not have `reactive` or `req` modules. The correct import should be from shiny.
+
+Incorrect:
+
+```
+from shiny.express import input, ui, render, reactive, req
+```
+
+Correct:
+
+```
+from shiny import req, reactive
+from shiny.express import input, ui, render
+```
+
+### `reactive.value` and a function with the same name
+
+A reactive value must not have the same name as another object, like a function. In this example,
+
+Incorrect, with the same name:
+
+```
+foo = reactive.value("1")
+
+@render.text
+def foo():
+    ...
+```
+
+Correct, with different names:
+
+```
+foo_v = reactive.value("1")
+
+@render.text
+def foo():
+    ...
+```</code></pre>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li><a href="https://github.com/jcheng5/r-sidebot" class="uri">https://github.com/jcheng5/r-sidebot</a></li>
+<li><a href="https://github.com/posit-dev/shiny-assistant" class="uri">https://github.com/posit-dev/shiny-assistant</a> and <a href="https://gallery.shinyapps.io/assistant/" class="uri">https://gallery.shinyapps.io/assistant/</a></li>
+<li><a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md</a></li>
+<li><a href="https://github.com/sol-eng/pharos/blob/main/CLAUDE.md" class="uri">https://github.com/sol-eng/pharos/blob/main/CLAUDE.md</a></li>
+<li><a href="https://github.com/search?q=path%3A%2F%5ECLAUDE%5C.md%2F+OR+path%3A%2F%5Ellms%5C.txt%2F+OR+path%3A%2F%5E%5C.github%5C%2Fcopilot-instructions%5C.md%2F&amp;type=code" class="uri">https://github.com/search?q=path%3A%2F%5ECLAUDE%5C.md%2F+OR+path%3A%2F%5Ellms%5C.txt%2F+OR+path%3A%2F%5E%5C.github%5C%2Fcopilot-instructions%5C.md%2F&amp;type=code</a></li>
+<li><a href="https://github.com/posit-dev/demobot" class="uri">https://github.com/posit-dev/demobot</a> (internal)</li>
+</ul>
+</section>
+</section>
+<section id="recommended-further-learningwatching" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-further-learningwatching">Recommended further learning/watching</h2>
+<ul>
+<li>Recommended video on AI from JJ: <a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ" class="uri">https://www.youtube.com/watch?v=LCEmiRjPEtQ</a></li>
+<li>New package for benchmarking LLM apps in R: <a href="https://github.com/tidyverse/vitals" class="uri">https://github.com/tidyverse/vitals</a></li>
+<li>AWS Code Whisperer: <a href="https://open-vsx.org/extension/amazonwebservices/aws-toolkit-vscode" class="uri">https://open-vsx.org/extension/amazonwebservices/aws-toolkit-vscode</a></li>
+<li>RStudio Copilot Integration: <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html" class="uri">https://docs.posit.co/ide/user/ide/guide/tools/copilot.html</a></li>
+<li>Investigating truthfulness: <a href="https://transluce.org/investigating-o3-truthfulness" class="uri">https://transluce.org/investigating-o3-truthfulness</a></li>
+<li>Joe’s LLM workshop:<a href="https://jcheng5.github.io/llm-quickstart/quickstart.html#/title-slide">https://jcheng5.github.io/llm-quickstart/quickstart.html#/title-slide</a></li>
+<li>Security conference talk about the dangers of ML (4:08 is where he talks about ml): <a href="https://www.youtube.com/watch?v=ajGX7odA87k">https://www.youtube.com/watch?v=ajGX7odA87k</a></li>
+<li>Moving beyond “algorithmic bias is a data problem”: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/</a></li>
+<li>Here’s What Ethical AI Really Means - YouTube philosophy tube: <a href="https://www.youtube.com/watch?v=AaU6tI2pb3M" class="uri">https://www.youtube.com/watch?v=AaU6tI2pb3M</a></li>
+<li>i-will-fucking-piledrive-you-if-you-mention-ai-again: <a href="https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/" class="uri">https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/</a></li>
+<li>Podcast about AI, from tech will not save you: <a href="https://techwontsave.us/episode/277_generative_ai_is_not_inevitable_w_emily_m_bender_and_alex_hanna" class="uri">https://techwontsave.us/episode/277_generative_ai_is_not_inevitable_w_emily_m_bender_and_alex_hanna</a></li>
+<li>Remove AI from from your google search: <a href="https://udm14.com/" class="uri">https://udm14.com/</a></li>
+<li>AI reddit post watching microsoft employees go insane: <a href="https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/" class="uri">https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/</a></li>
+</ul>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Pertinent XKCD</span>
+<span class="glightbox-desc lightbox-desc-2">Off to the races!</span>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+</body></html>

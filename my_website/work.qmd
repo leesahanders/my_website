@@ -17,4 +17,6 @@ page-layout: full
 title-block-banner: true
 ---
 
+<!-- work/* -->
+
 Some random technical writeups for things I've found useful, all brought to you by Quarto's blogging capability. 

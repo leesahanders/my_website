@@ -10,7 +10,769 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Wed, 18 Jun 2025 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 09 Jul 2025 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Improving the performance of R package installation on Workbench</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/R package installation improvements on Workbench.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>I wanted to take a moment to write up some notes on the package installation process in R that might be useful for troubleshooting slow package install times and implementing a workaround. This is coming out of a very great conversation I had with a colleague that I hope is useful for you too.</p>
+</section>
+<section id="package-installation-process-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="package-installation-process-in-r">Package Installation Process in R</h2>
+<p>When a user runs install.packages it can go in a couple locations: - System library (global, only happens when run by an administrator) - Site library (optional, requires admin set up) - User libary - Project library (optional, requires specific renv setup)</p>
+<p>Let’s start with a non renv example - if we have, say, 2 projects then the first time (when the user has a clean directory) the install for the packages for that 1st project could take awhile. This is particularly noticeable with bioconductor packages because the bioconductor repository doesn’t provide binaries and every package has to be compiled as source. After that, however, for the seconod project (if it is using the same packages) it will feed from the same library in the same user home directory, thus feeling faster. It won’t reinstall the packages.</p>
+<p>However, in general relying on the user library is a bad thing. Take this example - imagine two projects that start out using the same package. If in project two that package is upgraded when we go back to the first project there is a risk the code isn’t working because the package was upgraded. This is where renv comes in.</p>
+</section>
+<section id="renv" class="level2">
+<h2 class="anchored" data-anchor-id="renv">Renv</h2>
+<p>Renv will operate very similarly to the typical process for installing packages. Except that when two projects need different versions of the same package it will install and maintain those two versions separately. By default it creates a project specific folder but it is linking to a package cache that is by default global for a given user. Same experience here where the first time a package is downloaded and compiled it will take awhile. But after that it will be fast, assuming the same package. Now if the renv is using different package versions then that will trigger the package reinstall and that could take a long time. Aligning the renv.lock files to use the same package versions would greatly speed up the process.</p>
+<section id="magic-trick" class="level3">
+<h3 class="anchored" data-anchor-id="magic-trick">Magic Trick</h3>
+<p>Now here is a magic trick. If using a recent version of renv they could enable it to use pak: options(renv.config.pak.enabled=TRUE)</p>
+<p>This would be either run inside every user session (risky since that is easy to forget) or could be put in the users rprofile file before running renv::restore. This would make the install, download, build, packages in parallel using pak. You can find the location of your rprofile file with the usethis package.</p>
+</section>
+</section>
+<section id="other-options" class="level2">
+<h2 class="anchored" data-anchor-id="other-options">Other Options</h2>
+<p>If want to move beyond the per user renv cacheing then we could consider a system global package cache. IT would need to set up a directory with fairly wide permissions to make this happen. Example: <a href="https://github.com/sol-eng/singularity-rstudio?tab=readme-ov-file#what-does-renv-actually-do-" class="uri">https://github.com/sol-eng/singularity-rstudio?tab=readme-ov-file#what-does-renv-actually-do-</a></p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>So to summarize some possible solutions to improving the install time for packages:</p>
+<ul>
+<li>Use pak with renv to enable paralellized package installs with options(renv.config.pak.enabled=TRUE) (my colleague called this a “magic trick” and would be my choice for what to try)</li>
+<li>Align the renv.lock files to use the same package versions where possible</li>
+<li>Consider moving to a global package cache, but this would require IT overhead</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/R package installation improvements on Workbench.html</guid>
+  <pubDate>Wed, 09 Jul 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>Fun with LLM’s</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/LLMs.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>I’ve heard LLM’s described as a revolutionary search engine, which feels pretty on the nose. Definitely the way we interact with the internet is vastly different when leveraging any LLM technology. I wanted to squirrel away some thoughts and experiments from my own exploration into various LLM technologies.</p>
+</section>
+<section id="what-llms-cant-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-llms-cant-do">What LLM’s can’t do</h2>
+<p>As appealing as it may be, at the end of the day the burden is still on you figuring out how to articulate what you want. I think this is where a lot of the hype has gone off the rails - this idea of an LLM completely releasing you from any thought is never going to happen. Having skills in articulate a plan and coming up with ideas is always going to matter - as eloquently put in this xkcd (also proving that there really is an xkcd for anything).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/clarity-of-ideas-xkcd.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Pertinent XKCD"><img src="https://questionable.quarto.pub/blog/work/img/clarity-of-ideas-xkcd.jpg" class="img-fluid figure-img" style="width:60.0%" alt="Pertinent XKCD"></a></p>
+<figcaption>Pertinent XKCD</figcaption>
+</figure>
+</div>
+</section>
+<section id="setting-up-claude-code-in-aws" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-claude-code-in-aws">Setting up Claude Code in AWS</h2>
+<p>Install NodeJS 18+</p>
+<pre><code>sudo apt install nodejs
+node -v # check the version
+sudo apt-get install npm
+sudo npm config set os linux</code></pre>
+<p>Make sure your aws credentials are set up. Create credential files in <code>~/.aws/credentials</code> and <code>~/.aws/config</code></p>
+<p>Install Claude code (instructions say don’t use sudo! But I did anyway)</p>
+<pre><code>sudo npm install -g @anthropic-ai/claude-code
+sudo npm install -g &lt;ModuleName&gt; --unsafe-perm=true --allow-root
+sudo npm install -g @anthropic-ai/claude-code --force --no-os-check --allow-root</code></pre>
+<p>If needed, uninstall it:</p>
+<pre><code>sudo apt-get remove npm
+npm uninstall -g @anthropic-ai/claude-code</code></pre>
+<p>Update your bashrc and add</p>
+<pre><code>sudo nano  ~/.bashrc
+
+export AWS_REGION=us-east-2 
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'</code></pre>
+<p>Because I am doing this as a sudo user I should also add it to my /etc/environment file:</p>
+<pre><code>sudo nano /etc/environment 
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+
+export AWS_REGION=us-east-2 
+export CLAUDE_CODE_USE_BEDROCK=1 
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'</code></pre>
+<pre><code>source ~/.bashrc
+source /etc/environment </code></pre>
+<p>Check that they set with:</p>
+<pre><code>env | grep CLAUDE
+sudo env | grep CLAUDE
+env | grep AWS
+env | grep ANTHROPIC</code></pre>
+<p>To use it first cd into your project directory, log in to aws, and then you can do things with claude:</p>
+<pre><code>cd soleng-book
+aws sso login</code></pre>
+<p>You’ll want to create an instruction file named <code>CLAUDE.md</code>, something like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CLAUDE.md</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="CLAUDE.md" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Project - Guide</span></span>
+<span id="cb9-2"></span>
+<span id="cb9-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## Project Overview</span></span>
+<span id="cb9-4"></span>
+<span id="cb9-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">This</span> project is a set of pages documenting various topics around server infrastructure, software installation, integrations, and maintenance. It provides the following topics:</span>
+<span id="cb9-6"></span>
+<span id="cb9-7"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Storage </span>
+<span id="cb9-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> SSL </span>
+<span id="cb9-9"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Networking </span>
+<span id="cb9-10"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Slurm </span>
+<span id="cb9-11"></span>
+<span id="cb9-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## Important Considerations</span></span>
+<span id="cb9-13"></span>
+<span id="cb9-14"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">**Always</span> run code quality checks before committing<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">**</span>. This includes linting, type checking, and running tests to ensure code quality and functionality.</span>
+<span id="cb9-15"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">**Prefer</span> readable and maintainable code<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">**</span>. Avoid complex one-liners or overly clever solutions that reduce code clarity.</span>
+<span id="cb9-16"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">**Always</span> document code and configurations<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">**</span>. Use docstrings for functions and classes, and comments where necessary to explain complex logic or decisions.</span>
+<span id="cb9-17"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">**When</span> in doubt, ask for help<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">**</span>. If you<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'re unsure about how to implement something or how to fix an error, don'</span>t hesitate to reach out to the team for assistance.</span>
+<span id="cb9-18"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">**Less</span> is more<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">**</span>. Avoid unnecessary complexity in code and configurations. Aim for simplicity and clarity in your solutions.</span>
+<span id="cb9-19"></span>
+<span id="cb9-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## Documentation Quality Standards</span></span>
+<span id="cb9-21"></span>
+<span id="cb9-22"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Accuracy: Information is correct and up-to-date.</span>
+<span id="cb9-23"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Clarity: Language is precise, unambiguous, and easy to understand.</span>
+<span id="cb9-24"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Completeness: All necessary information is present<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">;</span> <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">no</span> critical steps or explanations are missing.</span>
+<span id="cb9-25"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Consistency: Terminology, formatting, and style are uniform throughout.</span>
+<span id="cb9-26"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Conciseness: Information is presented efficiently without unnecessary words or repetition.</span>
+<span id="cb9-27"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Relevance: Content directly addresses the needs and questions of the target audience.</span>
+<span id="cb9-28"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Accessibility: Documentation is easy to navigate, search, and consume <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">e.g.,</span> clear headings, index, TOC<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">)</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">.</span></span>
+<span id="cb9-29"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Examples/Illustrations: Sufficient and relevant code examples, diagrams, or screenshots are provided.</span>
+<span id="cb9-30"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Audience Appropriateness: Language and technical depth are tailored to the intended readers.</span>
+<span id="cb9-31"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">-</span> Maintainability: Structure and content facilitate future updates and revisions.</span>
+<span id="cb9-32"></span>
+<span id="cb9-33"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## Contributing</span></span>
+<span id="cb9-34"></span>
+<span id="cb9-35"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">1.</span> Plan the changes carefully, considering the overall architecture and existing patterns.</span>
+<span id="cb9-36"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">2.</span> Write sections following existing code patterns and type hints</span>
+<span id="cb9-37"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">3.</span> Add more detail where necessary</span>
+<span id="cb9-38"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">4.</span> Once everything is working, make a commit and request human review.</span></code></pre></div>
+</div>
+<p>You can then use the claude command to be off to the races:</p>
+<pre><code>claude</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/claude.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="Off to the races!"><img src="https://questionable.quarto.pub/blog/work/img/claude.png" class="img-fluid figure-img" alt="Off to the races!"></a></p>
+<figcaption>Off to the races!</figcaption>
+</figure>
+</div>
+</section>
+<section id="self-hosting-with-ollama" class="level2">
+<h2 class="anchored" data-anchor-id="self-hosting-with-ollama">Self hosting with Ollama</h2>
+<p>[Ollama] is a LLM model that you can self-host. You would want to place it on its own server (because it can an will consume all resources) and then access it through that IP address, like this:</p>
+<pre><code>server_ip_address &lt;- "&lt;ADD YOUR SERVER'S IP ADDRESS HERE&gt;"
+
+library(ellmer)
+
+chat &lt;- chat_ollama(
+  system_prompt = "Answer questions using the R programming language. ",
+  base_url = paste0("http://", server_ip_address, ":11434"),
+  model = "gemma3:1b",
+)</code></pre>
+<p>(Credit to Isabella)</p>
+</section>
+<section id="security" class="level2">
+<h2 class="anchored" data-anchor-id="security">Security</h2>
+<p>Large Language Models (LLMs) are revolutionizing everything from code generation to data analysis and customer interactions.&nbsp; However, their rapid adoption also introduces significant security concerns.&nbsp; From data privacy risks to potential misuse - such as generating malicious code or spreading misinformation - organizations must take a proactive approach to LLM security.</p>
+<p>This section is tailored for IT administrators and security professionals who oversee LLM adoption, providing actionable insights on risk mitigation, access control, and enterprise-level security measures.</p>
+<section id="the-security-challenges-of-llms" class="level3">
+<h3 class="anchored" data-anchor-id="the-security-challenges-of-llms">The Security Challenges of LLMs</h3>
+<p>LLMs present unique security risks that administrators must proactively address:</p>
+<ul>
+<li>Data Privacy &amp; Protection: LLMs process vast amounts of information, including proprietary and sensitive data.</li>
+<li>Unauthorized access: Vulnerabilities like prompt injection and model poisoning can compromise entire enterprise systems.</li>
+<li>Misinformation &amp; Compliance Risks: AI-generated content can introduce inaccuracies, requiring monitoring and governance.</li>
+</ul>
+<p>A well-defined enterprise LLM strategy is crucial to maintaining security while leveraging AI’s full potential.</p>
+</section>
+<section id="choosing-the-right-llm-deployment-model" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-right-llm-deployment-model">Choosing the Right LLM Deployment Model</h3>
+<p>Administrators must select an LLM deployment model that aligns with organizational security policies and data governance requirements balanced against model capability. The three primary options include:</p>
+<ol type="1">
+<li><p>Self-Hosted (Highest Security): Models are deployed internally, ensuring full control over data and security policies (e.g., Ollama).</p></li>
+<li><p>Trusted Cloud Providers (Balanced Security &amp; Scalability): Models hosted by vetted providers with strong security guarantees (e.g., Databricks, Snowflake, AWS Bedrock).</p></li>
+<li><p>Unvetted Public Models (High Risk, Not recommended):&nbsp; Free or open-access LLMs with uncertain security and data retention policies (e.g., free-tier ChatGPT).</p></li>
+</ol>
+<blockquote class="blockquote">
+<p>Administrator Tip: Always involve IT security teams in LLM vetting.&nbsp; Ensure that providers adhere to your organization’s data protection standards and contractual safeguards, such as NDAs and service-level agreements (SLAs).&nbsp; “Free” LLMs often come at the cost of your data.</p>
+</blockquote>
+</section>
+<section id="best-practices-for-secure-llm-usage" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices-for-secure-llm-usage">Best Practices for Secure LLM Usage</h3>
+<ol type="1">
+<li>Code Assistance &amp; Completion (IDE Integration)</li>
+</ol>
+<p>Many developers integrate LLMs into their coding workflows for ghost text, inline chat, and code completion. To ensure security:</p>
+<ul>
+<li><p>Use IT-approved LLMs within the IDE-integrated editors.</p></li>
+<li><p>Select solutions that protect data and have an active community responding to vulnerabilities.</p></li>
+<li><p>Centralize access via Posit Workbench to eliminate the need for individual API Key management.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Programmatic LLM Access (Proprietary Data Analysis)</li>
+</ol>
+<p>Developers often use LLMs for workflows like exploratory data analysis, requiring API access from code. Security measures should include:</p>
+<ul>
+<li><p>Using only IT-approved LLMs.</p></li>
+<li><p>Choosing secure R and Python packages for LLM development, such as ellmer (R), chatlas (Python), which allow model switching.</p></li>
+<li><p>Ensuring libraries come from trusted sources like Posit Package Manager to prevent vulnerability exploitation.</p></li>
+<li><p>Verifying code snippets from LLM outputs to track drift and hallucinations over time.</p></li>
+<li><p>Protecting authentication credentials using Managed Credentials in Posit Workbench instead of storing API keys manually</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Embedded LLMs in Applications &amp; Chat UIs</li>
+</ol>
+<p>When deploying applications with LLM-powered interactions:</p>
+<ul>
+<li><p>Use only IT-approved LLMs with secure access packages like shinychat for Shiny applications</p></li>
+<li><p>Centralize application hosting and enforce strict access controls with Posit Connect</p></li>
+<li><p>Protect authentication credentials with Managed Credentials to prevent exposure.</p></li>
+<li><p>Monitor LLM contributions and ensure transparency, as some jurisdictions require explicit disclosure of AI-generated content.</p></li>
+</ul>
+</section>
+<section id="case-study-how-posit-built-a-secure-chatbot" class="level3">
+<h3 class="anchored" data-anchor-id="case-study-how-posit-built-a-secure-chatbot">Case Study: How Posit Built a Secure Chatbot</h3>
+<p>One of the most common enterprise use cases for LLMs is chatbot development.&nbsp; At Posit, we applied the above best practices when building an internal chatbot for support assistance. Here’s what we learned:</p>
+<ul>
+<li><p>Risk Modeling is Crucial: We identified risks like data exposure, hallucinations, and unauthorized access before deployment.</p></li>
+<li><p>LLM Vetting Pays Off: By selecting a trusted provider that was self-hosted instead of a free-tier model, we ensured contractual protections and security measures were in place.</p></li>
+<li><p>Package Selection: We selected the package chatlas to be the backbone for our chatbot for its ease of use and ability to be hosted from our trusted Posit Package Manager repository.</p></li>
+<li><p>Strict Access Controls Prevent Misuse: Our chatbot was hosted via Posit Connect, ensuring only authorized users had access.</p></li>
+<li><p>Monitoring and Verification: We implemented verification for URL’s provided by the chatbot and a feedback mechanism by users to monitor performance over time.</p></li>
+<li><p>Credential Management Simplified Security: We relied on Managed Credentials to securely connect to the chatbot’s LLM backend instead of exposing API keys.</p></li>
+<li><p>Proactive Prompt Security: We fortified against prompt injection attacks by explicitly instructing it to refuse disclosure of its system prompt, preventing unauthorized manipulation and information leakage.</p></li>
+</ul>
+<p>These lessons reinforced the importance of security-first LLM implementations, whether for chatbot development or broader enterprise use cases.</p>
+</section>
+<section id="security-best-practices-a-shared-responsibility" class="level3">
+<h3 class="anchored" data-anchor-id="security-best-practices-a-shared-responsibility">Security Best Practices: A Shared Responsibility</h3>
+<p>For Developers:</p>
+<p>✅ Define LLM usage requirements.</p>
+<p>✅ Use only IT-approved LLMs.</p>
+<p>✅ Verify outputs for consistency and track model performance.</p>
+<p>✅ Choose rigorously maintained packages through Posit Package Manager.</p>
+<p>✅ Protect Secrets - opt for Managed Credentials over API keys.</p>
+<p>✅ Be transparent about AI-generated contributions.</p>
+<p>For IT &amp; Admins</p>
+<p>✅ Select LLM deployment models that align with security policies.</p>
+<p>✅ Implement robust access controls and credential management.</p>
+<p>✅ Develop a thread model and conduct regular audits.</p>
+<p>✅ Provide clear usage guidelines and approved access methods.</p>
+<p>✅ Centralize LLM access management to prevent unauthorized usage.</p>
+<p>Enterprise-Wide Security Measures:</p>
+<p>✅ Minimize data shared with LLMs.</p>
+<p>✅ Define and enforce guardrails to prevent unauthorized responses.</p>
+<p>✅ Implement monitoring to detect and mitigate prompt injection attacks.</p>
+<p>✅ Use access controls to secure deployed LLM content.</p>
+</section>
+<section id="final-thoughts-llm-security-is-a-non-negotiable" class="level3">
+<h3 class="anchored" data-anchor-id="final-thoughts-llm-security-is-a-non-negotiable">Final Thoughts: LLM Security is a Non-Negotiable</h3>
+<p>LLMs are game-changers, but security must be a top priority. By implementing strong safeguards, vetting models carefully and fostering an enterprise-wide culture of responsible AI-use, organizations can unlock the full potential of LLMs without compromising data integrity.</p>
+<p>Next Steps:</p>
+<p>📌 Consult your LLM provider for additional best practices.</p>
+<p>📌 Stay updated on key AI concepts like tokens, RAG, and prompt engineering.</p>
+<p>📌 Explore secure deployment options with Posit Workbench and Posit Connect.</p>
+<p>📌 Learn from real-world chatbot implementations and apply best practices to your own enterprise use cases.</p>
+<p>By staying proactive, enterprises can confidently navigate the evolving LLM landscape while maintaining security and compliance.</p>
+</section>
+</section>
+<section id="prompt-tips" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-tips">Prompt tips</h2>
+<ol type="1">
+<li>Be specific and descriptive</li>
+<li>Define the output format</li>
+<li>Add context by adding data, including the conversation history, RAG, etc</li>
+<li>Give examples</li>
+<li>Format the prompt with clear headlines and sections</li>
+<li>Have it check its result</li>
+</ol>
+</section>
+<section id="prompt-examples" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-examples">Prompt examples</h2>
+<section id="default-prompt-usually-auto-included" class="level3">
+<h3 class="anchored" data-anchor-id="default-prompt-usually-auto-included">Default prompt, usually auto included</h3>
+<pre><code>You are a helpful assistant.</code></pre>
+<p>often we don’t want this because then it can’t tell us when it is wrong.</p>
+</section>
+<section id="concise-answers" class="level3">
+<h3 class="anchored" data-anchor-id="concise-answers">Concise answers</h3>
+<pre><code>Answer questions directly and with no preamble. Do not use sections.</code></pre>
+<pre><code>Answer this is as a terse technical consultant, 4 sentences max.</code></pre>
+</section>
+<section id="tell-it-to-tell-you-when-it-doesnt-know" class="level3">
+<h3 class="anchored" data-anchor-id="tell-it-to-tell-you-when-it-doesnt-know">Tell it to tell you when it doesn’t know</h3>
+<pre><code>If you can't answer the question based on the provided context, tell the user that you can't. </code></pre>
+<pre><code>If you're unsure about any aspect of the project, make a reasonable decision and explain your choice in a comment.</code></pre>
+<pre><code>It's important that you get clear, unambiguous instructions from the user, so if the user's request is unclear in any way, you should ask for clarification. If you aren't sure how to accomplish the user's request, say so, rather than using an uncertain technique.</code></pre>
+<pre><code>Can you find the “set” in this photo? If you’re not able to answer this question reliably, tell me.</code></pre>
+</section>
+<section id="explain-itself" class="level3">
+<h3 class="anchored" data-anchor-id="explain-itself">Explain itself</h3>
+<pre><code>The response should not only contain the answer to the question, but also, a comprehensive explanation of how you came up with the answer.</code></pre>
+</section>
+<section id="limit-scope" class="level3">
+<h3 class="anchored" data-anchor-id="limit-scope">Limit scope</h3>
+<pre><code>Discuss only the R programming language and provide code examples in the R programming language. Friendly refuse to chat on something else." </code></pre>
+<pre><code>Only answer questions related to Shiny, or R or Python. Don't answer any questions related to anything else.</code></pre>
+<pre><code>You are a chatbot that is displayed on a web page next to a data dashboard. You will be asked to filter, sort, and answer questions on the data. The user interface in which this conversation is being shown is a narrow sidebar of a dashboard, so keep your answers concise and don't include unnecessary patter, nor additional prompts or offers for further assistance. For security reasons, you may only query this specific table. Always use SQL to count, sum, average, or otherwise aggregate the data. Do not retrieve the data and perform the aggregation yourself--if you cannot do it in SQL, you should refuse the request. </code></pre>
+<pre><code>Edge cases that should be refused. All of these should be refused with an answer clarifying capability and requesting the user ask again. 
+- Off-topic questions
+- Questions that are on the topic, but are vageuly worded. 
+- Questions where more information is needed from the user.
+- Harassment / toxic language</code></pre>
+</section>
+<section id="dont-assume-the-user-has-asked-the-right-question" class="level3">
+<h3 class="anchored" data-anchor-id="dont-assume-the-user-has-asked-the-right-question">Don’t assume the user has asked the right question</h3>
+<pre><code>If the user provides a vague help request, like "Help" or "Show me instructions", describe your own capabilities in a helpful way, including examples of questions they can ask. Be sure to mention whatever advanced statistical capabilities (standard deviation, quantiles, correlation, variance) you have.</code></pre>
+<pre><code>Don't assume the user asked the right question. Instead consider what they could have met and respond to the question that has an answer that is least complex. </code></pre>
+</section>
+<section id="detail-the-desired-output-format" class="level3">
+<h3 class="anchored" data-anchor-id="detail-the-desired-output-format">Detail the desired output format</h3>
+<pre><code>List the three most successful science fiction novels that have been turned into movies. 
+Desired output format: A JSON with the keys novel, novel_year_of_publication, movie, movie_year_of_publication. </code></pre>
+</section>
+<section id="follow-a-process-and-ask-for-feedback-before-continuing" class="level3">
+<h3 class="anchored" data-anchor-id="follow-a-process-and-ask-for-feedback-before-continuing">Follow a process and ask for feedback before continuing</h3>
+<pre><code>Answer questions thinking through step by step. </code></pre>
+<pre><code>## Process to follow
+
+1. Plan the changes carefully, considering the overall architecture and existing patterns.
+2. Write the code follow existing code patterns and type hints
+3. Add documentation where necessary
+4. Run `just dev-format`
+5. Ensure `just dev-check docker` or `just dev-check podman` passes
+6. Consider adding or updating e2e tests in `app/tests/e2e/`. Add if needed.
+7. Test changes with e2e tests using `just e2e-workflow docker` or `just e2e-workflow podman` for overall tests or to run specific tests use `just e2e-specific docker test` replacing test with the specific test filename and/or class + function name, for example `just e2e-specific docker test_asset_generation.py::TestInstallationGuideGeneration::test_config_downloads_from_install_guide_workbench`.
+8. Once everything is working, make a commit and request human review.</code></pre>
+<pre><code>Review these steps carefully and follow them to create the Shiny for {language} app. It is very important that your app follows these guidelines, so think about them before you start writing code:
+
+- Analyze the user prompt carefully. Identify the main features, functionalities, and any specific requirements mentioned.
+
+- Plan the structure of the app, including:
+   - UI components (input widgets, output displays)
+   - Server logic (data processing, reactive elements)
+   - Any necessary data sources or external libraries
+
+- Create the app code following these guidelines:
+   - Use proper Shiny for {language} syntax and structure
+   - Include necessary import statements at the beginning
+   - Implement both the UI and server components
+   - Ensure all features mentioned in the user prompt are included
+   - Use cards for the UI layout
+   - If the app contains a few input controls, default to using `page_sidebar` with the inputs in the sidebar and the outputs in the main panel--but if the user prompt specifies a different layout, follow that instead
+
+- If the user prompt is vague or missing important details, make reasonable assumptions to fill in the gaps. Mention these assumptions in comments within the code.
+
+- Ensure the app is complete and runnable. Include any additional helper functions or data processing steps as needed.</code></pre>
+<pre><code>Write a blog post about climate change and include recent statistics following these steps: 
+Gather facts: "List recent climate change statistics from 2023."
+Plan the content: "Create an outline for a climate change blog post."
+Write in parts: "Write an engaging introduction for a climate change blog post."
+Expand each section separately.
+Breaking down the task ensures each part is handled properly before moving to the next.</code></pre>
+</section>
+<section id="making-shiny-apps" class="level3">
+<h3 class="anchored" data-anchor-id="making-shiny-apps">Making Shiny apps</h3>
+<p>From: <a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt.md</a></p>
+<pre><code>You are an AI assistant specialized in helping users with Shiny for {language}.
+Your tasks include explaining concepts in Shiny, explaining how to do things with Shiny, or creating a complete, functional Shiny for {language} app code as an artifact based on the user's description.
+Only answer questions related to Shiny, or R or Python. Don't answer any questions related to anything else.
+
+If the user asks for explanations about concepts or code in Shiny for {language}, then you should provide detailed and accurate information about the topic. This may include descriptions, examples, use cases, and best practices related to Shiny for {language}. If your answer includes examples of Shiny apps, you should provide the code of each one within `&lt;SHINYAPP AUTORUN="0"&gt;` and `&lt;/SHINYAPP&gt;` tags, and otherwise adhere to the guidelines below for creating applications.
+
+If the user asks for an application, you should provide a Shiny for {language} app code that meets the requirements specified in the user prompt. The app should be well-structured, include necessary components, and follow best practices for Shiny app development.
+
+Review these steps carefully and follow them to create the Shiny for {language} app. It is very important that your app follows these guidelines, so think about them before you start writing code:
+
+- Analyze the user prompt carefully. Identify the main features, functionalities, and any specific requirements mentioned.
+
+- Plan the structure of the app, including:
+   - UI components (input widgets, output displays)
+   - Server logic (data processing, reactive elements)
+   - Any necessary data sources or external libraries
+
+- Create the app code following these guidelines:
+   - Use proper Shiny for {language} syntax and structure
+   - Include necessary import statements at the beginning
+   - Implement both the UI and server components
+   - Ensure all features mentioned in the user prompt are included
+   - Use cards for the UI layout
+   - If the app contains a few input controls, default to using `page_sidebar` with the inputs in the sidebar and the outputs in the main panel--but if the user prompt specifies a different layout, follow that instead
+
+- If the user prompt is vague or missing important details, make reasonable assumptions to fill in the gaps. Mention these assumptions in comments within the code.
+
+- Ensure the app is complete and runnable. Include any additional helper functions or data processing steps as needed.
+
+- Output the entire app code within `&lt;SHINYAPP AUTORUN="1"&gt;` and `&lt;/SHINYAPP&gt;` tags. Inside those tags, each file should be within `&lt;FILE NAME="..."&gt;` and `&lt;/FILE&gt;` tags, where the `...` is replaced with the filename.
+
+- Only put it in those tags if it is a complete app. If you are only displaying a code fragment, do not put it in those tags; simply put it in a code block with backticks.
+
+- If the user asks to show the shinylive or editor panel, then create an app file where the content is completely empty. Do not put anything else in the file at all. Also, do not explain why you are doing this. Just do it.
+
+{language_specific_prompt}
+
+Consider multiple possible implementations of the application, then choose the best one. Remember to create a fully functional Shiny for {language} app that accurately reflects the user's requirements. If you're unsure about any aspect of the app, make a reasonable decision and explain your choice in a comment.
+
+{verbosity}</code></pre>
+</section>
+<section id="making-r-shiny-apps" class="level3">
+<h3 class="anchored" data-anchor-id="making-r-shiny-apps">Making R Shiny apps</h3>
+<p>From: <a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_r.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_r.md</a></p>
+<pre><code>- Use the bslib package for styling and layout.</code></pre>
+</section>
+<section id="making-python-shiny-apps" class="level3">
+<h3 class="anchored" data-anchor-id="making-python-shiny-apps">Making Python Shiny apps</h3>
+<p>From: <a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md</a></p>
+<pre><code>- Try not to import big packages like scipy.
+
+- Prefer using matplotlib instead of plotly for plotting. A matplotlib plot should not return `plt`. It does not need to return anything, but if necessary, can return `fig`.
+
+- Don't mix Shiny Core and Shiny Express syntax. Just use one. Use Core by default, and if the user asks for Express, then use Express.
+
+- Do not use the captilized functions `reactive.Calc`, `reactive.Value`, or `reactive.Effect`. Instead, use the lowercase versions: `reactive.calc`, `reactive.value`, and `reactive.effect`.
+
+- Do not use `ui.panel_sidebar()` because it no longer exists. Instead ,use `ui.sidebar()`.
+
+- Do not use `panel_main()` because it no longer exists. Instead of `sidebar_layout(panel_sidebar(a, b), panel_main(x, y))`, use `sidebar_layout(sidebar(a, b), x, y)`.
+
+- Never use the `@output` decorator, as it is deprecated. Instead, only use the `@render.xx` decorator.
+
+- Avoid using `@render.image`. Prefer to use `@render.ui` instead and return a `ui.img()` object.
+
+- If you have dynamic UI returning a `ui.img()`, use `@render.ui`, not `@render.image`, and use `ui.output_ui()` instead of `ui.output_image()`.
+
+- For the qrcode package, when calling `img.save(buf)`, do not use the `format="PNG"` parameter. Just do `img.save(buf)`.
+
+- Do not define the UI as a function. Instead use `app_ui = ...`, where the `...` is a static UI definition.
+
+- If the app makes HTTP requests, use the `urllib3` library.
+
+- If using Shiny Express, there are some things to keep in mind:
+  - Use `from shiny.express import input, ui, ...`, where the `...` represents other necessary components.
+  - Do not try to import `reactive` from `shiny.express`. It is imported from `shiny`.
+  - For nestable UI components, like `ui.card()`, it should be used as `with ui.card(): ...`, instead of `ui.card(...)`
+
+- If using Shiny Core, end with the `app = App(...)` call.
+
+- If the user says that there is an error about a missing package, tell them to add requirements.txt with that package.
+
+- Put all required packages in a `requirements.txt` file, and present that file inside of the `&lt;SHINYAPP&gt;` tags.
+
+## Examples
+
+This example shows the assistant creating an example app in the process of answering a question. Because the user did not explicitly ask to create an app, the example should be presented in &lt;SHINYAPP AUTORUN="0"&gt; instead of &lt;SHINYAPP AUTORUN="1"&gt;. This allows the user to run the app manually, but will not overwrite their existing work.
+
+[Example]
+[User]
+How do I reset a `ui.input_text` to be empty?
+[/User]
+[Assistant]
+To reset a `ui.input_text` to a default value in a Shiny for Python app, you can use the `update_text()` function. This function allows you to dynamically change the value of an input_text widget from the server side. Here's an explanation of how to do it:
+
+1. First, you need to create an `input_text` widget in your UI with an ID.
+2. In your server function, you can use the `@reactive.Effect` decorator to create a reactive effect that will update the input when a certain condition is met (like a button click).
+3. Inside this effect, you use the `ui.update_text()` function to reset the value.
+
+Here's a simple example that demonstrates this:
+
+&lt;SHINYAPP AUTORUN="0"&gt;
+&lt;FILE NAME="app.py"&gt;
+from shiny import App, reactive, render, ui
+
+app_ui = ui.page_fluid(
+    ui.input_text("name", "Enter your name", value=""),
+    ui.output_text("greeting"),
+    ui.input_action_button("reset", "Reset"),
+)
+
+def server(input, output, session):
+    @output
+    @render.text
+    def greeting():
+        return f"Hello, {input.name()}!"
+
+    @reactive.Effect
+    @reactive.event(input.reset)
+    def _():
+        ui.update_text("name", value="")
+
+app = App(app_ui, server)
+&lt;/FILE&gt;
+&lt;/SHINYAPP&gt;
+
+In this example:
+
+1. We have an `input_text` widget with the ID "name".
+2. We have a button with the ID "reset".
+3. In the server function, we create a reactive effect that listens for clicks on the reset button.
+4. When the reset button is clicked, `ui.update_text("name", value="")` is called, which resets the "name" input to an empty string.
+
+You can modify the default value to whatever you want by changing the `value` parameter in `ui.update_text()`. For example, if you want to reset it to "Default Name", you would use:
+
+```python
+ui.update_text("name", value="Default Name")
+```
+
+This approach allows you to reset the input text to any value you desire, providing flexibility in how you manage your app's state.
+[/Assistant]
+[/Example]
+
+## Anti-Examples
+
+These examples are INCORRECT and you must avoid these patterns when writing code. Look at these carefully and consider them before writing your own code.
+
+### Use of nonexistent sidebar panel functions
+
+The following code is INCORRECT because ui.panel_sidebar and ui.panel_main do not exist.
+
+```
+app_ui = ui.page_sidebar(
+    ui.panel_sidebar(
+        ui.input_action_button("generate", "Generate New Plot")
+    ),
+    ui.panel_main(
+      ui.output_plot("plot")
+    ),
+)
+```
+
+Instead, sidebar page and sidebar layout code should look like this:
+
+```
+app_ui = ui.page_sidebar(
+    ui.sidebar(
+        ui.input_action_button("generate", "Generate New Plot")
+    ),
+    ui.output_plot("plot")
+)
+```
+
+or:
+
+```
+app_ui = ui.page_fillable(
+    ui.layout_sidebar(
+        ui.sidebar(
+            ui.input_action_button("generate", "Generate New Plot")
+        ),
+        ui.output_plot("plot")
+    )
+)
+```
+
+### Failure to import necessary modules, especially shiny.reactive
+
+```
+from shiny import App, render, ui
+import numpy as np
+import matplotlib.pyplot as plt
+
+app_ui = ... # Elided for brevity
+
+def server(input, output, session):
+
+    @render.plot
+    @reactive.event(input.generate)
+    def regression_plot():
+        n = input.num_points()
+        noise_level = input.noise()
+
+        # Elided for brevity
+
+app = App(app_ui, server)
+```
+
+In this example, the code is missing the import statement for `reactive` from `shiny`. This will cause the code to fail when trying to use the `@reactive.event` decorator. The correct import statement should be:
+
+```
+from shiny import App, render, ui, reactive
+```
+
+### Incorrect import of reactive and req
+
+The module shiny.express does not have `reactive` or `req` modules. The correct import should be from shiny.
+
+Incorrect:
+
+```
+from shiny.express import input, ui, render, reactive, req
+```
+
+Correct:
+
+```
+from shiny import req, reactive
+from shiny.express import input, ui, render
+```
+
+### `reactive.value` and a function with the same name
+
+A reactive value must not have the same name as another object, like a function. In this example,
+
+Incorrect, with the same name:
+
+```
+foo = reactive.value("1")
+
+@render.text
+def foo():
+    ...
+```
+
+Correct, with different names:
+
+```
+foo_v = reactive.value("1")
+
+@render.text
+def foo():
+    ...
+```</code></pre>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li><a href="https://github.com/jcheng5/r-sidebot" class="uri">https://github.com/jcheng5/r-sidebot</a></li>
+<li><a href="https://github.com/posit-dev/shiny-assistant" class="uri">https://github.com/posit-dev/shiny-assistant</a> and <a href="https://gallery.shinyapps.io/assistant/" class="uri">https://gallery.shinyapps.io/assistant/</a></li>
+<li><a href="https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md" class="uri">https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt_python.md</a></li>
+<li><a href="https://github.com/sol-eng/pharos/blob/main/CLAUDE.md" class="uri">https://github.com/sol-eng/pharos/blob/main/CLAUDE.md</a></li>
+<li><a href="https://github.com/search?q=path%3A%2F%5ECLAUDE%5C.md%2F+OR+path%3A%2F%5Ellms%5C.txt%2F+OR+path%3A%2F%5E%5C.github%5C%2Fcopilot-instructions%5C.md%2F&amp;type=code" class="uri">https://github.com/search?q=path%3A%2F%5ECLAUDE%5C.md%2F+OR+path%3A%2F%5Ellms%5C.txt%2F+OR+path%3A%2F%5E%5C.github%5C%2Fcopilot-instructions%5C.md%2F&amp;type=code</a></li>
+<li><a href="https://github.com/posit-dev/demobot" class="uri">https://github.com/posit-dev/demobot</a> (internal)</li>
+</ul>
+</section>
+</section>
+<section id="recommended-further-learningwatching" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-further-learningwatching">Recommended further learning/watching</h2>
+<ul>
+<li>Recommended video on AI from JJ: <a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ" class="uri">https://www.youtube.com/watch?v=LCEmiRjPEtQ</a></li>
+<li>New package for benchmarking LLM apps in R: <a href="https://github.com/tidyverse/vitals" class="uri">https://github.com/tidyverse/vitals</a></li>
+<li>AWS Code Whisperer: <a href="https://open-vsx.org/extension/amazonwebservices/aws-toolkit-vscode" class="uri">https://open-vsx.org/extension/amazonwebservices/aws-toolkit-vscode</a></li>
+<li>RStudio Copilot Integration: <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html" class="uri">https://docs.posit.co/ide/user/ide/guide/tools/copilot.html</a></li>
+<li>Investigating truthfulness: <a href="https://transluce.org/investigating-o3-truthfulness" class="uri">https://transluce.org/investigating-o3-truthfulness</a></li>
+<li>Joe’s LLM workshop:<a href="https://jcheng5.github.io/llm-quickstart/quickstart.html#/title-slide">https://jcheng5.github.io/llm-quickstart/quickstart.html#/title-slide</a></li>
+<li>Security conference talk about the dangers of ML (4:08 is where he talks about ml): <a href="https://www.youtube.com/watch?v=ajGX7odA87k">https://www.youtube.com/watch?v=ajGX7odA87k</a></li>
+<li>Moving beyond “algorithmic bias is a data problem”: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/</a></li>
+<li>Here’s What Ethical AI Really Means - YouTube philosophy tube: <a href="https://www.youtube.com/watch?v=AaU6tI2pb3M" class="uri">https://www.youtube.com/watch?v=AaU6tI2pb3M</a></li>
+<li>i-will-fucking-piledrive-you-if-you-mention-ai-again: <a href="https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/" class="uri">https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/</a></li>
+<li>Podcast about AI, from tech will not save you: <a href="https://techwontsave.us/episode/277_generative_ai_is_not_inevitable_w_emily_m_bender_and_alex_hanna" class="uri">https://techwontsave.us/episode/277_generative_ai_is_not_inevitable_w_emily_m_bender_and_alex_hanna</a></li>
+<li>Remove AI from from your google search: <a href="https://udm14.com/" class="uri">https://udm14.com/</a></li>
+<li>AI reddit post watching microsoft employees go insane: <a href="https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/" class="uri">https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/</a></li>
+</ul>
+
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/LLMs.html</guid>
+  <pubDate>Thu, 03 Jul 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Creating a custom Workbench login page</title>
   <dc:creator>Lisa </dc:creator>
@@ -139,7 +901,7 @@ cap.innerHTML = "This is a message added by your admin. Sign into Posit with you
 <div id="fig-light-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/positron-theme-light.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="fig-elephants"><img src="https://questionable.quarto.pub/blog/work/img/positron-theme-light.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
+<a href="img/positron-theme-light.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-1"><img src="https://questionable.quarto.pub/blog/work/img/positron-theme-light.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-light-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Light theme
@@ -151,7 +913,7 @@ cap.innerHTML = "This is a message added by your admin. Sign into Posit with you
 <div id="fig-dark-theme" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/positron-data.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="fig-elephants"><img src="https://questionable.quarto.pub/blog/work/img/positron-data.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
+<a href="img/positron-data.png" class="lightbox" data-gallery="fig-elephants" data-glightbox="description: .lightbox-desc-2"><img src="https://questionable.quarto.pub/blog/work/img/positron-data.png" class="img-fluid figure-img" data-ref-parent="fig-elephants"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) dark theme
@@ -224,7 +986,7 @@ font-style: inherit;">ls</span> /opt/python/</span></code></pre></div>
 <div id="fig-python-interp" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-interp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/python-interpreter.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="https://questionable.quarto.pub/blog/work/img/python-interpreter.png" class="img-fluid figure-img"></a>
+<a href="img/python-interpreter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="https://questionable.quarto.pub/blog/work/img/python-interpreter.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-interp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Python interpreter selection
@@ -237,7 +999,7 @@ Figure&nbsp;2: Python interpreter selection
 <div id="fig-python-interp-manually" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-interp-manually-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/select-interpreter-manually.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="https://questionable.quarto.pub/blog/work/img/select-interpreter-manually.png" class="img-fluid figure-img"></a>
+<a href="img/select-interpreter-manually.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="https://questionable.quarto.pub/blog/work/img/select-interpreter-manually.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-interp-manually-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Python interpreter manual selection
@@ -322,7 +1084,7 @@ font-style: inherit;">--user</span></span></code></pre></div>
 <div id="fig-python-app" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/running-shiny-python-app.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="https://questionable.quarto.pub/blog/work/img/running-shiny-python-app.png" class="img-fluid figure-img"></a>
+<a href="img/running-shiny-python-app.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5"><img src="https://questionable.quarto.pub/blog/work/img/running-shiny-python-app.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: Python Shiny App
@@ -1283,6 +2045,183 @@ map $http_upgrade $connection_upgrade {
   <category>code</category>
   <guid>https://questionable.quarto.pub/blog/work/saml-entraid-posit-team.html</guid>
   <pubDate>Wed, 07 May 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
+<item>
+  <title>Validation</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/validation.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="frame-of-mind" class="level2">
+<h2 class="anchored" data-anchor-id="frame-of-mind">Frame of mind</h2>
+<p>My colleagues recommendation while reading these resources:</p>
+<blockquote class="blockquote">
+<p>Put yourself in a mental model that you are at a certain company and you want to build a whole new IT system that’s addressing certain unmet needs. Due to the nature of the use case you need to use this CSV (Computer System Validation) approach. Your goal is to meet user requirements while keeping risks under control.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>As an exercise, think about can you come up with some guiding principles on how to set up Posit Team to make it GXP compliant. For example, what happens if deploy a shiny app and what part of processes are happening there when it comes to GXP, CSV, and such. The icing on the cake is how can we change the Connect configuration to make it compliant.</p>
+</blockquote>
+</section>
+<section id="definitions" class="level2">
+<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<p><strong>DQ</strong> Design Qualification - a design is assessed and documented to make sure it meets user requirements and regulatory standards (typically doesn’t apply to Posit software)</p>
+<p><strong>IQ</strong> Installation Qualification - verifies that equipment and systems are installed correctly according to the manufacturers instructions</p>
+<p><strong>OQ</strong> Operational Qualification - verifies that a system performs as required over time, typically requires implementation of control systems, alarms, and testing of functions under different conditions</p>
+<p><strong>PQ</strong> Performance Qualification - verifies the system performance while operating under normal operating conditions, typically involves real production environments or batches and monitors quality outcomes</p>
+<p><strong>CSV</strong> Computer System Validation is a form of software validation to ensure that a regulated computerized system is as safe, secure, and reliable as paper based records.</p>
+<p><strong>URD/URS</strong> User Requirements Document or User Requirements Specification specifies what the user expects the software to be able to do.</p>
+<p><strong>GXP</strong> A set of principles that govern the use of various systems and recommend the implementation of strict controls</p>
+<p><strong>GMP</strong> Good Manufacturing Practices, guidelines that govern the manufacture and sale of food, beverages, cosmetics, pharmaceuticals, dietary supplements, and medical devices</p>
+<p><strong>SCE</strong> Statistical Compute Environment - typically computerized systems where late-stage clinical development workloads run</p>
+<p><strong>SOP</strong> Standard Operating Procedure is a set of repeatable steps and instructions that an organization can follow in order to achieve a common activity.</p>
+<p><strong>Production</strong> Day to day system for productive use. Change control for system-wide changes is in place.</p>
+<p><strong>Development</strong> Small replica of the production system. No change control. Used for IT internal testing of new features/changes.</p>
+<p><strong>Test/Staging/QA</strong> Small replica of the production system. Fully change controlled. Used to allow for business testing before rolling out the change to Production.</p>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="start-here" class="level3">
+<h3 class="anchored" data-anchor-id="start-here">Start here</h3>
+<p>Internal to Posit resources:</p>
+<ul>
+<li><p>Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - <a href="https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md" class="uri">https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md</a></p></li>
+<li><p>Michael had a post in the Life science and healthcare channel - posted pdf document - <a href="https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489" class="uri">https://positpbc.slack.com/archives/CQ55EG3U7/p1742983108413489</a></p></li>
+<li><p>This post from MichaelM is useful about validated environments: <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE" class="uri">https://positpbc.slack.com/archives/C2P7MTJKE/p1746448154247119?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE</a></p></li>
+<li><p>Another internal post about the limitations of renv - <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1746653854586919?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE" class="uri">https://positpbc.slack.com/archives/C2P7MTJKE/p1746653854586919?thread_ts=1746118620.637929&amp;cid=C2P7MTJKE</a></p></li>
+</ul>
+</section>
+<section id="as-a-vendor---disclaimer" class="level3">
+<h3 class="anchored" data-anchor-id="as-a-vendor---disclaimer">As a vendor - disclaimer</h3>
+<p>We as posit are not in the business of validating packages. We can talk about how to do it high level but its up to them to build such a process or point them at Atorus OpenVal (which doesn’t use Package Manager), or Jumping Rivers Litmus system.</p>
+</section>
+<section id="now-add-some-more-documents" class="level3">
+<h3 class="anchored" data-anchor-id="now-add-some-more-documents">Now add some more documents</h3>
+<p>Phil resources: (See Trevor chat)</p>
+<p>Posit pro products (still says Rstudio everything): <a href="https://posit.co/wp-content/uploads/2024/11/rstudio_compliance_validation.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w" class="uri">https://posit.co/wp-content/uploads/2024/11/rstudio_compliance_validation.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w</a></p>
+<p>R validation: <a href="https://www.r-project.org/doc/R-FDA.pdf" class="uri">https://www.r-project.org/doc/R-FDA.pdf</a></p>
+<p>Tidyverse, tidymodels: <a href="https://posit.co/wp-content/uploads/2024/11/validation-tidy.pdf?_gl=1*1rog1io*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDI4LjAuMC4w" class="uri">https://posit.co/wp-content/uploads/2024/11/validation-tidy.pdf?_gl=1*1rog1io*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDI4LjAuMC4w</a></p>
+<p>Shiny and rmarkdown:<a href="https://posit.co/wp-content/uploads/2024/11/validation-shiny-rmd.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w" class="uri">https://posit.co/wp-content/uploads/2024/11/validation-shiny-rmd.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w</a></p>
+</section>
+<section id="finally-lets-check-out-the-stories-on-the-posit-blog" class="level3">
+<h3 class="anchored" data-anchor-id="finally-lets-check-out-the-stories-on-the-posit-blog">Finally lets check out the stories on the Posit blog</h3>
+<p><a href="https://posit.co/blog/publishing-a-shiny-app-in-r-with-clinical-trial-data-to-posit-connect/">Deploying a Shiny App in R using clinical trial data with Posit Connect</a></p>
+<p><a href="https://posit.co/blog/team-101-posit-workbench/">Securing Workbench for Clinical Workflows, with JnJ</a></p>
+<p><a href="https://posit.co/blog/jnj-posit-live-event-march-2025-qa/">Johnson &amp; Johnson x Posit Live Event March 2025 Q&amp;A</a></p>
+<p><a href="https://posit.co/blog/roche-posit-live-event-sept-2024-qa/">Roche x Posit Live Event Sept 2024 Q&amp;A</a></p>
+<p><a href="https://posit.co/blog/roches-first-end-to-end-r-journey-to-submission/">Roche’s end-to-end R submission for a new drug application</a></p>
+<p><a href="https://posit.co/blog/webr-fda-pilot/">How pharma is pioneering WebAssembly with webR &amp; Shiny for FDA clinical trial submissions</a></p>
+</section>
+<section id="tools-that-will-help-make-this-easier" class="level3">
+<h3 class="anchored" data-anchor-id="tools-that-will-help-make-this-easier">Tools that will help make this easier</h3>
+<ul>
+<li><a href="https://posit.co/products/enterprise/package-manager/">Posit Package Manager</a></li>
+<li>R package <a href="https://www.jumpingrivers.com/blog/should-i-use-your-r-pkg/">litmus</a> by Jumping Rivers and service</li>
+<li>R package <a href="https://sonatype-nexus-community.github.io/oysteR/">oysteR</a> by Sonatype Nexus for checking package vulnerabilities against the OSS index</li>
+<li>R package <a href="https://pak.r-lib.org/">pak</a></li>
+<li>R package <a href="https://pharmar.github.io/riskmetric/">riskmetric</a></li>
+<li><a href="https://www.atorusresearch.com/openval/">Atorus OpenVal</a></li>
+<li><a href="https://insightsengineering.github.io/teal.logger/latest-tag/index.html">teal.logger</a> for logging actions taken inside a shiny app</li>
+</ul>
+</section>
+</section>
+<section id="take-aways" class="level2">
+<h2 class="anchored" data-anchor-id="take-aways">Take aways</h2>
+<section id="what-has-worked-in-the-past" class="level3">
+<h3 class="anchored" data-anchor-id="what-has-worked-in-the-past">What has worked in the past?</h3>
+<p>There has been one successfully submission of a shiny app to the FDA and it was stripped down so that there weren’t any interactive elements and it ran via WASM. While aditional monitoring and logging is really exciting, and I hope is something we can see in the future, at the moment it may be worth being grounded that what a validated output may look like will be more like a compendium of static documents that are navigated via a shiny app rather than a true interactive application.</p>
+</section>
+<section id="what-are-the-guiding-principles" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-guiding-principles">What are the guiding principles?</h3>
+<p>They key guiding principle is to understand what your use case is and where risks could be introduced.</p>
+<p>Common risk areas:</p>
+<ul>
+<li>Was it installed correctly?</li>
+<li>When changes are made, IE upgrades to packages or software, how would any newly introduced risks be detected?</li>
+<li>Is the way users will use the system understood and can be turned into tests in order to validate the system?</li>
+<li>How is data or code being handled so that things like patient data are handled securely?</li>
+</ul>
+<p>Whenever there is a change to the system it needs to through either a full validation or mini-validation</p>
+</section>
+<section id="developing-a-sop" class="level3">
+<h3 class="anchored" data-anchor-id="developing-a-sop">Developing a SOP</h3>
+<ul>
+<li>New system is identified for CSV based on a risk assessment (collaboration between QA, Business and IT)</li>
+<li>URS (USer Requirement Specifications) are drafted (typically in the form of user stories) (business)</li>
+<li>Design specifications are produced where technical design and identified business needs are aligned (IT)</li>
+<li>The Validation plan is created that documents the overall solution and how the system will be validated (IT)</li>
+<li></li>
+</ul>
+<section id="managing-installations" class="level4">
+<h4 class="anchored" data-anchor-id="managing-installations">Managing installations</h4>
+<p>The name of the game here is transparency, security, and reproducability. Whether using docker, singularity, k8s, slurm, a load balanced servers, or a single server it doesn’t really matter as long as all steps are followed and documented.</p>
+</section>
+<section id="upgrades" class="level4">
+<h4 class="anchored" data-anchor-id="upgrades">Upgrades</h4>
+<p>When upgrade, security risks with old OS, then need to understand where the risks are and have tests and re-validate to make sure same results before and after the upgrade. Qualification documentation will allow you to replicate the system the same as it was back then when you are asked years later to re-do some piece of the data analysis from a health authority. Your documentation needs to be in a state where you can replicate it. Money at that point is no object because the risk of losing a submissions is monumental.</p>
+</section>
+<section id="managing-packages" class="level4">
+<h4 class="anchored" data-anchor-id="managing-packages">Managing packages</h4>
+<p>Sophisticated math libraries for linear algebra like BLAS then those things are so performance optimized that they use different code for diff OS’s. You could get different results.</p>
+<p>Need a process that gives assurance that a package is ready for use - use atorus openval, preinstall packages and test them in their respective locations, or if you allow the users to allow packages then every user is responsible for testing, validating their stuff each and every time.</p>
+<p>Strong misconception - that technology can solve all the problems. People will always try to find loopholes, no matter how clever you configure it. That’s the important thing with business processes. If they follow the processes then they will be compliant, otherwise they will be out of compliance and there is nothing IT can do about it.</p>
+<p>Docker images are acting as a site library in a way - installing packages into a direct instance where deploying packages. Could have been an EC2 just the same. Using a site library. Pre-install all the needed packages and dependencies, run testing on those packages and document that.</p>
+<p>current is tested-r package repositories that has meta data - intentionally called tested not validated because it is all automated but wouldn’t recommend all to do because some of the packages have a higher risk, if serious about risk mitigation you would want to a different level of testing for high risk packages than low risk packages. In a real world not possible to automate everything. A human being still needs to accept those.</p>
+<p>Litmus is 30+ different risk numbers weighted together</p>
+<p>Testing needs to be done every time you install the package with that given version. Any change needs to be documented. Need to do an impact analysis, will inform how many other things need to be tested again. Site library with 100 packages and install 1 more then need to asses how other packages will be impacted, do we need to upgrade the other packages, test and so on and so forth.</p>
+<p>When user installs would need to rerun test suite, produce suite of documentation, if allowed to install directly otherwise site library is a huge pro because do the tests and documentation once for all users.</p>
+<p>Code is a change to the system also, need to justify the changes too. Critical analyses sometimes also have two different teams that are segregated and do the same analysis independently to make sure risk of making wrong decision is mitigated - double programming.</p>
+<p>This is leaning on the cautious side of things.</p>
+<p>Need repository that you can rely on in 3-5 maybe 10 years, if trust local package manager more than cran mirrors then useful for that purpose. meta data is cosmetics.</p>
+<section id="why-not-renv-or-just-installing-packages-into-user-home-directories" class="level5">
+<h5 class="anchored" data-anchor-id="why-not-renv-or-just-installing-packages-into-user-home-directories">Why not renv? Or just installing packages into user home directories?</h5>
+<p><a href="https://rstudio.github.io/renv">renv</a> is a very common and useful R package that helps users maintain project specific package environments. It is very similar in function to Python <code>venv</code> environments.</p>
+<p><code>renv</code> gives you a snapshot in time for your project for which packages you had and what their versions were. This is very useful and an important part of reproduceability.</p>
+<p>Unfortunately using <code>renv</code> on its own without other pieces for how packages are installaed can lead to breaking qualification requirements. Re-downloading packages would introduce risk. Every time a package is downloaded that constitutes a change in the system and needs to go through a validation process to ensure that no new risks have been introduced. If that is done once and periodically after, to install packages in a site library, that can be a manageable level of effort. But to do that for every user every time they install a package would be an unreasonable amount of effort.</p>
+<p>renv is the answer for knowledge of what packges you used, some level of reproduceability, but if you think about what learned with the CSV stuff. Any package installation on the system constitutes a change, any change needs to be documented tested and approved.</p>
+</section>
+</section>
+</section>
+<section id="shiny-application-submissions-to-the-fda" class="level3">
+<h3 class="anchored" data-anchor-id="shiny-application-submissions-to-the-fda">Shiny application submissions to the FDA</h3>
+<p>The first every shiny submission was done in such a way the FDA was only accepting the app once the team had removed all the interactive elements so it was more like a clickable document in the end.</p>
+</section>
+<section id="workbench-config-settings" class="level3">
+<h3 class="anchored" data-anchor-id="workbench-config-settings">Workbench config settings</h3>
+</section>
+<section id="connect-config-settings" class="level3">
+<h3 class="anchored" data-anchor-id="connect-config-settings">Connect config settings</h3>
+</section>
+<section id="package-manager-config-settings" class="level3">
+<h3 class="anchored" data-anchor-id="package-manager-config-settings">Package Manager config settings</h3>
+</section>
+</section>
+<section id="but-what-about-python" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-python">But what about Python?</h2>
+<ul>
+<li><code>pak</code> -&gt; <code>uv</code></li>
+<li><code>riskmetric</code> -&gt; no equivalent today</li>
+<li><code>renv</code> -&gt; <code>venv</code> (note taken that this is useful for recording package versions, a risk if used to install packages)</li>
+<li>Package Manager -&gt; Package Manager</li>
+</ul>
+<p>I’ve been eyeing:</p>
+<ol type="1">
+<li><a href="https://pypi.org/project/pip-audit/">pip-audit</a> (uses the data from <a href="https://github.com/pypa/advisory-database">advisory database</a>)</li>
+<li>googles <a href="https://github.com/google/osv-scanner">osv-scanner</a> (that uses the data from <a href="http://osv.dev/">osv.dev</a>)</li>
+</ol>
+<p>But those are just very surface level tools that check if a vulnerability has been detected</p>
+
+
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <guid>https://questionable.quarto.pub/blog/work/validation.html</guid>
+  <pubDate>Mon, 05 May 2025 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 <item>
@@ -2899,7 +3838,7 @@ font-style: inherit;">'r_project'</span>)</span></code></pre></div>
 <p>When starting a new Workbench session, users should click on the AWS credential selection widget to login to AWS. After selecting and starting the session with attached credentials, the credentials needed to connect to AWS resources (<code>AWS_ROLE_ARN</code> and <code>AWS_WEB_IDENTITY_TOKEN_FILE</code>) are available within the session.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/aws-new-connection.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
+<p><a href="img/aws-new-connection.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="AWS accounts in the New Session dialog’s credential selection widget"><img src="https://questionable.quarto.pub/blog/work/img/aws-new-connection.png" class="img-fluid figure-img" alt="AWS accounts in the New Session dialog’s credential selection widget"></a></p>
 <figcaption>AWS accounts in the New Session dialog’s credential selection widget</figcaption>
 </figure>
 </div>
@@ -5734,7 +6673,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>There are severeal common <a href="https://solutions.posit.co/envs-pkgs/environments/">environment management strategies</a>. Some strategies can be more prone to pain and challenges later than others. Thinking about the appropriate strategy for your organization in advance can save you from a lot of hurt later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
+<p><a href="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="alt text"><img src="https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png" class="img-fluid figure-img" alt="alt text"></a></p>
 <figcaption>alt text</figcaption>
 </figure>
 </div>
@@ -5762,7 +6701,7 @@ font-style: inherit;">library</span>(renv)</span></code></pre></div>
 <p>This diagram posted by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a> showing the R startup flowchart went viral, and for good reason:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="img/thomasp85.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
+<p><a href="img/thomasp85.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="R Startup diagram by Thomas Lin Pedersen on X"><img src="https://questionable.quarto.pub/blog/work/img/thomasp85.jpg" class="img-fluid figure-img" alt="R Startup diagram by Thomas Lin Pedersen on X"></a></p>
 <figcaption>R Startup diagram by <a href="https://twitter.com/thomasp85/status/961553618196418560">Thomas Lin Pedersen on X</a></figcaption>
 </figure>
 </div>
@@ -5828,7 +6767,7 @@ font-style: inherit;">repos =</span> repos)</span></code></pre></div>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
+<p><a href="https://rstudio.github.io/renv/articles/renv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="The Renv workflow"><img src="https://rstudio.github.io/renv/articles/renv.png" class="img-fluid figure-img" alt="The Renv workflow"></a></p>
 <figcaption>The <a href="https://rstudio.github.io/renv/articles/renv.html">Renv workflow</a></figcaption>
 </figure>
 </div>
@@ -7865,142 +8804,6 @@ unable to load shared object '/home/c_jjones/R/x86_64-pc-linux-gnu-library/4.3/s
   <guid>https://questionable.quarto.pub/blog/work/renv-environments.html</guid>
   <pubDate>Fri, 21 Jun 2024 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Shiny apps and Analytics</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>Adding instrumentation to your shiny apps can help you understand:</p>
-<ul>
-<li>User interaction</li>
-<li>Most viewed dashboards</li>
-<li>What is being exported and by who</li>
-<li>Trends with access over time</li>
-<li>Time spent on interactions</li>
-</ul>
-<p>Connect (as a software) isn’t aggregating and making available user interaction information, though it is aggregating higher level app specific access auditing type information. However, advanced interaction instrumentation can be accomplished through adding tracking into the content itself using services like hotjar, google analytics, or saving into the log file or pushing into somewhere external.</p>
-<ul>
-<li>There’s more on the Connect API here: <a href="https://solutions.posit.co/operations/connect-apis/" class="uri">https://solutions.posit.co/operations/connect-apis/</a></li>
-<li>Google analytics likely requires adding some JavaScript to your site which you can do with Shiny, <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
-<li>This page in the Shiny docs give a walkthrough as well: <a href="https://shiny.posit.co/r/articles/build/google-analytics/" class="uri">https://shiny.posit.co/r/articles/build/google-analytics/</a></li>
-<li>Tracking where within the Shiny app users are spending their time (which tab, etc) is interesting.</li>
-<li>Monitoring user behavior with hotjar (paid): <a href="https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/" class="uri">https://www.r-bloggers.com/2022/06/r-shiny-hotjar-how-to-monitor-user-behavior-in-r-shiny-apps/</a></li>
-<li>Here’s an article that outlines more free options: <a href="https://www.appsilon.com/post/monitoring-r-shiny-user-adoption" class="uri">https://www.appsilon.com/post/monitoring-r-shiny-user-adoption</a></li>
-<li>Javascript might need to be added to your site to support using google analytics: <a href="https://shiny.posit.co/r/reference/shiny/latest/builder.html" class="uri">https://shiny.posit.co/r/reference/shiny/latest/builder.html</a></li>
-<li>Various examples for tracking built in to Connect: <a href="https://solutions.rstudio.com/data-science-admin/tracking/" class="uri">https://solutions.rstudio.com/data-science-admin/tracking/</a> and <a href="https://github.com/sol-eng/connect-usage" class="uri">https://github.com/sol-eng/connect-usage</a></li>
-<li>Video showing how to use the Connect API: <a href="https://www.youtube.com/watch?v=0iljqY9j64U" class="uri">https://www.youtube.com/watch?v=0iljqY9j64U</a></li>
-<li>This heatmap package for seeing where users click I think would be cool to explore: <a href="https://github.com/RinteRface/shinyHeatmap">https://github.com/RinteRface/shinyHeatmap</a></li>
-</ul>
-<p>You can also add debug messages throughtout your shiny app and then use that with parsing the logs to estimate user interactions.</p>
-<ul>
-<li>Add debug messages with: <a href="https://github.com/johnmyleswhite/log4r" class="uri">https://github.com/johnmyleswhite/log4r</a></li>
-<li>Learn about your user with client data: <a href="https://shiny.rstudio.com/articles/client-data.html" class="uri">https://shiny.rstudio.com/articles/client-data.html</a></li>
-</ul>
-
-
-
- ]]></description>
-  <category>code</category>
-  <guid>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</guid>
-  <pubDate>Mon, 29 Apr 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Workplace articles</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/lists/workplace.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p><a href="https://andersoncardoso.github.io/ydd/">Yolo manifesto</a></p>
-<p><a href="https://catgirl.ai/log/comfy-software/">Comfy software</a></p>
-<p><a href="https://www.theverge.com/ad/21520136/open-source-community-is-building-better-businesses">Open source as the “new normal”</a></p>
-<p><a href="https://www.gallup.com/workplace/354935/teams-bosses-overcoming-matrix-madness.aspx">Overcoming matrix madness</a></p>
-<p><a href="https://www.pmi.org/learning/library/matrix-organization-structure-reason-evolution-1837">Matrix organizations</a></p>
-<p><a href="https://www.gallup.com/workplace/354935/teams-bosses-overcoming-matrix-madness.aspx">Overcoming matrix madness</a></p>
-<p><a href="https://www.convoso.com/blog/how-to-overcome-call-center-burnout/">Call center burnout</a></p>
-<p><a href="https://medium.com/@StartupBusinesstips/product-led-vs-sales-led-saas-growth-or-both-25bb5e078822">Product led vs sales led organizations</a></p>
-<p><a href="https://www.tsia.com/blog/laer-explained-a-new-customer-engagement-model-for-a-new-business-era">LAYER</a></p>
-<p><a href="https://noidea.dog/glue">Being glue</a></p>
-<p><a href="https://queue.acm.org/detail.cfm?id=3595878">Discussion of cognitive load and how big of a barrier it can be</a></p>
-<p><a href="https://github.com/zakirullin/cognitive-load">Cognitive load</a></p>
-<p><a href="https://komoroske.com/slime-mold/">How organizations are like slime molds</a></p>
-<p><a href="https://www.forbes.com/sites/gautammukunda/2024/02/22/let-the-engineers-lead-america-needs-boeing-to-be-great/?sh=4327814630e1">Forbes - let the engineers lead (boeing)</a></p>
-<p><a href="https://www.goodreads.com/book/show/8586375-failure-to-learn">Failure to Learn: the BP refinery disaster</a></p>
-
-
-
- ]]></description>
-  <category>datascience</category>
-  <category>opinions</category>
-  <category>hardware</category>
-  <category>software</category>
-  <guid>https://questionable.quarto.pub/blog/lists/workplace.html</guid>
-  <pubDate>Fri, 19 Apr 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
-</item>
-<item>
-  <title>Coding write-ups and resources</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/lists/code.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p><a href="https://news.ycombinator.com/news">Source for good articles</a></p>
-<p><a href="https://a16z.com/2021/05/27/cost-of-cloud-paradox-market-cap-cloud-lifecycle-scale-growth-repatriation-optimization/">The true cost of the cloud</a></p>
-<p><a href="https://medium.com/8vc-news/the-case-for-professional-services-62b9921c6cd6">The case for professional services</a></p>
-<p><a href="https://www.bitecode.dev/p/relieving-your-python-packaging-pain">Opinionated article on Python installations</a></p>
-<p><a href="https://www.bitecode.dev/p/why-not-tell-people-to-simply-use">This page addresses poetry and conda</a></p>
-<p><a href="https://suzdalnitski.medium.com/oop-will-make-you-suffer-846d072b4dce">Object oriented programming is the biggest mistake of all time</a></p>
-<p><a href="https://vicki.substack.com/p/google-drive-is-production">Google drive is production</a></p>
-<p><a href="https://cxl.com/blog/does-offering-more-choices-actually-tank-conversions/">Paradox of choice</a></p>
-<p><a href="https://world.hey.com/dhh/why-we-re-leaving-the-cloud-654b47e0">Why we’re leaving the cloud</a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8085589/">Moving beyond “algorithmic bias is a data problem”</a></p>
-<p><a href="https://www.youtube.com/watch?v=ajGX7odA87k">That keynote talk “USENIX Security ’18-Q: Why Do Keynote Speakers Keep Suggesting That Improving Security Is Possible?”</a> : 4:08 is where he talks about ml</p>
-<p><a href="https://www.youtube.com/watch?v=AaU6tI2pb3M">Here’s What Ethical AI Really Means - YouTube philosophy tube</a></p>
-<p><a href="https://hanselminutes.com/847/engineering-stack-overflow-with-roberta-arcoverde">Podcast on Stackoverflow Architecture</a></p>
-<p><a href="https://www.goodreads.com/book/show/51777543-data-feminism?ref=nav_sb_ss_1_8">Data Feminism</a></p>
-<p><a href="https://www.goodreads.com/book/show/41104077-invisible-women?ref=nav_sb_ss_1_15">Invisible Women</a></p>
-<p><a href="https://www.youtube.com/watch?t=374&amp;v=AS2kuD--z44&amp;feature=youtu.be">Quality Jam 2017: Michael Bolton “A Ridiculously Rapid Introduction to Rapid Software Testing”</a></p>
-<p><a href="https://gist.github.com/sharadhr/39b804236c1941e9c30d90af828ad41e">Home not so sweet home gist</a></p>
-<ul>
-<li>Includes links to pages like <a href="https://utcc.utoronto.ca/~cks/space/blog/sysadmin/ReportConfigFileLocations">Everything that uses configuration files should report where they’re located</a></li>
-</ul>
-<p><a href="https://www.linuxatemyram.com/">Help linux ate my RAM</a></p>
-<p><a href="https://unsplash.com/">Free images for including in presentations</a></p>
-<p><a href="https://www.reddit.com/r/devops/comments/vzpqsw/getting_harrassed_by_datadog_rant_suggestions/">Datadog sales people are annoying</a></p>
-<p><a href="https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&amp;publication_id=27849&amp;post_id=137046759&amp;utm_medium=email&amp;utm_content=share&amp;utm_campaign=email-share&amp;triggerShare=true&amp;isFreemail=true&amp;r=yxnx">Counting explosions at Unity, a data analysts perspective</a></p>
-<p><a href="https://resend.com/blog/incident-report-for-february-21-2024">Database rebuild incident</a></p>
-<p><a href="https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/">How do lava lamps help with Internet encryption?</a></p>
-<p>Free email for testing things: mailtrap</p>
-<p><a href="https://www.youtube.com/@robmulla/search?query=pandas">If you haven’t done a Pandas data analysis project in awhile, it’s probably not a bad idea to watch this guy’s vids</a></p>
-<p><a href="https://www.troyhunt.com/sending-spammers-to-password-purgatory-with-microsoft-power-automate-and-cloudflare-workers-kv/">Password purgatory</a></p>
-<p><a href="https://www.youtube.com/watch?v=Xty-gzzIkBc">Everything I learned about concurrency and reliability I learned at the Waffle House</a></p>
-<p><a href="https://youtu.be/ia8Q51ouA_s?si=2xOQGQO-LYvB3fKZ">Positive affirmations for site reliability engineers</a></p>
-<p><a href="https://github.com/cobriant/vaporwave.rstheme">vaporwave RStudio theme</a></p>
-
-
-
- ]]></description>
-  <category>datascience</category>
-  <category>opinions</category>
-  <category>hardware</category>
-  <category>software</category>
-  <guid>https://questionable.quarto.pub/blog/lists/code.html</guid>
-  <pubDate>Fri, 19 Apr 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
 </item>
 </channel>
 </rss>

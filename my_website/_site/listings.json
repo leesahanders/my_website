@@ -2,11 +2,13 @@
   {
     "listing": "/work.html",
     "items": [
-      "/work/resources/CSV.html",
+      "/work/R package installation improvements on Workbench.html",
+      "/work/LLMs.html",
       "/work/workbench-custom-login.html",
       "/work/Positron.html",
       "/work/system-dependencies-r.html",
       "/work/saml-entraid-posit-team.html",
+      "/work/validation.html",
       "/work/Configuring Jupyter.html",
       "/work/Monitoring Posit Team.html",
       "/work/mounting-drives-server.html",
@@ -29,17 +31,6 @@
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
       "/work/r-command-line.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   },
   {
@@ -73,17 +64,30 @@
       "/work/mounting-drives-server.html",
       "/work/Monitoring Posit Team.html",
       "/work/Configuring Jupyter.html",
+      "/work/validation.html",
       "/work/saml-entraid-posit-team.html",
       "/work/system-dependencies-r.html",
       "/work/Positron.html",
       "/work/workbench-custom-login.html",
+      "/work/LLMs.html",
+      "/work/R package installation improvements on Workbench.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
       "/lists.html",
       "/index.html",
-      "/work/resources/CSV.html",
       "/about.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   }
 ]

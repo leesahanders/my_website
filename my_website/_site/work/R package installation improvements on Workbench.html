@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2024-01-11">
-<meta name="description" content="This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks">
+<meta name="dcterms.date" content="2025-07-09">
+<meta name="description" content="Writing up a conversation with a colleague">
 
-<title>Lisa Anders - questionable.quarto - Accessing data in Azure Data Lake (delta files)</title>
+<title>Lisa Anders - questionable.quarto - Improving the performance of R package installation on Workbench</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,9 +44,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -156,15 +153,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Accessing data in Azure Data Lake (delta files)</h1>
+      <h1 class="title">Improving the performance of R package installation on Workbench</h1>
                   <div>
         <div class="description">
-          This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks
+          Writing up a conversation with a colleague
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">code</div>
-                <div class="quarto-category">data</div>
               </div>
                   </div>
   </div>
@@ -182,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 11, 2024</p>
+        <p class="date">July 9, 2025</p>
       </div>
     </div>
     
@@ -198,19 +194,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#azure-data-lake" id="toc-azure-data-lake" class="nav-link active" data-scroll-target="#azure-data-lake">Azure Data Lake</a>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#package-installation-process-in-r" id="toc-package-installation-process-in-r" class="nav-link" data-scroll-target="#package-installation-process-in-r">Package Installation Process in R</a></li>
+  <li><a href="#renv" id="toc-renv" class="nav-link" data-scroll-target="#renv">Renv</a>
   <ul class="collapse">
-  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set up</a></li>
-  <li><a href="#add-data" id="toc-add-data" class="nav-link" data-scroll-target="#add-data">Add data</a></li>
+  <li><a href="#magic-trick" id="toc-magic-trick" class="nav-link" data-scroll-target="#magic-trick">Magic Trick</a></li>
   </ul></li>
-  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-  <li><a href="#reading-and-writing-delta-files" id="toc-reading-and-writing-delta-files" class="nav-link" data-scroll-target="#reading-and-writing-delta-files">Reading and Writing Delta Files</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
-  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a>
-  <ul class="collapse">
-  <li><a href="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" id="toc-azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="nav-link" data-scroll-target="#azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></li>
-  <li><a href="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html" id="toc-delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="nav-link" data-scroll-target="#delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: https://docs.delta.io/latest/delta-intro.html</a></li>
-  </ul></li>
+  <li><a href="#other-options" id="toc-other-options" class="nav-link" data-scroll-target="#other-options">Other Options</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -221,170 +212,39 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is some work I did exploring how to access the underlying databricks data storage, without having to go through databricks. Wanted to squirrel this away so it’s easy to find in the future!</p>
-<section id="azure-data-lake" class="level2">
-<h2 class="anchored" data-anchor-id="azure-data-lake">Azure Data Lake</h2>
-<section id="set-up" class="level3">
-<h3 class="anchored" data-anchor-id="set-up">Set up</h3>
-<p>Landing page for Azure: &lt;<a href="https://portal.azure.com/">https://portal.azure.com/</a> &gt;</p>
-<p>Follow this article: &lt;<a href="https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account">https://learn.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account</a> &gt;</p>
-<p>The trick: ADL isn’t it’s own separate category, it gets created as part of a storage account.</p>
-<p>Steps:</p>
-<ol type="1">
-<li><p>Go to storage account</p></li>
-<li><p>Create and give it a name</p></li>
-<li><p>Select: LRS</p></li>
-<li><p>Switch to premium: block blobs</p></li>
-<li><p>Change to hierarchical blob</p></li>
-<li><p>Set tags:</p></li>
-</ol>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>I wanted to take a moment to write up some notes on the package installation process in R that might be useful for troubleshooting slow package install times and implementing a workaround. This is coming out of a very great conversation I had with a colleague that I hope is useful for you too.</p>
+</section>
+<section id="package-installation-process-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="package-installation-process-in-r">Package Installation Process in R</h2>
+<p>When a user runs install.packages it can go in a couple locations: - System library (global, only happens when run by an administrator) - Site library (optional, requires admin set up) - User libary - Project library (optional, requires specific renv setup)</p>
+<p>Let’s start with a non renv example - if we have, say, 2 projects then the first time (when the user has a clean directory) the install for the packages for that 1st project could take awhile. This is particularly noticeable with bioconductor packages because the bioconductor repository doesn’t provide binaries and every package has to be compiled as source. After that, however, for the seconod project (if it is using the same packages) it will feed from the same library in the same user home directory, thus feeling faster. It won’t reinstall the packages.</p>
+<p>However, in general relying on the user library is a bad thing. Take this example - imagine two projects that start out using the same package. If in project two that package is upgraded when we go back to the first project there is a risk the code isn’t working because the package was upgraded. This is where renv comes in.</p>
+</section>
+<section id="renv" class="level2">
+<h2 class="anchored" data-anchor-id="renv">Renv</h2>
+<p>Renv will operate very similarly to the typical process for installing packages. Except that when two projects need different versions of the same package it will install and maintain those two versions separately. By default it creates a project specific folder but it is linking to a package cache that is by default global for a given user. Same experience here where the first time a package is downloaded and compiled it will take awhile. But after that it will be fast, assuming the same package. Now if the renv is using different package versions then that will trigger the package reinstall and that could take a long time. Aligning the renv.lock files to use the same package versions would greatly speed up the process.</p>
+<section id="magic-trick" class="level3">
+<h3 class="anchored" data-anchor-id="magic-trick">Magic Trick</h3>
+<p>Now here is a magic trick. If using a recent version of renv they could enable it to use pak: options(renv.config.pak.enabled=TRUE)</p>
+<p>This would be either run inside every user session (risky since that is easy to forget) or could be put in the users rprofile file before running renv::restore. This would make the install, download, build, packages in parallel using pak. You can find the location of your rprofile file with the usethis package.</p>
+</section>
+</section>
+<section id="other-options" class="level2">
+<h2 class="anchored" data-anchor-id="other-options">Other Options</h2>
+<p>If want to move beyond the per user renv cacheing then we could consider a system global package cache. IT would need to set up a directory with fairly wide permissions to make this happen. Example: <a href="https://github.com/sol-eng/singularity-rstudio?tab=readme-ov-file#what-does-renv-actually-do-" class="uri">https://github.com/sol-eng/singularity-rstudio?tab=readme-ov-file#what-does-renv-actually-do-</a></p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>So to summarize some possible solutions to improving the install time for packages:</p>
 <ul>
-<li><p>rs:owner</p></li>
-<li><p>rs:project = soleng</p></li>
-<li><p>rs:environment = dev</p></li>
+<li>Use pak with renv to enable paralellized package installs with options(renv.config.pak.enabled=TRUE) (my colleague called this a “magic trick” and would be my choice for what to try)</li>
+<li>Align the renv.lock files to use the same package versions where possible</li>
+<li>Consider moving to a global package cache, but this would require IT overhead</li>
 </ul>
-<ol start="7" type="1">
-<li>Once in just need access keys or shared access signature in order to gain access</li>
-</ol>
-</section>
-<section id="add-data" class="level3">
-<h3 class="anchored" data-anchor-id="add-data">Add data</h3>
-<p>You can add data manually by creating a container and then using the upload icon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="image"><img src="https://gist.github.com/assets/70042237/750bd967-979a-4220-a1f2-9cf5118dfcdd.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="authentication" class="level2">
-<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
-<p>Access your authentication details through the Access Keys or Shared Access Signature links on the left. I prefer Access Keys since they are easier to use.</p>
-<p>For authentication from an R script we’ll be using <a href="https://github.com/Azure/AzureStor">https://github.com/Azure/AzureStor</a></p>
-<p>You’ll need to know:</p>
-<ul>
-<li><p>The Blob endpoint for your Azure Data Lake storage</p></li>
-<li><p>An Access Key (this can also be done with a Shared Access Signature)</p></li>
-</ul>
-<pre><code>library(AzureStor)
-
-blob_endpoint &lt;- "https://REDACTED.blob.core.windows.net/"
-
-bl_endp_key &lt;- storage_endpoint(blob_endpoint, key="REDACTED")
-
-# List containers and files in containers
-list_storage_containers(bl_endp_key)
-cont1 &lt;- storage_container(bl_endp_key, "container1")
-list_storage_files(cont1)
-
-# Download a file
-storage_download(cont1, "/crm_call_center_logs.parquet")
-
-# Upload a file 
-storage_upload(cont1, "crm_call_center_logs.parquet", "newdir/crm_call_center_logs.parquet")</code></pre>
-<p>You can also create and delete containers:</p>
-<pre><code># Create a container
-newcont &lt;- create_storage_container(bl_endp_key, "container3")
-
-# Create a directory in the container
-cont3 &lt;- storage_container(bl_endp_key, "container3")
-create_storage_dir(cont3, "newdir")
-
-# Delete a container
-delete_storage_container(newcont)</code></pre>
-</section>
-<section id="reading-and-writing-delta-files" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-writing-delta-files">Reading and Writing Delta Files</h2>
-<p>Delta files can be read by using the sparklyr package: <a href="https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html">https://spark.rstudio.com/packages/sparklyr/latest/reference/spark_read_delta.html</a> Thanks for the help with the magic incantation below!</p>
-<p>In order to do this we will need to manage a Spark cluster. We can run it in local mode so that we aren’t connecting to an external cluster with billing:</p>
-<pre><code>library(sparklyr)
-
-#Install a local version of Spark
-spark_install(version=3.4)
-
-# Set Spark configuration to be able to read delta tables
-conf &lt;- spark_config()
-conf$`spark.sql.extensions` &lt;- "io.delta.sql.DeltaSparkSessionExtension"
-conf$`spark.sql.catalog.spark_catalog` &lt;- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
-
-# For spark 3.4 
-conf$sparklyr.defaultPackages &lt;- "io.delta:delta-core_2.12:2.4.0"
-
-# Open a connection
-sc &lt;- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
-
-# For this example we will use a built-in dataframe to save example data files, including one for delta tables
-tbl_mtcars &lt;- copy_to(sc, mtcars, "spark_mtcars")
-
-# Write spark dataframe to disk
-spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
-spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
-spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
-
-# Read dataframes into normal memory
-spark_tbl_handle &lt;- spark_read_csv(sc, path = "test_file_csv")
-regular_df_csv &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_parquet(sc, path = "test_file_parquet")
-regular_df_parquet &lt;- collect(spark_tbl_handle)
-spark_tbl_handle &lt;- spark_read_delta(sc, path = "test_file_delta")
-regular_df_delta &lt;- collect(spark_tbl_handle)
-
-# Disconnect
-spark_disconnect(sc)</code></pre>
-<p>You should now have normal dataframes in your regular R environment that can be used for further analytics:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="image"><img src="https://gist.github.com/assets/70042237/52a8fd86-8f58-4688-87a6-7a5433d28aee.png" class="img-fluid figure-img" alt="image"></a></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
-<p>Note: For Spark 3.5 you might have success with “io.delta:delta-core_2.12:3.0.0”</p>
-</section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<p>From R:</p>
-<pre><code># See spark details (troubleshooting)
-spark_config()
-spark_get_java()
-spark_available_versions()
-spark_installed_versions()
-
-# See session details
-utils::sessionInfo() </code></pre>
-<p>From bash:</p>
-<pre><code>namei -l /usr/lib/spark</code></pre>
-<p>Recommended troubleshooting: <a href="https://spark.rstudio.com/guides/troubleshooting.html">https://spark.rstudio.com/guides/troubleshooting.html</a></p>
-</section>
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<section id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage" class="level3">
-<h3 class="anchored" data-anchor-id="azure-data-lake-azure-data-lake-storage-gen2-introduction---azure-storage">Azure Data Lake: <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2 Introduction - Azure Storage</a></h3>
-<blockquote class="blockquote">
-<p>Azure Data Lake Storage Gen2 is a set of capabilities dedicated to big data analytics, built on Azure Blob Storage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Data Lake Storage Gen2 converges the capabilities of Azure Data Lake Storage Gen1 with Azure Blob Storage. For example, Data Lake Storage Gen2 provides file system semantics, file-level security, and scale. Because these capabilities are built on Blob storage, you’ll also get low-cost, tiered storage, with high availability/disaster recovery capabilities.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A superset of POSIX permissions: The security model for Data Lake Gen2 supports ACL and POSIX permissions along with some extra granularity specific to Data Lake Storage Gen2. Settings may be configured through Storage Explorer or through frameworks like Hive and Spark.</p>
-</blockquote>
-<p>TLDR: Azure Data Lake is a place where data can be saved (similar to S3 buckets on Amazon).</p>
-</section>
-<section id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html" class="level3">
-<h3 class="anchored" data-anchor-id="delta-tables-httpsdocs.delta.iolatestdelta-intro.html">Delta Tables: <a href="https://docs.delta.io/latest/delta-intro.html">https://docs.delta.io/latest/delta-intro.html</a></h3>
-<blockquote class="blockquote">
-<p><a href="https://delta.io/">Delta Lake</a> is an <a href="https://github.com/delta-io/delta">open source project</a> that enables building a <a href="https://databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html">Lakehouse architecture</a> on top of <a href="https://databricks.com/discover/data-lakes/introduction">data lakes</a>. Delta Lake provides <a href="https://docs.delta.io/latest/concurrency-control.html">ACID transactions</a>, scalable metadata handling, and unifies <a href="https://docs.delta.io/latest/delta-streaming.html">streaming</a> and <a href="https://docs.delta.io/latest/delta-batch.html">batch</a> data processing on top of existing data lakes, such as S3, ADLS, GCS, and HDFS.</p>
-</blockquote>
-<p>You can check Delta Lake releases here: <a href="https://docs.delta.io/latest/releases.html">https://docs.delta.io/latest/releases.html</a></p>
-<p>TLDR: Delta tables are a data file format, specifically used with Spark clusters (for example Databricks).</p>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">image</span>
-<span class="glightbox-desc lightbox-desc-2">image</span>
-</div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -920,31 +780,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 

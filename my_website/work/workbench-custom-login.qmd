@@ -1,6 +1,6 @@
 ---
 title: "Creating a custom Workbench login page"
-description: "An exploration"
+description: "Adding custom branding"
 author: "Lisa"
 date: "2025-06-18"
 format:

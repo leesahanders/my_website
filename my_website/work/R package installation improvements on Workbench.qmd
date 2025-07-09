@@ -1,0 +1,64 @@
+---
+title: "Improving the performance of R package installation on Workbench"
+description: "Writing up a conversation with a colleague"
+author: "Lisa"
+date: "2025-07-09"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## Motivation
+
+I wanted to take a moment to write up some notes on the package installation process in R that might be useful for troubleshooting slow package install times and implementing a workaround. This is coming out of a very great conversation I had with a colleague that I hope is useful for you too. 
+
+## Package Installation Process in R
+
+When a user runs install.packages it can go in a couple locations: 
+- System library (global, only happens when run by an administrator)
+- Site library (optional, requires admin set up)
+- User libary 
+- Project library (optional, requires specific renv setup)
+
+Let's start with a non renv example - if we have, say, 2 projects then the first time (when the user has a clean directory) the install for the packages for that 1st project could take awhile. This is particularly noticeable with bioconductor packages because the bioconductor repository doesn't provide binaries and every package has to be compiled as source. After that, however, for the seconod project (if it is using the same packages) it will feed from the same library in the same user home directory, thus feeling faster. It won't reinstall the packages. 
+
+However, in general relying on the user library is a bad thing. Take this example - imagine two projects that start out using the same package. If in project two that package is upgraded when we go back to the first project there is a risk the code isn't working because the package was upgraded. This is where renv comes in. 
+
+## Renv
+
+Renv will operate very similarly to the typical process for installing packages. Except that when two projects need different versions of the same package it will install and maintain those two versions separately. By default it creates a project specific folder but it is linking to a package cache that is by default global for a given user. Same experience here where the first time a package is downloaded and compiled it will take awhile. But after that it will be fast, assuming the same package. Now if the renv is using different package versions then that will trigger the package reinstall and that could take a long time. Aligning the renv.lock files to use the same package versions would greatly speed up the process. 
+
+### Magic Trick 
+
+Now here is a magic trick. If using a recent version of renv they could enable it to use pak: options(renv.config.pak.enabled=TRUE)
+
+This would be either run inside every user session (risky since that is easy to forget) or could be put in the users rprofile file before running renv::restore. This would make the install, download, build, packages in parallel using pak. You can find the location of your rprofile file with the usethis package. 
+
+## Other Options
+
+If want to move beyond the per user renv cacheing then we could consider a system global package cache. IT would need to set up a directory with fairly wide permissions to make this happen. Example: <https://github.com/sol-eng/singularity-rstudio?tab=readme-ov-file#what-does-renv-actually-do->
+
+## Summary 
+
+So to summarize some possible solutions to improving the install time for packages: 
+
+- Use pak with renv to enable paralellized package installs with options(renv.config.pak.enabled=TRUE) (my colleague called this a "magic trick" and would be my choice for what to try)
+- Align the renv.lock files to use the same package versions where possible
+- Consider moving to a global package cache, but this would require IT overhead
+
+
+
+
+
+

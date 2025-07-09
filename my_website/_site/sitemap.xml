@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://questionable.quarto.pub/blog/work.html</loc>
-    <lastmod>2024-09-13T17:26:34.512Z</lastmod>
+    <lastmod>2025-07-09T15:13:33.805Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/vetiver.html</loc>
     <lastmod>2024-09-13T16:54:53.679Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/validation.html</loc>
+    <lastmod>2025-07-03T23:28:11.754Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</loc>
@@ -21,16 +25,16 @@
     <lastmod>2025-05-07T16:40:00.333Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/resources/CSV.html</loc>
-    <lastmod>2025-05-13T19:02:08.970Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/renv-environments.html</loc>
+    <lastmod>2025-05-21T14:44:57.726Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/r-repository-settings-workbench.html</loc>
-    <lastmod>2025-05-19T15:18:27.339Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/r-projects-setup.html</loc>
+    <lastmod>2025-05-19T15:18:07.689Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/r-command-line.html</loc>
-    <lastmod>2025-05-19T15:18:00.350Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/R package installation improvements on Workbench.html</loc>
+    <lastmod>2025-07-09T15:12:05.848Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/Positron.html</loc>
@@ -41,80 +45,84 @@
     <lastmod>2025-05-19T15:16:21.618Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/job-templating-k8s.html</loc>
-    <lastmod>2025-05-19T15:17:40.040Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/LLMs.html</loc>
+    <lastmod>2025-07-04T00:19:35.341Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/git-and-sagemaker.html</loc>
-    <lastmod>2025-05-19T15:16:54.762Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/Configuring Jupyter.html</loc>
-    <lastmod>2025-05-19T15:17:27.757Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</loc>
-    <lastmod>2025-01-22T19:27:45.400Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
-    <lastmod>2024-08-16T19:22:45.913Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists.html</loc>
-    <lastmod>2024-04-19T23:26:49.133Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/sound.html</loc>
-    <lastmod>2023-10-05T16:42:42.522Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/good-programming.html</loc>
-    <lastmod>2024-06-21T22:11:59.354Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/code.html</loc>
-    <lastmod>2024-04-19T23:28:00.854Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/about.html</loc>
-    <lastmod>2023-10-05T15:49:14.833Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/index.html</loc>
-    <lastmod>2023-10-05T15:49:15.183Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
-    <lastmod>2024-09-05T17:22:26.649Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
-    <lastmod>2025-05-16T14:31:47.917Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/workplace.html</loc>
-    <lastmod>2024-04-19T23:28:08.587Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/presentations.html</loc>
-    <lastmod>2023-10-05T19:49:07.601Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/site_map.html</loc>
-    <lastmod>2024-04-19T23:44:24.501Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/aws-data-sources.html</loc>
-    <lastmod>2025-05-19T15:16:15.767Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/google-resources.html</loc>
+    <lastmod>2025-05-19T15:17:00.047Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/delta-lake-and-azure.html</loc>
     <lastmod>2025-05-19T15:16:47.245Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/google-resources.html</loc>
-    <lastmod>2025-05-19T15:17:00.047Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/aws-data-sources.html</loc>
+    <lastmod>2025-05-19T15:16:15.767Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/site_map.html</loc>
+    <lastmod>2024-04-19T23:44:24.501Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/presentations.html</loc>
+    <lastmod>2023-10-05T19:49:07.601Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/workplace.html</loc>
+    <lastmod>2024-04-19T23:28:08.587Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
+    <lastmod>2025-05-16T14:31:47.917Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
+    <lastmod>2024-09-05T17:22:26.649Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/index.html</loc>
+    <lastmod>2023-10-05T15:49:15.183Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/about.html</loc>
+    <lastmod>2023-10-05T15:49:14.833Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/code.html</loc>
+    <lastmod>2024-04-19T23:28:00.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/good-programming.html</loc>
+    <lastmod>2024-06-21T22:11:59.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/sound.html</loc>
+    <lastmod>2023-10-05T16:42:42.522Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists.html</loc>
+    <lastmod>2024-04-19T23:26:49.133Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
+    <lastmod>2024-08-16T19:22:45.913Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</loc>
+    <lastmod>2025-01-22T19:27:45.400Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/Configuring Jupyter.html</loc>
+    <lastmod>2025-05-19T15:17:27.757Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/git-and-sagemaker.html</loc>
+    <lastmod>2025-05-19T15:16:54.762Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/job-templating-k8s.html</loc>
+    <lastmod>2025-05-19T15:17:40.040Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/Monitoring Posit Team.html</loc>
@@ -129,12 +137,12 @@
     <lastmod>2025-05-19T15:17:21.515Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/r-projects-setup.html</loc>
-    <lastmod>2025-05-19T15:18:07.689Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/r-command-line.html</loc>
+    <lastmod>2025-05-19T15:18:00.350Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/renv-environments.html</loc>
-    <lastmod>2025-05-21T14:44:57.726Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/r-repository-settings-workbench.html</loc>
+    <lastmod>2025-05-19T15:18:27.339Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/rspm_remote_admin_cli.html</loc>
@@ -158,6 +166,6 @@
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/workbench-custom-login.html</loc>
-    <lastmod>2025-06-18T16:13:44.112Z</lastmod>
+    <lastmod>2025-07-04T00:25:18.802Z</lastmod>
   </url>
 </urlset>
