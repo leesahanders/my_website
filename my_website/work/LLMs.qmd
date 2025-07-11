@@ -416,6 +416,14 @@ The "keep as much of the original content as possible" has really helped it keep
 here is what I have as a short paragraph to intro a section in a documentation guide for a software on how to set up JIT. Can you please improve it's accuracy and make its message clearer? Keep it as similar to the original paragraph as possible. "JIT provisioning has the distinct advantages of (1) being on-demand and eliminating the need for pre-provisioning users without (2) needing the additional up front maintenance of managing a SCIM integration. These are advantages over other  methods of user provisioning like manual, LDAP/SSSD/Active Directory, or SCIM. If you already have one of those other methods and are happy with it, then likely there isn't a main driver for wanting to change. If you have need for pre-provisioning or a more robust role mapping than another method for user provisioning should be considered."
 ```
 
+### Give it examples of good and bad 
+
+If I wanted to go a step further I might give it an example of "good" or callout "bad". 
+
+```
+Here is what a good issue is like <text>, it should always include (1) (2) (3), make sure that it does. Don't include (A) (B) or (C), check that these aren't included before responding
+```
+
 ### Follow a process and ask for feedback before continuing 
 
 ```
