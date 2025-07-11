@@ -781,5 +781,6 @@ def foo():
 - Podcast about AI, from tech will not save you: <https://techwontsave.us/episode/277_generative_ai_is_not_inevitable_w_emily_m_bender_and_alex_hanna>
 - Remove AI from from your google search: <https://udm14.com/>
 - AI reddit post watching microsoft employees go insane: <https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/>
+- The who cares era and the contribution by AI: <https://dansinker.com/posts/2025-05-23-who-cares/> 
 
 
