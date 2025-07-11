@@ -476,6 +476,18 @@ Expand each section separately.
 Breaking down the task ensures each part is handled properly before moving to the next.
 ```
 
+### Rendering mermaid diagrams 
+
+```
+Make a simple game application that displays the output of a mermaid diagram. The mermaid diagram illustrates the the difference between userprovisioning methods JIT and SCIM. show JIT and SCIM side by side, not together. 
+```
+
+Then once you've tweaked it to how you like it 
+
+```
+convert back into a mermaid diagram format
+```
+
 ### Making Shiny apps 
 
 From: <https://github.com/posit-dev/shiny-assistant/blob/main/shinyapp/app_prompt.md> 
