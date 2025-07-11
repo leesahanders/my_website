@@ -403,6 +403,19 @@ List the three most successful science fiction novels that have been turned into
 Desired output format: A JSON with the keys novel, novel_year_of_publication, movie, movie_year_of_publication. 
 ```
 
+### "Lead the witness" 
+
+```
+I am creating a git issue to improve the documentation of our on prem software. Can you give this issue a once over, improving accuracy, tone, and making a more compelling argument? Please include as much of the original content as possible and stay concise. This is slightly controversial because the scope of our documentation for this product is constantly under tension over what we should document versus what should be documented in the respective editors that our product is making available via a web browser. There have been discussions to remove the "using git" sections entirely. Take this into account and strengthen the argument for why it is needed. Here is my first pass:
+"first pass text"
+```
+
+The "keep as much of the original content as possible" has really helped it keep my tone while being instructional for places where it's able to catch technical misunderstandings. Doing a "leading the witness" approach helps you get the output you want, which I then try to run by humans for an actual value gut feel, since otherwise it's just giving me an echo chamber.
+
+```
+here is what I have as a short paragraph to intro a section in a documentation guide for a software on how to set up JIT. Can you please improve it's accuracy and make its message clearer? Keep it as similar to the original paragraph as possible. "JIT provisioning has the distinct advantages of (1) being on-demand and eliminating the need for pre-provisioning users without (2) needing the additional up front maintenance of managing a SCIM integration. These are advantages over other  methods of user provisioning like manual, LDAP/SSSD/Active Directory, or SCIM. If you already have one of those other methods and are happy with it, then likely there isn't a main driver for wanting to change. If you have need for pre-provisioning or a more robust role mapping than another method for user provisioning should be considered."
+```
+
 ### Follow a process and ask for feedback before continuing 
 
 ```
