@@ -23,6 +23,27 @@ Positron is a new IDE developed by Posit. I've been putting off giving it a deep
 
 I was the same way with RMarkdown. You could have torn it from my cold dead hands, but eventually that feature comes along that makes going through the process of changing worth it. And for me with Quarto that was `lightbox` with its ability to magically resize images. Such a simple thing, such a challenging thing to do outside of Quarto. 
 
+## Positron in WSL
+
+Check your linux version with `uname -m` and then install the correct one from : <https://positron.posit.co/download.html>
+
+I'm on Ubuntu Noble so I had a couple hoops to jump through for one of the system dependencies. 
+
+```
+wget https://cdn.posit.co/positron/releases/deb/x86_64/Positron-2025.08.0-130-x64.deb
+
+sudo apt --fix-broken install
+sudo apt install libasound2t64
+
+sudo dpkg -i Positron-2025.08.0-130-x64.deb
+```
+
+Open it with: `Positron`. 
+
+{{< video Screen Recording 2025-08-22 100003.mp4 >}}
+
+Pure magic - opens and works like a dream. Was expecting to have to do more setup with something to get it to open the GUI and am just over the moon at how easy and great the experience was.
+
 ## First impressions 
 
 Changing the theme made it feel like less of a sterile and "other" place. I'm a big fan of dark modes and I actually really liked the built in dark mode. 
@@ -255,6 +276,7 @@ rsconnect write-manifest shiny --overwrite .
 ```
 
 Commit the new `manifest.json` file to the git repo along with the code.
+
 
 ## Resources 
 

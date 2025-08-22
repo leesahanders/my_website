@@ -401,3 +401,10 @@ The future of clustermq: crew/mirai/nanonext
 - Go fastR: High Performance Computing with R Workshop:  [https://luwidmer.github.io/fastR-website/](https://luwidmer.github.io/fastR-website/)
 - HPC Training: <https://github.com/sol-eng/Workbench-HPC-Webinar> and slides: <https://docs.google.com/presentation/d/1gawEL2cVq7LoktfCjG55pTAYWhy0JYlskZMl5MaYD7I/edit#slide=id.p> 
 
+## Bonus - Parallelize package installs! 
+
+Parallelize your package installs (particularly useful for monstrous bioconductor packages) using `pak` with `renv`. `pak` will natively use parallelization for the install, making it a ton faster. 
+
+```
+options(renv.config.pak.enabled=TRUE)
+```
