@@ -31,21 +31,20 @@ As appealing as it may be, at the end of the day the burden is still on you figu
 
 ## Setting up Claude Code in AWS 
 
-Install NodeJS 18+
+Install npm
 ```
-sudo apt install nodejs
-node -v # check the version
-sudo apt-get install npm
-sudo npm config set os linux
+sudo apt install npm  
+npm config set os linux
+
+npm config set prefix ~/.npm-global
+export PATH=~/.npm-global/bin:$PATH
 ```
 
 Make sure your aws credentials are set up. Create credential files in `~/.aws/credentials` and `~/.aws/config`
 
-Install Claude code (instructions say don't use sudo! But I did anyway) 
+Install Claude code: 
 ```
-sudo npm install -g @anthropic-ai/claude-code
-sudo npm install -g <ModuleName> --unsafe-perm=true --allow-root
-sudo npm install -g @anthropic-ai/claude-code --force --no-os-check --allow-root
+npm install -g @anthropic-ai/claude-code --force --no-os-check
 ```
 
 If needed, uninstall it: 
@@ -65,7 +64,18 @@ export CLAUDE_CODE_USE_BEDROCK=1
 export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'
 ```
 
-Because I am doing this as a sudo user I should also add it to my /etc/environment file: 
+You will need to set environment variables with the relevant parameters. In my case it is the following. I'm updating zhrc / .bashrc which is in my home directory as a hidden file so it will persist across sessions: 
+
+```
+export AWS_REGION=us-east-2
+export CLAUDE_CODE_USE_BEDROCK=1
+export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'
+
+source ~/.profile
+source ~/.bashrc
+```
+
+If I did this as a sudo user I should also add it to my /etc/environment file: 
 
 ```
 sudo nano /etc/environment 
