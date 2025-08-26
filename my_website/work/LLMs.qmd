@@ -83,7 +83,7 @@ sudo nano /etc/environment
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 
 
-export AWS_REGION=us-east-2 
+export AWS_REGION=<your region>
 export CLAUDE_CODE_USE_BEDROCK=1 
 export ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-20250514-v1:0'
 ```
@@ -792,5 +792,11 @@ def foo():
 - Remove AI from from your google search: <https://udm14.com/>
 - AI reddit post watching microsoft employees go insane: <https://old.reddit.com/r/ExperiencedDevs/comments/1krttqo/my_new_hobby_watching_ai_slowly_drive_microsoft/>
 - The who cares era and the contribution by AI: <https://dansinker.com/posts/2025-05-23-who-cares/> 
+- AI hiring leak from McHire that was built by an AI company: <https://www.wired.com/story/mcdonalds-ai-hiring-chat-bot-paradoxai/> 
+- AWS CEO says replacing workers is short sided: <https://www.theregister.com/2025/08/21/aws_ceo_entry_level_jobs_opinion/> 
+- Wikipedia: Signs of AI Writing: <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing> 
+
+
+
 
 
