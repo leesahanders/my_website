@@ -85,4 +85,4 @@ A handful of articles that have stood out over the years as interesting case stu
 
 [Counting explosions at Unity, a data analysts perspective](https://counting.substack.com/p/counting-explosions-at-unity?utm_source=substack&publication_id=27849&post_id=137046759&utm_medium=email&utm_content=share&utm_campaign=email-share&triggerShare=true&isFreemail=true&r=yxnx)
 
-
+[Leak of data from McHire, AI developed the website with bad password best practices](https://www.wired.com/story/mcdonalds-ai-hiring-chat-bot-paradoxai/)
