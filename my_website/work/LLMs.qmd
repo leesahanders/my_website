@@ -796,7 +796,7 @@ def foo():
 - AWS CEO says replacing workers is short sided: <https://www.theregister.com/2025/08/21/aws_ceo_entry_level_jobs_opinion/> 
 - Wikipedia: Signs of AI Writing: <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing> 
 - Vibe coding is legacy code: <https://blog.val.town/vibe-code> 
-
+- Indirect prompt injection: <https://simonwillison.net/2025/Aug/25/agentic-browser-security/> 
 
 
 
