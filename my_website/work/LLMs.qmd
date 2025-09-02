@@ -795,7 +795,7 @@ def foo():
 - AI hiring leak from McHire that was built by an AI company: <https://www.wired.com/story/mcdonalds-ai-hiring-chat-bot-paradoxai/> 
 - AWS CEO says replacing workers is short sided: <https://www.theregister.com/2025/08/21/aws_ceo_entry_level_jobs_opinion/> 
 - Wikipedia: Signs of AI Writing: <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing> 
-
+- Vibe coding is legacy code: <https://blog.val.town/vibe-code> 
 
 
 
