@@ -1,0 +1,174 @@
+---
+title: "Sparklyr and UV (to connect to Databricks)"
+description: "A much better experience"
+author: "Lisa"
+date: "2025-09-11"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## How does the connection to Databricks work?
+
+```{mermaid}
+flowchart LR
+    A[Databricks Clusters] --> B{Databricks-Connect Python Package};
+    B --> C[PySpark];
+    C --> D[pysparklyr];
+    D --> E[sparklyr];
+    E --> F[reticulate];
+    F --> G[R session];
+    B -- "Must match runtime" --> A;
+```
+
+## Connecting to Databricks from R using a UV created venv
+
+Sparklyr can use a previously existing environment for python. This is actually my preference (in SE) since it lets you have very explicit control over the contents of your python environment.
+
+The trick here is to rely on sparklyr for the detection. It might be tempting to try to start modifying reticulate, but there is still some maturity to get pain points smoothed out. Sparklyr detecting the environment is a much better experience. For example you'd call the environment like this in order to use a previously created venv (my preference):
+
+``` r
+library(sparklyr)
+library(dplyr)
+library(dbplyr)
+library(DBI)
+library(tidyverse)
+library(reticulate)
+# install.packages("pysparklyr")
+
+sc <- spark_connect(
+    cluster_id = "redacted",
+    method = "databricks_connect",
+    envname = "/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python",
+)
+```
+
+In that example I created my uv venv with the below, after making sure that I was "cd'd" to the correct directory:
+
+``` bash
+# Check what python versions you have access to
+ls -1d /opt/python/*
+
+# Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
+uv init --app --python 3.10.16
+
+uv pip install databricks-connect
+```
+
+If using a specific version of python make sure it is called out both in the `.python-versions` file and the `pyproject.toml` file
+
+If using a specific version of databricks-connect then make sure that the version needed is called out in the `pyproject.toml` file like this:
+
+``` bash
+dependencies = [
+    "databricks-connect==14.3.3",
+]
+```
+
+After changing anything be sure to run `uv sync`.
+
+You'll want to make sure that the version of databricks-connect matches the version for your cluster. Double check the version-python-version requirements here. If it's really old (think 14.3.3) then there are a bunch of issues with various dependencies and I'd recommend talking to the cluster owner to see if upgrading the runtime is a possibility.
+
+Also note that the command will need to start the cluster - so if it hasn't already started you are probably looking at it "hanging" until the cluster has successfully started. To prevent this delay consider pre-starting the cluster and then running the spark_connect command.
+
+## Troubleshooting
+
+### Venv
+
+This is the page you should read: <https://spark.posit.co/deployment/databricks-connect.html#environments>
+
+### Python
+
+Next we'll want to make sure that python is set up correctly, since sparklyr wraps pyspark.
+
+Make sure you have the right python version. It will need to be compatible with the version of databricks-connect that you need: <https://docs.databricks.com/aws/en/dev-tools/databricks-connect/python/install#version-support-matrix> and <https://docs.databricks.com/aws/en/dev-tools/databricks-connect/requirements>
+
+Check what version of python reticulate is using: `reticulate::py_config()` and `ls -l /home/lisa.anders/.virtualenvs/r-reticulate/bin` and `ls -1d /opt/python/*`
+
+Figure out what python I have access to, we could also use py_discover_config() `ls -1d /opt/python/*` and which versions are available through uv with `uv python list --only-installed`
+
+Set the symlink: `ln -sf /opt/python/3.10.16/bin/python3.10 /home/lisa.anders/.virtualenvs/r-reticulate/bin/python3.10`
+
+Set up the folder as a uv project: `uv init` or we could declare the python version explicitly: `uv init --app --python 3.10.16`
+
+We might find that the version of databricks-connect that we need is only support on an older version of python. In that case we should use uv to install the version of python that we need. For example for databricks-connect 14.3.3 we need python 3.10. `uv python install 3.10` and then `uv python pin 3.10.16` (or edit .python-version) and then `uv sync`
+
+Make sure it's called out in the uv pyproject.toml file:
+
+```         
+dependencies = [
+    "databricks-connect==14.3.3",
+]
+```
+
+And then make sure everything matches with `uv sync` (or install the packages directly with: `uv pip install databricks-connect`)
+
+You can create env for a version of python that matches the cluster python version with `pysparklyr::install_databricks()`.
+
+Something like…
+
+```         
+install_databricks(version = "15.3", python_version = "3.11.9", envname = "r-sparklyr-databricks-15.4-3.11.9") 
+sc <- spark_connect( cluster_id = "redacted", version = "15.3", method = "databricks_connect", envname = "r-sparklyr-databricks-15.4-3.11.9" )
+```
+
+### Move packages from one python virtual environment to another
+
+You could also try moving all the packages from one python virtual environment to another with:
+
+```         
+library(reticulate)
+
+envname <- "r-reticulate"
+
+# backup list of packages and versions
+packages <- py_list_packages(envname = envname)
+
+# delete existing virtualenv
+virtualenv_remove(envname = envname)
+
+# recreate it with packages
+virtualenv_create(envname = envname, python = "/opt/python/3.12.11/bin/python", packages = packages$requirement)
+```
+
+### Reticulate
+
+Run `reticulate::py_last_error()` for more details on any error messages.
+
+If you want a dev version of reticulate use: `pak::pak("rstudio/reticulate")` or this is what someone else used: `pak::pkg_install("rstudio/reticulate", dependencies = FALSE)`
+
+Or with:
+
+```         
+install.packages("remotes")
+remotes::install_github("rstudio/reticulate")
+```
+
+Or if you add it as a git runner to your package manager use `install.packages("reticulate", repos="my-repo-for-git-runners)`
+
+See the available virtualenv's with: `reticulate::virtualenv_list()`.
+
+Remove a virtualenv created by reticulate with `virtualenv_remove("r-sparklyr-databricks-14.3")`.
+
+In order for a created venv to be picked up by reticulate we need to set the RETICULATE_PYTHON variable to ".venv/bin/activate" in the project's .Renviron file (from [here](https://ryjohnson09.quarto.pub/stepping-stones/docs/R/reticulate/proj-settings.html)). Like: `RETICULATE_PYTHON=".venv/bin/activate"`. That can also cause issues though so you might want to unset it with `Sys.unsetenv("RETICULATE_PYTHON")`.
+
+### Databricks runtime
+
+To successfully connect to a Databricks cluster, you will need to match the proper version of the [databricks-connect](https://pypi.org/project/databricks-connect/) Python library to the Databricks Runtime (DBR) version in the cluster.
+
+If you get an error message like:
+
+> Error in py_call_impl(callable, call_args$unnamed, call_args$named) : Exception: Unsupported combination of Databricks Runtime & Databricks Connect versions: 14.3 (Databricks Runtime) \< 16.1.6 (Databricks Connect).
+
+This is because the version of databricks-connect on your databricks environment doesn't match what you have locally. Read through the python section above and follow those recommendations to make sure that you have (1) a python version that supports the databricks-connect version you need (2) the correct version of databricks-connect and (3) that the correct virtual environment is being pulled with the `envname` parameter.

@@ -2,6 +2,7 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/databricks-and-uc-and-sparklyr.html",
       "/work/R package installation improvements on Workbench.html",
       "/work/LLMs.html",
       "/work/workbench-custom-login.html",
@@ -71,6 +72,7 @@
       "/work/workbench-custom-login.html",
       "/work/LLMs.html",
       "/work/R package installation improvements on Workbench.html",
+      "/work/databricks-and-uc-and-sparklyr.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
