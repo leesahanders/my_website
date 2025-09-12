@@ -19,7 +19,9 @@ categories:
   - code
 ---
 
-## How does the connection to Databricks work?
+## The players
+
+There are a bunch of packages and pieces between your R sesson and the databricks environment you want to leverage that are useful to be aware of. 
 
 ```{mermaid}
 flowchart LR
@@ -31,6 +33,10 @@ flowchart LR
     F --> G[R session];
     B -- "Must match runtime" --> A;
 ```
+
+If you are using managed credentials on Workbench show the credentials with:
+
+`env | grep DATABRICKS`
 
 ## Connecting to Databricks from R using a UV created venv
 
