@@ -22,20 +22,20 @@
 
 
 
-<section id="how-does-the-connection-to-databricks-work" class="level2">
-<h2 class="anchored" data-anchor-id="how-does-the-connection-to-databricks-work">How does the connection to Databricks work?</h2>
-<p>databricks (clusters spun up and can have different runtimes) - databrick-connect python package (MUST MATCH RUNTIME ENVIRONMENT) - pyspark - pysparklyr (double check) - sparklyr - reticulate - rsession</p>
+<section id="the-players" class="level2">
+<h2 class="anchored" data-anchor-id="the-players">The players</h2>
+<p>There are a bunch of packages and pieces between your R sesson and the databricks environment you want to leverage that are useful to be aware of.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A[Databricks Clusters] --&gt; B{`Databricks-Connect` Python Package};
-    B --&gt; C[`PySpark`];
-    C --&gt; D[`pysparklyr`];
-    D --&gt; E[`sparklyr`];
-    E --&gt; F[`reticulate`];
+    A[Databricks Clusters] --&gt; B{Databricks-Connect Python Package};
+    B --&gt; C[PySpark];
+    C --&gt; D[pysparklyr];
+    D --&gt; E[sparklyr];
+    E --&gt; F[reticulate];
     F --&gt; G[R session];
     B -- "Must match runtime" --&gt; A;
 </pre>
@@ -44,6 +44,8 @@
 </div>
 </div>
 </div>
+<p>If you are using managed credentials on Workbench show the credentials with:</p>
+<p><code>env | grep DATABRICKS</code></p>
 </section>
 <section id="connecting-to-databricks-from-r-using-a-uv-created-venv" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-to-databricks-from-r-using-a-uv-created-venv">Connecting to Databricks from R using a UV created venv</h2>

@@ -35,6 +35,17 @@
     ]
   },
   {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
+    ]
+  },
+  {
     "listing": "/site_map.html",
     "items": [
       "/lists/data.html",
@@ -79,17 +90,6 @@
       "/lists.html",
       "/index.html",
       "/about.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   }
 ]

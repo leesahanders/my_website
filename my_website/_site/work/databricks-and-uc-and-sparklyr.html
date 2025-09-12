@@ -429,7 +429,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-does-the-connection-to-databricks-work" id="toc-how-does-the-connection-to-databricks-work" class="nav-link active" data-scroll-target="#how-does-the-connection-to-databricks-work">How does the connection to Databricks work?</a></li>
+  <li><a href="#the-players" id="toc-the-players" class="nav-link active" data-scroll-target="#the-players">The players</a></li>
   <li><a href="#connecting-to-databricks-from-r-using-a-uv-created-venv" id="toc-connecting-to-databricks-from-r-using-a-uv-created-venv" class="nav-link" data-scroll-target="#connecting-to-databricks-from-r-using-a-uv-created-venv">Connecting to Databricks from R using a UV created venv</a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
   <ul class="collapse">
@@ -450,9 +450,9 @@ window.Quarto = {
 
 
 
-<section id="how-does-the-connection-to-databricks-work" class="level2">
-<h2 class="anchored" data-anchor-id="how-does-the-connection-to-databricks-work">How does the connection to Databricks work?</h2>
-<p>databricks (clusters spun up and can have different runtimes) - databrick-connect python package (MUST MATCH RUNTIME ENVIRONMENT) - pyspark - pysparklyr (double check) - sparklyr - reticulate - rsession</p>
+<section id="the-players" class="level2">
+<h2 class="anchored" data-anchor-id="the-players">The players</h2>
+<p>There are a bunch of packages and pieces between your R sesson and the databricks environment you want to leverage that are useful to be aware of.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -461,9 +461,9 @@ window.Quarto = {
 <pre class="mermaid mermaid-js">flowchart LR
     A[Databricks Clusters] --&gt; B{Databricks-Connect Python Package};
     B --&gt; C[PySpark];
-    C --&gt; D[PySparklyR];
-    D --&gt; E[SparklyR];
-    E --&gt; F[Reticulate];
+    C --&gt; D[pysparklyr];
+    D --&gt; E[sparklyr];
+    E --&gt; F[reticulate];
     F --&gt; G[R session];
     B -- "Must match runtime" --&gt; A;
 </pre>
@@ -472,6 +472,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>If you are using managed credentials on Workbench show the credentials with:</p>
+<p><code>env | grep DATABRICKS</code></p>
 </section>
 <section id="connecting-to-databricks-from-r-using-a-uv-created-venv" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-to-databricks-from-r-using-a-uv-created-venv">Connecting to Databricks from R using a UV created venv</h2>
@@ -660,7 +662,7 @@ remotes::install_github("rstudio/reticulate")</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog\/");
+        var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

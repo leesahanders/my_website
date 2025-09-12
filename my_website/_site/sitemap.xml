@@ -57,64 +57,68 @@
     <lastmod>2025-08-22T16:06:36.866Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/aws-data-sources.html</loc>
-    <lastmod>2025-08-22T16:06:36.865Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/site_map.html</loc>
-    <lastmod>2025-08-22T16:06:36.860Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/presentations.html</loc>
-    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/workplace.html</loc>
-    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
-    <lastmod>2025-08-22T16:06:36.857Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
-    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/index.html</loc>
-    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/about.html</loc>
-    <lastmod>2025-08-22T16:06:36.850Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/code.html</loc>
-    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/good-programming.html</loc>
-    <lastmod>2025-08-26T14:18:46.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/sound.html</loc>
-    <lastmod>2025-08-22T16:06:36.857Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists.html</loc>
-    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
-    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/Configuring Jupyter.html</loc>
+    <lastmod>2025-08-22T16:06:36.863Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</loc>
     <lastmod>2025-08-22T16:06:36.865Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/Configuring Jupyter.html</loc>
-    <lastmod>2025-08-22T16:06:36.863Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
+    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists.html</loc>
+    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/sound.html</loc>
+    <lastmod>2025-08-22T16:06:36.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/good-programming.html</loc>
+    <lastmod>2025-08-26T14:18:46.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/code.html</loc>
+    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/about.html</loc>
+    <lastmod>2025-08-22T16:06:36.850Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/index.html</loc>
+    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
+    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
+    <lastmod>2025-08-22T16:06:36.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/workplace.html</loc>
+    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/presentations.html</loc>
+    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/site_map.html</loc>
+    <lastmod>2025-08-22T16:06:36.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/aws-data-sources.html</loc>
+    <lastmod>2025-08-22T16:06:36.865Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/databricks-and-uc-and-sparklyr.html</loc>
+    <lastmod>2025-09-12T17:39:02.227Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/git-and-sagemaker.html</loc>
@@ -167,9 +171,5 @@
   <url>
     <loc>https://questionable.quarto.pub/blog/work/workbench-custom-login.html</loc>
     <lastmod>2025-08-22T16:06:36.888Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/work/databricks-and-uc-and-sparklyr.html</loc>
-    <lastmod>2025-09-12T17:31:41.305Z</lastmod>
   </url>
 </urlset>
