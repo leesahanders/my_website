@@ -155,6 +155,9 @@ ls -1d /opt/python/*
 # Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
 uv init --app --python 3.10.16
 
+# create the venv
+uv venv
+
 uv pip install databricks-connect
 ```
 
@@ -181,12 +184,20 @@ uv python list
 
 After changing anything be sure to run `uv sync`.
 
+Activate the virtual environment 
+
+```bash
+source .venv/bin/activate
+```
+
 Run the application:
 
 ```bash
 uv run app.py
 uv run shiny run --reload app.py
 ```
+
+From inside vs code to open the python as a console that's using your venv click the plus symbol -> start antoher -> click on your venv 
 
 #### The pip way
 
@@ -322,3 +333,5 @@ Commit the new `manifest.json` file to the git repo along with the code.
 ## Resources 
 
 Inspired by: <https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/> 
+
+Also useful: <https://blog.phle.dev/posts/python-setup-2024/index.html> 
