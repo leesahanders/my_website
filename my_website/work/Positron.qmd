@@ -119,6 +119,10 @@ We can discover which python versions we have access to with:
 ls /opt/python/
 ```
 
+### Positron and R 
+
+In Positron `cmd shift 0` will restart your r session
+
 ### Select the python interpreter
 
 Manage the interpreter in the session (virtual environment) through the top right icon: 
