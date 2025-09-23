@@ -140,6 +140,47 @@ We can create a new interpreter (and then select it through the dropdown) either
 
 Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
 
+Install uv: 
+
+```bash
+wget -qO- https://astral.sh/uv/install.sh | sh
+```
+
+Create the uv project: 
+
+``` bash
+# Check what python versions you have access to
+ls -1d /opt/python/*
+
+# Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
+uv init --app --python 3.10.16
+
+uv pip install databricks-connect
+```
+
+If using a specific version of python make sure it is called out both in the `.python-versions` file and the `pyproject.toml` file
+
+If using a specific version of databricks-connect then make sure that the version needed is called out in the `pyproject.toml` file like this:
+
+``` bash
+dependencies = [
+    "databricks-connect==14.3.3",
+]
+```
+
+You can also use uv to install a particular version of python: 
+
+```bash
+uv python install 3.12
+
+uv init --app --python 3.12.10
+
+# view available python versions 
+uv python list
+```
+
+After changing anything be sure to run `uv sync`.
+
 Run the application:
 
 ```bash
