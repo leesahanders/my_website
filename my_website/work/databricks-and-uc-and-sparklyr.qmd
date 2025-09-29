@@ -25,11 +25,11 @@ There are a bunch of packages and pieces between your R sesson and the databrick
 
 ```{mermaid}
 flowchart LR
-    A[Databricks Clusters] --> B{Databricks-Connect Python Package};
-    B --> C[PySpark];
-    C --> D[pysparklyr];
-    D --> E[sparklyr];
-    E --> F[reticulate];
+    A[Databricks Clusters] --> B{Databricks-Connect Python package};
+    B --> C[PySpark Python package];
+    C --> D[pysparklyr r package];
+    D --> E[sparklyr r package];
+    E --> F[reticulate r package];
     F --> G[R session];
     B -- "Must match runtime" --> A;
 ```
