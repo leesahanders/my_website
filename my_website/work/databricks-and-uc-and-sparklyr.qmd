@@ -34,9 +34,60 @@ flowchart LR
     B -- "Must match runtime" --> A;
 ```
 
+On the databricks side you'll need to make sure you have: 
+
+- the cluster ID 
+- the cluster runtime environment 
+- the DATABRICKS_PATH found under the datasource -> ⁠Advanced Options > JDBC/ODBC⁠ in the Databricks UI" (typically in the form `/sql/1.0/warehouses/somehash`)
+- the DATABRICKS_HOST (typically something like adb-redacted.15.azuredatabricks.net)
+
+Note that likely, as a user, you will have access to multiple databricks clusters. You will have a personal one, that is your compute, and could haveshared ones across your team. At the time of creation by default they will use the latest runtime environment, but as they get old they could get harder and harder to connect to. I'd recommend checking the runtime environment, checking that you have a compatible python environment, and if not just spinning up a new cluster instead of dealing with the headache of trying to connect to the old one. 
+
+You'll either need to create a cluster, start a cluster, or use the interface to get your PATH and cluster ID and runtime settings. 
+
 If you are using managed credentials on Workbench show the credentials with:
 
 `env | grep DATABRICKS`
+
+## Connecting to Databricks - at a glance 
+
+- use the odbc package 
+- use sparklyr 
+
+Think of odbc as a typical data connection. This method is treating databricks like a database. It won't use compute, so you won't see improved performance, but is typically lower cost and easier. odbc could be considered "safer" for that reason. 
+
+A typical workflow would be doing analysis on Workbench using spark compute. Pushing that ML model or whatever back to databricks. Then you would call the data from Connect via odbc. In theory someone could automate workflows with sparklyr on Connect but there's the whole risk when the user is experiencing the "pain" of the big job that they won't optimize and burn through databricks money needlessly.
+
+## Connecting to Databricks from R using odbc
+
+```r
+library(dplyr)
+library(dbplyr)
+library(DBI)
+library(tidyverse)
+
+con <- dbConnect(
+  odbc::databricks(),
+  httpPath = "/sql/1.0/warehouses/1d700cb4bab6d335" # azure
+  #httpPath = "/sql/1.0/warehouses/300bd24ba12adf8e" # aws
+  # httpPath = "value found under ⁠Advanced Options > JDBC/ODBC⁠ in the Databricks UI, could also load from environment with = Sys.getenv("DATABRICKS_PATH"),
+  )
+
+con
+
+data <- tbl(con, Id("samples", "nyctaxi", "trips"))
+head(data)
+
+## Example connecting to data source from customer
+# tbl(sc, in_catalog("marvel", "information_schema", "tables")) |> collect()
+# 
+# sc2 <- dbConnect(
+#   odbc::databricks(),
+#   HTTPPath = "/sql/protocolv1/o/redacted"
+# )
+# 
+# tbl(sc2, in_catalog("marvel", "information_schema", "tables")) # |> collect()
+```
 
 ## Connecting to Databricks from R using a UV created venv
 
@@ -87,6 +138,52 @@ After changing anything be sure to run `uv sync`.
 You'll want to make sure that the version of databricks-connect matches the version for your cluster. Double check the version-python-version requirements here. If it's really old (think 14.3.3) then there are a bunch of issues with various dependencies and I'd recommend talking to the cluster owner to see if upgrading the runtime is a possibility.
 
 Also note that the command will need to start the cluster - so if it hasn't already started you are probably looking at it "hanging" until the cluster has successfully started. To prevent this delay consider pre-starting the cluster and then running the spark_connect command.
+
+## Deploying to Connect 
+
+Follow the excellent cookbook example here: <https://docs.posit.co/connect/cookbook/content/integrations/databricks/viewer/r/> 
+
+Including a library call to the `pysparklyr` is the key while deploying so it can create the python environment for you. There is a geat writeup on the sparklyr documentation here: <https://spark.posit.co/deployment/databricks-posit-connect.html> 
+
+For example your library calls might look like: 
+
+```r
+library(connectapi)
+library(dbplyr)
+library(dplyr)
+library(gt)
+library(httr2)
+library(odbc)
+library(shiny)
+library(sparklyr)
+library(dplyr)
+library(DBI)
+library(tidyverse)
+library(reticulate)
+library(pysparklyr) # this is the key while deploying, refer to https://spark.posit.co/deployment/databricks-posit-connect.html
+# install.packages("pysparklyr")
+```
+
+In order to get the example from the cookbook working to use sparklyr instead of odbc I just needed to swap out how the connection is being made:
+
+```r
+con <- spark_connect(
+    # cluster_id = "0606-201802-s75pygqn", # 14.3 <- don't bother using this old cluster, too painful to sort through python version errors
+    cluster_id = "0922-141250-qdsi5yjo", # 17.2
+    #serverless = TRUE,
+    token      = databricks_token(session),
+    method = "databricks_connect"
+    #envname = "/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python", #only needed this while debugging python environments
+  )
+```
+
+As always, it needs host name and path in order to successfully connect as env vars. 
+
+- `#DATABRICKS_PATH = "/sql/1.0/warehouses/1d700cb4bab6d335" # azure`
+- `#DATABRICKS_PATH = "/sql/1.0/warehouses/300bd24ba12adf8e" # aws`
+- For the host this is what you want for Azure: `DATABRICKS_HOST =` `adb-3256282566390055.15.azuredatabricks.net`
+
+There's a caveat that very rarely would you actually want automated big jobs going to databricks from Connect. Likely using sparklyr for deployed pieces of content is a sign of an antipattern, since it can lead to losing focus on optimizing and can lead to large databricks bills. 
 
 ## Troubleshooting
 
