@@ -10,7 +10,645 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.8.23</generator>
-<lastBuildDate>Thu, 11 Sep 2025 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 29 Sep 2025 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Setting the package repository on Posit Workbench and Connect for R and Python</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/work/r-python-repository-settings-workbench-connect.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Setting the repository for R and Python package installations is a critical part of having a secure system. Malicious package attacks are a <a href="https://thehackernews.com/2025/04/malicious-python-packages-on-pypi.html">big issue</a>, and domain squatting attacks are a new-ish vector for these to get in the door.</p>
+<p>Having a controlled repository with <a href="https://docs.posit.co/rspm/admin/security/package.html#vulnerability-blocking">vulnerable package blocking</a> is critical. But it’s only useful if users are actually using the repository. When using something like Package Manager you’ll want users to install packages from there, rather than the broader internet.</p>
+</section>
+<section id="at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
+<section id="r-repository" class="level3">
+<h3 class="anchored" data-anchor-id="r-repository">R repository</h3>
+<p>The best pattern is to configure the repository across R sessions using R config options, not RStudio configs. A shared site library can be created (leveraging <code>Rprofile.site</code> and <code>Renviron.site</code> for example) or using <code>renv</code> with a shared <code>renv</code> package cache (maintaining reproduceability through the <code>renv.lock</code> file).</p>
+<p>The <code>Renviron.site</code> would override the <code>Rprofile.site</code> setting and therefore may be more robust.</p>
+<section id="option-1-renviron.site" class="level4">
+<h4 class="anchored" data-anchor-id="option-1-renviron.site">Option 1: Renviron.site</h4>
+<p>Referencing: <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R" class="uri">https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R</a></p>
+<p>Create a <code>Renviron.site</code> file and define:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Renviron.site</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_PREFIX_AUTO</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>TRUE</span>
+<span id="cb1-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_CACHE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>/scratch/renv</span>
+<span id="cb1-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>R_LIBS_SITE=<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div></div>
+</div>
+</section>
+<section id="option-2-.rprofile.site" class="level4">
+<h4 class="anchored" data-anchor-id="option-2-.rprofile.site">Option 2: .Rprofile.site</h4>
+<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Rprofile.site</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">repos</span> = c<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">CRAN</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.posit.co/all/latest"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">))</span></span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">interactive()</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb2-4">  <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">width</span> = 120<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span></span>
+<span id="cb2-6"></span>
+<span id="cb2-7"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.info()</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sysname"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">]]</span> == <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Windows"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb2-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Sys.setenv</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">RENV_DOWNLOAD_METHOD</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"curl"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-9"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span></span>
+<span id="cb2-10"></span>
+<span id="cb2-11"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"folder"</span> %in% tolower<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">list.files</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)))</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb2-12"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">!</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rlib"</span> %in% list.files<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/username/"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">))</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb2-13"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">print</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Creating Rlib folder"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-14"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dir.create</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/username/Rlib"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">,mode</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0777"</span>,recursive = T<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-15"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span></span>
+<span id="cb2-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"\033[0;32;1mSetting local user lib\033[0m\n"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-17"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">.libPaths</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">c</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C:/username/Rlib"</span> , .libPaths<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-18"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb2-19"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"\033[0;33;1mYou should consider getting the access right so we can put your local R-lib there, instead of OneDrive.\033[0m\n"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb2-20"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span></span></code></pre></div></div>
+</div>
+</section>
+<section id="test" class="level4">
+<h4 class="anchored" data-anchor-id="test">Test</h4>
+<p>Test this by running and checking the outputs of:</p>
+<ul>
+<li><code>.libPaths()</code></li>
+<li><code>options()$repos</code></li>
+</ul>
+</section>
+</section>
+<section id="python-repository" class="level3">
+<h3 class="anchored" data-anchor-id="python-repository">Python repository</h3>
+<p>Add the following lines to <code>/etc/pip.conf</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/pip.conf</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="/etc/pip.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[global]</span></span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">timeout</span> = 60</span>
+<span id="cb3-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">index-url</span> = https://pkg.demo.posit.team/blocked-python/latest/simple</span>
+<span id="cb3-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">trusted-host</span> = pkg.demo.posit.team</span></code></pre></div></div>
+</div>
+</section>
+</section>
+<section id="longer-explanation-and-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="longer-explanation-and-considerations">Longer explanation and considerations</h2>
+<section id="blocking-access-to-cran-andor-pypi" class="level3">
+<h3 class="anchored" data-anchor-id="blocking-access-to-cran-andor-pypi">Blocking access to cran and/or pypi</h3>
+<p>While not needed in all cases, an admin may want to block direct access to cran or pypi in order to force all package installs to go through the secured repository. This typically only makes sense at the corporate level.</p>
+<p>Firewall rules, DNS filtering, and/or web proxy servers can be set to restrict which sites are accessible by users within the network and from specific devices. Configs can also be installed into users machines to access a specific repository URL, for example on windows to use group policies to push environment elements for members of the AD domain.</p>
+<p>Regardless of method chosen, having a clear definition of acceptable use that emphasizes why these steps were taken can a long way to getting users onboard.</p>
+</section>
+<section id="r-repository-1" class="level3">
+<h3 class="anchored" data-anchor-id="r-repository-1">R Repository</h3>
+<section id="startup-behavior-of-r-when-loading-package-environment-details" class="level4">
+<h4 class="anchored" data-anchor-id="startup-behavior-of-r-when-loading-package-environment-details">Startup behavior of R when loading package environment details</h4>
+<p>R Startup behavior (funny): <a href="https://rstats.wtf/r-startup.html" class="uri">https://rstats.wtf/r-startup.html</a></p>
+<blockquote class="blockquote">
+<p>Credit: This section was largely taken from an internal Posit resource of unknown authorship</p>
+</blockquote>
+<p>From bash it is different than from the editor.</p>
+<p>See <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html" title="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">here</a> for the official startup docs from R.</p>
+<p>R from the command line/bash will take the user’s environment. It will not read any additional bash files during start-up (which the RStudio products will do). It will still read in the R startup files (Renviron/Rprofile).</p>
+<p>Prior to loading the R session from the bash shell any commands in this file will be read and execute commands if it exists: <code>/etc/profile</code></p>
+<p>Next, the the first of the following files that exists and is readable will have commands executed from (only one of these files will be read and executed):</p>
+<ul>
+<li><p><code>~/.bash_profile</code></p></li>
+<li><p><code>~/.bash_login</code></p></li>
+<li><p><code>~/.profile</code></p></li>
+</ul>
+<p>R then always loads the following (in order):</p>
+<ul>
+<li><p><code>R_HOME/etc/Renviron.site</code> (set for all users)</p></li>
+<li><p><code>.Renviron</code> - user-specific, typically in the user’s home directory, but can be elsewhere (for instance, in a Project folder)</p></li>
+<li><p><code>R_HOME/etc/Rprofile.site</code> (set for all users)</p></li>
+<li><p><code>.Rprofile</code> - user-specific, typically in the user’s home directory, but can be elsewhere (for instance, in a Project folder)</p></li>
+</ul>
+<p>Beyond this, what gets put in the environment depends on the product.</p>
+<ul>
+<li><p>RStudio Server / Workbench: before any of this executes, RStudio Server will first include the contents of /etc/rstudio/rsession-profile if it exists. It will also add anything set in rsession-ld-library-path in rserver.conf to the LD_LIBRARY_PATH environment variable.</p></li>
+<li><p>Shiny Server / Connect: you can affect the environment variables for a specific application using program supervisors</p></li>
+</ul>
+<p>This page in the documentation is the new home for the golden source of info for startup behavior: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html" class="uri">https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html</a></p>
+</section>
+<section id="r-sessions-across-all-workbench-ides" class="level4">
+<h4 class="anchored" data-anchor-id="r-sessions-across-all-workbench-ides">R sessions across all Workbench IDE’s</h4>
+<p>Relying on <code>repos.conf</code> for R repository configuration IMHO is a clear anti-pattern which especially large customers with large setups should not use. <code>repos.conf</code> is a relic from a time where there was only RSP.</p>
+<p>Configure the repository settings in R directly, rather than through the RStudio settings.</p>
+<p>Resources:</p>
+<ul>
+<li><p>A great resource for setting this up simply is: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html" class="uri">https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html</a></p></li>
+<li><p>For a more complex example that could be used in slurm environments refer to: <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R" class="uri">https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R</a></p></li>
+</ul>
+<p>The <code>Renviron.site</code> would override the <code>Rprofile.site</code> setting and therefore may be more robust.</p>
+<section id="renviron.site" class="level5">
+<h5 class="anchored" data-anchor-id="renviron.site">Renviron.site</h5>
+<p>Create a <code>Renviron.site</code> file and define:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Renviron.site</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Key1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>value1</span>
+<span id="cb4-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_PREFIX_AUTO</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>TRUE</span>
+<span id="cb4-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RENV_PATHS_CACHE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>/scratch/renv</span>
+<span id="cb4-4"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>R_LIBS_SITE=<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">${R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div></div>
+</div>
+<p>And then <code>Sys.getenv("Key1")</code> will return <code>"value1"</code> in a users R session.</p>
+<p>This can be set at the user or system level. Users have the choice between user or project level (project taking preference). The <a href="https://usethis.r-lib.org/">usethis</a> package includes a helper function for editing <code>.Renviron</code> files from an R session with&nbsp;<code>usethis::edit_r_environ()</code>. For a system level install it is placed per R version, for example at <code>/opt/R/4.1.1/lib/R/etc/Renviron.site</code>.</p>
+</section>
+<section id="rprofile.site" class="level5">
+<h5 class="anchored" data-anchor-id="rprofile.site">.Rprofile.site</h5>
+<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Rprofile.site</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">repos</span> = c<span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">CRAN</span> = <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://packagemanager.posit.co/all/latest"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">))</span></span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">interactive()</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb5-4">  <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">options</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">width</span> = 120<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">)</span></span>
+<span id="cb5-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span></span></code></pre></div></div>
+</div>
+<p>Again this file can be se at the user or system level. At the user level the easiest way to edit your <code>.Rprofile</code> file is to use the <code>usethis::edit_r_profile()</code> function from within an R session. You can specify whether you want to edit the user or project level <code>.Rprofile.</code> For a system level install it is placed per R version, for example at <code>/opt/R/4.2.0/lib/R/etc/Rprofile.site</code>.</p>
+</section>
+<section id="configuring-a-shared-library" class="level5">
+<h5 class="anchored" data-anchor-id="configuring-a-shared-library">Configuring a shared library</h5>
+<p>Taken from an <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1738088423395249?thread_ts=1737982807.176319&amp;cid=C2P7MTJKE">internal discussion</a></p>
+<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>.</p>
+<p>There are two main options:</p>
+<ul>
+<li><p>Install a set of R packages in a shared library. The users here would need to specify which packages they really need and then their IT team could install those into a <code>site-library</code> in each R version, ideally leveraging a time-based snapshot from package manager for reproducibility reason. Users in this case would be limited to a certain package version for some time. They however can update those packages regularly (e.g.&nbsp;quarterly) to lessen the pain here. As mentioned above, do <strong>NOT</strong> use any recommendation from the Posit Admin guide for this setup but follow the standard approach to configure the same in R (leveraging <code>Rprofile.site</code> and <code>Renviron.site</code> for example).</p></li>
+<li><p>Educate/train the users to all use <code>renv</code> - then every user would have maximum degree of freedom to choose which packages and which version they want to use for each project. They then would maintain <code>renv.lock</code> files for each project and the admin team can then configure a shared <code>renv</code> package cache to ensure that any given package/version combination is only stored once.</p></li>
+</ul>
+<p>Both options in their own right also protect the data scientists from producing irreproducible code since in neither case they rely on that melting pot of R package mess that typically piles up in <code>R_LIBS_USER</code> (in particular for systems where R points to latest CRAN which IMHO is another anti-pattern)</p>
+<section id="script-for-updating-packages-from-rspm-that-have-changed-to-site-library" class="level6">
+<h6 class="anchored" data-anchor-id="script-for-updating-packages-from-rspm-that-have-changed-to-site-library">Script for updating packages from rspm that have changed to site library</h6>
+<pre><code># update existing packages
+update.packages(lib.loc=&lt;site.library&gt;, repos=&lt;PPM Repo&gt;, ask=FALSE)
+
+# add any new packages
+new.packages(lib.loc=&lt;site.library&gt;, repos=&lt;PPM Repo&gt;, ask=FALSE)</code></pre>
+</section>
+<section id="faster-installs" class="level6">
+<h6 class="anchored" data-anchor-id="faster-installs">Faster installs</h6>
+<p>Parallelize your package installs (particularly useful for monstrous bioconductor packages) using <code>pak</code> with <code>renv</code>. <code>pak</code> will natively use parallelization for the install, making it significantly faster.</p>
+<pre><code>options(renv.config.pak.enabled=TRUE)</code></pre>
+</section>
+</section>
+</section>
+<section id="workbench-and-rstudio-sessions-only" class="level4">
+<h4 class="anchored" data-anchor-id="workbench-and-rstudio-sessions-only">Workbench and RStudio sessions only</h4>
+<p>The oft recommended path is to use the <code>repos.conf</code> or <code>rsession.conf</code> file to configure the repository URL.</p>
+<p>This might look like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="/etc/rstudio/rsession.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">r-cran-repos=http://cran.at.r-project.org/</span></span></code></pre></div></div>
+</div>
+<p>Or:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/repos.conf</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-filename="/etc/rstudio/repos.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">RSPM</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://packagemanager.posit.co/cran/__linux__/jammy/latest</span>
+<span id="cb9-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">CRAN</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://packagemanager.posit.co/cran/__linux__/jammy/latest</span>
+<span id="cb9-3"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Australia</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://cran.ms.unimelb.edu.au/</span>
+<span id="cb9-4"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Austria</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>https://lib.ugent.be/CRAN/</span></code></pre></div></div>
+</div>
+<p>And adding to <code>rsession.conf</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-filename="/etc/rstudio/rsession.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Use this to change the location / name of the repos.conf file</span></span>
+<span id="cb10-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">r-cran-repos-file=/etc/rstudio/repos.conf</span></span></code></pre></div></div>
+</div>
+<p>Reference: <a href="https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html" class="uri">https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html</a></p>
+</section>
+<section id="ld_library_path" class="level4">
+<h4 class="anchored" data-anchor-id="ld_library_path">LD_LIBRARY_PATH</h4>
+<p>Reference: <a href="https://rstudioide.zendesk.com/agent/tickets/107856" class="uri">https://rstudioide.zendesk.com/agent/tickets/107856</a></p>
+<p>There are a few different places the LD_LIBRARY_PATH can be modified within Workbench settings, only some of which will work for packages like <code>rJava</code>. For instance, including the ldpaths script in <code>/etc/rstudio/r-versions</code> can ensure the correct library is set on R session startup. The final step in this support article shows a method of setting this up which should work even on non-containerized Workbench sessions (the mkdir command can be excluded, since that directory should already exist on a server-installed version of Workbench):</p>
+<p>We need to force the installed R version to use it’s own ldpaths startup script when it starts inside the container.</p>
+<p><code>RUN mkdir -p /etc/rstudio &amp;&amp; printf "Path: /opt/R/${R_VERSION}\nScript: /opt/R/${R_VERSION}/lib/R/etc/ldpaths" &gt; /etc/rstudio/r-versions</code></p>
+<p>These steps are good to follow: <a href="https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench" class="uri">https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench</a></p>
+<p>The additional steps that need to be followed on Workbench are:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/r-versions</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-filename="/etc/rstudio/r-versions" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Path:</span> /opt/R/4.2.0</span>
+<span id="cb11-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">Script:</span> /opt/R/4.2.0/lib/R/etc/ldpaths</span></code></pre></div></div>
+</div>
+</section>
+<section id="troubleshooting" class="level4">
+<h4 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h4>
+<p>To determine the environment details it can be useful to run <code>Sys.getenv()</code> from inside and outside RStudio, to see if the user’s bash files are setting environment variables inappropriately for the system.</p>
+<p>If the issue is occurring within RStudio it can be helpful to capture the output of<code>system("ldd /usr/lib/rstudio-server/bin/rsession")</code> from inside and outside RStudio to see which R libraries are being loaded.</p>
+<p>Test from a user session the repository details with:</p>
+<ul>
+<li><code>.libPaths()</code></li>
+<li><code>options()$repos</code></li>
+</ul>
+<p>Permissions on the various configs can cause various issues with soft fails, for example a working permission is: <code>chmod 644</code>, or for the rstudio directory consider <code>chmod 0755 /etc/rstudio</code> or <code>chmod o+x /etc/rstudio</code> to add the <code>x</code> bit for just rstudio-server without opening up the other permissions if it is desired to keep it restricted (may result in odd behavior).</p>
+<p>Check permissions with: <code>ls -la /etc/rstudio</code></p>
+</section>
+</section>
+<section id="python-repository-1" class="level3">
+<h3 class="anchored" data-anchor-id="python-repository-1">Python repository</h3>
+<section id="all-projects-system-wide-for-the-current-user" class="level4">
+<h4 class="anchored" data-anchor-id="all-projects-system-wide-for-the-current-user">All projects system wide for the current user</h4>
+<p>Set your user-specific pip configuration file to use the desired repository address:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> config set global.index-url https://pkg.demo.posit.team/blocked-python/latest/simple</span>
+<span id="cb12-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> config set global.trusted-host pkg.demo.posit.team</span></code></pre></div></div>
+</section>
+<section id="specific-project-for-the-current-user" class="level4">
+<h4 class="anchored" data-anchor-id="specific-project-for-the-current-user">Specific project for the current user</h4>
+<p>To associate a Package Manager repository with a specific Python project, configure a repository index URL to be used with a <code>requirements.txt</code> file for the project or virtual environment: Copy and paste the following lines to the top of the <code>requirements.txt</code> file in your project:</p>
+<pre><code>--index-url https://pkg.demo.posit.team/blocked-python/latest/simple
+--trusted-host pkg.demo.posit.team</code></pre>
+</section>
+<section id="globally-for-all-users-on-workbench-andor-on-connect" class="level4">
+<h4 class="anchored" data-anchor-id="globally-for-all-users-on-workbench-andor-on-connect">Globally for all users, on Workbench, and/or on Connect</h4>
+<p>Add the following lines to <code>/etc/pip.conf</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/pip.conf</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-filename="/etc/pip.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[global]</span></span>
+<span id="cb14-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">timeout</span> = 60</span>
+<span id="cb14-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">index-url</span> = https://pkg.demo.posit.team/blocked-python/latest/simple</span>
+<span id="cb14-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">trusted-host</span> = pkg.demo.posit.team</span></code></pre></div></div>
+</div>
+</section>
+<section id="pip-limitations" class="level4">
+<h4 class="anchored" data-anchor-id="pip-limitations">Pip limitations</h4>
+<p>The current stated config order of priority is SITE &gt; USER &gt; GLOBAL. For example, global values would be overwritten by user values. It will look for files in these locations:</p>
+<pre><code>$ pip config list -v
+For variant 'global', will try loading '/etc/xdg/pip/pip.conf'
+For variant 'global', will try loading '/etc/pip.conf'
+For variant 'user', will try loading '~/.pip/pip.conf'
+For variant 'user', will try loading '~/.config/pip/pip.conf'
+For variant 'site', will try loading '[venv]/pip.conf'</code></pre>
+<p>Note that pip does not currently allow or a repository order preference to be respected.</p>
+<blockquote class="blockquote">
+<p>Packages are expected to be unique up to name and version, so two wheels with the same package name and version are treated as indistinguishable by pip. This is a deliberate feature of the package metadata, and not likely to change.</p>
+</blockquote>
+<p>References:</p>
+<ul>
+<li><a href="https://github.com/pypa/pip/issues/5045#issuecomment-369521345" class="uri">https://github.com/pypa/pip/issues/5045#issuecomment-369521345</a></li>
+<li><a href="https://discuss.python.org/t/dependency-notation-including-the-index-url/5659" class="uri">https://discuss.python.org/t/dependency-notation-including-the-index-url/5659</a></li>
+<li><a href="https://pip.pypa.io/en/stable/cli/pip_config/" class="uri">https://pip.pypa.io/en/stable/cli/pip_config/</a></li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>code</category>
+  <category>R</category>
+  <category>Python</category>
+  <category>Posit</category>
+  <guid>https://questionable.quarto.pub/blog/work/r-python-repository-settings-workbench-connect.html</guid>
+  <pubDate>Mon, 29 Sep 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
+</item>
 <item>
   <title>Sparklyr and UV (to connect to Databricks)</title>
   <dc:creator>Lisa </dc:creator>
@@ -31,11 +669,11 @@
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A[Databricks Clusters] --&gt; B{Databricks-Connect Python Package};
-    B --&gt; C[PySpark];
-    C --&gt; D[pysparklyr];
-    D --&gt; E[sparklyr];
-    E --&gt; F[reticulate];
+    A[Databricks Clusters] --&gt; B{Databricks-Connect Python package};
+    B --&gt; C[PySpark Python package];
+    C --&gt; D[pysparklyr r package];
+    D --&gt; E[sparklyr r package];
+    E --&gt; F[reticulate r package];
     F --&gt; G[R session];
     B -- "Must match runtime" --&gt; A;
 </pre>
@@ -44,98 +682,293 @@
 </div>
 </div>
 </div>
+<p>On the databricks side you’ll need to make sure you have:</p>
+<ul>
+<li>the cluster ID</li>
+<li>the cluster runtime environment</li>
+<li>the DATABRICKS_PATH found under the datasource -&gt; ⁠Advanced Options &gt; JDBC/ODBC⁠ in the Databricks UI” (typically in the form <code>/sql/1.0/warehouses/somehash</code>)</li>
+<li>the DATABRICKS_HOST (typically something like adb-redacted.15.azuredatabricks.net)</li>
+</ul>
+<p>Note that likely, as a user, you will have access to multiple databricks clusters. You will have a personal one, that is your compute, and could haveshared ones across your team. At the time of creation by default they will use the latest runtime environment, but as they get old they could get harder and harder to connect to. I’d recommend checking the runtime environment, checking that you have a compatible python environment, and if not just spinning up a new cluster instead of dealing with the headache of trying to connect to the old one.</p>
+<p>You’ll either need to create a cluster, start a cluster, or use the interface to get your PATH and cluster ID and runtime settings.</p>
 <p>If you are using managed credentials on Workbench show the credentials with:</p>
 <p><code>env | grep DATABRICKS</code></p>
+</section>
+<section id="connecting-to-databricks---at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-to-databricks---at-a-glance">Connecting to Databricks - at a glance</h2>
+<ul>
+<li>use the odbc package</li>
+<li>use sparklyr</li>
+</ul>
+<p>Think of odbc as a typical data connection. This method is treating databricks like a database. It won’t use compute, so you won’t see improved performance, but is typically lower cost and easier. odbc could be considered “safer” for that reason.</p>
+<p>A typical workflow would be doing analysis on Workbench using spark compute. Pushing that ML model or whatever back to databricks. Then you would call the data from Connect via odbc. In theory someone could automate workflows with sparklyr on Connect but there’s the whole risk when the user is experiencing the “pain” of the big job that they won’t optimize and burn through databricks money needlessly.</p>
+</section>
+<section id="connecting-to-databricks-from-r-using-odbc" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-to-databricks-from-r-using-odbc">Connecting to Databricks from R using odbc</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dbplyr)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(DBI)</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">con <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbConnect</span>(</span>
+<span id="cb1-7">  odbc<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">databricks</span>(),</span>
+<span id="cb1-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">httpPath =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/sql/1.0/warehouses/1d700cb4bab6d335"</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># azure</span></span>
+<span id="cb1-9">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#httpPath = "/sql/1.0/warehouses/300bd24ba12adf8e" # aws</span></span>
+<span id="cb1-10">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># httpPath = "value found under ⁠Advanced Options &gt; JDBC/ODBC⁠ in the Databricks UI, could also load from environment with = Sys.getenv("DATABRICKS_PATH"),</span></span>
+<span id="cb1-11">  )</span>
+<span id="cb1-12"></span>
+<span id="cb1-13">con</span>
+<span id="cb1-14"></span>
+<span id="cb1-15">data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tbl</span>(con, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Id</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"samples"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nyctaxi"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"trips"</span>))</span>
+<span id="cb1-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(data)</span>
+<span id="cb1-17"></span>
+<span id="cb1-18"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Example connecting to data source from customer</span></span>
+<span id="cb1-19"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># tbl(sc, in_catalog("marvel", "information_schema", "tables")) |&gt; collect()</span></span>
+<span id="cb1-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># </span></span>
+<span id="cb1-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># sc2 &lt;- dbConnect(</span></span>
+<span id="cb1-22"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#   odbc::databricks(),</span></span>
+<span id="cb1-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#   HTTPPath = "/sql/protocolv1/o/redacted"</span></span>
+<span id="cb1-24"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># )</span></span>
+<span id="cb1-25"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># </span></span>
+<span id="cb1-26"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># tbl(sc2, in_catalog("marvel", "information_schema", "tables")) # |&gt; collect()</span></span></code></pre></div></div>
 </section>
 <section id="connecting-to-databricks-from-r-using-a-uv-created-venv" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-to-databricks-from-r-using-a-uv-created-venv">Connecting to Databricks from R using a UV created venv</h2>
 <p>Sparklyr can use a previously existing environment for python. This is actually my preference (in SE) since it lets you have very explicit control over the contents of your python environment.</p>
 <p>The trick here is to rely on sparklyr for the detection. It might be tempting to try to start modifying reticulate, but there is still some maturity to get pain points smoothed out. Sparklyr detecting the environment is a much better experience. For example you’d call the environment like this in order to use a previously created venv (my preference):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(sparklyr)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(dbplyr)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(DBI)</span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
+<span id="cb2-5"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(tidyverse)</span>
-<span id="cb1-6"><span class="fu" style="color: #4758AB;
+<span id="cb2-6"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(reticulate)</span>
-<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># install.packages("pysparklyr")</span></span>
-<span id="cb1-8"></span>
-<span id="cb1-9">sc <span class="ot" style="color: #003B4F;
+<span id="cb2-8"></span>
+<span id="cb2-9">sc <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">spark_connect</span>(</span>
-<span id="cb1-10">    <span class="at" style="color: #657422;
+<span id="cb2-10">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cluster_id =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"redacted"</span>,</span>
-<span id="cb1-11">    <span class="at" style="color: #657422;
+<span id="cb2-11">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"databricks_connect"</span>,</span>
-<span id="cb1-12">    <span class="at" style="color: #657422;
+<span id="cb2-12">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">envname =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python"</span>,</span>
-<span id="cb1-13">)</span></code></pre></div></div>
+<span id="cb2-13">)</span></code></pre></div></div>
 <p>In that example I created my uv venv with the below, after making sure that I was “cd’d” to the correct directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Check what python versions you have access to</span></span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ls</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-1d</span> /opt/python/<span class="pp" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">*</span></span>
-<span id="cb2-3"></span>
-<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.</span></span>
-<span id="cb2-5"><span class="ex" style="color: null;
+<span id="cb3-5"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--app</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--python</span> 3.10.16</span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="ex" style="color: null;
+<span id="cb3-6"></span>
+<span id="cb3-7"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> pip install databricks-connect</span></code></pre></div></div>
 <p>If using a specific version of python make sure it is called out both in the <code>.python-versions</code> file and the <code>pyproject.toml</code> file</p>
 <p>If using a specific version of databricks-connect then make sure that the version needed is called out in the <code>pyproject.toml</code> file like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">dependencies</span> = [</span>
-<span id="cb3-2">    <span class="st" style="color: #20794D;
+<span id="cb4-2">    <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"databricks-connect==14.3.3"</span><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">,</span></span>
-<span id="cb3-3"><span class="ex" style="color: null;
+<span id="cb4-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">]</span></span></code></pre></div></div>
 <p>After changing anything be sure to run <code>uv sync</code>.</p>
 <p>You’ll want to make sure that the version of databricks-connect matches the version for your cluster. Double check the version-python-version requirements here. If it’s really old (think 14.3.3) then there are a bunch of issues with various dependencies and I’d recommend talking to the cluster owner to see if upgrading the runtime is a possibility.</p>
 <p>Also note that the command will need to start the cluster - so if it hasn’t already started you are probably looking at it “hanging” until the cluster has successfully started. To prevent this delay consider pre-starting the cluster and then running the spark_connect command.</p>
+</section>
+<section id="deploying-to-connect" class="level2">
+<h2 class="anchored" data-anchor-id="deploying-to-connect">Deploying to Connect</h2>
+<p>Follow the excellent cookbook example here: <a href="https://docs.posit.co/connect/cookbook/content/integrations/databricks/viewer/r/" class="uri">https://docs.posit.co/connect/cookbook/content/integrations/databricks/viewer/r/</a></p>
+<p>Including a library call to the <code>pysparklyr</code> is the key while deploying so it can create the python environment for you. There is a geat writeup on the sparklyr documentation here: <a href="https://spark.posit.co/deployment/databricks-posit-connect.html" class="uri">https://spark.posit.co/deployment/databricks-posit-connect.html</a></p>
+<p>For example your library calls might look like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(connectapi)</span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dbplyr)</span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb5-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(gt)</span>
+<span id="cb5-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(httr2)</span>
+<span id="cb5-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(odbc)</span>
+<span id="cb5-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(shiny)</span>
+<span id="cb5-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(sparklyr)</span>
+<span id="cb5-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb5-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(DBI)</span>
+<span id="cb5-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb5-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(reticulate)</span>
+<span id="cb5-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(pysparklyr) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># this is the key while deploying, refer to https://spark.posit.co/deployment/databricks-posit-connect.html</span></span>
+<span id="cb5-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install.packages("pysparklyr")</span></span></code></pre></div></div>
+<p>In order to get the example from the cookbook working to use sparklyr instead of odbc I just needed to swap out how the connection is being made:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">con <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">spark_connect</span>(</span>
+<span id="cb6-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cluster_id = "0606-201802-s75pygqn", # 14.3 &lt;- don't bother using this old cluster, too painful to sort through python version errors</span></span>
+<span id="cb6-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cluster_id =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0922-141250-qdsi5yjo"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 17.2</span></span>
+<span id="cb6-4">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#serverless = TRUE,</span></span>
+<span id="cb6-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">token      =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">databricks_token</span>(session),</span>
+<span id="cb6-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"databricks_connect"</span></span>
+<span id="cb6-7">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#envname = "/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python", #only needed this while debugging python environments</span></span>
+<span id="cb6-8">  )</span></code></pre></div></div>
+<p>As always, it needs host name and path in order to successfully connect as env vars.</p>
+<ul>
+<li><code>#DATABRICKS_PATH = "/sql/1.0/warehouses/1d700cb4bab6d335" # azure</code></li>
+<li><code>#DATABRICKS_PATH = "/sql/1.0/warehouses/300bd24ba12adf8e" # aws</code></li>
+<li>For the host this is what you want for Azure: <code>DATABRICKS_HOST =</code> <code>adb-3256282566390055.15.azuredatabricks.net</code></li>
+</ul>
+<p>There’s a caveat that very rarely would you actually want automated big jobs going to databricks from Connect. Likely using sparklyr for deployed pieces of content is a sign of an antipattern, since it can lead to losing focus on optimizing and can lead to large databricks bills.</p>
 </section>
 <section id="troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
@@ -993,6 +1826,7 @@ def foo():
 <li>Wikipedia: Signs of AI Writing: <a href="https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing" class="uri">https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing</a></li>
 <li>Vibe coding is legacy code: <a href="https://blog.val.town/vibe-code" class="uri">https://blog.val.town/vibe-code</a></li>
 <li>Indirect prompt injection: <a href="https://simonwillison.net/2025/Aug/25/agentic-browser-security/" class="uri">https://simonwillison.net/2025/Aug/25/agentic-browser-security/</a></li>
+<li>Where’s the Shovelware? Why AI Coding Claims Don’t Add Up: <a href="https://substack.com/inbox/post/172538377#_" class="uri">https://substack.com/inbox/post/172538377#_</a></li>
 </ul>
 
 
@@ -1210,32 +2044,167 @@ Soon:
 </section>
 <section id="llm-integrations" class="level2">
 <h2 class="anchored" data-anchor-id="llm-integrations">LLM integrations</h2>
-<p>Stay tuned for Posit::Conf 2025!</p>
+<p>This was a focus topic during Posit::Conf 2025!</p>
+<div id="fig-dark-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/positron-assistant.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;2: Positron Assistant"><img src="https://questionable.quarto.pub/blog/work/img/positron-assistant.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Positron Assistant
+</figcaption>
+</figure>
+</div>
+<p>To use a LLM that isn’t supported yet you’ll need to go in and modify a couple parameters as described <a href="https://connect.posit.it/positron-wiki/positron-assistant.html#aws-bedrock">here</a>. You’ll want to hit the keys command-shift-p to open the settings menu and then click on <code>open user preference (json)</code> and update it to have the appropriate settings, which might look like this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>settings.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="settings.json" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">{</span></span>
+<span id="cb2-2">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"extensions.autoCheckUpdates"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"false"</span>,</span>
+<span id="cb2-3">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"extensions.autoUpdate"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"false"</span>,</span>
+<span id="cb2-4">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positron.environment.enabled"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"false"</span>,</span>
+<span id="cb2-5">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"python.environmentProviders.enable"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"map[Conda:false]"</span>,</span>
+<span id="cb2-6">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"python.interpreters.exclude"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"[/usr/bin /bin]"</span>,</span>
+<span id="cb2-7">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quarto.path"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/usr/lib/rstudio-server/bin/quarto/bin/quarto"</span>,</span>
+<span id="cb2-8">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"terminal.integrated.defaultProfile.linux"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bash"</span>,</span>
+<span id="cb2-9">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"remote.autoForwardPorts"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> false,</span>
+<span id="cb2-10">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"posit.workbench.showWorkbenchHint"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> false,</span>
+<span id="cb2-11">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"workbench.colorTheme"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Default Positron Dark"</span>,</span>
+<span id="cb2-12">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"files.associations"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> {</span>
+<span id="cb2-13">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"renv.lock"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"json"</span></span>
+<span id="cb2-14">    <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">},</span></span>
+<span id="cb2-15">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positron.assistant.enable"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> true,</span>
+<span id="cb2-16">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positron.assistant.testModels"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> true,</span>
+<span id="cb2-17">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positron.assistant.copilot.enable"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> true,</span>
+<span id="cb2-18">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"positron.assistant.enabledProviders"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">:</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"amazon-bedrock"</span><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb2-19"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">}</span></span></code></pre></div></div>
+</div>
 </section>
 <section id="running-a-python-project" class="level2">
 <h2 class="anchored" data-anchor-id="running-a-python-project">Running a python project</h2>
 <p>Reference: <a href="https://positron.posit.co/start.html" class="uri">https://positron.posit.co/start.html</a></p>
 <p>I’m a big fan of using the git integration to clone down a project, for example this set of <a href="https://github.com/rstudio/posit-demo-assets">demo examples</a>.</p>
 <p>We’ll want to make sure that <code>ipykernel</code> is installed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python3</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip install ipykernel</span></code></pre></div></div>
 <p>We can discover which python versions we have access to with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ls</span> /opt/python/</span></code></pre></div></div>
+<section id="positron-and-r" class="level3">
+<h3 class="anchored" data-anchor-id="positron-and-r">Positron and R</h3>
+<p>In Positron <code>cmd shift 0</code> will restart your r session</p>
+</section>
 <section id="select-the-python-interpreter" class="level3">
 <h3 class="anchored" data-anchor-id="select-the-python-interpreter">Select the python interpreter</h3>
 <p>Manage the interpreter in the session (virtual environment) through the top right icon:</p>
 <div id="fig-python-interp" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-interp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/python-interpreter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;2: Python interpreter selection"><img src="https://questionable.quarto.pub/blog/work/img/python-interpreter.png" class="img-fluid figure-img"></a>
+<a href="img/python-interpreter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3: Python interpreter selection"><img src="https://questionable.quarto.pub/blog/work/img/python-interpreter.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-interp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Python interpreter selection
+Figure&nbsp;3: Python interpreter selection
 </figcaption>
 </figure>
 </div>
@@ -1245,10 +2214,10 @@ Figure&nbsp;2: Python interpreter selection
 <div id="fig-python-interp-manually" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-interp-manually-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/select-interpreter-manually.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3: Python interpreter manual selection"><img src="https://questionable.quarto.pub/blog/work/img/select-interpreter-manually.png" class="img-fluid figure-img"></a>
+<a href="img/select-interpreter-manually.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Python interpreter manual selection"><img src="https://questionable.quarto.pub/blog/work/img/select-interpreter-manually.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-interp-manually-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Python interpreter manual selection
+Figure&nbsp;4: Python interpreter manual selection
 </figcaption>
 </figure>
 </div>
@@ -1256,43 +2225,125 @@ Figure&nbsp;3: Python interpreter manual selection
 <section id="the-uv-way" class="level4">
 <h4 class="anchored" data-anchor-id="the-uv-way">The uv way</h4>
 <p>Use <a href="https://github.com/astral-sh/uv">uv</a>. It will detect that this is a project and create the venv for us when we go to run the application.</p>
+<p>Install uv:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">wget</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-qO-</span> https://astral.sh/uv/install.sh <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sh</span></span></code></pre></div></div>
+<p>Create the uv project:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Check what python versions you have access to</span></span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ls</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-1d</span> /opt/python/<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span></span>
+<span id="cb6-3"></span>
+<span id="cb6-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.</span></span>
+<span id="cb6-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--app</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--python</span> 3.10.16</span>
+<span id="cb6-6"></span>
+<span id="cb6-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># create the venv</span></span>
+<span id="cb6-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> venv</span>
+<span id="cb6-9"></span>
+<span id="cb6-10"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> pip install databricks-connect</span></code></pre></div></div>
+<p>If using a specific version of python make sure it is called out both in the <code>.python-versions</code> file and the <code>pyproject.toml</code> file</p>
+<p>If using a specific version of databricks-connect then make sure that the version needed is called out in the <code>pyproject.toml</code> file like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dependencies</span> = [</span>
+<span id="cb7-2">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"databricks-connect==14.3.3"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb7-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">]</span></span></code></pre></div></div>
+<p>You can also use uv to install a particular version of python:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> python install 3.12</span>
+<span id="cb8-2"></span>
+<span id="cb8-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--app</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--python</span> 3.12.10</span>
+<span id="cb8-4"></span>
+<span id="cb8-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># view available python versions </span></span>
+<span id="cb8-6"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> python list</span></code></pre></div></div>
+<p>After changing anything be sure to run <code>uv sync</code>.</p>
+<p>Activate the virtual environment</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">source</span> .venv/bin/activate</span></code></pre></div></div>
 <p>Run the application:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run app.py</span>
-<span id="cb4-2"><span class="ex" style="color: null;
+<span id="cb10-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run shiny run <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--reload</span> app.py</span></code></pre></div></div>
+<p>From inside vs code to open the python as a console that’s using your venv click the plus symbol -&gt; start antoher -&gt; click on your venv</p>
 </section>
 <section id="the-pip-way" class="level4">
 <h4 class="anchored" data-anchor-id="the-pip-way">The pip way</h4>
 <p>Setup the <code>venv</code> environment:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> venv env</span>
-<span id="cb5-2"><span class="bu" style="color: null;
+<span id="cb11-2"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">.</span> env/bin/activate</span>
-<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+<span id="cb11-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># source env/bin/activate</span></span>
-<span id="cb5-4"><span class="ex" style="color: null;
+<span id="cb11-4"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span> pip</span>
-<span id="cb5-5"><span class="ex" style="color: null;
+<span id="cb11-5"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-r</span> requirements.txt</span></code></pre></div></div>
 <p>I recommend using <code>env</code> instead of <code>.venv</code> because quarto will automatically pick it up.</p>
 <p>Run the application:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">shiny</span> run <span class="at" style="color: #657422;
 background-color: null;
@@ -1300,16 +2351,16 @@ font-style: inherit;">--reload</span> app.py</span></code></pre></div></div>
 </section>
 <section id="register-new-interpreter-as-kernel-likely-optional" class="level4">
 <h4 class="anchored" data-anchor-id="register-new-interpreter-as-kernel-likely-optional">Register new interpreter as kernel (likely optional)</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Register as kernel</span></span>
-<span id="cb7-2"><span class="ex" style="color: null;
+<span id="cb13-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> install ipykernel jupyter</span>
-<span id="cb7-3"><span class="co" style="color: #5E5E5E;
+<span id="cb13-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># python -m ipykernel install --name "my-new-project_venv" --user </span></span>
-<span id="cb7-4"><span class="ex" style="color: null;
+<span id="cb13-4"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -1330,10 +2381,10 @@ font-style: inherit;">--user</span></span></code></pre></div></div>
 <div id="fig-python-app" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/running-shiny-python-app.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Python Shiny App"><img src="https://questionable.quarto.pub/blog/work/img/running-shiny-python-app.png" class="img-fluid figure-img"></a>
+<a href="img/running-shiny-python-app.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;5: Python Shiny App"><img src="https://questionable.quarto.pub/blog/work/img/running-shiny-python-app.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Python Shiny App
+Figure&nbsp;5: Python Shiny App
 </figcaption>
 </figure>
 </div>
@@ -1343,14 +2394,14 @@ Figure&nbsp;4: Python Shiny App
 <section id="the-pip-way-1" class="level4">
 <h4 class="anchored" data-anchor-id="the-pip-way-1">The pip way</h4>
 <p>Create a <code>venv</code> to isolate environments and generate a <code>requirements.txt</code> file so that only the minimum packages needed to support your project are included. Read <a href="https://docs.posit.co/connect/admin/python/package-management/index.html">this</a> for more on Python package management.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python3</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> pip freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements.txt</span>
-<span id="cb8-2"><span class="ex" style="color: null;
+<span id="cb14-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python3</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -1362,36 +2413,36 @@ font-style: inherit;">-r</span> requirements.txt</span></code></pre></div></div>
 <h4 class="anchored" data-anchor-id="the-uv-way-1">The uv way</h4>
 <p>Create a <a href="https://docs.posit.co/connect/user/publishing-cli-notebook/index.html#creating-a-manifest-for-future-deployment"><code>manifest.json</code> file</a> to support git-backed publishing</p>
 <p>For uv projects, they can be initialized and updated with (change format and packages as needed):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1">    <span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--app</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--python</span> 3.12.6</span>
-<span id="cb9-2">    <span class="ex" style="color: null;
+<span id="cb15-2">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> add numpy matplotlib jupyter</span>
-<span id="cb9-3">    <span class="ex" style="color: null;
+<span id="cb15-3">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> sync <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span></span>
-<span id="cb9-4">    <span class="ex" style="color: null;
+<span id="cb15-4">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> export <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-o</span> requirements.txt <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--no-hashes</span></span>
-<span id="cb9-5">    <span class="ex" style="color: null;
+<span id="cb15-5">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run rsconnect write-manifest api .</span>
-<span id="cb9-6"></span>
-<span id="cb9-7">    <span class="co" style="color: #5E5E5E;
+<span id="cb15-6"></span>
+<span id="cb15-7">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Dev dependencies may need to be added </span></span>
-<span id="cb9-8">    <span class="ex" style="color: null;
+<span id="cb15-8">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> add <span class="at" style="color: #657422;
 background-color: null;
@@ -1433,46 +2484,46 @@ package_manager = "pip"
 </section>
 <section id="rsconnect-python-cli" class="level4">
 <h4 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># With uv</span></span>
-<span id="cb11-2"><span class="ex" style="color: null;
+<span id="cb17-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run rsconnect deploy shiny .</span>
-<span id="cb11-3"><span class="co" style="color: #5E5E5E;
+<span id="cb17-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Without uv</span></span>
-<span id="cb11-4"><span class="ex" style="color: null;
+<span id="cb17-4"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> deploy shiny .</span></code></pre></div></div>
 </section>
 <section id="git-backed" class="level4">
 <h4 class="anchored" data-anchor-id="git-backed">Git-backed</h4>
 <p>Update the code, and then run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># With uv</span></span>
-<span id="cb12-2"><span class="ex" style="color: null;
+<span id="cb18-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> export <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-o</span> requirements.txt <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--no-hashes</span></span>
-<span id="cb12-3"><span class="ex" style="color: null;
+<span id="cb18-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run rsconnect write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--overwrite</span> .</span>
-<span id="cb12-4"><span class="co" style="color: #5E5E5E;
+<span id="cb18-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Without uv</span></span>
-<span id="cb12-5"><span class="ex" style="color: null;
+<span id="cb18-5"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements.txt </span>
-<span id="cb12-6"><span class="ex" style="color: null;
+<span id="cb18-6"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
@@ -1484,6 +2535,7 @@ font-style: inherit;">--overwrite</span> .</span></code></pre></div></div>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <p>Inspired by: <a href="https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/" class="uri">https://www.andrewheiss.com/blog/2024/07/08/fun-with-positron/</a></p>
+<p>Also useful: <a href="https://blog.phle.dev/posts/python-setup-2024/index.html" class="uri">https://blog.phle.dev/posts/python-setup-2024/index.html</a></p>
 
 
 </section>
@@ -6510,361 +7562,6 @@ font-style: inherit;">]</span></span></code></pre></div></div>
   <category>HPC</category>
   <guid>https://questionable.quarto.pub/blog/work/job-templating-k8s.html</guid>
   <pubDate>Wed, 21 Aug 2024 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Google data storage and R</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/google-resources.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<section id="overview" class="level1">
-<h1>Overview</h1>
-<p>Access to resources in google (bigquery, drive, etc) will depend on where the user is connecting from:</p>
-<ul>
-<li>Local desktop: any method is fine</li>
-<li>Workbench / server web app based: “OOB” workflows or non-interactive</li>
-<li>Connect / server web app non-interactive: Non-interactive only</li>
-</ul>
-</section>
-<section id="interactive-workflow" class="level1">
-<h1>Interactive workflow</h1>
-<p>In order to get this working on Workbench, we need to use the OOB method so we don’t have to mess with bouncing between URL’s.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(googlesheets4)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(gargle)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(googledrive)</span></code></pre></div></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># load/refresh existing credentials, if available</span></span>
-<span id="cb2-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># otherwise, go to browser for authentication and authorization (only works if not behind a proxy)</span></span>
-<span id="cb2-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_auth</span>()</span>
-<span id="cb2-4"></span>
-<span id="cb2-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">gargle_oauth_client_type =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"web"</span>)       <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># pseudo-OOB, use this when on Workbench, Connect, etc. </span></span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># options(gargle_oauth_client_type = "installed") # conventional OOB - this doesn't work for me, looks like it was deprecated in 2023</span></span></code></pre></div></div>
-</section>
-<section id="hacky-workflow-aka-oauth-user-token-re-discovered" class="level1">
-<h1>Hacky workflow AKA Oauth user token re-discovered</h1>
-<p>The idea is to make it render once, then use the token in the cache for future authentications. This will likely need to be periodically updated (think, annually) whenever the token expires.</p>
-<p>This is the least recommended because of security challenges and having to manage an ecosystem of tokens, but it’s hard to deny the appeal because it means a service account isn’t needed!</p>
-<p>We’ll need to change the location of the cached token to within the project so that when we deploy to Connect it will be included. Security here is tricky since the token is an exposed file, so care should be taken.</p>
-<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#sidebar-1-deployment" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html#sidebar-1-deployment</a></p>
-<p>Step 1: Do this once interactively to get a token</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Get a token interactively, but we can reuse it later</span></span>
-<span id="cb3-2"></span>
-<span id="cb3-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># pseudo-OOB - this will bounce us out to a webpage, but we don't have to bounce back, we'll copy a code instead that we'll use like a password</span></span>
-<span id="cb3-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">gargle_oauth_client_type =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"web"</span>) </span>
-<span id="cb3-5"></span>
-<span id="cb3-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># designate project-specific cache</span></span>
-<span id="cb3-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">gargle_oauth_cache =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".secrets"</span>)</span>
-<span id="cb3-8"></span>
-<span id="cb3-9"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># do anything that triggers auth, in this case I want to tie it to my email identity</span></span>
-<span id="cb3-10"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">gargle_oauth_email =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"lisamaeanders@gmail.com"</span>)</span>
-<span id="cb3-11"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_auth</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"lisamaeanders@gmail.com"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cache =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".secrets"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">use_oob =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb3-12"></span>
-<span id="cb3-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># use a 'read only' scope, so it's impossible to edit or delete files</span></span>
-<span id="cb3-14"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_auth</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">scopes =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"drive.readonly"</span>)</span>
-<span id="cb3-15"></span>
-<span id="cb3-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># This sets an option that allows gargle to use cached tokens whenever there’s a unique match:</span></span>
-<span id="cb3-17"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#options(gargle_oauth_email = TRUE)</span></span></code></pre></div></div>
-<p>Step 2: Downstream use we will reuse the token we got interactively earlier</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Revise code so it uses the pre-authorized token </span></span>
-<span id="cb4-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_auth</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cache =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".secrets"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"lisamaeanders@gmail.com"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">use_oob =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb4-3"></span>
-<span id="cb4-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># now use googledrive</span></span>
-<span id="cb4-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_find</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n_max =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div></div>
-</section>
-<section id="when-deployed-in-gcp-use-existing-cloud-credentials-and-go-keyless" class="level1">
-<h1>When deployed in GCP use existing cloud credentials and go “keyless”</h1>
-<p>When deployed already in GCP then there is an underlying service account already assigned to your infrastructure. The gotcha is that it is unlikely that the pre-existing service account has the “scope” IE the access to what you need.</p>
-<p>Additional scopes need to be added to that service account identity, for example:</p>
-<ul>
-<li>That authentication might be successful for BigQuery, because the service account has the scope ‘cloud-platform’</li>
-<li>That authentication won’t be successful for drive, because it doesn’t have the ‘drive’ scope</li>
-</ul>
-<p>Additional scope is added at the GCP compute instance level either when the instance is created or the instance can be stopped and the scope added.</p>
-<p>Check for GCE credentials with (super curious what this returns for you, probably worth saving the output so it can be restored in the future if needed):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">credentials_gce</span>()</span></code></pre></div></div>
-<p>This also means that if you are GCE and getting errors that may be because it is using that service account for access, which doesn’t have the correct scoping. You may need to remove the credentials for that account so it can try to create fresh credentials:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># removes `credentials_gce()` from gargle's registry</span></span>
-<span id="cb6-2">gargle<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cred_funs_add</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">credentials_gce =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>)</span></code></pre></div></div>
-<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#embrace-credentials-available-in-certain-cloud-settings" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html#embrace-credentials-available-in-certain-cloud-settings</a></p>
-</section>
-<section id="non-interactive-workflow" class="level1">
-<h1>Non-interactive workflow</h1>
-<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a></p>
-<section id="service-account-token" class="level2">
-<h2 class="anchored" data-anchor-id="service-account-token">Service account token</h2>
-<p>Follow <a href="https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token">these</a> steps:</p>
-<ul>
-<li>Create a service account</li>
-<li>From the <a href="https://console.cloud.google.com">GCP Console</a>, in the target GCP Project, go to IAM &amp; Admin &gt; Service accounts</li>
-<li>Assign permissions: googledrive docs does not have any explicit roles, service account used to test bigrquery has roles BigQuery Admin and Storage Admin</li>
-<li>After creating the service account, click on the three dots and “actions”, manage keys, add key as json, download credentials as json file</li>
-<li>This key is a secret! Consider how it should be protected</li>
-<li>Provide path of json file to authentication</li>
-<li>Grant the service account permissions to resources as needed (it doesn’t inherit permissions) (For example, I had to visit https://console.developers.google.com/apis/api/drive.googleapis.com/overview?project=redacted to enable access for google drive and gogle sheets, which it gave me the link to in an error message for my specific project)</li>
-</ul>
-<p>Reference: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-a-service-account-token-directly" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-a-service-account-token-directly</a> and <a href="https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token" class="uri">https://gargle.r-lib.org/articles/get-api-credentials.html#service-account-token</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># use a service account token, like drive_auth(path = "/path/to/your/service-account-token.json")</span></span>
-<span id="cb7-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># drive_auth(path = Sys.getenv("google_drive_service_account"), scopes = "drive.readonly")</span></span>
-<span id="cb7-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># drive_auth(path = Sys.getenv("google_drive_service_account"), scopes = "drive.readonly")</span></span>
-<span id="cb7-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">credentials_service_account</span>(</span>
-<span id="cb7-5">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#scopes = "https://www.googleapis.com/auth/userinfo.email",</span></span>
-<span id="cb7-6">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">path =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"google_drive_service_account"</span>)</span>
-<span id="cb7-7">)</span>
-<span id="cb7-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># now use googledrive</span></span>
-<span id="cb7-9">googledrive<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_find</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">n_max =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>)</span></code></pre></div></div>
-</section>
-</section>
-<section id="troubleshooting" class="level1">
-<h1>Troubleshooting</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># see user associated with current token</span></span>
-<span id="cb8-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_user</span>()</span>
-<span id="cb8-3"></span>
-<span id="cb8-4"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># List credentials </span></span>
-<span id="cb8-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cred_funs_list</span>()</span>
-<span id="cb8-6"></span>
-<span id="cb8-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># force the OAuth web dance</span></span>
-<span id="cb8-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#drive_auth(email = NA)</span></span>
-<span id="cb8-9"></span>
-<span id="cb8-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># provides an OAuth2 “situation report”, only relevant for oauth2 user tokens (not service accounts, etc)</span></span>
-<span id="cb8-11"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">gargle_oauth_sitrep</span>() </span>
-<span id="cb8-12"></span>
-<span id="cb8-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># check if a oauth cache is being used</span></span>
-<span id="cb8-14">gargle<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">gargle_oauth_cache</span>()</span>
-<span id="cb8-15"></span>
-<span id="cb8-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Default is to cache OAuth access credentials in the folder ~/.cache/gargle between R sessions</span></span>
-<span id="cb8-17"></span>
-<span id="cb8-18"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># retrieve the currently configured OAuth client and API key, respectively.</span></span>
-<span id="cb8-19"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># without configuring auth these are null</span></span>
-<span id="cb8-20"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_oauth_client</span>() </span>
-<span id="cb8-21"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">drive_api_key</span>() </span>
-<span id="cb8-22"></span>
-<span id="cb8-23"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># see your token file in the cache</span></span>
-<span id="cb8-24"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list.files</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">".secrets/"</span>)</span>
-<span id="cb8-25"></span>
-<span id="cb8-26"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># For troubleshooting purposes, you can set a gargle option to see verbose output about the execution of gargle::token_fetch():</span></span>
-<span id="cb8-27"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">options</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">gargle_verbosity =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"debug"</span>)</span>
-<span id="cb8-28"></span>
-<span id="cb8-29"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Gargle uses port 1410 for auth, check if it is blocked with (on nix systems): sudo lsof -i :1410</span></span></code></pre></div></div>
-</section>
-<section id="security" class="level1">
-<h1>Security</h1>
-<p>Want to learn more about managing tokens? Read <a href="https://gargle.r-lib.org/articles/managing-tokens-securely.html">this</a></p>
-</section>
-<section id="resources" class="level1">
-<h1>Resources</h1>
-<ul>
-<li>Exploring non-interactive auth workflows would also be really useful (and set us up for successful deployments to Connect down the road): <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a></li>
-<li>Might also be useful to refer to the google docs on auth: <a href="https://cloud.google.com/bigquery/docs/authentication" class="uri">https://cloud.google.com/bigquery/docs/authentication</a></li>
-<li>This section is also really useful: <a href="https://bigrquery.r-dbi.org/#authentication-and-authorization" class="uri">https://bigrquery.r-dbi.org/#authentication-and-authorization</a></li>
-<li>Likely OOB auth is needed, with options(gargle_oob_default = TRUE)</li>
-<li>“If you are interacting with R within a browser (applies to RStudio Server, Posit Workbench, Posit Cloud, and Google Collaboratory), you need OOB auth or the pseudo-OOB variant. If this does not happen automatically, you can request it explicitly with use_oob = TRUE or, more persistently, by setting an option via options(gargle_oob_default = TRUE).”</li>
-<li>Reference: <a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="uri">https://googledrive.tidyverse.org/reference/drive_auth.html</a></li>
-<li>Also really useful: <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="uri">https://gargle.r-lib.org/articles/non-interactive-auth.html</a></li>
-<li>And another one that is really useful: <a href="https://bigrquery.r-dbi.org/#authentication-and-authorization" class="uri">https://bigrquery.r-dbi.org/#authentication-and-authorization</a></li>
-<li>There’s an example on this page using a json file downloaded from the google developers console: <a href="https://googledrive.tidyverse.org/reference/drive_auth_configure.html#ref-examples" class="uri">https://googledrive.tidyverse.org/reference/drive_auth_configure.html#ref-examples</a></li>
-<li>From the google cloud console these are the options we have for generating credentials: API key, Oauth client ID, service account. (<a href="https://console.cloud.google.com/" class="uri">https://console.cloud.google.com/</a> -&gt; API’s and Services -&gt; Create credentials)</li>
-<li>Basically you (1) create a service account then (2) create a key (see <a href="https://developers.google.com/identity/protocols/oauth2/service-account" class="uri">https://developers.google.com/identity/protocols/oauth2/service-account</a>)</li>
-<li>Auth from web: <a href="https://gargle.r-lib.org/articles/auth-from-web.html" class="uri">https://gargle.r-lib.org/articles/auth-from-web.html</a></li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>code</category>
-  <category>data</category>
-  <guid>https://questionable.quarto.pub/blog/work/google-resources.html</guid>
-  <pubDate>Fri, 21 Jun 2024 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 </channel>

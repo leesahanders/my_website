@@ -2,6 +2,7 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/r-python-repository-settings-workbench-connect.html",
       "/work/databricks-and-uc-and-sparklyr.html",
       "/work/R package installation improvements on Workbench.html",
       "/work/LLMs.html",
@@ -32,17 +33,6 @@
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
       "/work/r-command-line.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   },
   {
@@ -84,12 +74,24 @@
       "/work/LLMs.html",
       "/work/R package installation improvements on Workbench.html",
       "/work/databricks-and-uc-and-sparklyr.html",
+      "/work/r-python-repository-settings-workbench-connect.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
       "/lists.html",
       "/index.html",
       "/about.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   }
 ]

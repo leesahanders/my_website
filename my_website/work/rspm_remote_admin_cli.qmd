@@ -49,6 +49,8 @@ Some other commands useful to know about:
 -   here's the way we included the rspm cli in the container images: <https://github.com/rstudio/sol-eng-demo-server/pull/110/files>
 -   list of all commands: <https://docs.posit.co/rspm/admin/appendix/cli/rspm/>
 
+> For example, for a super-token you might have your admin generate keys for package manager via `rspm create token --scope=global:admin --expires=never` and share them via a 1password note. 
+
 ### Environment set-up
 
 Current environment token:

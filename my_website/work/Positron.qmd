@@ -99,7 +99,39 @@ Resource: <https://positron.posit.co/remote-ssh.html>
 
 ## LLM integrations 
 
-Stay tuned for Posit::Conf 2025!
+This was a focus topic during Posit::Conf 2025!
+
+![Positron Assistant](img/positron-assistant.png){#fig-dark-theme}
+
+
+
+To use a LLM that isn't supported yet you'll need to go in and modify a couple parameters as described [here](https://connect.posit.it/positron-wiki/positron-assistant.html#aws-bedrock). You'll want to hit the keys command-shift-p to open the settings menu and then click on `open user preference (json)` and update it to have the appropriate settings, which might look like this: 
+
+```{.bash filename="settings.json"}
+{
+    "extensions.autoCheckUpdates": "false",
+    "extensions.autoUpdate": "false",
+    "positron.environment.enabled": "false",
+    "python.environmentProviders.enable": "map[Conda:false]",
+    "python.interpreters.exclude": "[/usr/bin /bin]",
+    "quarto.path": "/usr/lib/rstudio-server/bin/quarto/bin/quarto",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "remote.autoForwardPorts": false,
+    "posit.workbench.showWorkbenchHint": false,
+    "workbench.colorTheme": "Default Positron Dark",
+    "files.associations": {
+        "renv.lock": "json"
+    },
+    "positron.assistant.enable": true,
+    "positron.assistant.testModels": true,
+    "positron.assistant.copilot.enable": true,
+    "positron.assistant.enabledProviders": ["amazon-bedrock"]
+}
+```
+
+### Positron and R 
+
+In Positron `cmd shift 0` will restart your r session
 
 ## Running a python project 
 
@@ -118,10 +150,6 @@ We can discover which python versions we have access to with:
 ```bash
 ls /opt/python/
 ```
-
-### Positron and R 
-
-In Positron `cmd shift 0` will restart your r session
 
 ### Select the python interpreter
 
@@ -199,6 +227,12 @@ Run the application:
 ```bash
 uv run app.py
 uv run shiny run --reload app.py
+``` 
+
+To lock dependencies declared in a pyproject.toml into the requirements.txt file:
+
+```bash
+uv pip compile pyproject.toml -o requirements.txt
 ```
 
 From inside vs code to open the python as a console that's using your venv click the plus symbol -> start antoher -> click on your venv 

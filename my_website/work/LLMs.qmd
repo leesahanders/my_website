@@ -486,6 +486,14 @@ Expand each section separately.
 Breaking down the task ensures each part is handled properly before moving to the next.
 ```
 
+### Give it context through chatting, then make a presentation 
+
+```
+So I started with chatting about the components and architecture and code flow. Checked my understanding with Claude and I think that also helps to build context in the chat. Then it was just:
+
+Could you create a report of this, that summarizes the information at a high level, in a way that would be interesting and informative to fellow engineers and also less-technical stakeholders who are also interested? Include an overview, commands to retrieve the AMI ID, commands to get AMI details. Visuals would be especially valued!
+```
+
 ### Rendering mermaid diagrams 
 
 ```
@@ -764,6 +772,7 @@ def foo():
     ...
 ```
 ````
+
 
 
 ### References

@@ -430,7 +430,10 @@ window.Quarto = {
    
   <ul>
   <li><a href="#the-players" id="toc-the-players" class="nav-link active" data-scroll-target="#the-players">The players</a></li>
+  <li><a href="#connecting-to-databricks---at-a-glance" id="toc-connecting-to-databricks---at-a-glance" class="nav-link" data-scroll-target="#connecting-to-databricks---at-a-glance">Connecting to Databricks - at a glance</a></li>
+  <li><a href="#connecting-to-databricks-from-r-using-odbc" id="toc-connecting-to-databricks-from-r-using-odbc" class="nav-link" data-scroll-target="#connecting-to-databricks-from-r-using-odbc">Connecting to Databricks from R using odbc</a></li>
   <li><a href="#connecting-to-databricks-from-r-using-a-uv-created-venv" id="toc-connecting-to-databricks-from-r-using-a-uv-created-venv" class="nav-link" data-scroll-target="#connecting-to-databricks-from-r-using-a-uv-created-venv">Connecting to Databricks from R using a UV created venv</a></li>
+  <li><a href="#deploying-to-connect" id="toc-deploying-to-connect" class="nav-link" data-scroll-target="#deploying-to-connect">Deploying to Connect</a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
   <ul class="collapse">
   <li><a href="#venv" id="toc-venv" class="nav-link" data-scroll-target="#venv">Venv</a></li>
@@ -459,11 +462,11 @@ window.Quarto = {
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A[Databricks Clusters] --&gt; B{Databricks-Connect Python Package};
-    B --&gt; C[PySpark];
-    C --&gt; D[pysparklyr];
-    D --&gt; E[sparklyr];
-    E --&gt; F[reticulate];
+    A[Databricks Clusters] --&gt; B{Databricks-Connect Python package};
+    B --&gt; C[PySpark Python package];
+    C --&gt; D[pysparklyr r package];
+    D --&gt; E[sparklyr r package];
+    E --&gt; F[reticulate r package];
     F --&gt; G[R session];
     B -- "Must match runtime" --&gt; A;
 </pre>
@@ -472,42 +475,125 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>On the databricks side you’ll need to make sure you have:</p>
+<ul>
+<li>the cluster ID</li>
+<li>the cluster runtime environment</li>
+<li>the DATABRICKS_PATH found under the datasource -&gt; ⁠Advanced Options &gt; JDBC/ODBC⁠ in the Databricks UI” (typically in the form <code>/sql/1.0/warehouses/somehash</code>)</li>
+<li>the DATABRICKS_HOST (typically something like adb-redacted.15.azuredatabricks.net)</li>
+</ul>
+<p>Note that likely, as a user, you will have access to multiple databricks clusters. You will have a personal one, that is your compute, and could haveshared ones across your team. At the time of creation by default they will use the latest runtime environment, but as they get old they could get harder and harder to connect to. I’d recommend checking the runtime environment, checking that you have a compatible python environment, and if not just spinning up a new cluster instead of dealing with the headache of trying to connect to the old one.</p>
+<p>You’ll either need to create a cluster, start a cluster, or use the interface to get your PATH and cluster ID and runtime settings.</p>
 <p>If you are using managed credentials on Workbench show the credentials with:</p>
 <p><code>env | grep DATABRICKS</code></p>
+</section>
+<section id="connecting-to-databricks---at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-to-databricks---at-a-glance">Connecting to Databricks - at a glance</h2>
+<ul>
+<li>use the odbc package</li>
+<li>use sparklyr</li>
+</ul>
+<p>Think of odbc as a typical data connection. This method is treating databricks like a database. It won’t use compute, so you won’t see improved performance, but is typically lower cost and easier. odbc could be considered “safer” for that reason.</p>
+<p>A typical workflow would be doing analysis on Workbench using spark compute. Pushing that ML model or whatever back to databricks. Then you would call the data from Connect via odbc. In theory someone could automate workflows with sparklyr on Connect but there’s the whole risk when the user is experiencing the “pain” of the big job that they won’t optimize and burn through databricks money needlessly.</p>
+</section>
+<section id="connecting-to-databricks-from-r-using-odbc" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-to-databricks-from-r-using-odbc">Connecting to Databricks from R using odbc</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  odbc<span class="sc">::</span><span class="fu">databricks</span>(),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">httpPath =</span> <span class="st">"/sql/1.0/warehouses/1d700cb4bab6d335"</span> <span class="co"># azure</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#httpPath = "/sql/1.0/warehouses/300bd24ba12adf8e" # aws</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># httpPath = "value found under ⁠Advanced Options &gt; JDBC/ODBC⁠ in the Databricks UI, could also load from environment with = Sys.getenv("DATABRICKS_PATH"),</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>con</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="fu">Id</span>(<span class="st">"samples"</span>, <span class="st">"nyctaxi"</span>, <span class="st">"trips"</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Example connecting to data source from customer</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># tbl(sc, in_catalog("marvel", "information_schema", "tables")) |&gt; collect()</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># sc2 &lt;- dbConnect(</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   odbc::databricks(),</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   HTTPPath = "/sql/protocolv1/o/redacted"</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># tbl(sc2, in_catalog("marvel", "information_schema", "tables")) # |&gt; collect()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="connecting-to-databricks-from-r-using-a-uv-created-venv" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-to-databricks-from-r-using-a-uv-created-venv">Connecting to Databricks from R using a UV created venv</h2>
 <p>Sparklyr can use a previously existing environment for python. This is actually my preference (in SE) since it lets you have very explicit control over the contents of your python environment.</p>
 <p>The trick here is to rely on sparklyr for the detection. It might be tempting to try to start modifying reticulate, but there is still some maturity to get pain points smoothed out. Sparklyr detecting the environment is a much better experience. For example you’d call the environment like this in order to use a previously created venv (my preference):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pysparklyr")</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_id =</span> <span class="st">"redacted"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"databricks_connect"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">envname =</span> <span class="st">"/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pysparklyr")</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_id =</span> <span class="st">"redacted"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"databricks_connect"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">envname =</span> <span class="st">"/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In that example I created my uv venv with the below, after making sure that I was “cd’d” to the correct directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what python versions you have access to</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1d</span> /opt/python/<span class="pp">*</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init <span class="at">--app</span> <span class="at">--python</span> 3.10.16</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install databricks-connect</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what python versions you have access to</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1d</span> /opt/python/<span class="pp">*</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init <span class="at">--app</span> <span class="at">--python</span> 3.10.16</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install databricks-connect</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If using a specific version of python make sure it is called out both in the <code>.python-versions</code> file and the <code>pyproject.toml</code> file</p>
 <p>If using a specific version of databricks-connect then make sure that the version needed is called out in the <code>pyproject.toml</code> file like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dependencies</span> = [</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"databricks-connect==14.3.3"</span><span class="ex">,</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dependencies</span> = [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"databricks-connect==14.3.3"</span><span class="ex">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>After changing anything be sure to run <code>uv sync</code>.</p>
 <p>You’ll want to make sure that the version of databricks-connect matches the version for your cluster. Double check the version-python-version requirements here. If it’s really old (think 14.3.3) then there are a bunch of issues with various dependencies and I’d recommend talking to the cluster owner to see if upgrading the runtime is a possibility.</p>
 <p>Also note that the command will need to start the cluster - so if it hasn’t already started you are probably looking at it “hanging” until the cluster has successfully started. To prevent this delay consider pre-starting the cluster and then running the spark_connect command.</p>
+</section>
+<section id="deploying-to-connect" class="level2">
+<h2 class="anchored" data-anchor-id="deploying-to-connect">Deploying to Connect</h2>
+<p>Follow the excellent cookbook example here: <a href="https://docs.posit.co/connect/cookbook/content/integrations/databricks/viewer/r/" class="uri">https://docs.posit.co/connect/cookbook/content/integrations/databricks/viewer/r/</a></p>
+<p>Including a library call to the <code>pysparklyr</code> is the key while deploying so it can create the python environment for you. There is a geat writeup on the sparklyr documentation here: <a href="https://spark.posit.co/deployment/databricks-posit-connect.html" class="uri">https://spark.posit.co/deployment/databricks-posit-connect.html</a></p>
+<p>For example your library calls might look like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(connectapi)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr2)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(odbc)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparklyr)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pysparklyr) <span class="co"># this is the key while deploying, refer to https://spark.posit.co/deployment/databricks-posit-connect.html</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pysparklyr")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In order to get the example from the cookbook working to use sparklyr instead of odbc I just needed to swap out how the connection is being made:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">spark_connect</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># cluster_id = "0606-201802-s75pygqn", # 14.3 &lt;- don't bother using this old cluster, too painful to sort through python version errors</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_id =</span> <span class="st">"0922-141250-qdsi5yjo"</span>, <span class="co"># 17.2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#serverless = TRUE,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">token      =</span> <span class="fu">databricks_token</span>(session),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"databricks_connect"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#envname = "/home/lisa.anders/demo/databricks_demo-main/.venv/bin/python", #only needed this while debugging python environments</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As always, it needs host name and path in order to successfully connect as env vars.</p>
+<ul>
+<li><code>#DATABRICKS_PATH = "/sql/1.0/warehouses/1d700cb4bab6d335" # azure</code></li>
+<li><code>#DATABRICKS_PATH = "/sql/1.0/warehouses/300bd24ba12adf8e" # aws</code></li>
+<li>For the host this is what you want for Azure: <code>DATABRICKS_HOST =</code> <code>adb-3256282566390055.15.azuredatabricks.net</code></li>
+</ul>
+<p>There’s a caveat that very rarely would you actually want automated big jobs going to databricks from Connect. Likely using sparklyr for deployed pieces of content is a sign of an antipattern, since it can lead to losing focus on optimizing and can lead to large databricks bills.</p>
 </section>
 <section id="troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
