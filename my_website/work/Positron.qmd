@@ -77,6 +77,8 @@ Since Positron is a fork of VS Code it relies on extensions for adding various f
 - Jupyter Keymap 
 - Jupyter Slide Show 
 - Project Manager
+- Positron Assistant 
+- Databot
 - Python Debugger 
 - Quarto
 - Ruff
@@ -100,6 +102,9 @@ Resource: <https://positron.posit.co/remote-ssh.html>
 ## LLM integrations 
 
 This was a focus topic during Posit::Conf 2025!
+
+For positron assistant and databot we will need credentials to connect to the LLM. In my case, that's AWS Bedrock and it being added to user sessions as part of the AWS infrastructure. We can check from terminal with: `env | grep AWS`
+
 
 ![Positron Assistant](img/positron-assistant.png){#fig-dark-theme}
 
@@ -128,6 +133,12 @@ To use a LLM that isn't supported yet you'll need to go in and modify a couple p
     "positron.assistant.enabledProviders": ["amazon-bedrock"]
 }
 ```
+
+For databot: 
+
+- Download from the extensions store
+- ctrl shift p user settings (not json) and databot authorize 
+- the ctrl shift p and open databot 
 
 ### Positron and R 
 
