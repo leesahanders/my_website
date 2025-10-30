@@ -69,6 +69,8 @@ Internal to Posit resources:
 
 - Another internal post about the limitations of renv - <https://positpbc.slack.com/archives/C2P7MTJKE/p1746653854586919?thread_ts=1746118620.637929&cid=C2P7MTJKE>
 
+- Workshop on deploying reproducible analytics environments for regulated use cases at Posit conf 2025 <https://posit-conf-2025.github.io/reproducible-environments/#/title-slide> 
+
 ### As a vendor - disclaimer
 
 We as posit are not in the business of validating packages. We can talk about how to do it high level but its up to them to build such a process or point them at Atorus OpenVal (which doesn't use Package Manager), or Jumping Rivers Litmus system. 
