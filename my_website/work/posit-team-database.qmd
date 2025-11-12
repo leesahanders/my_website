@@ -1,0 +1,417 @@
+---
+title: "Posit Team and Databases"
+description: "Connecting the Posit Pro Stack to sqlite and postgres databases for application communication"
+author: "Lisa"
+date: "2025-11-12"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+## How This Relates to the Posit Pro Product Stack
+
+Each of the products can run in different architecture modes. For any architecture that isn't the single server install then a postgres database is a requirement. Posit supports either a built-in sqlite database that is created at time of install, or a bring-your-own Postgres database so it allows multi concurrent read/write access. 
+
+- [Workbench Database Overview](https://docs.posit.co/ide/server-pro/admin/database/database.html)
+- [Connect Database Overview](https://docs.posit.co/connect/admin/database/)
+- [Package Manager Database Overview](https://docs.posit.co/rspm/admin/database.html)
+- [Support article](https://support.posit.co/hc/en-us/articles/1500005822102-Install-and-Configure-PostgreSQL-for-Posit-Workbench) 
+
+## Choosing Your Database
+
+There are a couple key considerations to balance when selecting the database type for your application: 
+
+- Ease of creation / maintenance 
+- Support by the application 
+- Performance requirements 
+- Disaster recovery requirements 
+
+For example, an application might by default stand up its own database, like a lightweight sqlite database. However for multi-node deployments it may need a database like Postgres which supports multi concurrent read/write access. Concurrent read/write is critical for any setup where there are multiple nodes (which includes high availability/load balanced or HPC integrated configurations like Slurm or Kubernetes). Additionally, when running in a container an external database should be used for  persistence of the database content in the case of upgrades or crashes. 
+
+Having an external database also can make disaster recovery easier, as many providers offer built in backups of database offerings. 
+
+Last but not least, in the case of performance issues where the server is running out of CPU/RAM often the first thing to go is the database. Moving to an off-disk database can improve performance when running on the margins. 
+
+## Sqlite 
+
+By default, each of the Pro software options will stand up its own sqlite database at the time of install. No additional work needed. The directory for the sqlite database can be optionally changed.  
+
+### Package Manager 
+
+```{.bash filename="/etc/rstudio-pm/rstudio-pm.gcfg"}
+[Database]
+Provider = sqlite
+
+[SQLite]
+Dir = /mnt/rstudio-pm/sqlite
+```
+
+### Connect 
+
+```{.bash filename="/etc/rstudio-connect/rstudio-connect.gcfg"}
+[Database]
+Provider = sqlite
+
+[SQLite]
+Dir = /mnt/posit-connect/sqlite
+```
+
+### Workbench 
+
+```{.bash filename="/etc/rstudio/database.conf"}
+provider=sqlite
+
+directory=/var/lib/rstudio-server
+```
+
+## Postgres
+
+Instead, for copious reasons listed above, we can bring our own Postgres database and use it instead. We should first doublecheck the version requirements for the Postgres database and create an instance that aligns. 
+
+For example we can use the AWS CLI to create a postgres database instance: 
+
+```bash
+aws sso login
+
+aws rds create-db-instance \
+  --db-instance-identifier ${DB_NAME} \
+  --db-instance-class db.t4g.micro \ # db.t3.medium is also good
+  --engine postgres \
+  --engine-version 16.4 \ # Check the supported version
+  --master-username ${DB_USER} \
+  --master-user-password ${DB_PASSWORD} \
+  --allocated-storage 20 \ # 30 is also good
+  --vpc-security-group-ids ${DEFAULT_SG_ID} \
+  --db-subnet-group-name ${SUBNET_DB_NAME} \
+  --tags "Key=rs:project,Value=${PROJECT}" "Key=rs:owner,Value=${OWNER}" # can also just hardcode them with --tags Key=rs:owner,Value=<put your email here> Key=rs:project,Value=solutions
+```
+
+### Understanding PostgreSQL's Structure: Databases Versus Schemas
+
+A single [PostgreSQL](https://www.postgresql.org/docs/current/manage-ag-overview.html) instance (often referred to as a "cluster" in PostgreSQL documentation, which can sometimes be confusing as "cluster" has other meanings in IT) is the top-level entity managed by the PostgreSQL server process. Within this instance, there's a distinct hierarchy for organizing data:
+
+- **Database:** At its core, a **database** in PostgreSQL is an isolated container for a collection of data, tables, functions, and other objects relevant to a specific application or purpose. Think of a database as a separate, self-contained unit within the PostgreSQL instance. Each database operates independently, meaning objects (like tables) in one database are not directly visible or accessible from another database within the same instance, although they can share some cluster-level objects like user roles. A common scenario for on-prem deployments is to have a single PostgreSQL instance hosting multiple databases, with each database dedicated to supporting its own distinct application or service.
+    
+- **Schema:** Within each database, you define one or more **schemas**. A **schema** acts as a namespace, providing a logical grouping mechanism for database objects such as tables, views, functions, and indexes. It's akin to a directory within a file system, helping to organize objects and prevent naming conflicts. For example, two different applications (or even different modules within the same application) might use a table named `users`, but by placing them in different schemas (e.g., `app1.users` and `app2.users`), they can coexist peacefully within the same database. Every database has a default `public` schema, but it's often best practice to create custom schemas for organizational and security reasons.
+
+**Conceptual Diagram:**
+
+```
++----------------------------------------------------------------+
+|                   PostgreSQL Instance (Cluster)                |
+|                                                                |
+|  +---------------------+        +---------------------+      |
+|  |     Database A      |        |     Database B      |      |
+|  | (e.g., App X Data)  |        | (e.g., App Y Data)  |      |
+|  |                     |        |                     |      |
+|  | +-----------------+ |        | +-----------------+ |      |
+|  | |   Schema 'app_x'| |        | |  Schema 'public'| |      |
+|  | |   +-----------+ | |        | |  +-----------+  | |      |
+|  | |   |  Table 1  | | |        | |  |  Table 4  |  | |      |
+|  | |   +-----------+ | |        | |  +-----------+  | |      |
+|  | |   |  Table 2  | | |        | |  |  Table 5  |  | |      |
+|  | |   +-----------+ | |        | |  +-----------+  | |      |
+|  | +-----------------+ |        | +-----------------+ |      |
+|  | +-----------------+ |        | +-----------------+ |      |
+|  | |  Schema 'admin' | |        | | Schema 'reports'| |      |
+|  | |   +-----------+ | |        | |  +-----------+  | |      |
+|  | |   |  Table 3  | | |        | |  |  Table 6  |  | |      |
+|  | |   +-----------+ | |        | |  +-----------+  | |      |
+|  | +-----------------+ |        | +-----------------+ |      |
+|  +---------------------+        +---------------------+      |
+|                                                                |
++----------------------------------------------------------------+
+```
+
+A single Postgres instance can consist of multiple databases, each of which is supporting it's own application. 
+
+> Tip: Multiple Posit Pro products can share the same Postgres instance as long as they have distinct and separate databases. In theory they may be able to have distinct schemas, but this wouldn't be considered a support configuration. 
+
+For a database connection, the connection string might look like: `postgres://positadmin@lisa-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com:5432/my-database-name`
+
+If we are using a schema, to further help with isolation, we can set it with: 
+`jdbc:postgresql://host:port/dbname?currentSchema=myschema`
+
+And finally, if we are using a URI, that might look like: `postgresql://rstudio@localhost:5432/rstudio?sslmode=verify-full&options=-csearch_path=public`
+
+
+### Preparing the Database
+
+For each product, by default, it needs a separate database with the name: 
+
+- Package Manager: `rstudio_pm`
+- Connect: `connect`
+- Workbench: `rstudio`
+
+For example, using the AWS CLI we can get the endpoint for our database so we can connect to it and create things as needed: 
+
+```bash
+# Get endpoint to access database instance:https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/describe-db-instances.html
+
+DB_HOST=$(aws rds describe-db-instances \
+  --db-instance-identifier ${DB_NAME} \
+  --query 'DBInstances[0].Endpoint.Address' \
+  --output text
+)
+
+# echo $DB_HOST
+#DB_HOST=lisa-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com
+#DB_URL="postgres://${DB_USER}@${DB_HOST}:5432/${DB_NAME}"
+```
+
+We might need to remote in to the instance to create the databases, as needed: 
+
+```bash
+# Install system packages
+sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+sudo apt install postgresql-client-16
+
+# Connect to the database (if local)
+sudo -i -u postgres psql 
+
+# Connect to the database (if remote)
+psql postgres://positadmin@lisa-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com:5432/my-database-name
+
+# Connect to the default database (if remote) 
+psql postgres://positadmin@lisa-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com:5432/postgres
+
+# Connect to the default database if hosted in a docker container 
+psql postgres://postgres:my_password@localhost:5432/postgres
+
+# Connect to the database to make sure it is there
+export <password redacted>
+#psql postgres://positadmin@lisa-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com:5432/my-database-name
+
+# Test that we have access t the various assets with
+list databases with \list
+```
+
+Once we've started a postgres sesssion we can use sql to create what we need: 
+
+```sql
+# Create a user/role
+CREATE ROLE rstudio CREATEDB LOGIN PASSWORD 'test';
+
+# Create a database
+CREATE DATABASE posit WITH OWNER = posit;
+
+# Switch to the database
+\c DBNAME
+\c positconnect2
+```
+
+We can exit our connection to the postgres database with: 
+
+```bash
+#Quit with 
+\q
+```
+
+Alternatively, we can run the commands to create a database and user remotely, without creating a postgres session: 
+
+```bash
+# Create database role (user) and Database
+sudo -i -u postgres psql -c "CREATE ROLE rstudio CREATEDB LOGIN PASSWORD 'test';"
+sudo -i -u postgres psql -c "CREATE DATABASE rstudio WITH OWNER = posit;"
+```
+
+Finally we should test network access to the postgres database from the server the application is hosted on: 
+
+```bash
+# Test database connection
+psql -h instance-eks-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com -U posit_connect -d posit_connect -c '\conninfo'
+```
+
+Finally, we need to update the config for each product so it knows to connect to the brought Postgres database. 
+
+### Database Connection User Credentials
+
+The user credentials supplied in the Postgres.URL URL must be able to create and alter database tables, and have read/write permissions to the database referenced in the URL. A blank database with the given name MUST already exist.
+
+For proof of concept installations, the user credentials can be included in the `Postgres.URL` URL. Remember to URL-encode any passwords because special characters can really mess things up in a way that results in vague error messages. 
+
+Alternatively, we can protect any connection credentials by encoding them. In this case DO NOT percent encode your password prior to encrypting it since that will introduce new characters into the password. it will be encrypted using the base64 encrypted password value. 
+
+### Package Manager 
+
+#### Without encryption
+
+```{.bash filename="/etc/rstudio-pm/rstudio-pm.gcfg"}
+[Database]
+Provider = postgres
+
+[Postgres]
+URL = "postgres://username@db.seed.co/rstudio_pm"
+Password = <base64 encrypted password value>
+```
+
+#### With encryption
+
+On Package Manager use the [rspm encrypt utility](https://docs.posit.co/rspm/admin/appendix/encryption.html): `rspm encrypt` (it will prompt you to enter the password to be encrypted)
+
+After running the command (with the raw text of the password in the config) you'll copy the password output over the old password value in the corresponding configuration file.
+
+```{.bash filename="/etc/rstudio-pm/rstudio-pm.gcfg"}
+[Database]
+Provider = postgres
+
+[Postgres]
+URL = "postgres://username:password@db.seed.co/rstudio_pm"
+Password = <base64 encrypted password value>
+```
+
+### Connect 
+
+#### Without encryption
+
+```{.bash filename="/etc/rstudio-connect/rstudio-connect.gcfg"}
+; /etc/rstudio-connect/rstudio-connect.gcfg
+[Database]
+Provider = postgres
+
+[Postgres]
+URL = "postgres://username:password@db.seed.co/connect"
+# Example without SSL 
+# URL = "postgres://username:password@db.seed.co/connect?sslmode=disable"
+# Example specifying a schema 
+# URL = "postgres://username:password@db.seed.co/connect?options=-csearch_path=connect_schema"
+```
+
+#### With encryption
+
+On Connect use the [rscadmin encrypt utility](https://docs.posit.co/connect/admin/appendix/configuration/#property-types): `rscadmin encrypt-config-value` (it will prompt you to enter the password to be encrypted)
+
+On a system with missing symlinks, use `/opt/rstudio-connect/bin/rscadmin encrypt-config-value`. 
+
+After running the command (with the raw text of the password in the config) you'll copy the password output over the old password value in the corresponding configuration file.
+
+```{.bash filename="/etc/rstudio-connect/rstudio-connect.gcfg"}
+[Database]
+Provider = postgres
+
+[Postgres]
+URL = "postgres://username@db.seed.co/connect"
+Password = <encrypted, Base64-encoded password value>
+```
+
+### Workbench 
+
+#### Without encryption
+
+```{.bash filename="/etc/rstudio/database.conf"}
+# Note: when connecting to a PostgreSQL database, a default empty database called 'rstudio' must first be created!
+provider=postgresql
+
+# Specifies the host (hostname or IP address) of the database host
+host=localhost
+ 
+# Specifies the database to connect to
+database=rstudio
+
+# Specifies the TCP port where the database is listening for connections
+port=5432
+
+# Specifies the database connection username
+username=rstudio
+
+# Specifies the database connection password. This may be encrypted with the secure-cookie-key.
+# The encrypted password can be generated using the helper command rstudio-server encrypt-password.
+# It is strongly recommended that you encrypt the password!
+password=test
+
+# Alternatively, Specifies the connection URL in the form of a postgresql:// connection URL. This can be used if you need
+# to set special database settings that are not available with the other parameters. If set, this parameter will
+# override any other postgresql parameters that have been set, with the exception of the password. A password in 
+# the URI is supported as a convenience but we strongly recommend using the separate password field, which will
+# always replace any password specified in the URI.
+# connection-uri=postgresql://rstudio@localhost:5432/rstudio?sslmode=verify-full&options=-csearch_path=public
+```
+
+#### With encryption
+
+On Workbench use the [rstudio-server encrypt utility](https://docs.posit.co/ide/server-pro/admin/hardening/encryption.html#step-re-encrypt-configuration-values): `sudo rstudio-server encrypt-password`
+
+After running the command (with the raw text of the password in the config) you'll copy the password output over the old password value in the corresponding configuration file.
+
+```{.bash filename="/etc/rstudio/database.conf"}
+# Note: when connecting to a PostgreSQL database, a default empty database called 'rstudio' must first be created!
+provider=postgresql
+
+# Specifies the host (hostname or IP address) of the database host
+host=postgres://username:password@db.seed.co/posit
+
+# Specifies the database to connect to
+database=rstudio
+
+# Specifies the TCP port where the database is listening for connections
+port=5432
+
+# Specifies the database connection username
+username=rstudio
+
+# Specifies the database connection password. This may be encrypted with the secure-cookie-key.
+# The encrypted password can be generated using the helper command rstudio-server encrypt-password.
+# It is strongly recommended that you encrypt the password!
+password=<encrypted, Base64-encoded password value>
+```
+
+### Troubleshooting 
+
+```bash
+# Check psql version
+psql --version
+
+# Test database connection
+psql -h address.cpbvczwgws3n.us-east-2.rds.amazonaws.com -U posit_connect -d posit_connect -c '\conninfo'
+```
+
+Verify the Workbench installation: 
+
+```bash 
+sudo rstudio-server stop
+sudo rstudio-server verify-installation
+sudo systemctl status rstudio-server
+sudo systemctl status rstudio-launcher
+sudo rstudio-server status 2>&1 | tee status.txt
+sudo rstudio-launcher status 2>&1 | tee status.txt
+sudo tail -n 50 /var/log/rstudio/rstudio-server/rserver.log
+sudo tail -n 50 /var/log/rstudio/launcher/rstudio-launcher.log
+```
+
+For Workbench, check the data from the database in the [admin dashboard](https://docs.posit.co/ide/server-pro/admin/server_management/administrative_dashboard.html) at `http://<server-address>/admin`. 
+
+Verify the Connect installation: 
+
+```bash 
+sudo systemctl status rstudio-connect
+sudo systemctl status rstudio-connect 2>&1 | tee status.txt
+sudo tail -n 50 /var/log/rstudio-connect/rstudio-connect.log | grep error*
+sudo tail -n 50 /var/log/rstudio/rstudio-connect.log | grep error*
+sudo tail -n 50 /var/log/rstudio/rstudio-connect/rstudio-connect.access.log | grep error*
+sudo tail -n 50 /var/log/rstudio/rstudio-connect/rstudio-connect.log | grep error*
+```
+
+Verify the Package Manager installation: 
+
+```bash 
+sudo systemctl status rstudio-pm 2>&1 | tee status.txt
+sudo tail -n 50 /var/log/rstudio/rstudio-pm/rstudio-pm.log
+```
+
+
+
+
+
+
