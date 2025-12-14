@@ -85,6 +85,9 @@ Since Positron is a fork of VS Code it relies on extensions for adding various f
 - Shiny 
 - Scope to this
 - vscode-pets
+- quarto.quarto
+- REditorSupport.r@2.6.1
+- ms-python.python@2023.6.1
 
 <!--
 Soon: 

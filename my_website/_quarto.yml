@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  favicon: images/leafey-48.png
   site-url: "https://questionable.quarto.pub/blog/"
   title: "Lisa Anders - questionable.quarto"
   description: "Making the most out of data"
