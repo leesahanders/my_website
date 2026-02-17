@@ -191,6 +191,8 @@ There's a caveat that very rarely would you actually want automated big jobs goi
 
 This is the page you should read: <https://spark.posit.co/deployment/databricks-connect.html#environments>
 
+Check the created virtual environment with: `reticulate::py_config()` and `reticulate::py_run_string("import pandas as pd; print(pd.__version__)"`
+
 ### Python
 
 Next we'll want to make sure that python is set up correctly, since sparklyr wraps pyspark.

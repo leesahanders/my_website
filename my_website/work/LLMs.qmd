@@ -807,6 +807,11 @@ def foo():
 - Vibe coding is legacy code: <https://blog.val.town/vibe-code> 
 - Indirect prompt injection: <https://simonwillison.net/2025/Aug/25/agentic-browser-security/> 
 - Where's the Shovelware? Why AI Coding Claims Don't Add Up: <https://substack.com/inbox/post/172538377#_> 
+- Using LLMs at Oxide: <https://rfd.shared.oxide.computer/rfd/0576> 
+- Welcome to gas town : <https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04> 
+- Research: The Hidden Penalty of Using AI at Work: <https://hbr.org/2025/08/research-the-hidden-penalty-of-using-ai-at-work>
+- Curl vs AI with Daniel Stenberg: <https://opensourcesecurity.io/2025/2025-05-curl_vs_ai_with_daniel_stenberg/>
+
 
 
 
