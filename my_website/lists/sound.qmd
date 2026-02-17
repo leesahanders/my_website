@@ -37,6 +37,11 @@ Some historic links:
 
 Make your own music using programming with Sonic Pi: <https://sonic-pi.net/> 
 
+## Strudel
+
+A live coding platform to write music: <https://strudel.cc/>
+
+
 ## Sky COTL
 
 Sky Children of Light is a phone game that has a built in music player that I really love. Instead of having to turn pages in sheet music it has floating icons that change shape over the notes you need to play, making it really easy to pick up once you get the hang of it. 
