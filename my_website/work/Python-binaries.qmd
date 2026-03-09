@@ -1,0 +1,62 @@
+---
+title: "Python binaries"
+description: "Short and sweet"
+author: "Lisa"
+date: "2026-03-06"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - Posit
+---
+
+There are many  options for installing and managing your python versions. 
+
+My current favorite way to do this is with [uv](https://docs.astral.sh/uv/guides/install-python/). You can run commands that will install and manage your python binaries for you: 
+
+```bash
+# Install a psecific version of python 
+uv python install 3.12
+
+# Check aailable and installed python versions 
+uv python list
+```
+
+uv will use the Python requirements defined in requires-python in the pyproject.toml file like this: 
+
+
+```bash
+[project]
+name = "python-shiny-app-demo-cicd-github-actions"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12.11"
+dependencies = [
+    "altair>=5.4.1",
+    "anywidget>=0.9.13",
+    "pandas>=2.2.3",
+    "shiny>=1.2.1",
+    "shinywidgets>=0.3.4",
+]
+```
+
+Uv/Astral is also building binaries that can be used to install Python in air-gappped or validated environments, but finding the right pages is a bit tricky: 
+
+- Location for releases: <https://github.com/astral-sh/python-build-standalone/releases>
+
+- There is documentation on the binaries here: <https://gregoryszorc.com/docs/python-build-standalone/main/running.html#obtaining-distributions>
+
+- For an example I've found this repo that Michael made very useful: <https://github.com/michaelmayer2/py-install/>
+
+- It would also be possible to use the now un-maintained Post method to build Python RPMs: <https://github.com/rstudio/python-builds>
+
