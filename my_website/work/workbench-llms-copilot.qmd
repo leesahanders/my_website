@@ -1,0 +1,153 @@
+---
+title: "Workbench, LLM's, and copilot"
+description: "The power of AI"
+author: "Lisa"
+date: "2026-04-08"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - Posit
+---
+
+## Integrating Workbench and Github Copilot
+
+### Steps 
+
+**As an admin**, add the following line to `/etc/rstudio/rsession.conf` to enable the use of copilot in RStudio: 
+
+```{.bash filename="/etc/rstudio/rsession.conf"}
+copilot-enabled=1
+```
+
+Custom SSL certificates (not sure iif applicable or not) will need `copilot-ssl-certificates-file=`<path> in `/etc/rstudio/rsession.conf` .
+
+Additionally in order to support Copilot with Positron as an admin [Positron Assistant will need to be enabled](https://docs.posit.co/ide/server-pro/admin/positron_sessions/positron-assistant.html). To enable the use of copilot in Positron specify the following in the `positron-user-settings.json` file:
+
+/etc/rstudio/positron-user-settings.json
+
+```{.bash filename="/etc/rstudio/positron-user-settings.json"}
+{
+  "positron.assistant.enable": true, 
+```
+
+There are a couple more parameters to consider adding that might be useful: 
+
+```{.bash filename="/etc/rstudio/positron-user-settings.json"}
+    "positron.assistant.consoleActions.enable": true,
+    "positron.assistant.showTokenUsage.enable": true,  
+    "terminal.integrated.defaultProfile.linux": "bash",  
+    "extensions.autoUpdate": false,  
+    "extensions.autoCheckUpdates": false,
+```
+  
+Consider ading these as enforced settings so that users cannot change them: <https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings> 
+
+/etc/rstudio/etc/rstudio/enforced-settings.json
+```{.bash filename="/etc/rstudio/etc/rstudio/enforced-settings.json"}  
+{
+  "files.autoSave": true
+}
+```
+
+The presence of /etc/rstudio/positron-user-settings.json will automatically create settings for every user upon launching positron so that they only need to select and sign into copilot once. more technically, the positron-user-settings.json is merged with a user's existing settings.json, and importantly, once a setting has been merged, future template changes won't propagate to users who already have that setting defined which will require them to update manually. 
+
+**For RStudio,** users will then need to: 
+
+1. Navigate to Tools > Global Options > Copilot
+2. Check "Enable GitHub Copilot"
+3. Download and install the Copilot Agent components
+4. Click "Sign In" and follow the device authentication flow at `https://github.com/login/device`
+
+This will give the Rstudio and copilot integration experience. 
+
+Chattr is a really cool open source R package sponsored byPosit that can help extend the integration into interactive  chat sessions: [https://mlverse.github.io/chattr/](https://mlverse.github.io/chattr/) 
+
+Reference: [https://docs.posit.co/ide/user/ide/guide/tools/copilot.html](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html) 
+
+**For Positron**, users will need to: 
+
+Follow the [getting started steps in the Positron User Guide](https://positron.posit.co/assistant-getting-started.html): 
+
+1. Run the command Positron Assistant: Configure Language Model Providers
+2. Select GitHub Copilot as the model provider.
+3. Select the Sign in button to initiate GitHub’s OAuth authentication flow.
+
+Users then can open Positron assistant and use it. Unfortunately Databot was developed and tested with Claude models, and is only available for use with that model family. But Positron Assistant should cover the same use cases. 
+
+There's some useful troubleshooting information around authentication to Copilot here, but let me know if you run into difficulties and I can ask around to get more granular information: [https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change](https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change)
+  
+It maybe useful to note that users who previously signed into GitHub within Positron (for Copilot or other integrations) must sign out and sign back in after upgrading to version 2026.01.1
+  
+## Other LLM providers 
+  
+For other LLM providers the integration is only through Positron and is Positron Assistant (Databot for Claude specifically). 
+  
+Here an example /etc/rstudio/positron-user-settings.json:
+  
+```{.bash filename="/etc/rstudio/positron-user-settings.json"}
+{
+  "positron.assistant.enable": true, 
+  "positron.assistant.enabledProviders": ["amazon-bedrock"],
+  "positron.assistant.enabledProviders": [
+        "amazon-bedrock",
+        "openai-api",
+    ]
+}
+```
+  
+There may be additional settings to consider adding: 
+  
+```
+  {
+  "positron.assistant.enable": true, 
+  "positron.assistant.models.preference.byProvider": {
+    "anthropic-api": "Claude Sonnet 4.5",
+    "openai-api": "gpt-4o"
+  },
+  "positron.assistant.models.include": [
+  "claude",
+  "GPT-4o",
+  "^claude.*opus"
+  ],
+  "positron.assistant.enabledProviders": ["amazon-bedrock"],
+  "positron.assistant.enabledProviders": [
+    "azure",
+    "mistral",
+    "ollama",
+    "openai"
+  ],
+  "positron.assistant.gitIntegration.enable": true,
+  "positron.assistant.testModels": true,
+  "positron.assistant.followups.enable": false,
+  "positron.assistant.consoleActions.enable": true,
+  "positron.assistant.showTokenUsage.enable": true,
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+}
+```
+  
+User will need to run the command Positron Assistant: Configure Language Model Providers in the Command Palette. 
+  
+Consider ading these as enforced settings so that users cannot change them: <https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings> 
+ 
+/etc/rstudio/etc/rstudio/enforced-settings.json
+```{.bash filename="/etc/rstudio/etc/rstudio/enforced-settings.json"}  
+{
+  "files.autoSave": true
+}
+```
+
+
+
+  

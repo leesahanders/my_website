@@ -1,0 +1,102 @@
+---
+title: "User access to Workbench"
+description: "A quick overview"
+author: "Lisa"
+date: "2026-04-13"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - Posit
+---
+
+## Overview
+
+Posit Workbench gives each user their own Linux session with a home directory, running processes, and file-system permissions. This means every Workbench user must have a corresponding system account on the server (or accessible via network services like System Security Services Daemon (SSSD) or Lightweight Directory Access Protocol (LDAP)).
+
+:::{.callout-important}
+Workbench users require local or networked system accounts regardless of what authentication method you use. Enabling user authentication doesn't also handling user provisioning which needs to be set up separately. 
+:::
+
+This is different from Posit Connect and Posit Package Manager, which run content
+under a single service account and do not need per-user system accounts.
+
+## How authentication works in Workbench
+
+Workbench uses Linux [Pluggable Authentication Modules (PAM)](http://en.wikipedia.org/wiki/Pluggable_authentication_module).
+
+1. **User signs in** — either through a direct login form (PAM) or via your SSO provider (SAML, OpenID Connect, or a reverse proxy).
+2. **Workbench maps the user to a system account** — The authenticated username must match a Linux account on the server.
+3. **PAM creates a session** — Workbench calls PAM to create a Linux session
+   for the matched system account, which sets up the user's environment
+   (home directory, groups, and resource limits).
+
+Not all Posit products require local system accounts or PAM. For example, Posit Connect and Shiny Server rely on their own authentication engines and on a single system account for doing their work in most cases, not requiring individualized development environments like the ones offered by Posit Workbench.
+
+::: {.callout-note}
+When using SSO, OpenID Connect, or proxied authentication, you need to configure PAM sessions to automatically create system accounts on first sign-in. Otherwise, you must provision local system accounts manually before users can sign in.
+:::
+
+## Pros and cons 
+
+Taken from Trevor's excellent slide deck ~July 2025
+
+|Strategy|Pros|Cons|
+|---|---|---|
+|Manual Linux user accounts|Simple, quick to set up | Doesn’t scale|
+|Corporate LDAP/AD|Leverage existing corporate user & group info|Set up outside PWB & difficult for some|
+|Corporate SSO OpenID/SAML with SCIM|Leverage existing corporate user info & enterprise IT friendly|No group info (yet) & more setup required in IdP|
+|Corporate SSO OpenID/SAML with JIT|Leverage existing corporate user info & easy set up (once you know the settings)|No group info (yet) & less enterprise IT friendly|
+
+## Key concepts: Authentication vs. Sessions vs. Provisioning
+
+Workbench has three components for successful user access: 
+
+| Concept | What it is | 
+|---|---|---|
+| **Authentication** | Verifying user identity (who is this person?) |
+| **PAM Sessions** | Server-side environment setup (home directory, access controls, user permisions) |
+| **User Provisioning** | Creating system accounts automatically vs. manually |
+---
+
+## Authentication methods
+
+| Method | When to use | Posit Workbench Configuration  |Notes |
+|---|---|---|
+| **Local accounts / PAM Authentication** | Users have local accounts that already exist | [PAM Authentication](pam_authentication.qmd) via `pam_unix` | Direct login form on Workbench |
+| **LDAP or Active Directory** | Users have LDAP/AD accounts that already exist | [PAM Authentication](pam_authentication.qmd) via `pam_sss` or `pam_ldap` | Direct login form on Workbench |
+| **Kerberos (not SSO)**  | PAM authenticates with Kerberos. | [PAM + Kerberos](kerberos/) via `pam_sss` or `pam_krb5` | Direct login form on Workbench |
+| **OAuth2/OpenID Connect (OIDC)** | Using cloud IdP (Microsoft Entra ID, Okta, etc.) | [OAuth2/OIDC](https://docs.posit.co/ide/server-pro/authenticating-users.html#openid-connect-authentication) | SSO via external provider|
+| **SAML** | Using enterprise SSO (Okta, Microsoft, others) | [SAML](https://docs.posit.co/ide/server-pro/authenticating-users.html#saml-single-sign-on-authentication) | SSO via external provider |
+| **Proxied Authentication** | Authentication handled by reverse proxy (Shibboleth, Kerberos) | [Proxied Authentication](proxied_authentication.qmd) | Workbench trusts the proxy's auth header |
+
+## PAM sessions 
+
+Even when PAM is not used for authentication (e.g., with SAML or OIDC instead), PAM sessions are still used for home directory access, access controls, and user permissions. A PAM session is a server-side session started on behalf of a user, similar to what a remote shell would do. [PAM Sessions](https://docs.posit.co/ide/server-pro/admin/access_and_security/pam_sessions.html)]
+
+The steps described in [Configuration for user provisioning](https://docs.posit.co/ide/server-pro/admin/user_provisioning/configuration.html) describe how to set this up. 
+
+## User provisioning 
+
+You must choose how to create (or verify) system accounts. Here's a quick comparison:
+
+| Method | When to use | How it works | Supports groups? | Setup |
+|---|---|---|---|---|
+| **Manual account creation** | Small deployments or strict IT control | IT administrators create accounts with `useradd` before users sign in | ✅ Yes (via local `/etc/group` or NSS) | Create accounts: `sudo useradd -m username` |
+| **LDAP/Active Directory** | On-premises directory service already exists | SSSD connects to LDAP/AD; PAM creates accounts on first login via `pam_mkhomedir` | ✅ Yes (groups from LDAP/AD) | [SSSD configuration](https://docs.posit.co/ide/server-pro/admin/user_provisioning/configuration.html) + `pam_mkhomedir` |
+| **Just-in-Time (JIT)** | Using OIDC/SAML with simple provisioning | Workbench creates accounts automatically on first login based on identity provider claims | ❌ No | Enable: `user-provisioning-register-on-first-login=1` |
+| **SCIM (System for Cross-domain Identity Management)** | Using Okta or Microsoft Entra ID for full account/group sync | IdP sends account and group data to Workbench via SCIM API; groups synced automatically | ✅ Yes (groups from IdP) | [SCIM provisioning](https://docs.posit.co/ide/server-pro/admin/user_provisioning/user_provisioning.html) |
+
+
+
+
+
