@@ -11,7 +11,7 @@ editor: source
 toc: true
 image: "img/"
 draft: false
-freeze: true
+freeze: false
 filters:
    - lightbox
 lightbox: auto

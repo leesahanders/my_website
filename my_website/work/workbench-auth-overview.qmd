@@ -72,12 +72,12 @@ Workbench has three components for successful user access:
 
 | Method | When to use | Posit Workbench Configuration  |Notes |
 |---|---|---|
-| **Local accounts / PAM Authentication** | Users have local accounts that already exist | [PAM Authentication](pam_authentication.qmd) via `pam_unix` | Direct login form on Workbench |
-| **LDAP or Active Directory** | Users have LDAP/AD accounts that already exist | [PAM Authentication](pam_authentication.qmd) via `pam_sss` or `pam_ldap` | Direct login form on Workbench |
-| **Kerberos (not SSO)**  | PAM authenticates with Kerberos. | [PAM + Kerberos](kerberos/) via `pam_sss` or `pam_krb5` | Direct login form on Workbench |
+| **Local accounts / PAM Authentication** | Users have local accounts that already exist | PAM Authentication via `pam_unix` | Direct login form on Workbench |
+| **LDAP or Active Directory** | Users have LDAP/AD accounts that already exist | PAM Authentication via `pam_sss` or `pam_ldap` | Direct login form on Workbench |
+| **Kerberos (not SSO)**  | PAM authenticates with Kerberos. | PAM + Kerberos via `pam_sss` or `pam_krb5` | Direct login form on Workbench |
 | **OAuth2/OpenID Connect (OIDC)** | Using cloud IdP (Microsoft Entra ID, Okta, etc.) | [OAuth2/OIDC](https://docs.posit.co/ide/server-pro/authenticating-users.html#openid-connect-authentication) | SSO via external provider|
 | **SAML** | Using enterprise SSO (Okta, Microsoft, others) | [SAML](https://docs.posit.co/ide/server-pro/authenticating-users.html#saml-single-sign-on-authentication) | SSO via external provider |
-| **Proxied Authentication** | Authentication handled by reverse proxy (Shibboleth, Kerberos) | [Proxied Authentication](proxied_authentication.qmd) | Workbench trusts the proxy's auth header |
+| **Proxied Authentication** | Authentication handled by reverse proxy (Shibboleth, Kerberos) | Proxied Authentication | Workbench trusts the proxy's auth header |
 
 ## PAM sessions 
 

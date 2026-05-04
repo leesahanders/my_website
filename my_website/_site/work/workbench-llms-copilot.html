@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2023-08-29">
-<meta name="description" content="This simple trick will save you so much time">
+<meta name="dcterms.date" content="2026-04-08">
+<meta name="description" content="The power of AI">
 
-<title>Problems with git credential persistence when in the cloud – Lisa Anders - questionable.quarto</title>
+<title>Workbench, LLM’s, and github copilot – Lisa Anders - questionable.quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -322,15 +357,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Problems with git credential persistence when in the cloud</h1>
+      <h1 class="title">Workbench, LLM’s, and github copilot</h1>
                   <div>
         <div class="description">
-          This simple trick will save you so much time
+          The power of AI
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">security</div>
+                <div class="quarto-category">Posit</div>
               </div>
                   </div>
   </div>
@@ -348,7 +382,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 29, 2023</p>
+        <p class="date">April 8, 2026</p>
       </div>
     </div>
     
@@ -364,11 +398,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-when-on-linux" id="toc-problem-when-on-linux" class="nav-link active" data-scroll-target="#problem-when-on-linux">Problem when on Linux:</a></li>
-  <li><a href="#problem-when-on-sagemaker" id="toc-problem-when-on-sagemaker" class="nav-link" data-scroll-target="#problem-when-on-sagemaker">Problem when on Sagemaker:</a></li>
-  <li><a href="#tldr-solution" id="toc-tldr-solution" class="nav-link" data-scroll-target="#tldr-solution">TLDR Solution:</a></li>
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
-  <li><a href="#alternatives" id="toc-alternatives" class="nav-link" data-scroll-target="#alternatives">Alternatives</a></li>
+  <li><a href="#integrating-workbench-and-github-copilot" id="toc-integrating-workbench-and-github-copilot" class="nav-link active" data-scroll-target="#integrating-workbench-and-github-copilot">Integrating Workbench and Github Copilot</a>
+  <ul class="collapse">
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a></li>
+  </ul></li>
+  <li><a href="#other-llm-providers" id="toc-other-llm-providers" class="nav-link" data-scroll-target="#other-llm-providers">Other LLM providers</a></li>
+  <li><a href="#disabling-positron-assistant" id="toc-disabling-positron-assistant" class="nav-link" data-scroll-target="#disabling-positron-assistant">Disabling Positron Assistant</a></li>
   </ul>
 </nav>
     </div>
@@ -380,49 +415,176 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!</p>
-<section id="problem-when-on-linux" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-linux">Problem when on Linux:</h2>
-<blockquote class="blockquote">
-<p>In general gitcreds doesn’t work well on linux (which has led to this git issue <a href="https://github.com/r-lib/gitcreds/issues/47">(Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds</a> ). There is an excellent blog post that is very useful that goes deeper into what is going on: <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">Notes from a data witch - Managing GitHub credentials from R, difficulty level linux</a></p>
-</blockquote>
+<section id="integrating-workbench-and-github-copilot" class="level2">
+<h2 class="anchored" data-anchor-id="integrating-workbench-and-github-copilot">Integrating Workbench and Github Copilot</h2>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps</h3>
+<p><strong>As an admin</strong>, add the following line to <code>/etc/rstudio/rsession.conf</code> to enable the use of copilot in RStudio:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="/etc/rstudio/rsession.conf"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">copilot-enabled=1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Custom SSL certificates (not sure iif applicable or not) will need <code>copilot-ssl-certificates-file=</code><path> in <code>/etc/rstudio/rsession.conf</code> .</path></p>
+<p>Additionally in order to support Copilot with Positron as an admin <a href="https://docs.posit.co/ide/server-pro/admin/positron_sessions/positron-assistant.html">Positron Assistant will need to be enabled</a>. To enable the use of copilot in Positron specify the following in the <code>positron-user-settings.json</code> file:</p>
+<p>/etc/rstudio/positron-user-settings.json</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/positron-user-settings.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="/etc/rstudio/positron-user-settings.json"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"positron.assistant.enable"</span><span class="ex">:</span> true, </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>There are a couple more parameters to consider adding that might be useful:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/positron-user-settings.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="/etc/rstudio/positron-user-settings.json"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="st">"positron.assistant.consoleActions.enable"</span><span class="ex">:</span> true,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"positron.assistant.showTokenUsage.enable"</span><span class="ex">:</span> true,  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"terminal.integrated.defaultProfile.linux"</span><span class="ex">:</span> <span class="st">"bash"</span>,  </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extensions.autoUpdate"</span><span class="ex">:</span> false,  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extensions.autoCheckUpdates"</span><span class="ex">:</span> false,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"positron.assistant.provider.anthropic.enable"</span><span class="ex">:</span> false,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"positron.assistant.provider.githubCopilot.enable"</span><span class="ex">:</span> true</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>From <a href="https://positron.posit.co/assistant-getting-started.html#step-2-configure-language-model-providers" class="uri">https://positron.posit.co/assistant-getting-started.html#step-2-configure-language-model-providers</a> :</p>
+<ul>
+<li>Anthropic is enabled by default. Opt out of the positron.assistant.provider.anthropic.enable setting to disable it.</li>
+<li>GitHub Copilot is enabled by default. Opt out of the positron.assistant.provider.githubCopilot.enable setting to disable it.</li>
+</ul>
+<p>However, if users have already created sessions then updating /etc/rstudio/positron-user-settings.json won’t push changes. In that case we should add these settings as enforced settings so they are forced to propagate. Alternatively it can also be worth adding these as enforced settings so that users cannot change them: <a href="https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings" class="uri">https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings</a></p>
+<p>/etc/rstudio/etc/rstudio/enforced-settings.json</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/etc/rstudio/enforced-settings.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="/etc/rstudio/etc/rstudio/enforced-settings.json"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="st">"positron.assistant.enable"</span><span class="ex">:</span> true, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="st">"positron.assistant.consoleActions.enable"</span><span class="ex">:</span> true,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">"positron.assistant.showTokenUsage.enable"</span><span class="ex">:</span> true,  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   <span class="st">"positron.assistant.gitIntegration.enable"</span><span class="ex">:</span> true,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   <span class="st">"positron.assistant.provider.anthropic.enable"</span><span class="ex">:</span> false,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>   <span class="st">"positron.assistant.provider.githubCopilot.enable"</span><span class="ex">:</span> true</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>And then also add to /etc/rstudio/profiles for all users (or change this to specify specific users or groups):</p>
+<p>/etc/rstudio/etc/rstudio/enforced-settings.json</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/profiles</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="/etc/rstudio/profiles"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[*]</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">positron-enforced-settings</span> = /etc/rstudio/enforced-settings.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The presence of /etc/rstudio/positron-user-settings.json will automatically create settings for every user upon launching positron so that they only need to select and sign into copilot once. more technically, the positron-user-settings.json is merged with a user’s existing settings.json, and importantly, once a setting has been merged, future template changes won’t propagate to users who already have that setting defined which will require them to update manually.</p>
+<p><strong>For RStudio,</strong> users will then need to:</p>
+<ol type="1">
+<li>Navigate to Tools &gt; Global Options &gt; Copilot</li>
+<li>Check “Enable GitHub Copilot”</li>
+<li>Wait a moment (or close and repoen the global options menu) for the sign-in field to populate</li>
+<li>Click “Sign In” and follow the device authentication flow at <code>https://github.com/login/device</code></li>
+</ol>
+<p>This will give the Rstudio and copilot integration experience with ghost editing: <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html#using-copilot" class="uri">https://docs.posit.co/ide/user/ide/guide/tools/copilot.html#using-copilot</a></p>
+<p>Chattr is a really cool open source R package sponsored byPosit that can help extend the integration into interactive chat sessions: <a href="https://mlverse.github.io/chattr/">https://mlverse.github.io/chattr/</a></p>
+<p>Reference: <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html">https://docs.posit.co/ide/user/ide/guide/tools/copilot.html</a></p>
+<p><strong>For Positron</strong>, users will need to:</p>
+<p>Follow the <a href="https://positron.posit.co/assistant-getting-started.html">getting started steps in the Positron User Guide</a>:</p>
+<ol type="1">
+<li>Open positron assistant (the robot logo in the extensions pane)</li>
+<li>Configure Language Model Providers</li>
+<li>Select GitHub Copilot as the model provider.</li>
+<li>Select the Sign in button to initiate GitHub’s OAuth authentication flow.</li>
+</ol>
+<p>Users then can open Positron assistant and use it. Unfortunately Databot was developed and tested with Claude models, and is only available for use with that model family. But Positron Assistant should cover the same use cases.</p>
+<p>There’s some useful troubleshooting information around authentication to Copilot here: <a href="https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change">https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change</a></p>
+<p>It maybe useful to note that users who previously signed into GitHub within Positron (for Copilot or other integrations) must sign out and sign back in after upgrading to version 2026.01.1</p>
 </section>
-<section id="problem-when-on-sagemaker" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-sagemaker">Problem when on Sagemaker:</h2>
-<blockquote class="blockquote">
-<p>Additionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist.</p>
-</blockquote>
 </section>
-<section id="tldr-solution" class="level2">
-<h2 class="anchored" data-anchor-id="tldr-solution">TLDR Solution:</h2>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
+<section id="other-llm-providers" class="level2">
+<h2 class="anchored" data-anchor-id="other-llm-providers">Other LLM providers</h2>
+<p>For other LLM providers the integration is only through Positron and is Positron Assistant (Databot for Claude specifically).</p>
+<p>Here an example /etc/rstudio/positron-user-settings.json:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/positron-user-settings.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="/etc/rstudio/positron-user-settings.json"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"positron.assistant.enable"</span><span class="ex">:</span> true, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"positron.assistant.enabledProviders"</span><span class="ex">:</span> <span class="pp">[</span><span class="st">"amazon-bedrock"</span><span class="pp">]</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"positron.assistant.enabledProviders"</span><span class="ex">:</span> [</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"amazon-bedrock"</span><span class="ex">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"openai-api"</span><span class="ex">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">]</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>There may be additional settings to consider adding:</p>
+<pre><code>  {
+  "positron.assistant.enable": true, 
+  "positron.assistant.models.preference.byProvider": {
+    "anthropic-api": "Claude Sonnet 4.5",
+    "openai-api": "gpt-4o"
+  },
+  "positron.assistant.models.include": [
+  "claude",
+  "GPT-4o",
+  "^claude.*opus"
+  ],
+  "positron.assistant.enabledProviders": ["amazon-bedrock"],
+  "positron.assistant.enabledProviders": [
+    "azure",
+    "mistral",
+    "ollama",
+    "openai"
+  ],
+  "positron.assistant.gitIntegration.enable": true,
+  "positron.assistant.testModels": true,
+  "positron.assistant.followups.enable": false,
+  "positron.assistant.consoleActions.enable": true,
+  "positron.assistant.showTokenUsage.enable": true,
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+}</code></pre>
+<p>User will need to run the command Positron Assistant: Configure Language Model Providers in the Command Palette.</p>
+<p>Consider ading these as enforced settings so that users cannot change them: <a href="https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings" class="uri">https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings</a></p>
+<p>/etc/rstudio/etc/rstudio/enforced-settings.json</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/etc/rstudio/etc/rstudio/enforced-settings.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="/etc/rstudio/etc/rstudio/enforced-settings.json"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"files.autoSave"</span><span class="ex">:</span> true</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">Testing</h2>
-<p>I’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.</p>
-<p>Load libraries:</p>
-<pre><code>library(usethis) 
-library(gitcreds) 
-library(gh) 
-library(credentials)</code></pre>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
-<p>From the documentation:</p>
-<blockquote class="blockquote">
-<p>The “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.</p>
-</blockquote>
-<p>Generate the PAT:</p>
-<p><code>usethis::create_github_token()</code></p>
-<p>Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:</p>
-<p><code>gitcreds::gitcreds_set()</code></p>
-<p>Check that it stored with:</p>
-<p><code>gitcreds_get()</code></p>
-</section>
-<section id="alternatives" class="level2">
-<h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
-<p>The old way “store a PAT as the <code>GITHUB_PAT</code> environment variable in <code>.Renviron.</code>” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the <code>gh</code> package for generating PATs like in <a href="https://gh.r-lib.org/articles/managing-personal-access-tokens.html">Managing Personal Access Tokens</a></p>
-<p>Alternatively, there are some git config options from the terminal. See: <a href="https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux">Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR</a></p>
+<section id="disabling-positron-assistant" class="level2">
+<h2 class="anchored" data-anchor-id="disabling-positron-assistant">Disabling Positron Assistant</h2>
+<p>Add enforced settings to helm values.yaml</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">config:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">server:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="ex">rserver.conf:</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">admin-enabled:</span> 1</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Add enforced settings JSON file</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="ex">enforced-settings.json:</span> <span class="kw">|</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">"positron.assistant.enable"</span><span class="ex">:</span> false,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">"extensions.allowed"</span><span class="ex">:</span> {</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"posit.assistant"</span><span class="ex">:</span> false,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>              <span class="kw">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span><span class="ex">,</span>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The key here to get positron assistant to not show up being:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>        <span class="er">}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reference the enforced settings in profiles</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>      <span class="ex">profiles:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"*"</span><span class="ex">:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          <span class="ex">positron-enforced-settings:</span> /mnt/configmap/rstudio/enforced-settings.json</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">"extensions.allowed"</span><span class="ex">:</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"posit.assistant"</span><span class="ex">:</span> false,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span><span class="ex">,</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

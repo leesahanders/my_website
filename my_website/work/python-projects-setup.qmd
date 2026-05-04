@@ -11,7 +11,7 @@ editor: source
 toc: true
 image: "img/"
 draft: false
-freeze: true
+freeze: false
 filters:
    - lightbox
 lightbox: auto
@@ -90,7 +90,9 @@ pip install -r requirements.txt
 
 ## More on the requirements.txt
 
-It can be as simple as just a list of packages, or it can also include specific versions or call out to a particular url. 
+It can be as simple as just a list of packages, or it can also include specific versions or call out to a particular url. This is a great page showing some different options: <https://packagemanager.posit.co/__docs__/user/configure-python.html> 
+
+`-i https://packagemanager.posit.co/pypi/latest/simple` or `--index-url https://staging.packagemanager.rstudio.com/pypi/latest/simple` can be used to set the repository url. 
 
 ```bash
 --index-url https://staging.packagemanager.rstudio.com/pypi/latest/simple

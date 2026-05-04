@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2025-12-11">
+<meta name="description" content="Preparing for your Posit Team Install">
+
+<title>Pre-reqs for Posit installs – Lisa Anders - questionable.quarto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/leafey-48.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6f6599830d51be977da3b6af758f8eff.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-e91c052eb570edf2d22681b9d732e88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-41747d4fbeb8042c449695184b3e5aec.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-e91c052eb570edf2d22681b9d732e88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-stuff" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-database" role="img">
+</i> 
+ <span class="menu-text">Stuff</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/posts/">
+ <span class="dropdown-text">Blog / Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../lists.html">
+ <span class="dropdown-text">Lists</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../presentations.html">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/">
+ <span class="dropdown-text">Recipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../work.html">
+ <span class="dropdown-text">Technical writeups</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../site_map.html"> 
+<span class="menu-text">Site Map</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/leesahanders/my_website"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Pre-reqs for Posit installs</h1>
+                  <div>
+        <div class="description">
+          Preparing for your Posit Team Install
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Posit</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lisa </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 11, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preparing-for-your-posit-team-install" id="toc-preparing-for-your-posit-team-install" class="nav-link active" data-scroll-target="#preparing-for-your-posit-team-install">Preparing for your Posit Team Install</a>
+  <ul class="collapse">
+  <li><a href="#server-selection" id="toc-server-selection" class="nav-link" data-scroll-target="#server-selection">Server selection</a></li>
+  <li><a href="#pre-requisites" id="toc-pre-requisites" class="nav-link" data-scroll-target="#pre-requisites">Pre-requisites</a>
+  <ul class="collapse">
+  <li><a href="#who-is-needed-for-the-install" id="toc-who-is-needed-for-the-install" class="nav-link" data-scroll-target="#who-is-needed-for-the-install">Who is needed for the install</a></li>
+  <li><a href="#preparing-the-servers" id="toc-preparing-the-servers" class="nav-link" data-scroll-target="#preparing-the-servers">Preparing the servers</a></li>
+  <li><a href="#server-hardening" id="toc-server-hardening" class="nav-link" data-scroll-target="#server-hardening">Server hardening</a></li>
+  <li><a href="#storage" id="toc-storage" class="nav-link" data-scroll-target="#storage">Storage</a></li>
+  <li><a href="#database" id="toc-database" class="nav-link" data-scroll-target="#database">Database</a></li>
+  <li><a href="#load-balancers-proxy-ingress" id="toc-load-balancers-proxy-ingress" class="nav-link" data-scroll-target="#load-balancers-proxy-ingress">Load balancers / Proxy / Ingress</a></li>
+  <li><a href="#license-files" id="toc-license-files" class="nav-link" data-scroll-target="#license-files">License files</a></li>
+  <li><a href="#ssl-certificates" id="toc-ssl-certificates" class="nav-link" data-scroll-target="#ssl-certificates">SSL certificates</a></li>
+  <li><a href="#install-r" id="toc-install-r" class="nav-link" data-scroll-target="#install-r">Install R</a></li>
+  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python">Install Python</a></li>
+  <li><a href="#install-quarto" id="toc-install-quarto" class="nav-link" data-scroll-target="#install-quarto">Install Quarto</a></li>
+  <li><a href="#prepare-for-user-data-access" id="toc-prepare-for-user-data-access" class="nav-link" data-scroll-target="#prepare-for-user-data-access">Prepare for user data access</a></li>
+  <li><a href="#authentication-and-authorization" id="toc-authentication-and-authorization" class="nav-link" data-scroll-target="#authentication-and-authorization">Authentication and authorization</a></li>
+  <li><a href="#hpc-installations" id="toc-hpc-installations" class="nav-link" data-scroll-target="#hpc-installations">HPC installations</a></li>
+  <li><a href="#cheat-sheet-commands" id="toc-cheat-sheet-commands" class="nav-link" data-scroll-target="#cheat-sheet-commands">Cheat sheet commands</a></li>
+  </ul></li>
+  <li><a href="#how-long-will-the-install-process-take" id="toc-how-long-will-the-install-process-take" class="nav-link" data-scroll-target="#how-long-will-the-install-process-take">How long will the install process take?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>Lisa Anders heavily inspired by resources and conversations in the Solutions Engineering team, especially SamC, Katie, MichaelM, and Monanshi</p>
+<p>This is now moved over to: <a href="https://github.com/leesahanders/posit-team-pre-reqs" class="uri">https://github.com/leesahanders/posit-team-pre-reqs</a></p>
+<p><strong>Author</strong>: Lisa Anders heavily inspired by resources and conversations in the Solutions Engineering team, especially SamC, Katie, MichaelM, Monanshi, and the West Study Group</p>
+<p><strong>Target audience</strong>: An admin that you know will be a good admin, they have fearlessness and independence but maybe they don’t know what they are doing yet. The goal being to help the you’ll-be-a-good-admin-we-just-have-to-get-through-this-one-new-thing folks that are rising to the challenge. Also for hard conversations with leadership when you are trying to get a different admin, because they aren’t able to follow these clear pre reqs. And honestly maybe this is selfish - when a customer is struggling because they are new to nfs or postgres management (or whif atever it is) and are looking to me for guidance I want (1) something I can refer to that will enable tus both and (2) something we can point at and say “you aren’t able to do this fundamental set up steps, maybe we should reconsider”.</p>
+<section id="preparing-for-your-posit-team-install" class="level1">
+<h1>Preparing for your Posit Team Install</h1>
+<p>Your Posit Team install is a big step on the road to enterprise data science. Congratulations! There are a couple things you can prepare early so that your install will go smoothly.</p>
+<p>This guide is meant for someone that already has linux experience. Our products run on linux and while we do our best they are complex products requiring knowledge and curiosity to run successfully. These steps below should be possible to complete independently by a competent administrator and are a good gauge of readiness for maintaining the Posit Team suite of products. If this looks like too much please reach out to our sales team to discuss other options like managed services, Posit cloud, or running the editors locally. There are options.</p>
+<section id="server-selection" class="level2">
+<h2 class="anchored" data-anchor-id="server-selection">Server selection</h2>
+<p>Plan on having both a production and a staging environment (at the minimum) to follow our best practices. This will enable testing of upgrades, patching, etc in the staging environment prior to rolling it out to production. Whenever any changes happen on a server there is risk of down time. By having an identical version of your production environment where those issues can be encountered and resolution can have as long as it needs then when the production upgrade happens you’ll know the steps for a fast and painless upgrade process.</p>
+<p>Make sure that the configuration and sizing is large enough to support your use cases (or is able to be expanded in the future). We have some starting recommmendations <a href="https://support.posit.co/hc/en-us/articles/115002344588-Configuration-and-sizing-recommendations">in the Configuration and sizing recommendations support article</a>.</p>
+<p>Make sure that the OS selected is a <a href="https://docs.posit.co/platform-support.html">supported version</a>. It should be a flavor of linux and one that your IT team is knowledgable in supporting.</p>
+<p>Note that we do not recommend running multiple of the products on the same server. Our best practice recommendation is to run each product on its own dedicated hardware. While it may seem appealing there are a couple reasons why this generally is a bad idea. There is a <a href="https://support.posit.co/hc/en-us/articles/4419660407063-Running-Multiple-RStudio-Products-on-the-same-Machine">support article here</a> that goes into this in more detail.</p>
+</section>
+<section id="pre-requisites" class="level2">
+<h2 class="anchored" data-anchor-id="pre-requisites">Pre-requisites</h2>
+<section id="who-is-needed-for-the-install" class="level3">
+<h3 class="anchored" data-anchor-id="who-is-needed-for-the-install">Who is needed for the install</h3>
+<p>In order to do the install a linux administrator with root access will be needed. While not always necessary, running commands with <code>sudo</code> privileges is the happy path to guarantee success and is a much easier install if that level of access is allowed.</p>
+<p>At times through the install other administrators may also be needed, notably for storage, databases, and/or authentication. Networking, security, or admins for specific cloud platforms may also be needed. Make sure you’ve lined up people that can be reached out to that will be available to help as needed.</p>
+<p>Last but not least make sure that you have a strong representative(s) for your various data science communities. The Posit products are very configurable and there are many choices that will easier to navigate if you have a stakeholder who will use the product involved in making the decision.</p>
+</section>
+<section id="preparing-the-servers" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-the-servers">Preparing the servers</h3>
+<p>Make sure that any server patching, upgrades, connections to a vendor support, or repositories have been set up.</p>
+<p>For RHEL based systems follow the instructions here: <a href="https://docs.posit.co/resources/install-r.html#install-required-dependencies">Install required dependencies</a></p>
+<p>Example checking if RHEL subscriptions have been set up:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (RHEL only) Check that subscription manager is connected and RHEL license is enabled </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> subscription-manager repos <span class="at">--list</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Be sure to restart the software if needed to pull in any updates:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Can also use reboot, in RHEL systems these are functionally the same</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> shutdown <span class="at">-r</span> now</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="server-hardening" class="level3">
+<h3 class="anchored" data-anchor-id="server-hardening">Server hardening</h3>
+<p>Disabling any server hardening, or being able to promptly review and enable the alerts, will be needed for specific commands. The easiest option is to disable any server hardening temporarily during the install and then enable it afterwords. The challenge with server hardening is that the error messages are usually borderline nonexistent if existent at all and it’s very difficult to tell if the issue is server hardening or a missed step in the install process.</p>
+<p>Selinux has three modes: enforcing, permissive, disabled. Permissive mode makes it so that any potential issues are flagged and logged, but won’t be blocked. This is a command that will set selinux to permissive mode:</p>
+<blockquote class="blockquote">
+<p>Is this really the command for permissive mode?</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set selinux to permissive</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setenforce 0</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set selinux to permissive, persists after a restart</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setenforce 0 <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> sed <span class="at">-i</span> <span class="st">'s/^SELINUX=.*/SELINUX=disabled/g'</span> /etc/selinux/config</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check selinux mode </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">sestatus</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Workbench has a selinux module that can be used after install to run with selinux set to <code>enforcing</code>. Install this module prior to installing the software, following <a href="https://docs.posit.co/ide/server-pro/admin/access_and_security/selinux_configuration.html">the instructions here</a>.</p>
+<p>Another common issue related to server hardening is an overly restrictive umask during installation. For example, if umask is set to <code>0077</code>, packages added to <code>site-packages</code> during the Python installation are inaccessible within user sessions, and Jupyter sessions will fail to launch.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the umask level </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">umask</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set umask to a more permissive level </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">umask</span> 020</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Networking ports can also be a common challenge if certain ports are blocked. Review the <a href="https://docs.posit.co/getting-started/networking.html">cheatsheet of Networking</a> to make sure all needed ports have been opened. Note that these ports are needed internally inside your network, outbound is not required (but can make things a lot easier). The recommendation for very closed off installations would be to open up the firewall temporarily so that files can be downloaded for install more easily instead of needing to download on a separate device and then upload them.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the correct IP address comes back for each server </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if firewalld is enabled</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> firewall-cmd <span class="at">--state</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Disable firewalld</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> stop firewalld <span class="kw">&amp;&amp;</span> <span class="ex">systemctl</span> disable firewalld <span class="co"># RHEL</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> disable <span class="co"># Ubuntu</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># If you find that "privileged ports", like 443, are being blocked from being listened on use this command to grant the relevant service (package mmanager in this example) binary permission to do so</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> setcap <span class="st">'cap_net_bind_service=+ep'</span> /opt/rstudio-pm/bin/rstudio-pm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>How do we check that networking looks good?</p>
+</blockquote>
+</section>
+<section id="storage" class="level3">
+<h3 class="anchored" data-anchor-id="storage">Storage</h3>
+<p>Additional storage is not necessarily needed. If the architecture desired is a single server and doesn’t need failover or redundancy then using the on disk storage might be sufficient. That is the fastest option, and doesn’t require any additional configuration or setup.</p>
+<p>The software will need write privileges to /tmp, <code>noexec</code> will cause issues during the install process. This can be otionally set if needed for the relevant software user account with <code>chown rstudio-pm: /tmp</code> or <code>chmod 1777 /tmp</code>. Alternatively a new tmp location can be created that will allow write privileges. You can confirm the privileges via the command <code>namei -l /tmp</code>​.</p>
+<p>In the case of robust, high availability/load balanced, containerized, kubernetes, or slurm deployments then a mounted shared drive for all nodes for a product in a particular environment (staging or production) will be needed. Review the <a href="https://docs.posit.co/getting-started/storage.html">storage options article</a> to determine what will work for you. Typically with storage you get what you pay for, so the cheapest options, while tempting, often run into issues with latency and performance. The storage recommendation simplistically boils down to recommending something NFS based (with the note that S3 can work for Package Manager as well).</p>
+<p>The rest of this section will focus on tips for mounting NFS storage.</p>
+<p>Be sure to consult the <a href="https://support.posit.co/hc/en-us/articles/360060548093-Deploying-NFS-for-High-Availability-Deployments">Deploying NFS for high availability deployments support article</a> and the <a href="https://docs.posit.co/ide/server-pro/admin/getting_started/installation/multi_server_installation.html#mount-shared-storage">How to mount shared storage steps from the Workbench Admin guide</a> for some help to get things set up.</p>
+<p>On the prepared servers the needed system dependencies will need to be install, likely <code>nfs-utils</code>.</p>
+<p>It’s a good idea to go through the process of manually mounting, making sure everything works, unmounting it, and then adding it to fstab so it will persist in the case of server restarts.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List of filesystems exported from nfs server where hostname is the hostname of the nfs server </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">showmount</span> <span class="op">&lt;</span>hostname<span class="op">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mount the share drive (interactive mode, this won't persist if the server is rebooted)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mount</span> hostname:/data/home /home</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See mounted shares</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">showmount</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mount</span> <span class="at">-a</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mount</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Unmount prior to adding to fstab</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">umount</span> /mountDir</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Example entry in <code>/etc/fstab</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hostname:/data/Connect</span> /home nfs default</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>After modifying <code>/etc/fstab</code> pull it in with: <code>sudo systemctl daemon-reload</code></p>
+<blockquote class="blockquote">
+<p>what is this about? One more thing fstab nfsif want to make sure is mountd on boot there is a command you’ll want to add something like _netdev to the fstab, here is the command: <code>defaults,_netdev</code></p>
+</blockquote>
+<p>In the case of permissions issues a useful command to know that will update the permissions of affected files and directories using <code>chmod -R og+rX</code>. This allows all users and groups to read the files, search inside the directories, and run any programs that already have the execute permission set.</p>
+<blockquote class="blockquote">
+<p>Another issue that pops up is we need /tmp needs to be executable, which isnt always the case. Should say something about how to create a new directory and use that instead in the case that /tmp doesn’t allow execution.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Pull in more from here: <a href="https://docs.posit.co/ide/server-pro/admin/getting_started/installation/multi_server_installation.html#mount-shared-storage" class="uri">https://docs.posit.co/ide/server-pro/admin/getting_started/installation/multi_server_installation.html#mount-shared-storage</a></p>
+</blockquote>
+</section>
+<section id="database" class="level3">
+<h3 class="anchored" data-anchor-id="database">Database</h3>
+<p>An additional database is not necessarily needed. If the architecture desired is a single server and doesn’t need failover or redundancy then using the built-in sqlite database might be sufficient. That is the fastest option, and doesn’t require any additional configuration or setup.</p>
+<p>In the case of robust, high availability/load balanced, containerized, kubernetes, or slurm deployments then an external postgres database is required for all nodes for a product in a particular environment (staging or production).</p>
+<p>The rest of this section will focus on tips for setting up a Postgres database.</p>
+<p>Work with your database team to create and configure your postgres database. One postgres server can be used for multiple products, however each product environment will need its own database within that postgres server with its own username and password.</p>
+<p>Here’s an example of how to create a database and user remotely, without creating a postgres session:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create database role (user) and Database for Connect, duplicate this for the other products (be sure to update the names)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-i</span> <span class="at">-u</span> postgres psql <span class="at">-c</span> <span class="st">"CREATE ROLE positConnectAdmin CREATEDB LOGIN PASSWORD 'test';"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-i</span> <span class="at">-u</span> postgres psql <span class="at">-c</span> <span class="st">"CREATE DATABASE positConnect WITH OWNER = positConnectAdmin;"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here’s an example of testing network access to the postgres database from the server the software will be hosted on:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test database connection</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> instance-eks-rds.cpbvczwgws3n.us-east-2.rds.amazonaws.com <span class="at">-U</span> posit_connect <span class="at">-d</span> posit_connect <span class="at">-c</span> <span class="st">'\conninfo'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Be sure to capture the details of the connection string, username, and password for use later. The connection string will be in a format like <code>postgres://username@db.seed.co/posit</code> with any optional connection details at the end, like <code>?options=-csearch_path=connect_schema</code>.</p>
+</section>
+<section id="load-balancers-proxy-ingress" class="level3">
+<h3 class="anchored" data-anchor-id="load-balancers-proxy-ingress">Load balancers / Proxy / Ingress</h3>
+<p>Prepare whichever ingress is needed if it is being used. The ingress will need an SSL certificate in order to be accessed over https and we recommend having sticky sessions enabled. Each product and environment will need its own ingress.</p>
+<p>Each admin guide has an additional section discussing considerations when running with a proxy. If that applies to your desired setup, it is highly recommend you seek out and read those pages.</p>
+</section>
+<section id="license-files" class="level3">
+<h3 class="anchored" data-anchor-id="license-files">License files</h3>
+<p>By now you should have received a license file or key from Posit. If using a license file be sure to copy it to the environment where it is needed. Each license is specific to that product. So while the same license will be shared across your production and staging environments, they will be different for each software product.</p>
+</section>
+<section id="ssl-certificates" class="level3">
+<h3 class="anchored" data-anchor-id="ssl-certificates">SSL certificates</h3>
+<p><a href="https://docs.posit.co/how-to-guides/guides/install-ssl-certificates.html">Verify TLS certificates and keys</a> (without passphrases) including the full certificate chain up to and including the root CA certificate. The certificate and key should be copied to the server ready to be copied into its relevant folder after the software has been installed following the install instructions. Wildcard certs are a great option if you want to cover multiple servers under a single domain.</p>
+<p>In the case of installs using ingress there is a choice:</p>
+<ul>
+<li>Most customers will choose to have ssl certs at the ingress controller / load balancer layer and terminate at that layer. Within the cluster communication is not encrypted, over http. This can be an acceptable risk for many organizations.</li>
+<li>For security concerned customers they will havve the same with the SSL certs at the ingress controller / load balancer layer but additionally will have certs installed on each node so that all traffic is over https.</li>
+</ul>
+<p>In the case of a kubernetes installation we strongly recommend considering using a service mesh. A service mesh can be used for many things, one of those being creating a blanket of TLS across the cluster. In a kubernetes environment the challenge is that resources are transient. Since SSL certs are typically allocated to a specific address (even with the ability to do wildcards) it can be very challenging to get things working since you may not have persistent host names. A service mesh solves this problem.</p>
+</section>
+<section id="install-r" class="level3">
+<h3 class="anchored" data-anchor-id="install-r">Install R</h3>
+<p>Install R following <a href="https://docs.posit.co/resources/install-r.html">our instructions here</a> on:</p>
+<ul>
+<li>Workbench server where R users will be running sessions</li>
+<li>Connect server where R users will be deploying content</li>
+<li>Package Manager server where internally developed R packages will be built and served</li>
+</ul>
+<p>Check with your data science community to confirm those use cases, of if it should be skipped on any systems.</p>
+<p>Check with your developers if a specific version is needed, otherwise the recommendation is to go with the latest production release. Multiple versions can be installed to run side by side to support projects developed at different times.</p>
+<p>Find all installed R versions with: <code>ls -ld /opt/R/*</code></p>
+</section>
+<section id="install-python" class="level3">
+<h3 class="anchored" data-anchor-id="install-python">Install Python</h3>
+<p>Install Python following <a href="https://docs.posit.co/resources/install-python-uv.html">our instructions here</a> on:</p>
+<ul>
+<li>Workbench server where Python users will be running sessions</li>
+<li>Connect server where Python users will be deploying content</li>
+<li>Package Manager server where internally developed Python packages will be built and served</li>
+</ul>
+<p>Check with your data science community to confirm those use cases, of if it should be skipped on any systems.</p>
+<p>Check with your developers if a specific version is needed, otherwise the recommendation is to go with the latest production release. Multiple versions can be installed to run side by side to support projects developed at different times.</p>
+<p>Find all installed python versions with: <code>ls -1d /opt/python/*</code></p>
+</section>
+<section id="install-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="install-quarto">Install Quarto</h3>
+<p>Installation of Quarto is only needed on Connect. Install quarto following <a href="https://docs.posit.co/resources/install-quarto.html">our instructions here</a>. Check with your developers if a specific version is needed, otherwise the recommendation is to go with the latest production release. Multiple versions can be installed to run side by side to support projects developed at different times.</p>
+<p>Find all installed quarto versions with: <code>ls -ld /opt/quarto*</code> and <code>quarto check</code></p>
+</section>
+<section id="prepare-for-user-data-access" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-for-user-data-access">Prepare for user data access</h3>
+<p>Users will likely need data source access for their day to day workflows whether working on Workbench and developing resources, or deploying content to Connect that will update the visualizations as the underlying data updates.</p>
+<p>Depending on the resources your organization has, and the analytics being built, some of the data connections that might make sense to integrate with include databases, pinned data sets, flat files like csv’s stored in the project directory or a shared directory, mounted network drives, pins, blob storage like Azure torge or s3 buckets, or some other kind of interface.</p>
+<p>Data source connections are hndled by the R or Python code written by the developer, not by Workbench or Connect. Connection feasibility is determined solely by the underlying Linux server environment. If a connection can be established from a standalone R or Python session on that server, the same connection will be available when running the code via Workbench or Connect.</p>
+<p>Compile a list of all needed data sources and the methods for connecting to them. For the different types of data sources different pre-reqs may be needed:</p>
+<ul>
+<li>Mounted shares : Make sure any shares are mounted to the shares and the path is documented for developers to use</li>
+<li>Databases : <a href="https://docs.posit.co/pro-drivers/server/">Install the pro drivers</a> or any other needed drivers and (optionally) create the /etc/odbcinst.ini to make access easier so that developers can use a name to connect to a database instead of need to know full address and ports</li>
+<li>Blob storage : Document the locations and connection methods for the blob storage. Access is typically through a package (like paws or aws.s3).</li>
+<li>Others : Taken on a case by case basis, document the current methods for access and make sure any pre-requisites are installed on the servers</li>
+</ul>
+<p>Posit has support for oauth integrations to data sources. This makes it so that instead of needing to provisionion service accounts or secrets that developers then need to guard, they can instead get a “pass through” experience where after logging in a short-term token is cache’d that can be used to enable password-less data access. In order to enable this an additional oauth application will need to be created to enable that access on a per data source level. Review the</p>
+<ul>
+<li>Posit Workbench and Managed Credentials: <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/managed-credentials.html" class="uri">https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/managed-credentials.html</a></li>
+<li>Posit Connect and Oauth Integrations: <a href="https://docs.posit.co/connect/user/oauth-integrations/" class="uri">https://docs.posit.co/connect/user/oauth-integrations/</a></li>
+</ul>
+</section>
+<section id="authentication-and-authorization" class="level3">
+<h3 class="anchored" data-anchor-id="authentication-and-authorization">Authentication and authorization</h3>
+<p>For any authentication systems that are desired to be integrated with, configuration will be needed from the perspective of the authentication provider. Typically they will need to configure users and groups that should have access, SSO and MFA requirements, and will use the information from your server address, DSN, or ingress to know the appropriate redirect URL. In the case of user provisioning via a system like SCIM then additional set up and details are likely needed. Work closely with your auth team in order to create these in advance of the install.</p>
+<p>There are multiple authentication modes that are supported that can be chosen from. Both SAML and OpenID/Oauth support SSO and are recommended over other methods since it leverages the full capablity of using an enterprise authentication provider. Oauth is typically preferred as the stronger choice and the gold standard for secure authentication currently. This is due to its use of tokens. Importantly they are short-lived, usually expiring after an hour, so the risk of exposure and abuse is much lower than other options. However, if there is an existing Active Directory (AD) service or LDAP service and a knowledgeable IT team for those services than that can also work.</p>
+<blockquote class="blockquote">
+<p>How to test that authentication will work? group command</p>
+</blockquote>
+</section>
+<section id="hpc-installations" class="level3">
+<h3 class="anchored" data-anchor-id="hpc-installations">HPC installations</h3>
+<blockquote class="blockquote">
+<p>Anything to know or prep for slurm or k8s?</p>
+</blockquote>
+<p>Follow the pre-req and pre-flight install steps <a href="https://docs.posit.co/ide/server-pro/admin/integration/launcher-kubernetes.html">here for kubernetes</a></p>
+<p>Prepare any pre-reqs for container images for your kubernetes environment.</p>
+<p>Follow the pre-req and pre-flight install steps <a href="https://docs.posit.co/ide/server-pro/admin/integration/launcher-slurm.html">here for slurm</a></p>
+<p>If using slurm consider whether or not singulatiry/apptainer images are desired and prepare the requirements for those images as needed.</p>
+<p>Read this email and incorporate: Fwd: Posit &lt;-&gt; BofA: SLURM Call Summary and next steps</p>
+</section>
+<section id="cheat-sheet-commands" class="level3">
+<h3 class="anchored" data-anchor-id="cheat-sheet-commands">Cheat sheet commands</h3>
+<p>There are a couple commands that are useful to keep at your fingerprints while going through the install.</p>
+<section id="package-manager" class="level4">
+<h4 class="anchored" data-anchor-id="package-manager">Package Manager</h4>
+<p>Add account to rstudio-pm group in order to use the cli: <code>sudo usermod -aG rstudio-pm ubuntu</code></p>
+<p>Without an alias call the CLI directly: `<code>/opt/rstudio-pm/bin/rspm --help</code></p>
+<p>Config lives at: <code>/etc/rstudio-pm/rstudio-pm.gcfg</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start/ Stop / Restart commands</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl stop rstudio-pm</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start rstudio-pm</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Status command</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-pm</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-pm <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> status.txt</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View logs </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/rstudio-pm/rstudio-pm.log</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/rstudio-pm/rstudio-pm.log <span class="kw">|</span> <span class="fu">grep</span> error<span class="pp">*</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> journalctl <span class="at">-xe</span> <span class="at">-u</span> rstudio-pm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="connect" class="level4">
+<h4 class="anchored" data-anchor-id="connect">Connect</h4>
+<p>Config lives at: <code>/etc/rstudio-connect/rstudio-connect.gcfg</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start/ Stop / Restart commands</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart rstudio-connect</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl stop rstudio-connect</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start rstudio-connect</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Status command</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-connect</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-connect <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> status.txt</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View logs </span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/rstudio-connect/rstudio-connect.log</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/rstudio-connect/rstudio-connect.log <span class="kw">|</span> <span class="fu">grep</span> error<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="workbench" class="level4">
+<h4 class="anchored" data-anchor-id="workbench">Workbench</h4>
+<p>Add account to rstudio-server group: <code>sudo usermod -aG rstudio-server ubuntu</code> For admin access add user to <code>rstudio-admin</code> group</p>
+<p>Check if there are any active sessions running: <code>sudo rstudio-server active-sessions</code> If there are active sessions, then&nbsp;<a href="https://docs.posit.co/ide/server-pro/server_management/core_administrative_tasks.html#managing-active-sessions">suspend all</a>&nbsp;active user sessions: <code>sudo rstudio-server suspend-all</code></p>
+<p>Configs live in: <code>/etc/rstudio/</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start/ Stop / Restart commands</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-server restart</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-server start</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-server stop</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-server start</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-launcher restart</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-launcher stop</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-launcher start</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Status command</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-server</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-server <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> status.txt</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-launcher</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-launcher <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> status.txt</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># See nodes </span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-server list-nodes</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Some test CLI commands </span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="ex">/opt/rstudio-pm/bin/rspm</span> list</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="ex">/opt/rstudio-pm/bin/rspm</span> online</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># View logs </span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/rstudio-server/rserver.log</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/launcher/rstudio-launcher.log <span class="kw">|</span> <span class="fu">grep</span> error<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+</section>
+<section id="how-long-will-the-install-process-take" class="level2">
+<h2 class="anchored" data-anchor-id="how-long-will-the-install-process-take">How long will the install process take?</h2>
+<p>By following the above steps you are minimizing delays due to waiting for resources to become available. This process should now be fast and efficient, but its worth noting that depending on the complexity of your environment some installs will inherently take longer than others.</p>
+<p>At the end of the day, it’s not about having to know everything. The most important quality in an admin is being able to be fearless and try things independently. As you go through the install our Support team is here to partner with you if you run into issues that we can help with. We our proud of the knowledge of our team, and hope you enjoy your interactions with them.</p>
+<p>We appreciate feedback! If there are steps we can better outline or document please let us know either by contacting your customer success representative with feedback, through submitting a support ticket, or letting us know in person at our annual conference. Thanks!</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

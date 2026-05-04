@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2023-08-29">
-<meta name="description" content="This simple trick will save you so much time">
+<meta name="dcterms.date" content="2026-04-13">
+<meta name="description" content="A quick overview">
 
-<title>Problems with git credential persistence when in the cloud – Lisa Anders - questionable.quarto</title>
+<title>User access to Workbench – Lisa Anders - questionable.quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -322,15 +322,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Problems with git credential persistence when in the cloud</h1>
+      <h1 class="title">User access to Workbench</h1>
                   <div>
         <div class="description">
-          This simple trick will save you so much time
+          A quick overview
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">security</div>
+                <div class="quarto-category">Posit</div>
               </div>
                   </div>
   </div>
@@ -348,7 +347,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 29, 2023</p>
+        <p class="date">April 13, 2026</p>
       </div>
     </div>
     
@@ -364,11 +363,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem-when-on-linux" id="toc-problem-when-on-linux" class="nav-link active" data-scroll-target="#problem-when-on-linux">Problem when on Linux:</a></li>
-  <li><a href="#problem-when-on-sagemaker" id="toc-problem-when-on-sagemaker" class="nav-link" data-scroll-target="#problem-when-on-sagemaker">Problem when on Sagemaker:</a></li>
-  <li><a href="#tldr-solution" id="toc-tldr-solution" class="nav-link" data-scroll-target="#tldr-solution">TLDR Solution:</a></li>
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
-  <li><a href="#alternatives" id="toc-alternatives" class="nav-link" data-scroll-target="#alternatives">Alternatives</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#how-authentication-works-in-workbench" id="toc-how-authentication-works-in-workbench" class="nav-link" data-scroll-target="#how-authentication-works-in-workbench">How authentication works in Workbench</a></li>
+  <li><a href="#pros-and-cons" id="toc-pros-and-cons" class="nav-link" data-scroll-target="#pros-and-cons">Pros and cons</a></li>
+  <li><a href="#key-concepts-authentication-vs.-sessions-vs.-provisioning" id="toc-key-concepts-authentication-vs.-sessions-vs.-provisioning" class="nav-link" data-scroll-target="#key-concepts-authentication-vs.-sessions-vs.-provisioning">Key concepts: Authentication vs.&nbsp;Sessions vs.&nbsp;Provisioning</a></li>
+  <li><a href="#authentication-methods" id="toc-authentication-methods" class="nav-link" data-scroll-target="#authentication-methods">Authentication methods</a></li>
+  <li><a href="#pam-sessions" id="toc-pam-sessions" class="nav-link" data-scroll-target="#pam-sessions">PAM sessions</a></li>
+  <li><a href="#user-provisioning" id="toc-user-provisioning" class="nav-link" data-scroll-target="#user-provisioning">User provisioning</a></li>
   </ul>
 </nav>
     </div>
@@ -380,49 +381,216 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!</p>
-<section id="problem-when-on-linux" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-linux">Problem when on Linux:</h2>
-<blockquote class="blockquote">
-<p>In general gitcreds doesn’t work well on linux (which has led to this git issue <a href="https://github.com/r-lib/gitcreds/issues/47">(Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds</a> ). There is an excellent blog post that is very useful that goes deeper into what is going on: <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">Notes from a data witch - Managing GitHub credentials from R, difficulty level linux</a></p>
-</blockquote>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Posit Workbench gives each user their own Linux session with a home directory, running processes, and file-system permissions. This means every Workbench user must have a corresponding system account on the server (or accessible via network services like System Security Services Daemon (SSSD) or Lightweight Directory Access Protocol (LDAP)).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Workbench users require local or networked system accounts regardless of what authentication method you use. Enabling user authentication doesn’t also handling user provisioning which needs to be set up separately.</p>
+</div>
+</div>
+<p>This is different from Posit Connect and Posit Package Manager, which run content under a single service account and do not need per-user system accounts.</p>
 </section>
-<section id="problem-when-on-sagemaker" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-sagemaker">Problem when on Sagemaker:</h2>
-<blockquote class="blockquote">
-<p>Additionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist.</p>
-</blockquote>
+<section id="how-authentication-works-in-workbench" class="level2">
+<h2 class="anchored" data-anchor-id="how-authentication-works-in-workbench">How authentication works in Workbench</h2>
+<p>Workbench uses Linux <a href="http://en.wikipedia.org/wiki/Pluggable_authentication_module">Pluggable Authentication Modules (PAM)</a>.</p>
+<ol type="1">
+<li><strong>User signs in</strong> — either through a direct login form (PAM) or via your SSO provider (SAML, OpenID Connect, or a reverse proxy).</li>
+<li><strong>Workbench maps the user to a system account</strong> — The authenticated username must match a Linux account on the server.</li>
+<li><strong>PAM creates a session</strong> — Workbench calls PAM to create a Linux session for the matched system account, which sets up the user’s environment (home directory, groups, and resource limits).</li>
+</ol>
+<p>Not all Posit products require local system accounts or PAM. For example, Posit Connect and Shiny Server rely on their own authentication engines and on a single system account for doing their work in most cases, not requiring individualized development environments like the ones offered by Posit Workbench.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using SSO, OpenID Connect, or proxied authentication, you need to configure PAM sessions to automatically create system accounts on first sign-in. Otherwise, you must provision local system accounts manually before users can sign in.</p>
+</div>
+</div>
 </section>
-<section id="tldr-solution" class="level2">
-<h2 class="anchored" data-anchor-id="tldr-solution">TLDR Solution:</h2>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
+<section id="pros-and-cons" class="level2">
+<h2 class="anchored" data-anchor-id="pros-and-cons">Pros and cons</h2>
+<p>Taken from Trevor’s excellent slide deck ~July 2025</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Manual Linux user accounts</td>
+<td>Simple, quick to set up</td>
+<td>Doesn’t scale</td>
+</tr>
+<tr class="even">
+<td>Corporate LDAP/AD</td>
+<td>Leverage existing corporate user &amp; group info</td>
+<td>Set up outside PWB &amp; difficult for some</td>
+</tr>
+<tr class="odd">
+<td>Corporate SSO OpenID/SAML with SCIM</td>
+<td>Leverage existing corporate user info &amp; enterprise IT friendly</td>
+<td>No group info (yet) &amp; more setup required in IdP</td>
+</tr>
+<tr class="even">
+<td>Corporate SSO OpenID/SAML with JIT</td>
+<td>Leverage existing corporate user info &amp; easy set up (once you know the settings)</td>
+<td>No group info (yet) &amp; less enterprise IT friendly</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">Testing</h2>
-<p>I’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.</p>
-<p>Load libraries:</p>
-<pre><code>library(usethis) 
-library(gitcreds) 
-library(gh) 
-library(credentials)</code></pre>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
-<p>From the documentation:</p>
-<blockquote class="blockquote">
-<p>The “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.</p>
-</blockquote>
-<p>Generate the PAT:</p>
-<p><code>usethis::create_github_token()</code></p>
-<p>Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:</p>
-<p><code>gitcreds::gitcreds_set()</code></p>
-<p>Check that it stored with:</p>
-<p><code>gitcreds_get()</code></p>
+<section id="key-concepts-authentication-vs.-sessions-vs.-provisioning" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts-authentication-vs.-sessions-vs.-provisioning">Key concepts: Authentication vs.&nbsp;Sessions vs.&nbsp;Provisioning</h2>
+<p>Workbench has three components for successful user access:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>What it is</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Authentication</strong></td>
+<td>Verifying user identity (who is this person?)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>PAM Sessions</strong></td>
+<td>Server-side environment setup (home directory, access controls, user permisions)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>User Provisioning</strong></td>
+<td>Creating system accounts automatically vs.&nbsp;manually</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
 </section>
-<section id="alternatives" class="level2">
-<h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
-<p>The old way “store a PAT as the <code>GITHUB_PAT</code> environment variable in <code>.Renviron.</code>” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the <code>gh</code> package for generating PATs like in <a href="https://gh.r-lib.org/articles/managing-personal-access-tokens.html">Managing Personal Access Tokens</a></p>
-<p>Alternatively, there are some git config options from the terminal. See: <a href="https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux">Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR</a></p>
+<section id="authentication-methods" class="level2">
+<h2 class="anchored" data-anchor-id="authentication-methods">Authentication methods</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>When to use</th>
+<th>Posit Workbench Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Local accounts / PAM Authentication</strong></td>
+<td>Users have local accounts that already exist</td>
+<td>PAM Authentication via <code>pam_unix</code></td>
+</tr>
+<tr class="even">
+<td><strong>LDAP or Active Directory</strong></td>
+<td>Users have LDAP/AD accounts that already exist</td>
+<td>PAM Authentication via <code>pam_sss</code> or <code>pam_ldap</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Kerberos (not SSO)</strong></td>
+<td>PAM authenticates with Kerberos.</td>
+<td>PAM + Kerberos via <code>pam_sss</code> or <code>pam_krb5</code></td>
+</tr>
+<tr class="even">
+<td><strong>OAuth2/OpenID Connect (OIDC)</strong></td>
+<td>Using cloud IdP (Microsoft Entra ID, Okta, etc.)</td>
+<td><a href="https://docs.posit.co/ide/server-pro/authenticating-users.html#openid-connect-authentication">OAuth2/OIDC</a></td>
+</tr>
+<tr class="odd">
+<td><strong>SAML</strong></td>
+<td>Using enterprise SSO (Okta, Microsoft, others)</td>
+<td><a href="https://docs.posit.co/ide/server-pro/authenticating-users.html#saml-single-sign-on-authentication">SAML</a></td>
+</tr>
+<tr class="even">
+<td><strong>Proxied Authentication</strong></td>
+<td>Authentication handled by reverse proxy (Shibboleth, Kerberos)</td>
+<td>Proxied Authentication</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pam-sessions" class="level2">
+<h2 class="anchored" data-anchor-id="pam-sessions">PAM sessions</h2>
+<p>Even when PAM is not used for authentication (e.g., with SAML or OIDC instead), PAM sessions are still used for home directory access, access controls, and user permissions. A PAM session is a server-side session started on behalf of a user, similar to what a remote shell would do. <a href="https://docs.posit.co/ide/server-pro/admin/access_and_security/pam_sessions.html">PAM Sessions</a>]</p>
+<p>The steps described in <a href="https://docs.posit.co/ide/server-pro/admin/user_provisioning/configuration.html">Configuration for user provisioning</a> describe how to set this up.</p>
+</section>
+<section id="user-provisioning" class="level2">
+<h2 class="anchored" data-anchor-id="user-provisioning">User provisioning</h2>
+<p>You must choose how to create (or verify) system accounts. Here’s a quick comparison:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>When to use</th>
+<th>How it works</th>
+<th>Supports groups?</th>
+<th>Setup</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Manual account creation</strong></td>
+<td>Small deployments or strict IT control</td>
+<td>IT administrators create accounts with <code>useradd</code> before users sign in</td>
+<td>✅ Yes (via local <code>/etc/group</code> or NSS)</td>
+<td>Create accounts: <code>sudo useradd -m username</code></td>
+</tr>
+<tr class="even">
+<td><strong>LDAP/Active Directory</strong></td>
+<td>On-premises directory service already exists</td>
+<td>SSSD connects to LDAP/AD; PAM creates accounts on first login via <code>pam_mkhomedir</code></td>
+<td>✅ Yes (groups from LDAP/AD)</td>
+<td><a href="https://docs.posit.co/ide/server-pro/admin/user_provisioning/configuration.html">SSSD configuration</a> + <code>pam_mkhomedir</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Just-in-Time (JIT)</strong></td>
+<td>Using OIDC/SAML with simple provisioning</td>
+<td>Workbench creates accounts automatically on first login based on identity provider claims</td>
+<td>❌ No</td>
+<td>Enable: <code>user-provisioning-register-on-first-login=1</code></td>
+</tr>
+<tr class="even">
+<td><strong>SCIM (System for Cross-domain Identity Management)</strong></td>
+<td>Using Okta or Microsoft Entra ID for full account/group sync</td>
+<td>IdP sends account and group data to Workbench via SCIM API; groups synced automatically</td>
+<td>✅ Yes (groups from IdP)</td>
+<td><a href="https://docs.posit.co/ide/server-pro/admin/user_provisioning/user_provisioning.html">SCIM provisioning</a></td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

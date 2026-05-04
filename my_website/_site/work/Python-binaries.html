@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lisa">
-<meta name="dcterms.date" content="2023-08-29">
-<meta name="description" content="This simple trick will save you so much time">
+<meta name="dcterms.date" content="2026-03-06">
+<meta name="description" content="Short and sweet">
 
-<title>Problems with git credential persistence when in the cloud – Lisa Anders - questionable.quarto</title>
+<title>Python binaries – Lisa Anders - questionable.quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -322,15 +357,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Problems with git credential persistence when in the cloud</h1>
+      <h1 class="title">Python binaries</h1>
                   <div>
         <div class="description">
-          This simple trick will save you so much time
+          Short and sweet
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">security</div>
+                <div class="quarto-category">Posit</div>
               </div>
                   </div>
   </div>
@@ -348,7 +382,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 29, 2023</p>
+        <p class="date">March 6, 2026</p>
       </div>
     </div>
     
@@ -359,18 +393,8 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#problem-when-on-linux" id="toc-problem-when-on-linux" class="nav-link active" data-scroll-target="#problem-when-on-linux">Problem when on Linux:</a></li>
-  <li><a href="#problem-when-on-sagemaker" id="toc-problem-when-on-sagemaker" class="nav-link" data-scroll-target="#problem-when-on-sagemaker">Problem when on Sagemaker:</a></li>
-  <li><a href="#tldr-solution" id="toc-tldr-solution" class="nav-link" data-scroll-target="#tldr-solution">TLDR Solution:</a></li>
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
-  <li><a href="#alternatives" id="toc-alternatives" class="nav-link" data-scroll-target="#alternatives">Alternatives</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -380,52 +404,40 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a random trick that took me longer than I care to admit to figure out - and wanted to squirrel it away so it’s easy to find in the future!</p>
-<section id="problem-when-on-linux" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-linux">Problem when on Linux:</h2>
-<blockquote class="blockquote">
-<p>In general gitcreds doesn’t work well on linux (which has led to this git issue <a href="https://github.com/r-lib/gitcreds/issues/47">(Ship our own credential helper on Linux · Issue #47 · r-lib/gitcreds</a> ). There is an excellent blog post that is very useful that goes deeper into what is going on: <a href="https://blog.djnavarro.net/posts/2021-08-08_git-credential-helpers/">Notes from a data witch - Managing GitHub credentials from R, difficulty level linux</a></p>
-</blockquote>
-</section>
-<section id="problem-when-on-sagemaker" class="level2">
-<h2 class="anchored" data-anchor-id="problem-when-on-sagemaker">Problem when on Sagemaker:</h2>
-<blockquote class="blockquote">
-<p>Additionally, on Sagemaker things like credentials will be by default stored to the ephemeral EC2 instance and lost when the session is closed. A different method needs to be pursued in order for the token to persist.</p>
-</blockquote>
-</section>
-<section id="tldr-solution" class="level2">
-<h2 class="anchored" data-anchor-id="tldr-solution">TLDR Solution:</h2>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
-</section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">Testing</h2>
-<p>I’ll add a disclaimer that it is similar to the .Renviron approach where the credentials would be stored as plain text, however to a location chosen by the user.</p>
-<p>Load libraries:</p>
-<pre><code>library(usethis) 
-library(gitcreds) 
-library(gh) 
-library(credentials)</code></pre>
-<p>Configure the global git to cache instead of store the credentials to a local file (from bash/terminal):<br>
-<code>git config --global credential.helper 'store --file ~/.my-credentials'</code></p>
-<p>From the documentation:</p>
-<blockquote class="blockquote">
-<p>The “store” mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you change your password for the Git host, you won’t ever have to type in your credentials again. The downside of this approach is that your passwords are stored in cleartext in a plain file in your home directory. The other options involve needing to change the root container to include alternative git credential helpers (libsecret or gcm core) which as far as I can tell are not currently available and would be something I’d recommend reaching out to Amazon about as they control that image.</p>
-</blockquote>
-<p>Generate the PAT:</p>
-<p><code>usethis::create_github_token()</code></p>
-<p>Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:</p>
-<p><code>gitcreds::gitcreds_set()</code></p>
-<p>Check that it stored with:</p>
-<p><code>gitcreds_get()</code></p>
-</section>
-<section id="alternatives" class="level2">
-<h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
-<p>The old way “store a PAT as the <code>GITHUB_PAT</code> environment variable in <code>.Renviron.</code>” is typically what is recommended as being more compatible with linux if you are able to switch back to it, but it can present a security issue. We’ve also commonly seen folks using the <code>gh</code> package for generating PATs like in <a href="https://gh.r-lib.org/articles/managing-personal-access-tokens.html">Managing Personal Access Tokens</a></p>
-<p>Alternatively, there are some git config options from the terminal. See: <a href="https://happygitwithr.com/https-pat.html?q=env#pat-doesnt-persist-on-linux">Chapter 9 Personal access token for HTTPS | Happy Git and GitHub for the useR</a></p>
+<p>There are many options for installing and managing your python versions.</p>
+<p>My current favorite way to do this is with <a href="https://docs.astral.sh/uv/guides/install-python/">uv</a>. You can run commands that will install and manage your python binaries for you:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install a psecific version of python </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python install 3.12</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check aailable and installed python versions </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>uv will use the Python requirements defined in requires-python in the pyproject.toml file like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[[tool.uv.index]]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">url</span> = <span class="st">"https://packagemanager.posit.co/pypi/latest/simple"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">default</span> = true</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[project]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">name</span> = <span class="st">"python-shiny-app-demo-cicd-github-actions"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">version</span> = <span class="st">"0.1.0"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">description</span> = <span class="st">"Add your description here"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">readme</span> = <span class="st">"README.md"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">requires-python</span> = <span class="st">"&gt;=3.12.11"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">dependencies</span> = [</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"altair&gt;=5.4.1"</span><span class="ex">,</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"anywidget&gt;=0.9.13"</span><span class="ex">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas&gt;=2.2.3"</span><span class="ex">,</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shiny&gt;=1.2.1"</span><span class="ex">,</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shinywidgets&gt;=0.3.4"</span><span class="ex">,</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Uv/Astral is also building binaries that can be used to install Python in air-gappped or validated environments, but finding the right pages is a bit tricky:</p>
+<ul>
+<li><p>Location for releases: <a href="https://github.com/astral-sh/python-build-standalone/releases" class="uri">https://github.com/astral-sh/python-build-standalone/releases</a></p></li>
+<li><p>There is documentation on the binaries here: <a href="https://gregoryszorc.com/docs/python-build-standalone/main/running.html#obtaining-distributions" class="uri">https://gregoryszorc.com/docs/python-build-standalone/main/running.html#obtaining-distributions</a></p></li>
+<li><p>For an example I’ve found this repo that Michael made very useful: <a href="https://github.com/michaelmayer2/py-install/" class="uri">https://github.com/michaelmayer2/py-install/</a></p></li>
+<li><p>It would also be possible to use the now un-maintained Post method to build Python RPMs: <a href="https://github.com/rstudio/python-builds" class="uri">https://github.com/rstudio/python-builds</a></p></li>
+</ul>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

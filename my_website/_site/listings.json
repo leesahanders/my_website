@@ -2,6 +2,13 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/workbench-auth-overview.html",
+      "/work/workbench-llms-copilot.html",
+      "/work/Snowflake-R-managed-credentials-example.html",
+      "/work/Python-binaries.html",
+      "/work/How to EntraID with Posit Team using JIT.html",
+      "/work/pre-reqs-for-installs.html",
+      "/work/posit-team-database.html",
       "/work/r-python-repository-settings-workbench-connect.html",
       "/work/databricks-and-uc-and-sparklyr.html",
       "/work/R package installation improvements on Workbench.html",
@@ -33,6 +40,17 @@
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
       "/work/r-command-line.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   },
   {
@@ -75,23 +93,19 @@
       "/work/R package installation improvements on Workbench.html",
       "/work/databricks-and-uc-and-sparklyr.html",
       "/work/r-python-repository-settings-workbench-connect.html",
+      "/work/posit-team-database.html",
+      "/work/pre-reqs-for-installs.html",
+      "/work/How to EntraID with Posit Team using JIT.html",
+      "/work/Python-binaries.html",
+      "/work/Snowflake-R-managed-credentials-example.html",
+      "/work/workbench-llms-copilot.html",
+      "/work/workbench-auth-overview.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
       "/lists.html",
       "/index.html",
       "/about.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   }
 ]

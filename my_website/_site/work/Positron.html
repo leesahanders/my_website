@@ -68,6 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../images/leafey-48.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -504,12 +505,17 @@ Figure&nbsp;1: Data Previewer now shows distributions!
 <li>Jupyter Keymap</li>
 <li>Jupyter Slide Show</li>
 <li>Project Manager</li>
+<li>Positron Assistant</li>
+<li>Databot</li>
 <li>Python Debugger</li>
 <li>Quarto</li>
 <li>Ruff</li>
 <li>Shiny</li>
 <li>Scope to this</li>
 <li>vscode-pets</li>
+<li>quarto.quarto</li>
+<li>REditorSupport.r@2.6.1</li>
+<li>ms-python.python@2023.6.1</li>
 </ul>
 <!--
 Soon: 
@@ -526,6 +532,7 @@ Soon:
 <section id="llm-integrations" class="level2">
 <h2 class="anchored" data-anchor-id="llm-integrations">LLM integrations</h2>
 <p>This was a focus topic during Posit::Conf 2025!</p>
+<p>For positron assistant and databot we will need credentials to connect to the LLM. In my case, that’s AWS Bedrock and it being added to user sessions as part of the AWS infrastructure. We can check from terminal with: <code>env | grep AWS</code></p>
 <div id="fig-dark-theme" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dark-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -561,6 +568,12 @@ Figure&nbsp;2: Positron Assistant
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"positron.assistant.enabledProviders"</span><span class="ex">:</span> <span class="pp">[</span><span class="st">"amazon-bedrock"</span><span class="pp">]</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>For databot:</p>
+<ul>
+<li>Download from the extensions store</li>
+<li>ctrl shift p user settings (not json) and databot authorize</li>
+<li>the ctrl shift p and open databot</li>
+</ul>
 <section id="positron-and-r" class="level3">
 <h3 class="anchored" data-anchor-id="positron-and-r">Positron and R</h3>
 <p>In Positron <code>cmd shift 0</code> will restart your r session</p>
