@@ -88,6 +88,22 @@ Step 3: Easy collaboration
 pip install -r requirements.txt
 ```
 
+## More on the requirements.txt
+
+It can be as simple as just a list of packages, or it can also include specific versions or call out to a particular url. 
+
+```bash
+--index-url https://staging.packagemanager.rstudio.com/pypi/latest/simple
+shiny
+shinywidgets
+altair
+pandas
+vega
+polars
+pulumi>=3.0.0,<4.0.0
+pulumi-aws>=5.0.0,<6.0.0
+```
+
 ## Python projects setup
 
 Setup the `venv` environment:

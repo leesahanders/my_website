@@ -1,5 +1,5 @@
 ---
-title: "Workbench, LLM's, and copilot"
+title: "Workbench, LLM's, and github copilot"
 description: "The power of AI"
 author: "Lisa"
 date: "2026-04-08"
@@ -48,16 +48,37 @@ There are a couple more parameters to consider adding that might be useful:
     "terminal.integrated.defaultProfile.linux": "bash",  
     "extensions.autoUpdate": false,  
     "extensions.autoCheckUpdates": false,
+    "positron.assistant.provider.anthropic.enable": false,
+    "positron.assistant.provider.githubCopilot.enable": true
 ```
+ 
+From <https://positron.posit.co/assistant-getting-started.html#step-2-configure-language-model-providers> : 
+
+  - Anthropic is enabled by default. Opt out of the positron.assistant.provider.anthropic.enable setting to disable it.
+  - GitHub Copilot is enabled by default. Opt out of the positron.assistant.provider.githubCopilot.enable setting to disable it.
   
-Consider ading these as enforced settings so that users cannot change them: <https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings> 
+However, if users have already created sessions then updating /etc/rstudio/positron-user-settings.json won't push changes. In that case we should add these settings as enforced settings so they are forced to propagate. Alternatively it can also be worth adding these as enforced settings so that users cannot change them: <https://docs.posit.co/ide/server-pro/admin/positron_sessions/user_settings.html#enforced-settings> 
 
 /etc/rstudio/etc/rstudio/enforced-settings.json
 ```{.bash filename="/etc/rstudio/etc/rstudio/enforced-settings.json"}  
 {
-  "files.autoSave": true
+   "positron.assistant.enable": true, 
+   "positron.assistant.consoleActions.enable": true,
+   "positron.assistant.showTokenUsage.enable": true,  
+   "positron.assistant.gitIntegration.enable": true,
+   "positron.assistant.provider.anthropic.enable": false,
+   "positron.assistant.provider.githubCopilot.enable": true
 }
 ```
+  
+And then also add to /etc/rstudio/profiles for all users (or change this to specify specific users or groups): 
+
+/etc/rstudio/etc/rstudio/enforced-settings.json
+```{.bash filename="/etc/rstudio/profiles"}  
+[*]
+positron-enforced-settings = /etc/rstudio/enforced-settings.json
+```
+  
 
 The presence of /etc/rstudio/positron-user-settings.json will automatically create settings for every user upon launching positron so that they only need to select and sign into copilot once. more technically, the positron-user-settings.json is merged with a user's existing settings.json, and importantly, once a setting has been merged, future template changes won't propagate to users who already have that setting defined which will require them to update manually. 
 
@@ -65,10 +86,10 @@ The presence of /etc/rstudio/positron-user-settings.json will automatically crea
 
 1. Navigate to Tools > Global Options > Copilot
 2. Check "Enable GitHub Copilot"
-3. Download and install the Copilot Agent components
+3. Wait a moment (or close and repoen the global options menu) for the sign-in field to populate
 4. Click "Sign In" and follow the device authentication flow at `https://github.com/login/device`
 
-This will give the Rstudio and copilot integration experience. 
+This will give the Rstudio and copilot integration experience with ghost editing: <https://docs.posit.co/ide/user/ide/guide/tools/copilot.html#using-copilot>
 
 Chattr is a really cool open source R package sponsored byPosit that can help extend the integration into interactive  chat sessions: [https://mlverse.github.io/chattr/](https://mlverse.github.io/chattr/) 
 
@@ -78,13 +99,14 @@ Reference: [https://docs.posit.co/ide/user/ide/guide/tools/copilot.html](https:/
 
 Follow the [getting started steps in the Positron User Guide](https://positron.posit.co/assistant-getting-started.html): 
 
-1. Run the command Positron Assistant: Configure Language Model Providers
+1. Open positron assistant (the robot logo in the extensions pane)
+1. Configure Language Model Providers
 2. Select GitHub Copilot as the model provider.
 3. Select the Sign in button to initiate GitHub’s OAuth authentication flow.
 
 Users then can open Positron assistant and use it. Unfortunately Databot was developed and tested with Claude models, and is only available for use with that model family. But Positron Assistant should cover the same use cases. 
 
-There's some useful troubleshooting information around authentication to Copilot here, but let me know if you run into difficulties and I can ask around to get more granular information: [https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change](https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change)
+There's some useful troubleshooting information around authentication to Copilot here: [https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change](https://docs.posit.co/ide/server-pro/user/positron/guide/positron-assistant.html#github-copilot-authentication-change)
   
 It maybe useful to note that users who previously signed into GitHub within Positron (for Copilot or other integrations) must sign out and sign back in after upgrading to version 2026.01.1
   
@@ -148,6 +170,48 @@ Consider ading these as enforced settings so that users cannot change them: <htt
 }
 ```
 
+## Disabling Positron Assistant 
+  
+Add enforced settings to helm values.yaml
+  
+```bash
+  config:
+    server:
+      rserver.conf:
+        admin-enabled: 1
 
+      # Add enforced settings JSON file
+      enforced-settings.json: |
+        {
+          "positron.assistant.enable": false,
+             "extensions.allowed": {
+                 "posit.assistant": false,
+              }
+    },  
+ ```
+  
+The key here to get positron assistant to not show up being: 
+  
+```bash
+        }
+  # Reference the enforced settings in profiles
+      profiles:
+        "*":
+          positron-enforced-settings: /mnt/configmap/rstudio/enforced-settings.json
+  
+```
+
+
+  
+```bash
+"extensions.allowed": {
+        "posit.assistant": false,
+    },
+```
+  
+  
+
+  
+  
 
   
