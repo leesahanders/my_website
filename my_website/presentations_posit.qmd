@@ -3,6 +3,41 @@ Check out some of the presentations I've made while working at Posit:
 
 <center> 
 
+**2026**
+
+</center>
+
+::::::{.column-screen-inset}
+
+::::: mycards-container
+
+:::: mycard
+
+::: angle-open
+\>
+:::
+
+::: mycard-title
+GitHub Copilot Setup on and Integration on Workbench
+:::
+
+::: mycard-description
+Learnings from Workbench Customer Implementation
+:::
+
+::: mycard-link
+<br>
+[Check out the slides](https://pub.current.posit.team/public/github-copilot-workbench/){target="_blank"}
+:::
+
+::::
+
+:::::
+
+:::::
+
+<center> 
+
 **2024**
 
 </center>
