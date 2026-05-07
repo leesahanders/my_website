@@ -45,11 +45,17 @@ git config --global user.email "lisa.anders@posit.co"
 git config --global user.name "leesahanders"
 ```
 
+Set a long timeout on the store so it will work on linux: 
+```bash
+git config --global credential.helper 'cache --file ~/.my-credentials --timeout=10000000'
+```
 
 Switch to rstudio terminal, checking for credentials: 
 ```r
 gh::gh_whoami()
 ```
+
+For Github: 
 
 Generate the PAT:
 ```r
@@ -59,13 +65,24 @@ usethis::create_github_token()
 Copy the generated PAT to your clipboard. Provide the PAT to this function when asked for it:
 ```r
 gitcreds::gitcreds_set()
-
 ```
 Check that it stored with:
 
 ```r
 gitcreds_get()
 ```
+
+For gitlab generate a PAT token in gitlab with: 
+
+- Log in to your GitLab
+- Navigate to your avatar at the top-right corner and click Settings
+- In the left sidebar, choose Access Tokens
+- Provide a name for your token and an optional expiration date
+- Check the api and write_repository scopes
+- Click Create personal access token
+- Copy the generated token and store it securely
+
+Then go through the normal process for cloning down a project through RStudio. When prompted for a password use the PAT token. 
 
 Now you can clone down a project. For the first time using a PAT it will give you a link to visit for authenticating the first time. 
 
