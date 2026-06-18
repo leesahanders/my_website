@@ -205,6 +205,9 @@ uv init --app --python 3.10.16
 uv venv
 
 uv pip install databricks-connect
+
+# If you want to test installs and see the repository location
+uv pip install seaborn --reinstall -v
 ```
 
 If using a specific version of python make sure it is called out both in the `.python-versions` file and the `pyproject.toml` file
@@ -298,6 +301,14 @@ Create a `venv` to isolate environments and generate a `requirements.txt` file s
 ```bash
 python3 -m pip freeze > requirements.txt
 python3 -m pip install -r requirements.txt
+```
+
+The requirements.txt can be locked to a particular repository with: 
+
+```
+--index-url https://packagemanager.posit.co/pypi/latest/simple
+shiny
+etc
 ```
 
 #### The uv way

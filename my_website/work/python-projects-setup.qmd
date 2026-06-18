@@ -66,6 +66,8 @@ Alternatively, for a specific project add these to the top of the `requirements.
 ```
 --index-url https://pkg.current.posit.team/blocked-python/latest/simple
 --trusted-host pkg.current.posit.team
+shiny 
+etc
 ```
 
 Step 2: Use environment tracking
