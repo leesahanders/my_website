@@ -1,0 +1,35 @@
+---
+title: "The importance of good manufacturing"
+description: "Case studies"
+author: "Lisa"
+date: "2026-06-23"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - opinions
+  - hardware
+  - software
+---
+
+A handful of articles that have stood out over the years as interesting case studies into the importance of good manufacturing, and what that actually means. 
+
+## FDA related 
+
+Interesting case study for a manufacturer that lost their FDA approval. Interesting seeing what the FDA used as justification for the removal of approval to sell in the US. Crazy situation but also it's the lapses in quality controls, audit trails, and destruction of documentation that got them really highlighting the importance of auditability in this space.
+
+The compliance report: <https://www.fda.gov/media/164602/download> 
+
+It's resulted in a shortage of platinum in medical treatments, which are predominantly used in cancer therapies. So it was a very hard call by the CDER team to shut own the manufacturer.
+
+## Disasters 
+
+The BP Texas City Refinery Disaster is critically important in understanding how safety culture is important, a disaster doesn't just happen because of bad luck. This book is a great writeup on what happened: <https://www.goodreads.com/book/show/8586375-failure-to-learn> 
