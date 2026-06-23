@@ -4,7 +4,7 @@
     "items": [
       "/work/workbench-auth-overview.html",
       "/work/workbench-llms-copilot.html",
-      "/work/Snowflake-R-managed-credentials-example.html",
+      "/work/Snowflake-managed-credentials-examples.html",
       "/work/Python-binaries.html",
       "/work/How to EntraID with Posit Team using JIT.html",
       "/work/pre-reqs-for-installs.html",
@@ -45,6 +45,7 @@
   {
     "listing": "/lists.html",
     "items": [
+      "/lists/manufacturing.html",
       "/lists/code.html",
       "/lists/workplace.html",
       "/lists/good-programming.html",
@@ -97,9 +98,10 @@
       "/work/pre-reqs-for-installs.html",
       "/work/How to EntraID with Posit Team using JIT.html",
       "/work/Python-binaries.html",
-      "/work/Snowflake-R-managed-credentials-example.html",
+      "/work/Snowflake-managed-credentials-examples.html",
       "/work/workbench-llms-copilot.html",
       "/work/workbench-auth-overview.html",
+      "/lists/manufacturing.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",

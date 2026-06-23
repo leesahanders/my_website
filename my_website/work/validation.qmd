@@ -75,7 +75,7 @@ Internal to Posit resources:
 
 We as posit are not in the business of validating packages. We can talk about how to do it high level but its up to them to build such a process or point them at Atorus OpenVal (which doesn't use Package Manager), or Jumping Rivers Litmus system. 
 
-### Now add some more documents 
+### More resources
 
 Phil resources: (See Trevor chat) 
 
@@ -86,6 +86,8 @@ R validation: <https://www.r-project.org/doc/R-FDA.pdf>
 Tidyverse, tidymodels: <https://posit.co/wp-content/uploads/2024/11/validation-tidy.pdf?_gl=1*1rog1io*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDI4LjAuMC4w>
 
 Shiny and rmarkdown:<https://posit.co/wp-content/uploads/2024/11/validation-shiny-rmd.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w>
+
+Version control and validation: <https://intuitionlabs.ai/articles/git-workflows-fda-compliance> 
 
 ### Finally lets check out the stories on the Posit blog 
 

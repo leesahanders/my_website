@@ -10,7 +10,40 @@
 <atom:link href="https://questionable.quarto.pub/blog/site_map.xml" rel="self" type="application/rss+xml"/>
 <description>Making the most out of data</description>
 <generator>quarto-1.8.23</generator>
-<lastBuildDate>Mon, 13 Apr 2026 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 23 Jun 2026 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>The importance of good manufacturing</title>
+  <dc:creator>Lisa </dc:creator>
+  <link>https://questionable.quarto.pub/blog/lists/manufacturing.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>A handful of articles that have stood out over the years as interesting case studies into the importance of good manufacturing, and what that actually means.</p>
+<section id="fda-related" class="level2">
+<h2 class="anchored" data-anchor-id="fda-related">FDA related</h2>
+<p>Interesting case study for a manufacturer that lost their FDA approval. Interesting seeing what the FDA used as justification for the removal of approval to sell in the US. Crazy situation but also it’s the lapses in quality controls, audit trails, and destruction of documentation that got them really highlighting the importance of auditability in this space.</p>
+<p>The compliance report: <a href="https://www.fda.gov/media/164602/download" class="uri">https://www.fda.gov/media/164602/download</a></p>
+<p>It’s resulted in a shortage of platinum in medical treatments, which are predominantly used in cancer therapies. So it was a very hard call by the CDER team to shut own the manufacturer.</p>
+</section>
+<section id="disasters" class="level2">
+<h2 class="anchored" data-anchor-id="disasters">Disasters</h2>
+<p>The BP Texas City Refinery Disaster is critically important in understanding how safety culture is important, a disaster doesn’t just happen because of bad luck. This book is a great writeup on what happened: <a href="https://www.goodreads.com/book/show/8586375-failure-to-learn" class="uri">https://www.goodreads.com/book/show/8586375-failure-to-learn</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>opinions</category>
+  <category>hardware</category>
+  <category>software</category>
+  <guid>https://questionable.quarto.pub/blog/lists/manufacturing.html</guid>
+  <pubDate>Tue, 23 Jun 2026 06:00:00 GMT</pubDate>
+  <media:content url="https://questionable.quarto.pub/blog/lists/img/" medium="image"/>
+</item>
 <item>
   <title>User access to Workbench</title>
   <dc:creator>Lisa </dc:creator>
@@ -614,7 +647,7 @@ font-style: inherit;">,</span></span></code></pre></div></div>
 <item>
   <title>Examples for connecting to Snowflake using Managed Credentials</title>
   <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/Snowflake-R-managed-credentials-example.html</link>
+  <link>https://questionable.quarto.pub/blog/work/Snowflake-managed-credentials-examples.html</link>
   <description><![CDATA[ 
 
 
@@ -622,115 +655,125 @@ font-style: inherit;">,</span></span></code></pre></div></div>
 
 
 
+<p>Check that credentials are cached in your session with this command, run in terminal: <code>env | grep SNOWFLAKE</code></p>
+<p>Here is an example from <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/snowflake.html" class="uri">https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/snowflake.html</a> The Snowflake CLI wraps Snowflake SQL and provides configuration management and data access tools.</p>
+<pre><code># List connections
+snow connection list</code></pre>
+<p>And then here is an easy one for R:</p>
+<pre><code>library(DBI)
+library(odbc)
+
+conn &lt;- DBI::dbConnect(odbc::snowflake())
+DBI::dbGetQuery(conn, "SELECT CURRENT_USER()")</code></pre>
 <p>Here is the Shiny app (save as an app.R file, you’ll also need to change WAREHOUSE, DB, and SCHEMA and add SNOWFLAKE_ACCOUNT as an environment variable and add the snowflake integration):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"></span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"></span>
+<span id="cb3-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(shiny)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
+<span id="cb3-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(bslib)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
+<span id="cb3-4"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(DBI)</span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
+<span id="cb3-5"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(odbc)</span>
-<span id="cb1-6"><span class="fu" style="color: #4758AB;
+<span id="cb3-6"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
-<span id="cb1-7"><span class="fu" style="color: #4758AB;
+<span id="cb3-7"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(connectcreds)</span>
-<span id="cb1-8"></span>
-<span id="cb1-9">ui <span class="ot" style="color: #003B4F;
+<span id="cb3-8"></span>
+<span id="cb3-9">ui <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">page_fluid</span>(</span>
-<span id="cb1-10">  <span class="at" style="color: #657422;
+<span id="cb3-10">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Snowflake test"</span>,</span>
-<span id="cb1-11">  <span class="fu" style="color: #4758AB;
+<span id="cb3-11">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">card</span>(</span>
-<span id="cb1-12">    <span class="fu" style="color: #4758AB;
+<span id="cb3-12">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">card_header</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"who am i"</span>),</span>
-<span id="cb1-13">    <span class="fu" style="color: #4758AB;
+<span id="cb3-13">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">verbatimTextOutput</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"whoami"</span>)</span>
-<span id="cb1-14">  ),</span>
-<span id="cb1-15">  <span class="fu" style="color: #4758AB;
+<span id="cb3-14">  ),</span>
+<span id="cb3-15">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">card</span>(</span>
-<span id="cb1-16">    <span class="fu" style="color: #4758AB;
+<span id="cb3-16">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">card_header</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"connection details"</span>),</span>
-<span id="cb1-17">    <span class="fu" style="color: #4758AB;
+<span id="cb3-17">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">verbatimTextOutput</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"connection_info"</span>)</span>
-<span id="cb1-18">  ),</span>
-<span id="cb1-19">  <span class="fu" style="color: #4758AB;
+<span id="cb3-18">  ),</span>
+<span id="cb3-19">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">card</span>(</span>
-<span id="cb1-20">    <span class="fu" style="color: #4758AB;
+<span id="cb3-20">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">card_header</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"data"</span>),</span>
-<span id="cb1-21">    <span class="fu" style="color: #4758AB;
+<span id="cb3-21">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tableOutput</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"data"</span>)</span>
-<span id="cb1-22">  )</span>
-<span id="cb1-23">)</span>
-<span id="cb1-24"></span>
-<span id="cb1-25">server <span class="ot" style="color: #003B4F;
+<span id="cb3-22">  )</span>
+<span id="cb3-23">)</span>
+<span id="cb3-24"></span>
+<span id="cb3-25">server <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">function</span>(input, output, session) {</span>
-<span id="cb1-26"> </span>
-<span id="cb1-27">  <span class="co" style="color: #5E5E5E;
+<span id="cb3-26"> </span>
+<span id="cb3-27">  <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Define connection parameters</span></span>
-<span id="cb1-28">  WAREHOUSE <span class="ot" style="color: #003B4F;
+<span id="cb3-28">  WAREHOUSE <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"DEFAULT_WH"</span></span>
-<span id="cb1-29">  DB <span class="ot" style="color: #003B4F;
+<span id="cb3-29">  DB <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"LENDING_CLUB"</span></span>
-<span id="cb1-30">  SCHEMA <span class="ot" style="color: #003B4F;
+<span id="cb3-30">  SCHEMA <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"PUBLIC"</span></span>
-<span id="cb1-31">  ACCOUNT <span class="ot" style="color: #003B4F;
+<span id="cb3-31">  ACCOUNT <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">Sys.getenv</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"SNOWFLAKE_ACCOUNT"</span>)</span>
-<span id="cb1-32"> </span>
-<span id="cb1-33">  con <span class="ot" style="color: #003B4F;
+<span id="cb3-32"> </span>
+<span id="cb3-33">  con <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> DBI<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -741,70 +784,70 @@ background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">snowflake</span>(),</span>
-<span id="cb1-34">                        <span class="co" style="color: #5E5E5E;
+<span id="cb3-34">                        <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># connection_name = "workbench",</span></span>
-<span id="cb1-35">                        <span class="at" style="color: #657422;
+<span id="cb3-35">                        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">warehouse =</span> WAREHOUSE,</span>
-<span id="cb1-36">                        <span class="at" style="color: #657422;
+<span id="cb3-36">                        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">account =</span> ACCOUNT,</span>
-<span id="cb1-37">                        <span class="at" style="color: #657422;
+<span id="cb3-37">                        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">database =</span> DB,</span>
-<span id="cb1-38">                        <span class="at" style="color: #657422;
+<span id="cb3-38">                        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">schema =</span> SCHEMA</span>
-<span id="cb1-39">  )</span>
-<span id="cb1-40"> </span>
-<span id="cb1-41"> </span>
-<span id="cb1-42">  output<span class="sc" style="color: #5E5E5E;
+<span id="cb3-39">  )</span>
+<span id="cb3-40"> </span>
+<span id="cb3-41"> </span>
+<span id="cb3-42">  output<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>whoami <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">renderText</span> ({</span>
-<span id="cb1-43">    whoami <span class="ot" style="color: #003B4F;
+<span id="cb3-43">    whoami <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> (</span>
-<span id="cb1-44">      DBI<span class="sc" style="color: #5E5E5E;
+<span id="cb3-44">      DBI<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">dbGetQuery</span>(con, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'SELECT CURRENT_USER();'</span>)</span>
-<span id="cb1-45">    )</span>
-<span id="cb1-46">    userrole <span class="ot" style="color: #003B4F;
+<span id="cb3-45">    )</span>
+<span id="cb3-46">    userrole <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> (</span>
-<span id="cb1-47">      DBI<span class="sc" style="color: #5E5E5E;
+<span id="cb3-47">      DBI<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">dbGetQuery</span>(con, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'SELECT CURRENT_ROLE();'</span>)</span>
-<span id="cb1-48">    )</span>
-<span id="cb1-49">    <span class="fu" style="color: #4758AB;
+<span id="cb3-48">    )</span>
+<span id="cb3-49">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Hello, "</span>, whoami, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">". Your role is: "</span>,userrole)</span>
-<span id="cb1-50">  })</span>
-<span id="cb1-51"> </span>
-<span id="cb1-52">  output<span class="sc" style="color: #5E5E5E;
+<span id="cb3-50">  })</span>
+<span id="cb3-51"> </span>
+<span id="cb3-52">  output<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>connection_info <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">renderText</span>({</span>
-<span id="cb1-53">    con_info <span class="ot" style="color: #003B4F;
+<span id="cb3-53">    con_info <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -821,10 +864,10 @@ background-color: null;
 font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span>
-<span id="cb1-54">    <span class="fu" style="color: #4758AB;
+<span id="cb3-54">    <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">paste0</span>(</span>
-<span id="cb1-55">      <span class="st" style="color: #20794D;
+<span id="cb3-55">      <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Warehouse: "</span>, WAREHOUSE, <span class="st" style="color: #20794D;
 background-color: null;
@@ -833,7 +876,7 @@ background-color: null;
 font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>,</span>
-<span id="cb1-56">      <span class="st" style="color: #20794D;
+<span id="cb3-56">      <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Account: "</span>, ACCOUNT, <span class="st" style="color: #20794D;
 background-color: null;
@@ -842,7 +885,7 @@ background-color: null;
 font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>,</span>
-<span id="cb1-57">      <span class="st" style="color: #20794D;
+<span id="cb3-57">      <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Database: "</span>, DB, <span class="st" style="color: #20794D;
 background-color: null;
@@ -851,7 +894,7 @@ background-color: null;
 font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>,</span>
-<span id="cb1-58">      <span class="st" style="color: #20794D;
+<span id="cb3-58">      <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Schema: "</span>, SCHEMA, <span class="st" style="color: #20794D;
 background-color: null;
@@ -860,60 +903,60 @@ background-color: null;
 font-style: inherit;">\n\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>,</span>
-<span id="cb1-59">      <span class="st" style="color: #20794D;
+<span id="cb3-59">      <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Connection Object:</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>, con_info</span>
-<span id="cb1-60">    )</span>
-<span id="cb1-61">  })</span>
-<span id="cb1-62"> </span>
-<span id="cb1-63">  output<span class="sc" style="color: #5E5E5E;
+<span id="cb3-60">    )</span>
+<span id="cb3-61">  })</span>
+<span id="cb3-62"> </span>
+<span id="cb3-63">  output<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>data <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">renderTable</span> ({</span>
-<span id="cb1-64">    DBI<span class="sc" style="color: #5E5E5E;
+<span id="cb3-64">    DBI<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">dbGetQuery</span>(con, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"SHOW TABLES;"</span>)</span>
-<span id="cb1-65">  })</span>
-<span id="cb1-66">}</span>
-<span id="cb1-67"></span>
-<span id="cb1-68"><span class="fu" style="color: #4758AB;
+<span id="cb3-65">  })</span>
+<span id="cb3-66">}</span>
+<span id="cb3-67"></span>
+<span id="cb3-68"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">shinyApp</span>(ui, server)</span></code></pre></div></div>
 <p>Here is the Quarto report (you’ll need to change WAREHOUSE, DB, and SCHEMA, and note that this won’t run on Connect since it won’t be able to interactively access credentials):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">---</span></span>
-<span id="cb2-2">title<span class="sc" style="color: #5E5E5E;
+<span id="cb4-2">title<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"test"</span></span>
-<span id="cb2-3">format<span class="sc" style="color: #5E5E5E;
+<span id="cb4-3">format<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> html</span>
-<span id="cb2-4">editor<span class="sc" style="color: #5E5E5E;
+<span id="cb4-4">editor<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> source</span>
-<span id="cb2-5"><span class="sc" style="color: #5E5E5E;
+<span id="cb4-5"><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">---</span></span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="do" style="color: #5E5E5E;
+<span id="cb4-6"></span>
+<span id="cb4-7"><span class="do" style="color: #5E5E5E;
 background-color: null;
 font-style: italic;">## Quarto</span></span>
-<span id="cb2-8"></span>
-<span id="cb2-9">Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <span class="sc" style="color: #5E5E5E;
+<span id="cb4-8"></span>
+<span id="cb4-9">Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>https<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -922,49 +965,49 @@ background-color: null;
 font-style: inherit;">//</span>quarto.org<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>.</span>
-<span id="cb2-10"></span>
-<span id="cb2-11"><span class="do" style="color: #5E5E5E;
+<span id="cb4-10"></span>
+<span id="cb4-11"><span class="do" style="color: #5E5E5E;
 background-color: null;
 font-style: italic;">## Running Code</span></span>
-<span id="cb2-12"></span>
-<span id="cb2-13">When you click the <span class="sc" style="color: #5E5E5E;
+<span id="cb4-12"></span>
+<span id="cb4-13">When you click the <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>Render<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span> button a document will be generated that includes both content and the output of embedded code. You can embed code like this<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span></span>
-<span id="cb2-14"></span>
-<span id="cb2-15"><span class="st" style="color: #20794D;
+<span id="cb4-14"></span>
+<span id="cb4-15"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">r</span></span>
-<span id="cb2-16"><span class="at" style="color: #657422;
+<span id="cb4-16"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">1 + 1</span></span>
-<span id="cb2-17"><span class="st" style="color: #20794D;
+<span id="cb4-17"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span></span>
-<span id="cb2-18"></span>
-<span id="cb2-19">You can add options to executable code like this</span>
-<span id="cb2-20"></span>
-<span id="cb2-21"><span class="st" style="color: #20794D;
+<span id="cb4-18"></span>
+<span id="cb4-19">You can add options to executable code like this</span>
+<span id="cb4-20"></span>
+<span id="cb4-21"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">r</span></span>
-<span id="cb2-22"><span class="at" style="color: #657422;
+<span id="cb4-22"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">#| echo: false</span></span>
-<span id="cb2-23"><span class="at" style="color: #657422;
+<span id="cb4-23"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">2 * 2</span></span>
-<span id="cb2-24"><span class="st" style="color: #20794D;
+<span id="cb4-24"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span></span>
-<span id="cb2-25"></span>
-<span id="cb2-26">The <span class="st" style="color: #20794D;
+<span id="cb4-25"></span>
+<span id="cb4-26">The <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">`</span><span class="at" style="color: #657422;
 background-color: null;
@@ -973,123 +1016,153 @@ background-color: null;
 font-style: inherit;">`</span> option disables the printing of <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">code</span> (only output is displayed).</span>
-<span id="cb2-27"></span>
-<span id="cb2-28"><span class="do" style="color: #5E5E5E;
+<span id="cb4-27"></span>
+<span id="cb4-28"><span class="do" style="color: #5E5E5E;
 background-color: null;
 font-style: italic;">## Make a connection to snowflake</span></span>
-<span id="cb2-29"></span>
-<span id="cb2-30">Show the credentials with<span class="sc" style="color: #5E5E5E;
+<span id="cb4-29"></span>
+<span id="cb4-30">Show the credentials with<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span></span>
-<span id="cb2-31"></span>
-<span id="cb2-32"><span class="st" style="color: #20794D;
+<span id="cb4-31"></span>
+<span id="cb4-32"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">`</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">env | grep SNOWFLAKE</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">`</span></span>
-<span id="cb2-33"></span>
-<span id="cb2-34"><span class="st" style="color: #20794D;
+<span id="cb4-33"></span>
+<span id="cb4-34"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">r</span></span>
-<span id="cb2-35"><span class="at" style="color: #657422;
+<span id="cb4-35"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  # Define connection parameters</span></span>
-<span id="cb2-36"><span class="at" style="color: #657422;
+<span id="cb4-36"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  WAREHOUSE &lt;- "DEFAULT_WH"</span></span>
-<span id="cb2-37"><span class="at" style="color: #657422;
+<span id="cb4-37"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  DB &lt;- "LENDING_CLUB"</span></span>
-<span id="cb2-38"><span class="at" style="color: #657422;
+<span id="cb4-38"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  SCHEMA &lt;- "PUBLIC"</span></span>
-<span id="cb2-39"><span class="at" style="color: #657422;
+<span id="cb4-39"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  ACCOUNT &lt;- Sys.getenv("SNOWFLAKE_ACCOUNT")</span></span>
-<span id="cb2-40"><span class="at" style="color: #657422;
+<span id="cb4-40"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;"> </span></span>
-<span id="cb2-41"><span class="at" style="color: #657422;
+<span id="cb4-41"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  con &lt;- DBI::dbConnect(odbc::snowflake(),</span></span>
-<span id="cb2-42"><span class="at" style="color: #657422;
+<span id="cb4-42"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">                        # connection_name = "workbench",</span></span>
-<span id="cb2-43"><span class="at" style="color: #657422;
+<span id="cb4-43"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">                        warehouse = WAREHOUSE,</span></span>
-<span id="cb2-44"><span class="at" style="color: #657422;
+<span id="cb4-44"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">                        account = ACCOUNT,</span></span>
-<span id="cb2-45"><span class="at" style="color: #657422;
+<span id="cb4-45"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">                        database = DB,</span></span>
-<span id="cb2-46"><span class="at" style="color: #657422;
+<span id="cb4-46"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">                        schema = SCHEMA</span></span>
-<span id="cb2-47"><span class="at" style="color: #657422;
+<span id="cb4-47"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  )</span></span>
-<span id="cb2-48"><span class="st" style="color: #20794D;
+<span id="cb4-48"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span></span>
-<span id="cb2-49"></span>
-<span id="cb2-50"><span class="do" style="color: #5E5E5E;
+<span id="cb4-49"></span>
+<span id="cb4-50"><span class="do" style="color: #5E5E5E;
 background-color: null;
 font-style: italic;">## Results</span></span>
-<span id="cb2-51"></span>
-<span id="cb2-52"></span>
-<span id="cb2-53"><span class="st" style="color: #20794D;
+<span id="cb4-51"></span>
+<span id="cb4-52"></span>
+<span id="cb4-53"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">r</span></span>
-<span id="cb2-54"><span class="at" style="color: #657422;
+<span id="cb4-54"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">whoami &lt;- (</span></span>
-<span id="cb2-55"><span class="at" style="color: #657422;
+<span id="cb4-55"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  DBI::dbGetQuery(con, 'SELECT CURRENT_USER();')</span></span>
-<span id="cb2-56"><span class="at" style="color: #657422;
+<span id="cb4-56"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">)</span></span>
-<span id="cb2-57"><span class="at" style="color: #657422;
+<span id="cb4-57"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">userrole &lt;- (</span></span>
-<span id="cb2-58"><span class="at" style="color: #657422;
+<span id="cb4-58"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">  DBI::dbGetQuery(con, 'SELECT CURRENT_ROLE();')</span></span>
-<span id="cb2-59"><span class="at" style="color: #657422;
+<span id="cb4-59"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">)</span></span>
-<span id="cb2-60"><span class="at" style="color: #657422;
+<span id="cb4-60"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">paste0("Hello, ", whoami, ". Your role is: ",userrole)</span></span>
-<span id="cb2-61"><span class="st" style="color: #20794D;
+<span id="cb4-61"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span></span>
-<span id="cb2-62"></span>
-<span id="cb2-63"><span class="st" style="color: #20794D;
+<span id="cb4-62"></span>
+<span id="cb4-63"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">r</span></span>
-<span id="cb2-64"><span class="at" style="color: #657422;
+<span id="cb4-64"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">DBI::dbGetQuery(con, "SHOW TABLES;")</span></span>
-<span id="cb2-65"><span class="st" style="color: #20794D;
+<span id="cb4-65"><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">```</span></span></code></pre></div></div>
+<p>Last here is a python example (from <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/snowflake.html" class="uri">https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/snowflake.html</a>)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install snowflake-connector-python</span></code></pre></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> snowflake.connector</span>
+<span id="cb6-2"></span>
+<span id="cb6-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> snowflake.connector.<span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">connect</span>() <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> conn:</span>
+<span id="cb6-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> conn.cursor() <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> cur:</span>
+<span id="cb6-5">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(cur.execute(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SELECT 'successfully connected to ' || current_account() || ' WITH user ' || current_user();"</span>).fetchall())</span></code></pre></div></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python3</span> test_connection.py</span></code></pre></div></div>
 
 
 
  ]]></description>
   <category>Posit</category>
-  <guid>https://questionable.quarto.pub/blog/work/Snowflake-R-managed-credentials-example.html</guid>
+  <guid>https://questionable.quarto.pub/blog/work/Snowflake-managed-credentials-examples.html</guid>
   <pubDate>Mon, 23 Mar 2026 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
@@ -5966,7 +6039,18 @@ font-style: inherit;">uv</span> venv</span>
 <span id="cb6-9"></span>
 <span id="cb6-10"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">uv</span> pip install databricks-connect</span></code></pre></div></div>
+font-style: inherit;">uv</span> pip install databricks-connect</span>
+<span id="cb6-11"></span>
+<span id="cb6-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># If you want to test installs and see the repository location</span></span>
+<span id="cb6-13"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">uv</span> pip install seaborn <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--reinstall</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span></span></code></pre></div></div>
 <p>If using a specific version of python make sure it is called out both in the <code>.python-versions</code> file and the <code>pyproject.toml</code> file</p>
 <p>If using a specific version of databricks-connect then make sure that the version needed is called out in the <code>pyproject.toml</code> file like this:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
@@ -6112,41 +6196,45 @@ background-color: null;
 font-style: inherit;">-m</span> pip install <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-r</span> requirements.txt</span></code></pre></div></div>
+<p>The requirements.txt can be locked to a particular repository with:</p>
+<pre><code>--index-url https://packagemanager.posit.co/pypi/latest/simple
+shiny
+etc</code></pre>
 </section>
 <section id="the-uv-way-1" class="level4">
 <h4 class="anchored" data-anchor-id="the-uv-way-1">The uv way</h4>
 <p>Create a <a href="https://docs.posit.co/connect/user/publishing-cli-notebook/index.html#creating-a-manifest-for-future-deployment"><code>manifest.json</code> file</a> to support git-backed publishing</p>
 <p>For uv projects, they can be initialized and updated with (change format and packages as needed):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1">    <span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> init <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--app</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--python</span> 3.12.6</span>
-<span id="cb16-2">    <span class="ex" style="color: null;
+<span id="cb17-2">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> add numpy matplotlib jupyter</span>
-<span id="cb16-3">    <span class="ex" style="color: null;
+<span id="cb17-3">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> sync <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--upgrade</span></span>
-<span id="cb16-4">    <span class="ex" style="color: null;
+<span id="cb17-4">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> export <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-o</span> requirements.txt <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--no-hashes</span></span>
-<span id="cb16-5">    <span class="ex" style="color: null;
+<span id="cb17-5">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run rsconnect write-manifest api .</span>
-<span id="cb16-6"></span>
-<span id="cb16-7">    <span class="co" style="color: #5E5E5E;
+<span id="cb17-6"></span>
+<span id="cb17-7">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Dev dependencies may need to be added </span></span>
-<span id="cb16-8">    <span class="ex" style="color: null;
+<span id="cb17-8">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> add <span class="at" style="color: #657422;
 background-color: null;
@@ -6188,46 +6276,46 @@ package_manager = "pip"
 </section>
 <section id="rsconnect-python-cli" class="level4">
 <h4 class="anchored" data-anchor-id="rsconnect-python-cli">rsconnect-python CLI</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># With uv</span></span>
-<span id="cb18-2"><span class="ex" style="color: null;
+<span id="cb19-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run rsconnect deploy shiny .</span>
-<span id="cb18-3"><span class="co" style="color: #5E5E5E;
+<span id="cb19-3"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Without uv</span></span>
-<span id="cb18-4"><span class="ex" style="color: null;
+<span id="cb19-4"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> deploy shiny .</span></code></pre></div></div>
 </section>
 <section id="git-backed" class="level4">
 <h4 class="anchored" data-anchor-id="git-backed">Git-backed</h4>
 <p>Update the code, and then run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># With uv</span></span>
-<span id="cb19-2"><span class="ex" style="color: null;
+<span id="cb20-2"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> export <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-o</span> requirements.txt <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--no-hashes</span></span>
-<span id="cb19-3"><span class="ex" style="color: null;
+<span id="cb20-3"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">uv</span> run rsconnect write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--overwrite</span> .</span>
-<span id="cb19-4"><span class="co" style="color: #5E5E5E;
+<span id="cb20-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Without uv</span></span>
-<span id="cb19-5"><span class="ex" style="color: null;
+<span id="cb20-5"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">pip</span> freeze <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> requirements.txt </span>
-<span id="cb19-6"><span class="ex" style="color: null;
+<span id="cb20-6"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">rsconnect</span> write-manifest shiny <span class="at" style="color: #657422;
 background-color: null;
@@ -7114,13 +7202,14 @@ map $http_upgrade $connection_upgrade {
 <h3 class="anchored" data-anchor-id="as-a-vendor---disclaimer">As a vendor - disclaimer</h3>
 <p>We as posit are not in the business of validating packages. We can talk about how to do it high level but its up to them to build such a process or point them at Atorus OpenVal (which doesn’t use Package Manager), or Jumping Rivers Litmus system.</p>
 </section>
-<section id="now-add-some-more-documents" class="level3">
-<h3 class="anchored" data-anchor-id="now-add-some-more-documents">Now add some more documents</h3>
+<section id="more-resources" class="level3">
+<h3 class="anchored" data-anchor-id="more-resources">More resources</h3>
 <p>Phil resources: (See Trevor chat)</p>
 <p>Posit pro products (still says Rstudio everything): <a href="https://posit.co/wp-content/uploads/2024/11/rstudio_compliance_validation.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w" class="uri">https://posit.co/wp-content/uploads/2024/11/rstudio_compliance_validation.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w</a></p>
 <p>R validation: <a href="https://www.r-project.org/doc/R-FDA.pdf" class="uri">https://www.r-project.org/doc/R-FDA.pdf</a></p>
 <p>Tidyverse, tidymodels: <a href="https://posit.co/wp-content/uploads/2024/11/validation-tidy.pdf?_gl=1*1rog1io*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDI4LjAuMC4w" class="uri">https://posit.co/wp-content/uploads/2024/11/validation-tidy.pdf?_gl=1*1rog1io*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDI4LjAuMC4w</a></p>
 <p>Shiny and rmarkdown:<a href="https://posit.co/wp-content/uploads/2024/11/validation-shiny-rmd.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w" class="uri">https://posit.co/wp-content/uploads/2024/11/validation-shiny-rmd.pdf?_gl=1*1nenc0g*_ga*MTI1ODM3MDExLjE3MzY2MTk0MTQ.*_ga_2C0WZ1JHG0*MTc0NjIwNDQyOC4zNjQuMC4xNzQ2MjA0NDM1LjAuMC4w</a></p>
+<p>Version control and validation: <a href="https://intuitionlabs.ai/articles/git-workflows-fda-compliance" class="uri">https://intuitionlabs.ai/articles/git-workflows-fda-compliance</a></p>
 </section>
 <section id="finally-lets-check-out-the-stories-on-the-posit-blog" class="level3">
 <h3 class="anchored" data-anchor-id="finally-lets-check-out-the-stories-on-the-posit-blog">Finally lets check out the stories on the Posit blog</h3>
@@ -7447,543 +7536,6 @@ unable to load shared object '/home/username/x86_64-pc-linux-gnu-library/4.3/str
   <category>data</category>
   <guid>https://questionable.quarto.pub/blog/work/mounting-drives-server.html</guid>
   <pubDate>Tue, 29 Apr 2025 06:00:00 GMT</pubDate>
-  <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
-</item>
-<item>
-  <title>Setting the R package repository on Posit Workbench</title>
-  <dc:creator>Lisa </dc:creator>
-  <link>https://questionable.quarto.pub/blog/work/r-repository-settings-workbench.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The repository for packages being used for installation by users is often important to configure. When using something like Package Manager you’ll want users to install packages from there, rather than the broader internet.</p>
-</section>
-<section id="at-a-glance" class="level2">
-<h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
-<p>The best pattern is to configure the repository across R sessions using R config options, not RStudio configs. A shared site library can be created (leveraging <code>Rprofile.site</code> and <code>Renviron.site</code> for example) or using <code>renv</code> with a shared <code>renv</code> package cache (maintaining reproduceability through the <code>renv.lock</code> file).</p>
-<p>The <code>Renviron.site</code> would override the <code>Rprofile.site</code> setting and therefore may be more robust.</p>
-<section id="renviron.site" class="level3">
-<h3 class="anchored" data-anchor-id="renviron.site">Renviron.site</h3>
-<p>Referencing: <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R" class="uri">https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R</a></p>
-<p>Create a <code>Renviron.site</code> file and define:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Renviron.site</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">RENV_PATHS_PREFIX_AUTO</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>TRUE</span>
-<span id="cb1-2"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">RENV_PATHS_CACHE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>/scratch/renv</span>
-<span id="cb1-3"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>R_LIBS_SITE=<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">${R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">}</span></span></code></pre></div></div>
-</div>
-</section>
-<section id="rprofile.site" class="level3">
-<h3 class="anchored" data-anchor-id="rprofile.site">.Rprofile.site</h3>
-<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Rprofile.site</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">options</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">repos</span> = c<span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">CRAN</span> = <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/all/latest"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">))</span></span>
-<span id="cb2-2"></span>
-<span id="cb2-3"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">interactive()</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">{</span></span>
-<span id="cb2-4">  <span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">options</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">width</span> = 120<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-5"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">}</span></span>
-<span id="cb2-6"></span>
-<span id="cb2-7"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Sys.info()</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">[[</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"sysname"</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">]]</span> == <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Windows"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">{</span></span>
-<span id="cb2-8"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">Sys.setenv</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">RENV_DOWNLOAD_METHOD</span> = <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"curl"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-9"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">}</span></span>
-<span id="cb2-10"></span>
-<span id="cb2-11"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"folder"</span> %in% tolower<span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">list.files</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"C:/"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)))</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">{</span></span>
-<span id="cb2-12"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">!</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Rlib"</span> %in% list.files<span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"C:/username/"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">))</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">{</span></span>
-<span id="cb2-13"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">print</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Creating Rlib folder"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-14"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">dir.create</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"C:/username/Rlib"</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">,mode</span> = <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"0777"</span>,recursive = T<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-15"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">}</span></span>
-<span id="cb2-16"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cat</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"\033[0;32;1mSetting local user lib\033[0m\n"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-17"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">.libPaths</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">c</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"C:/username/Rlib"</span> , .libPaths<span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-18"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">}</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">{</span></span>
-<span id="cb2-19"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cat</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"\033[0;33;1mYou should consider getting the access right so we can put your local R-lib there, instead of OneDrive.\033[0m\n"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb2-20"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">}</span></span></code></pre></div></div>
-</div>
-</section>
-<section id="test" class="level3">
-<h3 class="anchored" data-anchor-id="test">Test</h3>
-<p>Test this by running and checking the outputs of:</p>
-<ul>
-<li><code>.libPaths()</code></li>
-<li><code>options()$repos</code></li>
-</ul>
-</section>
-</section>
-<section id="long-winded" class="level2">
-<h2 class="anchored" data-anchor-id="long-winded">Long-winded</h2>
-<section id="startup-behavior-of-r-when-loading-package-environment-details" class="level3">
-<h3 class="anchored" data-anchor-id="startup-behavior-of-r-when-loading-package-environment-details">Startup behavior of R when loading package environment details</h3>
-<p>R Startup behavior (funny): <a href="https://rstats.wtf/r-startup.html" class="uri">https://rstats.wtf/r-startup.html</a></p>
-<blockquote class="blockquote">
-<p>Credit: This section was largely taken from an internal Posit resource of unknown authorship</p>
-</blockquote>
-<p>From bash it is different than from the editor.</p>
-<p>See <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html" title="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">here</a> for the official startup docs from R.</p>
-<p>R from the command line/bash will take the user’s environment. It will not read any additional bash files during start-up (which the RStudio products will do). It will still read in the R startup files (Renviron/Rprofile).</p>
-<p>Prior to loading the R session from the bash shell any commands in this file will be read and execute commands if it exists: <code>/etc/profile</code></p>
-<p>Next, the the first of the following files that exists and is readable will have commands executed from (only one of these files will be read and executed):</p>
-<ul>
-<li><p><code>~/.bash_profile</code></p></li>
-<li><p><code>~/.bash_login</code></p></li>
-<li><p><code>~/.profile</code></p></li>
-</ul>
-<p>R then always loads the following (in order):</p>
-<ul>
-<li><p><code>R_HOME/etc/Renviron.site</code> (set for all users)</p></li>
-<li><p><code>.Renviron</code> - user-specific, typically in the user’s home directory, but can be elsewhere (for instance, in a Project folder)</p></li>
-<li><p><code>R_HOME/etc/Rprofile.site</code> (set for all users)</p></li>
-<li><p><code>.Rprofile</code> - user-specific, typically in the user’s home directory, but can be elsewhere (for instance, in a Project folder)</p></li>
-</ul>
-<p>Beyond this, what gets put in the environment depends on the product.</p>
-<ul>
-<li><p>RStudio Server / Workbench: before any of this executes, RStudio Server will first include the contents of /etc/rstudio/rsession-profile if it exists. It will also add anything set in rsession-ld-library-path in rserver.conf to the LD_LIBRARY_PATH environment variable.</p></li>
-<li><p>Shiny Server / Connect: you can affect the environment variables for a specific application using program supervisors</p></li>
-</ul>
-<p>This page in the documentation is the new home for the golden source of info for startup behavior: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html" class="uri">https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html</a></p>
-</section>
-<section id="r-sessions-across-all-workbench-ides" class="level3">
-<h3 class="anchored" data-anchor-id="r-sessions-across-all-workbench-ides">R sessions across all Workbench IDE’s</h3>
-<p>Relying on <code>repos.conf</code> for R repository configuration IMHO is a clear anti-pattern which especially large customers with large setups should not use. <code>repos.conf</code> is a relic from a time where there was only RSP.</p>
-<p>Configure the repository settings in R directly, rather than through the RStudio settings.</p>
-<p>Resources:</p>
-<ul>
-<li><p>A great resource for setting this up simply is: <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html" class="uri">https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html</a></p></li>
-<li><p>For a more complex example that could be used in slurm environments refer to: <a href="https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R" class="uri">https://github.com/sol-eng/singularity-rstudio/blob/main/data/workbench/scripts/run.R</a></p></li>
-</ul>
-<p>The <code>Renviron.site</code> would override the <code>Rprofile.site</code> setting and therefore may be more robust.</p>
-<section id="renviron.site-1" class="level4">
-<h4 class="anchored" data-anchor-id="renviron.site-1">Renviron.site</h4>
-<p>Create a <code>Renviron.site</code> file and define:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Renviron.site</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="/opt/R/Some-R-Version/lib/R/etc/Renviron.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Key1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>value1</span>
-<span id="cb3-2"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">RENV_PATHS_PREFIX_AUTO</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>TRUE</span>
-<span id="cb3-3"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">RENV_PATHS_CACHE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>/scratch/renv</span>
-<span id="cb3-4"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>R_LIBS_SITE=<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">${R_LIBS_SITE</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib64/R/library:/usr/share/R/library'</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">}</span></span></code></pre></div></div>
-</div>
-<p>And then <code>Sys.getenv("Key1")</code> will return <code>"value1"</code> in a users R session.</p>
-<p>This can be set at the user or system level. Users have the choice between user or project level (project taking preference). The <a href="https://usethis.r-lib.org/">usethis</a> package includes a helper function for editing <code>.Renviron</code> files from an R session with&nbsp;<code>usethis::edit_r_environ()</code>. For a system level install it is placed per R version, for example at <code>/opt/R/4.1.1/lib/R/etc/Renviron.site</code>.</p>
-</section>
-<section id="rprofile.site-1" class="level4">
-<h4 class="anchored" data-anchor-id="rprofile.site-1">.Rprofile.site</h4>
-<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/opt/R/Some-R-Version/lib/R/etc/Rprofile.site</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="/opt/R/Some-R-Version/lib/R/etc/Rprofile.site" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">options</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">repos</span> = c<span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">CRAN</span> = <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://packagemanager.posit.co/all/latest"</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">))</span></span>
-<span id="cb4-2"></span>
-<span id="cb4-3"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">interactive()</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">{</span></span>
-<span id="cb4-4">  <span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">options</span><span class="er" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">(</span><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">width</span> = 120<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">)</span></span>
-<span id="cb4-5"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">}</span></span></code></pre></div></div>
-</div>
-<p>Again this file can be se at the user or system level. At the user level the easiest way to edit your <code>.Rprofile</code> file is to use the <code>usethis::edit_r_profile()</code> function from within an R session. You can specify whether you want to edit the user or project level <code>.Rprofile.</code> For a system level install it is placed per R version, for example at <code>/opt/R/4.2.0/lib/R/etc/Rprofile.site</code>.</p>
-</section>
-<section id="configuring-a-shared-library" class="level4">
-<h4 class="anchored" data-anchor-id="configuring-a-shared-library">Configuring a shared library</h4>
-<p>Taken from an <a href="https://positpbc.slack.com/archives/C2P7MTJKE/p1738088423395249?thread_ts=1737982807.176319&amp;cid=C2P7MTJKE">internal discussion</a></p>
-<p>Set <code>.libPaths()</code> in <code>.Rprofile.site</code>.</p>
-<p>There are two main options:</p>
-<ul>
-<li><p>Install a set of R packages in a shared library. The users here would need to specify which packages they really need and then their IT team could install those into a <code>site-library</code> in each R version, ideally leveraging a time-based snapshot from package manager for reproducibility reason. Users in this case would be limited to a certain package version for some time. They however can update those packages regularly (e.g.&nbsp;quarterly) to lessen the pain here. As mentioned above, do <strong>NOT</strong> use any recommendation from the Posit Admin guide for this setup but follow the standard approach to configure the same in R (leveraging <code>Rprofile.site</code> and <code>Renviron.site</code> for example).</p></li>
-<li><p>Educate/train the users to all use <code>renv</code> - then every user would have maximum degree of freedom to choose which packages and which version they want to use for each project. They then would maintain <code>renv.lock</code> files for each project and the admin team can then configure a shared <code>renv</code> package cache to ensure that any given package/version combination is only stored once.</p></li>
-</ul>
-<p>Both options in their own right also protect the data scientists from producing irreproducible code since in neither case they rely on that melting pot of R package mess that typically piles up in <code>R_LIBS_USER</code> (in particular for systems where R points to latest CRAN which IMHO is another anti-pattern)</p>
-<section id="script-for-updating-packages-from-rspm-that-have-changed-to-site-library" class="level5">
-<h5 class="anchored" data-anchor-id="script-for-updating-packages-from-rspm-that-have-changed-to-site-library">Script for updating packages from rspm that have changed to site library</h5>
-<pre><code># update existing packages
-update.packages(lib.loc=&lt;site.library&gt;, repos=&lt;PPM Repo&gt;, ask=FALSE)
-
-# add any new packages
-new.packages(lib.loc=&lt;site.library&gt;, repos=&lt;PPM Repo&gt;, ask=FALSE)</code></pre>
-</section>
-</section>
-</section>
-<section id="workbench-and-rstudio-sessions-only" class="level3">
-<h3 class="anchored" data-anchor-id="workbench-and-rstudio-sessions-only">Workbench and RStudio sessions only</h3>
-<p>The oft recommended path is to use the <code>repos.conf</code> or <code>rsession.conf</code> file to configure the repository URL.</p>
-<p>This might look like:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="/etc/rstudio/rsession.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">r-cran-repos=http://cran.at.r-project.org/</span></span></code></pre></div></div>
-</div>
-<p>Or:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/repos.conf</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="/etc/rstudio/repos.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">RSPM</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>https://packagemanager.posit.co/cran/__linux__/jammy/latest</span>
-<span id="cb7-2"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">CRAN</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>https://packagemanager.posit.co/cran/__linux__/jammy/latest</span>
-<span id="cb7-3"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Australia</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>https://cran.ms.unimelb.edu.au/</span>
-<span id="cb7-4"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">Austria</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>https://lib.ugent.be/CRAN/</span></code></pre></div></div>
-</div>
-<p>And adding to <code>rsession.conf</code>:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/rsession.conf</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="/etc/rstudio/rsession.conf" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Use this to change the location / name of the repos.conf file</span></span>
-<span id="cb8-2"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">r-cran-repos-file=/etc/rstudio/repos.conf</span></span></code></pre></div></div>
-</div>
-<p>Reference: <a href="https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html" class="uri">https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html</a></p>
-</section>
-<section id="ld_library_path" class="level3">
-<h3 class="anchored" data-anchor-id="ld_library_path">LD_LIBRARY_PATH</h3>
-<p>Reference: <a href="https://rstudioide.zendesk.com/agent/tickets/107856" class="uri">https://rstudioide.zendesk.com/agent/tickets/107856</a></p>
-<p>There are a few different places the LD_LIBRARY_PATH can be modified within Workbench settings, only some of which will work for packages like <code>rJava</code>. For instance, including the ldpaths script in <code>/etc/rstudio/r-versions</code> can ensure the correct library is set on R session startup. The final step in this support article shows a method of setting this up which should work even on non-containerized Workbench sessions (the mkdir command can be excluded, since that directory should already exist on a server-installed version of Workbench):</p>
-<p>We need to force the installed R version to use it’s own ldpaths startup script when it starts inside the container.</p>
-<p><code>RUN mkdir -p /etc/rstudio &amp;&amp; printf "Path: /opt/R/${R_VERSION}\nScript: /opt/R/${R_VERSION}/lib/R/etc/ldpaths" &gt; /etc/rstudio/r-versions</code></p>
-<p>These steps are good to follow: <a href="https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench" class="uri">https://solutions.posit.co/envs-pkgs/using-rjava/index.html#additional-steps-for-workbench</a></p>
-<p>The additional steps that need to be followed on Workbench are:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>/etc/rstudio/r-versions</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-filename="/etc/rstudio/r-versions" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">Path:</span> /opt/R/4.2.0</span>
-<span id="cb9-2"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">Script:</span> /opt/R/4.2.0/lib/R/etc/ldpaths</span></code></pre></div></div>
-</div>
-</section>
-<section id="troubleshooting" class="level3">
-<h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
-<p>To determine the environment details it can be useful to run <code>Sys.getenv()</code> from inside and outside RStudio, to see if the user’s bash files are setting environment variables inappropriately for the system.</p>
-<p>If the issue is occurring within RStudio it can be helpful to capture the output of<code>system("ldd /usr/lib/rstudio-server/bin/rsession")</code> from inside and outside RStudio to see which R libraries are being loaded.</p>
-<p>Test from a user session the repository details with:</p>
-<ul>
-<li><code>.libPaths()</code></li>
-<li><code>options()$repos</code></li>
-</ul>
-<p>Permissions on the various configs can cause various issues with soft fails, for example a working permission is: <code>chmod 644</code>, or for the rstudio directory consider <code>chmod 0755 /etc/rstudio</code> or <code>chmod o+x /etc/rstudio</code> to add the <code>x</code> bit for just rstudio-server without opening up the other permissions if it is desired to keep it restricted (may result in odd behavior).</p>
-<p>Check permissions with: <code>ls -la /etc/rstudio</code></p>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>code</category>
-  <category>R</category>
-  <guid>https://questionable.quarto.pub/blog/work/r-repository-settings-workbench.html</guid>
-  <pubDate>Thu, 24 Apr 2025 06:00:00 GMT</pubDate>
   <media:content url="https://questionable.quarto.pub/blog/work/img/" medium="image"/>
 </item>
 </channel>
