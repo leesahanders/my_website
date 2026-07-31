@@ -1,0 +1,613 @@
+---
+title: "Workbench and Azure managed credentials"
+description: "Configure Workbench Custom OAuth for Programmatic SharePoint Data Access w/o Changing Auth Providers"
+author: "Lisa"
+date: "2026-07-31"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+# Configure Workbench Custom OAuth for Programmatic SharePoint Data Access w/o Changing Auth Providers
+
+---
+
+## Background 
+
+For connecting to SharePoint data from Workbench there are two main options: 
+
+**Option 1:** Migrate to Entra ID login + delegated Azure credentials (recommended, fully supported)  
+  
+This requires Workbench's login authentication to be Microsoft Entra ID via OpenID Connect, and uses delegated credentials so a user's own sign-in grants their R/Python sessions access to Azure resources.This is the fully supported feature option.   
+
+- [Configure Entra ID with OpenID Connect (Quick Start)](https://docs.posit.co/ide/server-pro/admin/quick-starts/entraid-openid.html)
+- [Delegated Azure Credentials (Admin Guide)](https://docs.posit.co/ide/server-pro/admin/authenticating_users/delegated_azure_credentials.html)
+- [Using Azure Delegated Credentials in Sessions (User Guide)](https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/azure.html)
+
+**Option 2:** Custom OAuth Integration (possible, but a preview feature)  
+  
+This would keep allow any existing login setup with an added separate OAuth integration pointed at an Azure app registration purely for data access. However, this feature is currently in preview: it's not yet fully supported for production use and could see breaking changes in future releases. It's an option to explore if you need to avoid a login migration, but it comes with that tradeoff.  
+
+- [Custom OAuth Credentials (Admin Guide)](https://docs.posit.co/ide/server-pro/admin/integration/custom_oauth.html)
+- [Custom OAuth Integrations (User Guide)](https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/custom_oauth.html)
+
+For a side-by-side comparison of all credential/provider options, this overview page is a good reference:
+
+- [Managed Credentials Overview](https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/managed-credentials.html)
+
+---
+
+## Overview
+
+This guide walks you through configuring Posit Workbench to use **Option 2:** **Custom OAuth integration with Azure Entra ID** for programmatic access to Microsoft SharePoint and Microsoft Graph APIs. This integration allows users to authenticate normally with passwords or OpenID Connect, while gaining the ability to request OAuth tokens within R and Python sessions for accessing SharePoint data.
+
+**Important:** This is not single sign-on (SSO) or OAuth-based login. Users authenticate to Workbench using their normal credentials with whichever login method has been chosen. The Custom OAuth integration enables them to obtain specific tokens for programmatic Microsoft Graph access.
+
+---
+
+## What You Will Accomplish
+
+By the end of this guide, your Workbench server will:
+
+- Authenticate users to Workbench using whichever auth method you currently have set up
+- Authenticate programmatically for data access with Microsoft Entra ID using OAuth 2.0 authorization code flow
+- Store OAuth tokens in the Workbench session database
+- Allow users to retrieve tokens within R and Python sessions via `rstudioapi::getOAuthCredentials()`
+- Support delegated permissions for SharePoint and Microsoft Graph API access
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- **Workbench installed and accessible** via HTTPS with a valid SSL certificate 
+- **Administrative access to Azure Entra ID** with permission to create and modify applications and grant admin consent
+- **Administrative command line access to the Workbench server** with sudo privileges
+- **Valid SSL certificate with verified HTTPS access** for Workbench redirect callback URL
+- **Network connectivity between Workbench and Azure Entra ID** on port 443 (HTTPS)
+
+**SSL Certificate Note:** Self-signed certificates are supported for testing, but production environments should use a CA-signed certificate.
+
+---
+
+## Architecture Overview
+
+```
+┌─────────────────────────────┐
+│  Workbench Browser          │
+│  ├─ HTTPS enabled           │
+│  ├─ oauth-clients.conf      │
+│  └─ User Sessions (R/Python)│
+└──────────────┬──────────────┘
+               │ (HTTPS)
+               ↓
+     ┌─────────────────────────────┐
+     │  Azure Entra ID             │
+     │  ├─ App Registration        │
+     │  ├─ Delegated Permissions   │
+     │  ├─ Redirect URI            |
+     │  └─ OAuth 2.0 Endpoints     │
+     └──────────────┬──────────────┘
+                    │ (Token Exchange)
+                    ↓
+     ┌─────────────────────────────┐
+     │  Microsoft Graph API        │
+     │  SharePoint Online          │
+     └─────────────────────────────┘
+```
+
+---
+
+## Step 1: Create and Configure the Azure Entra ID Application
+
+### 1.1: Register the Application
+
+1. Sign in to the [Azure portal](https://portal.azure.com)
+2. Navigate to **Azure Entra ID** > **App registrations**
+3. Click **+ New registration**
+4. Enter the following details:
+   - **Name:** e.g., `Posit-Workbench-SharePoint-OAuth`
+   - **Supported account types:** Select "Accounts in this organizational directory only"
+   - **Redirect URI:** Leave blank for now, you'll add it in the next step
+5. Click **Register**
+
+### 1.2: Configure the Redirect URI
+
+1. From the app registration **Overview** page, select **+ Add a Redirect URI** (or go to **Authentication**)
+2. Click **+ Add a platform** > **Web**
+3. Enter your Workbench redirect URI:
+
+   ```
+   https://<workbench-hostname>/oauth_redirect_callback
+   ```
+   
+   Replace `<workbench-hostname>` with your actual Workbench domain (e.g., `workbench.example.com`)
+
+4. **Critical:** The redirect URI must:
+   - Use HTTPS (not HTTP)
+   - Include the exact path `/oauth_redirect_callback`
+   - Match exactly what you configure in Workbench (case-sensitive)
+   - Be a publicly resolvable domain (localhost is not accepted by Azure in production)
+   - In the case of having Workbench behind a proxy should be the proxy URL apprpriately configured to allow traffic to pass
+
+5. Click **Save**
+
+### 1.3: Create a Client Secret
+
+1. From the app registration, go to **Manage** > **Certificates & secrets**
+2. Click **+ New client secret**
+3. Enter a description (e.g., "Workbench OAuth")
+4. Set **Expires:** to "24 months" or your organization's standard
+5. Click **Add**
+6. **Immediately copy the secret value** (shown under **Value**, not **Client ID**)
+   - **Important:** This secret is only displayed once. Store it securely; you will need it for Workbench configuration.
+
+### 1.4: Copy Your IDs
+
+From the app registration **Overview** page, copy and save:
+- **Application (client) ID**
+- **Directory (tenant) ID**
+
+You will need these for Workbench configuration.
+
+### 1.5: Configure API Permissions
+
+1. Go to **Manage** > **API permissions**
+2. Click **+ Add a permission**
+3. Select **Microsoft Graph** from the list
+4. Select **Delegated permissions**
+5. Search for and select the following permissions:
+
+   - `User.Read` — Read user profile information
+   - `Files.Read.All` — Read files in SharePoint and OneDrive
+   - `Sites.Read.All` — Read SharePoint sites
+   - `offline_access` — Required for token refresh capability
+   - Any others that may be needed to support access as detailed [here](https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md) 
+
+6. Click **Add permissions**
+7. After adding permissions, click **Grant admin consent for [Your Organization]**
+8. Click **Yes** to confirm
+
+**Important:** Admin consent is required for Custom OAuth to function. User consent alone is insufficient.
+
+---
+
+## Step 2: Prepare the Client Secret
+
+You have two options for handling the client secret in your configuration: encrypt it or use it in plain text.
+
+### Option A: Encrypt the Client Secret (Recommended)
+
+On your Workbench server with sudo access, use the built-in encryption utility:
+
+```bash
+sudo rstudio-server encrypt-password
+```
+
+When prompted, enter the client secret you copied from Azure. The command will output an encrypted value. Copy this encrypted value for use in Step 3 below.
+
+### Option B: Use Plain Client Secret (Acceptable for Testing)
+
+You can also use the client secret directly in the configuration file without encryption.
+
+**Note:** For production environments, encryption is strongly recommended. Choose the option that best fits your security requirements and environment.
+
+For this guide, we'll show examples using **Option A (encrypted)**, but the steps work the same with a plain secret.
+
+---
+
+## Step 3: Create the Custom OAuth Configuration File
+
+This is the only configuration file required for Custom OAuth. Your existing authentication method (PAM, LDAP, Active Directory, or any other) will continue to work unchanged. The Custom OAuth integration is independent of login authentication.
+
+Create `/etc/rstudio/oauth-clients.conf` with the following structure:
+
+```ini
+# ============================================================================
+# Workbench Custom OAuth Clients Configuration
+# ============================================================================
+# This file defines OAuth integrations for programmatic access to external
+# services. The section name appears in the UI under Managed Credentials.
+# ============================================================================
+
+[sharepoint-oauth]
+
+# Display name in Workbench UI (Settings > Managed Credentials > Custom OAuth)
+name=SharePoint OAuth Integration
+
+# Azure Entra ID Application (client) ID from Step 1.4
+client-id=<APPLICATION_CLIENT_ID>
+
+# Client secret from Step 1.3 (encrypted or plain)
+# For security, it is recommended to encrypt using: sudo rstudio-server encrypt-password
+# Then paste the encrypted value here
+client-secret=<CLIENT_SECRET_OR_ENCRYPTED_VALUE>
+
+# Azure OAuth 2.0 authorization endpoint (replace TENANT_ID with yours)
+authorize-url=https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/authorize
+
+# Azure OAuth 2.0 token endpoint (replace TENANT_ID with yours)
+token-url=https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token
+
+# Scopes for programmatic access (space-separated, explicit URLs)
+# CRITICAL: Must be explicit URLs, not .default scope
+# Why? Custom OAuth uses delegated permissions. The .default scope only works 
+# with application-level permissions. Use individual, explicit scope URLs.
+scopes=https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Sites.Read.All offline_access
+
+# Token endpoint authentication method
+# Use client-secret-basic (most reliable)
+token-endpoint-auth-method=client-secret-basic
+```
+
+Replace:
+- `<APPLICATION_CLIENT_ID>` with your Application (client) ID from Step 1.4
+- `<CLIENT_SECRET_OR_ENCRYPTED_VALUE>` with either:
+  - The encrypted value from Step 2.1 (recommended), OR
+  - The plain client secret from Step 1.3 (less secure, not recommended for production)
+- `<TENANT_ID>` with your Directory (tenant) ID from Step 1.4 (appears twice in URLs)
+
+---
+
+## Step 4: Configure SSL/TLS and Launcher Sessions
+
+Custom OAuth requires HTTPS for the OAuth redirect callback. Additionally, you need to configure launcher sessions for Custom OAuth to function properly with session management.
+
+### 4.A: SSL/TLS Configuration
+
+Ensure your Workbench has SSL configured in `rserver.conf`. If you already have HTTPS set up, verify these settings are present:
+
+```ini
+# ============================================================================
+# SSL/TLS Configuration (REQUIRED for OAuth redirect callback)
+# ============================================================================
+
+# Enable SSL
+ssl-enabled=1
+
+# Path to SSL certificate
+ssl-certificate=/path/to/your/certificate.crt
+
+# Path to SSL certificate key
+ssl-certificate-key=/path/to/your/certificate.key
+
+# TLS protocol versions (explicit specification required)
+ssl-protocols=TLSv1.2 TLSv1.3
+
+# HTTPS port (standard is 443, or 8443 if running without root)
+www-port=443
+```
+
+### 4.B: Launcher Sessions Configuration
+
+Add the following launcher configuration to `/etc/rstudio/rserver.conf`. This enables session management which Custom OAuth depends on:
+
+```ini
+# ============================================================================
+# Launcher Configuration (REQUIRED for Custom OAuth sessions)
+# ============================================================================
+
+# Enable launcher for job execution and sessions
+launcher-address=127.0.0.1
+launcher-port=5559
+launcher-sessions-enabled=1
+launcher-default-cluster=Local
+
+# Session callback address - MUST match your OAuth redirect domain exactly
+# This is where Workbench sends users after they authenticate with Azure
+# It must be HTTPS and must match the redirect URI in your Azure app
+launcher-sessions-callback-address=https://<workbench-hostname>
+```
+
+Replace `<workbench-hostname>` with your actual Workbench domain (e.g., `workbench.example.com`).
+
+**Critical:** The `launcher-sessions-callback-address` must:
+- Use HTTPS (not HTTP)
+- Exactly match the redirect URI you configured in Azure (Step 1.2)
+- Be the publicly resolvable domain (not localhost in production)
+- Include the full domain name with no trailing slashes
+
+---
+
+## Step 5: Restart Workbench Services
+
+After making configuration changes, restart Workbench:
+
+```bash
+sudo systemctl restart rstudio-server
+sudo systemctl restart rstudio-launcher
+```
+
+Verify that services restarted successfully:
+
+```bash
+sudo systemctl status rstudio-server
+sudo systemctl status rstudio-launcher
+```
+
+Check logs for errors: 
+
+```bash
+sudo tail -n 50 /var/log/rstudio/rstudio-server/rserver.log
+sudo tail -n 50 /var/log/rstudio/launcher/rstudio-launcher.log
+```
+
+Both services should show **active (running)**.
+
+---
+
+## Step 6: Verify the Configuration
+
+### 6.1: Test HTTPS Access
+
+From a browser, navigate to your Workbench instance via HTTPS:
+
+```
+https://<workbench-hostname>
+```
+
+Verify that the login page loads without SSL errors. 
+
+### 6.2: Login to Workbench
+
+1. Login with your existing Workbench credentials using whatever authentication method you currently have configured (PAM, LDAP, Active Directory, Kerberos, SAML, or any other)
+2. Once logged in, click **Settings** in the top right corner
+3. Select **Managed Credentials**
+
+You should see a **Custom OAuth** section with an entry for **"SharePoint OAuth Integration"** (or whatever name you configured).
+
+### 6.3: Test OAuth Flow
+
+1. In **Managed Credentials**, click the **SharePoint OAuth Integration** entry
+2. Click **"Signing In..."**
+3. You will be redirected to Azure for authentication
+4. Sign in with your Azure/Microsoft 365 credentials
+5. Grant permissions when prompted
+6. You will be redirected back to Workbench
+
+After successful authentication, the credential should appear in **Managed Credentials** **without an error icon** (red X).
+
+### 6.4: Retrieve Token in R
+
+In an R session within Workbench, retrieve the OAuth token:
+
+```R
+# Get the OAuth token
+integration <- rstudioapi::findOAuthIntegration("sharepoint-oauth")
+  token <- rstudioapi::getOAuthCredentials(integration$id)
+  str(token)
+
+# Verify token structure
+str(token)
+# Should show: $access_token, $refresh_token, $expires_in, $token_type, etc.
+```
+
+### 6.5: Use Token for Microsoft Graph API
+
+```R
+library(httr2)
+
+# Build request to Microsoft Graph API with token
+response <- request("https://graph.microsoft.com/v1.0/me") %>%
+  req_headers(Authorization = paste("Bearer", token$access_token)) %>%
+  req_perform()
+
+# View user information
+content(response)
+```
+
+Reference [this page](https://solutions.posit.co/connections/microsoft365/index.html) for some examples of interacting with sharepoint data. 
+
+---
+
+## Troubleshooting
+
+### Problem: OAuth button shows error (red X)
+
+**Possible Causes:**
+
+1. **Admin consent not granted in Azure**
+   - Solution: Return to Azure app > API permissions and click "Grant admin consent for [Organization]"
+
+2. **Redirect URI doesn't match exactly**
+   - Solution: Verify in Azure app that redirect URI matches exactly what you configured in rserver.conf
+   - Check: HTTPS (not HTTP), exact path `/oauth_redirect_callback`, no trailing slashes
+
+3. **Client secret expired or incorrect**
+   - Solution: In Azure, create a new client secret and update Workbench configuration
+
+4. **Scopes misconfigured**
+   - Solution: Verify scopes in oauth-clients.conf are explicit URLs (not `.default`)
+   - Must include `offline_access` for token refresh
+
+### Problem: "Claim is invalid" error from Azure
+
+**Root Cause:** Corrupted or missing permissions in Azure app
+
+**Solution:**
+
+1. Go to Azure app > API permissions
+2. Remove all permissions
+3. Re-add permissions one at a time:
+   - User.Read
+   - Files.Read.All
+   - Sites.Read.All
+   - offline_access
+4. Grant admin consent
+5. Wait 30 seconds for Azure to sync
+6. Restart Workbench: `sudo systemctl restart rstudio-server`
+
+### Problem: Cannot retrieve token in R
+
+**Solution:**
+
+1. Verify credential appears in **Settings > Managed Credentials** without error
+2. Check R session is in the same Workbench server where you authenticated
+3. Verify syntax: `rstudioapi::getOAuthCredentials("sharepoint-oauth")`
+   - Section name from oauth-clients.conf must match exactly
+4. Check Workbench logs: `sudo journalctl -u rstudio-server -f`
+
+### Problem: HTTPS connection errors
+
+**Solutions:**
+
+- Verify SSL certificate and key paths in rserver.conf are correct
+- Verify certificate is readable by rstudio-server user
+- Test certificate: `openssl s_client -connect localhost:443`
+- For self-signed certificates, add to system CA bundle or test with curl -k flag
+
+### Problem: Sessions fail or won't connect
+
+**Possible Causes:**
+
+1. **Launcher not configured**
+   - Solution: Verify Step 4.B launcher settings are in rserver.conf
+   - Check: `launcher-sessions-enabled=1` and `launcher-default-cluster=Local` are set
+
+2. **Launcher callback address doesn't match OAuth redirect URI**
+   - Solution: Verify `launcher-sessions-callback-address` exactly matches your Azure redirect URI
+   - Both must use HTTPS and be identical (case-sensitive)
+   - Example: If Azure has `https://workbench.example.com/oauth_redirect_callback`, then `launcher-sessions-callback-address=https://workbench.example.com`
+
+### Problem: OAuth button appears but doesn't work
+
+**If you see a session connection error after authenticating:**
+
+- Verify `launcher-sessions-callback-address` is configured (Step 4.B)
+- Verify it matches your Azure redirect URI exactly
+- Restart Workbench: `sudo systemctl restart rstudio-server rstudio-launcher`
+
+### Problem: Workbench won't start
+
+**Check logs:**
+
+```bash
+sudo journalctl -u rstudio-server -n 50
+```
+
+**Common issues:**
+
+- Configuration file syntax errors (check for missing `=` signs, invalid section names)
+- File permission issues on oauth-clients.conf or openid-client-secret  
+- Client secret file permissions not set to 0600   
+- Missing launcher configuration in rserver.conf
+- SSL certificate/key files not found or incorrect paths
+- `launcher-sessions-callback-address` not set or incorrect format
+
+---
+
+## Configuration Reference
+
+### Required for Custom OAuth
+
+| Setting | File | Value | Purpose |
+|---------|------|-------|---------|
+| `ssl-enabled` | rserver.conf | 1 | Enable HTTPS (required for OAuth callback) |
+| `ssl-protocols` | rserver.conf | TLSv1.2 TLSv1.3 | Enforce modern TLS versions |
+| `ssl-certificate` | rserver.conf | `/path/to/cert.crt` | SSL certificate file path |
+| `ssl-certificate-key` | rserver.conf | `/path/to/cert.key` | SSL certificate key file path |
+| `[sharepoint-oauth]` | oauth-clients.conf | Section name | Appears in UI as credential name |
+| `name` | oauth-clients.conf | Display name | User-friendly name in Managed Credentials |
+| `client-id` | oauth-clients.conf | Azure Application ID | OAuth client identifier |
+| `client-secret` | oauth-clients.conf | Secret (encrypted or plain) | OAuth client credential |
+| `scopes` | oauth-clients.conf | Space-separated URLs | API permissions to request |
+| `token-endpoint-auth-method` | oauth-clients.conf | client-secret-basic | Authentication method (tested reliable) |
+| `authorize-url` | oauth-clients.conf | Azure OAuth URL | Azure authorization endpoint |
+| `token-url` | oauth-clients.conf | Azure OAuth URL | Azure token endpoint |
+
+---
+
+## How the OAuth Flow Works
+
+```
+User in Workbench
+     ↓
+Settings > Managed Credentials > Custom OAuth
+     ↓
+Clicks "SharePoint OAuth Integration" → "Signing In..."
+     ↓
+Browser redirected to:
+  https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize?
+  client_id={CLIENT_ID}&
+  redirect_uri=https://{workbench_hostname}/oauth_redirect_callback&
+  scope=https://graph.microsoft.com/User.Read ...&
+  response_type=code
+     ↓
+User logs in to Azure
+     ↓
+User grants permissions
+     ↓
+Azure redirects back to:
+  https://{workbench_hostname}/oauth_redirect_callback?code={AUTH_CODE}
+     ↓
+Workbench exchanges AUTH_CODE for token
+  POST https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token
+  client_id={CLIENT_ID}&
+  client_secret={CLIENT_SECRET}&
+  code={AUTH_CODE}&
+  ...
+     ↓
+Azure returns:
+  { access_token, refresh_token, expires_in, token_type, ... }
+     ↓
+Token stored in Workbench session database
+     ↓
+User retrieves in R:
+  token ← rstudioapi::getOAuthCredentials("sharepoint-oauth")
+     ↓
+Use token to access Microsoft Graph / SharePoint:
+  Authorization: Bearer {access_token}
+```
+
+---
+
+## Security Considerations
+
+- **Client Secret:** Store securely; encrypt using `rstudio-server encrypt-password`
+- **HTTPS Required:** All communications must use HTTPS with valid certificates
+- **Admin Consent:** Admin consent is required; user consent alone will not work
+- **Token Storage:** Tokens are stored in Workbench session database; follow your organization's data retention policies
+- **Scopes:** Request minimum necessary scopes (User.Read, Files.Read.All, Sites.Read.All)
+- **Expiration:** Tokens expire; use refresh_token for new access tokens
+
+---
+
+## Additional Resources
+
+- [Microsoft Entra ID OAuth 2.0 Documentation](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)
+- [Microsoft Graph API Reference](https://learn.microsoft.com/en-us/graph/api/overview)
+- [Posit Workbench Configuration Reference](https://docs.posit.co/ide/server-pro/admin/reference)
+- [Posit Custom OAuth Documentation](https://docs.posit.co/workbench/admin/reference/custom-oauth-credentials.html)
+
+---
+
+## Summary
+
+You have successfully configured Posit Workbench to use Custom OAuth with Azure Entra ID for programmatic SharePoint data access. Users can now:
+
+1. Login to Workbench normally
+2. Authenticate via OAuth to Azure to obtain tokens
+3. Use those tokens in R/Python sessions to access Microsoft Graph and SharePoint
+
+The configuration is production-ready. For production deployments, ensure:
+
+- CA-signed SSL certificate 
+- Properly configured firewall rules
+- Regular token rotation and renewal procedures
+- Audit logging for OAuth token usage
+- Backup/recovery procedures
+
+
+ 
