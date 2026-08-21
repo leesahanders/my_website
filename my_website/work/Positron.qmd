@@ -282,6 +282,26 @@ pip install ipykernel jupyter
 python -m ipykernel install --name "shiny-income-share" --user
 ```
 
+### Cheat sheet 
+
+```bash
+# Make sure you are in a directory with your code ("open folder")
+
+# Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
+uv init --app --python 3.12.4
+
+# create the venv
+uv venv
+
+# Make sure you source it, it will give you the command to run
+
+# Install packages
+uv pip install pandas
+uv pip install -r requirements.txt
+
+# And then you may need to select your venv as the interpreter and reload the session with ctrl-shift-p reload window
+```
+
 ### Running and previewing an app 
 
 Open the folder so that the root directory is the content example you want to run. 
