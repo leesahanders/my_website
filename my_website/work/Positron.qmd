@@ -300,6 +300,8 @@ uv pip install pandas
 uv pip install -r requirements.txt
 
 # And then you may need to select your venv as the interpreter and reload the session with ctrl-shift-p reload window
+
+# ctrl shift p to open the command pallette and select the python interpreter that matches the venv we created, or top right where it says python or R select new console session and the venv we created. make sure that bottom left also matches the venv
 ```
 
 ### Running and previewing an app 
