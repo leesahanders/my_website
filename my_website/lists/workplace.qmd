@@ -50,3 +50,5 @@ categories:
 [Forbes - let the engineers lead (boeing)](https://www.forbes.com/sites/gautammukunda/2024/02/22/let-the-engineers-lead-america-needs-boeing-to-be-great/?sh=4327814630e1)
 
 [Failure to Learn: the BP refinery disaster](https://www.goodreads.com/book/show/8586375-failure-to-learn)
+
+[Wally Reflector](https://swizec.com/blog/the-wally-reflector/) 
