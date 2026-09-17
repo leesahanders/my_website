@@ -50,13 +50,20 @@ Discussion between the developers and the Global Azure Administration team about
 
 There are several authentication approaches available. For Posit users, **managed credentials** through Posit Workbench or Posit Connect are the recommended primary option for enterprise deployments.
 
+### Authentication options using active authentication (good for interactive content and sessions)
+
 | **Method**                            | **auth_type** (R / Python)        | **Permissions** | **Microsoft Setup Needed** | **Capability**                  |
 |---------------------------------------|----------------------|----------------|----------------|---------------------------------|
 | **Managed Credentials: Workbench (Delegated)** | `rstudioapi::getDelegatedAzureToken()` / `client.oauth.get_delegated_azure_token()` | Delegated (User) | Azure app registration (admin configures), user signs in once via SSO | Interactive Workbench sessions and jobs launched from them |
 | **Managed Credentials: Connect (Viewer OAuth)** | `connectapi::get_oauth_credentials()` / `client.oauth.get_credentials()` | Delegated (Viewer) | Azure app registration (admin configures an OAuth integration) | Published Connect content; each viewer's own SharePoint permissions apply |
-| **Managed Credentials: Connect (Service Account OAuth)** | Same as above, configured for a shared service identity | Delegated (Service Account) | Azure app registration + service account configured in the integration | Scheduled reports and content where a shared, non-viewer-specific identity is appropriate |
 | **User Sign-in Flow: Default**       | default / `with_interactive()` | Delegated (User) |  Redirect URLs, user permissions | Interactive only (local IDE, Workbench, interactive Shiny/Streamlit)                |
 | **User Sign-in Flow: Device Code**    | device_code / `with_device_flow()` | Delegated (User) | Enable `mobile and desktop flows`, user permissions | Interactive only (local IDE, Workbench)                |
+
+### Authentication options using embedded credentials (good for static content)
+
+| **Method**                            | **auth_type** (R / Python)        | **Permissions** | **Microsoft Setup Needed** | **Capability**                  |
+|---------------------------------------|----------------------|----------------|----------------|---------------------------------|
+| **Managed Credentials: Connect (Service Account OAuth)** | Same as above, configured for a shared service identity | Delegated (Service Account) | Azure app registration + service account configured in the integration | Scheduled reports and content where a shared, non-viewer-specific identity is appropriate |
 | **Service Principal / Client Secret** | client_credentials / `with_client_secret()` | Application | Application permissions, client secret | Scheduled/non-interactive, APIs, background jobs |
 | **Service Account / Embedded Credentials** | resource_owner / `with_username_and_password()` | Delegated (Service Account) | Service account credentials in code | Scheduled/non-interactive content |
 
