@@ -21,9 +21,8 @@ categories:
 ---
 
 
-
 :::{.callout-note}
-Disclaimer: This page discusses Microsoft-developed open source packages. For R, the `Microsoft365R` package was at version 2.3.4 at the time of initial writing. For Python, the `Office365-REST-Python-Client` library is the Microsoft-recommended approach. Readers should refer to the [Microsoft365R package documentation](https://github.com/Azure/Microsoft365R) and [Office365-REST-Python-Client documentation](https://github.com/vgrem/Office365-REST-Python-Client) for the most up-to-date information.
+Disclaimer: This page discusses Microsoft-developed open source packages. For R, the `Microsoft365R` package was at version 2.4.1 and AzureAuth at version 1.3.4 at the time of initial writing. For Python, the `Office365-REST-Python-Client` library is the Microsoft-recommended approach. Readers should refer to the [Microsoft365R package documentation](https://github.com/Azure/Microsoft365R) and [Office365-REST-Python-Client documentation](https://github.com/vgrem/Office365-REST-Python-Client) for the most up-to-date information.
 :::
 
 ## Introduction
@@ -54,7 +53,7 @@ There are several authentication approaches available. For Posit users, **manage
 | **Method**                            | **auth_type** (R / Python)        | **Permissions** | **Microsoft Setup Needed** | **Capability**                  |
 |---------------------------------------|----------------------|----------------|----------------|---------------------------------|
 | **Managed Credentials: Workbench (Delegated)** | `rstudioapi::getDelegatedAzureToken()` / `client.oauth.get_delegated_azure_token()` | Delegated (User) | Azure app registration (admin configures), user signs in once via SSO | Interactive Workbench sessions and jobs launched from them |
-| **Managed Credentials: Connect (Viewer OAuth)** | `connectapi::get_oauth_credentials()` / `client.oauth.get_credentials()` | Delegated (Viewer) | Azure app regiscctration (admin configures an OAuth integration) | Published Connect content; each viewer's own SharePoint permissions apply |
+| **Managed Credentials: Connect (Viewer OAuth)** | `connectapi::get_oauth_credentials()` / `client.oauth.get_credentials()` | Delegated (Viewer) | Azure app registration (admin configures an OAuth integration) | Published Connect content; each viewer's own SharePoint permissions apply |
 | **Managed Credentials: Connect (Service Account OAuth)** | Same as above, configured for a shared service identity | Delegated (Service Account) | Azure app registration + service account configured in the integration | Scheduled reports and content where a shared, non-viewer-specific identity is appropriate |
 | **User Sign-in Flow: Default**       | default / `with_interactive()` | Delegated (User) |  Redirect URLs, user permissions | Interactive only (local IDE, Workbench, interactive Shiny/Streamlit)                |
 | **User Sign-in Flow: Device Code**    | device_code / `with_device_flow()` | Delegated (User) | Enable `mobile and desktop flows`, user permissions | Interactive only (local IDE, Workbench)                |
@@ -188,6 +187,7 @@ library(rstudioapi)
 library(AzureAuth) 
 library(Microsoft365R)
 library(AzureGraph)
+library(connectapi)
 
 site_url = "https://yourorg.sharepoint.com/sites/YourSite"
 
@@ -218,17 +218,30 @@ sharepoint_token <- get_manual_token(token)
 # use the exported token directly, skipping any interactive app/tenant login
 site <- get_sharepoint_site(site_url = site_url, token = sharepoint_token)
 cat("Connected to:", site$properties$webUrl, "\n")
+
+# List document libraries
+site$list_drives()
+
+# Access a document library and list files
+drive <- site$get_drive("Documents")
+drive$list_items()
+
+# Download a file
+drive$download_file("reports/quarterly.xlsx", dest = "quarterly.xlsx")
 ```
 
 [View `getDelegatedAzureToken()` documentation](https://rstudio.github.io/rstudioapi/reference/getDelegatedAzureToken.html).
 
 ## Python
 
+:::{.callout-note}
+Watch the package names when installing python packages. `pip install posit` and `pip install office365` will silently install unrelated packages from PyPI that happen to share these names, not the ones used in this article. Always install the exact names for the packages, in this case `posit-sdk` and `Office365-REST-Python-Client` to avoid a confusing `ModuleNotFoundError` after what looks like a successful install. 
+:::
+
 <!-- verified on 2026-09-17 by Lisa -->
 
 ```python
 import os
-import requests
 # pip install posit-sdk 
 from posit import connect
 from posit.workbench import Client
@@ -236,7 +249,7 @@ from posit.workbench import Client
 from office365.sharepoint.client_context import ClientContext
 
 SITE_URL = "https://yourorg.sharepoint.com/sites/YourSite"
-SITE_URL_ROOT = "https://yourorg.sharepoint.com # tenant root, not /sites/YourSite
+SITE_URL_ROOT = "https://yourorg.sharepoint.com" # tenant root, not /sites/YourSite
 
 # check if running on Posit Connect or Workbench
 if os.getenv("POSIT_PRODUCT") == "CONNECT":
@@ -259,6 +272,9 @@ if os.getenv("POSIT_PRODUCT") == "CONNECT":
             print(
                 "Your SharePoint refresh token has expired. Please log out and then log back into the integration."
             )
+        else:
+            print(f"Failed to retrieve SharePoint OAuth credentials: {e}")
+        sys.exit(1)
 elif os.getenv("POSIT_PRODUCT") == "WORKBENCH":
     client = Client()
     # Resource must match the SharePoint tenant, not Graph, for office365-rest-python-client
@@ -278,6 +294,8 @@ def acquire_token():
 ctx = ClientContext(SITE_URL).with_access_token(acquire_token)
 web = ctx.web.get().execute_query()
 print(f"Connected to: {web.url}")
+
+
 ```
 
 [View `get_delegated_azure_token()` documentation](https://posit-dev.github.io/posit-sdk-py/reference/workbench.oauth.OAuth.html#posit.workbench.oauth.OAuth.get_delegated_azure_token).
@@ -384,7 +402,7 @@ site_url = "https://yourorg.sharepoint.com/sites/YourSite"
 app = "your-app-id"
 
 # Add sensitive variables as environmental variables so they aren't exposed
-client_secret <- Sys.getenv("EXAMPLE_SHINY_CLIENT_SECRET")
+client_secret <- Sys.getenv("MY_CLIENT_SECRET")
 
 # Create auth token cache directory
 create_AzureR_dir()
@@ -497,7 +515,7 @@ library(AzureGraph)
 tenant = "your-tenant-id"
 
 AzureAuth::clean_token_directory()
-AzureGraph::delete_graph_login(tenant = "your-tenant-id")
+AzureGraph::delete_graph_login(tenant = tenant)
 ```
 
 ## Python
@@ -643,7 +661,7 @@ foo <- function() {
   # SharePoint site
   site <- gr$get_sharepoint_site(site_url)
 
-  # Note the function get_drive() uses drive_id as a parameter (NOT drive name)
+  # Drive 
   drv <- site$get_drive(drive_name)
 
   # Downloading the file:

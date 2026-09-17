@@ -288,7 +288,7 @@ python -m ipykernel install --name "shiny-income-share" --user
 # Make sure you are in a directory with your code ("open folder")
 
 # Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
-uv init --app --python 3.12.4
+uv init --app --python 3.13
 
 # create the venv
 uv venv
