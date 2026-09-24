@@ -812,6 +812,6 @@ def foo():
 - Research: The Hidden Penalty of Using AI at Work: <https://hbr.org/2025/08/research-the-hidden-penalty-of-using-ai-at-work>
 - Curl vs AI with Daniel Stenberg: <https://opensourcesecurity.io/2025/2025-05-curl_vs_ai_with_daniel_stenberg/>
 - AI Doesn’t Reduce Work—It Intensifies It <https://hbr.org/2026/02/ai-doesnt-reduce-work-it-intensifies-it> 
-
-
+- Don't paste the AI <https://dontpastetheai.com/> 
+- Confessions of an Unrepentant Slop Snob<https://charity.wtf/p/confessions-of-an-unrepentant-slop> 
 
