@@ -1,0 +1,175 @@
+---
+title: "Building and Publishing Packages to Posit Package Manager"
+description: "An overview of package publication options"
+author: "Lisa"
+date: "2026-09-28"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+I wanted to walk through an overview of hosting internally developed packages in your Package Manager. I wanted to lay out the setup options so you can decide which fits your workflow best. I'll highly recommend the PPM Admin training course, here are its materials that I highly recommend as a companion overview: [https://sol-eng.github.io/admin-training-async/ppm_install_03.html](https://sol-eng.github.io/admin-training-async/ppm_install_03.html)
+
+  
+
+**Create the internal packages repos (one for R, one for Python)**  
+  
+Package Manager needs a repo per language. How that repo gets populated is where the options below differ. A single internally developed packages repo can support multiple "sources" meaning that both packages from git (git source) and packages published directly by publishers (internal source) can share a repository. 
+
+My recommendation, if you don't have a strong preference between the options, would be to support both options 1 and 2 by subscribing both sources to the same internal packages repository. Option 1 suits ad hoc or CI-driven publishing where developers want control over timing; Option 2 suits packages that should always reflect the latest version controlled release. 
+
+_PPM admin steps (one-time setup, per language to host internally developed packages):_
+
+```bash
+rspm create source --name=internal-r-src --type=local
+rspm create repo --name=internal-r
+rspm subscribe --repo=internal-r --source=internal-r-src
+
+rspm create source --name=internal-py-src --type=local
+rspm create repo --name=internal-python
+rspm subscribe --repo=internal-python --source=internal-py-src
+```
+
+**Option 1: Remote publishing via API key**  
+  
+Developers (or a CI pipeline) push built packages directly to Package Manager whenever they're ready to publish.  
+  
+_PPM admin steps:_
+
+Generate a scoped, expiring token for each publisher or CI system:
+
+```bash
+rspm create token --description="R package publisher" \
+--sources=internal-r-src --expires=90d \
+--scope=sources:write --user="<publisher-username>"
+```
+
+Docs: [https://docs.posit.co/rspm/admin/authentication/token-authentication.html](https://docs.posit.co/rspm/admin/authentication/token-authentication.html)
+
+
+_Publisher steps:_
+
+R packages:
+
+```bash
+export PACKAGEMANAGER_TOKEN=<token>
+export PACKAGEMANAGER_ADDRESS=https://<your-ppm-host>
+curl -fLOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" "${PACKAGEMANAGER_ADDRESS}/__api__/download" && chmod +x rspm
+./rspm add --source=internal-r-src --path=/path/to/package_1.0.tar.gz
+```
+
+Python packages:
+
+```bash
+export TWINE_REPOSITORY_URL=https://<your-ppm-host>/upload/pypi/internal-python-src
+export TWINE_USERNAME=__token__
+export TWINE_PASSWORD=<token>
+twine upload dist/*
+```
+
+Publishing a new version is just re-running the same command with the new build. Package Manager automatically archives the old version and promotes the new one as default.
+
+
+Docs: [https://docs.posit.co/rspm/admin/remote-publishing.html](https://docs.posit.co/rspm/admin/remote-publishing.html)
+
+**Option 2: Publishing via version control / git backed**  
+  
+Package Manager subscribes to a version controlled repository and builds the package with no separate publish step for developers.  
+  
+_PPM admin steps:_
+
+```bash
+rspm create source --name=git --type=git
+rspm subscribe --repo=internal-r --source=git
+rspm create git-builder --source=git --url=git@github.com:org/repo.git --credential=my-key
+
+rspm create source --name=git-py --type=git-python
+rspm subscribe --repo=internal-py --source=git-py
+rspm create git-builder --source=git-py --url=git@github.com:org/repo.git --credential=my-key
+```
+  
+
+Note: this requires R and/or Python actually installed on the Package Manager server itself, since Package Manager does the build (configured via  `RVersion`/`PythonVersion` in rstudio-pm.gcfg).
+
+Publisher steps: No additional steps beyond sending the url for the git builder to PPM admin. New versions are picked up automatically.
+
+Docs: [https://docs.posit.co/rspm/admin/building-packages.html](https://docs.posit.co/rspm/admin/building-packages.html)
+
+**Option 3: Developer hands the tarball to the PPM admin, who publishes it manually**
+
+This uses the same underlying command as Option 1 (`rspm add`), but the PPM admin runs it using their own credentials instead of a token scoped to the developer. It's worth knowing as a fallback, but I don't recommend it because it makes the PPM admin a bottleneck for every release and lacks a per-publisher audit trail (everything appears to come from the admin account).
+
+**Once the internal repo(s) exist: wiring up Workbench and Connect**
+
+Creating the repo in Package Manager only makes packages available for install, Workbench and Connect each need to be told the new repo exists before their users/content can actually see it.
+
+_Workbench R Packages:_
+  
+Add the internal repo to /etc/rstudio/repos.conf alongside CRAN:
+
+```
+CRAN=https://<ppm-host>/<cran-repo-name>/latest
+Internal=https://<ppm-host>/<internal-r-repo-name>/latest
+```
+
+One thing to check: if Workbench currently sets an R repo via `r-cran-repos` in `rsession.conf` instead of `repos.conf`, that older setting needs to be removed first.
+
+Docs: [https://docs.posit.co/rspm/admin/workbench.html#internal-packages-and-cran-packages](https://docs.posit.co/rspm/admin/workbench.html#internal-packages-and-cran-packages)
+
+_Workbench Python packages:_
+
+pip: edit /etc/pip.conf, using index-url for the primary index and extra-index-url to add another
+
+```
+[global]
+index-url = https://<ppm-host>/<internal-python-repo-name>/latest/simple
+extra-index-url = https://<ppm-host>/<pypi-repo-name>/latest/simple
+```
+
+uv: edit `/etc/uv/uv.toml`, adding an `[[index]]` block per repo (mark one `default = true`)
+
+```
+[[index]]  
+url = "[https://packagemanager.posit.co/pypi/latest/simple](https://packagemanager.posit.co/pypi/latest/simple)"  
+default = true
+
+[[index]]  
+url = "https://<ppm-host>/<internal-python-repo-name>/latest/simple"  
+```
+
+Docs: [https://docs.posit.co/rspm/admin/workbench.html#python-repositories](https://docs.posit.co/rspm/admin/workbench.html#python-repositories)
+
+_Connect R and Python packages:_
+
+Add a second `[RPackageRepository]` section in `/etc/rstudio-connect/rstudio-connect.gcfg`, alongside the existing CRAN one, and then same for Python:
+
+```
+[RPackageRepository "CRAN"]
+URL = "https://<ppm-host>/<cran-repo-name>/latest"
+
+[RPackageRepository "internal"]
+URL = "https://<ppm-host>/<internal-r-repo-name>/latest"
+
+[PythonPackageRepository "PyPI"]
+URL = https://<ppm-host>/<pypi-repo-name>/latest/simple
+
+[PythonPackageRepository "internal"]
+URL = https://<ppm-host>/<internal-python-repo-name>/latest/simple
+```
+  
+Docs: [https://docs.posit.co/connect/admin/r/package-management/index.html#configuring-on-posit-connect](https://docs.posit.co/connect/admin/r/package-management/index.html#configuring-on-posit-connect) and [https://docs.posit.co/connect/admin/python/package-management/index.html#python-package-repositories](https://docs.posit.co/connect/admin/python/package-management/index.html#python-package-repositories)
+
+Hopefully these details are a helpful resource as you navigate publishing internally developed packages to your package manager instance. 
+
+  

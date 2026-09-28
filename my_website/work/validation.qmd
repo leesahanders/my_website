@@ -59,6 +59,11 @@ My colleagues recommendation while reading these resources:
 
 ### Start here 
 
+This is a regular topic at our annual Posit conference and the materials are available online 
+
+- Here is the git repo from 2025: [https://github.com/posit-conf-2025/reproducible-environments](https://github.com/posit-conf-2025/reproducible-environments) and here are the slides from 2025: [https://posit-conf-2025.github.io/reproducible-environments/#/title-slide](https://posit-conf-2025.github.io/reproducible-environments/#/title-slide)
+- Here is the repo and materials from 2026: [https://github.com/posit-conf-2026/r-pharma-regulated](https://github.com/posit-conf-2026/r-pharma-regulated) 
+
 Internal to Posit resources: 
 
 - Computerized system validation - google this - Michael uploaded in the pharma task force github a summarized csv - <https://github.com/rstudio/pharma-taskforce/blob/main/doc/Overview/CSV.md>

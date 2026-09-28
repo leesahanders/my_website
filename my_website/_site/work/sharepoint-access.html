@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2026-09-17">
+<meta name="description" content="Finally overhauled this article and I’m really proud of how much information there is!">
+
+<title>Sharepoint Access article 20 – Lisa Anders - questionable.quarto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/leafey-48.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6f6599830d51be977da3b6af758f8eff.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-e91c052eb570edf2d22681b9d732e88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-41747d4fbeb8042c449695184b3e5aec.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-e91c052eb570edf2d22681b9d732e88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-stuff" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-database" role="img">
+</i> 
+ <span class="menu-text">Stuff</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/posts/">
+ <span class="dropdown-text">Blog / Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../lists.html">
+ <span class="dropdown-text">Lists</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../presentations.html">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/">
+ <span class="dropdown-text">Recipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../work.html">
+ <span class="dropdown-text">Technical writeups</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../site_map.html"> 
+<span class="menu-text">Site Map</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/leesahanders/my_website"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Sharepoint Access article 20</h1>
+                  <div>
+        <div class="description">
+          Finally overhauled this article and I’m really proud of how much information there is!
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lisa </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 17, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#authentication-options" id="toc-authentication-options" class="nav-link" data-scroll-target="#authentication-options">Authentication Options</a>
+  <ul class="collapse">
+  <li><a href="#authentication-options-using-active-authentication-good-for-interactive-content-and-sessions" id="toc-authentication-options-using-active-authentication-good-for-interactive-content-and-sessions" class="nav-link" data-scroll-target="#authentication-options-using-active-authentication-good-for-interactive-content-and-sessions">Authentication options using active authentication (good for interactive content and sessions)</a></li>
+  <li><a href="#authentication-options-using-embedded-credentials-good-for-static-content" id="toc-authentication-options-using-embedded-credentials-good-for-static-content" class="nav-link" data-scroll-target="#authentication-options-using-embedded-credentials-good-for-static-content">Authentication options using embedded credentials (good for static content)</a></li>
+  </ul></li>
+  <li><a href="#authentication-background" id="toc-authentication-background" class="nav-link" data-scroll-target="#authentication-background">Authentication Background</a></li>
+  <li><a href="#authentication-configurations" id="toc-authentication-configurations" class="nav-link" data-scroll-target="#authentication-configurations">Authentication Configurations</a>
+  <ul class="collapse">
+  <li><a href="#overview-and-setup-resources" id="toc-overview-and-setup-resources" class="nav-link" data-scroll-target="#overview-and-setup-resources">Overview and Setup Resources</a></li>
+  <li><a href="#managed-credentials-recommended-for-enterprise" id="toc-managed-credentials-recommended-for-enterprise" class="nav-link" data-scroll-target="#managed-credentials-recommended-for-enterprise">Managed Credentials (Recommended for Enterprise)</a></li>
+  <li><a href="#individual-authentication-methods" id="toc-individual-authentication-methods" class="nav-link" data-scroll-target="#individual-authentication-methods">Individual Authentication Methods</a></li>
+  <li><a href="#user-sign-in-flow-default" id="toc-user-sign-in-flow-default" class="nav-link" data-scroll-target="#user-sign-in-flow-default">User Sign-in Flow: Default</a></li>
+  <li><a href="#user-sign-in-flow-device-code" id="toc-user-sign-in-flow-device-code" class="nav-link" data-scroll-target="#user-sign-in-flow-device-code">User Sign-in Flow: Device Code</a></li>
+  <li><a href="#service-principal-client-secret" id="toc-service-principal-client-secret" class="nav-link" data-scroll-target="#service-principal-client-secret">Service Principal / Client Secret</a></li>
+  <li><a href="#embedded-credentials" id="toc-embedded-credentials" class="nav-link" data-scroll-target="#embedded-credentials">Embedded Credentials</a></li>
+  </ul></li>
+  <li><a href="#authentication-examples" id="toc-authentication-examples" class="nav-link" data-scroll-target="#authentication-examples">Authentication Examples</a>
+  <ul class="collapse">
+  <li><a href="#managed-credentials-workbench-connect-users" id="toc-managed-credentials-workbench-connect-users" class="nav-link" data-scroll-target="#managed-credentials-workbench-connect-users">Managed Credentials (Workbench &amp; Connect Users)</a></li>
+  <li><a href="#user-sign-in-flow-default-1" id="toc-user-sign-in-flow-default-1" class="nav-link" data-scroll-target="#user-sign-in-flow-default-1">User Sign-in Flow: Default</a></li>
+  <li><a href="#user-sign-in-flow-device-code-1" id="toc-user-sign-in-flow-device-code-1" class="nav-link" data-scroll-target="#user-sign-in-flow-device-code-1">User Sign-in Flow: Device Code</a></li>
+  <li><a href="#service-principal-client-secret-1" id="toc-service-principal-client-secret-1" class="nav-link" data-scroll-target="#service-principal-client-secret-1">Service Principal / Client Secret</a></li>
+  <li><a href="#embedded-credentials-1" id="toc-embedded-credentials-1" class="nav-link" data-scroll-target="#embedded-credentials-1">Embedded Credentials</a></li>
+  <li><a href="#troubleshooting-authentication-failures" id="toc-troubleshooting-authentication-failures" class="nav-link" data-scroll-target="#troubleshooting-authentication-failures">Troubleshooting Authentication Failures</a></li>
+  </ul></li>
+  <li><a href="#more-sharepoint-examples" id="toc-more-sharepoint-examples" class="nav-link" data-scroll-target="#more-sharepoint-examples">More SharePoint Examples</a>
+  <ul class="collapse">
+  <li><a href="#managed-credentials-recommended" id="toc-managed-credentials-recommended" class="nav-link" data-scroll-target="#managed-credentials-recommended">Managed Credentials — Recommended</a></li>
+  <li><a href="#direct-authentication-via-client-secret-static-examples" id="toc-direct-authentication-via-client-secret-static-examples" class="nav-link" data-scroll-target="#direct-authentication-via-client-secret-static-examples">Direct Authentication Via Client Secret Static Examples</a></li>
+  <li><a href="#direct-authentication-via-embedded-service-account-credentials-resource-owner-flow-static-examples" id="toc-direct-authentication-via-embedded-service-account-credentials-resource-owner-flow-static-examples" class="nav-link" data-scroll-target="#direct-authentication-via-embedded-service-account-credentials-resource-owner-flow-static-examples">Direct Authentication Via Embedded Service Account Credentials (Resource Owner Flow) Static Examples</a></li>
+  <li><a href="#sharepoint-and-pins-example" id="toc-sharepoint-and-pins-example" class="nav-link" data-scroll-target="#sharepoint-and-pins-example">Sharepoint and Pins Example</a></li>
+  </ul></li>
+  <li><a href="#other-azure-service-urls" id="toc-other-azure-service-urls" class="nav-link" data-scroll-target="#other-azure-service-urls">Other Azure service URL’s</a></li>
+  <li><a href="#other-microsoft-365-related-resources" id="toc-other-microsoft-365-related-resources" class="nav-link" data-scroll-target="#other-microsoft-365-related-resources">Other Microsoft 365 Related Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Disclaimer: This page discusses Microsoft-developed open source packages. For R, the <code>Microsoft365R</code> package was at version 2.4.1 and AzureAuth at version 1.3.4 at the time of initial writing. For Python, the <code>Office365-REST-Python-Client</code> library is the Microsoft-recommended approach. Readers should refer to the <a href="https://github.com/Azure/Microsoft365R">Microsoft365R package documentation</a> and <a href="https://github.com/vgrem/Office365-REST-Python-Client">Office365-REST-Python-Client documentation</a> for the most up-to-date information.</p>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><a href="https://www.microsoft.com/en-us/microsoft-365">Microsoft 365</a> is a subscription extension of the Microsoft Office product line with cloud hosting support.</p>
+<ul>
+<li>For R users, the Microsoft-supported method is the <a href="https://github.com/Azure/Microsoft365R"><code>Microsoft365R</code></a> package developed by <a href="https://github.com/hongooi73">Hong Ooi</a>. It supports access to Teams, SharePoint Online, Outlook, and OneDrive.</li>
+<li>For Python users, the recommended approach is the <a href="https://github.com/vgrem/Office365-REST-Python-Client"><code>Office365-REST-Python-Client</code></a> library, which provides access to Microsoft 365 services including SharePoint Online.</li>
+</ul>
+<p>This article describes approaches for authentication to Microsoft 365 for use with the <a href="https://posit.co/products/enterprise/team/">Posit professional products</a>. Examples for both R and Python are included, along with guidance on using managed credentials in Posit Workbench and Posit Connect for secure, enterprise-friendly access patterns.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>Authentication for <code>Microsoft365R</code> is through Microsoft’s Azure cloud platform through <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app">registered applications</a>. This grants developers access to the underlying Microsoft API for programmatic access to Microsoft resources.</li>
+<li>The registered application will be used to authenticate in to the Microsoft Azure cloud platform using any of the four main authentication approaches that are supported by <code>Microsoft365R</code>. You will select the approach that fits the types of content being built and your organizations security requirements and add the needed permissions, redirect URLs, etc in order to enable access.</li>
+<li>The steps for registering a custom app are provided in <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app">this Microsoft page</a>.</li>
+<li>Graph permissions will need to be granted as specified in <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">the app registrations page</a>. Depending on your organization’s security policy, access will likely need to be granted by your Microsoft Azure Global Administrator. Depending on the authentication method selected, these could be user/delegated level permissions, or Graph application level permissions.</li>
+<li>Consult our page on <a href="../db/best-practices/managing-credentials/">securing credentials</a> to review best practices for guarding the authentication details.</li>
+</ul>
+</section>
+<section id="authentication-options" class="level2">
+<h2 class="anchored" data-anchor-id="authentication-options">Authentication Options</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Discussion between the developers and the Global Azure Administration team about your organization’s content and security requirements is important to decide which approach will work best for your needs.</p>
+</div>
+</div>
+<p>There are several authentication approaches available. For Posit users, <strong>managed credentials</strong> through Posit Workbench or Posit Connect are the recommended primary option for enterprise deployments.</p>
+<section id="authentication-options-using-active-authentication-good-for-interactive-content-and-sessions" class="level3">
+<h3 class="anchored" data-anchor-id="authentication-options-using-active-authentication-good-for-interactive-content-and-sessions">Authentication options using active authentication (good for interactive content and sessions)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Method</strong></th>
+<th><strong>auth_type</strong> (R / Python)</th>
+<th><strong>Permissions</strong></th>
+<th><strong>Microsoft Setup Needed</strong></th>
+<th><strong>Capability</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Managed Credentials: Workbench (Delegated)</strong></td>
+<td><code>rstudioapi::getDelegatedAzureToken()</code> / <code>client.oauth.get_delegated_azure_token()</code></td>
+<td>Delegated (User)</td>
+<td>Azure app registration (admin configures), user signs in once via SSO</td>
+<td>Interactive Workbench sessions and jobs launched from them</td>
+</tr>
+<tr class="even">
+<td><strong>Managed Credentials: Connect (Viewer OAuth)</strong></td>
+<td><code>connectapi::get_oauth_credentials()</code> / <code>client.oauth.get_credentials()</code></td>
+<td>Delegated (Viewer)</td>
+<td>Azure app registration (admin configures an OAuth integration)</td>
+<td>Published Connect content; each viewer’s own SharePoint permissions apply</td>
+</tr>
+<tr class="odd">
+<td><strong>User Sign-in Flow: Default</strong></td>
+<td>default / <code>with_interactive()</code></td>
+<td>Delegated (User)</td>
+<td>Redirect URLs, user permissions</td>
+<td>Interactive only (local IDE, Workbench, interactive Shiny/Streamlit)</td>
+</tr>
+<tr class="even">
+<td><strong>User Sign-in Flow: Device Code</strong></td>
+<td>device_code / <code>with_device_flow()</code></td>
+<td>Delegated (User)</td>
+<td>Enable <code>mobile and desktop flows</code>, user permissions</td>
+<td>Interactive only (local IDE, Workbench)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="authentication-options-using-embedded-credentials-good-for-static-content" class="level3">
+<h3 class="anchored" data-anchor-id="authentication-options-using-embedded-credentials-good-for-static-content">Authentication options using embedded credentials (good for static content)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Method</strong></th>
+<th><strong>auth_type</strong> (R / Python)</th>
+<th><strong>Permissions</strong></th>
+<th><strong>Microsoft Setup Needed</strong></th>
+<th><strong>Capability</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Managed Credentials: Connect (Service Account OAuth)</strong></td>
+<td>Same as above, configured for a shared service identity</td>
+<td>Delegated (Service Account)</td>
+<td>Azure app registration + service account configured in the integration</td>
+<td>Scheduled reports and content where a shared, non-viewer-specific identity is appropriate</td>
+</tr>
+<tr class="even">
+<td><strong>Service Principal / Client Secret</strong></td>
+<td>client_credentials / <code>with_client_secret()</code></td>
+<td>Application</td>
+<td>Application permissions, client secret</td>
+<td>Scheduled/non-interactive, APIs, background jobs</td>
+</tr>
+<tr class="odd">
+<td><strong>Service Account / Embedded Credentials</strong></td>
+<td>resource_owner / <code>with_username_and_password()</code></td>
+<td>Delegated (Service Account)</td>
+<td>Service account credentials in code</td>
+<td>Scheduled/non-interactive content</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="authentication-background" class="level2">
+<h2 class="anchored" data-anchor-id="authentication-background">Authentication Background</h2>
+<p>Authentication for <code>Microsoft365R</code> is through Microsoft’s Azure cloud platform through a <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app">registered application</a>. This grants developers access to the underlying Microsoft API for programmatic access to Microsoft resources.</p>
+<p>Within this page “application,” also referred to as “app,” refers to a specific part of the <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/authentication-flows-app-scenarios">Microsoft Authentication Flow</a>. The application is used to:</p>
+<ol type="1">
+<li>Obtain an <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols">‘OAuth 2.0’ token</a> by authenticating the requesting user or system<br>
+</li>
+<li>Provide token to access protected APIs for interacting with Microsoft resources</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="img/ms365.drawio.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Simple Oauth 2.0 Flow Diagram Example"><img src="img/ms365.drawio.svg" class="img-fluid figure-img" alt="Diagram showing two-step process for authorization. Step 1, user obtains a token from the Registered Application. Step 2, user uses the token in interactions with the API."></a></p>
+<figcaption>Simple Oauth 2.0 Flow Diagram Example</figcaption>
+</figure>
+</div>
+<p><code>Microsoft365R</code> will use a pre-existing app, <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">“d44a05d5-c6a5-4bbb-82d2-443123722380”</a>, by default that is pre-configured for use with the RStudio IDE and interactive use. Depending on your organizations security it may be blocked and need the Azure Global Administrator to grant access. This default application does not support scheduled reports or development / deployment outside of the RStudio IDE without additional configuration.</p>
+<p>A custom app will need to be registered if the default app is blocked or the content being developed is being run outside of the RStudio IDE and/or in a non-interactive context. Depending on the organization’s security policy the custom app registration can be done either by the developer or the Azure Global Administrator. The steps for registering a custom app are provided in <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app">this Microsoft page</a> with additional details below.</p>
+<p>Under the hood, <code>Microsoft365R</code> is using the <a href="https://github.com/Azure/AzureAuth"><code>AzureAuth</code></a> and <a href="https://github.com/Azure/AzureGraph"><code>AzureGraph</code></a> packages, also developed by <a href="https://github.com/hongooi73">Hong Ooi</a>, for authentication, token management, and access to the <a href="https://docs.microsoft.com/en-us/graph/use-the-api">Graph API</a>. In some cases, for example with troubleshooting or to remove interactive prompts in scheduled content, calling those packages directly to manage tokens is useful.</p>
+</section>
+<section id="authentication-configurations" class="level2">
+<h2 class="anchored" data-anchor-id="authentication-configurations">Authentication Configurations</h2>
+<section id="overview-and-setup-resources" class="level3">
+<h3 class="anchored" data-anchor-id="overview-and-setup-resources">Overview and Setup Resources</h3>
+<p>Depending on your organization’s security policy, app registration and credential setup may be handled by the developer, may require Azure Global Administrator support, or may need to be entirely managed by your Azure administrator.</p>
+<p><strong>Key Resources for Setup:</strong></p>
+<ul>
+<li><p><strong>Posit Workbench Managed Credentials</strong> (Azure):</p>
+<ul>
+<li><a href="https://docs.posit.co/ide/server-pro/admin/authenticating_users/delegated_azure_credentials.html">Admin Setup Guide - Delegated Azure Credentials</a></li>
+<li><a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/azure.html">User Guide - Azure Managed Credentials</a></li>
+</ul></li>
+<li><p><strong>Posit Connect OAuth Integrations</strong> (Microsoft/Azure):</p>
+<ul>
+<li><a href="https://docs.posit.co/connect/admin/integrations/oauth-integrations/microsoft/">Admin Setup Guide - OAuth Integrations</a></li>
+<li><a href="https://docs.posit.co/connect/user/managing-integrations/">User Guide - Managing Integrations</a></li>
+</ul></li>
+<li><p><strong>Microsoft’s App Registration Guide</strong>: <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app">Quick Start - Register an Application</a></p></li>
+<li><p><strong>Microsoft365R Package Guide</strong>: <a href="https://cran.r-project.org/web/packages/Microsoft365R/vignettes/auth.html">Authentication Vignette</a> - comprehensive overview of all authentication approaches</p></li>
+<li><p><strong>App Registration &amp; Permissions</strong>: <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">Microsoft365R App Registration Reference</a> - <strong>highly recommended</strong> detailed breakdown of required permissions, redirect URIs, platform configurations, and best practices for each authentication method</p></li>
+</ul>
+<p>The app registration reference provides crucial details on: - Exact Graph API permissions needed for different use cases - Proper redirect URI configuration for different deployment scenarios - Platform-specific setup (Desktop, Web, Mobile) - Scope and consent configuration - Token requirements and refresh strategies</p>
+<hr>
+</section>
+<section id="managed-credentials-recommended-for-enterprise" class="level3">
+<h3 class="anchored" data-anchor-id="managed-credentials-recommended-for-enterprise">Managed Credentials (Recommended for Enterprise)</h3>
+<p><strong>For Posit Workbench Admins:</strong> Set up managed credentials to provide users with seamless Azure authentication. Azure credentials are automatically available from Workbench sessions when it has been configured with the appropriate permissions. Tokens are accessible on demand using the Software Development Kit (SDK) functions available to users.</p>
+<ul>
+<li><a href="https://docs.posit.co/ide/server-pro/admin/authenticating_users/delegated_azure_credentials.html">Workbench Admin Setup - Delegated Azure Credentials</a></li>
+</ul>
+<p><strong>For Posit Connect Admins:</strong> Configure OAuth integrations to enable viewer-based authentication for published content. Each viewer authenticates with their own identity for data access.</p>
+<ul>
+<li><a href="https://docs.posit.co/connect/admin/integrations/oauth-integrations/microsoft/">Connect Admin Setup - OAuth Integrations</a></li>
+</ul>
+<hr>
+</section>
+<section id="individual-authentication-methods" class="level3">
+<h3 class="anchored" data-anchor-id="individual-authentication-methods">Individual Authentication Methods</h3>
+<p>The following sections describe setup and usage for each direct authentication approach. These are typically used when managed credentials are not available. For first-time setup, reference the app registration guide linked above.</p>
+</section>
+<section id="user-sign-in-flow-default" class="level3">
+<h3 class="anchored" data-anchor-id="user-sign-in-flow-default">User Sign-in Flow: Default</h3>
+<p>A custom app can be created or the default app registration “d44a05d5-c6a5-4bbb-82d2-443123722380” that comes with the <code>Microsoft365R</code> package can be used. The user permissions will need to be enabled as detailed in <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">the app registrations page</a>. Depending on your organization’s security policy, access to your tenant may need to be granted by an Azure Global Administrator. Additionally, Redirect URLs will need to be added through Azure under <code>App Registrations</code> -&gt; <code>select your app</code> -&gt; <code>Authentication</code> -&gt; <code>Platform configurations</code> -&gt; <code>Mobile and desktop applications</code> -&gt;<code>Add URI</code> as well as also enabling <code>nativeclient</code>.</p>
+<p>For adding Redirect URLs, which will give a typical web-app authentication experience for interactive applications:</p>
+<ul>
+<li>For RStudio Desktop the URL is: <code>http://localhost:1410/</code>.</li>
+<li>For Connect and Workbench, as well as any non-local connections, the URL will be of the form <code>https://myserver.com/myapplication</code>. An SSL certificate will be required by Azure. A <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reply-url#restrictions-on-wildcards-in-redirect-uris">wildcard</a> could be used where appropriate for server-wide access.</li>
+<li>For content hosted in shinyapps.io this would be of the form <code>https://youraccount.shinyapps.io/appname</code> (including the port number if specified).</li>
+</ul>
+</section>
+<section id="user-sign-in-flow-device-code" class="level3">
+<h3 class="anchored" data-anchor-id="user-sign-in-flow-device-code">User Sign-in Flow: Device Code</h3>
+<p>A custom app can be created. User permissions will need to be enabled as detailed in <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">the app registrations page</a>. Depending on your organization’s security policy, access to your tenant may need to be granted by an Azure Global Administrator.</p>
+<p>Enabling the device code workflow is through the App Registration dashboard in Azure -&gt; <code>click on the created app</code> -&gt; <code>Authentication</code> -&gt; <code>Allow public client flows</code> and setting <code>Enable the following mobile and desktop flows</code> to <code>yes</code>. The device code workflow does not need Redirect URLs. Instead, this method provides a code and a link for the developer to access in a separate browser window (or even on a separate device) for sign-in.</p>
+</section>
+<section id="service-principal-client-secret" class="level3">
+<h3 class="anchored" data-anchor-id="service-principal-client-secret">Service Principal / Client Secret</h3>
+<p>A custom app will need to be registered in Azure with Application permissions. The permissions can be based off of the <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">user permissions</a> but can be assigned as needed for the application and to comply with any security restrictions.</p>
+<p>Application permissions are more powerful than user permissions so it is important to emphasize that exposing the client secret directly should be avoided. As a control, using environment variables for storing the client secret is recommended. Connect allows <a href="https://docs.posit.co/connect/admin/security-and-auditing/#application-environment-variables">Environment Variables</a>. The variables are encrypted on-disk, and in-memory.</p>
+<p>Adding environment variables can be done at the project level with <a href="../db/best-practices/deployment/">securing deployment</a> through the <a href="https://support.posit.co/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a>.</p>
+</section>
+<section id="embedded-credentials" class="level3">
+<h3 class="anchored" data-anchor-id="embedded-credentials">Embedded Credentials</h3>
+<p>A custom app will need to be registered in Azure with User permissions as specified in <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">the app registrations page</a>. Depending on your organization’s security policy, access to your tenant may need to be granted by an Azure Global Administrator.</p>
+<p>The credentials being embedded can be a user or a service account, as long as access to the desired content inside Microsoft 365 has been granted. Creating service accounts per content is recommended to enable faster troubleshooting and easier collaboration. As a control, the Username / Password should never be exposed directly in the code, instead using <a href="https://docs.posit.co/connect/admin/security-and-auditing/#application-environment-variables">Environment Variables</a>. The variables are encrypted on-disk, and in-memory.</p>
+<p>Adding environment variables can be done at the project level with <a href="../db/best-practices/deployment/">securing deployment</a> through the <a href="https://support.posit.co/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a>.</p>
+</section>
+</section>
+<section id="authentication-examples" class="level2">
+<h2 class="anchored" data-anchor-id="authentication-examples">Authentication Examples</h2>
+<section id="managed-credentials-workbench-connect-users" class="level3">
+<h3 class="anchored" data-anchor-id="managed-credentials-workbench-connect-users">Managed Credentials (Workbench &amp; Connect Users)</h3>
+<p>When your administrator has configured managed credentials, you can access Azure services seamlessly without managing tokens or secrets yourself. Credentials are automatically available in your environment and refreshed as needed.</p>
+<p><strong>Workbench Users:</strong> Access managed credentials by selecting them when launching a session. See <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/azure.html">User Guide - Azure Managed Credentials</a> for detailed instructions.</p>
+<p><strong>Connect Users (SharePoint Examples):</strong> Your application automatically has access to OAuth-authenticated resources. See <a href="https://docs.posit.co/connect/user/managing-integrations/">User Guide - Managing Integrations</a> for details.</p>
+<p>For practical examples of accessing SharePoint with managed credentials: - <a href="https://docs.posit.co/connect/cookbook/content/integrations/sharepoint/viewer/python/index.html">SharePoint Integration Cookbook (Python)</a> - <a href="https://docs.posit.co/connect/cookbook/content/integrations/sharepoint/viewer/r/">SharePoint Integration Cookbook (R)</a></p>
+<p>Accessing the token would be done with:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<!-- verified on 2026-09-17 by Lisa -->
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstudioapi)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureAuth) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureGraph)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(connectapi)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># check if running on Posit Connect or Workbench</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">Sys.getenv</span>(<span class="st">"POSIT_PRODUCT"</span>) <span class="sc">==</span> <span class="st">"CONNECT"</span>) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># initialize Connect API client</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    client <span class="ot">&lt;-</span> <span class="fu">connect</span>()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read the user-session-token header</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    user_session_token <span class="ot">&lt;-</span> session<span class="sc">$</span>request<span class="sc">$</span>HTTP_POSIT_CONNECT_USER_SESSION_TOKEN</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab the OAuth Integration access token using the session token</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    credentials <span class="ot">&lt;-</span> <span class="fu">get_oauth_credentials</span>(client, user_session_token)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    token <span class="ot">&lt;-</span> credentials<span class="sc">$</span>access_token</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">Sys.getenv</span>(<span class="st">"POSIT_PRODUCT"</span>) <span class="sc">==</span> <span class="st">"WORKBENCH"</span>) {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># resource must be Microsoft Graph, since Microsoft365R talks to Graph, not the SharePoint REST API</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    credentials <span class="ot">&lt;-</span> rstudioapi<span class="sc">::</span><span class="fu">getDelegatedAzureToken</span>(<span class="st">"https://graph.microsoft.com"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    token <span class="ot">&lt;-</span> credentials<span class="sc">$</span>access_token</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab the access token from the SHAREPOINT_TOKEN env var if running locally</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    token <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"SHAREPOINT_TOKEN"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create auth token cache directory</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">create_AzureR_dir</span>()</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># wrap the raw access token in a proper AzureAuth token object</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>sharepoint_token <span class="ot">&lt;-</span> <span class="fu">get_manual_token</span>(token)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># use the exported token directly, skipping any interactive app/tenant login</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">get_sharepoint_site</span>(<span class="at">site_url =</span> site_url, <span class="at">token =</span> sharepoint_token)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Connected to:"</span>, site<span class="sc">$</span>properties<span class="sc">$</span>webUrl, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># List document libraries</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>site<span class="sc">$</span><span class="fu">list_drives</span>()</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Access a document library and list files</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>drive <span class="ot">&lt;-</span> site<span class="sc">$</span><span class="fu">get_drive</span>(<span class="st">"Documents"</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>drive<span class="sc">$</span><span class="fu">list_items</span>()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Download a file</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>drive<span class="sc">$</span><span class="fu">download_file</span>(<span class="st">"reports/quarterly.xlsx"</span>, <span class="at">dest =</span> <span class="st">"quarterly.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://rstudio.github.io/rstudioapi/reference/getDelegatedAzureToken.html">View&nbsp;<code>getDelegatedAzureToken()</code>&nbsp;documentation</a>.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Watch the package names when installing python packages. <code>pip install posit</code> and <code>pip install office365</code> will silently install unrelated packages from PyPI that happen to share these names, not the ones used in this article. Always install the exact names for the packages, in this case <code>posit-sdk</code> and <code>Office365-REST-Python-Client</code> to avoid a confusing <code>ModuleNotFoundError</code> after what looks like a successful install.</p>
+</div>
+</div>
+<!-- verified on 2026-09-17 by Lisa -->
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install posit-sdk </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> posit <span class="im">import</span> <span class="ex">connect</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> posit.workbench <span class="im">import</span> Client</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install Office365-REST-Python-Client </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> office365.sharepoint.client_context <span class="im">import</span> ClientContext</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>SITE_URL <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>SITE_URL_ROOT <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com"</span> <span class="co"># tenant root, not /sites/YourSite</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># check if running on Posit Connect or Workbench</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.getenv(<span class="st">"POSIT_PRODUCT"</span>) <span class="op">==</span> <span class="st">"CONNECT"</span>:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    client <span class="op">=</span> <span class="ex">connect</span>.Client()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab the user session token from headers</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for streamlit</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    user_session_token <span class="op">=</span> st.context.headers.get(<span class="st">"Posit-Connect-User-Session-Token"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for flask</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># user_session_token = get_request_header("Posit-Connect-User-Session-Token")</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># fetch the access token using the session token</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        access_token <span class="op">=</span> client.oauth.get_credentials(user_session_token).get(</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">"access_token"</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if the refresh token has expired prompt the user to login again</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="ex">connect</span>.errors.ClientError <span class="im">as</span> e:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> e.error_code <span class="op">==</span> <span class="dv">219</span>:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Your SharePoint refresh token has expired. Please log out and then log back into the integration."</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Failed to retrieve SharePoint OAuth credentials: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        sys.exit(<span class="dv">1</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> os.getenv(<span class="st">"POSIT_PRODUCT"</span>) <span class="op">==</span> <span class="st">"WORKBENCH"</span>:</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    client <span class="op">=</span> Client()</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Resource must match the SharePoint tenant, not Graph, for office365-rest-python-client</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    full_token <span class="op">=</span> client.oauth.get_delegated_azure_token(SITE_URL_ROOT)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For other resources you would use graph or a different url </span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># full_token = client.oauth.get_delegated_azure_token("https://graph.microsoft.com")</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    access_token <span class="op">=</span> full_token[<span class="st">"access_token"</span>]</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab access token from env var if running locally</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    access_token <span class="op">=</span> os.getenv(<span class="st">"SHAREPOINT_TOKEN"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># use the acquired access token to authenticate against SharePoint directly,</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co"># skipping any interactive/browser login since we already have a token</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> acquire_token():</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"access_token"</span>: access_token, <span class="st">"token_type"</span>: <span class="st">"Bearer"</span>}</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>ctx <span class="op">=</span> ClientContext(SITE_URL).with_access_token(acquire_token)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>web <span class="op">=</span> ctx.web.get().execute_query()</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Connected to: </span><span class="sc">{</span>web<span class="sc">.</span>url<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://posit-dev.github.io/posit-sdk-py/reference/workbench.oauth.OAuth.html#posit.workbench.oauth.OAuth.get_delegated_azure_token">View&nbsp;<code>get_delegated_azure_token()</code>&nbsp;documentation</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="user-sign-in-flow-default-1" class="level3">
+<h3 class="anchored" data-anchor-id="user-sign-in-flow-default-1">User Sign-in Flow: Default</h3>
+<p>The user sign-in flow option provides the typical web browser authentication experience. A user will need to be available to interact with the authentication pop-up, making this suitable for interactive applications (such as the local RStudio IDE, Workbench, or an interactive Shiny/Streamlit app), but not for scheduled content.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pass <code>tenant</code> explicitly for any custom (non-default) app registration. If omitted, Microsoft365R falls back to the generic <code>/common/</code> endpoint, which fails with <code>AADSTS50194</code> for single-tenant apps — the default configuration for a custom app registration, and the setup most readers of this article will actually have.</p>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>app <span class="ot">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">get_sharepoint_site</span>(<span class="at">site_url =</span> site_url, <span class="at">app =</span> app, <span class="at">tenant =</span> tenant)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Connected to:"</span>, site<span class="sc">$</span>properties<span class="sc">$</span>webUrl, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>See <a href="https://cran.r-project.org/web/packages/Microsoft365R/vignettes/auth.html">the auth vignette</a> for more details.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> office365.sharepoint.client_context <span class="im">import</span> ClientContext</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>site_url <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>tenant <span class="op">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ctx <span class="op">=</span> ClientContext(site_url).with_interactive(tenant, client_id)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>web <span class="op">=</span> ctx.web.get().execute_query()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Connected to: </span><span class="sc">{</span>web<span class="sc">.</span>url<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="user-sign-in-flow-device-code-1" class="level3">
+<h3 class="anchored" data-anchor-id="user-sign-in-flow-device-code-1">User Sign-in Flow: Device Code</h3>
+<p>In some interactive cases it may be easier to use the device code flow where the user is prompted with a code and a link which is opened in a separate screen for logging in. For example, for using a Workbench instance deployed without an SSL certificate. This requires interaction from the user and is not applicable for scheduled content. See <a href="https://cran.r-project.org/web/packages/Microsoft365R/vignettes/auth.html">the auth vignette</a> for more details.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>app <span class="ot">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">get_sharepoint_site</span>(<span class="at">site_url =</span> site_url, <span class="at">app =</span> app, <span class="at">tenant =</span> tenant, <span class="at">auth_type =</span> <span class="st">"device_code"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Connected to:"</span>, site<span class="sc">$</span>properties<span class="sc">$</span>webUrl, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> office365.sharepoint.client_context <span class="im">import</span> ClientContext</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>site_url <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tenant <span class="op">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints the verification URL and code to the console automatically</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ctx <span class="op">=</span> ClientContext(site_url).with_device_flow(tenant, client_id)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>web <span class="op">=</span> ctx.web.get().execute_query()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Connected to: </span><span class="sc">{</span>web<span class="sc">.</span>url<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="service-principal-client-secret-1" class="level3">
+<h3 class="anchored" data-anchor-id="service-principal-client-secret-1">Service Principal / Client Secret</h3>
+<p>Content in a non-interactive context (such as scheduled reports) won’t have a user account available for interactive authentication. The Service Principal via Client Secret is the Microsoft-recommended approach for non-interactive scenarios. See <a href="https://cran.r-project.org/web/packages/Microsoft365R/vignettes/scripted.html">the vignette</a> for more details.</p>
+<p><strong>Important Security Notes:</strong> - Application permissions are more powerful than user permissions, so avoid exposing the client secret directly in code - Store the client secret as an <a href="https://docs.posit.co/connect/admin/security-and-auditing/#application-environment-variables">Environment Variable</a> via the <a href="https://support.posit.co/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a> - For R, use <a href="https://github.com/Azure/AzureAuth">AzureAuth</a> to remove console prompts: <code>AzureAuth::create_AzureR_dir()</code></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureAuth)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureGraph)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>app <span class="ot">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sensitive variables as environmental variables so they aren't exposed</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>client_secret <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"MY_CLIENT_SECRET"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create auth token cache directory</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">create_AzureR_dir</span>()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Microsoft Graph login</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">create_graph_login</span>(tenant, app, <span class="at">password =</span> client_secret, <span class="at">auth_type =</span> <span class="st">"client_credentials"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># An example of using the Graph login to connect to a SharePoint site</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> gr<span class="sc">$</span><span class="fu">get_sharepoint_site</span>(site_url)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Connected to:"</span>, site<span class="sc">$</span>properties<span class="sc">$</span>webUrl, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> office365.sharepoint.client_context <span class="im">import</span> ClientContext</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>tenant_id <span class="op">=</span> os.getenv(<span class="st">"TENANT_ID"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> os.getenv(<span class="st">"CLIENT_ID"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>client_secret <span class="op">=</span> os.getenv(<span class="st">"EXAMPLE_CLIENT_SECRET"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>site_url <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ctx <span class="op">=</span> ClientContext(site_url).with_client_secret(tenant_id, client_id, client_secret)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>web <span class="op">=</span> ctx.web.get().execute_query()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Connected to: </span><span class="sc">{</span>web<span class="sc">.</span>url<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="embedded-credentials-1" class="level3">
+<h3 class="anchored" data-anchor-id="embedded-credentials-1">Embedded Credentials</h3>
+<p>Content in a non-interactive context (such as scheduled reports) won’t have a user account available for interactive authentication. In cases where Application-level permissions aren’t appropriate for your organization’s security requirements, use embedded credentials instead. See <a href="https://cran.r-project.org/web/packages/Microsoft365R/vignettes/scripted.html">the vignette</a> for more details.</p>
+<p><strong>Important Security Notes:</strong></p>
+<ul>
+<li>Embedded credentials can be a user account or service account; working with your Azure administrator to create service accounts per content is recommended</li>
+<li>Store credentials as <a href="https://docs.posit.co/connect/admin/security-and-auditing/#application-environment-variables">Environment Variables</a> via the <a href="https://support.posit.co/hc/en-us/articles/228272368-Managing-your-content-in-RStudio-Connect">Connect UI</a></li>
+<li>For R, use <a href="https://github.com/Azure/AzureAuth">AzureAuth</a> to remove console prompts</li>
+<li>See our <a href="../db/best-practices/deployment/#credentials-inside-environment-variables-in-rstudio-connect">best practices guide</a> for environment variable patterns</li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureAuth)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureGraph)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>app <span class="ot">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sensitive variables as environmental variables so they aren't exposed</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>user <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_MS365R_SERVICE_USER"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>pwd <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_MS365R_SERVICE_PASSWORD"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>app_secret <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_MS365R_APP_SECRET"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create auth token cache directory, otherwise it will prompt the user on the console for input</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">create_AzureR_dir</span>()</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Microsoft Graph login</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">create_graph_login</span>(tenant, app,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">username =</span> user,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">password =</span> pwd,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">token_args =</span> <span class="fu">list</span>(<span class="at">client_secret =</span> app_secret),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">auth_type =</span> <span class="st">"resource_owner"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># An example of using the Graph login to connect to a SharePoint site</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> gr<span class="sc">$</span><span class="fu">get_sharepoint_site</span>(site_url)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Connected to:"</span>, site<span class="sc">$</span>properties<span class="sc">$</span>webUrl, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> office365.sharepoint.client_context <span class="im">import</span> ClientContext</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tenant_id <span class="op">=</span> os.getenv(<span class="st">"TENANT_ID"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> os.getenv(<span class="st">"CLIENT_ID"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>site_url <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Service account credentials</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>service_user <span class="op">=</span> os.getenv(<span class="st">"EXAMPLE_MS365_SERVICE_USER"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>service_password <span class="op">=</span> os.getenv(<span class="st">"EXAMPLE_MS365_SERVICE_PASSWORD"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ctx <span class="op">=</span> ClientContext(site_url).with_username_and_password(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    tenant_id, client_id, service_user, service_password</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>web <span class="op">=</span> ctx.web.get().execute_query()</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Connected as service account to: </span><span class="sc">{</span>web<span class="sc">.</span>url<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="troubleshooting-authentication-failures" class="level3">
+<h3 class="anchored" data-anchor-id="troubleshooting-authentication-failures">Troubleshooting Authentication Failures</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<p>In the case of authentication failures, clear cached authentication tokens/files:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureAuth)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureGraph)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>AzureAuth<span class="sc">::</span><span class="fu">clean_token_directory</span>()</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>AzureGraph<span class="sc">::</span><span class="fu">delete_graph_login</span>(<span class="at">tenant =</span> tenant)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<p><code>Office365-REST-Python-Client</code> uses MSAL internally for the <code>with_interactive</code>/<code>with_device_flow</code>/<code>with_username_and_password</code>/<code>with_client_secret</code> methods shown above. None of these examples configure a persistent MSAL token cache, so each new <code>ClientContext</code> re-authenticates from scratch (there’s typically nothing on disk to clear unless your own code explicitly set one up).</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="more-sharepoint-examples" class="level2">
+<h2 class="anchored" data-anchor-id="more-sharepoint-examples">More SharePoint Examples</h2>
+<section id="managed-credentials-recommended" class="level3">
+<h3 class="anchored" data-anchor-id="managed-credentials-recommended">Managed Credentials — Recommended</h3>
+<p>For the best experience in production, use Posit Connect OAuth integrations (viewer-based). Each viewer uses their own SharePoint permissions:</p>
+<ul>
+<li><a href="https://docs.posit.co/connect/cookbook/content/integrations/sharepoint/viewer/python/index.html">Connect and SharePoint Integration Cookbook (Python)</a></li>
+<li><a href="https://docs.posit.co/connect/cookbook/content/integrations/sharepoint/viewer/r/">Connect and SharePoint Integration Cookbook (R)</a></li>
+<li><a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/azure.html#example-workflows">Workbench and Sharepoint Example Workflows R and Python</a></li>
+</ul>
+</section>
+<section id="direct-authentication-via-client-secret-static-examples" class="level3">
+<h3 class="anchored" data-anchor-id="direct-authentication-via-client-secret-static-examples">Direct Authentication Via Client Secret Static Examples</h3>
+<p>The authentication method used in these examples can be any of the methods shown above. The documentation on <code>Microsoft365R</code> (for R) and <code>Office365-REST-Python-Client</code> (for Python) contains extensive examples.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureGraph)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureAuth)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="st">"your-tenant-id"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>app <span class="ot">=</span> <span class="st">"your-app-id"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>drive_name <span class="ot">=</span> <span class="st">"Documents"</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>file_src <span class="ot">=</span> <span class="st">"myfile.csv"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sensitive variables as environment variables so they aren't exposed</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>client_secret <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_SHINY_CLIENT_SECRET"</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create auth token cache directory</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">create_AzureR_dir</span>()</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Microsoft Graph login</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">create_graph_login</span>(tenant, app, <span class="at">password =</span> client_secret, <span class="at">auth_type =</span> <span class="st">"client_credentials"</span>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to a SharePoint site</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> gr<span class="sc">$</span><span class="fu">get_sharepoint_site</span>(site_url)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a specific drive (document library)</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>drv <span class="ot">&lt;-</span> site<span class="sc">$</span><span class="fu">get_drive</span>(drive_name)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Download a specific file</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>drv<span class="sc">$</span><span class="fu">download_file</span>(<span class="at">src =</span> file_src, <span class="at">dest =</span> <span class="st">"tmp.csv"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># List items in the drive</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>drv<span class="sc">$</span><span class="fu">list_items</span>()</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>drv<span class="sc">$</span><span class="fu">list_files</span>()</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>drv<span class="sc">$</span><span class="fu">list_shared_files</span>()</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>drv<span class="sc">$</span><span class="fu">list_shared_items</span>()</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Upload file to SharePoint</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>drv<span class="sc">$</span><span class="fu">upload_file</span>(<span class="at">src =</span> <span class="st">"local_file.csv"</span>, <span class="at">dest =</span> <span class="st">"remote_file.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> office365.sharepoint.client_context <span class="im">import</span> ClientContext</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>site_url <span class="op">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>tenant_id <span class="op">=</span> os.getenv(<span class="st">"TENANT_ID"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> os.getenv(<span class="st">"CLIENT_ID"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>client_secret <span class="op">=</span> os.getenv(<span class="st">"EXAMPLE_CLIENT_SECRET"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>list_title <span class="op">=</span> <span class="st">"Documents"</span>  <span class="co"># the document library's name</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">"Shared Documents/myfile.csv"</span>  <span class="co"># server-relative path</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ctx <span class="op">=</span> ClientContext(site_url).with_client_secret(tenant_id, client_id, client_secret)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the document library's root folder</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>folder <span class="op">=</span> ctx.web.lists.get_by_title(list_title).root_folder</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># List files in the folder</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> folder.files.get().execute_query()</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> files:</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">file</span>.name)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Download a file</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"tmp.csv"</span>, <span class="st">"wb"</span>) <span class="im">as</span> local_file:</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    ctx.web.get_file_by_server_relative_path(file_path).download(local_file).execute_query()</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Upload a file to the same folder</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"local_file.csv"</span>, <span class="st">"rb"</span>) <span class="im">as</span> f:</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    folder.files.upload(f).execute_query()</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete a file</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>ctx.web.get_file_by_server_relative_path(<span class="st">"Shared Documents/local_file.csv"</span>).delete_object().execute_query()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="direct-authentication-via-embedded-service-account-credentials-resource-owner-flow-static-examples" class="level3">
+<h3 class="anchored" data-anchor-id="direct-authentication-via-embedded-service-account-credentials-resource-owner-flow-static-examples">Direct Authentication Via Embedded Service Account Credentials (Resource Owner Flow) Static Examples</h3>
+<p>For legacy Shiny applications or non-Connect deployments using embedded credentials:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example using Resource Owner Flow as described in the 'Service Account' section in https://cran.r-project.org/web/packages/Microsoft365R/vignettes/scripted.html </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Authentication and requirements from Azure side (app set up) described in https://cran.r-project.org/web/packages/AzureGraph/vignettes/auth.html </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Access to Sharepoint and how to use the various functions described under `Creating a custom app registration` in https://cran.r-project.org/web/packages/Microsoft365R/vignettes/od_sp.html and the API permissions listed under https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureAuth)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AzureGraph)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spsComps)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_TENANT"</span>, <span class="st">""</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>app<span class="ot">=</span><span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_APP"</span>, <span class="st">""</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span> <span class="co"># application with user permissions</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>drive_name <span class="ot">=</span> <span class="st">"Documents"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>file_src <span class="ot">=</span> <span class="st">"penguins_raw.csv"</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sensitive variables as environmental variables so they aren't exposed</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>user <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_MS365R_SERVICE_USER"</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>pwd <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_MS365R_SERVICE_PASSWORD"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create auth token cache directory, otherwise it will prompt the user on the console for input</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu">create_AzureR_dir</span>()</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"Starting Microsoft Graph login and data pull"</span>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create a Microsoft Graph login</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> <span class="fu">create_graph_login</span>(tenant, app, </span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>                           <span class="at">username =</span> user, </span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                           <span class="at">password =</span> pwd,</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>                           <span class="at">auth_type=</span><span class="st">"resource_owner"</span>)</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># SharePoint site</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  site <span class="ot">&lt;-</span> gr<span class="sc">$</span><span class="fu">get_sharepoint_site</span>(site_url)</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drive </span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  drv <span class="ot">&lt;-</span> site<span class="sc">$</span><span class="fu">get_drive</span>(drive_name)</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Downloading the file:</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  drv<span class="sc">$</span><span class="fu">download_file</span>(<span class="at">src =</span> file_src, <span class="at">dest =</span> <span class="st">"tmp.csv"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reading file into memory</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">"tmp.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, <span class="at">check.names=</span>F)</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"btn1"</span>, <span class="st">"Log into Azure and Show Sharepoint File"</span>),</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">dataTableOutput</span>(<span class="st">"table1"</span>)</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input,output, session) {</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Reactive values for the data, https://mastering-shiny.org/index.html is a great resource for learning Shiny</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>  rv <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>()</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>  rv<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>  <span class="co">#btn1</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>btn1, {</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">showNotification</span>(<span class="st">"btn1: Running"</span>)</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>    spsComps<span class="sc">::</span><span class="fu">shinyCatch</span>({</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>      rv<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">foo</span>()</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">blocking_level =</span> <span class="st">"error"</span>,</span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">prefix =</span> <span class="st">"My-project"</span> </span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Output</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table1 <span class="ot">&lt;-</span> DT<span class="sc">::</span><span class="fu">renderDataTable</span>({</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>    rv<span class="sc">$</span>data</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the application </span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="do">#### The AzureR packages save your login sessions so that you don’t need to reauthenticate each time. If you’re experiencing authentication failures, you can try clearing the saved data by running the following code:</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="co"># AzureAuth::clean_token_directory()</span></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="co"># AzureGraph::delete_graph_login(tenant="mytenant")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sharepoint-and-pins-example" class="level3">
+<h3 class="anchored" data-anchor-id="sharepoint-and-pins-example">Sharepoint and Pins Example</h3>
+<p>Microsoft resources can be used for hosting data in pins format using <a href="https://pins.rstudio.com/reference/board_ms365.html"><code>pins::board_ms365()</code></a>. The authentication method used in this example could be swapped out for any of the examples shown above.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Microsoft365R)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pins)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>tenant <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_TENANT"</span>, <span class="st">""</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>app<span class="ot">=</span><span class="fu">Sys.getenv</span>(<span class="st">"EXAMPLE_APP"</span>, <span class="st">""</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">=</span> <span class="st">"https://yourorg.sharepoint.com/sites/YourSite"</span> <span class="co"># application with user permissions</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Microsoft Graph login</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">get_sharepoint_site</span>(<span class="at">site_url =</span> site_url, <span class="at">app =</span> app, <span class="at">tenant =</span> tenant, <span class="at">auth_type =</span> <span class="st">"device_code"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># An example getting the default drive </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>doclib <span class="ot">&lt;-</span> site<span class="sc">$</span><span class="fu">get_drive</span>()</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect ms365 as a pin board. If this folder doesn't already exist it will be created on execution. </span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>board <span class="ot">&lt;-</span> <span class="fu">board_ms365</span>(<span class="at">drive =</span> doclib, <span class="st">"general/project1/board"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Write a dataset as a pin to SharePoint</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>board <span class="sc">%&gt;%</span> <span class="fu">pin_write</span>(mtcars, <span class="st">"mtcars"</span>, <span class="at">description =</span> <span class="st">"This is a test"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># View the metadata of the pin we just created </span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>board <span class="sc">%&gt;%</span> <span class="fu">pin_meta</span>(<span class="st">"mtcars"</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the pin</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> board <span class="sc">%&gt;%</span> <span class="fu">pin_read</span>(<span class="st">"mtcars"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="other-azure-service-urls" class="level2">
+<h2 class="anchored" data-anchor-id="other-azure-service-urls">Other Azure service URL’s</h2>
+<p>To retrieve a token a user needs to specify the URI for the Azure service. Here is a table for common resources (as taken from <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/azure.html#getting-an-access-token">here</a>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Azure Service</th>
+<th>Resource URI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Azure Storage</td>
+<td><code>https://storage.azure.com</code></td>
+</tr>
+<tr class="even">
+<td>Azure Key Vault</td>
+<td><code>https://vault.azure.net</code></td>
+</tr>
+<tr class="odd">
+<td>Azure SQL Database</td>
+<td><code>https://database.windows.net</code></td>
+</tr>
+<tr class="even">
+<td>Azure Management</td>
+<td><code>https://management.azure.com</code></td>
+</tr>
+<tr class="odd">
+<td>Microsoft Graph</td>
+<td><code>https://graph.microsoft.com</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="other-microsoft-365-related-resources" class="level2">
+<h2 class="anchored" data-anchor-id="other-microsoft-365-related-resources">Other Microsoft 365 Related Resources</h2>
+<p>There are a few cases not covered in this article where the below resources may be useful:</p>
+<ul>
+<li><p>For readers interested in directly interacting with the <a href="https://docs.microsoft.com/en-us/graph/use-the-api">Graph API</a>, the Microsoft page on <a href="https://docs.microsoft.com/en-us/graph/api/resources/sharepoint?view=graph-rest-1.0">Working with SharePoint sites in Microsoft Graph</a> is a useful starting reference.</p></li>
+<li><p>For Python users the <a href="https://github.com/vgrem/Office365-REST-Python-Client">Microsoft REST API</a> is the Microsoft-developed and recommended method for accessing Microsoft 365 resources. Note that SharePoint access is using the older <a href="https://docs.microsoft.com/en-us/previous-versions/office/developer/sharepoint-rest-reference/jj860569(v=office.15)?redirectedfrom=MSDN">SharePoint 2013 REST API</a>.</p></li>
+<li><p>Mapping SharePoint, OneNote, or other systems as a network drive to the hosting server could be considered, using a third-party developed program such as <a href="https://www.expandrive.com/onedrive-for-linux/">expandrive</a>. Note that this method also relies on application registration and it is unclear to this author how authentication is handled.</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

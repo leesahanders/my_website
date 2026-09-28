@@ -9,20 +9,24 @@
     <lastmod>2025-08-22T16:06:36.888Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/vetiver.html</loc>
-    <lastmod>2025-08-22T16:06:36.888Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/workbench-auth-overview.html</loc>
+    <lastmod>2026-05-04T17:15:06.660Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/validation.html</loc>
-    <lastmod>2026-06-23T15:20:30.939Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/version-control.html</loc>
+    <lastmod>2026-05-07T17:23:48.616Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/Snowflake-managed-credentials-examples.html</loc>
-    <lastmod>2026-05-07T17:19:32.777Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/system-dependencies-r.html</loc>
+    <lastmod>2025-08-22T16:06:36.887Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/sharepoint-oh-no.html</loc>
+    <loc>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</loc>
     <lastmod>2025-08-22T16:06:36.886Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/sharepoint-access.html</loc>
+    <lastmod>2026-09-17T17:46:09.998Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/secrets-and-pinning-files.html</loc>
@@ -50,7 +54,7 @@
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/Positron.html</loc>
-    <lastmod>2026-06-18T16:42:26.657Z</lastmod>
+    <lastmod>2026-09-17T17:03:34.242Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/parallelization.html</loc>
@@ -77,64 +81,68 @@
     <lastmod>2025-08-22T16:06:36.863Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</loc>
+    <loc>https://questionable.quarto.pub/blog/work/aws-data-sources.html</loc>
     <lastmod>2025-08-22T16:06:36.865Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
-    <lastmod>2026-05-05T15:19:17.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists.html</loc>
-    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/sound.html</loc>
-    <lastmod>2026-02-17T18:03:37.326Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/manufacturing.html</loc>
-    <lastmod>2026-06-23T15:14:09.779Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
-    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/index.html</loc>
-    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/about.html</loc>
-    <lastmod>2025-08-22T16:06:36.850Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/code.html</loc>
-    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/good-programming.html</loc>
-    <lastmod>2025-08-26T14:18:46.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
-    <lastmod>2025-08-22T16:06:36.857Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/lists/workplace.html</loc>
-    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
-  </url>
-  <url>
-    <loc>https://questionable.quarto.pub/blog/presentations.html</loc>
-    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/site_map.html</loc>
     <lastmod>2025-08-22T16:06:36.860Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/aws-data-sources.html</loc>
+    <loc>https://questionable.quarto.pub/blog/presentations.html</loc>
+    <lastmod>2025-08-22T16:06:36.858Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/workplace.html</loc>
+    <lastmod>2026-08-31T17:18:56.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/phone_games.html</loc>
+    <lastmod>2025-08-22T16:06:36.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/good-programming.html</loc>
+    <lastmod>2025-08-26T14:18:46.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/code.html</loc>
+    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/about.html</loc>
+    <lastmod>2025-08-22T16:06:36.850Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/index.html</loc>
+    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/data.html</loc>
+    <lastmod>2025-08-22T16:06:36.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/manufacturing.html</loc>
+    <lastmod>2026-06-23T15:14:09.779Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists/sound.html</loc>
+    <lastmod>2026-02-17T18:03:37.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/lists.html</loc>
+    <lastmod>2025-08-22T16:06:36.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/presentations_posit.html</loc>
+    <lastmod>2026-05-05T15:19:17.878Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/ansible-and-pulumi-ssh-keys.html</loc>
     <lastmod>2025-08-22T16:06:36.865Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/building-publishing-packages.html</loc>
+    <lastmod>2026-09-28T20:08:39.632Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/databricks-and-uc-and-sparklyr.html</loc>
@@ -150,7 +158,7 @@
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/LLMs.html</loc>
-    <lastmod>2026-04-22T16:00:12.268Z</lastmod>
+    <lastmod>2026-09-23T19:54:34.500Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/mounting-drives-server.html</loc>
@@ -189,20 +197,24 @@
     <lastmod>2025-08-22T16:06:36.886Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/shiny-apps-and-analytics.html</loc>
+    <loc>https://questionable.quarto.pub/blog/work/sharepoint-oh-no.html</loc>
     <lastmod>2025-08-22T16:06:36.886Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/system-dependencies-r.html</loc>
-    <lastmod>2025-08-22T16:06:36.887Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/Snowflake-managed-credentials-examples.html</loc>
+    <lastmod>2026-05-07T17:19:32.777Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/version-control.html</loc>
-    <lastmod>2026-05-07T17:23:48.616Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/validation.html</loc>
+    <lastmod>2026-09-28T19:56:20.112Z</lastmod>
   </url>
   <url>
-    <loc>https://questionable.quarto.pub/blog/work/workbench-auth-overview.html</loc>
-    <lastmod>2026-05-04T17:15:06.660Z</lastmod>
+    <loc>https://questionable.quarto.pub/blog/work/vetiver.html</loc>
+    <lastmod>2025-08-22T16:06:36.888Z</lastmod>
+  </url>
+  <url>
+    <loc>https://questionable.quarto.pub/blog/work/workbench-azure-custom-oauth.html</loc>
+    <lastmod>2026-07-31T17:27:58.572Z</lastmod>
   </url>
   <url>
     <loc>https://questionable.quarto.pub/blog/work/workbench-llms-copilot.html</loc>

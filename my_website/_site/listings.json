@@ -2,6 +2,9 @@
   {
     "listing": "/work.html",
     "items": [
+      "/work/building-publishing-packages.html",
+      "/work/sharepoint-access.html",
+      "/work/workbench-azure-custom-oauth.html",
       "/work/workbench-auth-overview.html",
       "/work/workbench-llms-copilot.html",
       "/work/Snowflake-managed-credentials-examples.html",
@@ -40,18 +43,6 @@
       "/work/sharepoint-oh-no.html",
       "/work/vetiver.html",
       "/work/r-command-line.html"
-    ]
-  },
-  {
-    "listing": "/lists.html",
-    "items": [
-      "/lists/manufacturing.html",
-      "/lists/code.html",
-      "/lists/workplace.html",
-      "/lists/good-programming.html",
-      "/lists/sound.html",
-      "/lists/phone_games.html",
-      "/lists/data.html"
     ]
   },
   {
@@ -102,12 +93,27 @@
       "/work/workbench-llms-copilot.html",
       "/work/workbench-auth-overview.html",
       "/lists/manufacturing.html",
+      "/work/workbench-azure-custom-oauth.html",
+      "/work/sharepoint-access.html",
+      "/work/building-publishing-packages.html",
       "/presentations_posit.html",
       "/work.html",
       "/presentations.html",
       "/lists.html",
       "/index.html",
       "/about.html"
+    ]
+  },
+  {
+    "listing": "/lists.html",
+    "items": [
+      "/lists/manufacturing.html",
+      "/lists/code.html",
+      "/lists/workplace.html",
+      "/lists/good-programming.html",
+      "/lists/sound.html",
+      "/lists/phone_games.html",
+      "/lists/data.html"
     ]
   }
 ]

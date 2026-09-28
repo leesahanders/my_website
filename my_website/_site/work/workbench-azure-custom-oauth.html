@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lisa">
+<meta name="dcterms.date" content="2026-07-31">
+<meta name="description" content="Configure Workbench Custom OAuth for Programmatic SharePoint Data Access w/o Changing Auth Providers">
+
+<title>Workbench and Azure managed credentials – Lisa Anders - questionable.quarto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/leafey-48.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6f6599830d51be977da3b6af758f8eff.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-e91c052eb570edf2d22681b9d732e88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-41747d4fbeb8042c449695184b3e5aec.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-e91c052eb570edf2d22681b9d732e88e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title"><span class="icon-upper">LISA ANDERS</span><span class="icon-sep"></span><span class="icon-lower">questionable.quarto</span></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-stuff" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-fa-database" role="img">
+</i> 
+ <span class="menu-text">Stuff</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-stuff">    
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/posts/">
+ <span class="dropdown-text">Blog / Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../lists.html">
+ <span class="dropdown-text">Lists</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../presentations.html">
+ <span class="dropdown-text">Presentations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://questionable.quarto.pub/recipes/">
+ <span class="dropdown-text">Recipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../work.html">
+ <span class="dropdown-text">Technical writeups</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../site_map.html"> 
+<span class="menu-text">Site Map</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/leesahanders/my_website"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Workbench and Azure managed credentials</h1>
+                  <div>
+        <div class="description">
+          Configure Workbench Custom OAuth for Programmatic SharePoint Data Access w/o Changing Auth Providers
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lisa </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 31, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#configure-workbench-custom-oauth-for-programmatic-sharepoint-data-access-wo-changing-auth-providers" id="toc-configure-workbench-custom-oauth-for-programmatic-sharepoint-data-access-wo-changing-auth-providers" class="nav-link active" data-scroll-target="#configure-workbench-custom-oauth-for-programmatic-sharepoint-data-access-wo-changing-auth-providers">Configure Workbench Custom OAuth for Programmatic SharePoint Data Access w/o Changing Auth Providers</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#what-you-will-accomplish" id="toc-what-you-will-accomplish" class="nav-link" data-scroll-target="#what-you-will-accomplish">What You Will Accomplish</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#architecture-overview" id="toc-architecture-overview" class="nav-link" data-scroll-target="#architecture-overview">Architecture Overview</a></li>
+  <li><a href="#step-1-create-and-configure-the-azure-entra-id-application" id="toc-step-1-create-and-configure-the-azure-entra-id-application" class="nav-link" data-scroll-target="#step-1-create-and-configure-the-azure-entra-id-application">Step 1: Create and Configure the Azure Entra ID Application</a>
+  <ul class="collapse">
+  <li><a href="#register-the-application" id="toc-register-the-application" class="nav-link" data-scroll-target="#register-the-application">1.1: Register the Application</a></li>
+  <li><a href="#configure-the-redirect-uri" id="toc-configure-the-redirect-uri" class="nav-link" data-scroll-target="#configure-the-redirect-uri">1.2: Configure the Redirect URI</a></li>
+  <li><a href="#create-a-client-secret" id="toc-create-a-client-secret" class="nav-link" data-scroll-target="#create-a-client-secret">1.3: Create a Client Secret</a></li>
+  <li><a href="#copy-your-ids" id="toc-copy-your-ids" class="nav-link" data-scroll-target="#copy-your-ids">1.4: Copy Your IDs</a></li>
+  <li><a href="#configure-api-permissions" id="toc-configure-api-permissions" class="nav-link" data-scroll-target="#configure-api-permissions">1.5: Configure API Permissions</a></li>
+  </ul></li>
+  <li><a href="#step-2-prepare-the-client-secret" id="toc-step-2-prepare-the-client-secret" class="nav-link" data-scroll-target="#step-2-prepare-the-client-secret">Step 2: Prepare the Client Secret</a>
+  <ul class="collapse">
+  <li><a href="#option-a-encrypt-the-client-secret-recommended" id="toc-option-a-encrypt-the-client-secret-recommended" class="nav-link" data-scroll-target="#option-a-encrypt-the-client-secret-recommended">Option A: Encrypt the Client Secret (Recommended)</a></li>
+  <li><a href="#option-b-use-plain-client-secret-acceptable-for-testing" id="toc-option-b-use-plain-client-secret-acceptable-for-testing" class="nav-link" data-scroll-target="#option-b-use-plain-client-secret-acceptable-for-testing">Option B: Use Plain Client Secret (Acceptable for Testing)</a></li>
+  </ul></li>
+  <li><a href="#step-3-create-the-custom-oauth-configuration-file" id="toc-step-3-create-the-custom-oauth-configuration-file" class="nav-link" data-scroll-target="#step-3-create-the-custom-oauth-configuration-file">Step 3: Create the Custom OAuth Configuration File</a></li>
+  <li><a href="#step-4-configure-ssltls-and-launcher-sessions" id="toc-step-4-configure-ssltls-and-launcher-sessions" class="nav-link" data-scroll-target="#step-4-configure-ssltls-and-launcher-sessions">Step 4: Configure SSL/TLS and Launcher Sessions</a>
+  <ul class="collapse">
+  <li><a href="#a-ssltls-configuration" id="toc-a-ssltls-configuration" class="nav-link" data-scroll-target="#a-ssltls-configuration">4.A: SSL/TLS Configuration</a></li>
+  <li><a href="#b-launcher-sessions-configuration" id="toc-b-launcher-sessions-configuration" class="nav-link" data-scroll-target="#b-launcher-sessions-configuration">4.B: Launcher Sessions Configuration</a></li>
+  </ul></li>
+  <li><a href="#step-5-restart-workbench-services" id="toc-step-5-restart-workbench-services" class="nav-link" data-scroll-target="#step-5-restart-workbench-services">Step 5: Restart Workbench Services</a></li>
+  <li><a href="#step-6-verify-the-configuration" id="toc-step-6-verify-the-configuration" class="nav-link" data-scroll-target="#step-6-verify-the-configuration">Step 6: Verify the Configuration</a>
+  <ul class="collapse">
+  <li><a href="#test-https-access" id="toc-test-https-access" class="nav-link" data-scroll-target="#test-https-access">6.1: Test HTTPS Access</a></li>
+  <li><a href="#login-to-workbench" id="toc-login-to-workbench" class="nav-link" data-scroll-target="#login-to-workbench">6.2: Login to Workbench</a></li>
+  <li><a href="#test-oauth-flow" id="toc-test-oauth-flow" class="nav-link" data-scroll-target="#test-oauth-flow">6.3: Test OAuth Flow</a></li>
+  <li><a href="#retrieve-token-in-r" id="toc-retrieve-token-in-r" class="nav-link" data-scroll-target="#retrieve-token-in-r">6.4: Retrieve Token in R</a></li>
+  <li><a href="#use-token-for-microsoft-graph-api" id="toc-use-token-for-microsoft-graph-api" class="nav-link" data-scroll-target="#use-token-for-microsoft-graph-api">6.5: Use Token for Microsoft Graph API</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#problem-oauth-button-shows-error-red-x" id="toc-problem-oauth-button-shows-error-red-x" class="nav-link" data-scroll-target="#problem-oauth-button-shows-error-red-x">Problem: OAuth button shows error (red X)</a></li>
+  <li><a href="#problem-claim-is-invalid-error-from-azure" id="toc-problem-claim-is-invalid-error-from-azure" class="nav-link" data-scroll-target="#problem-claim-is-invalid-error-from-azure">Problem: “Claim is invalid” error from Azure</a></li>
+  <li><a href="#problem-cannot-retrieve-token-in-r" id="toc-problem-cannot-retrieve-token-in-r" class="nav-link" data-scroll-target="#problem-cannot-retrieve-token-in-r">Problem: Cannot retrieve token in R</a></li>
+  <li><a href="#problem-https-connection-errors" id="toc-problem-https-connection-errors" class="nav-link" data-scroll-target="#problem-https-connection-errors">Problem: HTTPS connection errors</a></li>
+  <li><a href="#problem-sessions-fail-or-wont-connect" id="toc-problem-sessions-fail-or-wont-connect" class="nav-link" data-scroll-target="#problem-sessions-fail-or-wont-connect">Problem: Sessions fail or won’t connect</a></li>
+  <li><a href="#problem-oauth-button-appears-but-doesnt-work" id="toc-problem-oauth-button-appears-but-doesnt-work" class="nav-link" data-scroll-target="#problem-oauth-button-appears-but-doesnt-work">Problem: OAuth button appears but doesn’t work</a></li>
+  <li><a href="#problem-workbench-wont-start" id="toc-problem-workbench-wont-start" class="nav-link" data-scroll-target="#problem-workbench-wont-start">Problem: Workbench won’t start</a></li>
+  </ul></li>
+  <li><a href="#configuration-reference" id="toc-configuration-reference" class="nav-link" data-scroll-target="#configuration-reference">Configuration Reference</a>
+  <ul class="collapse">
+  <li><a href="#required-for-custom-oauth" id="toc-required-for-custom-oauth" class="nav-link" data-scroll-target="#required-for-custom-oauth">Required for Custom OAuth</a></li>
+  </ul></li>
+  <li><a href="#how-the-oauth-flow-works" id="toc-how-the-oauth-flow-works" class="nav-link" data-scroll-target="#how-the-oauth-flow-works">How the OAuth Flow Works</a></li>
+  <li><a href="#security-considerations" id="toc-security-considerations" class="nav-link" data-scroll-target="#security-considerations">Security Considerations</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<section id="configure-workbench-custom-oauth-for-programmatic-sharepoint-data-access-wo-changing-auth-providers" class="level1">
+<h1>Configure Workbench Custom OAuth for Programmatic SharePoint Data Access w/o Changing Auth Providers</h1>
+<hr>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>For connecting to SharePoint data from Workbench there are two main options:</p>
+<p><strong>Option 1:</strong> Migrate to Entra ID login + delegated Azure credentials (recommended, fully supported)</p>
+<p>This requires Workbench’s login authentication to be Microsoft Entra ID via OpenID Connect, and uses delegated credentials so a user’s own sign-in grants their R/Python sessions access to Azure resources.This is the fully supported feature option.</p>
+<ul>
+<li><a href="https://docs.posit.co/ide/server-pro/admin/quick-starts/entraid-openid.html">Configure Entra ID with OpenID Connect (Quick Start)</a></li>
+<li><a href="https://docs.posit.co/ide/server-pro/admin/authenticating_users/delegated_azure_credentials.html">Delegated Azure Credentials (Admin Guide)</a></li>
+<li><a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/azure.html">Using Azure Delegated Credentials in Sessions (User Guide)</a></li>
+</ul>
+<p><strong>Option 2:</strong> Custom OAuth Integration (possible, but a preview feature)</p>
+<p>This would keep allow any existing login setup with an added separate OAuth integration pointed at an Azure app registration purely for data access. However, this feature is currently in preview: it’s not yet fully supported for production use and could see breaking changes in future releases. It’s an option to explore if you need to avoid a login migration, but it comes with that tradeoff.</p>
+<ul>
+<li><a href="https://docs.posit.co/ide/server-pro/admin/integration/custom_oauth.html">Custom OAuth Credentials (Admin Guide)</a></li>
+<li><a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/custom_oauth.html">Custom OAuth Integrations (User Guide)</a></li>
+</ul>
+<p>For a side-by-side comparison of all credential/provider options, this overview page is a good reference:</p>
+<ul>
+<li><a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/managed-credentials.html">Managed Credentials Overview</a></li>
+</ul>
+<hr>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This guide walks you through configuring Posit Workbench to use <strong>Option 2:</strong> <strong>Custom OAuth integration with Azure Entra ID</strong> for programmatic access to Microsoft SharePoint and Microsoft Graph APIs. This integration allows users to authenticate normally with passwords or OpenID Connect, while gaining the ability to request OAuth tokens within R and Python sessions for accessing SharePoint data.</p>
+<p><strong>Important:</strong> This is not single sign-on (SSO) or OAuth-based login. Users authenticate to Workbench using their normal credentials with whichever login method has been chosen. The Custom OAuth integration enables them to obtain specific tokens for programmatic Microsoft Graph access.</p>
+<hr>
+</section>
+<section id="what-you-will-accomplish" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-accomplish">What You Will Accomplish</h2>
+<p>By the end of this guide, your Workbench server will:</p>
+<ul>
+<li>Authenticate users to Workbench using whichever auth method you currently have set up</li>
+<li>Authenticate programmatically for data access with Microsoft Entra ID using OAuth 2.0 authorization code flow</li>
+<li>Store OAuth tokens in the Workbench session database</li>
+<li>Allow users to retrieve tokens within R and Python sessions via <code>rstudioapi::getOAuthCredentials()</code></li>
+<li>Support delegated permissions for SharePoint and Microsoft Graph API access</li>
+</ul>
+<hr>
+</section>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>Before you begin, ensure you have:</p>
+<ul>
+<li><strong>Workbench installed and accessible</strong> via HTTPS with a valid SSL certificate</li>
+<li><strong>Administrative access to Azure Entra ID</strong> with permission to create and modify applications and grant admin consent</li>
+<li><strong>Administrative command line access to the Workbench server</strong> with sudo privileges</li>
+<li><strong>Valid SSL certificate with verified HTTPS access</strong> for Workbench redirect callback URL</li>
+<li><strong>Network connectivity between Workbench and Azure Entra ID</strong> on port 443 (HTTPS)</li>
+</ul>
+<p><strong>SSL Certificate Note:</strong> Self-signed certificates are supported for testing, but production environments should use a CA-signed certificate.</p>
+<hr>
+</section>
+<section id="architecture-overview" class="level2">
+<h2 class="anchored" data-anchor-id="architecture-overview">Architecture Overview</h2>
+<pre><code>┌─────────────────────────────┐
+│  Workbench Browser          │
+│  ├─ HTTPS enabled           │
+│  ├─ oauth-clients.conf      │
+│  └─ User Sessions (R/Python)│
+└──────────────┬──────────────┘
+               │ (HTTPS)
+               ↓
+     ┌─────────────────────────────┐
+     │  Azure Entra ID             │
+     │  ├─ App Registration        │
+     │  ├─ Delegated Permissions   │
+     │  ├─ Redirect URI            |
+     │  └─ OAuth 2.0 Endpoints     │
+     └──────────────┬──────────────┘
+                    │ (Token Exchange)
+                    ↓
+     ┌─────────────────────────────┐
+     │  Microsoft Graph API        │
+     │  SharePoint Online          │
+     └─────────────────────────────┘</code></pre>
+<hr>
+</section>
+<section id="step-1-create-and-configure-the-azure-entra-id-application" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-create-and-configure-the-azure-entra-id-application">Step 1: Create and Configure the Azure Entra ID Application</h2>
+<section id="register-the-application" class="level3">
+<h3 class="anchored" data-anchor-id="register-the-application">1.1: Register the Application</h3>
+<ol type="1">
+<li>Sign in to the <a href="https://portal.azure.com">Azure portal</a></li>
+<li>Navigate to <strong>Azure Entra ID</strong> &gt; <strong>App registrations</strong></li>
+<li>Click <strong>+ New registration</strong></li>
+<li>Enter the following details:
+<ul>
+<li><strong>Name:</strong> e.g., <code>Posit-Workbench-SharePoint-OAuth</code></li>
+<li><strong>Supported account types:</strong> Select “Accounts in this organizational directory only”</li>
+<li><strong>Redirect URI:</strong> Leave blank for now, you’ll add it in the next step</li>
+</ul></li>
+<li>Click <strong>Register</strong></li>
+</ol>
+</section>
+<section id="configure-the-redirect-uri" class="level3">
+<h3 class="anchored" data-anchor-id="configure-the-redirect-uri">1.2: Configure the Redirect URI</h3>
+<ol type="1">
+<li><p>From the app registration <strong>Overview</strong> page, select <strong>+ Add a Redirect URI</strong> (or go to <strong>Authentication</strong>)</p></li>
+<li><p>Click <strong>+ Add a platform</strong> &gt; <strong>Web</strong></p></li>
+<li><p>Enter your Workbench redirect URI:</p>
+<pre><code>https://&lt;workbench-hostname&gt;/oauth_redirect_callback</code></pre>
+<p>Replace <code>&lt;workbench-hostname&gt;</code> with your actual Workbench domain (e.g., <code>workbench.example.com</code>)</p></li>
+<li><p><strong>Critical:</strong> The redirect URI must:</p>
+<ul>
+<li>Use HTTPS (not HTTP)</li>
+<li>Include the exact path <code>/oauth_redirect_callback</code></li>
+<li>Match exactly what you configure in Workbench (case-sensitive)</li>
+<li>Be a publicly resolvable domain (localhost is not accepted by Azure in production)</li>
+<li>In the case of having Workbench behind a proxy should be the proxy URL apprpriately configured to allow traffic to pass</li>
+</ul></li>
+<li><p>Click <strong>Save</strong></p></li>
+</ol>
+</section>
+<section id="create-a-client-secret" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-client-secret">1.3: Create a Client Secret</h3>
+<ol type="1">
+<li>From the app registration, go to <strong>Manage</strong> &gt; <strong>Certificates &amp; secrets</strong></li>
+<li>Click <strong>+ New client secret</strong></li>
+<li>Enter a description (e.g., “Workbench OAuth”)</li>
+<li>Set <strong>Expires:</strong> to “24 months” or your organization’s standard</li>
+<li>Click <strong>Add</strong></li>
+<li><strong>Immediately copy the secret value</strong> (shown under <strong>Value</strong>, not <strong>Client ID</strong>)
+<ul>
+<li><strong>Important:</strong> This secret is only displayed once. Store it securely; you will need it for Workbench configuration.</li>
+</ul></li>
+</ol>
+</section>
+<section id="copy-your-ids" class="level3">
+<h3 class="anchored" data-anchor-id="copy-your-ids">1.4: Copy Your IDs</h3>
+<p>From the app registration <strong>Overview</strong> page, copy and save: - <strong>Application (client) ID</strong> - <strong>Directory (tenant) ID</strong></p>
+<p>You will need these for Workbench configuration.</p>
+</section>
+<section id="configure-api-permissions" class="level3">
+<h3 class="anchored" data-anchor-id="configure-api-permissions">1.5: Configure API Permissions</h3>
+<ol type="1">
+<li><p>Go to <strong>Manage</strong> &gt; <strong>API permissions</strong></p></li>
+<li><p>Click <strong>+ Add a permission</strong></p></li>
+<li><p>Select <strong>Microsoft Graph</strong> from the list</p></li>
+<li><p>Select <strong>Delegated permissions</strong></p></li>
+<li><p>Search for and select the following permissions:</p>
+<ul>
+<li><code>User.Read</code> — Read user profile information</li>
+<li><code>Files.Read.All</code> — Read files in SharePoint and OneDrive</li>
+<li><code>Sites.Read.All</code> — Read SharePoint sites</li>
+<li><code>offline_access</code> — Required for token refresh capability</li>
+<li>Any others that may be needed to support access as detailed <a href="https://github.com/Azure/Microsoft365R/blob/master/inst/app_registration.md">here</a></li>
+</ul></li>
+<li><p>Click <strong>Add permissions</strong></p></li>
+<li><p>After adding permissions, click <strong>Grant admin consent for [Your Organization]</strong></p></li>
+<li><p>Click <strong>Yes</strong> to confirm</p></li>
+</ol>
+<p><strong>Important:</strong> Admin consent is required for Custom OAuth to function. User consent alone is insufficient.</p>
+<hr>
+</section>
+</section>
+<section id="step-2-prepare-the-client-secret" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-prepare-the-client-secret">Step 2: Prepare the Client Secret</h2>
+<p>You have two options for handling the client secret in your configuration: encrypt it or use it in plain text.</p>
+<section id="option-a-encrypt-the-client-secret-recommended" class="level3">
+<h3 class="anchored" data-anchor-id="option-a-encrypt-the-client-secret-recommended">Option A: Encrypt the Client Secret (Recommended)</h3>
+<p>On your Workbench server with sudo access, use the built-in encryption utility:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rstudio-server encrypt-password</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>When prompted, enter the client secret you copied from Azure. The command will output an encrypted value. Copy this encrypted value for use in Step 3 below.</p>
+</section>
+<section id="option-b-use-plain-client-secret-acceptable-for-testing" class="level3">
+<h3 class="anchored" data-anchor-id="option-b-use-plain-client-secret-acceptable-for-testing">Option B: Use Plain Client Secret (Acceptable for Testing)</h3>
+<p>You can also use the client secret directly in the configuration file without encryption.</p>
+<p><strong>Note:</strong> For production environments, encryption is strongly recommended. Choose the option that best fits your security requirements and environment.</p>
+<p>For this guide, we’ll show examples using <strong>Option A (encrypted)</strong>, but the steps work the same with a plain secret.</p>
+<hr>
+</section>
+</section>
+<section id="step-3-create-the-custom-oauth-configuration-file" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-create-the-custom-oauth-configuration-file">Step 3: Create the Custom OAuth Configuration File</h2>
+<p>This is the only configuration file required for Custom OAuth. Your existing authentication method (PAM, LDAP, Active Directory, or any other) will continue to work unchanged. The Custom OAuth integration is independent of login authentication.</p>
+<p>Create <code>/etc/rstudio/oauth-clients.conf</code> with the following structure:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Workbench Custom OAuth Clients Configuration</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This file defines OAuth integrations for programmatic access to external</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># services. The section name appears in the UI under Managed Credentials.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[sharepoint-oauth]</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display name in Workbench UI (Settings &gt; Managed Credentials &gt; Custom OAuth)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span><span class="ot">=</span><span class="st">SharePoint OAuth Integration</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Azure Entra ID Application (client) ID from Step 1.4</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="dt">client-id</span><span class="ot">=</span><span class="st">&lt;APPLICATION_CLIENT_ID&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Client secret from Step 1.3 (encrypted or plain)</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># For security, it is recommended to encrypt using: sudo rstudio-server encrypt-password</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Then paste the encrypted value here</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="dt">client-secret</span><span class="ot">=</span><span class="st">&lt;CLIENT_SECRET_OR_ENCRYPTED_VALUE&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Azure OAuth 2.0 authorization endpoint (replace TENANT_ID with yours)</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="dt">authorize-url</span><span class="ot">=</span><span class="st">https://login.microsoftonline.com/&lt;TENANT_ID&gt;/oauth2/v2.0/authorize</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Azure OAuth 2.0 token endpoint (replace TENANT_ID with yours)</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="dt">token-url</span><span class="ot">=</span><span class="st">https://login.microsoftonline.com/&lt;TENANT_ID&gt;/oauth2/v2.0/token</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Scopes for programmatic access (space-separated, explicit URLs)</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># CRITICAL: Must be explicit URLs, not .default scope</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Why? Custom OAuth uses delegated permissions. The .default scope only works </span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># with application-level permissions. Use individual, explicit scope URLs.</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="dt">scopes</span><span class="ot">=</span><span class="st">https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read.All https://graph.microsoft.com/Sites.Read.All offline_access</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Token endpoint authentication method</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Use client-secret-basic (most reliable)</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="dt">token-endpoint-auth-method</span><span class="ot">=</span><span class="st">client-secret-basic</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Replace: - <code>&lt;APPLICATION_CLIENT_ID&gt;</code> with your Application (client) ID from Step 1.4 - <code>&lt;CLIENT_SECRET_OR_ENCRYPTED_VALUE&gt;</code> with either: - The encrypted value from Step 2.1 (recommended), OR - The plain client secret from Step 1.3 (less secure, not recommended for production) - <code>&lt;TENANT_ID&gt;</code> with your Directory (tenant) ID from Step 1.4 (appears twice in URLs)</p>
+<hr>
+</section>
+<section id="step-4-configure-ssltls-and-launcher-sessions" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-configure-ssltls-and-launcher-sessions">Step 4: Configure SSL/TLS and Launcher Sessions</h2>
+<p>Custom OAuth requires HTTPS for the OAuth redirect callback. Additionally, you need to configure launcher sessions for Custom OAuth to function properly with session management.</p>
+<section id="a-ssltls-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="a-ssltls-configuration">4.A: SSL/TLS Configuration</h3>
+<p>Ensure your Workbench has SSL configured in <code>rserver.conf</code>. If you already have HTTPS set up, verify these settings are present:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SSL/TLS Configuration (REQUIRED for OAuth redirect callback)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable SSL</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">ssl-enabled</span><span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to SSL certificate</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dt">ssl-certificate</span><span class="ot">=</span><span class="st">/path/to/your/certificate.crt</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to SSL certificate key</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="dt">ssl-certificate-key</span><span class="ot">=</span><span class="st">/path/to/your/certificate.key</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># TLS protocol versions (explicit specification required)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="dt">ssl-protocols</span><span class="ot">=</span><span class="st">TLSv1.2 TLSv1.3</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># HTTPS port (standard is 443, or 8443 if running without root)</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="dt">www-port</span><span class="ot">=</span><span class="dv">443</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="b-launcher-sessions-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="b-launcher-sessions-configuration">4.B: Launcher Sessions Configuration</h3>
+<p>Add the following launcher configuration to <code>/etc/rstudio/rserver.conf</code>. This enables session management which Custom OAuth depends on:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Launcher Configuration (REQUIRED for Custom OAuth sessions)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable launcher for job execution and sessions</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">launcher-address</span><span class="ot">=</span><span class="st">127.0.0.1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">launcher-port</span><span class="ot">=</span><span class="dv">5559</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dt">launcher-sessions-enabled</span><span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="dt">launcher-default-cluster</span><span class="ot">=</span><span class="st">Local</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Session callback address - MUST match your OAuth redirect domain exactly</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># This is where Workbench sends users after they authenticate with Azure</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># It must be HTTPS and must match the redirect URI in your Azure app</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="dt">launcher-sessions-callback-address</span><span class="ot">=</span><span class="st">https://&lt;workbench-hostname&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Replace <code>&lt;workbench-hostname&gt;</code> with your actual Workbench domain (e.g., <code>workbench.example.com</code>).</p>
+<p><strong>Critical:</strong> The <code>launcher-sessions-callback-address</code> must: - Use HTTPS (not HTTP) - Exactly match the redirect URI you configured in Azure (Step 1.2) - Be the publicly resolvable domain (not localhost in production) - Include the full domain name with no trailing slashes</p>
+<hr>
+</section>
+</section>
+<section id="step-5-restart-workbench-services" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-restart-workbench-services">Step 5: Restart Workbench Services</h2>
+<p>After making configuration changes, restart Workbench:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart rstudio-server</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart rstudio-launcher</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verify that services restarted successfully:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-server</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rstudio-launcher</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check logs for errors:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/rstudio-server/rserver.log</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-n</span> 50 /var/log/rstudio/launcher/rstudio-launcher.log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Both services should show <strong>active (running)</strong>.</p>
+<hr>
+</section>
+<section id="step-6-verify-the-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-verify-the-configuration">Step 6: Verify the Configuration</h2>
+<section id="test-https-access" class="level3">
+<h3 class="anchored" data-anchor-id="test-https-access">6.1: Test HTTPS Access</h3>
+<p>From a browser, navigate to your Workbench instance via HTTPS:</p>
+<pre><code>https://&lt;workbench-hostname&gt;</code></pre>
+<p>Verify that the login page loads without SSL errors.</p>
+</section>
+<section id="login-to-workbench" class="level3">
+<h3 class="anchored" data-anchor-id="login-to-workbench">6.2: Login to Workbench</h3>
+<ol type="1">
+<li>Login with your existing Workbench credentials using whatever authentication method you currently have configured (PAM, LDAP, Active Directory, Kerberos, SAML, or any other)</li>
+<li>Once logged in, click <strong>Settings</strong> in the top right corner</li>
+<li>Select <strong>Managed Credentials</strong></li>
+</ol>
+<p>You should see a <strong>Custom OAuth</strong> section with an entry for <strong>“SharePoint OAuth Integration”</strong> (or whatever name you configured).</p>
+</section>
+<section id="test-oauth-flow" class="level3">
+<h3 class="anchored" data-anchor-id="test-oauth-flow">6.3: Test OAuth Flow</h3>
+<ol type="1">
+<li>In <strong>Managed Credentials</strong>, click the <strong>SharePoint OAuth Integration</strong> entry</li>
+<li>Click <strong>“Signing In…”</strong></li>
+<li>You will be redirected to Azure for authentication</li>
+<li>Sign in with your Azure/Microsoft 365 credentials</li>
+<li>Grant permissions when prompted</li>
+<li>You will be redirected back to Workbench</li>
+</ol>
+<p>After successful authentication, the credential should appear in <strong>Managed Credentials</strong> <strong>without an error icon</strong> (red X).</p>
+</section>
+<section id="retrieve-token-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="retrieve-token-in-r">6.4: Retrieve Token in R</h3>
+<p>In an R session within Workbench, retrieve the OAuth token:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the OAuth token</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>integration <span class="ot">&lt;-</span> rstudioapi<span class="sc">::</span><span class="fu">findOAuthIntegration</span>(<span class="st">"sharepoint-oauth"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  token <span class="ot">&lt;-</span> rstudioapi<span class="sc">::</span><span class="fu">getOAuthCredentials</span>(integration<span class="sc">$</span>id)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str</span>(token)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify token structure</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(token)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Should show: $access_token, $refresh_token, $expires_in, $token_type, etc.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="use-token-for-microsoft-graph-api" class="level3">
+<h3 class="anchored" data-anchor-id="use-token-for-microsoft-graph-api">6.5: Use Token for Microsoft Graph API</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Build request to Microsoft Graph API with token</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://graph.microsoft.com/v1.0/me"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_headers</span>(<span class="at">Authorization =</span> <span class="fu">paste</span>(<span class="st">"Bearer"</span>, token<span class="sc">$</span>access_token)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_perform</span>()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View user information</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">content</span>(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Reference <a href="https://solutions.posit.co/connections/microsoft365/index.html">this page</a> for some examples of interacting with sharepoint data.</p>
+<hr>
+</section>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="problem-oauth-button-shows-error-red-x" class="level3">
+<h3 class="anchored" data-anchor-id="problem-oauth-button-shows-error-red-x">Problem: OAuth button shows error (red X)</h3>
+<p><strong>Possible Causes:</strong></p>
+<ol type="1">
+<li><strong>Admin consent not granted in Azure</strong>
+<ul>
+<li>Solution: Return to Azure app &gt; API permissions and click “Grant admin consent for [Organization]”</li>
+</ul></li>
+<li><strong>Redirect URI doesn’t match exactly</strong>
+<ul>
+<li>Solution: Verify in Azure app that redirect URI matches exactly what you configured in rserver.conf</li>
+<li>Check: HTTPS (not HTTP), exact path <code>/oauth_redirect_callback</code>, no trailing slashes</li>
+</ul></li>
+<li><strong>Client secret expired or incorrect</strong>
+<ul>
+<li>Solution: In Azure, create a new client secret and update Workbench configuration</li>
+</ul></li>
+<li><strong>Scopes misconfigured</strong>
+<ul>
+<li>Solution: Verify scopes in oauth-clients.conf are explicit URLs (not <code>.default</code>)</li>
+<li>Must include <code>offline_access</code> for token refresh</li>
+</ul></li>
+</ol>
+</section>
+<section id="problem-claim-is-invalid-error-from-azure" class="level3">
+<h3 class="anchored" data-anchor-id="problem-claim-is-invalid-error-from-azure">Problem: “Claim is invalid” error from Azure</h3>
+<p><strong>Root Cause:</strong> Corrupted or missing permissions in Azure app</p>
+<p><strong>Solution:</strong></p>
+<ol type="1">
+<li>Go to Azure app &gt; API permissions</li>
+<li>Remove all permissions</li>
+<li>Re-add permissions one at a time:
+<ul>
+<li>User.Read</li>
+<li>Files.Read.All</li>
+<li>Sites.Read.All</li>
+<li>offline_access</li>
+</ul></li>
+<li>Grant admin consent</li>
+<li>Wait 30 seconds for Azure to sync</li>
+<li>Restart Workbench: <code>sudo systemctl restart rstudio-server</code></li>
+</ol>
+</section>
+<section id="problem-cannot-retrieve-token-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="problem-cannot-retrieve-token-in-r">Problem: Cannot retrieve token in R</h3>
+<p><strong>Solution:</strong></p>
+<ol type="1">
+<li>Verify credential appears in <strong>Settings &gt; Managed Credentials</strong> without error</li>
+<li>Check R session is in the same Workbench server where you authenticated</li>
+<li>Verify syntax: <code>rstudioapi::getOAuthCredentials("sharepoint-oauth")</code>
+<ul>
+<li>Section name from oauth-clients.conf must match exactly</li>
+</ul></li>
+<li>Check Workbench logs: <code>sudo journalctl -u rstudio-server -f</code></li>
+</ol>
+</section>
+<section id="problem-https-connection-errors" class="level3">
+<h3 class="anchored" data-anchor-id="problem-https-connection-errors">Problem: HTTPS connection errors</h3>
+<p><strong>Solutions:</strong></p>
+<ul>
+<li>Verify SSL certificate and key paths in rserver.conf are correct</li>
+<li>Verify certificate is readable by rstudio-server user</li>
+<li>Test certificate: <code>openssl s_client -connect localhost:443</code></li>
+<li>For self-signed certificates, add to system CA bundle or test with curl -k flag</li>
+</ul>
+</section>
+<section id="problem-sessions-fail-or-wont-connect" class="level3">
+<h3 class="anchored" data-anchor-id="problem-sessions-fail-or-wont-connect">Problem: Sessions fail or won’t connect</h3>
+<p><strong>Possible Causes:</strong></p>
+<ol type="1">
+<li><strong>Launcher not configured</strong>
+<ul>
+<li>Solution: Verify Step 4.B launcher settings are in rserver.conf</li>
+<li>Check: <code>launcher-sessions-enabled=1</code> and <code>launcher-default-cluster=Local</code> are set</li>
+</ul></li>
+<li><strong>Launcher callback address doesn’t match OAuth redirect URI</strong>
+<ul>
+<li>Solution: Verify <code>launcher-sessions-callback-address</code> exactly matches your Azure redirect URI</li>
+<li>Both must use HTTPS and be identical (case-sensitive)</li>
+<li>Example: If Azure has <code>https://workbench.example.com/oauth_redirect_callback</code>, then <code>launcher-sessions-callback-address=https://workbench.example.com</code></li>
+</ul></li>
+</ol>
+</section>
+<section id="problem-oauth-button-appears-but-doesnt-work" class="level3">
+<h3 class="anchored" data-anchor-id="problem-oauth-button-appears-but-doesnt-work">Problem: OAuth button appears but doesn’t work</h3>
+<p><strong>If you see a session connection error after authenticating:</strong></p>
+<ul>
+<li>Verify <code>launcher-sessions-callback-address</code> is configured (Step 4.B)</li>
+<li>Verify it matches your Azure redirect URI exactly</li>
+<li>Restart Workbench: <code>sudo systemctl restart rstudio-server rstudio-launcher</code></li>
+</ul>
+</section>
+<section id="problem-workbench-wont-start" class="level3">
+<h3 class="anchored" data-anchor-id="problem-workbench-wont-start">Problem: Workbench won’t start</h3>
+<p><strong>Check logs:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> journalctl <span class="at">-u</span> rstudio-server <span class="at">-n</span> 50</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Common issues:</strong></p>
+<ul>
+<li>Configuration file syntax errors (check for missing <code>=</code> signs, invalid section names)</li>
+<li>File permission issues on oauth-clients.conf or openid-client-secret<br>
+</li>
+<li>Client secret file permissions not set to 0600<br>
+</li>
+<li>Missing launcher configuration in rserver.conf</li>
+<li>SSL certificate/key files not found or incorrect paths</li>
+<li><code>launcher-sessions-callback-address</code> not set or incorrect format</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="configuration-reference" class="level2">
+<h2 class="anchored" data-anchor-id="configuration-reference">Configuration Reference</h2>
+<section id="required-for-custom-oauth" class="level3">
+<h3 class="anchored" data-anchor-id="required-for-custom-oauth">Required for Custom OAuth</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 19%">
+<col style="width: 22%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>File</th>
+<th>Value</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ssl-enabled</code></td>
+<td>rserver.conf</td>
+<td>1</td>
+<td>Enable HTTPS (required for OAuth callback)</td>
+</tr>
+<tr class="even">
+<td><code>ssl-protocols</code></td>
+<td>rserver.conf</td>
+<td>TLSv1.2 TLSv1.3</td>
+<td>Enforce modern TLS versions</td>
+</tr>
+<tr class="odd">
+<td><code>ssl-certificate</code></td>
+<td>rserver.conf</td>
+<td><code>/path/to/cert.crt</code></td>
+<td>SSL certificate file path</td>
+</tr>
+<tr class="even">
+<td><code>ssl-certificate-key</code></td>
+<td>rserver.conf</td>
+<td><code>/path/to/cert.key</code></td>
+<td>SSL certificate key file path</td>
+</tr>
+<tr class="odd">
+<td><code>[sharepoint-oauth]</code></td>
+<td>oauth-clients.conf</td>
+<td>Section name</td>
+<td>Appears in UI as credential name</td>
+</tr>
+<tr class="even">
+<td><code>name</code></td>
+<td>oauth-clients.conf</td>
+<td>Display name</td>
+<td>User-friendly name in Managed Credentials</td>
+</tr>
+<tr class="odd">
+<td><code>client-id</code></td>
+<td>oauth-clients.conf</td>
+<td>Azure Application ID</td>
+<td>OAuth client identifier</td>
+</tr>
+<tr class="even">
+<td><code>client-secret</code></td>
+<td>oauth-clients.conf</td>
+<td>Secret (encrypted or plain)</td>
+<td>OAuth client credential</td>
+</tr>
+<tr class="odd">
+<td><code>scopes</code></td>
+<td>oauth-clients.conf</td>
+<td>Space-separated URLs</td>
+<td>API permissions to request</td>
+</tr>
+<tr class="even">
+<td><code>token-endpoint-auth-method</code></td>
+<td>oauth-clients.conf</td>
+<td>client-secret-basic</td>
+<td>Authentication method (tested reliable)</td>
+</tr>
+<tr class="odd">
+<td><code>authorize-url</code></td>
+<td>oauth-clients.conf</td>
+<td>Azure OAuth URL</td>
+<td>Azure authorization endpoint</td>
+</tr>
+<tr class="even">
+<td><code>token-url</code></td>
+<td>oauth-clients.conf</td>
+<td>Azure OAuth URL</td>
+<td>Azure token endpoint</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="how-the-oauth-flow-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-oauth-flow-works">How the OAuth Flow Works</h2>
+<pre><code>User in Workbench
+     ↓
+Settings &gt; Managed Credentials &gt; Custom OAuth
+     ↓
+Clicks "SharePoint OAuth Integration" → "Signing In..."
+     ↓
+Browser redirected to:
+  https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize?
+  client_id={CLIENT_ID}&amp;
+  redirect_uri=https://{workbench_hostname}/oauth_redirect_callback&amp;
+  scope=https://graph.microsoft.com/User.Read ...&amp;
+  response_type=code
+     ↓
+User logs in to Azure
+     ↓
+User grants permissions
+     ↓
+Azure redirects back to:
+  https://{workbench_hostname}/oauth_redirect_callback?code={AUTH_CODE}
+     ↓
+Workbench exchanges AUTH_CODE for token
+  POST https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token
+  client_id={CLIENT_ID}&amp;
+  client_secret={CLIENT_SECRET}&amp;
+  code={AUTH_CODE}&amp;
+  ...
+     ↓
+Azure returns:
+  { access_token, refresh_token, expires_in, token_type, ... }
+     ↓
+Token stored in Workbench session database
+     ↓
+User retrieves in R:
+  token ← rstudioapi::getOAuthCredentials("sharepoint-oauth")
+     ↓
+Use token to access Microsoft Graph / SharePoint:
+  Authorization: Bearer {access_token}</code></pre>
+<hr>
+</section>
+<section id="security-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="security-considerations">Security Considerations</h2>
+<ul>
+<li><strong>Client Secret:</strong> Store securely; encrypt using <code>rstudio-server encrypt-password</code></li>
+<li><strong>HTTPS Required:</strong> All communications must use HTTPS with valid certificates</li>
+<li><strong>Admin Consent:</strong> Admin consent is required; user consent alone will not work</li>
+<li><strong>Token Storage:</strong> Tokens are stored in Workbench session database; follow your organization’s data retention policies</li>
+<li><strong>Scopes:</strong> Request minimum necessary scopes (User.Read, Files.Read.All, Sites.Read.All)</li>
+<li><strong>Expiration:</strong> Tokens expire; use refresh_token for new access tokens</li>
+</ul>
+<hr>
+</section>
+<section id="additional-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow">Microsoft Entra ID OAuth 2.0 Documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/graph/api/overview">Microsoft Graph API Reference</a></li>
+<li><a href="https://docs.posit.co/ide/server-pro/admin/reference">Posit Workbench Configuration Reference</a></li>
+<li><a href="https://docs.posit.co/workbench/admin/reference/custom-oauth-credentials.html">Posit Custom OAuth Documentation</a></li>
+</ul>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>You have successfully configured Posit Workbench to use Custom OAuth with Azure Entra ID for programmatic SharePoint data access. Users can now:</p>
+<ol type="1">
+<li>Login to Workbench normally</li>
+<li>Authenticate via OAuth to Azure to obtain tokens</li>
+<li>Use those tokens in R/Python sessions to access Microsoft Graph and SharePoint</li>
+</ol>
+<p>The configuration is production-ready. For production deployments, ensure:</p>
+<ul>
+<li>CA-signed SSL certificate</li>
+<li>Properly configured firewall rules</li>
+<li>Regular token rotation and renewal procedures</li>
+<li>Audit logging for OAuth token usage</li>
+<li>Backup/recovery procedures</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/questionable\.quarto\.pub\/blog");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
