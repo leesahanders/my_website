@@ -1,0 +1,48 @@
+---
+title: "Validation part 2"
+description: "Challenges, tribulations, and learnings"
+author: "Lisa"
+date: "2026-10-08"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: source
+toc: true
+image: "img/"
+draft: false
+freeze: true
+filters:
+   - lightbox
+lightbox: auto
+categories:
+  - code
+---
+
+> Reference part 1 for general theory and references [here](validation.qmd).
+
+
+The most important place to start in writing the User Requirements Specifications and Validation docs is to undestand what the scientific need for the platform is. This enables writing test cases. Eg "We want to do genomics analysis using these methodologies or pharmakinetics analysis" etc.
+
+This can still involve Package Manager, but will need additional manual steps to lock down the package caches and business processes for accepting and adding and testing packages in the future. 
+
+First is to find a way to select which packages to use. Once there is a set of packages can create a curated repository in Package Manager to support the installation. The recommendation would still be to pre-install the packages on Workbench and on Connect as well. 
+
+Then would allow the install as part of IQ and can test the packages in a PQ script. Contribute specific analysis tests (from the scientific need above) and verify the system is safe to use. The mental model here is not to validate the package (as in order to be accepted into Pypi, CRAN, Bioconductor, the packages should have already undergone tests), but rather validating the workflow you are wanting to use. 
+
+Specifically, from a sanity perspective, install those things in a site library rather than a system library. Otherwise renv might have issues with sandboxing of environments. Everything ideally should either be in the site library or the users home folder/renv. 
+
+Here is a useful tool that when you provide a list of packages it will then install them into the site library. Can set the options to set the repo to the local package manager. Like renv, pak also creates a lock file so there is reproduceability later since it documents package version, download links, etc: <https://github.com/michaelmayer2/install-packages>
+
+A process for adding additional packages over time (6 months later, etc) will be  critical. One way to do that is to either move everyone to new site library with time steps or overwrite the site library (changes in rprofile.site). If we install in R 4.6 today for example. R will auto detect the site library if present and add it to the path as part of the start up behavior. A common mode I see is to lock it down with the major R version. So R 4.3 would have packages from 2 years ago, R 4.4 would have versions 1.5 years ago, R 4.5 would have package versions 1 year ago, R 4.6 would be 0.5 years ago, etc and moving forward. When a user loads the correct R major version for their project it will automatically connect with the packages in the site library appropriate for that major version (4..x etc). 
+
+Similar can be be done on Connect to lock down the packages by major version. If you don't configure then Connect will be reinstalling packages upon deployment, which typically isn't desired for locked down GXP installations. One option is the External package flag and it is useful but not helpful in a world where packages will be added later. Whatever  you choose will be locked for the whole server, so having sepparate staging and production environments is critical so developers have a sandbox to work through ad hoc deployments. There are two main recommendations for Connect: 
+
+1. Set version matching to strict (for how R versions are being selected). Reference: <https://docs.posit.co/connect/admin/r/#r-version-matching> and <https://docs.posit.co/connect/admin/appendix/configuration/#R.VersionMatching> with `R.VersionMatching` setting to `strict`. 
+2. Disable R environment management for R completely (so it won't use external or install packages at all). Reference: <https://docs.posit.co/connect/admin/r/package-management/#environment-management> with `R.EnvironmentManagement` setting set to `false` (default `true`).
+
+From a user perspective there are some interesting options here: <https://docs.posit.co/connect/user/publishing-r/index.html#environment-management> 
+
+Similar approach can be used for python. Python site library, use cases built on workflows with test cases. The field as such is only starting to embrace Python in a GXP format but this would put them on the right track. 
+
+
