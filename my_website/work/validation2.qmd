@@ -22,7 +22,7 @@ categories:
 > Reference part 1 for general theory and references [here](validation.qmd).
 
 
-The most important place to start in writing the User Requirements Specifications and Validation docs is to undestand what the scientific need for the platform is. This enables writing test cases. Eg "We want to do genomics analysis using these methodologies or pharmakinetics analysis" etc.
+The most important place to start in writing the User Requirements Specifications and Validation docs is to understand what the scientific need for the platform is. This enables writing test cases. Eg "We want to do genomics analysis using these methodologies or pharmakinetics analysis" etc.
 
 This can still involve Package Manager, but will need additional manual steps to lock down the package caches and business processes for accepting and adding and testing packages in the future. 
 
