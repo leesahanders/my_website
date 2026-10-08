@@ -249,6 +249,10 @@ Check for the available python versions (if typically installed):
 ls -ld /opt/python/*
 ```
 
+### Running out of memory 
+
+Clean up old files and caches in your home directory. Run `uv cache clean` and `pip cache purge`. 
+
 ## Resources
 
 [Posit Connect User Guide: Shiny for Python](https://docs.posit.co/connect/user/shiny-python/)
